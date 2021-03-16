@@ -1,0 +1,14 @@
+@media all {
+  .page-break {
+    display: none;
+  }
+}
+
+@page {
+  size: 6cm 6cm;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 2px;
+  margin-bottom: 0px;
+  font-family: 'db_adman_xregular';
+}
