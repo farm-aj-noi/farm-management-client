@@ -61,7 +61,7 @@ const Card1 = () => {
         </div>
       </div>
 
-      <Link href="/registercow/">
+      <Link href="/registercow/listregiscow">
         <StyleAlertCardDown>
           แสดงรายละเอียด
           <div style={{ margin: "-3px 0px 0px auto" }}>

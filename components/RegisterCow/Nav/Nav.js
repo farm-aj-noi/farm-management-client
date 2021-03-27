@@ -227,7 +227,7 @@ const Nav1 = () => {
             <Link href="/registercow/importfarmcow">
               <NavButtonLeft>เพิ่มโคเข้าสู่ระบบ</NavButtonLeft>
             </Link>
-            <Link href="/registercow/listfarmmer">
+            {/* <Link href="/registercow/listfarmmer">
               <NavButtonLeft>รายการโคเข้าขุน</NavButtonLeft>
             </Link>
             <Link href="/registercow/listfarmmer">
@@ -238,6 +238,28 @@ const Nav1 = () => {
             </Link>
             <Link href="/registercow/listfarmmer">
               <NavButtonLeft>รายการโคตาย</NavButtonLeft>
+            </Link> */}
+            <DropdownButton
+                  drop="down"
+                  title={`ตรวจสอบรายการโค`}
+                  bsPrefix={MyCss.nstdropleft}
+                >
+                  <Link href="/registercow/listfarmmer">
+                    <NavDropdownItem>รายการโคเข้าขุน</NavDropdownItem>
+                  </Link>
+                  <Link href="/registercow/listtreatfarm">
+                    <NavDropdownItem>รายการโคกำลังรักษา</NavDropdownItem>
+                  </Link>
+                  <Link href="/registercow/listsluagerfarm">
+                    <NavDropdownItem>รายการโคเข้าเชือด</NavDropdownItem>
+                  </Link>
+                  {/* <Link href="/registercow/showlisttreat">
+                    <NavDropdownItem>รายการโคตาย</NavDropdownItem>
+                  </Link> */}
+               
+                </DropdownButton>
+                <Link href="/registercow/listfarmmerweitting">
+              <NavButtonLeft>รายการโครอขึ้นทะเบียนขุน</NavButtonLeft>
             </Link>
             </>
             )}

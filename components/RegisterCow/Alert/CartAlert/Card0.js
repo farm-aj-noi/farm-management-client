@@ -53,8 +53,8 @@ export const QUERY_CARD4 = gql`
 
 export const QUERY_CARD5 = gql`
   query QUERY_CARD5 {
-    Card5 {
-      numcow
+    CardWaitting {
+      namecow
     }
   }
 `;
@@ -122,7 +122,7 @@ const Card0 = () => {
         // dataCard2 &&
         // dataCard3 &&
         // dataCard4 &&
-        // dataCard5 &&
+        dataCard5 &&
         // dataCard6 &&
         user.role.nameEN === "booster"
           ? dataCard1.Card1.length +
@@ -147,7 +147,7 @@ const Card0 = () => {
             dataCard5 &&
             dataCard6 &&
             user.role.nameEN === "accounter"
-          ? dataCard5.Card5.length
+          ? dataCard5.CardWaitting.length
           : dataCard1 &&
             dataCard1_5 &&
             dataCard2 &&
@@ -161,8 +161,8 @@ const Card0 = () => {
             // dataCard2.Card2.length +
             // dataCard3.Card3.length +
             // dataCard4.Card4.length +
-            dataCard6.Card1.length 
-            // dataCard5.Card5.length
+            dataCard6.Card1.length +
+            dataCard5.CardWaitting.length
           : ""}{" "}
         รายการ
       </div>

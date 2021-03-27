@@ -61,32 +61,21 @@ const UPDATE_GRADE = gql`
 
 const QUERY_PRODUCT = gql`
   query QUERY_PRODUCT($id: ID!) {
-    Cowdetail(id: $id) {
-      numcow
+    CowWaitting(id: $id) {
     namecow
     date
-    numkun
   numfarmer
   namefarmer
   passport
   pun
   teeth
-  rfid
   bodyscore
   datebirhtday
   imagecow
   weightbirht
   weightstart
   sex
-  treats{
-    dise
-  nofity
-  datet
-  quantity
-  note
-  symptom
-  medi
-  }
+  
     }
   }`
 const ProductId = () => {
@@ -133,7 +122,7 @@ const ProductId = () => {
       id: route.query.productId
 
     }, onCompleted(res) {
-      setCowdetailData(res.Cowdetail)
+      setCowdetailData(res.CowWaitting)
     }
   });
 
@@ -230,7 +219,7 @@ const ProductId = () => {
             <img style={{
 
               margin: "auto", objectFit: "cover", width: "100%", height: "100%", display: "relarive", padding: "4px", borderRadius: "30px"
-            }} alt="Image" src={data.Cowdetail.imagecow || logo} />
+            }} alt="Image" src={data.CowWaitting.imagecow || logo} />
           </Divimg >
                           {/* <div >
                             <img style={{objectFit:'cover',width: '90%', position:'inherit',}}  />
@@ -585,90 +574,7 @@ const ProductId = () => {
         </>
        
       </DivBase>
-      <div style={{ transform:"translate(0px,700px)"}}>
-      <DivFrom style={{margin:'auto' ,width:'1050px'}}>
-          <DivFromTop>
-            <div style={{ margin: "0px 0px 0px 0px" }}>
-              <Icon size={20} icon={list} />
-            </div>
-            รายการรักษา
-          </DivFromTop>
-          <DivFromDown
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr",
-              gridRowGap: "5px",
-            }}
-          >
-            <div>
-              <Table
-                striped
-                bordered
-                responsive
-                hover
-                style={{ margin: "auto" }}
-              >
-                <thead>
-                  <tr style={{ textAlign: "center" }}>
-                    <th>วันที่รักษา</th>
-                    <th>ชื่อโรค</th>
-                    <th>อาการของโรค</th>
-                    <th>ยาหรือวัคซีนที่ใช้</th>
-                    <th>จำนวน (CC)</th>
-                    <th>ระยะหยุดยา</th>
-                    {/* <th>วันที่หยุดยา</th> */}
-                    <th>หมายเหตุ</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {data &&
-                    data.Cowdetail &&
-                    data.Cowdetail.treats.length > 0 ? (
-                      data.Cowdetail.treats.map((prod) => (
-                        <tr key={prod.id} style={{ textAlign: "center" }}>
-                          <td>
-                            {dayjs(prod.datet)
-                              .add(543, "y")
-                              .locale("th")
-                              .format("DD MMMM YYYY")}
-                          </td>
-                          <td>{prod.dise}</td>
-                          <td>{prod.symptom}</td>
-                          <td>{prod.medi}</td>
-                          <td>{prod.quantity}</td>
-                          <td>{prod.nofity}</td>
-                          {/* <td>
-                          {dayjs(prod.date)
-                            .add(543, "y")
-                            .add(prod.nofity, "d")
-                            .locale("th")
-                            .format("DD MMMM YYYY")}
-                        </td> */}
-                          <td>{prod.note ? prod.note : "-"}</td>
-                        </tr>
-                      ))
-                    ) : (
-                      <tr style={{ textAlign: "center" }}>
-                        <td colSpan="7">ไม่พบข้อมูล</td>
-                      </tr>
-                    )}
-                </tbody>
-                {/* <tbody>
-                  <tr>
-                    <td>{data.Cowdetail.treats.dise}</td>
-                    <td>{console.log(data.Cowdetail.treats[0].dise)}</td>
-                    <td>{}</td>
-                    <td>{}</td>
-                    <td>{}</td>
-                    <td>{}</td>
-                    <td>{}</td>
-                  </tr>
-                </tbody> */}
-              </Table>
-            </div>
-          </DivFromDown>
-        </DivFrom>
-      </div>
+  
     </>
   );
 };

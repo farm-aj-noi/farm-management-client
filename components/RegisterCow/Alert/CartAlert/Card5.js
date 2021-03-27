@@ -4,22 +4,23 @@ import { Icon } from "react-icons-kit";
 import { fileText } from "react-icons-kit/fa/fileText";
 import { DivAlertCard, StyleAlertCardDown } from "./StyleCard";
 
-import ImgPrice from "../../../../images/slaughter/alert/price.png";
+// import ImgPrice from "../../../../images/slaughter/alert/price.png";
+import ImgPrice from "../../../../images/slaughter/alert/slaughter.png";
 
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
 export const QUERY_CARD = gql`
   query QUERY_CARD {
-    Card5 {
-      numcow
+    CardWaitting {
+      namecow
     }
   }
 `;
 
 const Card5 = () => {
-
   const { data, loading, error, refetch } = useQuery(QUERY_CARD);
+  console.log(data)
   return (
     <DivAlertCard
       style={{
@@ -34,7 +35,7 @@ const Card5 = () => {
           padding: "73px 10px 0 0px",
         }}
       >
-        รายการจัดการราคาชื้อ // 07/5
+        รายการโครอขึ้นทะเบียนขุน
       </div>
       <div
         style={{
@@ -55,10 +56,10 @@ const Card5 = () => {
             height: "62px",
           }}
         >
-          {data ? data.Card5.length : "NAN"}
+          {data ? data.CardWaitting.length : "NAN"}
         </div>
       </div>
-      <Link href="/slaughter/buy">
+      <Link href="/registercow/listwaittingcow">
         <StyleAlertCardDown>
           แสดงรายละเอียด
           <div style={{ margin: "-3px 0px 0px auto" }}>

@@ -105,30 +105,32 @@ const Imslaughter = ({ imslaughter }) => {
     let second = diff.getUTCSeconds();
     // console.clear() 
     // console.log(`${year} Year\n${month} Month \n${week} Week \n${day} Day \n${hour}:${minute}:${second} s`);
-    
+   
     if (year !== 0) {
-       return `${year} ปี ${month} เดือน`;
-    } else if (month !== 0) {
-       return `${month} เดือน ${day} วัน`;
-    } else if (week >= 1) {
-       return `${week.toFixed(0)} สัปดาห์`;
-    } else if (day > 1) {
-        return `${day} วัน`;
-    } else if (day !== 0) {
-       return `เมื่อวานนี้`;
-    } else if (hour > 1 && hour <= 24) {
+      return `${year} ปี ${month} เดือน`;
+   } else if (month !== 0) {
+      return `${month} เดือน ${day} วัน`;
+   } else if (week >= 1) {
+      return `${week.toFixed(0)} สัปดาห์`;
+   } else if (day > 1) {
+       return `${day} วัน`;
+   }
+    else if (day !== 0) {
+      return `เมื่อวานนี้`;
+   }
+    else if (hour > 1 && hour <= 24) {
+     return `${hour} ชั่วโมง`;
+   } else if (hour !== 0) {
       return `${hour} ชั่วโมง`;
-    } else if (hour !== 0) {
-       return `${hour} ชั่วโมง`;
-    } else if (minute > 1) {
-       return `${minute}นาที`;
-    } else if (minute === 1) {
-      return `${minute} นาที`;
-    } else if (second !== 0) {
-       return 'เมื่อครู่นี้';
-    }
-    return 'เมื่อครู่นี้';
-  }
+   } else if (minute > 1) {
+      return `${minute}นาที`;
+   } else if (minute === 1) {
+     return `${minute} นาที`;
+   } else if (second !== 0) {
+      return 'เมื่อครู่นี้';
+   }
+   return 'เมื่อครู่นี้';
+ }
 
   // component did mount
   useEffect(() => {
@@ -185,8 +187,8 @@ const Imslaughter = ({ imslaughter }) => {
       <td>{halveData.numcow}</td>
       <td>{halveData.pun}</td>
       <td>{
-                timeDifference(halveData.date.substring(0,10))
-                  }</td>
+                timeDifference(halveData.date)
+              }</td>
       <td>{halveData.numfarmer}</td>
       <td>{halveData.namefarmer}</td>
       <td>

@@ -1,5 +1,6 @@
 import React, { useContext, useState, useRef, useEffect } from "react";
 import styled from "styled-components";
+import { AuthContext } from "../../../appState/AuthProvider";
 
 import { Icon } from "react-icons-kit";
 import { Table } from "react-bootstrap";
@@ -34,35 +35,28 @@ import { red } from "../../../utils/colors";
 
 const CREATE = gql`
   mutation CREATE(
-    $numcow: String!
-    $numkun: String!
-    $pun: String!
-    $numfarmer: String!
+  
+    $pun: String
+    $numfarmer: String
     $passport: String
     $teeth: String
-    $rfid: String
     $bodyscore: String
-    $namefarmer: String!
-    $date: String!
-    $datebirhtday: String!
-    $namecow: String!
-    $sex: String!
-    $weightstart: Float!
-    $weightbirht: Float!
+    $namefarmer: String
+    $date: String
+    $datebirhtday: String
+    $namecow: String
+    $sex: String
+    $weightstart: Float
+    $weightbirht: Float
     $imagecow: String
-    $group: String!
-    $district: String!
-    $province: String!
 
   ) {
-    createCow(
-      numcow: $numcow
-      numkun: $numkun
+    importcowfarm(
+  
       pun: $pun
       numfarmer: $numfarmer
       passport: $passport
       teeth: $teeth
-      rfid: $rfid
       bodyscore: $bodyscore
       namefarmer: $namefarmer
       date: $date
@@ -71,14 +65,10 @@ const CREATE = gql`
       sex: $sex
       weightstart: $weightstart
       weightbirht: $weightbirht
-      statuscow: "กำลังขุน"
       imagecow: $imagecow
-      group: $group
-      district: $district
-      province: $province
+     
     ) {
-      numcow
-      numkun
+    
       pun
       numfarmer
       namefarmer
@@ -86,7 +76,7 @@ const CREATE = gql`
       datebirhtday
       namecow
       sex
-      group
+      
       weightstart
       weightbirht
       imagecow
@@ -272,42 +262,35 @@ const Index = () => {
   const [loadingCreate, setLoadingCreate] = useState(false);
   const [errorAlert, setErrorAlert] = useState(false);
   const [success, setSuccess] = useState(false);
+  const { user } = useContext(AuthContext);
 
   const [prod, setProd] = useState({
-    numcow: "",
-    numkun: "",
+   
     pun: "",
-    numfarmer: "",
-    passport: "",
+    numfarmer: "0",
+    passport: user.passsport,
     teeth: "",
-    rfid: "",
     bodyscore: "",
-    namefarmer: "",
+    namefarmer: "0",
     namecow: "",
     sex: "",
     weightstart: "",
     weightbirht: "",
-    statuscow: "กำลังขุน",
     imagecow: "",
-    group: "",
-    district: ""
-    ,province: ""
+ 
 
   });
 
   const [alert, setAlert] = useState({
-    numcow: false,
-    numkun: false,
+ 
     pun: false,
     numfarmer: false,
     passport: false,
     teeth: false,
-    rfid: false,
     bodyscore: false,
     namefarmer: false,
     namecow: false,
     sex: false,
-    group: false,
     weightstart: false,
     weightbirht: false,
     statuscow: false,
@@ -374,7 +357,7 @@ const Index = () => {
   const handleAlert = (name, value) => setAlert({ ...alert, [name]: value });
   const handlewAlert = (name, value) => setwAlert({ ...walert, [name]: value });
 
-  const [createCow, error] = useMutation(CREATE, {
+  const [importcowfarm, error] = useMutation(CREATE, {
     onCompleted: (data) => {
       setSuccess(true),
       // setProd({
@@ -408,7 +391,7 @@ const Index = () => {
     try {
       const url = await uploadFile();
       if (url) {
-      await createCow({
+      await importcowfarm({
         variables: {
           ...prod,
           date: selectedDate2,
@@ -427,9 +410,9 @@ const Index = () => {
       // console.log(error);
     }
   };
-  useEffect(() => {
-    setErrorAlert(false);
-  }, [prod.numkun]);
+  // useEffect(() => {
+  //   setErrorAlert(false);
+  // }, [prod.numkun]);
 console.log(prod.imagecow)
   return (
     <>
@@ -565,7 +548,7 @@ console.log(prod.imagecow)
             >
            
               <div>
-                ชื่อโค : {}
+               <span style={{color:"red"}}>*</span> ชื่อโค : {}
                 <div style={{ display: "grid", gridTemplateRows: "1fr 15px" }}>
                   <Searchinput
                     name="namecow"
@@ -584,10 +567,9 @@ console.log(prod.imagecow)
                     maxLength="100"
                     style={{
                       width: "210px",
-                      borderColor: `${!prod.namecow ? "red" : ""}`,
                     }}
                   />
-                  {!prod.namecow && !alert.namecow ? (
+                  {/* {!prod.namecow && !alert.namecow ? (
                     <label style={{ color: "red" }}>กรุณากรอกชื่อโค</label>
                   ) : (
                     alert.namecow && (
@@ -595,11 +577,11 @@ console.log(prod.imagecow)
                         กรุณากรอก ก-ฮ, สระ, A-Z และ a-z
                       </label>
                     )
-                  )}
+                  )} */}
                 </div>
               </div>
               <div>
-                สายพันธุ์ : {}
+              <span style={{color:"red"}}>*</span>สายพันธุ์ : {}
 
                 <div style={{ display: "grid", gridTemplateRows: "1fr 15px" }}>
                   <select
@@ -621,7 +603,7 @@ console.log(prod.imagecow)
                       backgroundClip: "padding-box",
                       border: "1px solid #ced4da",
                       /* border-radius: 0.25rem 0rem 0rem 0.25rem; */
-                      borderColor: `${!prod.pun ? "red" : ""}`,
+                      // borderColor: `${!prod.pun ? "red" : ""}`,
                       borderRadius: "0.25rem",
                       transition:
                         "border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out",
@@ -635,9 +617,9 @@ console.log(prod.imagecow)
                       </option>
                     ))}
                   </select>
-                  {!prod.pun && (
+                  {/* {!prod.pun && (
                     <label style={{ color: "red" }}>กรุณาเลือกสายพันธุ์</label>
-                  )}
+                  )} */}
                 </div>
 
 
@@ -645,7 +627,7 @@ console.log(prod.imagecow)
               </div>
              
               <div>
-                เพศโค : {}
+              <span style={{color:"red"}}>*</span> เพศโค : {}
                 <div style={{ display: "grid", gridTemplateRows: "1fr 15px" }}>
                   <select
                     type="text"
@@ -665,7 +647,7 @@ console.log(prod.imagecow)
                       backgroundClip: "padding-box",
                       border: "1px solid #ced4da",
                       /* border-radius: 0.25rem 0rem 0rem 0.25rem; */
-                      borderColor: `${!prod.sex ? "red" : ""}`,
+                      // borderColor: `${!prod.sex ? "red" : ""}`,
                       borderRadius: "0.25rem",
                       transition:
                         "border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out",
@@ -675,9 +657,9 @@ console.log(prod.imagecow)
                     <option value="ผู้">ผู้</option>
                     <option value="เมีย">เมีย</option>
                   </select>
-                  {!prod.sex && (
+                  {/* {!prod.sex && (
                     <label style={{ color: "red" }}>กรุณาเลือกเพศโค</label>
-                  )}
+                  )} */}
                 </div>
               </div>
              
@@ -702,7 +684,7 @@ console.log(prod.imagecow)
                 />{" "}
               </div>
               <div>
-                จำนวนฟันหน้าคู่แท้ : {}
+              <span style={{color:"red"}}>*</span> จำนวนฟันหน้าคู่แท้ : {}
                 <div style={{ display: "grid", gridTemplateRows: "1fr 15px" }}>
                   <Searchinput
                     name="teeth"
@@ -721,10 +703,10 @@ console.log(prod.imagecow)
                     maxLength="2"
                     style={{
                       width: "210px",
-                      borderColor: `${!prod.teeth ? "red" : ""}`,
+                      // borderColor: `${!prod.teeth ? "red" : ""}`,
                     }}
                   />
-                  {!prod.teeth && !alert.teeth ? (
+                  {/* {!prod.teeth && !alert.teeth ? (
                     <label style={{ color: "red" }}>
                       กรุณากรอกจำนวนฟันหน้าคู่แท้
                     </label>
@@ -734,11 +716,11 @@ console.log(prod.imagecow)
                         กรุณากรอกตัวเลข เท่านั้น
                       </label>
                     )
-                  )}
+                  )} */}
                 </div>
               </div>
               <div>
-                น้ำหนักปัจจุบัน : {}
+              <span style={{color:"red"}}>*</span>  น้ำหนักปัจจุบัน : {}
                 <div style={{ display: "grid", gridTemplateRows: "1fr 15px" }}>
                   <Searchinput
                     name="weightstart"
@@ -761,10 +743,10 @@ console.log(prod.imagecow)
                     maxLength="20"
                     style={{
                       width: "210px",
-                      borderColor: `${!prod.weightstart ? "red" : ""}`,
+                      // borderColor: `${!prod.weightstart ? "red" : ""}`,
                     }}
                   />
-                  {!prod.weightstart && !alert.weightstart ? (
+                  {/* {!prod.weightstart && !alert.weightstart ? (
                     <label style={{ color: "red" }}>กรุณากรอกน้ำหนัก</label>
                   ) : alert.weightstart ? (
                     <label style={{ color: "red" }}>
@@ -776,7 +758,7 @@ console.log(prod.imagecow)
                         กรุณากรอกน้ำหนักไม่เกิน1000 กก.
                       </label>
                     )
-                  )}
+                  )} */}
                 </div>
               </div>
               
@@ -821,10 +803,10 @@ console.log(prod.imagecow)
                     maxLength="20"
                     style={{
                       width: "210px",
-                      borderColor: `${!prod.weightbirht ? "red" : ""}`,
+                      // borderColor: `${!prod.weightbirht ? "red" : ""}`,
                     }}
                   />
-                  {!prod.weightbirht && !alert.weightbirht ? (
+                  {/* {!prod.weightbirht && !alert.weightbirht ? (
                     <label style={{ color: "red" }}>กรุณากรอกน้ำหนัก</label>
                   ) : alert.weightbirht ? (
                     <label style={{ color: "red" }}>
@@ -836,11 +818,11 @@ console.log(prod.imagecow)
                         กรุณากรอกน้ำหนักไม่เกิน60 กก.
                       </label>
                     )
-                  )}
+                  )} */}
                 </div>
               </div>
               <div>
-                Body Score : {}
+              <span style={{color:"red"}}>*</span>   Body Score : {}
                 <div style={{ display: "grid", gridTemplateRows: "1fr 15px" }}>
                   <select
                     type="text"
@@ -860,7 +842,7 @@ console.log(prod.imagecow)
                       backgroundClip: "padding-box",
                       border: "1px solid #ced4da",
                       /* border-radius: 0.25rem 0rem 0rem 0.25rem; */
-                      borderColor: `${!prod.bodyscore ? "red" : ""}`,
+                      // borderColor: `${!prod.bodyscore ? "red" : ""}`,
                       borderRadius: "0.25rem",
                       transition:
                         "border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out",
@@ -878,11 +860,11 @@ console.log(prod.imagecow)
                     <option value="5">5</option>
                     <option value="5.5">5.5</option>
                   </select>{" "}
-                  {!prod.bodyscore && (
+                  {/* {!prod.bodyscore && (
                     <label style={{ color: "red" }}>
                       กรุณาเลือก body score
                     </label>
-                  )}
+                  )} */}
                 </div>
               </div>
               {/* <Btns  name="CKICK"  for="filess">
@@ -950,43 +932,9 @@ console.log(prod.imagecow)
               />
             ) : (
               <Gobutton
-                disabled={
-                  !prod.numcow ||
-                  !prod.numkun ||
-                  !prod.pun ||
-                  !prod.numfarmer ||
-                  !prod.passport ||
-                  !prod.rfid ||
-                  !prod.teeth ||
-                  !prod.bodyscore ||
-                  !prod.namefarmer ||
-                  !prod.namecow ||
-                  !prod.sex ||
-                  !prod.group ||
-                  !prod.weightstart ||
-                  !prod.weightbirht ||
-                  passportCheck
-                }
+             
                 style={{
-                  backgroundColor: `${
-                    !prod.numcow ||
-                    !prod.numkun ||
-                    !prod.pun ||
-                    !prod.numfarmer ||
-                    !prod.passport ||
-                    !prod.rfid ||
-                    !prod.teeth ||
-                    !prod.group ||
-                    !prod.bodyscore ||
-                    !prod.namefarmer ||
-                    !prod.namecow ||
-                    !prod.sex ||
-                    !prod.weightstart ||
-                    !prod.weightbirht ||
-                    passportCheck
-                      ? "gray"
-                      : ""
-                  }`,
+                 
                   margin: "0px 12px 0px auto",
                   float: "right",
                 }}
