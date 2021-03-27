@@ -79,13 +79,67 @@ const QUERY_PRODUCT = gql`
   }`
 const DetailId = () => {
 
+  var data_treat = []
+
+  const [treat, setTreat] = useState([])
+  
+
   const route = useRouter();
   // console.log(route);
 
   const { data,loading, error  } = useQuery(QUERY_PRODUCT, {
     variables: {
       id: route.query.detailId
-    }
+    },
+    onCompleted: (data) => {
+      console.log(data.Cowdetail);
+      data_treat = []
+
+      if(data.Cowdetail){
+        for (let i = 0; i < data.Cowdetail.treats.length; i++) {
+          const element = data.Cowdetail.treats[i];
+
+          let check = data_treat.findIndex(e =>  e.datet == element.datet)
+
+          let list
+          if (check < 0){
+            console.log(111)
+            list = {
+              datet: element.datet,
+              dise: element.dise,
+              symptom: element.symptom,
+              list_dis: [{
+                medi: element.medi,
+                notify: element.nofity,
+                note: element.note,
+                quantity: element.quantity
+              }]
+            }
+            data_treat.push(list)
+
+            console.log('123',data_treat)
+
+          } else {
+            list = {
+                medi: element.medi,
+                notify: element.nofity,
+                note: element.note,
+                quantity: element.quantity
+              }
+              data_treat[check].list_dis.push(list)
+              console.log('456',data_treat)
+          }
+        }
+
+        console.log(data_treat)
+      }
+      setTreat(data_treat)
+      // if(data_treat.length > 0) {
+      //   let list = {}
+
+        
+      // }
+    },
   });
   console.log( route.query.detailId)
 
@@ -231,7 +285,8 @@ const DetailId = () => {
               {data &&
                 data.Cowdetail &&
                 data.Cowdetail.treats.length > 0 ? (
-                  data.Cowdetail.treats.map((prod) => (
+                  treat.map((prod) => (
+  
                     <Card 
                     style={{borderColor:"#95D4E7"}}
                     >
@@ -282,50 +337,53 @@ const DetailId = () => {
                               />
                             </div>
 
-
-
-                            <div>
+                            {prod.list_dis.map((list_dis) => ( 
+                              <div style={{display: "flex",gridColumn : "1 / 6"}}>
+                              <div>
                               ยา/วัคซีนที่ใช้ :{ }
                               <div style={{ gridColumnStart: 3 }}>
                                 <Searchinput
                                   name="medi"
-                                  value={prod.medi}
+                                  value={list_dis.medi}
                                   style={{  width: "200px",backgroundColor: "#ececec", }}
                                   maxLength="5"
                                   disabled
                                 />
-                              </div>
-                            </div>
-                            <div>
+                              </div> 
+                             </div> 
+                             <div>
                               ระยะหยุดยา(วัน) : { }
                               <Searchinput
                                 name="nofity"
-                                value={prod.nofity}
+                                value={list_dis.notify}
                                 disabled
                                 type="number"
                                 style={{ backgroundColor: "#ececec", width: "156px" }}
                               />
-                            </div>
-                            <div>
+                             </div>
+                             <div>
                               จำนวน (CC) : { }
                               <Searchinput
-                                value={prod.quantity}
+                                value={list_dis.quantity}
                                 name="quantity"
                                 type="number"
                                 disabled
                                 style={{ backgroundColor: "#ececec", width: "176px" }}
                               />
-                            </div>
-                           
-                            <div>
+                             </div>
+                             
+                             <div>
                               หมายเหตุ : { }
                               <Searchinput
                                 name="note"
-                                value={prod.note}
+                                value={list_dis.note}
                               disabled
                                 style={{ width: "306px",backgroundColor: "#ececec", }}
                               />
-                            </div>
+                             </div>
+
+                             </div>
+                           ))}         
 
                             
                           </div>

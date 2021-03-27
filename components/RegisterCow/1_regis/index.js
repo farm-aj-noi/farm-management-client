@@ -578,27 +578,33 @@ function blobToFile(theBlob, fileName){
 
   const [createCow, error] = useMutation(CREATE, {
     onCompleted: (data) => {
+      console.log(11111111111111)
       setSuccess(true),
-        // setProd({
-        //   numcow: "",
-        //   numkun: "",
-        //   pun: "",
-        //   numfarmer: "",
-        //   passport: "",
-        //   teeth: "",
-        //   rfid: "",
-        //   bodyscore: "เลือก",
-        //   namefarmer: "",
-        //   namecow: "",
-        //   sex: "เลือกเพศ",
-        //   weightstart: "",
-        //   weightbirht: "",
-        //   statuscow: "ลงทะเบียนแล้ว"
-        // })
-        setTimeout(function () {
-          setSuccess(false);
-        }, 3000);
-      window.location.reload(false);
+      //  setProd({
+      //   numcow: "",
+      //   numkun: "",
+      //   pun: "",
+      //   numfarmer: "",
+      //   passport: "",
+      //   teeth: "",
+      //   rfid: "",
+      //   bodyscore: "",
+      //   namefarmer: "",
+      //   namecow: "",
+      //   sex: "",
+      //   weightstart: "",
+      //   weightbirht: "",
+      //   statuscow: "กำลังขุน",
+      //   imagecow: "",
+      //   group: "",
+      //   district: ""
+      //   , province: "", amphur: "", zipcode: ""
+      // });
+    
+      //   setTimeout(function () {
+      //     setSuccess(false);
+      //   }, 3000);
+        window.location.reload();
 
     },
   });
@@ -610,6 +616,7 @@ function blobToFile(theBlob, fileName){
     try {
       const url = await uploadFile();
       if (url) {
+        console.log(123)
         await createCow({
           variables: {
             ...prod,
@@ -621,6 +628,9 @@ function blobToFile(theBlob, fileName){
 
           },
         });
+        console.log(11111)
+        window.location.reload();
+        
       }
       setLoadingCreate(false);
     } catch (error) {
