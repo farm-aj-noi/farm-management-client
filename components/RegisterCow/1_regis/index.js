@@ -5,6 +5,7 @@ import json_provinces from '../../../json/provinces.json'
 import json_amphures from '../../../json/amphures.json'
 import json_districts from '../../../json/districts.json'
 import json_zipcodes from '../../../json/zipcodes.json'
+import {picture} from 'react-icons-kit/ikons/picture'
 
 import { Icon } from "react-icons-kit";
 import { Table } from "react-bootstrap";
@@ -12,6 +13,8 @@ import Card from 'react-bootstrap/Card'
 import logo from './defultcow.jpg'
 import { list } from "react-icons-kit/fa/list";
 import { DivBase } from "../../../utils/divBase";
+import {notepad_add} from 'react-icons-kit/ikons/notepad_add'
+
 import {
   DivFrom,
   DivFromTop,
@@ -660,8 +663,8 @@ function blobToFile(theBlob, fileName){
          
          <DivFromTop>
          <div style={{ margin: "-3px 5px 0px 0px" , fontSize:"20px" }}>
-
-{/* <Icon size={25} icon={list} /> */}
+      
+<Icon size={25} icon={picture} />
 </div>
 <div style={{ margin: "-1px 5px 0px 0px" , fontSize:"20px" }}>
  รูปถ่ายโค
@@ -725,6 +728,9 @@ function blobToFile(theBlob, fileName){
          <DivFromTop>
          <div style={{ margin: "-3px 5px 0px 0px" , fontSize:"20px" }}>
 {/* <Icon size={25} icon={list} /> */}
+<div style={{ margin: "-3px 5px 0px 0px" }}>
+              <Icon size={20} icon={notepad_add} />
+            </div>
 </div>
 <div style={{ margin: "-1px 5px 0px 0px" , fontSize:"20px" }}>
 บันทึกโคเข้าขุน

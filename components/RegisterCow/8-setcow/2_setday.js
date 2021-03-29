@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import styled from "styled-components";
-import {  Removebutton } from "../../../utils/button";
+// import {  Editbutton } from "../../../utils/button";
 import {pen_3} from 'react-icons-kit/ikons/pen_3'
 
 import { Icon } from "react-icons-kit";
@@ -169,8 +169,8 @@ catch (error) {
           // margin:"auto"
         }}
       >
-        <>
-          <Sidemenu Sidenumber={1} />
+        
+          <Sidemenu Sidenumber={2} />
 
           <DivFrom
             style={{
@@ -178,80 +178,14 @@ catch (error) {
               gridRowStart: "2",
               gridRowEnd: "3",
               gridColumnStart: "3",
+           marginTop:"0"
             }}
           >
             <DivFromTop>
               <div style={{ margin: "-3px 5px 0px 0px" }}>
                 <Icon size={20} icon={pen_3} />
               </div>
-              
-              <div style={{ margin: "-1px 5px 0px 0px" , fontSize:"16px"}}>
-              เพิ่มสายพันธุ์
-                            </div>
-            </DivFromTop>
-            <DivFromDown>
-              <div
-                style={{
-                  margin: "auto",
-                  minWidth: "100%",
-                  display: "grid",
-                  gridTemplateColumns: "0.30fr 0fr 1fr  1fr",
-                  gridRowGap: "15px",
-                }}
-              >
-                <div>ชื่อ(ไทย) : {}
-                <Input
-                  name="name"
-                  onChange={handleChange}
-                  style={{ width: "218px" }}
-                />
-              </div>
-       <> &emsp; </>
-                <div>รหัสสายพันธุ์ : {}
-                <Input
-                  name="numpun"
-                  onChange={handleChange}
-                  style={{
-                    width: "218px",
-                  }}
-                />
-              </div>
-              <Gobutton
-              
-              style={{
-        
-                margin: "23px 3px 0px auto",
-                height:"30px",
-                width:"200px",
-                float: "right",
-
-              }}
-              onClick={handleSubmit}
-              >
-                {" "}
-                บันทึกข้อมูลสายพันธุ์{" "}
-              </Gobutton>
-                
-             
-        
-              </div>
-
-            </DivFromDown>
-          </DivFrom>
-
-          <DivFrom
-            style={{
-              width: "100%",
-              gridRowStart: "3",
-              gridRowEnd: "3",
-              gridColumnStart: "3",
-            }}
-          >
-            <DivFromTop>
-              <div style={{ margin: "-3px 5px 0px 0px" }}>
-                <Icon size={20} icon={list} />
-              </div>
-              ข้อมูลทั่วไปของชิ้นเนื้อ
+              ตั้งค่าระยะการส่งเชือด
             </DivFromTop>
             <DivFromDown>
               <div style={{ margin: "auto", minWidth: "100%" }}>
@@ -265,38 +199,39 @@ catch (error) {
                
                   <thead>
                     <tr style={{ textAlign: "center" }}>
-                      <th>ชื่อสายพันธุ์</th>
-                      <th>รหัสสายพันธุ์</th>
-                      <th>ลบ</th>
+                      <th>ระยะ ปี - เดือน </th>
+                      <th>น้ำหนักตามมาตรฐาน</th>
+                      <th>ตั้งค่า</th>
                     </tr>
                   </thead>
                   <tbody>
-                  {
+                  {/* {
                   datadrug &&
                   datadrug.puntypeQuery &&
                   datadrug.puntypeQuery.length > 0 ? (
                     datadrug.puntypeQuery.map((prod) => (
-                  
+                   */}
                  
                         <tr key={prod.id} style={{ textAlign: "center" }}>
-                  <td>{prod.name}</td>
-                  <td>{prod.numpun}</td>
+                  <td>1 - 5</td>
+                  <td>450 กิโลกรัม</td>
                   <td>
-                  <Removebuttoncolor onClick={ e => handleSubmitDelete(prod.id)}>
-              <Removebutton />
-            </Removebuttoncolor>
+                  <Editbuttoncolor >
+              <Editbutton />
+            </Editbuttoncolor>
                   </td>
-                  </tr> ))
+                  </tr>  {/*))
                   ) : (
                     <tr style={{ textAlign: "center" }}>
                       <td colSpan="7">ไม่พบข้อมูล</td>
                     </tr>
-                  )}</tbody>
+                  )}*/}
+                  </tbody> 
                 </Table>
               </div>
             </DivFromDown>
           </DivFrom>
-        </>
+        
 
         {/* <Footer/> */}
       </DivBase>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import styled from "styled-components";
+import {pen_3} from 'react-icons-kit/ikons/pen_3'
 
 import { Icon } from "react-icons-kit";
 import { Table } from "react-bootstrap";
@@ -156,8 +157,7 @@ const Index = () => {
         }}
       >
         <>
-          <Sidemenu Sidenumber={7} />
-
+          <Sidemenu Sidenumber={3} />
           <DivFrom
             style={{
               width: "100%",
@@ -168,121 +168,9 @@ const Index = () => {
           >
             <DivFromTop>
               <div style={{ margin: "-3px 5px 0px 0px" }}>
-                <Icon size={20} icon={list} />
+                <Icon size={20} icon={pen_3} />
               </div>
-              เพิ่มข้อมูลยา
-            </DivFromTop>
-            <DivFromDown>
-              <div
-                style={{
-                  margin: "auto",
-                  minWidth: "100%",
-                  display: "grid",
-                  gridTemplateColumns: "0.30fr 1fr 0.15fr 0.60fr 1fr",
-                  gridRowGap: "15px",
-                }}
-              >
-                <div>ชื่อ(ไทย) : </div>
-                <Input
-                  name="nameTH"
-                  value={prod.nameTH}
-                  onChange={handleChange}
-                  style={{ width: "218px" }}
-                />
-                <div />
-                <div>ชื่อ(อังกฤษ) : </div>
-                <Input
-                  name="nameEN"
-                  value={prod.nameEN}
-                  onChange={handleChange}
-                  style={{ width: "218px" }}
-                />
-                <div>ระยะหยุดยา : </div>
-                <Input
-                  name="code"
-                  value={prod.code}
-                  onChange={handleChange}
-                  style={{
-                    width: "218px",
-                    border: `${errorAlert ? "red solid 1px" : ""}`,
-                  }}
-                />
-                <div />
-                <div>สรรพคุณ : </div>
-                <Input
-                  name="BBE"
-                  value={prod.BBE}
-                  onChange={handleChange}
-                  type="Number"
-                  style={{ width: "218px" }}
-                />
-                <div />
-                {errorAlert && (
-                  <p
-                    style={{
-                      color: "red",
-                      position: "absolute",
-                      display: "flex",
-                      margin: "75px 0px 0 68px",
-                    }}
-                  >
-                    รหัสซ้ำ
-                  </p>
-                )}
-              </div>
-
-              <div style={{ float: "right", padding: "13px 8px" }}>
-                <Gobutton
-                  disabled={
-                    !prod.code ||
-                    !prod.nameTH ||
-                    !prod.nameEN ||
-                    !prod.BBE ||
-                    !prod.priceG2h ||
-                    !prod.priceG3 ||
-                    !prod.priceG3h ||
-                    !prod.priceG4 ||
-                    !prod.priceG4h ||
-                    !prod.priceG5
-                  }
-                  style={{
-                    backgroundColor: `${
-                      !prod.code ||
-                      !prod.nameTH ||
-                      !prod.nameEN ||
-                      !prod.BBE ||
-                      !prod.priceG2h ||
-                      !prod.priceG3 ||
-                      !prod.priceG3h ||
-                      !prod.priceG4 ||
-                      !prod.priceG4h ||
-                      !prod.priceG5
-                        ? "gray"
-                        : ""
-                    }`,
-                  }}
-                  onClick={handleSubmit}
-                >
-                  {" "}
-                  ยืนยัน{" "}
-                </Gobutton>
-              </div>
-            </DivFromDown>
-          </DivFrom>
-
-          <DivFrom
-            style={{
-              width: "100%",
-              gridRowStart: "3",
-              gridRowEnd: "3",
-              gridColumnStart: "3",
-            }}
-          >
-            <DivFromTop>
-              <div style={{ margin: "-3px 5px 0px 0px" }}>
-                <Icon size={20} icon={list} />
-              </div>
-              ข้อมูลทั่วไปของชิ้นเนื้อ
+              ตั้งค่าระยะหยุดยา
             </DivFromTop>
             <DivFromDown>
               <div style={{ margin: "auto", minWidth: "100%" }}>
@@ -295,13 +183,48 @@ const Index = () => {
                 >
                   <thead>
                     <tr style={{ textAlign: "center" }}>
-                      <th>รหัสชิ้นเนื้อ</th>
-                      <th>ชื่อไทย</th>
-                      <th>ชื่ออังกฤษ</th>
+                      <th>ชื่อยา</th>
+                      <th>ระยะหยุดยาก่อนเชือด</th>
+                      <th>ตั้งค่า</th>
                     </tr>
                   </thead>
                   <tbody>
-                   
+                    <tr key={prod.id} style={{ textAlign: "center" }}>
+                         <td>Oxytetracyclin</td>
+                  <td>45 วัน</td>
+                  <td>
+                  <Editbuttoncolor >
+              <Editbutton />
+            </Editbuttoncolor>
+                  </td>
+                    </tr>
+                    <tr key={prod.id} style={{ textAlign: "center" }}>
+                         <td>Penstep</td>
+                  <td>40 วัน</td>
+                  <td>
+                  <Editbuttoncolor >
+              <Editbutton />
+            </Editbuttoncolor>
+                  </td>
+                    </tr>
+                    <tr key={prod.id} style={{ textAlign: "center" }}>
+                         <td>Sulfatrimetroprim</td>
+                  <td>50 วัน</td>
+                  <td>
+                  <Editbuttoncolor >
+              <Editbutton />
+            </Editbuttoncolor>
+                  </td>
+                    </tr>
+                    <tr key={prod.id} style={{ textAlign: "center" }}>
+                         <td>Dexamethasone</td>
+                  <td>40 วัน</td>
+                  <td>
+                  <Editbuttoncolor >
+              <Editbutton />
+            </Editbuttoncolor>
+                  </td>
+                    </tr>
                   </tbody>
                 </Table>
               </div>

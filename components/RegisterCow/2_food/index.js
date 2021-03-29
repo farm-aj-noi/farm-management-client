@@ -3,8 +3,11 @@ import styled from "styled-components";
 
 import { Icon } from "react-icons-kit";
 import { Table } from "react-bootstrap";
+import {magnifying_glass_add} from 'react-icons-kit/ikons/magnifying_glass_add'
 
 import { list } from "react-icons-kit/fa/list";
+import {notepad_add} from 'react-icons-kit/ikons/notepad_add'
+
 import { DivBase } from "../../../utils/divBase";
 import {
   DivFrom,
@@ -223,7 +226,7 @@ const Index = () => {
         <DivFrom style={{ marginBottom: "15px" }}>
           <DivFromTop>
             <div style={{ margin: "-3px 5px 0px 0px" }}>
-              <Icon size={20} icon={list} />
+              <Icon size={20} icon={magnifying_glass_add} />
             </div>
             ข้อมูลโค
           </DivFromTop>
@@ -296,8 +299,8 @@ const Index = () => {
 
         <DivFrom style={{ marginBottom: "15px" }}>
           <DivFromTop>
-            <div style={{ margin: "-3px 5px 0px 0px" }}>
-              <Icon size={20} icon={list} />
+          <div style={{ margin: "-3px 5px 0px 0px" }}>
+              <Icon size={20} icon={notepad_add} />
             </div>
             บันทึกการให้อาหาร
           </DivFromTop>

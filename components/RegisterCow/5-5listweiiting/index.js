@@ -20,15 +20,19 @@ import Signin from "../../Signin";
 export const QUERY_LISTST = gql`
   query QUERY_LISTST(
     $passsport: String!,
+    $statusIm:String
   ) {
     cowfarmmerweitting(
       passsport: $passsport,
+      statusIm: $statusIm
     ) {
       id
       pun
       numfarmer
       namecow
       date
+      namefarmer
+      
     }
   }
 `;
@@ -46,6 +50,7 @@ export const QUERY = gql`
       statuscow
       user
       passport
+      namef
   }
   }
 `;
@@ -70,11 +75,15 @@ const Index = () => {
   const [inputnumkun, setInputnumkun] = useState("");
   const [groupin, setGroupin] = useState("");
   const [selectedStatus, SetStatusChange] = useState("605af3da9c7419287cdb3138");
+  const [namestatus,Setnamestatus] = useState("")
+  const at1 = "6061d400a8f9ea2bc848608a"
+
   // console.log(data);
+  console.log(at1)
   const { data, loading, error, refetch } = useQuery(QUERY_LISTST, {
     variables: {
       passsport:user.passsport,
-      numkun:inputnumkun
+      statusIm:selectedStatus,
     },
     onCompleted:(data) => {
       // console.log(data.SearchBuy)
@@ -84,7 +93,7 @@ const Index = () => {
     }
 
   });
-  // console.log()
+
   // setuser(AuthenticatorAssertionResponse)
   return (
     <>
@@ -141,8 +150,7 @@ const Index = () => {
                 }}
               >
                 <option value="605af3da9c7419287cdb3138">รออนุมัติขึ้นทะเบียนขุน</option>
-                <option value="601f968a8443a40c74357c2f">อนุมัติขึ้นทะเบียนแล้ว</option>
-                <option value="601f968a8443a40c74357c2f">ไม่ผ่านการอนุมัติ</option>
+                <option value="6061d400a8f9ea2bc848608a">อนุมัติขึ้นทะเบียนแล้ว</option>
               </select>
             </div>
 

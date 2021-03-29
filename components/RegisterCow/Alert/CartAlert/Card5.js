@@ -5,7 +5,7 @@ import { fileText } from "react-icons-kit/fa/fileText";
 import { DivAlertCard, StyleAlertCardDown } from "./StyleCard";
 
 // import ImgPrice from "../../../../images/slaughter/alert/price.png";
-import ImgPrice from "../../../../images/slaughter/alert/slaughter.png";
+import ImgPrice from "../../../../images/slaughter/alert/survey.png";
 
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
@@ -45,8 +45,8 @@ const Card5 = () => {
           width: "100%",
         }}
       >
-        <div style={{ width: "fit-content" }}>
-          <img src={ImgPrice} width="100" />
+        <div style={{ width: "fit-content" ,margin:'0px',marginLeft:'10px'}}>
+          <img src={ImgPrice} width="65" />
         </div>
         <div
           style={{

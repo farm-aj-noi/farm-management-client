@@ -173,7 +173,7 @@ const ProductId = () => {
                 transform: "translateX(-50%)"
               }}>
         <></>
-        <DivFrom style={{ width: "270px" ,height:"280px",margin:"20px",marginTop:"0" , marginRight:"2px"}}>
+        <DivFrom style={{ width: "270px" ,height:"min-content",margin:"20px",marginTop:"0" , marginRight:"2px"}}>
           
           <DivFromTop>
           <div style={{ margin: "-3px 5px 0px 0px" , fontSize:"20px" }}>
@@ -189,11 +189,11 @@ const ProductId = () => {
             style={{
               display: "grid",
               gridTemplateColumns: "0.3fr",
+      
               // gridRowGap: "5px",
               // paddingBottom: "20px",
             }}
           >
-       
             <div
               className="mb-3"
               style={{
@@ -201,65 +201,25 @@ const ProductId = () => {
                 gridTemplateColumns: "1fr ",
               }}
             >
-           
-             
-             
-             
-              
-              {/* <Btns  name="CKICK"  for="filess">
-              CKICK
-        <input
-          style={{height: '0px',width:' 0px', overflow:'hidden'}}
-          type="file"
-          name="file"
-          id="filess"
-          //   value={productData.imageUrl}
-          onChange={selectFile}
-        />
-        
-        </Btns> */}
-              {/* /////////////////////////////////////////////////////////////////////////////////////// */}
               <div >
-         
                 <div >
                   <div >
-                    <br />
                     <div >
                         <a >
-                        <Divimg >
-            <img style={{
+                        <Divimg style={{width:"240px"}}>
+                          <img style={{
 
-              margin: "auto", objectFit: "cover", width: "100%", height: "100%", display: "relarive", padding: "4px", borderRadius: "30px"
-            }} alt="Image" src={data.Cowdetail.imagecow || logo} />
-          </Divimg >
-                          {/* <div >
-                            <img style={{objectFit:'cover',width: '90%', position:'inherit',}}  />
-                          </div> */}
+                            margin: "auto", objectFit: "cover", width: "100%", height: "100%", display: "relarive", padding: "4px", borderRadius: "30px"
+                          }} alt="Image" src={cowdetailData.imagecow || logo} />
+                        </Divimg >
                         </a>
-                        <br />
                     </div>
                   </div>
                 </div>
 
-                  <p></p>
-        
-                  <div ></div>
-                 
-          
               </div>
-           {/* ---------------------------------------------------------------------------------------------*/}
             </div>
-            <div
-              className="mb-3"
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 0.75fr 1fr 0.75fr",
-                gridRowGap: "5px",
-                marginTop: "5px",
-              }}
-            ></div>
 
-          
           </DivFromDown>
         </DivFrom>
         <DivFrom style={{ width: "750px" ,float:"Rigth"}}>

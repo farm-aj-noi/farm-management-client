@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 // import { useRouter } from "next/router";
 import Link from "next/link";
+import {cog} from 'react-icons-kit/ikons/cog'
+
 import {
   DivFrom,
   DivFromTop,
@@ -29,7 +31,7 @@ const Menu = ({ Sidenumber }) => {
       >
         <DivFromTop>
           <div style={{ margin: "-3px 5px 0px 0px" }}>
-            <Icon size={20} icon={list} />
+            <Icon size={20} icon={cog} />
           </div>
           รายการตั้งค่า{" "}
         </DivFromTop>
@@ -67,16 +69,16 @@ const Menu = ({ Sidenumber }) => {
                     <Nav.Item
                       style={{ borderTop: "1px solid gray", paddingTop: "5px" }}
                     >
-                      <Nav.Link eventKey="3">
-                        <Link href="/registercow/setting/">
+                      <Nav.Link eventKey="2">
+                        <Link href="/registercow/setting/setday">
                           <div style={{ width: "100%" }}>ตั้งค่าระยะการส่งเชือด</div>
                         </Link>
                       </Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                      <Nav.Link eventKey="4">
-                        <Link href="/registercow/setting/">
-                          <div style={{ width: "100%" }}>ตั้งค่าแจ้งเตือน</div>
+                      <Nav.Link eventKey="3">
+                        <Link href="/registercow/setting/qtyday">
+                          <div style={{ width: "100%" }}>ตั้งค่าแจ้งเตือนระยะหยุดยา</div>
                         </Link>
                       </Nav.Link>
                     </Nav.Item>

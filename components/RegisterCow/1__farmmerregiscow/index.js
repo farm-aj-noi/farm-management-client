@@ -1,12 +1,15 @@
 import React, { useContext, useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { AuthContext } from "../../../appState/AuthProvider";
+import {notepad_add} from 'react-icons-kit/ikons/notepad_add'
 
 import { Icon } from "react-icons-kit";
 import { Table } from "react-bootstrap";
 import Card from 'react-bootstrap/Card'
 import logo from './defultcow.jpg'
 import { list } from "react-icons-kit/fa/list";
+import {picture} from 'react-icons-kit/ikons/picture'
+
 import { DivBase } from "../../../utils/divBase";
 import {
   DivFrom,
@@ -37,7 +40,6 @@ const CREATE = gql`
   mutation CREATE(
   
     $pun: String
-    $numfarmer: String
     $passport: String
     $teeth: String
     $bodyscore: String
@@ -49,7 +51,7 @@ const CREATE = gql`
     $weightstart: Float
     $weightbirht: Float
     $imagecow: String
-    $numaccount:String
+    $numfarmer:String
     $district: String
     $province: String
     $amphur:String
@@ -70,7 +72,6 @@ const CREATE = gql`
       weightstart: $weightstart
       weightbirht: $weightbirht
       imagecow: $imagecow
-      numaccount:$numaccount
       district: $district
       province: $province
       amphur:$amphur
@@ -85,7 +86,7 @@ const CREATE = gql`
       datebirhtday
       namecow
       sex
-      
+ 
       weightstart
       weightbirht
       imagecow
@@ -280,7 +281,7 @@ const Index = () => {
     passport: user.passsport,
     teeth: "",
     bodyscore: "",
-    namefarmer: user.username,
+    namefarmer: user.name,
     namecow: "",
     sex: "",
     weightstart: "",
@@ -403,7 +404,8 @@ const Index = () => {
 
   const handleSubmit = async () => {
     setLoadingCreate(true);
-  
+    console.log(4444444)
+
     try {
       const url = await uploadFile();
       if (url) {
@@ -446,7 +448,7 @@ console.log(prod.imagecow)
           <DivFromTop>
           <div style={{ margin: "-3px 5px 0px 0px" , fontSize:"20px" }}>
 
-{/* <Icon size={25} icon={list} /> */}
+<Icon size={25} icon={picture} />
 </div>
 <div style={{ margin: "-1px 5px 0px 0px" , fontSize:"20px" }}>
   รูปถ่ายโค
@@ -538,7 +540,7 @@ console.log(prod.imagecow)
           <DivFromTop>
           <div style={{ margin: "-3px 5px 0px 0px" , fontSize:"20px" }}>
 
-{/* <Icon size={25} icon={list} /> */}
+<Icon size={25} icon={notepad_add} />
 </div>
 <div style={{ margin: "-1px 5px 0px 0px" , fontSize:"20px" }}>
   บันทึกข้อมูลขอขึ้นทะเบียนโคขุน

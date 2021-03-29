@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import styled from "styled-components";
-import { useRouter } from "next/router"
+import { Router, useRouter } from "next/router"
 import logo from '../defultcow.jpg'
 
 import {
@@ -135,18 +135,24 @@ const ProductId = () => {
   const [edit, setEdit] = useState(false);
 
   const [cowdetailData, setCowdetailData] = useState({
-    numkun: '',
-    numcow: ''
-    , namecow: ''
-    , pun: '',
-    date: '',
-    datebirhtday: ''
-    , weightstart: ''
-    , numfarmer: '',
-    district: "",
-     province: "",
-      amphur: "",
-       zipcode: ""
+    namecow:'',
+    date:'',
+  numfarmer:'',
+  namefarmer:'',
+  passport:'',
+  pun:'',
+  teeth:'',
+  bodyscore:'',
+  datebirhtday:'',
+  imagecow:'',
+weightbirht:'',
+  weightstart:'',
+  sex:'',
+  numfarmer:'',
+  district:'',
+   province:'',
+    amphur:'',
+     zipcode:''
   });
   // const [loading, setLoading] = useState(false);
 
@@ -160,30 +166,33 @@ const ProductId = () => {
     setProd({ ...prod, [name]: value })
   };
 
-
   const [prod, setProd] = useState({
     numcow: "",
     numkun: "",
-    pun: cowdetailData.pun,
-    numfarmer: cowdetailData.numfarmer,
-    passport: cowdetailData.passport,
-    teeth: cowdetailData.teeth,
-    rfid: "",
-    date: Date(),
-    datebirhtday: cowdetailData.datebirhtday,
-    bodyscore: cowdetailData.bodyscore,
-    namefarmer: cowdetailData.namefarmer,
-    namecow: cowdetailData.namecow,
-    sex: cowdetailData.sex,
-    weightstart: cowdetailData.weightstart,
-    weightbirht: cowdetailData.weightbirht,
-    statuscow: "กำลังขุน",
-    imagecow: cowdetailData.imagecow,
-    group: "",
-    district: cowdetailData.district
-    , province: cowdetailData.province, amphur: cowdetailData.amphur, zipcode: cowdetailData.zipcode
+    rfid:"",
+    group:"",
+
+ // numfarmer: data.numfarmer,
+    // passport: data.passport,
+    // teeth: data.teeth,
+    // rfid: "",
+    // date: Date(),
+    // datebirhtday: data.datebirhtday,
+    // bodyscore: data.bodyscore,
+    // namefarmer: data.namefarmer,
+    // namecow: data.namecow,
+    // sex: data.sex,
+    // weightstart: data.weightstart,
+    // weightbirht: data.weightbirht,
+    // statuscow: "กำลังขุน",
+    // imagecow: data.imagecow,
+    // group: "",
+    // district: data.district
+    // , province: data.province, amphur: data.amphur, zipcode: data.zipcode
 
   });
+  console.log(prod)
+
   const [updatecowfarm] = useMutation(UPDATE_GRADE, {
     onCompleted: (data) => {
 
@@ -213,34 +222,32 @@ const ProductId = () => {
   });
   const handleSubmitUpdate = async () => {
     console.log(route.query.productId)
-    await createCow({
-      variables: {
-        ...prod,
-        date: selectedDate2,
-        datebirhtday: selectedDate,
-        weightstart: +prod.weightstart,
-        weightbirht: +prod.weightbirht,
-        imagecow: url,
-
-      },
-    });    
+    try {
   
- 
+        console.log(123)
+        await createCow({
+          variables: {
+         ...prod,
+         ...cowdetailData,
+         weightstart: +cowdetailData.weightstart,
+         weightbirht: +cowdetailData.weightbirht,
+          },
+        });
+        
+    } catch (error) {
+      
+    }
     await updatecowfarm({
 
       variables: {
        // ...cowdetailData,
         id: route.query.productId,
-        numkun: cowdetailData.numkun,
-        numcow: cowdetailData.numcow,
-        namecow: cowdetailData.namecow,
-        pun: cowdetailData.pun,
-       weightstart:+cowdetailData.weightstart,
-        numfarmer: cowdetailData.numfarmer
-      },
-    });
-    window.location.reload(false);
 
+      },
+      
+    }
+    );
+    route.reload('/registercow/alert');
     setEdit(false);
   };
   if (error) return <p>Something went wrong, please try again.</p>
@@ -279,7 +286,6 @@ const ProductId = () => {
               // paddingBottom: "20px",
             }}
           >
-       
             <div
               className="mb-3"
               style={{
@@ -287,26 +293,7 @@ const ProductId = () => {
                 gridTemplateColumns: "1fr ",
               }}
             >
-           
-             
-             
-             
-              
-              {/* <Btns  name="CKICK"  for="filess">
-              CKICK
-        <input
-          style={{height: '0px',width:' 0px', overflow:'hidden'}}
-          type="file"
-          name="file"
-          id="filess"
-          //   value={productData.imageUrl}
-          onChange={selectFile}
-        />
-        
-        </Btns> */}
-              {/* /////////////////////////////////////////////////////////////////////////////////////// */}
               <div >
-         
                 <div >
                   <div >
                     <div >
@@ -322,14 +309,9 @@ const ProductId = () => {
                   </div>
                 </div>
 
-                 
-          
               </div>
-           {/* ---------------------------------------------------------------------------------------------*/}
             </div>
 
-
-          
           </DivFromDown>
         </DivFrom>
         <DivFrom style={{ width: "750px" ,float:"Rigth"}}>
@@ -393,8 +375,12 @@ const ProductId = () => {
                     // disabled={!onEdite}
                     // style={{ backgroundColor: `${!onEdite ? "#ececec" : 'white'}` }}
  
-  onChange={handleChange}
-                  />
+                    onChange={(event) => {
+                      let input = event.target.value;
+                      let value = input;
+                        handleChange(event.target.name, value);
+                    }}
+                    />
                 </div>
               </div>
               <div>
@@ -406,7 +392,11 @@ const ProductId = () => {
                     maxLength="5"
                     // disabled={!onEdite}
                     // style={{ backgroundColor: `${!onEdite ? "#ececec" : 'white'}` }}
-                    onChange={handleChange}
+                    onChange={(event) => {
+                      let input = event.target.value;
+                      let value = input;
+                        handleChange(event.target.name, value);
+                    }}
                   />
                 </div>
               </div>
@@ -459,7 +449,11 @@ const ProductId = () => {
                     // style={{ backgroundColor: "#ececec" }}
                     // disabled={!onEdite}
                     // style={{ backgroundColor: `${!onEdite ? "#ececec" : 'white'}` }}
-                    // onChange={handleChange}
+                    onChange={(event) => {
+                      let input = event.target.value;
+                      let value = input;
+                        handleChange(event.target.name, value);
+                    }}
                   />
                 </div>
               </div>

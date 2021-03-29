@@ -3,6 +3,8 @@ import styled from "styled-components";
 
 import { Icon } from "react-icons-kit";
 import { Table } from "react-bootstrap";
+import {notepad_add} from 'react-icons-kit/ikons/notepad_add'
+
 import {
   Savebuttoncolor,
   Editbuttoncolor,
@@ -115,7 +117,7 @@ const Index = () => {
         <DivFrom style={{ marginBottom: "15px" }}>
           <DivFromTop>
             <div style={{ margin: "-3px 5px 0px 0px" }}>
-              <Icon size={20} icon={list} />
+              <Icon size={20} icon={notepad_add} />
             </div>
             บันทึกข้อมูลโรค
           </DivFromTop>

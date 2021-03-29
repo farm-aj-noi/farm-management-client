@@ -5,8 +5,9 @@ import { Icon } from "react-icons-kit";
 import { fileText } from "react-icons-kit/fa/fileText";
 import { DivAlertCard, StyleAlertCardDown } from "./StyleCard";
 
-import ImgSlaughter from "../../../../images/slaughter/alert/cut.png";
+import ImgSlaughter from "../../../../images/slaughter/alert/cowtreat.png";
 
+import ImgSlaughterz from "../../../../images/slaughter/alert/slaughter.png";
 
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";

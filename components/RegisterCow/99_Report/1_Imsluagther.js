@@ -3,6 +3,8 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import styled from "styled-components";
 
+import {magnifying_glass} from 'react-icons-kit/ikons/magnifying_glass'
+
 import { Icon } from "react-icons-kit";
 import { Table } from "react-bootstrap";
 
@@ -196,7 +198,7 @@ const Index = () => {
           >
             <DivFromTop>
               <div style={{ margin: "-3px 5px 0px 0px" }}>
-                <Icon size={20} icon={list} />
+                <Icon size={20} icon={magnifying_glass} />
               </div>
               รายงาน
             </DivFromTop>
