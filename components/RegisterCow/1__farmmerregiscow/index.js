@@ -49,7 +49,11 @@ const CREATE = gql`
     $weightstart: Float
     $weightbirht: Float
     $imagecow: String
-
+    $numaccount:String
+    $district: String
+    $province: String
+    $amphur:String
+    $zipcode: String
   ) {
     importcowfarm(
   
@@ -66,6 +70,11 @@ const CREATE = gql`
       weightstart: $weightstart
       weightbirht: $weightbirht
       imagecow: $imagecow
+      numaccount:$numaccount
+      district: $district
+      province: $province
+      amphur:$amphur
+      zipcode: $zipcode
      
     ) {
     
@@ -267,17 +276,20 @@ const Index = () => {
   const [prod, setProd] = useState({
    
     pun: "",
-    numfarmer: "0",
+    numfarmer: user.numaccount,
     passport: user.passsport,
     teeth: "",
     bodyscore: "",
-    namefarmer: "0",
+    namefarmer: user.username,
     namecow: "",
     sex: "",
     weightstart: "",
     weightbirht: "",
     imagecow: "",
- 
+    district: user.district,
+    province: user.province,
+    amphur:user.amphur,
+    zipcode: user.zipcode
 
   });
 
@@ -294,7 +306,11 @@ const Index = () => {
     weightstart: false,
     weightbirht: false,
     statuscow: false,
-    imagecow: false
+    imagecow: false,
+    district: false,
+    province: false,
+    amphur:false,
+    zipcode: false
   });
 
   const [walert, setwAlert] = useState({

@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import styled from "styled-components";
 import { useRouter } from "next/router"
 import logo from '../defultcow.jpg'
+
 import {
   Savebuttoncolor,
   Editbuttoncolor,
@@ -34,26 +35,73 @@ import { useQuery, useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
 
+const CREATE = gql`
+  mutation CREATE(
+    $numcow: String!
+    $numkun: String!
+    $pun: String!
+    $numfarmer: String!
+    $passport: String
+    $teeth: String
+    $rfid: String
+    $bodyscore: String
+    $namefarmer: String!
+    $date: String!
+    $datebirhtday: String!
+    $namecow: String!
+    $sex: String!
+    $weightstart: Float!
+    $weightbirht: Float!
+    $imagecow: String
+    $group: String!
+    $district: String!
+    $province: String!
+
+  ) {
+    createCow(
+      numcow: $numcow
+      numkun: $numkun
+      pun: $pun
+      numfarmer: $numfarmer
+      passport: $passport
+      teeth: $teeth
+      rfid: $rfid
+      bodyscore: $bodyscore
+      namefarmer: $namefarmer
+      date: $date
+      datebirhtday: $datebirhtday
+      namecow: $namecow
+      sex: $sex
+      weightstart: $weightstart
+      weightbirht: $weightbirht
+      statuscow: "กำลังขุน"
+      imagecow: $imagecow
+      group: $group
+      district: $district
+      province: $province
+    ) {
+      numcow
+      numkun
+      pun
+      numfarmer
+      namefarmer
+      date
+      datebirhtday
+      namecow
+      sex
+      group
+      weightstart
+      weightbirht
+      imagecow
+    }
+  }
+`;
 const UPDATE_GRADE = gql`
   mutation UPDATE_GRADE($id: String!
-    , $numcow: String
-    , $namecow: String
-    , $pun: String
-    , $weightstart: Float
-    , $numfarmer: String
-    , $numkun: String
     ) {
-    updateCow(id: $id, numkun: $numkun
-      ,numcow: $numcow
-      ,namecow: $namecow
-      ,pun: $pun
-      ,weightstart: $weightstart
-      ,numfarmer: $numfarmer) {
-      numcow
+      updatecowfarm(id: $id,) {
       namecow
-      pun
-      weightstart
-      numfarmer
+     
     }
   }
 `;
@@ -75,6 +123,11 @@ const QUERY_PRODUCT = gql`
   weightbirht
   weightstart
   sex
+  numfarmer
+  district
+   province
+    amphur
+     zipcode
   
     }
   }`
@@ -85,9 +138,15 @@ const ProductId = () => {
     numkun: '',
     numcow: ''
     , namecow: ''
-    , pun: ''
+    , pun: '',
+    date: '',
+    datebirhtday: ''
     , weightstart: ''
-    , numfarmer: ''
+    , numfarmer: '',
+    district: "",
+     province: "",
+      amphur: "",
+       zipcode: ""
   });
   // const [loading, setLoading] = useState(false);
 
@@ -95,25 +154,42 @@ const ProductId = () => {
 
   const route = useRouter();
   // console.log(route);
-  const handleChange = (e) => setCowdetailData({ ...cowdetailData, [e.target.name]: e.target.value });
+  // const handleChange = (e) => setCowdetailData({ ...cowdetailData, [e.target.name]: e.target.value });
+  const handleChange = (name, value) => {
+
+    setProd({ ...prod, [name]: value })
+  };
 
 
-  const [updateCow] = useMutation(UPDATE_GRADE, {
+  const [prod, setProd] = useState({
+    numcow: "",
+    numkun: "",
+    pun: cowdetailData.pun,
+    numfarmer: cowdetailData.numfarmer,
+    passport: cowdetailData.passport,
+    teeth: cowdetailData.teeth,
+    rfid: "",
+    date: Date(),
+    datebirhtday: cowdetailData.datebirhtday,
+    bodyscore: cowdetailData.bodyscore,
+    namefarmer: cowdetailData.namefarmer,
+    namecow: cowdetailData.namecow,
+    sex: cowdetailData.sex,
+    weightstart: cowdetailData.weightstart,
+    weightbirht: cowdetailData.weightbirht,
+    statuscow: "กำลังขุน",
+    imagecow: cowdetailData.imagecow,
+    group: "",
+    district: cowdetailData.district
+    , province: cowdetailData.province, amphur: cowdetailData.amphur, zipcode: cowdetailData.zipcode
+
+  });
+  const [updatecowfarm] = useMutation(UPDATE_GRADE, {
     onCompleted: (data) => {
 
-      setCowdetailData(data.updateCow);
-      // setEdit(false);
+      setCowdetailData(data.updatecowfarm);
     },
-    // refetchQueries: [
-    //   {
-    //     query: QUERY_PRODUCT,
-    //     // variables: {
-    //     //   barcode: "",
-    //     //   createdAt: "",
-    //     //   status: "",
-    //     // },
-    //   },
-    // ],
+
     awaitRefetchQueries: true,
   });
   // const [cowdetailData, setCowdetailData] = useState();
@@ -128,9 +204,29 @@ const ProductId = () => {
 
   console.log(cowdetailData)
 
+  const [createCow] = useMutation(CREATE, {
+    onCompleted: (data) => {
+      setSuccess(true),
+        window.location.reload();
+
+    },
+  });
   const handleSubmitUpdate = async () => {
     console.log(route.query.productId)
-    await updateCow({
+    await createCow({
+      variables: {
+        ...prod,
+        date: selectedDate2,
+        datebirhtday: selectedDate,
+        weightstart: +prod.weightstart,
+        weightbirht: +prod.weightbirht,
+        imagecow: url,
+
+      },
+    });    
+  
+ 
+    await updatecowfarm({
 
       variables: {
        // ...cowdetailData,
@@ -294,8 +390,8 @@ const ProductId = () => {
                     name="numkun"
                     value={cowdetailData.numkun}
                     maxLength="8"
-                    disabled={!onEdite}
-                    style={{ backgroundColor: `${!onEdite ? "#ececec" : 'white'}` }}
+                    // disabled={!onEdite}
+                    // style={{ backgroundColor: `${!onEdite ? "#ececec" : 'white'}` }}
  
   onChange={handleChange}
                   />
@@ -308,8 +404,8 @@ const ProductId = () => {
                     name="numcow"
                     value={cowdetailData.numcow}
                     maxLength="5"
-                    disabled={!onEdite}
-                    style={{ backgroundColor: `${!onEdite ? "#ececec" : 'white'}` }}
+                    // disabled={!onEdite}
+                    // style={{ backgroundColor: `${!onEdite ? "#ececec" : 'white'}` }}
                     onChange={handleChange}
                   />
                 </div>
@@ -359,8 +455,8 @@ const ProductId = () => {
                     name="rfid"
                     value={cowdetailData.rfid}
                     maxLength="20"
-                    disabled
-                    style={{ backgroundColor: "#ececec" }}
+                    // disabled
+                    // style={{ backgroundColor: "#ececec" }}
                     // disabled={!onEdite}
                     // style={{ backgroundColor: `${!onEdite ? "#ececec" : 'white'}` }}
                     // onChange={handleChange}
@@ -369,11 +465,11 @@ const ProductId = () => {
               </div>
 
               <div>
-                วัน/เดือน/ปี รับเข้าโค : { }
+                วัน/เดือน/ปี เกิดโค : { }
                 <div style={{ display: "grid", gridTemplateRows: "1fr 15px" }}>
                   <Searchinput
                     name="pun"
-                    value={dayjs(cowdetailData.date).format("DD-MM-YYYY")}
+                    value={dayjs(Date()).format("DD-MM-YYYY") }
                     maxLength="5"
                     disabled
                     style={{ backgroundColor: "#ececec" }}
@@ -497,6 +593,81 @@ const ProductId = () => {
                 </div>
               </div>
               <div>
+                จังหวัด : { }
+                <div style={{ display: "grid", gridTemplateRows: "1fr 15px" }}>
+                  <Searchinput
+                    name="namefarmer"
+                    value={cowdetailData.province}
+                    style={{ backgroundColor: "#ececec" }}
+                    maxLength="100"
+                  />
+                </div>
+              </div>
+              <div>
+                อำเภอ : { }
+                <div style={{ display: "grid", gridTemplateRows: "1fr 15px" }}>
+                  <Searchinput
+                    name="namefarmer"
+                    value={cowdetailData.amphur}
+                    style={{ backgroundColor: "#ececec" }}
+                    maxLength="100"
+                  />
+                </div>
+              </div>
+              <div>
+                ตำบล : { }
+                <div style={{ display: "grid", gridTemplateRows: "1fr 15px" }}>
+                  <Searchinput
+                    name="namefarmer"
+                    value={cowdetailData.district}
+                    style={{ backgroundColor: "#ececec" }}
+                    maxLength="100"
+                  />
+                </div>
+              </div>
+              <div>
+                กลุ่มที่ : { }
+                <div style={{ display: "grid", gridTemplateRows: "1fr 15px" }}>
+                <select
+                    type="text"
+                    name="group"
+                    onChange={(event) => {
+                      handleChange(event.target.name, event.target.value);
+                    }}
+                    style={{
+                      display: "inline",
+                      width: "170px",
+                      padding: "0.375rem 0.75rem",
+                      fontSize: "1rem",
+                      fontWeight: "400",
+                      lineHeight: "1.5",
+                      color: "#495057",
+                      backgroundColor: "#fff",
+                      backgroundClip: "padding-box",
+                      border: "1px solid #ced4da",
+                      /* border-radius: 0.25rem 0rem 0rem 0.25rem; */
+                      // borderColor: `${!prod.group ? "red" : ""}`,
+                      borderRadius: "0.25rem",
+                      transition:
+                        "border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out",
+                    }}
+                  >
+                     <option value="">เลือกกลุ่ม</option>
+                    <option value="01">01</option>
+                    <option value="02">02</option>
+                    <option value="03">03</option>
+                    <option value="04">04</option>
+                    <option value="05">05</option>
+                    <option value="06">06</option>
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                    <option value="09">09</option>
+                    <option value="10">10</option>
+                  </select>
+                </div>
+              </div>
+      
+              <div>
 {/*                 
                 <Editbuttoncolor style={{
                   margin: "5px 0px 0px auto",
@@ -507,8 +678,8 @@ const ProductId = () => {
                   <Editbutton />
                 </Editbuttoncolor> */}
 
-
-                {loading ? (
+            
+                {/* {loading ? (
           <Spinner animation="border" variant="primary" />
         ) :  !onEdite ? (
           <Editbuttoncolor style={{
@@ -535,14 +706,21 @@ const ProductId = () => {
           </Savebuttoncolor>
         ) : (
           <div>
-            {/* <Savebuttoncolor onClick={handleSubmitUpdate}>
-              <Savebutton />
-            </Savebuttoncolor> */}
+
           </div>
-        )}
+        )} */}
               </div>
 
             </div>
+            <Savebuttoncolor 
+            style={{
+              margin: "3px 0px 0px auto",
+              marginRight:"48px"
+            }}
+            onClick={handleSubmitUpdate}  > 
+              {/* <Savebutton /> */}
+              บันทึกข้อมูล
+            </Savebuttoncolor> 
           </DivFromDown>
    
            </div>
