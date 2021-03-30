@@ -389,6 +389,14 @@ const Signup = () => {
           autoComplete="off"
 
         />
+           <input
+          style={{ margin: "5px", height: "30px" }}
+          type="email"
+          name="email"
+          placeholder="confirm Email"
+          autoComplete="off"
+
+        />
         <input
           style={{ margin: "5px", height: "30px" }}
           type="password"

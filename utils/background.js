@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import bgFarmAll from "../images/backgrounds/backgroundbeforelogin.jpg";
-import bgFarm from "../images/backgrounds/mtBnyb.jpg";
+import bgFarm from "../images/backgrounds/mt01.jpg";
 
 export const BackgroundEmpty = styled.div`
   background-color: #ffffff; /*ดึงรูป*/
