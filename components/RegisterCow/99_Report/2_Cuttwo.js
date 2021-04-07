@@ -304,7 +304,7 @@ const Index = () => {
         }}
       >
         <>
-          <Sidemenu Sidenumber={1} />
+          <Sidemenu Sidenumber={2} />
 
           <DivFrom
             style={{
@@ -391,7 +391,7 @@ const Index = () => {
                   transform:"translate(160px,0px)",
                   display: "grid",
                   padding:"10px",
-                  gridTemplateColumns: "0.2fr 0.2fr 0.2fr 0.2fr",
+                  gridTemplateColumns: "0.1fr 0.2fr 0.2fr 0.2fr",
                 }}
               >
                 {/* <div
@@ -459,7 +459,7 @@ const Index = () => {
 
                     style={{
                       display: "inline",
-                      width: "80px",
+                      width: "150px",
                       padding: "0.375rem 0.1rem",
                       fontSize: "1rem",
                       fontWeight: "400",
@@ -502,7 +502,7 @@ const Index = () => {
                     }}
                     style={{
                       display: "inline",
-                      width: "80px",
+                      width: "110px",
                       padding: "0.375rem 0.1rem",
                       fontSize: "1rem",
                       fontWeight: "400",
@@ -537,7 +537,7 @@ const Index = () => {
                     }}
                     style={{
                       display: "inline",
-                      width: "80px",
+                      width: "90px",
                       padding: "0.375rem 0.1rem",
                       fontSize: "1rem",
                       fontWeight: "400",
@@ -614,6 +614,8 @@ const Index = () => {
                   {/* <LoadingSmall/> */}
                   <thead>
                     <tr style={{ textAlign: "center" }}>
+                    <th>วันที่รับเข้า</th>
+
                       <th>ใบแจ้งขุน</th>
                       <th>เบอร์โค</th>
                       <th>พันธุ์</th>
@@ -621,7 +623,6 @@ const Index = () => {
                       <th>ชื่อสมาชิก</th>
                       <th>น้ำหนักโค (กก.)</th>
                       <th>กลุ่มที่</th>
-                      <th>วันที่รับเข้า</th>
                     </tr>
                   </thead>
 
@@ -629,6 +630,13 @@ const Index = () => {
                     {data && data.ReportgetGroup.length > 0 ? (
                       data.ReportgetGroup.map((prod) => (
                         <tr key={prod.id} style={{ textAlign: "center" }}>
+                              <td>
+                            {dayjs(prod.date)
+                              .add(543, "y")
+                              .locale("th")
+                              .format("DD-MMMM-YYYY")}
+                            { }
+                          </td>
                           <td>{prod.numkun}</td>
                           <td>{prod.numcow}</td>
                           <td>{prod.pun}</td>
@@ -636,13 +644,7 @@ const Index = () => {
                           <td>{prod.namefarmer}</td>
                           <td>{prod.weightstart}</td>
                           <td>{prod.group}</td>
-                          <td>
-                            {dayjs(prod.date)
-                              .add(543, "y")
-                              .locale("th")
-                              .format("DD-MMMM-YYYY")}
-                            { }
-                          </td>
+                      
                         </tr>
                       ))
                     ) : (

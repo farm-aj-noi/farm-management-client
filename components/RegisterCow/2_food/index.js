@@ -7,6 +7,7 @@ import {magnifying_glass_add} from 'react-icons-kit/ikons/magnifying_glass_add'
 
 import { list } from "react-icons-kit/fa/list";
 import {notepad_add} from 'react-icons-kit/ikons/notepad_add'
+import { usePagination } from "../../../helps/paginationhook";
 
 import { DivBase } from "../../../utils/divBase";
 import {
@@ -53,6 +54,17 @@ export const QUERY_INFO = gql`
   }
 `;
 
+
+const QUERY_FOOD = gql`
+  query QUERY_FOOD($type:String) {
+    selectFood(type:$type) {
+      name
+      CP
+      TDN
+      id
+    }
+  }
+`;
 const CREATE = gql`
   mutation CREATE(
     $datestart: String!
@@ -90,6 +102,14 @@ const CREATE = gql`
 
 const Index = () => {
   //calendar
+  const {
+    isPaginating,
+    currentPage,
+    setCurrentPage,
+    pageItems,
+    setItemList,
+    totalPages,
+  } = usePagination([]);
   const dateRef = useRef();
   const [date, setDate] = useState(new Date());
   const [selectedDate, handleDateChange] = useState(
@@ -161,10 +181,22 @@ const Index = () => {
     imslaughter: "",
     note: "",
   });
+  const [selectedStatus, SetStatusChange] = useState("");
 
   // console.log(prod);
 
   // const event1 = new Date("July 1, 1999");
+  const { data: foodset } = useQuery(QUERY_FOOD, {
+    variables: {
+      type: selectedStatus,
+
+    },
+    onCompleted:(data) => {
+      // console.log(data.SearchBuy)
+      setItemList(data.selectFood)
+
+    }
+  });
 
   const { data: datainfo } = useQuery(QUERY_INFO, {
     variables: {
@@ -215,6 +247,15 @@ const Index = () => {
       // console.log(error);
     }
   };
+// console.log(foodset)
+//   useEffect(() => {
+//     foodset &&
+//     foodset.selectFood.filter((value) => {
+//         if (value.name === prod.name) {
+//           setProd({ ...prod, namefood: foodset.selectFood.name ,cp: foodset.selectFood.CP});
+//         }
+//       });
+//   }, [prod.name]);
 
   useEffect(() => {
     if (prod.typefood === "อาหารหยาบ") setProd({ ...prod, cp: "", tdn: "" });
@@ -341,7 +382,8 @@ const Index = () => {
                 ประเภทอาหาร : {}
                 <select
                   name="typefood"
-                  onChange={handleChange}
+                  onChange={(event) => SetStatusChange(event.target.value)}
+                  // onChange={handleChange}
                   style={{
                     display: "inline",
                     width: "156px",
@@ -360,17 +402,40 @@ const Index = () => {
                   }}
                 >
                   <option value="">เลือกประเภทอาหาร</option>
-                  <option value="อาหารข้น">อาหารข้น</option>
-                  <option value="อาหารหยาบ">อาหารหยาบ</option>
+                  <option value="F1">อาหารข้น</option>
+                  <option value="F2">อาหารหยาบ</option>
                 </select>
               </div>
               <div>
                 ชื่อ/สูตรอาหาร : {}
-                <Searchinput
-                  name="namefood"
+                <select
+                  name="typefood"
                   onChange={handleChange}
-                  style={{ width: "156px" }}
-                />
+                  style={{
+                    display: "inline",
+                    width: "156px",
+                    padding: "0.375rem 0.75rem",
+                    fontSize: "1rem",
+                    fontWeight: "400",
+                    lineHeight: "1.5",
+                    color: "#495057",
+                    backgroundColor: "#fff",
+                    backgroundClip: "padding-box",
+                    border: "1px solid #ced4da",
+                    /* border-radius: 0.25rem 0rem 0rem 0.25rem; */
+                    borderRadius: "0.25rem",
+                    transition:
+                      "border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out",
+                  }}
+                >
+                  <option value="">รายการอาหาร</option>
+                  {foodset &&
+                    foodset.selectFood.map((prod) => (
+                      <option key={prod.id} value={prod.name}>
+                        {prod.name}
+                      </option>
+                    ))}
+                </select>
               </div>
               <div style={{ gridColumnStart: 4, gridColumnEnd: 6 }}>
                 ชื่อบริษัท : {}
@@ -401,7 +466,10 @@ const Index = () => {
                 โปรตีน (CP) : {}
                 <Searchinput
                   name="cp"
-                  value={prod.cp}
+                  // value={foodset.selectFood.CP}
+                  // value={prod.cp}
+                  // value={inputList[i].nofity}
+
                   onChange={handleChange}
                   type="text"
                   style={{

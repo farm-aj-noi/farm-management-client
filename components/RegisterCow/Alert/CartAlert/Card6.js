@@ -35,7 +35,7 @@ const Card5 = () => {
           padding: "73px 10px 0 0px",
         }}
       >
-        แจ้งเตือนยา
+        แจ้งเตือนการรักษา
       </div>
       <div
         style={{

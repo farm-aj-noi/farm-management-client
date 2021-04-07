@@ -65,7 +65,7 @@ const Index = () => {
       }}
     >
       <>
-        <Sidemenu Sidenumber={3} />
+        <Sidemenu Sidenumber={4} />
         <DivFrom
           style={{
             width: "100%",

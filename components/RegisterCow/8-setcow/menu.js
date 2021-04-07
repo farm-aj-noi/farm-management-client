@@ -49,7 +49,14 @@ const Menu = ({ Sidenumber }) => {
                         </Link>
                       </Nav.Link>
                     </Nav.Item>
-
+                    <Nav.Item style={{ marginBottom: "5px" }}>
+                      <Nav.Link eventKey="2">
+                        <Link href="/registercow/setting/setfood">
+                          <div style={{ width: "100%" }}>ตั้งค่าข้อมูลอาหาร</div>
+                        </Link>
+                      </Nav.Link>
+                    </Nav.Item>
+               
                     {/* ------------------------------------------------------------------------ */}
 {/* 
                     <Nav.Item
@@ -69,19 +76,20 @@ const Menu = ({ Sidenumber }) => {
                     <Nav.Item
                       style={{ borderTop: "1px solid gray", paddingTop: "5px" }}
                     >
-                      <Nav.Link eventKey="2">
+                      <Nav.Link eventKey="3">
                         <Link href="/registercow/setting/setday">
                           <div style={{ width: "100%" }}>ตั้งค่าระยะการส่งเชือด</div>
                         </Link>
                       </Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                      <Nav.Link eventKey="3">
+                      <Nav.Link eventKey="4">
                         <Link href="/registercow/setting/qtyday">
                           <div style={{ width: "100%" }}>ตั้งค่าแจ้งเตือนระยะหยุดยา</div>
                         </Link>
                       </Nav.Link>
                     </Nav.Item>
+             
                     {/* <Nav.Item>
                       <Nav.Link eventKey="6">
                         <Link href="/slaughter/setting/bbe">

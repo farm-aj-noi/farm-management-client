@@ -7,6 +7,7 @@ import {pen_3} from 'react-icons-kit/ikons/pen_3'
 
 import { Icon } from "react-icons-kit";
 import { Table } from "react-bootstrap";
+import ListHalve from "./4_foodlist";
 
 import { Form, Row, Col, Tab, Nav } from "react-bootstrap";
 import { ic_notifications_active } from "react-icons-kit/md/ic_notifications_active";
@@ -46,34 +47,45 @@ import gql from "graphql-tag";
 
 const QUERY_DRUG = gql`
   query QUERY_DRUG {
-    puntypeQuery {
-      id
+    allFood{
       name
-      numpun
+      CP
+      TDN
+      id
+      type
+    }  
+      allFoodF2{
+      name
+      CP
+      TDN
+      id
+      type
     }
   }
-`;
-const DELETE_Drug = gql`
-  mutation DELETE_Drug($id: ID!) {
-    deletePun(id: $id) {
-     id
-     name
-    }
-  }
+
+  
 `;
 
 
 const CREATE = gql`
   mutation CREATE(
-    $name: String!
-    $numpun: String
+    $name: String
+    $CP: Float
+    $TDN: Float
+    $type: String
+
   ) {
-    createPun(
-      name: $name
-      numpun: $numpun
+    createFoodset(
+      name: $name ,
+       CP:$CP ,
+      TDN :$TDN,
+      type:$type
     ) {
       name
-      numpun
+      CP
+      TDN
+      type
+      id
     }
   }
 `;
@@ -81,11 +93,14 @@ const CREATE = gql`
 
 
 const Index = () => {
+  const route = useRouter();
 
   const [loadingCreate, setLoadingCreate] = useState(false);
   const [prod, setProd] = useState({
-    name: "",
-    numpun: "",
+    name:"",
+    CP:0 ,
+    TDN:0,
+    type:""
   });
 
   // const [alert, setAlert] = useState({
@@ -97,11 +112,12 @@ const Index = () => {
   const handleChange = e => setProd({ ...prod, [e.target.name]: e.target.value });
   // console.log(prod)
 
-  const { data: datadrug } = useQuery(QUERY_DRUG, {});
+  const { data } = useQuery(QUERY_DRUG, {});
 
-  const [createDrug, error] = useMutation(CREATE, {
+  const [createFoodset, error] = useMutation(CREATE, {
     onCompleted: (data) => {
       console.log(data)
+      route.push("/registercow/setting/setfood")
       window.location.reload(false);
 
       setSuccess(true),
@@ -112,43 +128,23 @@ const Index = () => {
 
     },
   });
-  const [deletePun] = useMutation(DELETE_Drug, {
-    onCompleted: (data) => {  
-    },
-    refetchQueries: [
-      {
-        query: QUERY_DRUG,
-      },
-    ],
-  });
+
   
-  const handleSubmitDelete = async (id) => {
-    // console.log(id)
-      try { 
-        await deletePun({
-          variables: {
-id:id
-          },
-        }
-        );
-      } catch (error) {
-        // console.log(error);
-      }
-  };
+
   const handleSubmit = async () => {
     setLoadingCreate(true);
 
     try {
-      await createDrug({
+      await createFoodset({
         variables: {
           ...prod,
           // name: prod.name,
-          numpun: prod.numpun,
+          CP: +prod.CP,
+          TDN: +prod.TDN
+
         },
         
       });
-     window.location.reload(false);
-
       }
 catch (error) {
   setLoadingCreate(false);
@@ -170,7 +166,7 @@ catch (error) {
         }}
       >
         <>
-          <Sidemenu Sidenumber={1} />
+          <Sidemenu Sidenumber={2} />
 
           <DivFrom
             style={{
@@ -186,7 +182,7 @@ catch (error) {
               </div>
               
               <div style={{ margin: "-1px 5px 0px 0px" , fontSize:"16px"}}>
-              เพิ่มสายพันธุ์
+              เพิ่มข้อมูลอาหาร
                             </div>
             </DivFromTop>
             <DivFromDown>
@@ -195,47 +191,103 @@ catch (error) {
                   margin: "auto",
                   minWidth: "100%",
                   display: "grid",
-                  gridTemplateColumns: "0.30fr 0fr 1fr  1fr",
+                  gridTemplateColumns: "1fr 0fr 0.5fr  0.5fr 0.5fr",
                   gridRowGap: "15px",
                 }}
               >
-                <div>ชื่อ(ไทย) : {}
+                <div>ชื่อสูตรอาหาร : {}
                 <Input
                   name="name"
+                  autoComplete="off"
+
                   onChange={handleChange}
-                  style={{ width: "218px" }}
+                  style={{ width: "260px" ,fontWeight: "400"
+                }}
                 />
               </div>
        <> &emsp; </>
-                <div>รหัสสายพันธุ์ : {}
+                <div>โปรตีน (CP) : {}
+                <Input
+                  name="CP"
+                  autoComplete="off"
+
+                  onChange={handleChange}
+                  style={{
+                    width: "120px",
+                  }}
+                />
+              </div>
+              <div>
+พลังงาน (TDN) : {}
+                <Input
+                                    autoComplete="off"
+
+                  name="TDN"
+                  onChange={handleChange}
+                  style={{
+                    width: "120px",
+                  }}
+                />
+          
+              </div>
+              {/* <div>โปรตีน (CP): {}
                 <Input
                   name="numpun"
                   onChange={handleChange}
                   style={{
-                    width: "218px",
+                    width: "80px",
                   }}
                 />
-              </div>
-              <Gobutton
+              </div> */}
+                 <div>
+                ประเภท : {}
+                <select
+                  name="type"
+                  onChange={handleChange}
+                  style={{
+                    display: "inline",
+                    width: "120px",
+                   height:"30px",
+                    padding: "0.375rem 0.75rem",
+                    fontSize: "1rem",
+                    fontWeight: "400",
+                    lineHeight: "1.5",
+                    color: "#495057",
+                    backgroundColor: "#fff",
+                    backgroundClip: "padding-box",
+                    border: "1px solid #ced4da",
+                    /* border-radius: 0.25rem 0rem 0rem 0.25rem; */
+                    borderRadius: "0.25rem",
+                    transition:
+                      "border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out",
+                  }}
+                >
+                  <option value="F1">อาหารข้น</option>
+                  <option value="F2">อาหารหยาบ</option>
+           
+                </select>
+                      
+            <Gobutton
               
               style={{
-        
-                margin: "23px 3px 0px auto",
                 height:"30px",
-                width:"200px",
-                float: "right",
-
+                padding:"1px",
+                width:"80px",
+                float: "left",
+                marginLeft:"30%",
+                transform:"translate(-1px,5px)"
+ 
               }}
               onClick={handleSubmit}
               >
                 {" "}
-                บันทึกข้อมูลสายพันธุ์{" "}
+                บันทึก{" "}
               </Gobutton>
-                
-             
-        
               </div>
-
+                
+         
+              </div>
+              
             </DivFromDown>
           </DivFrom>
 
@@ -251,7 +303,7 @@ catch (error) {
               <div style={{ margin: "-3px 5px 0px 0px" }}>
                 <Icon size={20} icon={list} />
               </div>
-              ข้อมูลสายพันธุ์
+              ข้อมูลรายการอาหาร
             </DivFromTop>
             <DivFromDown>
               <div style={{ margin: "auto", minWidth: "100%" }}>
@@ -265,33 +317,36 @@ catch (error) {
                
                   <thead>
                     <tr style={{ textAlign: "center" }}>
-                      <th>ชื่อสายพันธุ์</th>
-                      <th>รหัสสายพันธุ์</th>
-                      <th>ลบ</th>
+                      <th>ชื่อสูตรอาหาร (อาหารข้น)</th>
+                      <th>โปรตีน (CP)</th>
+                      <th>พลังงาน (TDN)</th>
+                      <th>แก้ไข</th>
+
                     </tr>
                   </thead>
                   <tbody>
-                  {
-                  datadrug &&
-                  datadrug.puntypeQuery &&
-                  datadrug.puntypeQuery.length > 0 ? (
-                    datadrug.puntypeQuery.map((prod) => (
-                  
-                 
-                        <tr key={prod.id} style={{ textAlign: "center" }}>
-                  <td>{prod.name}</td>
-                  <td>{prod.numpun}</td>
-                  <td>
-                  <Removebuttoncolor onClick={ e => handleSubmitDelete(prod.id)}>
-              <Removebutton />
-            </Removebuttoncolor>
-                  </td>
-                  </tr> ))
-                  ) : (
+                  {data &&
+                    // data.SearchHalveForSent.imslaughter.grade &&
+                    data.allFood.map((halveData) => (
+                      <ListHalve key={halveData.id} foodset={halveData} />
+                    ))}
+                 </tbody>
+                 <thead>
                     <tr style={{ textAlign: "center" }}>
-                      <td colSpan="7">ไม่พบข้อมูล</td>
+                      <th>ชื่อสูตรอาหาร (อาหารหยาบ)</th>
+                      <th>โปรตีน (CP)</th>
+                      <th>พลังงาน (TDN)</th>
+                      <th>แก้ไข</th>
+
                     </tr>
-                  )}</tbody>
+                  </thead>
+                  <tbody>
+                  {data &&
+                    // data.SearchHalveForSent.imslaughter.grade &&
+                    data.allFoodF2.map((halveData) => (
+                      <ListHalve key={halveData.id} foodset={halveData} />
+                    ))}
+                 </tbody>
                 </Table>
               </div>
             </DivFromDown>

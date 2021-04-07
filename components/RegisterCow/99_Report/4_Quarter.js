@@ -192,7 +192,7 @@ const Index = () => {
         }}
       >
         <>
-          <Sidemenu Sidenumber={1} />
+          <Sidemenu Sidenumber={4} />
 
           <DivFrom
             style={{
@@ -310,12 +310,12 @@ const Index = () => {
                   {/* <LoadingSmall/> */}
                   <thead>
                     <tr style={{ textAlign: "center" }}>
+                    <th>วันที่รับการรักษา</th>
                       <th>ใบแจ้งขุน</th>
                       <th>พันธุ์</th>
                       <th>ชื่อสมาชิก</th>
                       <th>โรคที่ป่วย</th>
                       <th>วัคซีน/ยาที่ใช้</th>
-                      <th>วันที่รับการรักษา</th>
                     </tr>
                   </thead>
 
@@ -323,6 +323,13 @@ const Index = () => {
                     {data && data.ReportgetTreat.length > 0 ? (
                       data.ReportgetTreat.map((prod) => (
                         <tr key={prod.id} style={{ textAlign: "center" }}>
+                              <td>
+                            {dayjs(prod.datet)
+                              .add(543, "y")
+                              .locale("th")
+                              .format("DD-MMMM-YYYY")}
+                            {}
+                          </td>
                           <td>{prod.numkun}</td>
                           <td>{prod.pun}</td>
                           <td>{prod.namefarmer}</td>
@@ -336,13 +343,7 @@ const Index = () => {
                               <div>{treat.medi} <br/></div> 
                             ))}
                           </td>
-                          <td>
-                            {dayjs(prod.date)
-                              .add(543, "y")
-                              .locale("th")
-                              .format("DD-MMMM-YYYY")}
-                            {}
-                          </td>
+                      
                         </tr>
                       ))
                     ) : (

@@ -123,7 +123,7 @@ const Index = () => {
         }}
       >
         <>
-          <Sidemenu Sidenumber={2} />
+          <Sidemenu Sidenumber={3} />
 
           <DivFrom
             style={{
