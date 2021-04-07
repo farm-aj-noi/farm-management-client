@@ -12,6 +12,7 @@ import Card2 from "./CartAlert/Card2";
 import Card3 from "./CartAlert/Card3";
 import Card4 from "./CartAlert/Card4";
 import Card5 from "./CartAlert/Card5";
+import Card6 from "./CartAlert/Card6";
 
 import { AuthContext } from "../../../appState/AuthProvider";
 // import Footer from "../../Footer/index";
@@ -42,6 +43,9 @@ const Index = () => {
                 <Card1 />
                 <Card1_5 />
                 <Card1_75 />
+                <Card5 /> 
+                <Card6 /> 
+
               </>
             ) : user.role.nameEN === "slaughter" ? (
               <>
@@ -60,10 +64,21 @@ const Index = () => {
                 <Card3 />
                 <Card4 />*/}
                 <Card5 /> 
+                <Card6 /> 
+
               </>
-            ) : (
-              ""
-            )}
+            ) :  user.role.nameEN === "veterinary" ? (
+<>
+                <Card1 />
+             
+                {/* <Card2 />
+                <Card3 />
+                <Card4 />*/}
+                <Card6 /> 
+
+              </>  ): (
+""
+           )}
           </DivFromDown>
         </DivFrom>
         {/* <Footer/> */}

@@ -31,6 +31,8 @@ const UPDATE = gql`
       id
       numcow
       numkun
+      importDateDead
+      notedead
       pun
       numfarmer
       namecow
@@ -138,10 +140,12 @@ const Index = ({ List }) => {
                 <td> {prod.numcow}</td>
                 <td>{prod.namecow}</td>
                 <td> {prod.pun} </td>
-                <td>{
+                {/* <td>{
                 timeDifference(prod.date.substring(0,10))
-                  }</td>
+                  }</td> */}
                 <td> {prod.numfarmer} </td>
+                <td> {dayjs(prod.importDateDead).format("DD-MM-YYYY")} </td>
+                <td> {prod.notedead} </td>
                 <td> {prod.statuscow} </td>
 
 

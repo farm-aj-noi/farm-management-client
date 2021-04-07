@@ -3,10 +3,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import styled from "styled-components";
 import {magnifying_glass} from 'react-icons-kit/ikons/magnifying_glass'
-import json_provinces from '../../../json/provinces.json'
-import json_amphures from '../../../json/amphures.json'
-import json_districts from '../../../json/districts.json'
-import json_zipcodes from '../../../json/zipcodes.json'
+
 import { Icon } from "react-icons-kit";
 import { Table } from "react-bootstrap";
 
@@ -43,13 +40,8 @@ import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
 export const QUERY = gql`
-  query QUERY($startdate: String, $enddate: String ,
-     $district:String ,
-      $province:String
-      $group:String) {
-    ReportgetGroup(startdate: $startdate, enddate: $enddate,
-     district:$district,
-      province:$province ,group:$group ) {
+  query QUERY($startdate: String, $enddate: String , $group:String , $district:String , $ province:String) {
+    ReportgetGroup(startdate: $startdate, enddate: $enddate,group:$group,district:$district,province:$province) {
       numcow
       numkun
       pun
@@ -66,23 +58,6 @@ export const QUERY = gql`
 
 const Index = () => {
   //calendar
-  const [param, setParam] = useState({
-    province_id: "",
-    amphur_id: "",
-    district_code: ""
-  });
-  const [success, setSuccess] = useState(false);
-  var data_provinces = json_provinces.filter(i=> i.geo_id == '3');
-  var data_amphures = json_amphures.filter(i=> i.geo_id == '3');
-  var data_districts = json_districts.filter(i=> i.geo_id == '3')
-  var data_zipcodes = json_zipcodes
-
-  var show_provinces = data_provinces;
-  var show_amphures = data_amphures.filter(i=> i.province_id == show_provinces[0].province_id);
-  // console.log(show_amphures)
-  var show_districts = data_districts.filter(i=>  i.amphur_id == show_amphures[0].amphur_id)
-  var show_zipcodes = data_zipcodes
-
   const dateRef = useRef();
   const [date, setDate] = useState(new Date());
   const [selectedDate, handleDateChange] = useState(
@@ -100,88 +75,6 @@ const Index = () => {
   const [selectedDate2, handleDateChange2] = useState(
     dayjs(date2).format("YYYY-MM-DD")
   );
-  
-  useEffect(() => {
-    if(param.province_id ==''){
-      // setParam({...param,province_id:data_provinces[0].province_id})
-      // show_amphures= show_amphures
-      // setParam({ ...param, 
-      //   province_id:  show_amphures[0].province_id,
-      //   amphur_id: show_amphures[0].amphur_id,
-      //   district_code: ""})
-    }else {
-      // console.log(data_amphures)
-      show_amphures = data_amphures.filter( i => i.province_id == param.province_id)
-      // console.log(show_amphures)
-      setParam({ ...param, 
-        amphur_id: show_amphures[0].amphur_id,
-        district_code: ""})
-
-        let str_amphur = ''
-        // document.getElementById('amphur').innerHTML = ''
-        show_amphures.forEach(i => {
-          // let option = document.createElement('option')
-          // option.setAttribute("data-amphur-id",i.amphur_id)
-          // option.setAttribute("key",i.amphur_id)
-          // option.setAttribute("value",i.amphur_name)
-          // option.innerHTML = i.amphur_name
-          str_amphur +=`
-          <option data-province-id=${i.province_id} data-amphur-id=${i.amphur_id} key=${i.amphur_id} value=${i.amphur_name}>
-            ${i.amphur_name}
-          </option>
-          `
-          // document.getElementById('amphur').appendChild(option)
-        });
-
-        document.getElementById('amphur').innerHTML=str_amphur
-    }
-    console.log(param)
-    // show_zipcodes = data_zipcodes.find(i => i.district_code == param.district_code)
-  
-  }, [param.province_id])
-  useEffect(() => {
-    if(param.amphur_id ==''){
-      // console.log(1)
-      // show_districts= show_districts
-      // setParam({ ...param, 
-      //   district_code: show_districts[0].district_code})
-    }else {
-      show_districts = data_districts.filter( i => i.province_id == param.province_id && i.amphur_id == param.amphur_id)
-      setParam({ ...param, 
-        district_code: show_districts[0].district_code})
-
-        let str_districts = ''
-        show_districts.forEach(i => {
-          str_districts +=`
-          <option data-district-code=${i.district_code} key=${i.district_id} value=${i.district_name}>
-            ${i.district_name}
-          </option>
-          `
-        });
-    
-        document.getElementById('district').innerHTML=str_districts
-    }
- 
-    // console.log(param)
-
-  }, [param.amphur_id])
-      
-  useEffect( () => {
-    // console.log(param.d/istrict_code)
-    // console.log(param)/
-// 
-    show_zipcodes = data_zipcodes.find(i => i.district_code == param.district_code)
-
-    // console.log(show_zipcodes)
-
-    if(show_zipcodes){
-      setProd({ ...prod, zipcode: show_zipcodes.zipcode_name })
-
-    }
-    
-
-
-  }, [param.district_code])
   // console.log("start : " + selectedDate + " , end : " + selectedDate2);
   const months = [
     "มกราคม",
@@ -259,11 +152,8 @@ const Index = () => {
       });
     };
   }, [date2]);
-  // const handleChange = e => setProd({ ...prod, [e.target.name]: e.target.value });
-  const handleChange = (name, value) => {
+  const handleChange = e => setProd({ ...prod, [e.target.name]: e.target.value });
 
-    setProd({ ...prod, [name]: value })
-  };
   const onChangeDatePicker = (e) => {
     // console.log("onChange");
     setDate(e);
@@ -304,7 +194,7 @@ const Index = () => {
         }}
       >
         <>
-          <Sidemenu Sidenumber={1} />
+          <Sidemenu Sidenumber={6} />
 
           <DivFrom
             style={{
@@ -387,22 +277,22 @@ const Index = () => {
     
               <div
                 style={{
-                  margin: "auto 0",
-                  transform:"translate(160px,0px)",
+                  margin: "auto",
+                  minWidth: "100%",
                   display: "grid",
                   padding:"10px",
-                  gridTemplateColumns: "0.2fr 0.2fr 0.2fr 0.2fr",
+
+                  gridTemplateColumns: "0.3fr 0.25fr 0.3fr",
                 }}
               >
-                {/* <div
+                <div
                   style={{
                     textAlign: "right",
-         
+                    marginRight: "15px",
                   }}
-                > */}
+                >
+                  กลุ่มที่/เขต : { }
                   <div >
-                  {"  "}กลุ่มที่ : { }
-                  <div>
                     <select
                       type="text"
                       name="group"
@@ -435,138 +325,65 @@ const Index = () => {
                       <option value="10">10</option>
                     </select>
                   </div>
-                  </div>
-
-                <div>
-                  {"  "}จังหวัด : { }
-                  <div >
-                  <select
-                    type="text"
-                    name="province"
-                    onChange={(event) => {
-            
-                      setParam({ ...param, 
-                        province_id: event.target[event.target.selectedIndex].getAttribute('data-province-id'),
-                        amphur_id: "",
-                        district_code: ""})
-                      console.log(param)
-                      // onSubmit={handleSubmit}
-                      handleChange(event.target.name, event.target.value);
-
-
-                    }}
-                    autoComplete="off"
-
-                    style={{
-                      display: "inline",
-                      width: "80px",
-                      padding: "0.375rem 0.1rem",
-                      fontSize: "1rem",
-                      fontWeight: "400",
-                      lineheight: "1.2",
-                      color: "#495057",
-                      backgroundcolor: "#fff",
-                      backgroundclip: "padding-box",
-                      border: " 1px solid #ced4da",
-                      borderradius: "0.25rem",
-                      // transition: "border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out",
-                    }}                  >
-                    <option value=""  disabled selected hidden>เลือก</option>
-                    {show_provinces &&
-                      show_provinces.map((prod) => (
-                        <option data-province-id={prod.province_id} key={prod.province_id} value={prod.province_name}>
-                          {prod.province_name}
-                        </option>
-                      ))}
-                  </select>
-                  </div>
-                </div>
-                <div>
-                  {"  "}อำเภอ : { }
-                  <div >
-                  <select
-                  id="amphur"
-                    type="text"
-                    name="amphur"
-                    placeholder="รหัสสมาชิก"
-
-                    onChange={(event) => {
-                      setParam({ ...param, 
-                        province_id: event.target[event.target.selectedIndex].getAttribute('data-province-id'),
-                        amphur_id: event.target[event.target.selectedIndex].getAttribute('data-amphur-id')
-                        })
-                        // onSubmit={handleSubmit}
-                        // onChange={handleChange}
-
-                      // handleChange(event.target.name, event.target.value);
-                    }}
-                    style={{
-                      display: "inline",
-                      width: "80px",
-                      padding: "0.375rem 0.1rem",
-                      fontSize: "1rem",
-                      fontWeight: "400",
-                      lineheight: "1.2",
-                      color: "#495057",
-                      backgroundcolor: "#fff",
-                      backgroundclip: "padding-box",
-                      border: " 1px solid #ced4da",
-                      borderradius: "0.25rem",
-                      // transition: "border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out",
-                    }}       
-                  >
-                 
-                  </select>
-                  </div>
                 </div>
                 <div>
                   {"  "}ตำบล : { }
                   <div >
-                  <select
-                    type="text"
-                    id="district"
-                    placeholder="รหัสสมาชิก"
-
-                    name="district"
-                    onChange={(event) => {
-                      console.log(event.target[event.target.selectedIndex].getAttribute('data-district-code'))
-                      setParam({ ...param, district_code: event.target[event.target.selectedIndex].getAttribute('data-district-code')})
-                      // onSubmit={handleSubmit}
-
-                      handleChange(event.target.name, event.target.value);
-                    }}
-                    style={{
-                      display: "inline",
-                      width: "80px",
-                      padding: "0.375rem 0.1rem",
-                      fontSize: "1rem",
-                      fontWeight: "400",
-                      lineheight: "1.2",
-                      color: "#495057",
-                      backgroundcolor: "#fff",
-                      backgroundclip: "padding-box",
-                      border: " 1px solid #ced4da",
-                      borderradius: "0.25rem",
-                      // transition: "border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out",
-                    }}
-                  >
-                  </select>
+                    <select
+                      type="text"
+                      name="district"
+                      onChange={handleChange}
+                      style={{
+                        display: "inline",
+                        width: "200px",
+                        padding: "0.375rem 0.1rem",
+                        fontSize: "1rem",
+                        fontWeight: "400",
+                        lineheight: "1.5",
+                        color: "#495057",
+                        backgroundcolor: "#fff",
+                        backgroundclip: "padding-box",
+                        border: " 1px solid #ced4da",
+                        borderradius: "0.25rem",
+                        // transition: "border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out",
+                      }}
+                    >
+                      <option value="">เลือกตำบล</option>
+                      <option value="รอบเวียง">รอบเวียง</option>
+                      <option value="เวียงชัย">เวียงชัย</option>
+                      
+                    </select>
                   </div>
                 </div>
-                {/* </div> */}
+                <div>
+                  {"  "}จังหวัด : { }
+                  <div >
+                    <select
+                      type="text"
+                      name="province"
+                      onChange={handleChange}
+                      style={{
+                        display: "inline",
+                        width: "200px",
+                        padding: "0.375rem 0.1rem",
+                        fontSize: "1rem",
+                        fontWeight: "400",
+                        lineheight: "1.5",
+                        color: "#495057",
+                        backgroundcolor: "#fff",
+                        backgroundclip: "padding-box",
+                        border: " 1px solid #ced4da",
+                        borderradius: "0.25rem",
+                        // transition: "border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out",
+                      }}
+                    >
+                      <option value="">เลือกจังหวัด</option>
+                      <option value="เชียงราย">เชียงราย</option>
+                      
+                    </select>
+                  </div>
+                </div>
 
-                 
-                  {/* <input
-          //  onSubmit={handleSubmit}
-
-                    name="zipcode"
-                    disabled
-                    value={prod.zipcode}
-                    style={{ margin: "5px", height: "30px" }}
-
-                    maxLength="100"
-                  
-                  /> */}
               </div>
             </DivFromDown>
            

@@ -74,6 +74,27 @@ const Menu = ({ Sidenumber }) => {
                         </Link>
                       </Nav.Link>
                     </Nav.Item>
+                    <Nav.Item style={{ marginBottom: "5px" }}>
+                      <Nav.Link eventKey="5">
+                        <Link href="/registercow/report/cowdeadlist">
+                          <div style={{ width: "100%" }}>รายงานโคตาย</div>
+                        </Link>
+                      </Nav.Link>
+                    </Nav.Item>
+                    {/* <Nav.Item style={{ marginBottom: "5px" }}>
+                      <Nav.Link eventKey="6">
+                        <Link href="/registercow/report/cowagelist">
+                          <div style={{ width: "100%" }}>รายงานโคตามอายุขุน</div>
+                        </Link>
+                      </Nav.Link>
+                    </Nav.Item> */}
+                    {/* <Nav.Item style={{ marginBottom: "5px" }}>
+                      <Nav.Link eventKey="7">
+                        <Link href="/registercow/report/quarter">
+                          <div style={{ width: "100%" }}>รายการการรักษาโค</div>
+                        </Link>
+                      </Nav.Link>
+                    </Nav.Item> */}
 
                     {/* <Nav.Item style={{ marginBottom: "5px" }}>
                       <Nav.Link eventKey="5">

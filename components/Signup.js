@@ -52,7 +52,6 @@ const Signup = () => {
   const [passsportCheck, setpasssportCheck] = useState(false);
 
   useEffect(() => {
-    // console.log(param)
     if(param.province_id ==''){
       // setParam({...param,province_id:data_provinces[0].province_id})
       // show_amphures= show_amphures

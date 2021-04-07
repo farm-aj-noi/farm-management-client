@@ -1,240 +1,119 @@
-import React, { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import Link from "next/link";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import styled from "styled-components";
-import {pen_3} from 'react-icons-kit/ikons/pen_3'
 
 import { Icon } from "react-icons-kit";
 import { Table } from "react-bootstrap";
-
-import { Form, Row, Col, Tab, Nav } from "react-bootstrap";
-import { ic_notifications_active } from "react-icons-kit/md/ic_notifications_active";
-import { ic_info_outline } from "react-icons-kit/md/ic_info_outline";
-import { ic_create } from "react-icons-kit/md/ic_create";
-import { Button } from "react-bootstrap";
-
-// import DatePicker from "react-datepicker";
-
-import dayjs from "dayjs";
-import Pickadate from "pickadate/builds/react-dom";
-import TH from "pickadate/builds/translations/th_TH";
+import Sidemenu from "./menu";
+import {pen_3} from 'react-icons-kit/ikons/pen_3'
 
 import { list } from "react-icons-kit/fa/list";
+import ListHalve from "./3_QTYlist";
 import { DivBase } from "../../../utils/divBase";
 import {
   DivFrom,
   DivFromTop,
   DivFromDown,
-  Input,
-  Gobutton,
-} from "./ListcuttwoFrom";
-import Sidemenu from "./menu";
+  Searchinput,
+  Wightinput,
+} from "./SlaughterFrom";
 // import Footer from "../../Footer/index";
+import dayjs from "dayjs";
+import DatePicker, { registerLocale } from "react-datepicker";
+import th from "date-fns/locale/th";
+registerLocale("th", th);
+import Datestyle from "../helps/datepicker.module.css";
 
-import {
-  Savebuttoncolor,
-  Editbuttoncolor,
-  Removebuttoncolor,
-} from "../../../utils/buttonColor";
 import { Savebutton, Editbutton } from "../../../utils/button";
-import { now } from "moment";
 
-import { useQuery, useMutation } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
-export const QUERY = gql`
-  query QUERY {
-    SettingBeeftypeCheck {
+export const QUERYLIST = gql`
+  query QUERYLIST {
+    allDrug{
       id
-      code
-      nameTH
-      nameEN
-      BBE
-    }
-  }
-`;
-
-const CREATE_BEEFTYPE = gql`
-  mutation CreateBeeftypeMutation(
-    $nameEN: String!
-    $nameTH: String!
-    $BBE: Int
-    $code: String!
-    $priceG2h: Float
-    $priceG3: Float
-    $priceG3h: Float
-    $priceG4: Float
-    $priceG4h: Float
-    $priceG5: Float
-  ) {
-    createBeeftype(
-      nameEN: $nameEN
-      nameTH: $nameTH
-      BBE: $BBE
-      code: $code
-      priceG2h: $priceG2h
-      priceG3: $priceG3
-      priceG3h: $priceG3h
-      priceG4: $priceG4
-      priceG4h: $priceG4h
-      priceG5: $priceG5
-    ) {
-      code
-      BBE
-      nameEN
-      nameTH
+      name
+      dateStop
+      
     }
   }
 `;
 
 const Index = () => {
-  const [prod, setProd] = useState({
-    code: "",
-    nameTH: "",
-    nameEN: "",
-    BBE: "",
-    priceG2h: "",
-    priceG3: "",
-    priceG3h: "",
-    priceG4: "",
-    priceG4h: "",
-    priceG5: "",
-  });
-  // console.log(+prod.BBE);
-  const [errorAlert, setErrorAlert] = useState(false);
 
-  const { data } = useQuery(QUERY, {});
-  const [createBeeftype, { loading, error }] = useMutation(CREATE_BEEFTYPE, {
-    onCompleted: (data) => {
-      // console.log(data)
-    },
-    refetchQueries: [
-      {
-        query: QUERY,
-      },
-    ],
-  });
 
-  const handleChange = (e) =>
-    setProd({ ...prod, [e.target.name]: e.target.value });
+  const [selectedDate, handleDateChange] = useState();
 
-  const handleSubmit = async () => {
-    try {
-      await createBeeftype({
-        variables: {
-          code: prod.code,
-          nameTH: prod.nameTH,
-          nameEN: prod.nameEN,
-          BBE: +prod.BBE,
-          priceG2h: +prod.priceG2h,
-          priceG3: +prod.priceG3,
-          priceG3h: +prod.priceG3h,
-          priceG4: +prod.priceG4,
-          priceG4h: +prod.priceG4h,
-          priceG5: +prod.priceG5,
-        },
-      });
-    } catch (error) {
-      setErrorAlert(true);
-      // console.log(error);
-    }
-  };
+  const [barcode, setInputbarcode] = useState("");
+  const [selectedStatus, SetStatusChange] = useState("");
+  // calendar
+  // const event1 = new Date("July 1, 1999");
 
+  const { data, loading, error } = useQuery(QUERYLIST, {});
   // console.log(data);
-  useEffect(() => {
-    setErrorAlert(false);
-  }, [prod.code]);
+
   return (
     <>
-      <DivBase
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 237.5px 712.5px 1fr",
-          gridRowGap: "15px",
-          gridColumnGap: "10px",
-          // width:"950px",
-          // margin:"auto"
-        }}
-      >
-        <>
-          <Sidemenu Sidenumber={3} />
-          <DivFrom
-            style={{
-              width: "100%",
-              gridRowStart: "2",
-              gridRowEnd: "3",
-              gridColumnStart: "3",
-            }}
-          >
-            <DivFromTop>
-              <div style={{ margin: "-3px 5px 0px 0px" }}>
-                <Icon size={20} icon={pen_3} />
-              </div>
-              ตั้งค่าระยะหยุดยา
-            </DivFromTop>
-            <DivFromDown>
-              <div style={{ margin: "auto", minWidth: "100%" }}>
-                <Table
-                  striped
-                  bordered
-                  responsive
-                  hover
-                  style={{ margin: "auto" }}
-                >
-                  <thead>
-                    <tr style={{ textAlign: "center" }}>
-                      <th>ชื่อยา</th>
-                      <th>ระยะหยุดยาก่อนเชือด</th>
-                      <th>ตั้งค่า</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr key={prod.id} style={{ textAlign: "center" }}>
-                         <td>Oxytetracyclin</td>
-                  <td>45 วัน</td>
-                  <td>
-                  <Editbuttoncolor >
-              <Editbutton />
-            </Editbuttoncolor>
-                  </td>
-                    </tr>
-                    <tr key={prod.id} style={{ textAlign: "center" }}>
-                         <td>Penstep</td>
-                  <td>40 วัน</td>
-                  <td>
-                  <Editbuttoncolor >
-              <Editbutton />
-            </Editbuttoncolor>
-                  </td>
-                    </tr>
-                    <tr key={prod.id} style={{ textAlign: "center" }}>
-                         <td>Sulfatrimetroprim</td>
-                  <td>50 วัน</td>
-                  <td>
-                  <Editbuttoncolor >
-              <Editbutton />
-            </Editbuttoncolor>
-                  </td>
-                    </tr>
-                    <tr key={prod.id} style={{ textAlign: "center" }}>
-                         <td>Dexamethasone</td>
-                  <td>40 วัน</td>
-                  <td>
-                  <Editbuttoncolor >
-              <Editbutton />
-            </Editbuttoncolor>
-                  </td>
-                    </tr>
-                  </tbody>
-                </Table>
-              </div>
-            </DivFromDown>
-          </DivFrom>
-        </>
+    <DivBase
+      style={{
+        display: "grid",
+        gridTemplateColumns: "1fr 237.5px 712.5px 1fr",
+        gridRowGap: "15px",
+        gridColumnGap: "10px",
+        // width:"950px",
+        // margin:"auto"
+      }}
+    >
+      <>
+        <Sidemenu Sidenumber={3} />
+        <DivFrom
+          style={{
+            width: "100%",
+            gridRowStart: "2",
+            gridRowEnd: "3",
+            gridColumnStart: "3",
+          }}
+        >
+          <DivFromTop>
+            <div style={{ margin: "-3px 5px 0px 0px" }}>
+              <Icon size={20} icon={pen_3} />
+            </div>
+            ตั้งค่าระยะหยุดยา
+          </DivFromTop>
+          <DivFromDown>
+            <div style={{ margin: "auto", minWidth: "100%" }}>
+            <Table
+                striped
+                bordered
+                responsive
+                hover
+                style={{ margin: "auto" }}
+              >
+                <thead>
+                  <tr style={{ textAlign: "center" }}>
+                    <th>ชื่อยา</th>
+                    <th>ระยะหยุดยา</th>
+                    <th>ตั้งค่า</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data &&
+                    // data.SearchHalveForSent.imslaughter.grade &&
+                    data.allDrug.map((halveData) => (
+                      <ListHalve key={halveData.id} drug={halveData} />
+                    ))}
+                </tbody>
+              </Table>
+            </div>
+          </DivFromDown>
+        </DivFrom>
+      </>
 
-        {/* <Footer/> */}
-      </DivBase>
-    </>
+      {/* <Footer/> */}
+    </DivBase>
+  </>
+             
+           
   );
 };
 

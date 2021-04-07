@@ -41,8 +41,8 @@ const UPDATE = gql`
 `;
 
 const UPDATED_D = gql`
-  mutation UPDATED_D($id: ID!, $statuscow: String!) {
-    updateDead(id: $id, statuscow: $statuscow) {
+  mutation UPDATED_D($id: ID!, $statuscow: String! ,$importDateDead:String,$notedead:String ) {
+    updateDead(id: $id, statuscow: $statuscow ,  importDateDead: $importDateDead,notedead: $notedead) {
       statuscow
     }
   }
@@ -161,6 +161,8 @@ const DetailId = () => {
 
   }
   );
+  const handleChange = e => setDrod({ ...drod, [e.target.name]: e.target.value });
+
   const handleSubmit = async () => {
     try {
       await handleClose;
@@ -179,7 +181,7 @@ const DetailId = () => {
       await handleClose;
       await updateDead({
         variables: {
-          ...prod,
+          ...drod,
         },
       });
     } catch (error) {
@@ -192,7 +194,12 @@ const DetailId = () => {
     statuscow: "",
     id:route.query.detailId
   });
-
+  const [drod, setDrod] = useState({
+    statuscow: "ตาย",
+    notedead:"",
+    importDateDead: new Date(),
+    id:route.query.detailId
+  });
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   if (error) return <p>Something went wrong, please try again.</p>
@@ -404,17 +411,7 @@ const DetailId = () => {
             {loading ? (
             <Spinner animation="border" variant="primary" />
           ) : (
-             <Savebuttoncolor style={{width:"120px"}} onClick={handleShow} 
-            //  disabled={
-            //  prod.statuscow === "ตาย"
-            // }
-            // style={{
-            //   backgroundColor: `${
-            //     !prod.statuscow 
-            //       ? "gray"
-            //       : ""
-            //   }`,
-            // }}
+             <Savebuttoncolor style={{width:"120px"}} onClick={handleSubmit} 
             >
                รักษาสำเร็จ
              </Savebuttoncolor>
@@ -422,7 +419,9 @@ const DetailId = () => {
              <Removebuttoncolor 
              
              style={{width:"120px"}}
-             onClick={handleSubmitDead}>
+             onClick={handleShow} 
+            //  onClick={handleSubmitDead}
+             >
                ตาย
             </Removebuttoncolor>
         </div>
@@ -443,14 +442,30 @@ const DetailId = () => {
           <Modal.Title>ยืนยันการรักษา</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          คุณต้องบันทึกข้อมูลหรือไม่?
+          <div>
+              <span style={{color:"red"}}>*</span> สาเหตุการตาย : { }
+                <div style={{ display: "grid", gridTemplateRows: "1fr 15px" }}>
+                  <Searchinput
+                    name="notedead"
+          
+                    onChange={handleChange}
+                    maxLength="100"
+                    style={{
+                      width: "465px",
+                    }}
+                  />
+                
+                </div>
+              </div>
+             
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             ปิด
           </Button>
-          <Button variant="primary" onClick={handleSubmit}>
+          <Button variant="primary" onClick={handleSubmitDead}>
             ยืนยัน
+
           </Button>
         </Modal.Footer>
       </Modal>

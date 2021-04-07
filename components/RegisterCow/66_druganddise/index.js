@@ -58,13 +58,17 @@ const CREATE = gql`
   mutation CREATE(
     $name: String!
     $nofity: Int
+    $dateStop: Int
   ) {
     createDrug(
       name: $name
       nofity: $nofity
+      dateStop: $dateStop
+
     ) {
       name
       nofity
+      dateStop
     }
   }
 `;
@@ -75,6 +79,7 @@ const Index = () => {
   const [prod, setProd] = useState({
     name: "",
     nofity: 0,
+    dateStop: 0,
   });
   const route = useRouter();
   // const [alert, setAlert] = useState({
@@ -138,6 +143,8 @@ id:id
         variables: {
           ...prod,
           nofity: +prod.nofity,
+          dateStop: +prod.dateStop,
+
         },
       });
     } catch (error) {
@@ -205,7 +212,7 @@ id:id
                 />
               </div>
               <div>
-                ระยะหยุดยา(วัน) : {}
+                ระยะการให้ยารอบถัดไป : {}
                 <Searchinput
                   name="nofity"
                   onChange={handleChange}
@@ -213,7 +220,6 @@ id:id
                   style={{ width: "156px" }}
                 />
               </div>
-      
               <div>
                 ข้อควรระวัง/ผลข้างเคียง : {}
                 <Searchinput
@@ -222,14 +228,24 @@ id:id
                   style={{ width: "324px" }}
                 />
               </div>
-              <div>
+                <div>
+              หมายเหตุ: {}
+                <Searchinput
+                  name="note"
+                  onChange={handleChange}
+                  type="number"
+                  style={{ width: "196px" }}
+                />
+              </div>
+      
+              {/* <div>
                 หมายเหตุ : {}
                 <Searchinput
                   name="note"
                   onChange={handleChange}
                   style={{ width: "226px" }}
                 />
-              </div>
+              </div> */}
             </div>
 
            

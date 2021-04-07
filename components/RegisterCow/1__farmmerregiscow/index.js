@@ -876,7 +876,6 @@ console.log(prod.imagecow)
                     <option value="4">4</option>
                     <option value="4.5">4.5</option>
                     <option value="5">5</option>
-                    <option value="5.5">5.5</option>
                   </select>{" "}
                   {/* {!prod.bodyscore && (
                     <label style={{ color: "red" }}>

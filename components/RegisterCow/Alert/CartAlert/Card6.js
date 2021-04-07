@@ -1,31 +1,30 @@
 import React from "react";
-
 import Link from "next/link";
 import { Icon } from "react-icons-kit";
 import { fileText } from "react-icons-kit/fa/fileText";
 import { DivAlertCard, StyleAlertCardDown } from "./StyleCard";
 
-import ImgSlaughter from "../../../../images/slaughter/alert/cut.png";
-
+// import ImgPrice from "../../../../images/slaughter/alert/price.png";
+import ImgPrice from "../../../../images/slaughter/alert/Background.png";
 
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
 export const QUERY_CARD = gql`
   query QUERY_CARD {
-    Card1 {
-      numkun
+    CardWaitting {
+      namecow
     }
   }
 `;
 
-const Card1_5 = () => {
+const Card5 = () => {
   const { data, loading, error, refetch } = useQuery(QUERY_CARD);
-
+  console.log(data)
   return (
     <DivAlertCard
       style={{
-        backgroundColor: "rgb(176 47 04)",
+        backgroundColor: "rgb(176 47 44)",
       }}
     >
       <div
@@ -36,7 +35,7 @@ const Card1_5 = () => {
           padding: "73px 10px 0 0px",
         }}
       >
-        รายการโคเข้าเชือด
+        แจ้งเตือนยา
       </div>
       <div
         style={{
@@ -46,8 +45,8 @@ const Card1_5 = () => {
           width: "100%",
         }}
       >
-        <div style={{ width: "fit-content" }}>
-          <img src={ImgSlaughter} width="100" />
+        <div style={{ width: "fit-content" ,margin:'0px',marginLeft:'10px'}}>
+          <img src={ImgPrice} width="130" />
         </div>
         <div
           style={{
@@ -57,11 +56,11 @@ const Card1_5 = () => {
             height: "62px",
           }}
         >
-          {data ? data.Card1.length : "NAN"}
+         0
+          {/* {data ? data.CardWaitting.length : "NAN"} */}
         </div>
       </div>
-
-      <Link href="/slaughter/slaughter">
+      <Link href="/registercow/listwaittingcow">
         <StyleAlertCardDown>
           แสดงรายละเอียด
           <div style={{ margin: "-3px 0px 0px auto" }}>
@@ -73,4 +72,4 @@ const Card1_5 = () => {
   );
 };
 
-export default Card1_5;
+export default Card5;

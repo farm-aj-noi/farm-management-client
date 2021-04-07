@@ -174,6 +174,8 @@ const Index = () => {
 
   const [createTreat, error] = useMutation(CREATE, {
     onCompleted: (data) => {
+      route.push("/registercow/showlisttreat")
+
       setSuccess(true),
         setTimeout(function () {
           setSuccess(false);

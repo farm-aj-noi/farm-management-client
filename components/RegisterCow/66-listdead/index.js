@@ -33,6 +33,8 @@ export const QUERY_LISTST = gql`
       namecow
       date
       statuscow
+      importDateDead
+      notedead
     }
   }
 `;
@@ -169,8 +171,9 @@ const Index = () => {
                 <th>หมายเลขโค</th>
                 <th>ชื่อโค</th>
                 <th>สายพันธุ์</th>
-                <th>อายุการขุน</th>
                 <th>หมายเลขสมาชิก</th>
+                <th>วันที่ตาย</th>
+                <th>สาเหตุการตาย</th>
                 <th>สถานะ</th>
                 {/* <th>จัดการ</th> */}
               </tr>
