@@ -59,6 +59,8 @@ export const QUERY = gql`
       weightstart
       price
       date
+      district
+      province
       group
     }
   }
@@ -619,10 +621,10 @@ const Index = () => {
                       <th>ใบแจ้งขุน</th>
                       <th>เบอร์โค</th>
                       <th>พันธุ์</th>
+                      <th>ตำบล</th>
+                      <th>กลุ่มที่</th>
                       <th>รหัสสมาชิก</th>
                       <th>ชื่อสมาชิก</th>
-                      <th>น้ำหนักโค (กก.)</th>
-                      <th>กลุ่มที่</th>
                     </tr>
                   </thead>
 
@@ -640,10 +642,11 @@ const Index = () => {
                           <td>{prod.numkun}</td>
                           <td>{prod.numcow}</td>
                           <td>{prod.pun}</td>
+                        
+                          <td>{prod.district}</td>
+                          <td>{prod.group}</td>
                           <td>{prod.numfarmer}</td>
                           <td>{prod.namefarmer}</td>
-                          <td>{prod.weightstart}</td>
-                          <td>{prod.group}</td>
                       
                         </tr>
                       ))

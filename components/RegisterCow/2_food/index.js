@@ -54,7 +54,16 @@ export const QUERY_INFO = gql`
   }
 `;
 
-
+const QUERY_FOODN = gql`
+  query QUERY_FOODN($name:String) {
+    selectFoodName(name:$name) {
+      name
+      CP
+      TDN
+      id
+    }
+  }
+`;
 const QUERY_FOOD = gql`
   query QUERY_FOOD($type:String) {
     selectFood(type:$type) {
@@ -72,8 +81,8 @@ const CREATE = gql`
     $typefood: String!
     $namefood: String!
     $namecop: String!
-    $cp: String!
-    $tdn: String!
+    $cp: Float!
+    $tdn: Float!
     $imslaughter: String!
     $note: String!
     $quantity: Float!
@@ -175,13 +184,13 @@ const Index = () => {
     typefood: "",
     namefood: "",
     namecop: "",
-    cp: "",
-    tdn: "",
     quantity: "",
     imslaughter: "",
     note: "",
   });
   const [selectedStatus, SetStatusChange] = useState("");
+  const [selF, SetF] = useState(0);
+  const [selFD, SetFD] = useState(0);
 
   // console.log(prod);
 
@@ -197,7 +206,26 @@ const Index = () => {
 
     }
   });
+  const { data: foodsetName } = useQuery(QUERY_FOODN, {
+    variables: {
+      name: prod.namefood,
 
+    },
+    onCompleted:(data) => {
+      // if(data.length !== 0){
+
+      // }
+      if(data.selectFoodName.length !== 0) {
+        SetF(data.selectFoodName[0].CP)
+        SetFD(data.selectFoodName[0].TDN)
+      }
+
+      // SetF(foodsetName.selectFoodName[0].CP)
+      setItemList(data.selectFoodName)
+
+    }
+  });
+  console.log(foodsetName);
   const { data: datainfo } = useQuery(QUERY_INFO, {
     variables: {
       numkun: numkun,
@@ -227,13 +255,17 @@ const Index = () => {
 
   const handleChange = (e) =>
     setProd({ ...prod, [e.target.name]: e.target.value });
-
+// console.log(f)
   const handleSubmit = async () => {
     setLoadingCreate(true);
     try {
       await createFeed({
         variables: {
           ...prod,
+          typefood: selectedStatus,
+          cp: selF,
+          tdn:selFD,
+          // namefood: prod.name,
           datestart: selectedDate,
           dateend: selectedDate2,
           quantity: +prod.quantity,
@@ -409,7 +441,7 @@ const Index = () => {
               <div>
                 ชื่อ/สูตรอาหาร : {}
                 <select
-                  name="typefood"
+                  name="namefood"
                   onChange={handleChange}
                   style={{
                     display: "inline",
@@ -468,10 +500,15 @@ const Index = () => {
                   name="cp"
                   // value={foodset.selectFood.CP}
                   // value={prod.cp}
-                  // value={inputList[i].nofity}
-
-                  onChange={handleChange}
-                  type="text"
+                  value={
+                    foodsetName && foodsetName.selectFoodName[0]
+                      ? foodsetName.selectFoodName[0].CP
+                      : ""
+                  }
+                  onChange={(event) => SetF(event.target.value)}
+            
+                  // onChange={handleChange}
+                  type="number"
                   style={{
                     width: "156px",
                     backgroundColor: `${
@@ -482,12 +519,20 @@ const Index = () => {
                 />
               </div>
               <div>
-                พลังงาน (TDN) : {}
+              พลังงาน (TDN) : {}
                 <Searchinput
                   name="tdn"
-                  value={prod.tdn}
-                  onChange={handleChange}
-                  type="text"
+                  // value={foodset.selectFood.CP}
+                  // value={prod.cp}
+                  value={
+                    foodsetName && foodsetName.selectFoodName[0]
+                      ? foodsetName.selectFoodName[0].TDN
+                      : ""
+                  }
+                  onChange={(event) => SetFD(event.target.value)}
+            
+                  // onChange={handleChange}
+                  type="number"
                   style={{
                     width: "156px",
                     backgroundColor: `${
@@ -497,6 +542,26 @@ const Index = () => {
                   disabled={prod.typefood === "อาหารหยาบ"}
                 />
               </div>
+              {/* <div>
+                พลังงาน (TDN) : {}
+                <Searchinput
+                  name="tdn"
+                  value={
+                    foodsetName && foodsetName.selectFoodName[0]
+                      ? foodsetName.selectFoodName[0].TDN
+                      : ""
+                  }                
+                    onChange={handleChange}
+                  type="text"
+                  style={{
+                    width: "156px",
+                    backgroundColor: `${
+                      prod.typefood === "อาหารหยาบ" ? "#ececec" : ""
+                    }`,
+                  }}
+                  disabled={prod.typefood === "อาหารหยาบ"}
+                />
+              </div> */}
               <div>
                 ปริมาณ (กก.) : {}
                 <Searchinput
@@ -525,7 +590,6 @@ const Index = () => {
             ) : (
               <Gobutton
                 disabled={
-                  !prod.typefood ||
                   !prod.namefood ||
                   !prod.namecop ||
                   !prod.quantity ||
@@ -533,7 +597,6 @@ const Index = () => {
                 }
                 style={{
                   backgroundColor: `${
-                    !prod.typefood ||
                     !prod.namefood ||
                     !prod.namecop ||
                     !prod.quantity ||

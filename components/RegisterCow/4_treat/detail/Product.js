@@ -498,12 +498,11 @@ const DetailId = () => {
     onCompleted: (data) => {
       console.log(data.Cowdetail);
       data_treat = []
-
       if(data.Cowdetail){
         for (let i = 0; i < data.Cowdetail.treats.length; i++) {
           const element = data.Cowdetail.treats[i];
 
-          let check = data_treat.findIndex(e =>  e.datet == element.datet)
+          let check = data_treat.findIndex(e =>  e.dise == element.dise)
 
           let list
           if (check < 0){
@@ -802,7 +801,6 @@ const DetailId = () => {
                       </Card.Body>
 
                     </Card>
-
                   ))
                 ) : (
                   <tr style={{ textAlign: "center" }}>
