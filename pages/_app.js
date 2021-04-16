@@ -202,7 +202,26 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
       router.pathname === "/slaughter/setting/price-lump" ||
       router.pathname === "/slaughter/setting/bbe" ||
       router.pathname === "/slaughter/setting/create-lump" ||
-      router.pathname === "/slaughter/setting/delete-lump"
+      router.pathname === "/slaughter/setting/delete-lump" 
+      /* ||router.pathname === "/registercow/" ||
+      router.pathname === "/registercow/importcow ||
+      router.pathname === "/registercow/historyfoods" ||
+      router.pathname === "/registercow/listtreat "||
+      router.pathname === "/registercow/listregiscow" ||
+      router.pathname === "/registercow/showlisttreat" ||
+      router.pathname === "/registercow/export" ||
+      router.pathname === "/registercow/listdead" ||
+      router.pathname === "/registercow/druganddise" ||
+      router.pathname === "/registercow/diseanddrug" ||
+      router.pathname === "/registercow/report" ||
+      router.pathname === "/registercow/report/cuttwo" ||
+      router.pathname === "/registercow/report/getto" ||
+      router.pathname === "/registercow/report/quarter" ||
+      router.pathname === "/registercow/" ||
+      router.pathname === "/registercow/" ||
+
+    
+*/
     ) {
       ctx.res.writeHead(302, { Location: "/signin" });
       ctx.res.end();
