@@ -32,15 +32,14 @@ const Index = ({ prod }) => {
     var body = [];
 
     body.push([
-      "วันที่เริ่มรักษา",
+      "วันที่ลงทะเบียน",
       "ใบแจ้งขุน",
-      "เบอร์โค",
       "พันธุ์",
-      "โรคที่ป่วย",
-      "ยาที่ใช้รักษา",
       "รหัสสมาชิก",
       "ชื่อสมาชิก",
-      
+      "จำนวนการรักษา",
+      "สถานะ",
+    
     ]);
     // console.log(data)
 
@@ -53,6 +52,10 @@ const Index = ({ prod }) => {
           dataRow.push(
             dayjs(row[column]).add(543, "y").locale("th").format("DD MMMM YYYY")
           );
+         
+        } else  if (column === "treats.length") {
+          dataRow.push(row.treats.length +  " ครั้ง");
+         
         } else {
           // console.log(column);
           // console.log(
@@ -68,20 +71,22 @@ const Index = ({ prod }) => {
   };
 
   const table = (data, columns) => {
+            console.log(data);
+
     // console.log(data)
     return {
       table: {
         headerRows: 1,
         // alignment: 'center'
         widths: [
-          "auto",
+          90,
           "auto",
           "auto",
           "auto",
           "*",
           "auto",
           "auto",
-          90,
+          
         ],
         body: buildTableBody(data, columns),
       },
@@ -114,20 +119,18 @@ const Index = ({ prod }) => {
           ],
         },
         {
-          text: "รายงานสรุปการรักษาโค\n\n",
+          text: "รายงานสรุปการรักษา\n\n",
           style: "header",
           alignment: "center",
         },
         table(data, [
-          "datet",
+          "date",
           "numkun",
-          "numcow",
           "pun",
-          "dise",
-          "medi",
           "numfarmer",
           "namefarmer",
-          
+          "treats.length",
+          "statuscow",
         ]),
         // {
         //   alignment: "justify",

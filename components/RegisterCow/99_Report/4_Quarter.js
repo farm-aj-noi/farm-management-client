@@ -52,9 +52,11 @@ export const QUERY = gql`
       weightstart
       price
       date
+      statuscow
       treats {
         dise
         medi
+        datet
       }
     }
   }
