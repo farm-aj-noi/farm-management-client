@@ -32,14 +32,15 @@ const Index = ({ prod }) => {
     var body = [];
 
     body.push([
+      "วันที่เริ่มรักษา",
       "ใบแจ้งขุน",
       "เบอร์โค",
       "พันธุ์",
+      "โรคที่ป่วย",
+      "ยาที่ใช้รักษา",
       "รหัสสมาชิก",
       "ชื่อสมาชิก",
-      "กลุ่ม",
-      "น้ำหนักโค (กก.)",
-      "วันที่รับเข้า",
+      
     ]);
     // console.log(data)
 
@@ -113,19 +114,20 @@ const Index = ({ prod }) => {
           ],
         },
         {
-          text: "รายงานสรุปการรับโคขุน\n\n",
+          text: "รายงานสรุปการรักษาโค\n\n",
           style: "header",
           alignment: "center",
         },
         table(data, [
+          "datet",
           "numkun",
           "numcow",
           "pun",
+          "dise",
+          "medi",
           "numfarmer",
           "namefarmer",
-          "weightstart",
-          "weightstart",
-          "date",
+          
         ]),
         // {
         //   alignment: "justify",

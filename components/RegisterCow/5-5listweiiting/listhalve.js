@@ -101,6 +101,8 @@ const Index = ({ List }) => {
   const router = useRouter();
   // console.log(router.query.trackingId);
   const [prod, setProd] = useState(List);
+  const [selectedStatus, SetStatusChange] = useState("6061d400a8f9ea2bc848608a");
+  const at1 = "6061d400a8f9ea2bc848608a"
 
   const [deletecow, { loading, error }] = useMutation(DELETE_COW, {
     onCompleted: (data) => {
@@ -132,7 +134,16 @@ const Index = ({ List }) => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
+  let mmo = {
+    anamestatus:''
+  } 
+  if(selectedStatus === at1  ){
+    mmo.anamestatus = `อนุมัติขึ้นทะเบียนขุน`
+ 
+  }
+  else{
+    mmo.anamestatus = 'รออนุมติขึ้นทะเบียนขุน'
+  }
   return (
     <>
       <tr key={prod.id} style={{ textAlign: "center" }}>
@@ -145,24 +156,9 @@ const Index = ({ List }) => {
                   }</td> */}
                 <td> {dayjs(prod.date).format("DD-MM-YYYY")} </td>
 
-        <td>    
-          {/* <Link href='/registercow/[cowId]' as={`/registercow/${prod.id}`}>
-            <Savebuttoncolor  >
-              ตรวจสอบ
-             </Savebuttoncolor>
-          </Link>
-          <> </>
-          {loading ? (
-            <Spinner animation="border" variant="primary" />
-          ) : (
-            <Removebuttoncolor onClick={handleShow}>
-              <Removebutton />
-            </Removebuttoncolor>
-
-     
- 
-          )} */}
-          รออนุมัติขึ้นทะเบียนขุน   </td>
+        <td>  
+          {mmo.anamestatus}
+         </td>
       </tr>
 
       <Modal

@@ -3,8 +3,12 @@ import styled from "styled-components";
 
 import { Icon } from "react-icons-kit";
 import { Table } from "react-bootstrap";
+import {magnifying_glass_add} from 'react-icons-kit/ikons/magnifying_glass_add'
 
 import { list } from "react-icons-kit/fa/list";
+import {notepad_add} from 'react-icons-kit/ikons/notepad_add'
+import { usePagination } from "../../../helps/paginationhook";
+
 import { DivBase } from "../../../utils/divBase";
 import {
   DivFrom,
@@ -50,6 +54,26 @@ export const QUERY_INFO = gql`
   }
 `;
 
+const QUERY_FOODN = gql`
+  query QUERY_FOODN($name:String) {
+    selectFoodName(name:$name) {
+      name
+      CP
+      TDN
+      id
+    }
+  }
+`;
+const QUERY_FOOD = gql`
+  query QUERY_FOOD($type:String) {
+    selectFood(type:$type) {
+      name
+      CP
+      TDN
+      id
+    }
+  }
+`;
 const CREATE = gql`
   mutation CREATE(
     $datestart: String!
@@ -57,8 +81,8 @@ const CREATE = gql`
     $typefood: String!
     $namefood: String!
     $namecop: String!
-    $cp: String!
-    $tdn: String!
+    $cp: Float!
+    $tdn: Float!
     $imslaughter: String!
     $note: String!
     $quantity: Float!
@@ -87,6 +111,14 @@ const CREATE = gql`
 
 const Index = () => {
   //calendar
+  const {
+    isPaginating,
+    currentPage,
+    setCurrentPage,
+    pageItems,
+    setItemList,
+    totalPages,
+  } = usePagination([]);
   const dateRef = useRef();
   const [date, setDate] = useState(new Date());
   const [selectedDate, handleDateChange] = useState(
@@ -152,17 +184,48 @@ const Index = () => {
     typefood: "",
     namefood: "",
     namecop: "",
-    cp: "",
-    tdn: "",
     quantity: "",
     imslaughter: "",
     note: "",
   });
+  const [selectedStatus, SetStatusChange] = useState("");
+  const [selF, SetF] = useState(0);
+  const [selFD, SetFD] = useState(0);
 
   // console.log(prod);
 
   // const event1 = new Date("July 1, 1999");
+  const { data: foodset } = useQuery(QUERY_FOOD, {
+    variables: {
+      type: selectedStatus,
 
+    },
+    onCompleted:(data) => {
+      // console.log(data.SearchBuy)
+      setItemList(data.selectFood)
+
+    }
+  });
+  const { data: foodsetName } = useQuery(QUERY_FOODN, {
+    variables: {
+      name: prod.namefood,
+
+    },
+    onCompleted:(data) => {
+      // if(data.length !== 0){
+
+      // }
+      if(data.selectFoodName.length !== 0) {
+        SetF(data.selectFoodName[0].CP)
+        SetFD(data.selectFoodName[0].TDN)
+      }
+
+      // SetF(foodsetName.selectFoodName[0].CP)
+      setItemList(data.selectFoodName)
+
+    }
+  });
+  console.log(foodsetName);
   const { data: datainfo } = useQuery(QUERY_INFO, {
     variables: {
       numkun: numkun,
@@ -192,13 +255,17 @@ const Index = () => {
 
   const handleChange = (e) =>
     setProd({ ...prod, [e.target.name]: e.target.value });
-
+// console.log(f)
   const handleSubmit = async () => {
     setLoadingCreate(true);
     try {
       await createFeed({
         variables: {
           ...prod,
+          typefood: selectedStatus,
+          cp: selF,
+          tdn:selFD,
+          // namefood: prod.name,
           datestart: selectedDate,
           dateend: selectedDate2,
           quantity: +prod.quantity,
@@ -212,6 +279,15 @@ const Index = () => {
       // console.log(error);
     }
   };
+// console.log(foodset)
+//   useEffect(() => {
+//     foodset &&
+//     foodset.selectFood.filter((value) => {
+//         if (value.name === prod.name) {
+//           setProd({ ...prod, namefood: foodset.selectFood.name ,cp: foodset.selectFood.CP});
+//         }
+//       });
+//   }, [prod.name]);
 
   useEffect(() => {
     if (prod.typefood === "อาหารหยาบ") setProd({ ...prod, cp: "", tdn: "" });
@@ -223,7 +299,7 @@ const Index = () => {
         <DivFrom style={{ marginBottom: "15px" }}>
           <DivFromTop>
             <div style={{ margin: "-3px 5px 0px 0px" }}>
-              <Icon size={20} icon={list} />
+              <Icon size={20} icon={magnifying_glass_add} />
             </div>
             ข้อมูลโค
           </DivFromTop>
@@ -296,8 +372,8 @@ const Index = () => {
 
         <DivFrom style={{ marginBottom: "15px" }}>
           <DivFromTop>
-            <div style={{ margin: "-3px 5px 0px 0px" }}>
-              <Icon size={20} icon={list} />
+          <div style={{ margin: "-3px 5px 0px 0px" }}>
+              <Icon size={20} icon={notepad_add} />
             </div>
             บันทึกการให้อาหาร
           </DivFromTop>
@@ -338,7 +414,8 @@ const Index = () => {
                 ประเภทอาหาร : {}
                 <select
                   name="typefood"
-                  onChange={handleChange}
+                  onChange={(event) => SetStatusChange(event.target.value)}
+                  // onChange={handleChange}
                   style={{
                     display: "inline",
                     width: "156px",
@@ -357,17 +434,40 @@ const Index = () => {
                   }}
                 >
                   <option value="">เลือกประเภทอาหาร</option>
-                  <option value="อาหารข้น">อาหารข้น</option>
-                  <option value="อาหารหยาบ">อาหารหยาบ</option>
+                  <option value="F1">อาหารข้น</option>
+                  <option value="F2">อาหารหยาบ</option>
                 </select>
               </div>
               <div>
                 ชื่อ/สูตรอาหาร : {}
-                <Searchinput
+                <select
                   name="namefood"
                   onChange={handleChange}
-                  style={{ width: "156px" }}
-                />
+                  style={{
+                    display: "inline",
+                    width: "156px",
+                    padding: "0.375rem 0.75rem",
+                    fontSize: "1rem",
+                    fontWeight: "400",
+                    lineHeight: "1.5",
+                    color: "#495057",
+                    backgroundColor: "#fff",
+                    backgroundClip: "padding-box",
+                    border: "1px solid #ced4da",
+                    /* border-radius: 0.25rem 0rem 0rem 0.25rem; */
+                    borderRadius: "0.25rem",
+                    transition:
+                      "border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out",
+                  }}
+                >
+                  <option value="">รายการอาหาร</option>
+                  {foodset &&
+                    foodset.selectFood.map((prod) => (
+                      <option key={prod.id} value={prod.name}>
+                        {prod.name}
+                      </option>
+                    ))}
+                </select>
               </div>
               <div style={{ gridColumnStart: 4, gridColumnEnd: 6 }}>
                 ชื่อบริษัท : {}
@@ -398,9 +498,17 @@ const Index = () => {
                 โปรตีน (CP) : {}
                 <Searchinput
                   name="cp"
-                  value={prod.cp}
-                  onChange={handleChange}
-                  type="text"
+                  // value={foodset.selectFood.CP}
+                  // value={prod.cp}
+                  value={
+                    foodsetName && foodsetName.selectFoodName[0]
+                      ? foodsetName.selectFoodName[0].CP
+                      : ""
+                  }
+                  onChange={(event) => SetF(event.target.value)}
+            
+                  // onChange={handleChange}
+                  type="number"
                   style={{
                     width: "156px",
                     backgroundColor: `${
@@ -411,12 +519,20 @@ const Index = () => {
                 />
               </div>
               <div>
-                พลังงาน (TDN) : {}
+              พลังงาน (TDN) : {}
                 <Searchinput
                   name="tdn"
-                  value={prod.tdn}
-                  onChange={handleChange}
-                  type="text"
+                  // value={foodset.selectFood.CP}
+                  // value={prod.cp}
+                  value={
+                    foodsetName && foodsetName.selectFoodName[0]
+                      ? foodsetName.selectFoodName[0].TDN
+                      : ""
+                  }
+                  onChange={(event) => SetFD(event.target.value)}
+            
+                  // onChange={handleChange}
+                  type="number"
                   style={{
                     width: "156px",
                     backgroundColor: `${
@@ -426,6 +542,26 @@ const Index = () => {
                   disabled={prod.typefood === "อาหารหยาบ"}
                 />
               </div>
+              {/* <div>
+                พลังงาน (TDN) : {}
+                <Searchinput
+                  name="tdn"
+                  value={
+                    foodsetName && foodsetName.selectFoodName[0]
+                      ? foodsetName.selectFoodName[0].TDN
+                      : ""
+                  }                
+                    onChange={handleChange}
+                  type="text"
+                  style={{
+                    width: "156px",
+                    backgroundColor: `${
+                      prod.typefood === "อาหารหยาบ" ? "#ececec" : ""
+                    }`,
+                  }}
+                  disabled={prod.typefood === "อาหารหยาบ"}
+                />
+              </div> */}
               <div>
                 ปริมาณ (กก.) : {}
                 <Searchinput
@@ -454,7 +590,6 @@ const Index = () => {
             ) : (
               <Gobutton
                 disabled={
-                  !prod.typefood ||
                   !prod.namefood ||
                   !prod.namecop ||
                   !prod.quantity ||
@@ -462,7 +597,6 @@ const Index = () => {
                 }
                 style={{
                   backgroundColor: `${
-                    !prod.typefood ||
                     !prod.namefood ||
                     !prod.namecop ||
                     !prod.quantity ||

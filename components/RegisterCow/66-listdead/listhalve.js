@@ -31,6 +31,8 @@ const UPDATE = gql`
       id
       numcow
       numkun
+      importDateDead
+      notedead
       pun
       numfarmer
       namecow
@@ -138,19 +140,21 @@ const Index = ({ List }) => {
                 <td> {prod.numcow}</td>
                 <td>{prod.namecow}</td>
                 <td> {prod.pun} </td>
-                <td>{
+                {/* <td>{
                 timeDifference(prod.date.substring(0,10))
-                  }</td>
+                  }</td> */}
                 <td> {prod.numfarmer} </td>
+                <td> {dayjs(prod.importDateDead).format("DD-MM-YYYY")} </td>
+                <td> {prod.notedead} </td>
                 <td> {prod.statuscow} </td>
 
 
-        <td>
-        <Link href='/registercow/treatdetail/[cowId]' as={`/registercow/treatdetail/${prod.id}`}>
+        {/* <td> */}
+        {/* <Link href='/registercow/treatdetail/[cowId]' as={`/registercow/treatdetail/${prod.id}`}>
             <Savebuttoncolor>
               ตรวจสอบ
              </Savebuttoncolor>
-          </Link>
+          </Link> */}
           {/* {loading ? (
             <Spinner animation="border" variant="primary" />
           ) : (
@@ -159,7 +163,7 @@ const Index = ({ List }) => {
                รักษาสำเร็จ
              </Savebuttoncolor>
           )} */}
-        </td>
+        {/* </td> */}
       </tr>
 
       <Modal

@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import styled from "styled-components";
+import {magnifying_glass} from 'react-icons-kit/ikons/magnifying_glass'
 
 import { Icon } from "react-icons-kit";
 import { Table } from "react-bootstrap";
@@ -191,7 +192,7 @@ const Index = () => {
         }}
       >
         <>
-          <Sidemenu Sidenumber={1} />
+          <Sidemenu Sidenumber={4} />
 
           <DivFrom
             style={{
@@ -204,7 +205,7 @@ const Index = () => {
           >
             <DivFromTop>
               <div style={{ margin: "-3px 5px 0px 0px" }}>
-                <Icon size={20} icon={list} />
+                <Icon size={20} icon={magnifying_glass} />
               </div>
               รายงาน
             </DivFromTop>
@@ -309,12 +310,12 @@ const Index = () => {
                   {/* <LoadingSmall/> */}
                   <thead>
                     <tr style={{ textAlign: "center" }}>
+                    <th>วันที่รับการรักษา</th>
                       <th>ใบแจ้งขุน</th>
                       <th>พันธุ์</th>
                       <th>ชื่อสมาชิก</th>
                       <th>โรคที่ป่วย</th>
                       <th>วัคซีน/ยาที่ใช้</th>
-                      <th>วันที่รับการรักษา</th>
                     </tr>
                   </thead>
 
@@ -322,6 +323,13 @@ const Index = () => {
                     {data && data.ReportgetTreat.length > 0 ? (
                       data.ReportgetTreat.map((prod) => (
                         <tr key={prod.id} style={{ textAlign: "center" }}>
+                              <td>
+                            {dayjs(prod.datet)
+                              .add(543, "y")
+                              .locale("th")
+                              .format("DD-MMMM-YYYY")}
+                            {}
+                          </td>
                           <td>{prod.numkun}</td>
                           <td>{prod.pun}</td>
                           <td>{prod.namefarmer}</td>
@@ -335,13 +343,7 @@ const Index = () => {
                               <div>{treat.medi} <br/></div> 
                             ))}
                           </td>
-                          <td>
-                            {dayjs(prod.date)
-                              .add(543, "y")
-                              .locale("th")
-                              .format("DD-MMMM-YYYY")}
-                            {}
-                          </td>
+                      
                         </tr>
                       ))
                     ) : (

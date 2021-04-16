@@ -1,12 +1,15 @@
 import React, { useContext, useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { AuthContext } from "../../../appState/AuthProvider";
+import {notepad_add} from 'react-icons-kit/ikons/notepad_add'
 
 import { Icon } from "react-icons-kit";
 import { Table } from "react-bootstrap";
 import Card from 'react-bootstrap/Card'
 import logo from './defultcow.jpg'
 import { list } from "react-icons-kit/fa/list";
+import {picture} from 'react-icons-kit/ikons/picture'
+
 import { DivBase } from "../../../utils/divBase";
 import {
   DivFrom,
@@ -37,7 +40,6 @@ const CREATE = gql`
   mutation CREATE(
   
     $pun: String
-    $numfarmer: String
     $passport: String
     $teeth: String
     $bodyscore: String
@@ -49,7 +51,11 @@ const CREATE = gql`
     $weightstart: Float
     $weightbirht: Float
     $imagecow: String
-
+    $numfarmer:String
+    $district: String
+    $province: String
+    $amphur:String
+    $zipcode: String
   ) {
     importcowfarm(
   
@@ -66,6 +72,10 @@ const CREATE = gql`
       weightstart: $weightstart
       weightbirht: $weightbirht
       imagecow: $imagecow
+      district: $district
+      province: $province
+      amphur:$amphur
+      zipcode: $zipcode
      
     ) {
     
@@ -76,7 +86,7 @@ const CREATE = gql`
       datebirhtday
       namecow
       sex
-      
+ 
       weightstart
       weightbirht
       imagecow
@@ -267,17 +277,20 @@ const Index = () => {
   const [prod, setProd] = useState({
    
     pun: "",
-    numfarmer: "0",
+    numfarmer: user.numaccount,
     passport: user.passsport,
     teeth: "",
     bodyscore: "",
-    namefarmer: "0",
+    namefarmer: user.name,
     namecow: "",
     sex: "",
     weightstart: "",
     weightbirht: "",
     imagecow: "",
- 
+    district: user.district,
+    province: user.province,
+    amphur:user.amphur,
+    zipcode: user.zipcode
 
   });
 
@@ -294,7 +307,11 @@ const Index = () => {
     weightstart: false,
     weightbirht: false,
     statuscow: false,
-    imagecow: false
+    imagecow: false,
+    district: false,
+    province: false,
+    amphur:false,
+    zipcode: false
   });
 
   const [walert, setwAlert] = useState({
@@ -387,7 +404,8 @@ const Index = () => {
 
   const handleSubmit = async () => {
     setLoadingCreate(true);
-  
+    console.log(4444444)
+
     try {
       const url = await uploadFile();
       if (url) {
@@ -430,7 +448,7 @@ console.log(prod.imagecow)
           <DivFromTop>
           <div style={{ margin: "-3px 5px 0px 0px" , fontSize:"20px" }}>
 
-{/* <Icon size={25} icon={list} /> */}
+<Icon size={25} icon={picture} />
 </div>
 <div style={{ margin: "-1px 5px 0px 0px" , fontSize:"20px" }}>
   รูปถ่ายโค
@@ -522,7 +540,7 @@ console.log(prod.imagecow)
           <DivFromTop>
           <div style={{ margin: "-3px 5px 0px 0px" , fontSize:"20px" }}>
 
-{/* <Icon size={25} icon={list} /> */}
+<Icon size={25} icon={notepad_add} />
 </div>
 <div style={{ margin: "-1px 5px 0px 0px" , fontSize:"20px" }}>
   บันทึกข้อมูลขอขึ้นทะเบียนโคขุน
@@ -858,7 +876,6 @@ console.log(prod.imagecow)
                     <option value="4">4</option>
                     <option value="4.5">4.5</option>
                     <option value="5">5</option>
-                    <option value="5.5">5.5</option>
                   </select>{" "}
                   {/* {!prod.bodyscore && (
                     <label style={{ color: "red" }}>

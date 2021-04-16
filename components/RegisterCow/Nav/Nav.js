@@ -151,14 +151,14 @@ const Nav1 = () => {
   </Link>
   <DropdownButton
                   drop="down"
-                  title={`บันทึกข้อมูลโรคและยา`}
+                  title={`เพิ่มข้อมูลโรคเเละยา`}
                   bsPrefix={MyCss.nstdropleft}
                 >
                   <Link href="/registercow/druganddise">
-                    <NavDropdownItem>บันทึกข้อมูลยา</NavDropdownItem>
+                    <NavDropdownItem>เพิ่มข้อมูลยา</NavDropdownItem>
                   </Link>
                   <Link href="/registercow/diseanddrug">
-                    <NavDropdownItem>บันทึกข้อมูลโรค</NavDropdownItem>
+                    <NavDropdownItem>เพิ่มข้อมูลโรค</NavDropdownItem>
                   </Link>
                   
                   {/* <Link href="/registercow/slaughter">
@@ -177,14 +177,14 @@ const Nav1 = () => {
   </Link>
   <DropdownButton
                   drop="down"
-                  title={`บันทึกข้อมูลโรคและยา`}
+                  title={`เพิ่มข้อมูลโรคเเละยา`}
                   bsPrefix={MyCss.nstdropleft}
                 >
                   <Link href="/registercow/druganddise">
-                    <NavDropdownItem>บันทึกข้อมูลยา</NavDropdownItem>
+                    <NavDropdownItem>เพิ่มข้อมูลยา</NavDropdownItem>
                   </Link>
                   <Link href="/registercow/diseanddrug">
-                    <NavDropdownItem>บันทึกข้อมูลโรค</NavDropdownItem>
+                    <NavDropdownItem>เพิ่มข้อมูลโรค</NavDropdownItem>
                   </Link>
                   
                   {/* <Link href="/registercow/slaughter">

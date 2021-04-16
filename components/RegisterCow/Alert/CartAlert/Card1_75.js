@@ -25,7 +25,7 @@ const Card1_5 = () => {
   return (
     <DivAlertCard
       style={{
-        backgroundColor: "rgb(176 47 44)",
+        backgroundColor: "rgb(176 47 04)",
       }}
     >
       <div

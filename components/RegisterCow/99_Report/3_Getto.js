@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import styled from "styled-components";
+import {magnifying_glass} from 'react-icons-kit/ikons/magnifying_glass'
 
 import { Icon } from "react-icons-kit";
 import { Table } from "react-bootstrap";
@@ -181,7 +182,7 @@ const Index = () => {
         }}
       >
         <>
-          <Sidemenu Sidenumber={1} />
+          <Sidemenu Sidenumber={3} />
 
           <DivFrom
             style={{
@@ -194,7 +195,7 @@ const Index = () => {
           >
             <DivFromTop>
               <div style={{ margin: "-3px 5px 0px 0px" }}>
-                <Icon size={20} icon={list} />
+                <Icon size={20} icon={magnifying_glass} />
               </div>
               รายงาน
             </DivFromTop>
@@ -298,6 +299,8 @@ const Index = () => {
                   {/* <LoadingSmall/> */}
                   <thead>
                     <tr style={{ textAlign: "center" }}>
+                    <th>วันที่ส่งเชือด</th>
+
                       <th>ใบแจ้งขุน</th>
                       <th>เบอร์โค</th>
                       <th>พันธุ์</th>
@@ -305,7 +308,6 @@ const Index = () => {
                       <th>ชื่อสมาชิก</th>
                       <th>น้ำหนักโค (กก.)</th>
                       <th>ราคาประเมิน (บาท)</th>
-                      <th>วันที่ส่งเชือด</th>
                     </tr>
                   </thead>
 
@@ -313,13 +315,6 @@ const Index = () => {
                     {data && data.Reportim.length > 0 ? (
                       data.Reportim.map((prod) => (
                         <tr key={prod.id} style={{ textAlign: "center" }}>
-                          <td>{prod.numkun}</td>
-                          <td>{prod.numcow}</td>
-                          <td>{prod.pun}</td>
-                          <td>{prod.numfarmer}</td>
-                          <td>{prod.namefarmer}</td>
-                          <td>{prod.weight}</td>
-                          <td>{prod.price}</td>
                           <td>
                             {dayjs(prod.importDate)
                               .add(543, "y")
@@ -327,6 +322,14 @@ const Index = () => {
                               .format("DD-MMMM-YYYY")}
                             {}
                           </td>
+                          <td>{prod.numkun}</td>
+                          <td>{prod.numcow}</td>
+                          <td>{prod.pun}</td>
+                          <td>{prod.numfarmer}</td>
+                          <td>{prod.namefarmer}</td>
+                          <td>{prod.weight}</td>
+                          <td>{prod.price}</td>
+                          
                         </tr>
                       ))
                     ) : (

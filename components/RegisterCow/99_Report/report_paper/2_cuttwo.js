@@ -32,14 +32,15 @@ const Index = ({ prod }) => {
     var body = [];
 
     body.push([
+      "วันที่รับเข้า",
       "ใบแจ้งขุน",
       "เบอร์โค",
       "พันธุ์",
+      "ตำบล",
+      "กลุ่ม",
       "รหัสสมาชิก",
       "ชื่อสมาชิก",
-      "น้ำหนักโค (กก.)",
-      "กลุ่ม",
-      "วันที่รับเข้า",
+      
     ]);
     // console.log(data)
 
@@ -73,6 +74,7 @@ const Index = ({ prod }) => {
         headerRows: 1,
         // alignment: 'center'
         widths: [
+          90, 
           "auto",
           "auto",
           "auto",
@@ -80,7 +82,7 @@ const Index = ({ prod }) => {
           "*",
           "auto",
           "auto",
-          90,
+       
         ],
         body: buildTableBody(data, columns),
       },
@@ -118,14 +120,14 @@ const Index = ({ prod }) => {
           alignment: "center",
         },
         table(data, [
+          "date",
           "numkun",
           "numcow",
           "pun",
+          "district",
+          "group",
           "numfarmer",
           "namefarmer",
-          "weightstart",
-          "group",
-          "date",
         ]),
         // {
         //   alignment: "justify",

@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import styled from "styled-components";
 import {  Removebutton } from "../../../utils/button";
+import {pen_3} from 'react-icons-kit/ikons/pen_3'
 
 import { Icon } from "react-icons-kit";
 import { Table } from "react-bootstrap";
@@ -181,11 +182,11 @@ catch (error) {
           >
             <DivFromTop>
               <div style={{ margin: "-3px 5px 0px 0px" }}>
-                <Icon size={20} icon={list} />
+                <Icon size={20} icon={pen_3} />
               </div>
               
-              <div style={{ margin: "-1px 5px 0px 0px" , fontSize:"20px"}}>
-              เพิ่มข้อมูลยา
+              <div style={{ margin: "-1px 5px 0px 0px" , fontSize:"16px"}}>
+              เพิ่มสายพันธุ์
                             </div>
             </DivFromTop>
             <DivFromDown>
@@ -250,7 +251,7 @@ catch (error) {
               <div style={{ margin: "-3px 5px 0px 0px" }}>
                 <Icon size={20} icon={list} />
               </div>
-              ข้อมูลทั่วไปของชิ้นเนื้อ
+              ข้อมูลสายพันธุ์
             </DivFromTop>
             <DivFromDown>
               <div style={{ margin: "auto", minWidth: "100%" }}>

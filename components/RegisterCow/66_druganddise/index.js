@@ -1,5 +1,6 @@
 import React, { useContext, useState, useRef, useEffect } from "react";
 import styled from "styled-components";
+import {notepad_add} from 'react-icons-kit/ikons/notepad_add'
 
 import { Icon } from "react-icons-kit";
 import { Table } from "react-bootstrap";
@@ -57,13 +58,17 @@ const CREATE = gql`
   mutation CREATE(
     $name: String!
     $nofity: Int
+    $dateStop: Int
   ) {
     createDrug(
       name: $name
       nofity: $nofity
+      dateStop: $dateStop
+
     ) {
       name
       nofity
+      dateStop
     }
   }
 `;
@@ -74,6 +79,7 @@ const Index = () => {
   const [prod, setProd] = useState({
     name: "",
     nofity: 0,
+    dateStop: 0,
   });
   const route = useRouter();
   // const [alert, setAlert] = useState({
@@ -137,6 +143,8 @@ id:id
         variables: {
           ...prod,
           nofity: +prod.nofity,
+          dateStop: +prod.dateStop,
+
         },
       });
     } catch (error) {
@@ -172,7 +180,7 @@ id:id
         <DivFrom style={{ marginBottom: "15px" }}>
           <DivFromTop>
             <div style={{ margin: "-3px 5px 0px 0px" }}>
-              <Icon size={20} icon={list} />
+              <Icon size={20} icon={notepad_add} />
             </div>
             บันทึกข้อมูลยา
           </DivFromTop>
@@ -204,7 +212,7 @@ id:id
                 />
               </div>
               <div>
-                ระยะหยุดยา(วัน) : {}
+                ระยะการให้ยารอบถัดไป : {}
                 <Searchinput
                   name="nofity"
                   onChange={handleChange}
@@ -212,7 +220,6 @@ id:id
                   style={{ width: "156px" }}
                 />
               </div>
-      
               <div>
                 ข้อควรระวัง/ผลข้างเคียง : {}
                 <Searchinput
@@ -221,14 +228,24 @@ id:id
                   style={{ width: "324px" }}
                 />
               </div>
-              <div>
+                <div>
+              หมายเหตุ: {}
+                <Searchinput
+                  name="note"
+                  onChange={handleChange}
+                  type="number"
+                  style={{ width: "196px" }}
+                />
+              </div>
+      
+              {/* <div>
                 หมายเหตุ : {}
                 <Searchinput
                   name="note"
                   onChange={handleChange}
                   style={{ width: "226px" }}
                 />
-              </div>
+              </div> */}
             </div>
 
            

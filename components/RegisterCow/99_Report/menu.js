@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 // import { useRouter } from "next/router";
 import Link from "next/link";
+import {grid_1} from 'react-icons-kit/ikons/grid_1'
+import {magnifying_glass} from 'react-icons-kit/ikons/magnifying_glass'
+
 import {
   DivFrom,
   DivFromTop,
@@ -29,7 +32,7 @@ const Menu = ({ Sidenumber }) => {
       >
         <DivFromTop>
           <div style={{ margin: "-3px 5px 0px 0px" }}>
-            <Icon size={20} icon={list} />
+            <Icon size={20} icon={grid_1} />
           </div>
           ประเภทรายงาน{" "}
         </DivFromTop>
@@ -71,6 +74,27 @@ const Menu = ({ Sidenumber }) => {
                         </Link>
                       </Nav.Link>
                     </Nav.Item>
+                    <Nav.Item style={{ marginBottom: "5px" }}>
+                      <Nav.Link eventKey="5">
+                        <Link href="/registercow/report/cowdeadlist">
+                          <div style={{ width: "100%" }}>รายงานโคตาย</div>
+                        </Link>
+                      </Nav.Link>
+                    </Nav.Item>
+                    {/* <Nav.Item style={{ marginBottom: "5px" }}>
+                      <Nav.Link eventKey="6">
+                        <Link href="/registercow/report/cowagelist">
+                          <div style={{ width: "100%" }}>รายงานโคตามอายุขุน</div>
+                        </Link>
+                      </Nav.Link>
+                    </Nav.Item> */}
+                    {/* <Nav.Item style={{ marginBottom: "5px" }}>
+                      <Nav.Link eventKey="7">
+                        <Link href="/registercow/report/quarter">
+                          <div style={{ width: "100%" }}>รายการการรักษาโค</div>
+                        </Link>
+                      </Nav.Link>
+                    </Nav.Item> */}
 
                     {/* <Nav.Item style={{ marginBottom: "5px" }}>
                       <Nav.Link eventKey="5">
