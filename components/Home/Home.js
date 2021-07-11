@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Link from "next/link";
 
 import { white, blue } from "../../utils/colors";
-import { LogoFarmAll, LogoSluagther ,Logoregister } from "../../utils/image";
+import { LogoFarmAll, LogoSluagther ,Logoregister ,Logotest2 } from "../../utils/image";
 import { LinkSt } from "./LinkOtherPage";
 
 import { AuthContext } from "../../appState/AuthProvider";
@@ -85,6 +85,13 @@ const Home = () => {
               <LinkSt>
                 <LogoSluagther height="150px" weight="150px" />
                 ระบบเชือด
+              </LinkSt>
+            </Link>
+
+            <Link href="/test_page">
+              <LinkSt>
+                <Logotest2 height="150px" weight="150px" />
+                ระบบทดสอบ
               </LinkSt>
             </Link>
           
