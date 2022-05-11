@@ -40,7 +40,7 @@ const QUERY_USER = {
         amphur
         zipcode
         numaccount
-        role{		
+        role{
           nameEN
           nameTH
         }
@@ -49,6 +49,23 @@ const QUERY_USER = {
   `,
 };
 
+// const QUERY_USER = {
+//   query: `
+//   query User {
+//     user {
+//       id
+//       name
+//       role {
+//         nameTH
+//         nameEN
+//       }
+//       email
+//     }
+//   }
+
+//   `,
+// };
+
 function MyApp({ Component, pageProps, apollo, user }) {
   // console.log("User : ",user)
   const [loading, setLoading] = useState(false);
@@ -56,6 +73,8 @@ function MyApp({ Component, pageProps, apollo, user }) {
   // if (router.isFallback) {
   //   return <LoadingPage/>
   // }
+
+  console.log('weqwe')
 
   Router.events.on("routeChangeStart", (url) => {
     // console.log(`Loading: ${url}`);
@@ -80,29 +99,6 @@ function MyApp({ Component, pageProps, apollo, user }) {
   );
 }
 
-// function MyApp({ Component, pageProps, apollo }) {
-//   return (
-//     <AuthProvider>
-//       <PageLayout>
-//         <Component {...pageProps} />
-//       </PageLayout>
-//     </AuthProvider>
-//   );
-// }
-
-// Only uncomment this method if you have blocking data requirements for
-// every single page in your application. This disables the ability to
-// perform automatic static optimization, causing every page in your app to
-// be server-side rendered.
-//
-
-// export function getStaticPaths() {
-//   return {
-//     // enables blocking mode for the fallback behavior
-//     fallback: "blocking",
-//   };
-// }
-
 MyApp.getInitialProps = async ({ ctx, router }) => {
   if (process.browser) {
     return __NEXT_DATA__.props.pageProps;
@@ -115,7 +111,7 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
   const cookies = headers && cookie.parse(headers.cookie || "");
 
   const token = cookies && cookies.jwt;
-  // console.log(token)
+  console.log(token)
 
   // Route Protection
   if (!token) {
@@ -230,7 +226,7 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
     router.pathname === "/registercow/listfarmmer" ||
     router.pathname === "/registercow/listtreatfarm" ||
     router.pathname === "/registercow/listsluagerfarm" ||
-    router.pathname === "/registercow/listfarmmerweitting" 
+    router.pathname === "/registercow/listfarmmerweitting"
 
     ) {
       ctx.res.writeHead(302, { Location: "/signin" });
@@ -259,6 +255,8 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
   //   body: JSON.stringify(QUERY_USER),
   // });
 
+  console.log(JSON.stringify(QUERY_USER))
+
   const response = await fetch(process.env.NEXT_PUBLIC_GRAPHQL_API, {
     method: "post",
     headers: {
@@ -268,10 +266,11 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
     body: JSON.stringify(QUERY_USER),
   });
 
+  console.log(response)
 
   if (response.ok) {
     const result = await response.json();
-    // console.log(result)
+    console.log(result)
     return { user: result.data.user };
   } else {
     // Route Protection

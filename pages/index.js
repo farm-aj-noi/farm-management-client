@@ -25,7 +25,6 @@ import { fn } from "moment";
 // }, []);
 
 const  HomePage =  ()  => {
-  console.log(json)
   // try {
     // let data = get_provinces();
     // console.log(data);
@@ -52,7 +51,7 @@ const  HomePage =  ()  => {
   return (
     <BackgroundFarmAll>
       <Nav />
-      
+
       <Home />
       {/* <Footer/> */}
     </BackgroundFarmAll>

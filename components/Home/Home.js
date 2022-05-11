@@ -9,7 +9,7 @@ import { AuthContext } from "../../appState/AuthProvider";
 
 const Home = () => {
   const { user } = useContext(AuthContext);
-
+  console.log(user)
   return (
     <>
       <div
@@ -75,7 +75,7 @@ const Home = () => {
                 ลงทะเบียนโคเข้าขุน
               </LinkSt>
             </Link> */}
-              <Link href="/registercow">
+            <Link href="/registercow">
               <LinkSt>
                 <Logoregister height="150px" weight="150px" />
                 ลงทะเบียนโคเข้าขุน
@@ -94,10 +94,11 @@ const Home = () => {
                 ระบบทดสอบ
               </LinkSt>
             </Link>
-          
+
+
           </div>
         )}
-        
+
       </div>
     </>
   );
