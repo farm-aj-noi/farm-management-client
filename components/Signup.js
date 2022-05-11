@@ -55,7 +55,7 @@ const Signup = () => {
     if(param.province_id ==''){
       // setParam({...param,province_id:data_provinces[0].province_id})
       // show_amphures= show_amphures
-      // setParam({ ...param, 
+      // setParam({ ...param,
       //   province_id:  show_amphures[0].province_id,
       //   amphur_id: show_amphures[0].amphur_id,
       //   district_code: ""})
@@ -63,7 +63,7 @@ const Signup = () => {
       // console.log(data_amphures)
       show_amphures = data_amphures.filter( i => i.province_id == param.province_id)
       // console.log(show_amphures)
-      setParam({ ...param, 
+      setParam({ ...param,
         amphur_id: show_amphures[0].amphur_id,
         district_code: ""})
 
@@ -85,27 +85,27 @@ const Signup = () => {
 
         document.getElementById('amphur').innerHTML=str_amphur
     }
-   
+
 
     // console.log(show_amphures)
-    
 
-   
+
+
 
     console.log(param)
     // show_zipcodes = data_zipcodes.find(i => i.district_code == param.district_code)
-  
+
   }, [param.province_id])
 
   useEffect(() => {
     if(param.amphur_id ==''){
       // console.log(1)
       // show_districts= show_districts
-      // setParam({ ...param, 
+      // setParam({ ...param,
       //   district_code: show_districts[0].district_code})
     }else {
       show_districts = data_districts.filter( i => i.province_id == param.province_id && i.amphur_id == param.amphur_id)
-      setParam({ ...param, 
+      setParam({ ...param,
         district_code: show_districts[0].district_code})
 
         let str_districts = ''
@@ -116,18 +116,18 @@ const Signup = () => {
           </option>
           `
         });
-    
+
         document.getElementById('district').innerHTML=str_districts
     }
- 
+
     // console.log(param)
 
   }, [param.amphur_id])
-      
+
   useEffect( () => {
     // console.log(param.d/istrict_code)
     // console.log(param)/
-// 
+//
     show_zipcodes = data_zipcodes.find(i => i.district_code == param.district_code)
 
     // console.log(show_zipcodes)
@@ -136,7 +136,7 @@ const Signup = () => {
       setUserInfo({ ...userInfo, zipcode: show_zipcodes.zipcode_name })
 
     }
-    
+
 
 
   }, [param.district_code])
@@ -207,22 +207,23 @@ const Signup = () => {
 
     setUserInfo({ ...userInfo, [name]: value })
   };
-  const handleSubmit = async () => {
-    try {  
-        await signup();
-    } catch (error) {
-    }
-  };
-  // const handleSubmit = async (e) => {
+  // const handleSubmit = async () => {
   //   try {
-  //     e.preventDefault();
-  //     await signup();
+  //     console.log(1111)
+  //       await signup();
   //   } catch (error) {
-  //     console.log(error);
   //   }
   // };
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      await signup();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  
+
   return (
     <div style={{ margin: "100px" }}>
       <form
@@ -232,7 +233,7 @@ const Signup = () => {
           margin: "auto",
           width: "30%",
         }}
-        // onSubmit={handleSubmit}
+        onSubmit={handleSubmit}
         onChange={(event) => {
           let input = event.target.value;
           let value = input;
@@ -254,9 +255,9 @@ const Signup = () => {
           maxLength="13"
           autoComplete="off"
 
- 
+
         />
-        
+
         <input
           style={{ margin: "5px", height: "30px" }}
           type="text"
@@ -291,8 +292,8 @@ const Signup = () => {
                     type="text"
                     name="province"
                     onChange={(event) => {
-            
-                      setParam({ ...param, 
+
+                      setParam({ ...param,
                         province_id: event.target[event.target.selectedIndex].getAttribute('data-province-id'),
                         amphur_id: "",
                         district_code: ""})
@@ -319,7 +320,7 @@ const Signup = () => {
                     placeholder="รหัสสมาชิก"
 
                     onChange={(event) => {
-                      setParam({ ...param, 
+                      setParam({ ...param,
                         province_id: event.target[event.target.selectedIndex].getAttribute('data-province-id'),
                         amphur_id: event.target[event.target.selectedIndex].getAttribute('data-amphur-id')
                         })
@@ -330,7 +331,7 @@ const Signup = () => {
                     style={{ margin: "5px", height: "30px" }}
 
                   >
-                 
+
                   </select>
                   <select
                     type="text"
@@ -350,7 +351,7 @@ const Signup = () => {
                   >
                   </select>
                   <input
-           onSubmit={handleSubmit}
+          //  onSubmit={handleSubmit}
 
                     name="zipcode"
                     disabled
@@ -358,24 +359,24 @@ const Signup = () => {
                     style={{ margin: "5px", height: "30px" }}
 
                     maxLength="100"
-                  
+
                   />
         {/* <div style={{ display: "grid", gridTemplateRows: "1fr 15px" }}>
-                
+
 
                 </div>
               </div>
               <div>
                 อำเภอ : { }
                 <div style={{ display: "grid", gridTemplateRows: "1fr 15px" }}>
-                  
+
                 </div>
               </div>
               <div>
                 ตำบล : { }
 
                 <div style={{ display: "grid", gridTemplateRows: "1fr 15px" }}>
-                 
+
                 </div>
               </div> */}
         <input
@@ -417,6 +418,7 @@ const Signup = () => {
             fontSize: "18px",
           }}
           type="submit"
+        // onSubmit={handleSubmit}
           disabled={loading}
         >
           Submit
