@@ -1,0 +1,36 @@
+.nstdropleft {
+    text-transform: none;
+    border: none;
+    background: #003171;
+    position: relative;
+    vertical-align: middle;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: bold;
+    height: 54px;
+    width: 100%;
+      text-align: left;
+  }
+  
+  .nstdropleft:hover {
+    background: #3bafda;
+    color: white;
+    text-decoration: none;
+  }
+  
+  .nstdropleft:active {
+    background: #3bafda;
+    color: white;
+    text-decoration: none;
+  }
+  
+  .dropdownmenu{
+    background-color: #003171;
+    
+  }
+  
+  .dropdown-menu{
+    background-color: #003171;
+    
+  }
+  

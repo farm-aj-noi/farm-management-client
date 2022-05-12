@@ -4,6 +4,7 @@ import LogoSt from "../images/logo/Logo-Slaughter.png"
 import Logoregis from "../images/logo/logo-register.png"
 import Logotest from "../images/logo/logo-test.jpg"
 import LogoStore from "../images/logo/logo-store.png"
+import LogoGrade from "../images/logo/logo-grade.png"
 
 export const LogoFarmAll = (prop) => {
   return (
@@ -50,6 +51,16 @@ export const Logobeefstore = (prop) => {
   return (
     <img
       src={LogoStore}
+      width={prop.weight}
+      height={prop.height}
+      style={{ display: "inline", marginRight: "auto"}}
+    />
+  );
+};
+export const Logobeefgrade = (prop) => {
+  return (
+    <img
+      src={LogoGrade}
       width={prop.weight}
       height={prop.height}
       style={{ display: "inline", marginRight: "auto"}}
