@@ -36,10 +36,10 @@ const Home = () => {
       </div>
 
       <div>
-        <Link href="/beefstore">
+        <Link href="/beefwarehouse/beefstore">
           <ButtonStore>คลังชิ้นเนื้อ</ButtonStore>
         </Link>
-        <Link href="/beefproduct">
+        <Link href="/beefwarehouse/beefproduct">
           <ButtonProduct>คลังผลิตภัณฑ์</ButtonProduct>
         </Link>
       </div>

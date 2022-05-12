@@ -60,7 +60,7 @@ export const BackgroundStore = styled.div`
   background-repeat: no-repeat; /*ไม่ให้รูปวนซ้ำ */
   background-size: cover; /*ขนาดรูปให้เท่าหน้าจอ*/
   background-position: 50% 50%; /*ลดตำแหน่งให้รูปมันพอดี*/
-  overflow-y: scroll;
+ 
 `;
 // export const backgroundFarmAll2 = styled.div`
 //   background-image: ${bgFarmAll}; /*ดึงรูป*/

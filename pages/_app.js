@@ -74,7 +74,7 @@ function MyApp({ Component, pageProps, apollo, user }) {
   //   return <LoadingPage/>
   // }
 
-  console.log('weqwe')
+  console.log("weqwe");
 
   Router.events.on("routeChangeStart", (url) => {
     // console.log(`Loading: ${url}`);
@@ -111,12 +111,15 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
   const cookies = headers && cookie.parse(headers.cookie || "");
 
   const token = cookies && cookies.jwt;
-  console.log(token)
+  console.log(token);
 
   // Route Protection
 
-  if(!token) {
-    if (router.pathname === "/beefstore") {
+  if (!token) {
+    if (
+      router.pathname === "/beefwarehouse" ||
+      router.pathname === "/beefwarehouse/beefstore"
+    ) {
       ctx.res.writeHead(302, { Location: "/signin" });
       ctx.res.end();
     }
@@ -211,31 +214,29 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
       router.pathname === "/slaughter/setting/price-lump" ||
       router.pathname === "/slaughter/setting/bbe" ||
       router.pathname === "/slaughter/setting/create-lump" ||
-
       router.pathname === "/slaughter/setting/delete-lump" ||
-    ////////////////////////////////////////////////////
-    router.pathname === "/registercow" ||
-    router.pathname === "/registercow/importcow" ||
-    router.pathname === "/registercow/historyfoods" ||
-    router.pathname === "/registercow/listtreat" ||
-    router.pathname === "/registercow/listregiscow" ||
-    router.pathname === "/registercow/showlisttreat" ||
-    router.pathname === "/registercow/export" ||
-    router.pathname === "/registercow/listdead" ||
-    router.pathname === "/registercow/druganddise" ||
-    router.pathname === "/registercow/diseanddrug" ||
-    router.pathname === "/registercow/report" ||
-    router.pathname === "/registercow/report/cuttwo" ||
-    router.pathname === "/registercow/report/getto" ||
-    router.pathname === "/registercow/report/quarter" ||
-    router.pathname === "/registercow/setting/setpun" ||
-    router.pathname === "/registercow/alert" ||
-    router.pathname === "/registercow/importfarmcow" ||
-    router.pathname === "/registercow/listfarmmer" ||
-    router.pathname === "/registercow/listtreatfarm" ||
-    router.pathname === "/registercow/listsluagerfarm" ||
-    router.pathname === "/registercow/listfarmmerweitting"
-
+      ////////////////////////////////////////////////////
+      router.pathname === "/registercow" ||
+      router.pathname === "/registercow/importcow" ||
+      router.pathname === "/registercow/historyfoods" ||
+      router.pathname === "/registercow/listtreat" ||
+      router.pathname === "/registercow/listregiscow" ||
+      router.pathname === "/registercow/showlisttreat" ||
+      router.pathname === "/registercow/export" ||
+      router.pathname === "/registercow/listdead" ||
+      router.pathname === "/registercow/druganddise" ||
+      router.pathname === "/registercow/diseanddrug" ||
+      router.pathname === "/registercow/report" ||
+      router.pathname === "/registercow/report/cuttwo" ||
+      router.pathname === "/registercow/report/getto" ||
+      router.pathname === "/registercow/report/quarter" ||
+      router.pathname === "/registercow/setting/setpun" ||
+      router.pathname === "/registercow/alert" ||
+      router.pathname === "/registercow/importfarmcow" ||
+      router.pathname === "/registercow/listfarmmer" ||
+      router.pathname === "/registercow/listtreatfarm" ||
+      router.pathname === "/registercow/listsluagerfarm" ||
+      router.pathname === "/registercow/listfarmmerweitting"
     ) {
       ctx.res.writeHead(302, { Location: "/signin" });
       ctx.res.end();
@@ -263,7 +264,7 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
   //   body: JSON.stringify(QUERY_USER),
   // });
 
-  console.log(JSON.stringify(QUERY_USER))
+  console.log(JSON.stringify(QUERY_USER));
 
   const response = await fetch(process.env.NEXT_PUBLIC_GRAPHQL_API, {
     method: "post",
@@ -274,11 +275,11 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
     body: JSON.stringify(QUERY_USER),
   });
 
-  console.log(response)
+  console.log(response);
 
   if (response.ok) {
     const result = await response.json();
-    console.log(result)
+    console.log(result);
     return { user: result.data.user };
   } else {
     // Route Protection
@@ -370,7 +371,7 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
       router.pathname === "/slaughter/setting/price-lump" ||
       router.pathname === "/slaughter/setting/bbe" ||
       router.pathname === "/slaughter/setting/create-lump" ||
-      router.pathname === "/slaughter/setting/delete-lump"||
+      router.pathname === "/slaughter/setting/delete-lump" ||
       /////////////////////////////////////////////////////////
       router.pathname === "/registercow" ||
       router.pathname === "/registercow/importcow" ||

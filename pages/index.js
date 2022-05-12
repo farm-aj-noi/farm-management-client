@@ -53,7 +53,7 @@ const  HomePage =  ()  => {
       <Nav />
 
       <Home />
-      {/* <Footer/> */}
+ {/*      <Footer/> */}
     </BackgroundFarmAll>
   );
 };
