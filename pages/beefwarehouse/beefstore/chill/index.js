@@ -1,6 +1,6 @@
 import React from "react";
 import Nav1 from "../../../../components/BeefWarehouse/BeefStore/Nav/Nav";
-import Chill from "../../../../components/BeefWarehouse/BeefStore/02Chill/";
+import Chill from "../../../../components/BeefWarehouse/BeefStore/02Chill/Chills";
 const index = () => {
   return (
     <div>

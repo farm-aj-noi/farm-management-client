@@ -1,92 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 
-import { DivCenter } from "../../../../utils/TableForm";
-import { ButtonRecordColor } from "../../../../utils/Button";
+import { Savebutton } from "../../../../../utils/button";
+import { Savebuttoncolor } from "../../../../../utils/buttonColor";
 
-import { useMutation } from "@apollo/react-hooks";
-import gql from "graphql-tag";
-
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
-
-import Router from "next/router";
-
-export const CREATE_IMPORT = gql`
-  mutation CREATE_IMPORT($barcode: String!) {
-    createImport(barcode: $barcode) {
-      import_date
-      halve {
-        weightwarm
-        barcode
-        status {
-          nameTH
-        }
-        beeftype {
-          nameTH
-        }
-        cows {
-          cownum
-        }
-      }
-    }
-  }
-`;
-
-function Create_Import() {
-  const MySwal = withReactContent(Swal);
-  const [ImportInfo, setImportInfo] = useState({
-    barcode: "",
-  });
-  const [success, setSuccess] = useState(false);
-  const [createImport, { loading, error }] = useMutation(CREATE_IMPORT, {
-    variables: { ...ImportInfo },
-    onCompleted: (data) => {
-      if (data) {
-        setSuccess(true);
-        setImportInfo({
-          barcode: "",
-        });
-        MySwal.fire({
-          icon: "success",
-          title: "สำเร็จ",
-          text: "ทำการนำเข้าคลังชิ้นเนื้อเสร็จสิ้น",
-          confirmButtonText: (
-            <span onClick={() => Router.reload("/beef_store/imports")}>
-              ตกลง
-            </span>
-          ),
-          confirmButtonColor: "#3085d6",
-        });
-      }
-    },
-  });
-
-  const handleChange = (e) => {
-    setImportInfo({
-      ...ImportInfo,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    try {
-      e.preventDefault();
-      await createImport();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
+const Create_Import = () => {
   return (
-    <DivCenter style={{ marginTop: "20px" }}>
-      <form
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-        onSubmit={handleSubmit}
-      >
+    <div style={{ display: "flex", justifyContent: "center",marginBottom:"7px" }}>
+      <form>
         <label
           for="beef"
           style={{
@@ -110,27 +30,15 @@ function Create_Import() {
             textAlign: "center",
             fontSize: "14px",
           }}
-          value={ImportInfo.barcode}
-          onChange={handleChange}
         />
-        <ButtonRecordColor disabled={loading}>บันทึก</ButtonRecordColor>
-        {error &&
-          MySwal.fire({
-            icon: "warning",
-            title: "ผิดพลาด",
-            text: (
-              <p style={{ color: "red" }}>{error.graphQLErrors[0].message}</p>
-            ),
-            confirmButtonText: (
-              <span onClick={() => Router.reload("/beef_store/imports")}>
-                ตกลง
-              </span>
-            ),
-            confirmButtonColor: "#3085d6",
-          })}
       </form>
-    </DivCenter>
+      <Savebuttoncolor
+        style={{ height: "35px", borderRadius: "0px 3px 3px 0px" }}
+      >
+        <Savebutton />
+      </Savebuttoncolor>
+    </div>
   );
-}
+};
 
 export default Create_Import;
