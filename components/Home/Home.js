@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Link from "next/link";
 
 import { white, blue } from "../../utils/colors";
-import { LogoFarmAll, LogoSluagther ,Logoregister ,Logotest2 } from "../../utils/image";
+import { LogoFarmAll, LogoSluagther ,Logoregister ,Logobeefstore } from "../../utils/image";
 import { LinkSt } from "./LinkOtherPage";
 
 import { AuthContext } from "../../appState/AuthProvider";
@@ -88,10 +88,10 @@ const Home = () => {
               </LinkSt>
             </Link>
 
-            <Link href="/test_page">
+            <Link href="/beefwarehouse">
               <LinkSt>
-                <Logotest2 height="150px" weight="150px" />
-                ระบบทดสอบ
+                <Logobeefstore height="150px" weight="150px" />
+                ระบบคลัง
               </LinkSt>
             </Link>
 

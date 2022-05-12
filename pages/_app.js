@@ -114,6 +114,14 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
   console.log(token)
 
   // Route Protection
+
+  if(!token) {
+    if (router.pathname === "/beefstore") {
+      ctx.res.writeHead(302, { Location: "/signin" });
+      ctx.res.end();
+    }
+  }
+
   if (!token) {
     if (router.pathname === "/cart") {
       ctx.res.writeHead(302, { Location: "/signin" });
