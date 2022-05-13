@@ -7,7 +7,6 @@ export const DivFrom = styled.div`
   ${FromDiv}
   position: relative;
   display: block;
-  width: 950px;
   height: auto;
 `;
 
@@ -97,4 +96,17 @@ export const InputPrice = styled.input`
   /* border-radius: 0.25rem 0rem 0rem 0.25rem; */
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+`;
+
+export const HeaderColor = styled.div`
+  text-align: center;
+  background: #da4453;
+  border: none;
+  border-radius: 4px;
+  font-size: 30px;
+  color: #ffffff;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

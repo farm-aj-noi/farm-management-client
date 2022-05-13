@@ -29,11 +29,248 @@ const index = () => {
           การเบิกออก
         </HeaderColor>
       </div>
+
+      <DivFrom style={{ width: "400px", height: "115px" }}>
+        <DivFromTop>ดำเนินการเบิกออก</DivFromTop>
+        <DivFromDown>
+          <Submit_Export />
+        </DivFromDown>
+      </DivFrom>
+      <DivFrom style={{ width: "900px", height: "180px" }}>
+        <DivFromTop>ดำเนินการเบิกออก</DivFromTop>
+        <DivFromDown>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <from style={{ fontSize: "20px" }}>
+              <label
+                for="beef"
+                style={{
+                  textAlign: "center",
+                  fontSize: "18px",
+                  marginRight: "10px",
+                }}
+              >
+                ประเภทซาก
+              </label>
+              <select
+                name="beef"
+                id="beef"
+                style={{
+                  height: "35px",
+                  width: "120px",
+                  border: "1px solid #AFAFAF",
+                  borderRadius: "4px",
+                  textAlign: "center",
+                  fontSize: "14px",
+                }}
+              >
+                <option value="">ทั้งหมด</option>
+                <option value="">ซากซ้าย</option>
+                <option value="">ซากขวา</option>
+                <option value="">ซากซ้าย</option>
+                <option value="">ซากขวา</option>
+                <option value="">ซากซ้าย</option>
+                <option value="">ซากขวา</option>
+                <option value="">ซากซ้าย</option>
+                <option value="">ซากขวา</option>
+                <option value="">ซากซ้าย</option>
+                <option value="">ซากขวา</option>
+                <option value="">ซากซ้าย</option>
+                <option value="">ซากขวา</option>
+                <option value="">ซากซ้าย</option>
+                <option value="">ซากขวา</option>
+                <option value="">ซากซ้าย</option>
+                <option value="">ซากขวา</option>
+                <option value="">ซากซ้าย</option>
+                <option value="">ซากขวา</option>
+                <option value="">ซากซ้าย</option>
+                <option value="">ซากขวา</option>
+                <option value="">ซากซ้าย</option>
+                <option value="">ซากขวา</option>
+                <option value="">ซากซ้าย</option>
+                <option value="">ซากขวา</option>
+                <option value="">ซากซ้าย</option>
+                <option value="">ซากขวา</option>
+                <option value="">ซากซ้าย</option>
+                <option value="">ซากขวา</option>
+                <option value="">ซากซ้าย</option>
+                <option value="">ซากขวา</option>
+                <option value="">ซากซ้าย</option>
+                <option value="">ซากขวา</option>
+                <option value="">ซากซ้าย</option>
+                <option value="">ซากขวา</option>
+              </select>
+              <label
+                for="beef"
+                style={{
+                  textAlign: "center",
+                  fontSize: "18px",
+                  marginLeft: "10px",
+                  marginRight: "10px",
+                }}
+              >
+                ผู้ขอเบิก
+              </label>
+              <input
+                style={{
+                  height: "35px",
+                  width: "110px",
+                  borderRadius: "4px",
+                  border: "1px solid #AFAFAF",
+                  fontSize: "14px",
+                  textAlign: "center",
+                }}
+              />
+              <label
+                for="beef"
+                style={{
+                  textAlign: "center",
+                  fontSize: "18px",
+                  marginLeft: "10px",
+                  marginRight: "10px",
+                }}
+              >
+                ผู้เบิกออก
+              </label>
+              <input
+                style={{
+                  height: "35px",
+                  width: "110px",
+                  borderRadius: "4px",
+                  border: "1px solid #AFAFAF",
+                  fontSize: "14px",
+                  textAlign: "center",
+                }}
+              />
+              <label
+                for="beef"
+                style={{
+                  textAlign: "center",
+                  fontSize: "18px",
+                  margin: "10px 10px",
+                }}
+              >
+                ตำแหน่ง
+              </label>
+              <select
+                name="room"
+                id="room"
+                style={{
+                  height: "35px",
+                  width: "50px",
+                  border: "1px solid #AFAFAF",
+                  borderRadius: "4px 0px 0px 4px",
+                  textAlign: "center",
+                  fontSize: "14px",
+                }}
+              >
+                <option value="">ห้อง</option>
+                <option value="">1</option>
+                <option value="">2</option>
+                <option value="">3</option>
+              </select>
+              <select
+                name="shelf"
+                id="shelf"
+                style={{
+                  height: "35px",
+                  width: "50px",
+                  border: "1px solid #AFAFAF",
+                  borderLeft: "none",
+                  textAlign: "center",
+                  fontSize: "14px",
+                }}
+              >
+                <option value="">ชั้น</option>
+                <option value="">1</option>
+                <option value="">2</option>
+                <option value="">3</option>
+              </select>
+              <select
+                name="bucket"
+                id="bucket"
+                style={{
+                  height: "35px",
+                  width: "60px",
+                  border: "1px solid #AFAFAF",
+                  borderRadius: "0px 4px 4px 0px",
+                  borderLeft: "none",
+                  textAlign: "center",
+                  fontSize: "14px",
+                  marginRight: "10px",
+                }}
+              >
+                <option value="">ตะกร้า</option>
+                <option value="">1</option>
+                <option value="">2</option>
+                <option value="">3</option>
+              </select>
+            </from>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginBottom: "10px",
+            }}
+          >
+            <from style={{ fontSize: "20px" }}>
+              <label
+                for="date"
+                style={{
+                  textAlign: "center",
+                  fontSize: "18px",
+                  marginRight: "10px",
+                }}
+              >
+                วันที่เบิกออก
+              </label>
+              <input
+                type="date"
+                id="ex_chill"
+                name="date"
+                style={{
+                  height: "35px",
+                  border: "1px solid #AFAFAF",
+                  borderRadius: "4px",
+                  color: "#AFAFAF",
+                  textAlign: "center",
+                }}
+              ></input>
+              <label
+                for="date"
+                style={{
+                  textAlign: "center",
+                  fontSize: "18px",
+                  margin: "10px 10px",
+                }}
+              >
+                ถึงวันที่
+              </label>
+              <input
+                type="date"
+                id="ex_chill"
+                name="date"
+                style={{
+                  height: "35px",
+                  border: "1px solid #AFAFAF",
+                  borderRadius: "4px",
+                  color: "#AFAFAF",
+                  textAlign: "center",
+                }}
+              ></input>
+            </from>
+          </div>
+        </DivFromDown>
+      </DivFrom>
+
       <div
         style={{ display: "flex", justifyContent: "center", marginTop: "30px" }}
-      >
-        <Submit_Export />
-      </div>
+      ></div>
       <div
         style={{
           display: "flex",
