@@ -1,45 +1,51 @@
 import React from "react";
 
-import { Savebutton } from "../../../../utils/button";
-import { Savebuttoncolor } from "../../../../utils/buttonColor";
+import { DivFromInsideLeft, Searchinput, Savebutton1 } from "./ExportFrom";
 
 const Submit_Export = () => {
   return (
-    <div
-      style={{ display: "flex", justifyContent: "center", marginBottom: "7px" }}
-    >
-      <form>
-        <label
-          for="beef"
-          style={{
-            textAlign: "center",
-            fontSize: "18px",
-            marginRight: "10px",
-          }}
-        >
-          รหัสบาร์โค้ด
-        </label>
-        <input
-          type="text"
-          id="barcode"
-          name="barcode"
-          style={{
-            height: "35px",
-            width: "200px",
-            borderRadius: "4px 0px 0px 4px",
-            borderRight: "none",
-            border: "1px solid #AFAFAF",
-            textAlign: "center",
-            fontSize: "14px",
-          }}
-        />
-      </form>
-      <Savebuttoncolor
-        style={{ height: "35px", borderRadius: "0px 3px 3px 0px" }}
-      >
-        <Savebutton />
-      </Savebuttoncolor>
-    </div>
+    <>
+      <div>
+        <form>
+          <DivFromInsideLeft>
+            บาร์โค้ด :
+            <div
+              style={{
+                display: "grid",
+                gridTemplateRows: "1fr 15px",
+              }}
+            >
+              <Searchinput />
+            </div>
+          </DivFromInsideLeft>
+          <DivFromInsideLeft>
+            ผู้ขอเบิก :
+            <div
+              style={{
+                display: "grid",
+                gridTemplateRows: "1fr 15px",
+              }}
+            >
+              <Searchinput />
+            </div>
+          </DivFromInsideLeft>
+          <DivFromInsideLeft>
+            สถานะเบิก :
+            <div
+              style={{
+                display: "grid",
+                gridTemplateRows: "1fr 15px",
+              }}
+            >
+              <Searchinput />
+            </div>
+          </DivFromInsideLeft>
+        </form>
+        <div style={{ display: "inline-block", justifySelf: "right" }}>
+          <Savebutton1>บันทึก</Savebutton1>
+        </div>
+      </div>
+    </>
   );
 };
 

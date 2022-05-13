@@ -1,7 +1,13 @@
 import styled from "styled-components";
 
 import { FromDiv } from "../../../../utils/from";
-import { lightBlue, white, blue } from "../../../../utils/colors";
+import {
+  lightBlue,
+  white,
+  blue,
+  lightGreen,
+  green,
+} from "../../../../utils/colors";
 
 export const ButtonSummit1 = styled.button`
   text-align: center;
@@ -59,10 +65,9 @@ export const DivFromTop = styled.div`
 `;
 
 export const DivFromDown = styled.div`
-  height: 350px;
+  height: fit-content;
   border-radius: 10px 10px 0 0;
-  padding: 25px 15px 15px 15px;
-  padding-bottom: 5%;
+  padding: 15px 15px 15px 15px;
 `;
 
 export const Searchinput = styled.input`
@@ -118,4 +123,31 @@ export const Wightinput = styled.input`
   -webkit-appearance: none;
   margin: 0;
   -moz-appearance: textfield;
+`;
+export const DivFromInsideLeft = styled.div`
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
+`;
+
+export const Savebutton1 = styled.button`
+/*   display: inline-block; */
+  width: 70px;
+ /*  justify-self: right; */
+  font-weight: 400;
+  color: ${white};
+  background-color: ${lightGreen};
+  text-align: center;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  /* padding: 0.375rem 0.75rem; */
+  font-size: 20px;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+
+  &:hover {
+    background-color: ${green};
+  }
 `;

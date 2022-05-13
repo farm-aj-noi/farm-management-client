@@ -7,7 +7,7 @@ export const DivFrom = styled.div`
   ${FromDiv}
   position: relative;
   display: block;
-  height: auto;
+  height: fit-content;
 `;
 
 export const DivFromTop = styled.div`

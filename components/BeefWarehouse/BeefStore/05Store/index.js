@@ -6,8 +6,29 @@ import { DivBase } from "../../../../utils/divBase";
 
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
+import { iosSearchStrong } from "react-icons-kit/ionicons/iosSearchStrong";
+
+import gql from "graphql-tag";
+import { useQuery } from "@apollo/react-hooks";
+
+import List_Store from "./ListStore.js";
+
+export const STORELIST = gql`
+  query STORELIST {
+    liststore {
+      beeftype
+      cownum
+      code
+      barcode
+      weightwarm
+      weight
+      status
+    }
+  }
+`;
 
 const index = () => {
+  const { data, loading, error } = useQuery(STORELIST);
   return (
     <DivBase>
       <div
@@ -27,6 +48,10 @@ const index = () => {
           คงคลัง
         </HeaderColor>
       </div>
+      <DivFrom>
+        <DivFromTop></DivFromTop>
+        <DivFromDown></DivFromDown>
+      </DivFrom>
       <div
         style={{ display: "flex", justifyContent: "center", marginTop: "30px" }}
       ></div>
@@ -260,7 +285,6 @@ const index = () => {
                 <tr style={{ textAlign: "center" }}>
                   <th>ประเภทซาก</th>
                   <th>ทะเบียนขุน</th>
-                  <th>วันที่นำเข้า</th>
                   <th>รหัสซาก</th>
                   <th>รหัสบาร์โค้ด</th>
                   <th>คิวอาร์โค้ด</th>
@@ -277,24 +301,10 @@ const index = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
+                {data &&
+                  data.liststore.map((prod) => (
+                    <List_Store key={prod.id} ListStore={prod} />
+                  ))}
               </tbody>
             </Table>
           </div>

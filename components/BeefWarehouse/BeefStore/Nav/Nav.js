@@ -57,18 +57,9 @@ const Nav1 = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
-            <DropdownButton
-              drop="down"
-              title={`การบ่มซาก`}
-              bsPrefix={MyCss.nstdropleft}
-            >
-              <Link href="/beefwarehouse/beefstore/chill">
-                <NavDropdownItem>บ่มซากเนื้อโค</NavDropdownItem>
-              </Link>
-              <Link href="/beefwarehouse/beefstore/chill/history_chill">
-                <NavDropdownItem>ประวัติการบ่มซากเนื้อโค</NavDropdownItem>
-              </Link>
-            </DropdownButton>
+            <Link href="/beefwarehouse/beefstore/chill">
+              <NavButtonLeft> บ่มซากเนื้อโค</NavButtonLeft>
+            </Link>
             <DropdownButton
               drop="down"
               title={`การนำเข้า`}
