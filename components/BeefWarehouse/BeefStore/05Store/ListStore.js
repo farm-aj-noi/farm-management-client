@@ -19,7 +19,7 @@ const ListStore = ({ ListStore }) => {
       <td></td>
       <td></td>
       <td></td>
-      <td>{ListStoreData.beeftype}</td>
+      <td>{ListStoreData.status}</td>
       <td></td>
       <td></td>
     </tr>

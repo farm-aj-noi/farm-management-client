@@ -1,14 +1,91 @@
-import React from "react";
-
-import { Savebuttoncolor } from "../../../../../utils/buttonColor";
+import React, { useState } from "react";
 
 import { DivFromInsideLeft, Searchinput, Savebutton1 } from "../ImportFrom";
 
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
+import { useMutation } from "@apollo/react-hooks";
+import gql from "graphql-tag";
+
+import Router from "next/router";
+
+export const CREATEIMPORTLUMP = gql`
+  mutation CreateImlump($barcode: String!, $beefstore: String!) {
+    createImlump(barcode: $barcode, beefstore: $beefstore) {
+      id
+      importdate
+    }
+  }
+`;
+
 const Create_Import = () => {
+  const MySwal = withReactContent(Swal);
+  const [ImportLumpsInfo, setImportLumpsInfo] = useState({
+    barcode: "",
+    beefstore: "627f7c1f5a28733be04a760f",
+  });
+  const [success, setSuccess] = useState(false);
+  const [createImlump, { loading, error }] = useMutation(CREATEIMPORTLUMP, {
+    variables: { ...ImportLumpsInfo },
+    onCompleted: (data) => {
+      if (data) {
+        setSuccess(true);
+        setImportLumpsInfo({
+          barcode: "",
+        });
+        MySwal.fire({
+          icon: "success",
+          title: "สำเร็จ",
+          text: "ทำการนำเข้าคลังชิ้นเนื้อเสร็จสิ้น",
+          confirmButtonText: (
+            <span
+              onClick={() =>
+                Router.reload("beefwarehouse/beefstore/import/import_lumps")
+              }
+            >
+              ตกลง
+            </span>
+          ),
+          confirmButtonColor: "#3085d6",
+        });
+      }
+    },
+    onError: (error) => {
+      if (error) {
+        setImportLumpsInfo({
+          barcode: "",
+        });
+        MySwal.fire({
+          icon: "error",
+          title: <p>eeee</p>,
+          text: "กรุณากรอกบาร์โค้ดใหม่อีกครั้ง",
+          confirmButtonText: <span>ตกลง</span>,
+          confirmButtonColor: "#3085d6",
+        });
+      }
+    },
+  });
+
+  const handleChange = (e) => {
+    setImportLumpsInfo({
+      ...ImportLumpsInfo,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      await createImlump();
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <div>
-        <form>
+        <form onSubmit={handleSubmit}>
           <DivFromInsideLeft>
             บาร์โค้ด :
             <div
@@ -17,7 +94,13 @@ const Create_Import = () => {
                 gridTemplateRows: "1fr 15px",
               }}
             >
-              <Searchinput />
+              <Searchinput
+                type="text"
+                id="barcode"
+                name="barcode"
+                value={ImportLumpsInfo.barcode}
+                onChange={handleChange}
+              />
             </div>
           </DivFromInsideLeft>
           <DivFromInsideLeft>
@@ -85,10 +168,18 @@ const Create_Import = () => {
               </div>
             </div>
           </DivFromInsideLeft>
+          <div
+            style={{
+              display: "inline-block",
+              justifySelf: "right",
+              float: "right",
+              paddingRight: "10px",
+              paddingBottom: "10px",
+            }}
+          >
+            <Savebutton1 disabled={loading}>บันทึก</Savebutton1>
+          </div>
         </form>
-        <div style={{ display: "inline-block", justifySelf: "right" }}>
-          <Savebutton1>บันทึก</Savebutton1>
-        </div>
       </div>
     </>
   );

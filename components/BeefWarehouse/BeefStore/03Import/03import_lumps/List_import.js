@@ -1,48 +1,35 @@
-import React, { useContext, useState, useRef, useEffect } from "react";
-import { qrcode } from "react-icons-kit/icomoon/qrcode";
-import { Icon } from "react-icons-kit";
-import { ButtonQrcodeColor } from "../../../../utils/Button";
-const tdstyle = {
-  border: "1px solid #dddddd",
-  textAlign: "center",
-  padding: "5px",
-  fontSize: "14px",
-};
+import React, { useState } from "react";
+import { Barcodebuttoncolor } from "../../../../../utils/buttonColor";
+import { Qrcodebutton } from "../../../../../utils/button";
+import dayjs from "dayjs";
 
-function List_import() {
+function List_import({ imlump }) {
+  const [imlumpData, SetImhalveData] = useState(imlump);
   return (
-    <>
-      <tr style={{ textAlign: "center" }}>
-        <td style={tdstyle}></td>
-        <td style={tdstyle}></td>
-        <td style={tdstyle}>{/* prod.halve.beeftype.nameTH */}</td>
-        <td style={tdstyle}></td>
-        <td style={tdstyle}></td>
-        <td style={tdstyle}>{/* prod.halve.cows.cownum */}</td>
-        <td style={tdstyle}>{/* prod.halve.beeftype.code */}</td>
-        <td style={tdstyle}>{}</td>
-        <td style={tdstyle}>
-          <ButtonQrcodeColor>
-            <Icon
-              style={{
-                verticalAlign: "text-bottom",
-                color: "white",
-              }}
-              icon={qrcode}
-              size={20}
-            />
-          </ButtonQrcodeColor>
-        </td>
-        <td style={tdstyle}>1</td>
-        <td style={tdstyle}>{}</td>
-        <td style={tdstyle}></td>
-        <td style={tdstyle}></td>
-        <td style={tdstyle}></td>
-        <td style={tdstyle}></td>
-        <td style={tdstyle}></td>
-      </tr>
-      
-    </>
+    <tr style={{ textAlign: "center" }}>
+      <td>{imlumpData.lump.imslaughter.namefarmer}</td>
+      <td>{imlumpData.lump.beeftype.nameTH}</td>
+      <td>
+        {dayjs(imlumpData.importdate).add(543, "year").format("DD/MM/YYYY")}
+      </td>
+      <td>
+        {dayjs(imlumpData.importdate).add(543, "year").format("h:mm:ss A")}
+      </td>
+      <td>{imlumpData.lump.imslaughter.numcow}</td>
+      <td>{imlumpData.lump.beeftype.code}</td>
+      <td>{imlumpData.lump.barcode}</td>
+      <td>
+        <Barcodebuttoncolor>
+          <Qrcodebutton />
+        </Barcodebuttoncolor>
+      </td>
+      <td>{imlumpData.lump.weight}</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>{imlumpData.lump.status.nameTH}</td>
+      <td>{imlumpData.user.name}</td>
+    </tr>
   );
 }
 

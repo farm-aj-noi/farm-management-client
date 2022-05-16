@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Table } from "react-bootstrap";
 import { DivFrom, DivFromTop, DivFromDown, HeaderColor } from "../ImportFrom";
@@ -10,7 +10,48 @@ import { iosSearchStrong } from "react-icons-kit/ionicons/iosSearchStrong";
 
 import Create_Import from "./Create_Import";
 
+import gql from "graphql-tag";
+import { useQuery } from "@apollo/react-hooks";
+
+import List_import from "./List_import";
+
+export const IMPOERTENTRAILSEARCH = gql`
+  query IMPOERTENTRAILSEARCH($startdate: String, $enddate: String) {
+    imentrailSearch(startdate: $startdate, enddate: $enddate) {
+      importdate
+      user {
+        name
+      }
+      entrail {
+        offal
+        toe
+        head
+        skin
+        liver
+        fat
+        onkale
+        tail
+        gallbladder
+        scrap
+        barcode
+        imslaughter {
+          numcow
+          namefarmer
+        }
+      }
+    }
+  }
+`;
+
 const index = () => {
+  const [selectedstartdate, SetStartDateChange] = useState("");
+  const [selectedenddate, SetEndDateChange] = useState("");
+  const { data, loading, error } = useQuery(IMPOERTENTRAILSEARCH, {
+    variables: {
+      startdate: selectedstartdate,
+      enddate: selectedenddate,
+    },
+  });
   return (
     <>
       <div
@@ -33,7 +74,7 @@ const index = () => {
       <DivBase
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 270px 900px 1fr",
+          gridTemplateColumns: "1fr 270px 1100px 1fr",
           gridRowGap: "15px",
           gridColumnGap: "10px",
           textAlign: "start",
@@ -74,49 +115,15 @@ const index = () => {
               </div>
               ค้นหารายการ
             </DivFromTop>
-            <DivFromDown>
+            <DivFromDown style={{ height: "110px" }}>
               <div
                 style={{
                   display: "flex",
                   justifyContent: "center",
+                  marginTop: "15px",
                 }}
               >
                 <from style={{ fontSize: "20px" }}>
-                  <label
-                    for="beef"
-                    style={{
-                      textAlign: "center",
-                      fontSize: "18px",
-                      marginRight: "10px",
-                    }}
-                  >
-                    ประเภทซาก
-                  </label>
-                  <select
-                    name="beef"
-                    id="beef"
-                    style={{
-                      height: "35px",
-                      width: "120px",
-                      border: "1px solid #AFAFAF",
-                      borderRadius: "4px",
-                      textAlign: "center",
-                      fontSize: "14px",
-                    }}
-                  >
-                    <option value="">ทั้งหมด</option>
-                    <option value="">ซากซ้าย</option>
-                    <option value="">ซากขวา</option>
-                    <option value="">ซากซ้าย</option>
-                    <option value="">ซากขวา</option>
-                    <option value="">ซากซ้าย</option>
-                    <option value="">ซากขวา</option>
-                    <option value="">ซากซ้าย</option>
-                    <option value="">ซากขวา</option>
-                    <option value="">ซากซ้าย</option>
-                    <option value="">ซากขวา</option>
-                  </select>
-
                   <label
                     for="beef"
                     style={{
@@ -201,16 +208,6 @@ const index = () => {
                     <option value="">2</option>
                     <option value="">3</option>
                   </select>
-                </from>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginBottom: "10px",
-                }}
-              >
-                <from style={{ fontSize: "20px" }}>
                   <label
                     for="date"
                     style={{
@@ -218,6 +215,7 @@ const index = () => {
                       fontSize: "18px",
                       marginRight: "10px",
                     }}
+                    onChange={(event) => SetStartDateChange(event.target.value)}
                   >
                     วันที่นำเข้า
                   </label>
@@ -254,6 +252,7 @@ const index = () => {
                       color: "#AFAFAF",
                       textAlign: "center",
                     }}
+                    onChange={(event) => SetEndDateChange(event.target.value)}
                   ></input>
                 </from>
               </div>
@@ -261,7 +260,7 @@ const index = () => {
           </DivFrom>
           <DivFrom
             style={{
-              width: "1180px",
+              width: "1380px",
               gridRowStart: "5",
               gridRowEnd: "5",
               gridColumnStart: "2",
@@ -287,38 +286,32 @@ const index = () => {
                   <thead>
                     <tr style={{ textAlign: "center" }}>
                       <th>เจ้าของซาก</th>
-                      <th>ประเภทซาก</th>
                       <th>วันที่นำเข้า</th>
                       <th>เวลา</th>
                       <th>ทะเบียนขุน</th>
-                      <th>รหัสซาก</th>
+                      <th>เครื่องใน</th>
+                      <th>ปลายเท้า</th>
+                      <th>หัว</th>
+                      <th>หนังสด</th>
+                      <th>ตับ</th>
+                      <th>ไขมันอุ่น</th>
+                      <th>องแคล</th>
+                      <th>หาง</th>
+                      <th>ถุงน้ำดี</th>
+                      <th>เศษซาก</th>
                       <th>รหัสบาร์โค้ด</th>
                       <th>คิวอาร์โค้ด</th>
-                      <th>น้ำหนัก</th>
                       <th>ห้อง</th>
                       <th>ชั้น</th>
                       <th>ตะกร้า</th>
-                      <th>สถานะ</th>
                       <th>ผู้นำเข้า</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
+                    {data &&
+                      data.imentrailSearch.map((prod) => (
+                        <List_import key={prod.id} imentrail={prod} />
+                      ))}
                   </tbody>
                 </Table>
               </div>

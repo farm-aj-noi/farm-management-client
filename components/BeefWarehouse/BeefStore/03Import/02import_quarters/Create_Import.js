@@ -44,7 +44,9 @@ const Create_Import = () => {
             confirmButtonText: (
               <span
                 onClick={() =>
-                  Router.reload("/beefwarehouse/beefstore/import/import_quarters")
+                  Router.reload(
+                    "/beefwarehouse/beefstore/import/import_quarters"
+                  )
                 }
               >
                 ตกลง
@@ -172,7 +174,23 @@ const Create_Import = () => {
               </div>
             </div>
           </DivFromInsideLeft>
-          <Savebutton1 disabled={loading}>บันทึก</Savebutton1>
+          <div
+            style={{
+              display: "inline-block",
+              justifySelf: "right",
+              float: "right",
+              paddingRight: "10px",
+              paddingBottom: "10px",
+            }}
+          >
+            <Savebutton1
+              disabled={
+                loading
+              } /* style={{float:"right",marginRight:"10px"}} */
+            >
+              บันทึก
+            </Savebutton1>
+          </div>
         </form>
       </div>
     </>

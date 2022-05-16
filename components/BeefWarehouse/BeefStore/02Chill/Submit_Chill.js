@@ -77,7 +77,7 @@ const Submit_Chill = () => {
             </div>
           </DivFromInsideLeft>
         </form>
-        <div style={{ display: "inline-block", justifySelf: "right" }}>
+        <div style={{ display: "inline-block", float:"right",padding:"10px" }}>
           <Savebutton1>บันทึก</Savebutton1>
         </div>
       </div>

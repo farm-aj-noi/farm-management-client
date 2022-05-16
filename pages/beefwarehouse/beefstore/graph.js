@@ -1,13 +1,13 @@
 import React from "react";
 import Nav from "../../../components/BeefWarehouse/BeefStore/Nav/Nav";
-import Exports from "../../../components/BeefWarehouse/BeefStore/04Export/"
-const exports = () => {
+import Graph from "../../../components/BeefWarehouse/BeefStore/10graph";
+const graph = () => {
   return (
     <div>
       <Nav />
-      <Exports/>
+      <Graph />
     </div>
   );
 };
 
-export default exports;
+export default graph;

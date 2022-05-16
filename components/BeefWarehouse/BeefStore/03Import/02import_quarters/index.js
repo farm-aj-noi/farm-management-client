@@ -42,7 +42,7 @@ export const IMPORTQUARTERSEARCH = gql`
         }
         imslaughter {
           numcow
-          numfarmer
+          namefarmer
         }
       }
     }

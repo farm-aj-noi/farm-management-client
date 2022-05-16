@@ -10,8 +10,6 @@ import withReactContent from "sweetalert2-react-content";
 
 import Router from "next/router";
 
-
-
 export const CREATEIMPORTHALVE = gql`
   mutation CREATEIMPORTHALVE($barcode: String!, $beefstore: String!) {
     createImHalve(barcode: $barcode, beefstore: $beefstore) {
@@ -25,7 +23,7 @@ const Create_Import = () => {
 
   const [ImporthalvesInfo, setImporthalvesInfo] = useState({
     barcode: "",
-    beefstore: "627cd2c405ef600808067abf",
+    beefstore: "627f7c1f5a28733be04a760f",
   });
   const [success, setSuccess] = useState(false);
   const [createImHalve, { loading, error }] = useMutation(CREATEIMPORTHALVE, {
@@ -43,7 +41,7 @@ const Create_Import = () => {
           confirmButtonText: (
             <span
               onClick={() =>
-                Router.reload("/beefwarehouse/beefstore/import/import_halves")
+                Router.reload("beefwarehouse/beefstore/import/import_halves")
               }
             >
               ตกลง
@@ -171,7 +169,17 @@ const Create_Import = () => {
               </div>
             </div>
           </DivFromInsideLeft>
-          <Savebutton1 disabled={loading}>บันทึก</Savebutton1>
+          <div
+            style={{
+              display: "inline-block",
+              justifySelf: "right",
+              float: "right",
+              paddingRight: "10px",
+              paddingBottom: "10px",
+            }}
+          >
+            <Savebutton1 disabled={loading}>บันทึก</Savebutton1>
+          </div>
         </form>
       </div>
     </>

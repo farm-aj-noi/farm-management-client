@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Table } from "react-bootstrap";
 import { DivFrom, DivFromTop, DivFromDown, HeaderColor } from "../ImportFrom";
@@ -10,7 +10,56 @@ import { iosSearchStrong } from "react-icons-kit/ionicons/iosSearchStrong";
 
 import Create_Import from "./Create_Import";
 
+import gql from "graphql-tag";
+import { useQuery } from "@apollo/react-hooks";
+
+import List_import from "./List_import";
+
+export const IMPORTCHOPSEARCH = gql`
+  query IMPORTCHOPSEARCH(
+    $startdate: String
+    $enddate: String
+    $beeftype: String
+  ) {
+    imchopSearch(
+      startdate: $startdate
+      enddate: $enddate
+      beeftype: $beeftype
+    ) {
+      id
+      importdate
+      user {
+        name
+      }
+      chop {
+        weight
+        barcode
+        status {
+          nameTH
+        }
+        beeftype {
+          code
+          nameTH
+        }
+        imslaughter {
+          numcow
+          namefarmer
+        }
+      }
+    }
+  }
+`;
 const index = () => {
+  const [selectedbeeftypechop, SetBeeftypechopsChange] = useState("");
+  const [selectedstartdate, SetStartDateChange] = useState("");
+  const [selectedenddate, SetEndDateChange] = useState("");
+  const { data, loading, error } = useQuery(IMPORTCHOPSEARCH, {
+    variables: {
+      beeftype: selectedbeeftypechop,
+      startdate: selectedstartdate,
+      enddate: selectedenddate,
+    },
+  });
   return (
     <>
       <div
@@ -103,6 +152,9 @@ const index = () => {
                       textAlign: "center",
                       fontSize: "14px",
                     }}
+                    onChange={(event) =>
+                      SetBeeftypechopsChange(event.target.value)
+                    }
                   >
                     <option value="">ทั้งหมด</option>
                     <option value="">ซากซ้าย</option>
@@ -240,6 +292,7 @@ const index = () => {
                       color: "#AFAFAF",
                       textAlign: "center",
                     }}
+                    onChange={(event) => SetStartDateChange(event.target.value)}
                   ></input>
                   <label
                     for="date"
@@ -262,6 +315,7 @@ const index = () => {
                       color: "#AFAFAF",
                       textAlign: "center",
                     }}
+                    onChange={(event) => SetEndDateChange(event.target.value)}
                   ></input>
                 </from>
               </div>
@@ -311,22 +365,10 @@ const index = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
+                    {data &&
+                      data.imchopSearch.map((prod) => (
+                        <List_import key={prod.id} imchop={prod} />
+                      ))}
                   </tbody>
                 </Table>
               </div>
