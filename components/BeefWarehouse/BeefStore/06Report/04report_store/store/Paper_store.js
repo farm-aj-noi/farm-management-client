@@ -9,7 +9,7 @@ import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-import { ButtonPDF, ButtonExcel } from "../ReportFrom";
+import { ButtonPDF, ButtonExcel } from "../../ReportFrom";
 
 pdfMake.fonts = {
   THSarabunNew: {

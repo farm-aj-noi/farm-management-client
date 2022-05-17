@@ -3,7 +3,7 @@ import React from "react";
 import { Icon } from "react-icons-kit";
 import { printer } from "react-icons-kit/ikons/printer";
 
-import { ButtonExcel } from "../ReportFrom";
+import { ButtonExcel } from "../../ReportFrom";
 
 const Excel_store = () => {
   return (

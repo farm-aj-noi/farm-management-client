@@ -1,20 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Icon } from "react-icons-kit";
 import { printer } from "react-icons-kit/ikons/printer";
 
+import { CSVLink } from "react-csv";
+
 import { ButtonExcel } from "../../ReportFrom";
 
-const Excel_import = () => {
+import dayjs from "dayjs";
+
+const Excel_import = ({ prod }) => {
+  const [data, setdata] = useState(prod);
+  const headers = [
+    { label: "เจ้าของซาก", key: "halve.imslaughter.namefarmer" },
+    { label: "ประเภทซาก", key: "halve.beeftype.nameTH" },
+    { label: "วันที่นำเข้า", key: "importdate" },
+    { label: "ทะเบียนขุน", key: "halve.imslaughter.numcow" },
+    { label: "รหัสซาก", key: "halve.beeftype.code" },
+    { label: "รหัสบาร์โค้ด", key: "halve.barcode" },
+    { label: "น้ำหนัก", key: "halve.weightwarm" },
+    { label: "สถานะ", key: "halve.status.nameTH" },
+    { label: "ผู้นำเข้า", key: "user.name" },
+  ];
   return (
-    <ButtonExcel>
-      <Icon
-        style={{ verticalAlign: "text-bottom", marginRight: "5px" }}
-        icon={printer}
-        size={20}
-      />
-      รายงานExcel
-    </ButtonExcel>
+    <CSVLink
+      filename={dayjs().format("Report YYYYMMDDTHHmmss") + ".csv"}
+      data={data}
+      headers={headers}
+    >
+      <ButtonExcel type="button" value="print Excel">
+        <Icon
+          style={{ verticalAlign: "text-bottom", marginRight: "5px" }}
+          icon={printer}
+          size={20}
+        />
+        รายงานExcel
+      </ButtonExcel>
+    </CSVLink>
   );
 };
 

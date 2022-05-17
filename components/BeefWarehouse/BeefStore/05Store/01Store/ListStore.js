@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Barcodebuttoncolor } from "../../../../utils/buttonColor";
-import { Qrcodebutton } from "../../../../utils/button";
+import { Barcodebuttoncolor } from "../../../../../utils/buttonColor";
+import { Qrcodebutton } from "../../../../../utils/button";
 import dayjs from "dayjs";
 
 const ListStore = ({ ListStore }) => {

@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 
-/* import { AuthContext } from "../../../../../appState/AuthProvider"; */
+import { AuthContext } from "../../../../../../appState/AuthProvider";
 
 import dayjs from "dayjs";
 
@@ -11,7 +11,7 @@ import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-import { ButtonPDF, ButtonExcel } from "../../ReportFrom";
+import { ButtonPDF } from "../../ReportFrom";
 
 pdfMake.fonts = {
   THSarabunNew: {
@@ -29,10 +29,12 @@ pdfMake.fonts = {
 };
 
 const Paper_import = ({ prod }) => {
-  /* const [data, setdata] = useState(prod);
+  const [data, setdata] = useState(prod);
   const { user } = useContext(AuthContext);
 
   if (data !== prod) setdata(prod);
+  /* console.log(data)
+   console.log(prod)  */
 
   const buildTableBody = (data, columns) => {
     var body = [];
@@ -48,18 +50,35 @@ const Paper_import = ({ prod }) => {
       "สถานะ",
       "ผู้นำเข้า",
     ]);
-    // console.log(data)
+    console.log(data);
 
     data.forEach(function (row) {
-      // console.log(row)
+      console.log(row);
       var dataRow = [];
 
       columns.forEach(function (column) {
-        if (column === "importDate") {
+        if (column === "importdate") {
           dataRow.push(
             dayjs(row[column]).add(543, "y").locale("th").format("DD MMMM YYYY")
           );
+        } else if (column === "halve.imslaughter.namefarmer") {
+          dataRow.push(row.halve.imslaughter.namefarmer);
+        } else if (column === "halve.beeftype.nameTH") {
+          dataRow.push(row.halve.beeftype.nameTH);
+        } else if (column == "halve.imslaughter.numcow") {
+          dataRow.push(row.halve.imslaughter.numcow);
+        } else if (column === "halve.beeftype.code") {
+          dataRow.push(row.halve.beeftype.code);
+        } else if (column === "halve.barcode") {
+          dataRow.push(row.halve.barcode);
+        } else if (column === "halve.weightwarm") {
+          dataRow.push(row.halve.weightwarm);
+        } else if (column === "halve.status.nameTH") {
+          dataRow.push(row.halve.status.nameTH);
+        } else if (column === "user.name") {
+          dataRow.push(row.user.name);
         } else {
+          /* console.log(row[column]) */
           // console.log(column);
           // console.log(
           //   dayjs(row[column]).add(543, "y").locale("th").format("DD-MMMM-YYYY")
@@ -80,16 +99,18 @@ const Paper_import = ({ prod }) => {
         headerRows: 1,
         // alignment: 'center'
         widths: [
-          "auto",
-          "auto",
-          "auto",
-          "auto",
-          "auto",
-          "auto",
-          "auto",
-          "auto",
-          "auto",
+          "star",
+          "star",
+          "star",
+          "star",
+          "star",
+          "star",
+          "star",
+          "star",
+          "star",
+          "star",
         ],
+
         body: buildTableBody(data, columns),
       },
       layout: "headerLineOnly",
@@ -121,21 +142,20 @@ const Paper_import = ({ prod }) => {
           ],
         },
         {
-          text: "รายงานสรุปการรับโคเข้าเชือด\n\n",
+          text: "รายงานนำเข้าซากโคผ่าซีก\n\n",
           style: "header",
           alignment: "center",
         },
         table(data, [
-          "namefarmer",
-          "nameTH",
+          "halve.imslaughter.namefarmer",
+          "halve.beeftype.nameTH",
           "importdate",
-          "importdate",
-          "numcow",
-          "code",
-          "barcode",
-          "weightwarm",
-          "nameTH",
-          "name",
+          "halve.imslaughter.numcow",
+          "halve.beeftype.code",
+          "halve.barcode",
+          "halve.weightwarm",
+          "halve.status.nameTH",
+          "user.name",
         ]),
       ],
 
@@ -194,9 +214,9 @@ const Paper_import = ({ prod }) => {
       },
     };
     pdfMake.createPdf(docDefinition).open();
-  }; */
+  };
   return (
-    <ButtonPDF type="button" /* value="print PDF" onClick={printPDF} */>
+    <ButtonPDF type="button" value="print PDF" onClick={printPDF}>
       <Icon
         style={{ verticalAlign: "text-bottom", marginRight: "5px" }}
         icon={printer}

@@ -44,7 +44,9 @@ const Create_Import = () => {
             confirmButtonText: (
               <span
                 onClick={() =>
-                  Router.reload("beefwarehouse/beefstore/import/import_entrails")
+                  Router.reload(
+                    "beefwarehouse/beefstore/import/import_entrails"
+                  )
                 }
               >
                 ตกลง
@@ -61,8 +63,8 @@ const Create_Import = () => {
           });
           MySwal.fire({
             icon: "error",
-            title: <p>eeee</p>,
-            text: "กรุณากรอกบาร์โค้ดใหม่อีกครั้ง",
+            title: <p>เกิดข้อผิดพลาด</p>,
+            text: "กรุณากรอกข้อมูลใหม่อีกครั้ง",
             confirmButtonText: <span>ตกลง</span>,
             confirmButtonColor: "#3085d6",
           });

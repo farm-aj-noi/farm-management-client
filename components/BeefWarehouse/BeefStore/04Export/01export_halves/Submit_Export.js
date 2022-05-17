@@ -69,8 +69,8 @@ const Submit_Export = () => {
         });
         MySwal.fire({
           icon: "error",
-          title: <p>eeee</p>,
-          text: "กรุณากรอกบาร์โค้ดใหม่อีกครั้ง",
+          title: <p>เกิดข้อผิดพลาด</p>,
+          text: "กรุณากรอกข้อมูลใหม่อีกครั้ง",
           confirmButtonText: <span>ตกลง</span>,
           confirmButtonColor: "#3085d6",
         });

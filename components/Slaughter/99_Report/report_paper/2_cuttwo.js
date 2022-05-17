@@ -40,10 +40,10 @@ const Index = ({ prod }) => {
       "น้ำหนัก (กก.)",
       "วันเชือด",
     ]);
-    // console.log(data)
+     console.log(data)
 
     data.forEach(function (row) {
-      // console.log(row)
+       console.log(row)
       var dataRow = [];
 
       columns.forEach(function (column) {

@@ -1,12 +1,13 @@
 import React from "react";
 import Nav from "../../../../components/BeefWarehouse/BeefStore/Nav/Nav";
 import Notify_exportrequest from "../../../../components/BeefWarehouse/BeefStore/07Notify/02notify_exportrequest";
+import { BackgroundStore } from "../../../../utils/background";
 const notify_exportrequest = () => {
   return (
-    <div>
+    <BackgroundStore>
       <Nav />
       <Notify_exportrequest />
-    </div>
+    </BackgroundStore>
   );
 };
 

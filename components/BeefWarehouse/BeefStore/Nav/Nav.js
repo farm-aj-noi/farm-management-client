@@ -130,7 +130,7 @@ const Nav1 = () => {
                 <NavDropdownItem>เบิกออกซากเนื้อโคส่วนอื่น ๆ </NavDropdownItem>
               </Link>
             </DropdownButton>
-            <Link href="/beefwarehouse/beefstore/store">
+            <Link href="/beefwarehouse/beefstore/Allstore/store">
               <NavButtonLeft>
                 <Icon9 height="30px" weight="30px" />
                 คงคลัง
@@ -160,7 +160,7 @@ const Nav1 = () => {
               <Link href="/beefwarehouse/beefstore/report/export/report_halves">
                 <NavDropdownItem>ออกรายงานเบิกออก</NavDropdownItem>
               </Link>
-              <Link href="/beefwarehouse/beefstore/report/report_store">
+              <Link href="/beefwarehouse/beefstore/report/store/report_store">
                 <NavDropdownItem>ออกรายงานคงคลัง</NavDropdownItem>
               </Link>
             </DropdownButton>

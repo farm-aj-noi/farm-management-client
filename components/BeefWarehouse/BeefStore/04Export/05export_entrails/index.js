@@ -310,8 +310,7 @@ const index = () => {
                 >
                   <thead>
                     <tr style={{ textAlign: "center" }}>
-                      <th>เจ้าของซาก</th>
-                      <th>วันที่นำเข้า</th>
+                      <th>วันที่เบิกออก</th>
                       <th>เวลา</th>
                       <th>ทะเบียนขุน</th>
                       <th>เครื่องใน</th>
@@ -329,7 +328,8 @@ const index = () => {
                       <th>ห้อง</th>
                       <th>ชั้น</th>
                       <th>ตะกร้า</th>
-                      <th>ผู้นำเข้า</th>
+                      <th>ผู้ขอเบิก</th>
+                      <th>ผู้เบิกออก</th>
                     </tr>
                   </thead>
                   <tbody>
