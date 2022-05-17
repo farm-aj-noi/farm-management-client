@@ -99,28 +99,29 @@ const Paper_import = ({ prod }) => {
         headerRows: 1,
         // alignment: 'center'
         widths: [
-          "star",
-          "star",
-          "star",
-          "star",
-          "star",
-          "star",
-          "star",
-          "star",
-          "star",
-          "star",
+          "auto",
+          "auto",
+          "auto",
+          "auto",
+          "auto",
+          "auto",
+          "auto",
+          "auto",
+          "auto",
         ],
 
         body: buildTableBody(data, columns),
       },
       layout: "headerLineOnly",
-      fontSize: 15,
+      fontSize: 12,
       alignment: "center",
     };
   };
 
   const printPDF = () => {
     var docDefinition = {
+     /*  pageSize: "A4",
+      pageOrientation: "landscape", */
       pageMargins: [40, 40, 40, 120],
       content: [
         {
