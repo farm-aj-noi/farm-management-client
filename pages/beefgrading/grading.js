@@ -1,13 +1,13 @@
 import React from "react";
 import Nav from "../../components/Beefgrading/Nav/Nav";
-import List from "../../components/beefgrading/list/List";
-const list = () => {
+import Grading from "../../components/beefgrading/grading/Grading";
+const grading = () => {
   return (
     <div>
       <Nav/>
-      <List/> 
+      <Grading/> 
     </div>
   );
 };
 
-export default list;
+export default grading;

@@ -13,6 +13,7 @@ export const ButtonSignUp = styled.button`
   padding: 5px;
   display: block;
   text-decoration: none;
+  border-radius: 20px;
 
   &:hover,
   &:focus {

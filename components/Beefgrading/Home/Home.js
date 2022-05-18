@@ -24,8 +24,8 @@ const Home = () => {
       <h1 style={{ color: "white", fontSize: "80px", fontWeight:"bold", height: "150px" }}>Beef Quality Grading System</h1>
       <h1 style={{  color: "white", fontSize: "60px", height: "175px"  }}>ระบบการตัดเกรดเนื้อโค</h1>
     </BorderRadius>
-    <div style={{ position: "absolute",top: "750px"}}>
-          <Link href="/beef_store/list">
+    <div style={{ position: "absolute",top: "770px"}}>
+          <Link href="/beefgrading/list">
             <ButtonSignIn>
               เริ่มการตัดเกรด
             </ButtonSignIn>

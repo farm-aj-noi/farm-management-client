@@ -7,7 +7,7 @@ import icon4 from "../images/beefgrading/4.png";
 import icon5 from "../images/beefgrading/5.png";
 import icon6 from "../images/beefgrading/grade.png";
 import Logo_Nav1 from "../images/beefgrading/logo-Nav.png";
-
+import Image from "next/image";
 
 export const LogoMyWeb = (prop) => {
   return (

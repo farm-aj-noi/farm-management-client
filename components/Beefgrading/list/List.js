@@ -15,7 +15,7 @@ import {
   ButtonRecordColor,
   ButtonSubmit,
   ButtonImagecolor
-} from "../../../Styleclass/Button";
+} from "../Styleclass/Button";
 
 const thstyle = {
   border: "1px solid #dddddd",
@@ -129,7 +129,7 @@ function List() {
                     <td>01</td>
                     <td>เเองกัส</td>
                     <td>
-                    <Link href="/beef_store/grading">
+                    <Link href="/beefgrading/grading">
                     <ButtonSubmit >
                       รอการตัดเกรด
                     </ButtonSubmit>
