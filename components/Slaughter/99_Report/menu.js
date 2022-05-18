@@ -1,16 +1,12 @@
 import React, { useState } from "react";
 // import { useRouter } from "next/router";
 import Link from "next/link";
-import {
-  DivFrom,
-  DivFromTop,
-  DivFromDown,
-  Searchinput,
-  Gobutton,
-  Input,
-} from "./ListcuttwoFrom";
+
+import { DivFrom, DivFromTop, DivFromDown } from "./ListcuttwoFrom";
+
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
+
 import { Form, Row, Col, Tab, Nav } from "react-bootstrap";
 
 const Menu = ({ Sidenumber }) => {
@@ -43,7 +39,9 @@ const Menu = ({ Sidenumber }) => {
                     <Nav.Item style={{ marginBottom: "5px" }}>
                       <Nav.Link eventKey="1">
                         <Link href="/slaughter/report">
-                          <div style={{ width: "100%" }}>รายงานรับโคเข้าเชือด</div>
+                          <div style={{ width: "100%" }}>
+                            รายงานรับโคเข้าเชือด
+                          </div>
                         </Link>
                       </Nav.Link>
                     </Nav.Item>
@@ -67,7 +65,9 @@ const Menu = ({ Sidenumber }) => {
                     <Nav.Item style={{ marginBottom: "5px" }}>
                       <Nav.Link eventKey="4">
                         <Link href="/slaughter/report/quarter">
-                          <div style={{ width: "100%" }}>รายงานซากโคสี่เสี้ยว</div>
+                          <div style={{ width: "100%" }}>
+                            รายงานซากโคสี่เสี้ยว
+                          </div>
                         </Link>
                       </Nav.Link>
                     </Nav.Item>
@@ -87,7 +87,6 @@ const Menu = ({ Sidenumber }) => {
                         </Link>
                       </Nav.Link>
                     </Nav.Item>
-
                   </Nav>
                 </Col>
               </Row>

@@ -9,6 +9,21 @@ import Link from "next/link";
 import Head from "next/head";
 
 import { Logobeefstore } from "../../../../utils/image";
+import {
+  Icon1,
+  Icon2,
+  Icon3,
+  Icon4,
+  Icon5,
+  Icon6,
+  Icon7,
+  Icon8,
+  Icon9,
+  Icon10,
+  Icon11,
+  Icon12,
+  Icon13,
+} from "../../../../utils/naviconbeefstore";
 
 import { blue, white } from "../../../../utils/colors";
 import {
@@ -57,21 +72,20 @@ const Nav1 = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
+            <Link href="/beefwarehouse/beefstore/chill">
+              <NavButtonLeft>
+                <Icon7 height="30px" weight="30px" />
+                บ่มซากเนื้อโค
+              </NavButtonLeft>
+            </Link>
             <DropdownButton
               drop="down"
-              title={`การบ่มซาก`}
-              bsPrefix={MyCss.nstdropleft}
-            >
-              <Link href="/beefwarehouse/beefstore/chill">
-                <NavDropdownItem>บ่มซากเนื้อโค</NavDropdownItem>
-              </Link>
-              <Link href="/beefwarehouse/beefstore/chill/history_chill">
-                <NavDropdownItem>ประวัติการบ่มซากเนื้อโค</NavDropdownItem>
-              </Link>
-            </DropdownButton>
-            <DropdownButton
-              drop="down"
-              title={`การนำเข้า`}
+              title={
+                <span>
+                  <Icon12 height="30px" weight="30px" />
+                  การนำเข้า
+                </span>
+              }
               bsPrefix={MyCss.nstdropleft}
             >
               <Link href="/beefwarehouse/beefstore/import/import_halves">
@@ -90,38 +104,75 @@ const Nav1 = () => {
                 <NavDropdownItem>นำเข้าซากเนื้อโคส่วนอื่น ๆ </NavDropdownItem>
               </Link>
             </DropdownButton>
-            <Link href="/beefwarehouse/beefstore/exports">
-              <NavButtonLeft> การเบิกออก</NavButtonLeft>
+            <DropdownButton
+              drop="down"
+              title={
+                <span>
+                  <Icon11 height="30px" weight="30px" />
+                  การเบิกออก
+                </span>
+              }
+              bsPrefix={MyCss.nstdropleft}
+            >
+              <Link href="/beefwarehouse/beefstore/export/export_halves">
+                <NavDropdownItem>เบิกออกซากเนื้อโคผ่าซีก</NavDropdownItem>
+              </Link>
+              <Link href="/beefwarehouse/beefstore/export/export_quarters">
+                <NavDropdownItem>เบิกออกซากเนื้อโคสี่เสี้ยว</NavDropdownItem>
+              </Link>
+              <Link href="/beefwarehouse/beefstore/export/export_lumps">
+                <NavDropdownItem>เบิกออกซากเนื้อโคก้อนเนื้อ</NavDropdownItem>
+              </Link>
+              <Link href="/beefwarehouse/beefstore/export/export_chops">
+                <NavDropdownItem>เบิกออกซากเนื้อโคชื้นเนื้อ</NavDropdownItem>
+              </Link>
+              <Link href="/beefwarehouse/beefstore/export/export_entrails">
+                <NavDropdownItem>เบิกออกซากเนื้อโคส่วนอื่น ๆ </NavDropdownItem>
+              </Link>
+            </DropdownButton>
+            <Link href="/beefwarehouse/beefstore/Allstore/store">
+              <NavButtonLeft>
+                <Icon9 height="30px" weight="30px" />
+                คงคลัง
+              </NavButtonLeft>
             </Link>
-            <Link href="/beefwarehouse/beefstore/store">
-              <NavButtonLeft> คงคลัง</NavButtonLeft>
+            <Link href="/beefwarehouse/beefstore/graph">
+              <NavButtonLeft>
+                <Icon13 height="40px" weight="37px" /> รายละเอียดกราฟ
+              </NavButtonLeft>
             </Link>
             <DropdownButton
               drop="down"
-              title={`ออกรายงาน`}
+              title={
+                <span>
+                  <Icon4 height="30px" weight="30px" />
+                  ออกรายงาน
+                </span>
+              }
               bsPrefix={MyCss.nstdropleft}
             >
               <Link href="/beefwarehouse/beefstore/report/report_chill">
                 <NavDropdownItem>ออกรายงานการบ่มซาก</NavDropdownItem>
               </Link>
-              <Link href="/beefwarehouse/beefstore/report/report_import">
+              <Link href="/beefwarehouse/beefstore/report/import/report_halves">
                 <NavDropdownItem>ออกรายงานการนำเข้า</NavDropdownItem>
               </Link>
-              <Link href="/beefwarehouse/beefstore/report/report_export">
+              <Link href="/beefwarehouse/beefstore/report/export/report_halves">
                 <NavDropdownItem>ออกรายงานเบิกออก</NavDropdownItem>
               </Link>
-              <Link href="/beefwarehouse/beefstore/report/report_store">
+              <Link href="/beefwarehouse/beefstore/report/store/report_store">
                 <NavDropdownItem>ออกรายงานคงคลัง</NavDropdownItem>
-              </Link>
-              <Link href="/beefwarehouse/beefstore/report/report_graph">
-                <NavDropdownItem>รายละเอียดกราฟ</NavDropdownItem>
               </Link>
             </DropdownButton>
             <Link href="/beefwarehouse/beefstore/notify/notify_date">
-              <NavButtonLeft> การแจ้งเตือน</NavButtonLeft>
+              <NavButtonLeft>
+                <Icon10 height="30px" weight="30px" /> การแจ้งเตือน
+              </NavButtonLeft>
             </Link>
             <Link href="/beefwarehouse/beefstore/setting">
-              <NavButtonLeft> การตั้งค่า</NavButtonLeft>
+              <NavButtonLeft>
+                <Icon5 height="30px" weight="30px" /> การตั้งค่า
+              </NavButtonLeft>
             </Link>
           </Nav>
           <Nav>

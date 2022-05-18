@@ -1,49 +1,37 @@
 import React, { useState } from "react";
 
-import { DivCenter } from "../../../../utils/TableForm";
-import { ButtonRecordColor } from "../../../../utils/Button";
-
-import { useMutation } from "@apollo/react-hooks";
-import gql from "graphql-tag";
+import { DivFromInsideLeft, Searchinput, Savebutton1 } from "../ImportFrom";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
+import { useMutation } from "@apollo/react-hooks";
+import gql from "graphql-tag";
+
 import Router from "next/router";
 
-export const CREATE_IMPORT = gql`
-  mutation CREATE_IMPORT($barcode: String!) {
-    createImport(barcode: $barcode) {
-      import_date
-      halve {
-        weightwarm
-        barcode
-        status {
-          nameTH
-        }
-        beeftype {
-          nameTH
-        }
-        cows {
-          cownum
-        }
-      }
+export const CREATEIMPORTLUMP = gql`
+  mutation CreateImlump($barcode: String!, $beefstore: String!) {
+    createImlump(barcode: $barcode, beefstore: $beefstore) {
+      id
+      importdate
     }
   }
 `;
 
-function Create_Import() {
+const Create_Import = () => {
   const MySwal = withReactContent(Swal);
-  const [ImportInfo, setImportInfo] = useState({
+  const [ImportLumpsInfo, setImportLumpsInfo] = useState({
     barcode: "",
+    beefstore: "627f7c1f5a28733be04a760f",
   });
   const [success, setSuccess] = useState(false);
-  const [createImport, { loading, error }] = useMutation(CREATE_IMPORT, {
-    variables: { ...ImportInfo },
+  const [createImlump, { loading, error }] = useMutation(CREATEIMPORTLUMP, {
+    variables: { ...ImportLumpsInfo },
     onCompleted: (data) => {
       if (data) {
         setSuccess(true);
-        setImportInfo({
+        setImportLumpsInfo({
           barcode: "",
         });
         MySwal.fire({
@@ -51,7 +39,11 @@ function Create_Import() {
           title: "สำเร็จ",
           text: "ทำการนำเข้าคลังชิ้นเนื้อเสร็จสิ้น",
           confirmButtonText: (
-            <span onClick={() => Router.reload("/beef_store/imports")}>
+            <span
+              onClick={() =>
+                Router.reload("beefwarehouse/beefstore/import/import_lumps")
+              }
+            >
               ตกลง
             </span>
           ),
@@ -59,11 +51,25 @@ function Create_Import() {
         });
       }
     },
+    onError: (error) => {
+      if (error) {
+        setImportLumpsInfo({
+          barcode: "",
+        });
+        MySwal.fire({
+          icon: "error",
+          title: <p>เกิดข้อผิดพลาด</p>,
+          text: "กรุณากรอกข้อมูลใหม่อีกครั้ง",
+          confirmButtonText: <span>ตกลง</span>,
+          confirmButtonColor: "#3085d6",
+        });
+      }
+    },
   });
 
   const handleChange = (e) => {
-    setImportInfo({
-      ...ImportInfo,
+    setImportLumpsInfo({
+      ...ImportLumpsInfo,
       [e.target.name]: e.target.value,
     });
   };
@@ -71,66 +77,112 @@ function Create_Import() {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      await createImport();
+      await createImlump();
     } catch (error) {
       console.log(error);
     }
   };
-
   return (
-    <DivCenter style={{ marginTop: "20px" }}>
-      <form
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-        onSubmit={handleSubmit}
-      >
-        <label
-          for="beef"
-          style={{
-            textAlign: "center",
-            fontSize: "18px",
-            marginRight: "10px",
-          }}
-        >
-          รหัสบาร์โค้ด
-        </label>
-        <input
-          type="text"
-          id="barcode"
-          name="barcode"
-          style={{
-            height: "35px",
-            width: "200px",
-            borderRadius: "4px 0px 0px 4px",
-            borderRight: "none",
-            border: "1px solid #AFAFAF",
-            textAlign: "center",
-            fontSize: "14px",
-          }}
-          value={ImportInfo.barcode}
-          onChange={handleChange}
-        />
-        <ButtonRecordColor disabled={loading}>บันทึก</ButtonRecordColor>
-        {error &&
-          MySwal.fire({
-            icon: "warning",
-            title: "ผิดพลาด",
-            text: (
-              <p style={{ color: "red" }}>{error.graphQLErrors[0].message}</p>
-            ),
-            confirmButtonText: (
-              <span onClick={() => Router.reload("/beef_store/imports")}>
-                ตกลง
-              </span>
-            ),
-            confirmButtonColor: "#3085d6",
-          })}
-      </form>
-    </DivCenter>
+    <>
+      <div>
+        <form onSubmit={handleSubmit}>
+          <DivFromInsideLeft>
+            บาร์โค้ด :
+            <div
+              style={{
+                display: "grid",
+                gridTemplateRows: "1fr 15px",
+              }}
+            >
+              <Searchinput
+                type="text"
+                id="barcode"
+                name="barcode"
+                value={ImportLumpsInfo.barcode}
+                onChange={handleChange}
+              />
+            </div>
+          </DivFromInsideLeft>
+          <DivFromInsideLeft>
+            ตำแหน่ง :
+            <div
+              style={{
+                display: "grid",
+                gridTemplateRows: "1fr 15px",
+              }}
+            >
+              <div style={{ display: "inline", width: "170px" }}>
+                <select
+                  name="room"
+                  id="room"
+                  style={{
+                    height: "35px",
+                    width: "50px",
+                    border: "1px solid #AFAFAF",
+                    borderRadius: "4px 0px 0px 4px",
+                    textAlign: "center",
+                    fontSize: "14px",
+                  }}
+                >
+                  <option value="">ห้อง</option>
+                  <option value="">1</option>
+                  <option value="">2</option>
+                  <option value="">3</option>
+                </select>
+                <select
+                  name="shelf"
+                  id="shelf"
+                  style={{
+                    height: "35px",
+                    width: "50px",
+                    border: "1px solid #AFAFAF",
+                    borderLeft: "none",
+                    textAlign: "center",
+                    fontSize: "14px",
+                  }}
+                >
+                  <option value="">ชั้น</option>
+                  <option value="">1</option>
+                  <option value="">2</option>
+                  <option value="">3</option>
+                </select>
+                <select
+                  name="bucket"
+                  id="bucket"
+                  style={{
+                    height: "35px",
+                    width: "60px",
+                    border: "1px solid #AFAFAF",
+                    borderRadius: "0px 4px 4px 0px",
+                    borderLeft: "none",
+                    textAlign: "center",
+                    fontSize: "14px",
+                    marginRight: "10px",
+                  }}
+                >
+                  <option value="">ตะกร้า</option>
+                  <option value="">1</option>
+                  <option value="">2</option>
+                  <option value="">3</option>
+                </select>
+              </div>
+            </div>
+          </DivFromInsideLeft>
+          <div
+            style={{
+              display: "inline-block",
+              justifySelf: "right",
+              float: "right",
+              paddingRight: "10px",
+              paddingBottom: "10px",
+            }}
+          >
+            <Savebutton1 disabled={loading}>บันทึก</Savebutton1>
+          </div>
+        </form>
+      </div>
+    </>
   );
-}
+};
 
 export default Create_Import;
