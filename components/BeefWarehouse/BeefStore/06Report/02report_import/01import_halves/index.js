@@ -28,11 +28,15 @@ export const IMPORTHALVESEARCH = gql`
     $startdate: String
     $enddate: String
     $beeftype: String
+    $namefarmer: String
+    $userName: String
   ) {
     imhalveSearch(
       startdate: $startdate
       enddate: $enddate
       beeftype: $beeftype
+      namefarmer: $namefarmer
+      userName: $userName
     ) {
       id
       importdate
@@ -61,11 +65,15 @@ const index = () => {
   const [selectedbeeftypehalve, SetBeeftypeHalveChange] = useState("");
   const [selectedstartdate, SetStartDateChange] = useState("");
   const [selectedenddate, SetEndDateChange] = useState("");
+  const [inputnamefarmer, SetInputnamefarmer] = useState("");
+  const [inputusername, SetInputusername] = useState("");
   const { data, loading, error } = useQuery(IMPORTHALVESEARCH, {
     variables: {
       beeftype: selectedbeeftypehalve,
       startdate: selectedstartdate,
       enddate: selectedenddate,
+      namefarmer: inputnamefarmer,
+      userName: inputusername,
     },
   });
   return (
@@ -90,7 +98,7 @@ const index = () => {
         <DivBase
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 270px 1000px 1fr",
+            gridTemplateColumns: "1fr 270px 1100px 1fr",
             gridRowGap: "15px",
             gridColumnGap: "20px",
             textAlign: "start",
@@ -168,7 +176,32 @@ const index = () => {
                       style={{
                         textAlign: "center",
                         fontSize: "18px",
+                        marginLeft: "10px",
                         marginRight: "10px",
+                      }}
+                    >
+                      เจ้าของซาก
+                    </label>
+                    <input
+                      style={{
+                        height: "35px",
+                        width: "110px",
+                        borderRadius: "4px",
+                        border: "1px solid #AFAFAF",
+                        fontSize: "14px",
+                        textAlign: "center",
+                      }}
+                      onChange={(event) =>
+                        SetInputnamefarmer(event.target.value)
+                      }
+                    />
+                    <label
+                      for="beef"
+                      style={{
+                        textAlign: "center",
+                        fontSize: "18px",
+                        marginRight: "10px",
+                        marginLeft: "10px",
                       }}
                     >
                       ผู้นำเข้า
@@ -183,6 +216,7 @@ const index = () => {
                         textAlign: "center",
                         marginRight: "10px",
                       }}
+                      onChange={(event) => SetInputusername(event.target.value)}
                     />
                     <label
                       for="date"

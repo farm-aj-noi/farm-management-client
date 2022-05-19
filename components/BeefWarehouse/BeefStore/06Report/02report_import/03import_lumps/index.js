@@ -18,29 +18,32 @@ import Excel_import from "./Excel_import.js";
 
 import Nav_imports from "../Nav_import";
 
-/* import { useQuery } from "@apollo/react-hooks";
-import gql from "graphql-tag"; */
+import { useQuery } from "@apollo/react-hooks";
+import gql from "graphql-tag";
 
 import dayjs from "dayjs";
 
-/* export const IMPORTHALVESEARCH = gql`
-  query IMPORTHALVESEARCH(
+export const IMPORTLUMPSEARCH = gql`
+  query IMPORTLUMPSEARCH(
     $startdate: String
     $enddate: String
     $beeftype: String
+    $namefarmer: String
+    $userName: String
   ) {
-    imhalveSearch(
+    imlumpSearch(
       startdate: $startdate
       enddate: $enddate
       beeftype: $beeftype
+      namefarmer: $namefarmer
+      userName: $userName
     ) {
-      id
       importdate
       user {
         name
       }
-      halve {
-        weightwarm
+      lump {
+        weight
         barcode
         status {
           nameTH
@@ -56,18 +59,22 @@ import dayjs from "dayjs";
       }
     }
   }
-`; */
+`;
 const index = () => {
-  /* const [selectedbeeftypehalve, SetBeeftypeHalveChange] = useState("");
+  const [selectedbeeftypelump, SetBeeftypeLumpChange] = useState("");
   const [selectedstartdate, SetStartDateChange] = useState("");
   const [selectedenddate, SetEndDateChange] = useState("");
-  const { data, loading, error } = useQuery(IMPORTHALVESEARCH, {
+  const [inputnamefarmer, SetInputnamefarmer] = useState("");
+  const [inputusername, SetInputusername] = useState("");
+  const { data, loading, error } = useQuery(IMPORTLUMPSEARCH, {
     variables: {
-      beeftype: selectedbeeftypehalve,
+      beeftype: selectedbeeftypelump,
       startdate: selectedstartdate,
       enddate: selectedenddate,
+      namefarmer: inputnamefarmer,
+      userName: inputusername,
     },
-  }); */
+  });
   return (
     <DivBase>
       <>
@@ -75,7 +82,6 @@ const index = () => {
           style={{
             display: "flex",
             justifyContent: "center",
-            
           }}
         >
           <HeaderColor
@@ -85,13 +91,13 @@ const index = () => {
               padding: "5px 30px",
             }}
           >
-             ออกรายงานนำเข้าซากโคก้อนเนื้อ
+            ออกรายงานนำเข้าซากโคก้อนเนื้อ
           </HeaderColor>
         </div>
         <DivBase
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 270px 1000px 1fr",
+            gridTemplateColumns: "1fr 270px 1100px 1fr",
             gridRowGap: "15px",
             gridColumnGap: "20px",
             textAlign: "start",
@@ -116,7 +122,7 @@ const index = () => {
                 gridRowEnd: "3",
                 gridColumnStart: "3",
                 marginTop: "0px",
-                height: "130px"
+                height: "130px",
               }}
             >
               <DivFromTop>
@@ -156,7 +162,9 @@ const index = () => {
                         fontSize: "14px",
                         marginRight: "10px",
                       }}
-                      /* onChange={(event) => SetBeeftypeHalveChange(event.target.value)} */
+                      onChange={(event) =>
+                        SetBeeftypeLumpChange(event.target.value)
+                      }
                     >
                       <option value="">ทั้งหมด</option>
                       <option value="5f1000e28d55662dcc23d95e">ซากซ้าย</option>
@@ -167,7 +175,32 @@ const index = () => {
                       style={{
                         textAlign: "center",
                         fontSize: "18px",
+                        marginLeft: "10px",
                         marginRight: "10px",
+                      }}
+                    >
+                      เจ้าของซาก
+                    </label>
+                    <input
+                      style={{
+                        height: "35px",
+                        width: "110px",
+                        borderRadius: "4px",
+                        border: "1px solid #AFAFAF",
+                        fontSize: "14px",
+                        textAlign: "center",
+                      }}
+                      onChange={(event) =>
+                        SetInputnamefarmer(event.target.value)
+                      }
+                    />
+                    <label
+                      for="beef"
+                      style={{
+                        textAlign: "center",
+                        fontSize: "18px",
+                        marginRight: "10px",
+                        marginLeft: "10px",
                       }}
                     >
                       ผู้นำเข้า
@@ -182,6 +215,7 @@ const index = () => {
                         textAlign: "center",
                         marginRight: "10px",
                       }}
+                      onChange={(event) => SetInputusername(event.target.value)}
                     />
                     <label
                       for="date"
@@ -204,7 +238,9 @@ const index = () => {
                         color: "#AFAFAF",
                         textAlign: "center",
                       }}
-                      /*  onChange={(event) => SetStartDateChange(event.target.value)} */
+                      onChange={(event) =>
+                        SetStartDateChange(event.target.value)
+                      }
                     ></input>
                     <label
                       for="date"
@@ -227,7 +263,7 @@ const index = () => {
                         color: "#AFAFAF",
                         textAlign: "center",
                       }}
-                      /* onChange={(event) => SetEndDateChange(event.target.value)} */
+                      onChange={(event) => SetEndDateChange(event.target.value)}
                     ></input>
                   </from>
                 </div>
@@ -268,46 +304,48 @@ const index = () => {
                         <th>รหัสซาก</th>
                         <th>รหัสบาร์โค้ด</th>
                         <th>น้ำหนัก</th>
-                        <th>ห้อง</th>
-                        <th>ชั้น</th>
-                        <th>ตะกร้า</th>
                         <th>สถานะ</th>
                         <th>ผู้นำเข้า</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {/*   {data &&
-                  data.imhalveSearch.map((prod) => ( */}
-                      <tr style={{ textAlign: "center" }}>
-                        <td>{/* prod.halve.imslaughter.namefarmer */}</td>
-                        <td>{/* prod.halve.beeftype.nameTH */}</td>
-                        <td>
-                          {/* dayjs(prod.importdate)
-                          .add(543, "year")
-                          .format("DD/MM/YYYY") */}
-                        </td>
-                        <td>
-                          {/* dayjs(prod.importdate)
-                          .add(543, "year")
-                          .format("h:mm:ss A") */}
-                        </td>
-                        <td>{/* prod.halve.imslaughter.numcow */}</td>
-                        <td>{/* prod.halve.beeftype.code */}</td>
-                        <td>{/* prod.halve.barcode */}</td>
-                        <td>{/* prod.halve.weightwarm */}</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>{/* prod.halve.status.nameTH */}</td>
-                        <td>{/* prod.user.name */}</td>
-                      </tr>
-                      {/*   ))} */}
+                      {data &&
+                        data.imlumpSearch.map((prod) => (
+                          <tr style={{ textAlign: "center" }}>
+                            <td>{prod.lump.imslaughter.namefarmer}</td>
+                            <td>{prod.lump.beeftype.nameTH}</td>
+                            <td>
+                              {dayjs(prod.importdate)
+                                .add(543, "year")
+                                .format("DD/MM/YYYY")}
+                            </td>
+                            <td>
+                              {dayjs(prod.importdate)
+                                .add(543, "year")
+                                .format("h:mm:ss A")}
+                            </td>
+                            <td>{prod.lump.imslaughter.numcow}</td>
+                            <td>{prod.lump.beeftype.code}</td>
+                            <td>{prod.lump.barcode}</td>
+                            <td>{prod.lump.weight}</td>
+                            <td>{prod.lump.status.nameTH}</td>
+                            <td>{prod.user.name}</td>
+                          </tr>
+                        ))}
                     </tbody>
                   </Table>
                 </div>
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                  <Paper_import />
-                  <Excel_import />
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    {data && data.imlumpSearch.length > 0 ? (
+                      <div>
+                        <Paper_import prod={data.imlumpSearch} />
+                        <Excel_import prod={data.imlumpSearch} />
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                  </div>
                 </div>
               </DivFromDown>
             </DivFrom>

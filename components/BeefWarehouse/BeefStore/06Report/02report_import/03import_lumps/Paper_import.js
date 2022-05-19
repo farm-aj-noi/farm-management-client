@@ -1,8 +1,9 @@
 import React, { useState, useContext } from "react";
 
-/* import { AuthContext } from "../../../../../appState/AuthProvider"; */
+import { AuthContext } from "../../../../../../appState/AuthProvider";
 
 import dayjs from "dayjs";
+import "dayjs/locale/th";
 
 import { Icon } from "react-icons-kit";
 import { printer } from "react-icons-kit/ikons/printer";
@@ -29,10 +30,12 @@ pdfMake.fonts = {
 };
 
 const Paper_import = ({ prod }) => {
-  /* const [data, setdata] = useState(prod);
+  const [data, setdata] = useState(prod);
   const { user } = useContext(AuthContext);
 
   if (data !== prod) setdata(prod);
+  /* console.log(data)
+   console.log(prod)  */
 
   const buildTableBody = (data, columns) => {
     var body = [];
@@ -48,18 +51,35 @@ const Paper_import = ({ prod }) => {
       "สถานะ",
       "ผู้นำเข้า",
     ]);
-    // console.log(data)
+    console.log(data);
 
     data.forEach(function (row) {
-      // console.log(row)
+      console.log(row);
       var dataRow = [];
 
       columns.forEach(function (column) {
-        if (column === "importDate") {
+        if (column === "importdate") {
           dataRow.push(
             dayjs(row[column]).add(543, "y").locale("th").format("DD MMMM YYYY")
           );
+        } else if (column === "lump.imslaughter.namefarmer") {
+          dataRow.push(row.lump.imslaughter.namefarmer);
+        } else if (column === "lump.beeftype.nameTH") {
+          dataRow.push(row.lump.beeftype.nameTH);
+        } else if (column == "lump.imslaughter.numcow") {
+          dataRow.push(row.lump.imslaughter.numcow);
+        } else if (column === "lump.beeftype.code") {
+          dataRow.push(row.lump.beeftype.code);
+        } else if (column === "lump.barcode") {
+          dataRow.push(row.lump.barcode);
+        } else if (column === "lump.weight") {
+          dataRow.push(row.lump.weight);
+        } else if (column === "lump.status.nameTH") {
+          dataRow.push(row.lump.status.nameTH);
+        } else if (column === "user.name") {
+          dataRow.push(row.user.name);
         } else {
+          /* console.log(row[column]) */
           // console.log(column);
           // console.log(
           //   dayjs(row[column]).add(543, "y").locale("th").format("DD-MMMM-YYYY")
@@ -80,26 +100,29 @@ const Paper_import = ({ prod }) => {
         headerRows: 1,
         // alignment: 'center'
         widths: [
-          "auto",
-          "auto",
-          "auto",
-          "auto",
-          "auto",
-          "auto",
-          "auto",
-          "auto",
-          "auto",
+          "star",
+          "star",
+          "star",
+          "star",
+          "star",
+          "star",
+          "star",
+          "star",
+          "star",
         ],
+
         body: buildTableBody(data, columns),
       },
       layout: "headerLineOnly",
-      fontSize: 15,
+      fontSize: 12,
       alignment: "center",
     };
   };
 
   const printPDF = () => {
     var docDefinition = {
+       pageSize: "A4",
+      pageOrientation: "landscape",
       pageMargins: [40, 40, 40, 120],
       content: [
         {
@@ -121,21 +144,20 @@ const Paper_import = ({ prod }) => {
           ],
         },
         {
-          text: "รายงานสรุปการรับโคเข้าเชือด\n\n",
+          text: "รายงานนำเข้าซากโคก้อนเนื้อ\n\n",
           style: "header",
           alignment: "center",
         },
         table(data, [
-          "namefarmer",
-          "nameTH",
+          "lump.imslaughter.namefarmer",
+          "lump.beeftype.nameTH",
           "importdate",
-          "importdate",
-          "numcow",
-          "code",
-          "barcode",
-          "weightwarm",
-          "nameTH",
-          "name",
+          "lump.imslaughter.numcow",
+          "lump.beeftype.code",
+          "lump.barcode",
+          "lump.weight",
+          "lump.status.nameTH",
+          "user.name",
         ]),
       ],
 
@@ -194,9 +216,9 @@ const Paper_import = ({ prod }) => {
       },
     };
     pdfMake.createPdf(docDefinition).open();
-  }; */
+  };
   return (
-    <ButtonPDF type="button" /* value="print PDF" onClick={printPDF} */>
+    <ButtonPDF type="button" value="print PDF" onClick={printPDF}>
       <Icon
         style={{ verticalAlign: "text-bottom", marginRight: "5px" }}
         icon={printer}

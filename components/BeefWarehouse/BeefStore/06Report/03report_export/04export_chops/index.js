@@ -18,29 +18,31 @@ import Excel_export from "./Excel_export.js";
 
 import Nav_exports from "../Nav_export";
 
-/* import { useQuery } from "@apollo/react-hooks";
-import gql from "graphql-tag"; */
+import { useQuery } from "@apollo/react-hooks";
+import gql from "graphql-tag";
 
 import dayjs from "dayjs";
 
-/* export const IMPORTHALVESEARCH = gql`
-  query IMPORTHALVESEARCH(
+export const EXPORTCHOPSEARCH = gql`
+  query EXPORTCHOPSEARCH(
     $startdate: String
     $enddate: String
     $beeftype: String
+    $userName: String
   ) {
-    imhalveSearch(
+    exportchop(
       startdate: $startdate
       enddate: $enddate
       beeftype: $beeftype
+      userName: $userName
     ) {
       id
-      importdate
+      exportdate
       user {
         name
       }
-      halve {
-        weightwarm
+      chop {
+        weight
         barcode
         status {
           nameTH
@@ -54,20 +56,25 @@ import dayjs from "dayjs";
           namefarmer
         }
       }
+      storestatus {
+        nameTH
+      }
     }
   }
-`; */
+`;
 const index = () => {
-  /* const [selectedbeeftypehalve, SetBeeftypeHalveChange] = useState("");
+  const [selectedbeeftypechop, SetBeeftypeChopChange] = useState("");
   const [selectedstartdate, SetStartDateChange] = useState("");
   const [selectedenddate, SetEndDateChange] = useState("");
-  const { data, loading, error } = useQuery(IMPORTHALVESEARCH, {
+  const [inputusername, SetInputusername] = useState("");
+  const { data, loading, error } = useQuery(EXPORTCHOPSEARCH, {
     variables: {
-      beeftype: selectedbeeftypehalve,
+      beeftype: selectedbeeftypechop,
       startdate: selectedstartdate,
       enddate: selectedenddate,
+      userName: inputusername,
     },
-  }); */
+  });
   return (
     <DivBase>
       <>
@@ -155,6 +162,9 @@ const index = () => {
                         fontSize: "14px",
                         marginRight: "10px",
                       }}
+                      onChange={(event) =>
+                        SetBeeftypeChopChange(event.target.value)
+                      }
                     >
                       <option value="">ทั้งหมด</option>
                       <option value="5f1000e28d55662dcc23d95e">ซากซ้าย</option>
@@ -180,6 +190,7 @@ const index = () => {
                         textAlign: "center",
                         marginRight: "10px",
                       }}
+                      onChange={(event) => SetInputusername(event.target.value)}
                     />
                     <label
                       for="date"
@@ -202,6 +213,9 @@ const index = () => {
                         color: "#AFAFAF",
                         textAlign: "center",
                       }}
+                      onChange={(event) =>
+                        SetStartDateChange(event.target.value)
+                      }
                     ></input>
                     <label
                       for="date"
@@ -224,6 +238,7 @@ const index = () => {
                         color: "#AFAFAF",
                         textAlign: "center",
                       }}
+                      onChange={(event) => SetEndDateChange(event.target.value)}
                     ></input>
                   </from>
                 </div>
@@ -262,50 +277,48 @@ const index = () => {
                         <th>ทะเบียนขุน</th>
                         <th>รหัสซาก</th>
                         <th>รหัสบาร์โค้ด</th>
-                        <th>คิวอาร์โค้ด</th>
                         <th>น้ำหนัก</th>
-                        <th>ห้อง</th>
-                        <th>ชั้น</th>
-                        <th>ตะกร้า</th>
                         <th>สถานะ</th>
                         <th>ผู้ขอเบิก</th>
                         <th>ผู้เบิกออก</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {/*   {data &&
-                  data.imhalveSearch.map((prod) => ( */}
-                      <tr style={{ textAlign: "center" }}>
-                        <td>{/* prod.halve.imslaughter.namefarmer */}</td>
-                        <td>{/* prod.halve.beeftype.nameTH */}</td>
-                        <td>
-                          {/* dayjs(prod.importdate)
-                          .add(543, "year")
-                          .format("DD/MM/YYYY") */}
-                        </td>
-                        <td>
-                          {/* dayjs(prod.importdate)
-                          .add(543, "year")
-                          .format("h:mm:ss A") */}
-                        </td>
-                        <td>{/* prod.halve.imslaughter.numcow */}</td>
-                        <td>{/* prod.halve.beeftype.code */}</td>
-                        <td>{/* prod.halve.barcode */}</td>
-                        <td>{/* prod.halve.weightwarm */}</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>{/* prod.halve.status.nameTH */}</td>
-                        <td>{/* prod.user.name */}</td>
-                        <td>{/* prod.user.name */}</td>
-                      </tr>
-                      {/*   ))} */}
+                      {data &&
+                        data.exportchop.map((prod) => (
+                          <tr style={{ textAlign: "center" }}>
+                            <td>{prod.chop.beeftype.nameTH}</td>
+                            <td>
+                              {dayjs(prod.exportdate)
+                                .add(543, "year")
+                                .format("DD/MM/YYYY")}
+                            </td>
+                            <td>
+                              {dayjs(prod.exportdate)
+                                .add(543, "year")
+                                .format("h:mm:ss A")}
+                            </td>
+                            <td>{prod.chop.imslaughter.numcow}</td>
+                            <td>{prod.chop.beeftype.code}</td>
+                            <td>{prod.chop.barcode}</td>
+                            <td>{prod.chop.weight}</td>
+                            <td>{prod.storestatus.nameTH}</td>
+                            <td>-</td>
+                            <td>{prod.user.name}</td>
+                          </tr>
+                        ))}
                     </tbody>
                   </Table>
                 </div>
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                  <Paper_export />
-                  <Excel_export />
+                  {data && data.exportchop.length > 0 ? (
+                    <div>
+                      <Paper_export prod={data.exportchop} />
+                      <Excel_export prod={data.exportchop} />
+                    </div>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </DivFromDown>
             </DivFrom>

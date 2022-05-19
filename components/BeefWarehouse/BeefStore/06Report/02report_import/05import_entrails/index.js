@@ -18,37 +18,40 @@ import Excel_import from "./Excel_import.js";
 
 import Nav_imports from "../Nav_import";
 
-/* import { useQuery } from "@apollo/react-hooks";
-import gql from "graphql-tag"; */
+import { useQuery } from "@apollo/react-hooks";
+import gql from "graphql-tag";
 
 import dayjs from "dayjs";
 
-/* export const IMPORTHALVESEARCH = gql`
-  query IMPORTHALVESEARCH(
+export const IMPOERTENTRAILSEARCH = gql`
+  query IMPOERTENTRAILSEARCH(
+    $namefarmer: String
+    $userName: String
     $startdate: String
     $enddate: String
-    $beeftype: String
   ) {
-    imhalveSearch(
+    imentrailSearch(
+      namefarmer: $namefarmer
+      userName: $userName
       startdate: $startdate
       enddate: $enddate
-      beeftype: $beeftype
     ) {
-      id
       importdate
       user {
         name
       }
-      halve {
-        weightwarm
+      entrail {
+        offal
+        toe
+        head
+        skin
+        liver
+        fat
+        onkale
+        tail
+        gallbladder
+        scrap
         barcode
-        status {
-          nameTH
-        }
-        beeftype {
-          code
-          nameTH
-        }
         imslaughter {
           numcow
           namefarmer
@@ -56,18 +59,20 @@ import dayjs from "dayjs";
       }
     }
   }
-`; */
+`;
 const index = () => {
-  /* const [selectedbeeftypehalve, SetBeeftypeHalveChange] = useState("");
+  const [inputnamefarmer, SetInputnamefarmer] = useState("");
+  const [inputusername, SetInputusername] = useState("");
   const [selectedstartdate, SetStartDateChange] = useState("");
   const [selectedenddate, SetEndDateChange] = useState("");
-  const { data, loading, error } = useQuery(IMPORTHALVESEARCH, {
+  const { data, loading, error } = useQuery(IMPOERTENTRAILSEARCH, {
     variables: {
-      beeftype: selectedbeeftypehalve,
       startdate: selectedstartdate,
       enddate: selectedenddate,
+      namefarmer: inputnamefarmer,
+      userName: inputusername,
     },
-  }); */
+  });
   return (
     <DivBase>
       <>
@@ -90,7 +95,7 @@ const index = () => {
         <DivBase
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 270px 1000px 1fr",
+            gridTemplateColumns: "1fr 270px 1100px 1fr",
             gridRowGap: "15px",
             gridColumnGap: "20px",
             textAlign: "start",
@@ -138,35 +143,32 @@ const index = () => {
                       style={{
                         textAlign: "center",
                         fontSize: "18px",
+                        marginLeft: "10px",
                         marginRight: "10px",
                       }}
                     >
-                      ประเภทซาก
+                      เจ้าของซาก
                     </label>
-                    <select
-                      name="beef"
-                      id="beef"
+                    <input
                       style={{
                         height: "35px",
-                        width: "120px",
-                        border: "1px solid #AFAFAF",
+                        width: "110px",
                         borderRadius: "4px",
-                        textAlign: "center",
+                        border: "1px solid #AFAFAF",
                         fontSize: "14px",
-                        marginRight: "10px",
+                        textAlign: "center",
                       }}
-                      /* onChange={(event) => SetBeeftypeHalveChange(event.target.value)} */
-                    >
-                      <option value="">ทั้งหมด</option>
-                      <option value="5f1000e28d55662dcc23d95e">ซากซ้าย</option>
-                      <option value="5f1000ee8d55662dcc23d960">ซากขวา</option>
-                    </select>
+                      onChange={(event) =>
+                        SetInputnamefarmer(event.target.value)
+                      }
+                    />
                     <label
                       for="beef"
                       style={{
                         textAlign: "center",
                         fontSize: "18px",
                         marginRight: "10px",
+                        marginLeft: "10px",
                       }}
                     >
                       ผู้นำเข้า
@@ -181,6 +183,7 @@ const index = () => {
                         textAlign: "center",
                         marginRight: "10px",
                       }}
+                      onChange={(event) => SetInputusername(event.target.value)}
                     />
                     <label
                       for="date"
@@ -203,7 +206,9 @@ const index = () => {
                         color: "#AFAFAF",
                         textAlign: "center",
                       }}
-                      /*  onChange={(event) => SetStartDateChange(event.target.value)} */
+                      onChange={(event) =>
+                        SetStartDateChange(event.target.value)
+                      }
                     ></input>
                     <label
                       for="date"
@@ -226,7 +231,7 @@ const index = () => {
                         color: "#AFAFAF",
                         textAlign: "center",
                       }}
-                      /* onChange={(event) => SetEndDateChange(event.target.value)} */
+                      onChange={(event) => SetEndDateChange(event.target.value)}
                     ></input>
                   </from>
                 </div>
@@ -260,53 +265,65 @@ const index = () => {
                     <thead>
                       <tr style={{ textAlign: "center" }}>
                         <th>เจ้าของซาก</th>
-                        <th>ประเภทซาก</th>
                         <th>วันที่นำเข้า</th>
                         <th>เวลา</th>
                         <th>ทะเบียนขุน</th>
-                        <th>รหัสซาก</th>
+                        <th>เครื่องใน</th>
+                        <th>ปลายเท้า</th>
+                        <th>หัว</th>
+                        <th>หนังสด</th>
+                        <th>ตับ</th>
+                        <th>ไขมันอุ่น</th>
+                        <th>องแคล</th>
+                        <th>หาง</th>
+                        <th>ถุงน้ำดี</th>
+                        <th>เศษซาก</th>
                         <th>รหัสบาร์โค้ด</th>
-                        <th>น้ำหนัก</th>
-                        <th>ห้อง</th>
-                        <th>ชั้น</th>
-                        <th>ตะกร้า</th>
-                        <th>สถานะ</th>
                         <th>ผู้นำเข้า</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {/*   {data &&
-                  data.imhalveSearch.map((prod) => ( */}
-                      <tr style={{ textAlign: "center" }}>
-                        <td>{/* prod.halve.imslaughter.namefarmer */}</td>
-                        <td>{/* prod.halve.beeftype.nameTH */}</td>
-                        <td>
-                          {/* dayjs(prod.importdate)
-                          .add(543, "year")
-                          .format("DD/MM/YYYY") */}
-                        </td>
-                        <td>
-                          {/* dayjs(prod.importdate)
-                          .add(543, "year")
-                          .format("h:mm:ss A") */}
-                        </td>
-                        <td>{/* prod.halve.imslaughter.numcow */}</td>
-                        <td>{/* prod.halve.beeftype.code */}</td>
-                        <td>{/* prod.halve.barcode */}</td>
-                        <td>{/* prod.halve.weightwarm */}</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>{/* prod.halve.status.nameTH */}</td>
-                        <td>{/* prod.user.name */}</td>
-                      </tr>
-                      {/*   ))} */}
+                      {data &&
+                        data.imentrailSearch.map((prod) => (
+                          <tr style={{ textAlign: "center" }}>
+                            <td>{prod.entrail.imslaughter.namefarmer}</td>
+                            <td>
+                              {dayjs(prod.importdate)
+                                .add(543, "year")
+                                .format("DD/MM/YYYY")}
+                            </td>
+                            <td>
+                              {dayjs(prod.importdate)
+                                .add(543, "year")
+                                .format("h:mm:ss A")}
+                            </td>
+                            <td>{prod.entrail.imslaughter.numcow}</td>
+                            <td>{prod.entrail.offal}</td>
+                            <td>{prod.entrail.toe}</td>
+                            <td>{prod.entrail.head}</td>
+                            <td>{prod.entrail.skin}</td>
+                            <td>{prod.entrail.liver}</td>
+                            <td>{prod.entrail.fat}</td>
+                            <td>{prod.entrail.onkale}</td>
+                            <td>{prod.entrail.tail}</td>
+                            <td>{prod.entrail.gallbladder}</td>
+                            <td>{prod.entrail.scrap}</td>
+                            <td>{prod.entrail.barcode}</td>
+                            <td>{prod.user.name}</td>
+                          </tr>
+                        ))}
                     </tbody>
                   </Table>
                 </div>
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                  <Paper_import />
-                  <Excel_import />
+                  {data && data.imentrailSearch.length > 0 ? (
+                    <div>
+                      <Paper_import prod={data.imentrailSearch} />
+                      <Excel_import prod={data.imentrailSearch} />
+                    </div>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </DivFromDown>
             </DivFrom>

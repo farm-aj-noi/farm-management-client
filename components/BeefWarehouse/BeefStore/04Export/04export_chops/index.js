@@ -20,8 +20,14 @@ export const EXPORTCHOPSEARCH = gql`
     $startdate: String
     $enddate: String
     $beeftype: String
+    $userName: String
   ) {
-    exportchop(startdate: $startdate, enddate: $enddate, beeftype: $beeftype) {
+    exportchop(
+      startdate: $startdate
+      enddate: $enddate
+      beeftype: $beeftype
+      userName: $userName
+    ) {
       id
       exportdate
       user {
@@ -53,11 +59,13 @@ const index = () => {
   const [selectedbeeftypechop, SetBeeftypeChopChange] = useState("");
   const [selectedstartdate, SetStartDateChange] = useState("");
   const [selectedenddate, SetEndDateChange] = useState("");
+  const [inputusername, SetInputusername] = useState("");
   const { data, loading, error } = useQuery(EXPORTCHOPSEARCH, {
     variables: {
       beeftype: selectedbeeftypechop,
       startdate: selectedstartdate,
       enddate: selectedenddate,
+      userName: inputusername,
     },
   });
   return (
@@ -203,6 +211,7 @@ const index = () => {
                       fontSize: "14px",
                       textAlign: "center",
                     }}
+                    onChange={(event) => SetInputusername(event.target.value)}
                   />
                   <label
                     for="beef"

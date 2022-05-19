@@ -20,8 +20,14 @@ export const CREATEEXPORTLUMP = gql`
     $startdate: String
     $enddate: String
     $beeftype: String
+    $userName: String
   ) {
-    exportlump(startdate: $startdate, enddate: $enddate, beeftype: $beeftype) {
+    exportlump(
+      startdate: $startdate
+      enddate: $enddate
+      beeftype: $beeftype
+      userName: $userName
+    ) {
       id
       user {
         name
@@ -52,6 +58,7 @@ const index = () => {
   const [selectedbeeftypelump, SetBeeftypeLumpChange] = useState("");
   const [selectedstartdate, SetStartDateChange] = useState("");
   const [selectedenddate, SetEndDateChange] = useState("");
+  const [inputusername, SetInputusername] = useState("");
   const { data, loading, error } = useQuery(CREATEEXPORTLUMP, {
     variables: {
       beeftype: selectedbeeftypelump,
@@ -202,6 +209,7 @@ const index = () => {
                       fontSize: "14px",
                       textAlign: "center",
                     }}
+                    onChange={(event) => SetInputusername(event.target.value)}
                   />
                   <label
                     for="beef"

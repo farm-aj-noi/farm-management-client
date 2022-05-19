@@ -23,7 +23,7 @@ const Create_Import = () => {
 
   const [ImportQuarterInfo, setImportquarterInfo] = useState({
     barcode: "",
-    beefstore: "627cd2c405ef600808067abf",
+    beefstore: "6284d7035415c34e54b2fc2c",
   });
   const [success, setSuccess] = useState(false);
 

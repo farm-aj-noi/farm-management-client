@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import { Table } from "react-bootstrap";
 import { DivFrom, DivFromTop, DivFromDown, HeaderColor } from "../ImportFrom";
@@ -15,16 +15,27 @@ import { useQuery } from "@apollo/react-hooks";
 
 import List_import from "./List_import";
 
+import DatePicker, { registerLocale } from "react-datepicker";
+import th from "date-fns/locale/th";
+registerLocale("th", th);
+import Datestyle from "../../../helps/datepicker.module.css";
+
+import dayjs from "dayjs";
+
 export const IMPORTHALVESEARCH = gql`
   query IMPORTHALVESEARCH(
-    $startdate: String
-    $enddate: String
+    $namefarmer: String
+    $userName: String
     $beeftype: String
+    $enddate: String
+    $startdate: String
   ) {
     imhalveSearch(
-      startdate: $startdate
-      enddate: $enddate
+      namefarmer: $namefarmer
+      userName: $userName
       beeftype: $beeftype
+      enddate: $enddate
+      startdate: $startdate
     ) {
       id
       importdate
@@ -51,14 +62,122 @@ export const IMPORTHALVESEARCH = gql`
 `;
 
 const index = () => {
+  /* //calendar
+  const dateRef = useRef();
+  const [date, setDate] = useState(null);
+  const [selectedDate, handleDateChange] = useState(
+    null
+  );
+  const dateRef2 = useRef();
+  const [date2, setDate2] = useState(new Date());
+  const [selectedDate2, handleDateChange2] = useState(
+    dayjs(date2).format("YYYY-MM-DD")
+  );
+  // console.log("start : " + selectedDate + " , end : " + selectedDate2);
+  const months = [
+    "มกราคม",
+    "กุมภาพันธ์",
+    "มีนาคม",
+    "เมษายน",
+    "พฤษภาคม",
+    "มิถุนายน",
+    "กรกฎาคม",
+    "สิงหาคม",
+    "กันยายน",
+    "ตุลาคม",
+    "พฤศจิกายน",
+    "ธันวาคม",
+  ];
+
+  const dateValueRef = useRef(date);
+  dateValueRef.current = date;
+
+  const dateValueRef2 = useRef(date2);
+  dateValueRef2.current = date2;
+
+  const changeDateToBuddhist = (changeDate = new Date()) => {
+    const prevDate = new Date(changeDate);
+    // console.log("current date", prevDate === date);
+    const newDate = new Date(
+      prevDate.setFullYear(prevDate.getFullYear() + 543)
+    );
+    // console.log("year", newDate.getFullYear());
+    dateRef.current.input.value = `${newDate.getDate()} ${
+      months[newDate.getMonth()]
+    } ${newDate.getFullYear()}`;
+    // console.log(dateRef.current.input.value);
+  };
+
+  const changeDateToBuddhist2 = (changeDate = new Date()) => {
+    const prevDate = new Date(changeDate);
+    // console.log("current date", prevDate === date);
+    const newDate = new Date(
+      prevDate.setFullYear(prevDate.getFullYear() + 543)
+    );
+    // console.log("year", newDate.getFullYear());
+    dateRef2.current.input.value = `${newDate.getDate()} ${
+      months[newDate.getMonth()]
+    } ${newDate.getFullYear()}`;
+    // console.log(dateRef2.current.input.value);
+  };
+
+  // component did mount
+  useEffect(() => {
+    // console.log("dateRef", dateRef);
+    // change date value in input dom on mounted
+    changeDateToBuddhist(date);
+    const datePicker = dateRef.current;
+    const renderDateInput = datePicker.renderDateInput;
+    // console.log(renderDateInput);
+    datePicker.renderDateInput = function () {
+      const inputDom = renderDateInput();
+      return React.cloneElement(inputDom, {
+        value: changeDateToBuddhist(dateValueRef.current),
+      });
+    };
+  }, []);
+
+  // component did mount
+  useEffect(() => {
+    // console.log("dateRef", dateRef);
+    // change date value in input dom on mounted
+    changeDateToBuddhist2(date2);
+    const datePicker2 = dateRef2.current;
+    const renderDateInput = datePicker2.renderDateInput;
+    // console.log(renderDateInput2);
+    datePicker2.renderDateInput = function () {
+      const inputDom = renderDateInput();
+      return React.cloneElement(inputDom, {
+        value: changeDateToBuddhist2(dateValueRef2.current),
+      });
+    };
+  }, [date2]);
+
+  const onChangeDatePicker = (e) => {
+    // console.log("onChange");
+    setDate(e);
+    handleDateChange(dayjs(e).format("YYYY-MM-DD"));
+  };
+
+  const onChangeDatePicker2 = (e) => {
+    // console.log("onChange");
+    setDate2(e);
+    handleDateChange2(dayjs(e).format("YYYY-MM-DD"));
+  };
+  //calendar */
+
   const [selectedbeeftypehalve, SetBeeftypeHalveChange] = useState("");
   const [selectedstartdate, SetStartDateChange] = useState("");
   const [selectedenddate, SetEndDateChange] = useState("");
+  const [inputnamefarmer, SetInputnamefarmer] = useState("");
+  const [inputusername, SetInputusername] = useState("");
   const { data, loading, error } = useQuery(IMPORTHALVESEARCH, {
     variables: {
       beeftype: selectedbeeftypehalve,
       startdate: selectedstartdate,
       enddate: selectedenddate,
+      namefarmer: inputnamefarmer,
+      userName: inputusername,
     },
   });
   return (
@@ -163,7 +282,28 @@ const index = () => {
                     <option value="5f1000e28d55662dcc23d95e">ซากซ้าย</option>
                     <option value="5f1000ee8d55662dcc23d960">ซากขวา</option>
                   </select>
-
+                  <label
+                    for="beef"
+                    style={{
+                      textAlign: "center",
+                      fontSize: "18px",
+                      marginLeft: "10px",
+                      marginRight: "10px",
+                    }}
+                  >
+                    เจ้าของซาก
+                  </label>
+                  <input
+                    style={{
+                      height: "35px",
+                      width: "110px",
+                      borderRadius: "4px",
+                      border: "1px solid #AFAFAF",
+                      fontSize: "14px",
+                      textAlign: "center",
+                    }}
+                    onChange={(event) => SetInputnamefarmer(event.target.value)}
+                  />
                   <label
                     for="beef"
                     style={{
@@ -184,6 +324,7 @@ const index = () => {
                       fontSize: "14px",
                       textAlign: "center",
                     }}
+                    onChange={(event) => SetInputusername(event.target.value)}
                   />
                   <label
                     for="beef"
@@ -281,6 +422,18 @@ const index = () => {
                     }}
                     onChange={(event) => SetStartDateChange(event.target.value)}
                   ></input>
+                  {/* <DatePicker
+                    className={Datestyle.datepicker}
+                    selected={date}
+                    onChange={onChangeDatePicker}
+                    dateFormat="dd/mm/yyyy"
+                    ref={dateRef}
+                    locale="th"
+                    peekNextMonth
+                    showMonthDropdown
+                    showYearDropdown
+                    dropdownMode="select"
+                  /> */}
                   <label
                     for="date"
                     style={{
@@ -304,6 +457,18 @@ const index = () => {
                     }}
                     onChange={(event) => SetEndDateChange(event.target.value)}
                   ></input>
+                  {/*  <DatePicker
+                    className={Datestyle.datepicker}
+                    selected={date2}
+                    onChange={onChangeDatePicker2}
+                    dateFormat="dd/mm/yyyy"
+                    ref={dateRef2}
+                    locale="th"
+                    peekNextMonth
+                    showMonthDropdown
+                    showYearDropdown
+                    dropdownMode="select"
+                  /> */}
                 </from>
               </div>
             </DivFromDown>

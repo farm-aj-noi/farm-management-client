@@ -3,6 +3,8 @@ import React, { useState, useContext } from "react";
 import { AuthContext } from "../../../../../../appState/AuthProvider";
 
 import dayjs from "dayjs";
+import 'dayjs/locale/th'
+
 
 import { Icon } from "react-icons-kit";
 import { printer } from "react-icons-kit/ikons/printer";
@@ -99,15 +101,15 @@ const Paper_import = ({ prod }) => {
         headerRows: 1,
         // alignment: 'center'
         widths: [
-          "auto",
-          "auto",
-          "auto",
-          "auto",
-          "auto",
-          "auto",
-          "auto",
-          "auto",
-          "auto",
+          "star",
+          "star",
+          "star",
+          "star",
+          "star",
+          "star",
+          "star",
+          "star",
+          "star",
         ],
 
         body: buildTableBody(data, columns),
@@ -120,8 +122,8 @@ const Paper_import = ({ prod }) => {
 
   const printPDF = () => {
     var docDefinition = {
-     /*  pageSize: "A4",
-      pageOrientation: "landscape", */
+      pageSize: "A4",
+      pageOrientation: "landscape",
       pageMargins: [40, 40, 40, 120],
       content: [
         {
