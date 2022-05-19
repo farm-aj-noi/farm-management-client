@@ -223,7 +223,7 @@ const index = () => {
                       margin: "10px 10px",
                     }}
                   >
-                    อายุ
+                    วันหมดอายุ
                   </label>
                   <select
                     name="room"
@@ -339,14 +339,14 @@ const index = () => {
                       <th>คิวอาร์โค้ด</th>
                       <th>น้ำหนักอุ่น</th>
                       <th>น้ำหนักเย็น</th>
-                      <th>อายุ</th>
+                      <th>วันหมดอายุ</th>
                       <th>เกรด</th>
                       <th>ห้อง</th>
                       <th>ชั้น</th>
                       <th>ตะกร้า</th>
                       <th>สถานะ</th>
                       <th>หมายเหตุ</th>
-                      <th>แก้ไข</th>
+                      <th>จัดการ</th>
                     </tr>
                   </thead>
                   <tbody>

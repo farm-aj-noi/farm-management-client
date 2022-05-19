@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-import { Barcodebuttoncolor } from "../../../../../utils/buttonColor";
-import { Qrcodebutton } from "../../../../../utils/button";
+import {
+  Barcodebuttoncolor,
+  Editbuttoncolor,
+} from "../../../../../utils/buttonColor";
+import { Qrcodebutton, Editbutton } from "../../../../../utils/button";
 import dayjs from "dayjs";
 
 const ListStore = ({ ListStore }) => {
@@ -11,17 +14,33 @@ const ListStore = ({ ListStore }) => {
       <td>{ListStoreData.cownum}</td>
       <td>{ListStoreData.code}</td>
       <td>{ListStoreData.barcode}</td>
-      <td></td>
-      <td>{ListStoreData.weightwarm}</td>
-      <td>{ListStoreData.weight}</td>
+      <td>
+        <Barcodebuttoncolor>
+          <Qrcodebutton />
+        </Barcodebuttoncolor>
+      </td>
+      {ListStoreData.weightwarm !== null ? (
+        <td>{ListStoreData.weightwarm}</td>
+      ) : (
+        <td>-</td>
+      )}
+      {ListStoreData.weight !== null ? (
+        <td>{ListStoreData.weight}</td>
+      ) : (
+        <td>-</td>
+      )}
       <td></td>
       <td></td>
       <td></td>
       <td></td>
       <td></td>
       <td>{ListStoreData.status}</td>
-      <td></td>
-      <td></td>
+      <td>-</td>
+      <td>
+        <Editbuttoncolor>
+          <Editbutton />
+        </Editbuttoncolor>
+      </td>
     </tr>
   );
 };
