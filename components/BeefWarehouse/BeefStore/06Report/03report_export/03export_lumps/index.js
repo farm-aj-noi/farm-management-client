@@ -18,56 +18,62 @@ import Excel_export from "./Excel_export.js";
 
 import Nav_exports from "../Nav_export";
 
-/* import { useQuery } from "@apollo/react-hooks";
-import gql from "graphql-tag"; */
+import { useQuery } from "@apollo/react-hooks";
+import gql from "graphql-tag";
 
 import dayjs from "dayjs";
 
-/* export const IMPORTHALVESEARCH = gql`
-  query IMPORTHALVESEARCH(
+export const CREATEEXPORTLUMP = gql`
+  query CREATEEXPORTLUMP(
     $startdate: String
     $enddate: String
     $beeftype: String
+    $userName: String
   ) {
-    imhalveSearch(
+    exportlump(
       startdate: $startdate
       enddate: $enddate
       beeftype: $beeftype
+      userName: $userName
     ) {
       id
-      importdate
       user {
         name
       }
-      halve {
-        weightwarm
+      lump {
+        weight
         barcode
         status {
           nameTH
         }
         beeftype {
-          code
           nameTH
+          code
         }
         imslaughter {
           numcow
           namefarmer
         }
       }
+      storestatus {
+        nameTH
+      }
+      exportdate
     }
   }
-`; */
+`;
 const index = () => {
-  /* const [selectedbeeftypehalve, SetBeeftypeHalveChange] = useState("");
+  const [selectedbeeftypelump, SetBeeftypeLumpChange] = useState("");
   const [selectedstartdate, SetStartDateChange] = useState("");
   const [selectedenddate, SetEndDateChange] = useState("");
-  const { data, loading, error } = useQuery(IMPORTHALVESEARCH, {
+  const [inputusername, SetInputusername] = useState("");
+  const { data, loading, error } = useQuery(CREATEEXPORTLUMP, {
     variables: {
-      beeftype: selectedbeeftypehalve,
+      beeftype: selectedbeeftypelump,
       startdate: selectedstartdate,
       enddate: selectedenddate,
     },
-  }); */
+  });
   return (
     <DivBase>
       <>
@@ -155,6 +161,9 @@ const index = () => {
                         fontSize: "14px",
                         marginRight: "10px",
                       }}
+                      onChange={(event) =>
+                        SetBeeftypeLumpChange(event.target.value)
+                      }
                     >
                       <option value="">ทั้งหมด</option>
                       <option value="5f1000e28d55662dcc23d95e">ซากซ้าย</option>
@@ -180,6 +189,7 @@ const index = () => {
                         textAlign: "center",
                         marginRight: "10px",
                       }}
+                      onChange={(event) => SetInputusername(event.target.value)}
                     />
                     <label
                       for="date"
@@ -202,6 +212,9 @@ const index = () => {
                         color: "#AFAFAF",
                         textAlign: "center",
                       }}
+                      onChange={(event) =>
+                        SetStartDateChange(event.target.value)
+                      }
                     ></input>
                     <label
                       for="date"
@@ -224,6 +237,7 @@ const index = () => {
                         color: "#AFAFAF",
                         textAlign: "center",
                       }}
+                      onChange={(event) => SetEndDateChange(event.target.value)}
                     ></input>
                   </from>
                 </div>
@@ -262,50 +276,48 @@ const index = () => {
                         <th>ทะเบียนขุน</th>
                         <th>รหัสซาก</th>
                         <th>รหัสบาร์โค้ด</th>
-                        <th>คิวอาร์โค้ด</th>
                         <th>น้ำหนัก</th>
-                        <th>ห้อง</th>
-                        <th>ชั้น</th>
-                        <th>ตะกร้า</th>
                         <th>สถานะ</th>
                         <th>ผู้ขอเบิก</th>
                         <th>ผู้เบิกออก</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {/*   {data &&
-                  data.imhalveSearch.map((prod) => ( */}
-                      <tr style={{ textAlign: "center" }}>
-                        <td>{/* prod.halve.imslaughter.namefarmer */}</td>
-                        <td>{/* prod.halve.beeftype.nameTH */}</td>
-                        <td>
-                          {/* dayjs(prod.importdate)
-                          .add(543, "year")
-                          .format("DD/MM/YYYY") */}
-                        </td>
-                        <td>
-                          {/* dayjs(prod.importdate)
-                          .add(543, "year")
-                          .format("h:mm:ss A") */}
-                        </td>
-                        <td>{/* prod.halve.imslaughter.numcow */}</td>
-                        <td>{/* prod.halve.beeftype.code */}</td>
-                        <td>{/* prod.halve.barcode */}</td>
-                        <td>{/* prod.halve.weightwarm */}</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>{/* prod.halve.status.nameTH */}</td>
-                        <td>{/* prod.user.name */}</td>
-                        <td>{/* prod.user.name */}</td>
-                      </tr>
-                      {/*   ))} */}
+                      {data &&
+                        data.exportlump.map((prod) => (
+                          <tr style={{ textAlign: "center" }}>
+                            <td>{prod.lump.beeftype.nameTH}</td>
+                            <td>
+                              {dayjs(prod.exportdate)
+                                .add(543, "year")
+                                .format("DD/MM/YYYY")}
+                            </td>
+                            <td>
+                              {dayjs(prod.exportdate)
+                                .add(543, "year")
+                                .format("h:mm:ss A")}
+                            </td>
+                            <td>{prod.lump.imslaughter.numcow}</td>
+                            <td>{prod.lump.beeftype.code}</td>
+                            <td>{prod.lump.barcode}</td>
+                            <td>{prod.lump.weight}</td>
+                            <td>{prod.storestatus.nameTH}</td>
+                            <td>-</td>
+                            <td>{prod.user.name}</td>
+                          </tr>
+                        ))}
                     </tbody>
                   </Table>
                 </div>
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                  <Paper_export />
-                  <Excel_export />
+                {data && data.exportlump.length > 0 ? (
+                    <div>
+                      <Paper_export prod={data.exportlump} />
+                      <Excel_export prod={data.exportlump} />
+                    </div>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </DivFromDown>
             </DivFrom>

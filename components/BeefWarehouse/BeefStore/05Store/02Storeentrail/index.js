@@ -15,22 +15,29 @@ import List_Store from "./ListStore.js";
 
 import Nav_store from "../Nav_store";
 
-export const STORELIST = gql`
-  query STORELIST {
-    liststore {
-      beeftype
-      cownum
-      code
+export const STOREENTRAIL = gql`
+  query STOREENTRAIL {
+    listentrail {
+      namefarmer
       barcode
-      weightwarm
-      weight
-      status
+      cownum
+      offal
+      toe
+      head
+      skin
+      liver
+      fat
+      onkale
+      tail
+      gallbladder
+      scrap
     }
   }
 `;
 
+
 const index = () => {
-  const { data, loading, error } = useQuery(STORELIST);
+  const { data, loading, error } = useQuery(STOREENTRAIL);
   return (
     <DivBase>
       <div
@@ -120,8 +127,8 @@ const index = () => {
                 </thead>
                 <tbody>
                   {data &&
-                    data.liststore.map((prod) => (
-                      <List_Store key={prod.id} ListStore={prod} />
+                    data.listentrail.map((prod) => (
+                      <List_Store key={prod.id} Listentrail={prod} />
                     ))}
                 </tbody>
               </Table>

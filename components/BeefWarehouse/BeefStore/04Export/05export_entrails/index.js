@@ -16,8 +16,16 @@ import gql from "graphql-tag";
 import List_export from "./ListExport";
 
 export const EXPORTENTRAILSEARCH = gql`
-  query EXPORTENTRAILSEARCH($startdate: String, $enddate: String) {
-    exportentrail(startdate: $startdate, enddate: $enddate) {
+  query EXPORTENTRAILSEARCH(
+    $startdate: String
+    $enddate: String
+    $userName: String
+  ) {
+    exportentrail(
+      startdate: $startdate
+      enddate: $enddate
+      userName: $userName
+    ) {
       user {
         name
       }
@@ -48,6 +56,7 @@ export const EXPORTENTRAILSEARCH = gql`
 const index = () => {
   const [selectedstartdate, SetStartDateChange] = useState("");
   const [selectedenddate, SetEndDateChange] = useState("");
+  const [inputusername, SetInputusername] = useState("");
   const { data, loading, error } = useQuery(EXPORTENTRAILSEARCH, {
     variables: {
       startdate: selectedstartdate,
@@ -169,6 +178,7 @@ const index = () => {
                       fontSize: "14px",
                       textAlign: "center",
                     }}
+                    onChange={(event) => SetInputusername(event.target.value)}
                   />
                   <label
                     for="beef"
@@ -263,7 +273,6 @@ const index = () => {
                       fontSize: "18px",
                       margin: "10px 10px",
                     }}
-                    onChange={(event) => SetEndDateChange(event.target.value)}
                   >
                     ถึงวันที่
                   </label>
@@ -278,6 +287,7 @@ const index = () => {
                       color: "#AFAFAF",
                       textAlign: "center",
                     }}
+                    onChange={(event) => SetEndDateChange(event.target.value)}
                   ></input>
                 </from>
               </div>

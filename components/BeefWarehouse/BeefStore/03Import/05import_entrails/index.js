@@ -16,8 +16,18 @@ import { useQuery } from "@apollo/react-hooks";
 import List_import from "./List_import";
 
 export const IMPOERTENTRAILSEARCH = gql`
-  query IMPOERTENTRAILSEARCH($startdate: String, $enddate: String) {
-    imentrailSearch(startdate: $startdate, enddate: $enddate) {
+  query IMPOERTENTRAILSEARCH(
+    $namefarmer: String
+    $userName: String
+    $startdate: String
+    $enddate: String
+  ) {
+    imentrailSearch(
+      namefarmer: $namefarmer
+      userName: $userName
+      startdate: $startdate
+      enddate: $enddate
+    ) {
       importdate
       user {
         name
@@ -44,12 +54,16 @@ export const IMPOERTENTRAILSEARCH = gql`
 `;
 
 const index = () => {
+  const [inputnamefarmer, SetInputnamefarmer] = useState("");
+  const [inputusername, SetInputusername] = useState("");
   const [selectedstartdate, SetStartDateChange] = useState("");
   const [selectedenddate, SetEndDateChange] = useState("");
   const { data, loading, error } = useQuery(IMPOERTENTRAILSEARCH, {
     variables: {
       startdate: selectedstartdate,
       enddate: selectedenddate,
+      namefarmer: inputnamefarmer,
+      userName: inputusername,
     },
   });
   return (
@@ -133,6 +147,28 @@ const index = () => {
                       marginRight: "10px",
                     }}
                   >
+                    เจ้าของซาก
+                  </label>
+                  <input
+                    style={{
+                      height: "35px",
+                      width: "110px",
+                      borderRadius: "4px",
+                      border: "1px solid #AFAFAF",
+                      fontSize: "14px",
+                      textAlign: "center",
+                    }}
+                    onChange={(event) => SetInputnamefarmer(event.target.value)}
+                  />
+                  <label
+                    for="beef"
+                    style={{
+                      textAlign: "center",
+                      fontSize: "18px",
+                      marginLeft: "10px",
+                      marginRight: "10px",
+                    }}
+                  >
                     ผู้นำเข้า
                   </label>
                   <input
@@ -144,6 +180,7 @@ const index = () => {
                       fontSize: "14px",
                       textAlign: "center",
                     }}
+                    onChange={(event) => SetInputusername(event.target.value)}
                   />
                   <label
                     for="beef"
@@ -215,7 +252,6 @@ const index = () => {
                       fontSize: "18px",
                       marginRight: "10px",
                     }}
-                    onChange={(event) => SetStartDateChange(event.target.value)}
                   >
                     วันที่นำเข้า
                   </label>
@@ -230,6 +266,7 @@ const index = () => {
                       color: "#AFAFAF",
                       textAlign: "center",
                     }}
+                    onChange={(event) => SetStartDateChange(event.target.value)}
                   ></input>
                   <label
                     for="date"

@@ -23,7 +23,7 @@ const Create_Import = () => {
   const MySwal = withReactContent(Swal);
   const [ImportLumpsInfo, setImportLumpsInfo] = useState({
     barcode: "",
-    beefstore: "627f7c1f5a28733be04a760f",
+    beefstore: "6284d7035415c34e54b2fc2c",
   });
   const [success, setSuccess] = useState(false);
   const [createImlump, { loading, error }] = useMutation(CREATEIMPORTLUMP, {

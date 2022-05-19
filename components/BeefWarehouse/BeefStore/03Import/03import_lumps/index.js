@@ -20,11 +20,15 @@ export const IMPORTLUMPSEARCH = gql`
     $startdate: String
     $enddate: String
     $beeftype: String
+    $namefarmer: String
+    $userName: String
   ) {
     imlumpSearch(
       startdate: $startdate
       enddate: $enddate
       beeftype: $beeftype
+      namefarmer: $namefarmer
+      userName: $userName
     ) {
       importdate
       user {
@@ -52,11 +56,15 @@ const index = () => {
   const [selectedbeeftypelump, SetBeeftypeLumpChange] = useState("");
   const [selectedstartdate, SetStartDateChange] = useState("");
   const [selectedenddate, SetEndDateChange] = useState("");
+  const [inputnamefarmer, SetInputnamefarmer] = useState("");
+  const [inputusername, SetInputusername] = useState("");
   const { data, loading, error } = useQuery(IMPORTLUMPSEARCH, {
     variables: {
       beeftype: selectedbeeftypelump,
       startdate: selectedstartdate,
       enddate: selectedenddate,
+      namefarmer: inputnamefarmer,
+      userName: inputusername,
     },
   });
   return (
@@ -175,7 +183,28 @@ const index = () => {
                     <option value="">ซากซ้าย</option>
                     <option value="">ซากขวา</option>
                   </select>
-
+                  <label
+                    for="beef"
+                    style={{
+                      textAlign: "center",
+                      fontSize: "18px",
+                      marginLeft: "10px",
+                      marginRight: "10px",
+                    }}
+                  >
+                    เจ้าของซาก
+                  </label>
+                  <input
+                    style={{
+                      height: "35px",
+                      width: "110px",
+                      borderRadius: "4px",
+                      border: "1px solid #AFAFAF",
+                      fontSize: "14px",
+                      textAlign: "center",
+                    }}
+                    onChange={(event) => SetInputnamefarmer(event.target.value)}
+                  />
                   <label
                     for="beef"
                     style={{
@@ -196,6 +225,7 @@ const index = () => {
                       fontSize: "14px",
                       textAlign: "center",
                     }}
+                    onChange={(event) => SetInputusername(event.target.value)}
                   />
                   <label
                     for="beef"

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Table } from "react-bootstrap";
 import { DivFrom, DivFromTop, DivFromDown, HeaderColor } from "./ChillFrom";
@@ -10,7 +10,57 @@ import { iosSearchStrong } from "react-icons-kit/ionicons/iosSearchStrong";
 
 import Submit_Chill from "./Submit_Chill";
 
+import { useQuery } from "@apollo/react-hooks";
+import gql from "graphql-tag";
+
+import List_chill from "./List_chill";
+
+export const CHILLSEARCHLIST = gql`
+  query CHILLSEARCHLIST(
+    $startdate: String
+    $enddate: String
+    $beeftype: String
+  ) {
+    listchill(startdate: $startdate, enddate: $enddate, beeftype: $beeftype) {
+      id
+      chilldate
+      chillday
+      chillroom {
+        roomnum
+      }
+      user {
+        name
+      }
+      halve {
+        barcode
+        beeftype {
+          nameTH
+          code
+        }
+        weightwarm
+        imslaughter {
+          numcow
+        }
+      }
+      storestatus {
+        nameTH
+      }
+    }
+  }
+`;
+
 const index = () => {
+  const [selectedbeeftypeChill, SetBeeftypeChillChange] = useState("");
+  const [selectedstartdate, SetStartDateChange] = useState("");
+  const [selectedenddate, SetEndDateChange] = useState("");
+  const { data, loading, error } = useQuery(CHILLSEARCHLIST, {
+    variables: {
+      beeftype: selectedbeeftypeChill,
+      startdate: selectedstartdate,
+      enddate: selectedenddate,
+    },
+  });
+
   return (
     <>
       <div
@@ -33,7 +83,7 @@ const index = () => {
       <DivBase
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 270px 1000px 1fr",
+          gridTemplateColumns: "1fr 270px 1100px 1fr",
           gridRowGap: "15px",
           gridColumnGap: "10px",
           textAlign: "start",
@@ -105,6 +155,9 @@ const index = () => {
                       fontSize: "14px",
                       marginRight: "10px",
                     }}
+                    onChange={(event) =>
+                      SetBeeftypeChillChange(event.target.value)
+                    }
                   >
                     <option value="">ทั้งหมด</option>
                     <option value="5f1000e28d55662dcc23d95e">ซากซ้าย</option>
@@ -139,7 +192,7 @@ const index = () => {
                       marginRight: "10px",
                     }}
                   >
-                    วันที่นำเข้า
+                    วันที่บ่ม
                   </label>
                   <input
                     type="date"
@@ -152,6 +205,7 @@ const index = () => {
                       color: "#AFAFAF",
                       textAlign: "center",
                     }}
+                    onChange={(event) => SetStartDateChange(event.target.value)}
                   ></input>
                   <label
                     for="date"
@@ -174,6 +228,7 @@ const index = () => {
                       color: "#AFAFAF",
                       textAlign: "center",
                     }}
+                    onChange={(event) => SetEndDateChange(event.target.value)}
                   ></input>
                 </from>
               </div>
@@ -220,20 +275,10 @@ const index = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
+                    {data &&
+                      data.listchill.map((prod) => (
+                        <List_chill key={prod.id} listchill={prod} />
+                      ))}
                   </tbody>
                 </Table>
               </div>

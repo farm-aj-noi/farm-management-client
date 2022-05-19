@@ -20,8 +20,14 @@ export const EXPORTHALVESSEARCH = gql`
     $startdate: String
     $enddate: String
     $beeftype: String
+    $userName: String
   ) {
-    exporthalve(startdate: $startdate, enddate: $enddate, beeftype: $beeftype) {
+    exporthalve(
+      startdate: $startdate
+      enddate: $enddate
+      beeftype: $beeftype
+      userName: $userName
+    ) {
       id
       exportdate
       user {
@@ -50,11 +56,13 @@ const index = () => {
   const [selectedbeeftypehalve, SetBeeftypeHalveChange] = useState("");
   const [selectedstartdate, SetStartDateChange] = useState("");
   const [selectedenddate, SetEndDateChange] = useState("");
+  const [inputusername, SetInputusername] = useState("");
   const { data, loading, error } = useQuery(EXPORTHALVESSEARCH, {
     variables: {
       beeftype: selectedbeeftypehalve,
       startdate: selectedstartdate,
       enddate: selectedenddate,
+      userName: inputusername,
     },
   });
   return (
@@ -200,6 +208,7 @@ const index = () => {
                       fontSize: "14px",
                       textAlign: "center",
                     }}
+                    onChange={(event) => SetInputusername(event.target.value)}
                   />
                   <label
                     for="beef"

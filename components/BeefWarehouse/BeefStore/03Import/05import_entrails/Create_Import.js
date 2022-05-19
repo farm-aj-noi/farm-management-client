@@ -11,8 +11,8 @@ import withReactContent from "sweetalert2-react-content";
 import Router from "next/router";
 
 export const CREATEIMPORTENTRAIL = gql`
-  mutation CREATEIMPORTENTRAIL($barcode: String!, $beefstore: String!) {
-    createImentrail(barcode: $barcode, beefstore: $beefstore) {
+  mutation CREATEIMPORTENTRAIL($barcode: String!, $entrailstore: String!) {
+    createImentrail(barcode: $barcode, entrailstore: $entrailstore) {
       id
       importdate
       name
@@ -24,7 +24,7 @@ const Create_Import = () => {
   const MySwal = withReactContent(Swal);
   const [ImportentrailInfo, setImportentrailInfo] = useState({
     barcode: "",
-    beefstore: "627f7c1f5a28733be04a760f",
+    entrailstore: "6284d7035415c34e54b2fc2c",
   });
   const [success, setSuccess] = useState(false);
   const [createImentrail, { loading, error }] = useMutation(

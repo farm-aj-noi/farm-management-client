@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Table } from "react-bootstrap";
 import {
@@ -16,7 +16,56 @@ import { iosSearchStrong } from "react-icons-kit/ionicons/iosSearchStrong";
 import Paper_chill from "./Paper_chill.js";
 import Excel_chill from "./Excel_chill.js";
 
+import { useQuery } from "@apollo/react-hooks";
+import gql from "graphql-tag";
+
+import dayjs from "dayjs";
+
+export const CHILLSEARCHLIST = gql`
+  query CHILLSEARCHLIST(
+    $startdate: String
+    $enddate: String
+    $beeftype: String
+  ) {
+    listchill(startdate: $startdate, enddate: $enddate, beeftype: $beeftype) {
+      id
+      chilldate
+      chillday
+      chillroom {
+        roomnum
+      }
+      user {
+        name
+      }
+      halve {
+        barcode
+        beeftype {
+          nameTH
+          code
+        }
+        weightwarm
+        imslaughter {
+          numcow
+        }
+      }
+      storestatus {
+        nameTH
+      }
+    }
+  }
+`;
+
 const index = () => {
+  const [selectedbeeftypeChill, SetBeeftypeChillChange] = useState("");
+  const [selectedstartdate, SetStartDateChange] = useState("");
+  const [selectedenddate, SetEndDateChange] = useState("");
+  const { data, loading, error } = useQuery(CHILLSEARCHLIST, {
+    variables: {
+      beeftype: selectedbeeftypeChill,
+      startdate: selectedstartdate,
+      enddate: selectedenddate,
+    },
+  });
   return (
     <DivBase>
       <div
@@ -81,6 +130,7 @@ const index = () => {
                   fontSize: "14px",
                   marginRight: "10px",
                 }}
+                onChange={(event) => SetBeeftypeChillChange(event.target.value)}
               >
                 <option value="">ทั้งหมด</option>
                 <option value="5f1000e28d55662dcc23d95e">ซากซ้าย</option>
@@ -128,6 +178,7 @@ const index = () => {
                   color: "#AFAFAF",
                   textAlign: "center",
                 }}
+                onChange={(event) => SetStartDateChange(event.target.value)}
               ></input>
               <label
                 for="date"
@@ -150,6 +201,7 @@ const index = () => {
                   color: "#AFAFAF",
                   textAlign: "center",
                 }}
+                onChange={(event) => SetEndDateChange(event.target.value)}
               ></input>
             </from>
           </div>
@@ -176,24 +228,48 @@ const index = () => {
                   <th>ทะเบียนขุน</th>
                   <th>รหัสซาก</th>
                   <th>รหัสบาร์โค้ด</th>
-                  <th>คิวอาร์โค้ด</th>
                   <th>น้ำหนักอุ่น</th>
                   <th>ห้องบ่ม</th>
                   <th>สถานะ</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
+                {data &&
+                  data.listchill.map((prod) => (
+                    <tr style={{ textAlign: "center" }}>
+                      <td>{prod.user.name}</td>
+                      <td>
+                        {dayjs(prod.chilldate)
+                          .add(543, "year")
+                          .format("DD/MM/YYYY")}
+                      </td>
+                      <td>
+                        {dayjs(prod.chilldate)
+                          .add(543, "year")
+                          .format("h:mm:ss A")}
+                      </td>
+                      <td>{prod.halve.beeftype.nameTH}</td>
+                      <td>{prod.chillday}</td>
+                      <td>{prod.halve.imslaughter.numcow}</td>
+                      <td>{prod.halve.beeftype.code}</td>
+                      <td>{prod.halve.barcode}</td>
+                      <td>{prod.halve.weightwarm}</td>
+                      <td>{prod.chillroom.roomnum}</td>
+                      <td>{prod.storestatus.nameTH}</td>
+                    </tr>
+                  ))}
               </tbody>
             </Table>
           </div>
-          <div style={{display:"flex",justifyContent:"center"}}>
-            <Paper_chill />
-            <Excel_chill />
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            {data && data.listchill.length > 0 ? (
+              <div>
+                <Paper_chill prod={data.listchill} />
+                <Excel_chill prod={data.listchill} />
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </DivFromDown>
       </DivFrom>

@@ -1,8 +1,9 @@
 import React, { useState, useContext } from "react";
 
-/* import { AuthContext } from "../../../../../appState/AuthProvider"; */
-
 import dayjs from "dayjs";
+import 'dayjs/locale/th'
+
+import { AuthContext } from "../../../../../../appState/AuthProvider";
 
 import { Icon } from "react-icons-kit";
 import { printer } from "react-icons-kit/ikons/printer";
@@ -11,7 +12,7 @@ import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-import { ButtonPDF, ButtonExcel } from "../../ReportFrom";
+import { ButtonPDF} from "../../ReportFrom";
 
 pdfMake.fonts = {
   THSarabunNew: {
@@ -29,10 +30,12 @@ pdfMake.fonts = {
 };
 
 const Paper_import = ({ prod }) => {
-  /* const [data, setdata] = useState(prod);
+  const [data, setdata] = useState(prod);
   const { user } = useContext(AuthContext);
 
   if (data !== prod) setdata(prod);
+  /* console.log(data)
+   console.log(prod)  */
 
   const buildTableBody = (data, columns) => {
     var body = [];
@@ -48,18 +51,35 @@ const Paper_import = ({ prod }) => {
       "สถานะ",
       "ผู้นำเข้า",
     ]);
-    // console.log(data)
+    console.log(data);
 
     data.forEach(function (row) {
-      // console.log(row)
+      console.log(row);
       var dataRow = [];
 
       columns.forEach(function (column) {
-        if (column === "importDate") {
+        if (column === "importdate") {
           dataRow.push(
             dayjs(row[column]).add(543, "y").locale("th").format("DD MMMM YYYY")
           );
+        } else if (column === "quarter.imslaughter.namefarmer") {
+          dataRow.push(row.quarter.imslaughter.namefarmer);
+        } else if (column === "quarter.beeftype.nameTH") {
+          dataRow.push(row.quarter.beeftype.nameTH);
+        } else if (column == "quarter.imslaughter.numcow") {
+          dataRow.push(row.quarter.imslaughter.numcow);
+        } else if (column === "quarter.beeftype.code") {
+          dataRow.push(row.quarter.beeftype.code);
+        } else if (column === "quarter.barcode") {
+          dataRow.push(row.quarter.barcode);
+        } else if (column === "quarter.weight") {
+          dataRow.push(row.quarter.weight);
+        } else if (column === "quarter.status.nameTH") {
+          dataRow.push(row.quarter.status.nameTH);
+        } else if (column === "user.name") {
+          dataRow.push(row.user.name);
         } else {
+          /* console.log(row[column]) */
           // console.log(column);
           // console.log(
           //   dayjs(row[column]).add(543, "y").locale("th").format("DD-MMMM-YYYY")
@@ -80,26 +100,29 @@ const Paper_import = ({ prod }) => {
         headerRows: 1,
         // alignment: 'center'
         widths: [
-          "auto",
-          "auto",
-          "auto",
-          "auto",
-          "auto",
-          "auto",
-          "auto",
-          "auto",
-          "auto",
+          "star",
+          "star",
+          "star",
+          "star",
+          "star",
+          "star",
+          "star",
+          "star",
+          "star",
         ],
+
         body: buildTableBody(data, columns),
       },
       layout: "headerLineOnly",
-      fontSize: 15,
+      fontSize: 12,
       alignment: "center",
     };
   };
 
   const printPDF = () => {
     var docDefinition = {
+       pageSize: "A4",
+      pageOrientation: "landscape",
       pageMargins: [40, 40, 40, 120],
       content: [
         {
@@ -121,21 +144,20 @@ const Paper_import = ({ prod }) => {
           ],
         },
         {
-          text: "รายงานสรุปการรับโคเข้าเชือด\n\n",
+          text: "รายงานนำเข้าซากโคสี่เสี้ยว\n\n",
           style: "header",
           alignment: "center",
         },
         table(data, [
-          "namefarmer",
-          "nameTH",
+          "quarter.imslaughter.namefarmer",
+          "quarter.beeftype.nameTH",
           "importdate",
-          "importdate",
-          "numcow",
-          "code",
-          "barcode",
-          "weightwarm",
-          "nameTH",
-          "name",
+          "quarter.imslaughter.numcow",
+          "quarter.beeftype.code",
+          "quarter.barcode",
+          "quarter.weight",
+          "quarter.status.nameTH",
+          "user.name",
         ]),
       ],
 
@@ -194,9 +216,9 @@ const Paper_import = ({ prod }) => {
       },
     };
     pdfMake.createPdf(docDefinition).open();
-  }; */
+  };
   return (
-    <ButtonPDF type="button" /* value="print PDF" onClick={printPDF} */>
+    <ButtonPDF type="button" value="print PDF" onClick={printPDF}>
       <Icon
         style={{ verticalAlign: "text-bottom", marginRight: "5px" }}
         icon={printer}

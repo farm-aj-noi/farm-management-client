@@ -19,8 +19,12 @@ export const IMPORTQUARTERSEARCH = gql`
     $startdate: String
     $enddate: String
     $beeftype: String
+    $namefarmer: String
+    $userName: String
   ) {
     imquartSearch(
+      namefarmer: $namefarmer
+      userName: $userName
       startdate: $startdate
       enddate: $enddate
       beeftype: $beeftype
@@ -52,11 +56,15 @@ const index = () => {
   const [selectedbeeftypequarter, SetBeeftypeQuarterChange] = useState("");
   const [selectedstartdate, SetStartDateChange] = useState("");
   const [selectedenddate, SetEndDateChange] = useState("");
+  const [inputnamefarmer, SetInputnamefarmer] = useState("");
+  const [inputusername, SetInputusername] = useState("");
   const { data, loading, error } = useQuery(IMPORTQUARTERSEARCH, {
     variables: {
       beeftype: selectedbeeftypequarter,
       startdate: selectedstartdate,
       enddate: selectedenddate,
+      namefarmer: inputnamefarmer,
+      userName: inputusername,
     },
   });
   return (
@@ -169,7 +177,28 @@ const index = () => {
                       ซากซ้าย-ขาหลัง
                     </option>
                   </select>
-
+                  <label
+                    for="beef"
+                    style={{
+                      textAlign: "center",
+                      fontSize: "18px",
+                      marginLeft: "10px",
+                      marginRight: "10px",
+                    }}
+                  >
+                    เจ้าของซาก
+                  </label>
+                  <input
+                    style={{
+                      height: "35px",
+                      width: "110px",
+                      borderRadius: "4px",
+                      border: "1px solid #AFAFAF",
+                      fontSize: "14px",
+                      textAlign: "center",
+                    }}
+                    onChange={(event) => SetInputnamefarmer(event.target.value)}
+                  />
                   <label
                     for="beef"
                     style={{
@@ -190,6 +219,7 @@ const index = () => {
                       fontSize: "14px",
                       textAlign: "center",
                     }}
+                    onChange={(event) => SetInputusername(event.target.value)}
                   />
                   <label
                     for="beef"

@@ -25,7 +25,6 @@ const Submit_Export = () => {
   const [ExportentrailInfo, setExportentrailInfo] = useState({
     barcode: "",
     storestatus: "",
-    beeftypechange: "",
   });
   const [successs, setSuccess] = useState(false);
   const [createExporte, { loading, error }] = useMutation(CREATEEXPORTENTRAIL, {
@@ -86,7 +85,7 @@ const Submit_Export = () => {
   return (
     <>
       <div>
-        <form>
+        <form onSubmit={handleSubmit}>
           <DivFromInsideLeft>
             บาร์โค้ด :
             <div
@@ -151,7 +150,7 @@ const Submit_Export = () => {
               paddingBottom: "10px",
             }}
           >
-            <Savebutton1>บันทึก</Savebutton1>
+            <Savebutton1 disabled={loading}>บันทึก</Savebutton1>
           </div>
         </form>
       </div>
