@@ -5,6 +5,7 @@ const withImages = require("next-images");
 
 const nextConfig = {
   distDir: "build",
+  reactDevOverlay: false,
   webpack: (config, options) => {
     config.module.rules.push({
       vendor: ["xlsx", "file-saver"],

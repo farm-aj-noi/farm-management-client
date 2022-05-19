@@ -19,6 +19,7 @@ import { useState } from "react";
 import Router from "next/router";
 import LoadingPage from "../helps/LoadingPage";
 
+//import Footer from "../components/Footer/index";
 // import { ThemeProvider } from "styled-components";
 
 // const theme = {
