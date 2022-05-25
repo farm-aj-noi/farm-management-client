@@ -49,6 +49,13 @@ export const IMPORTLUMPSEARCH = gql`
           namefarmer
         }
       }
+      beefroom {
+        roomname
+      }
+      shelf {
+        shelfname
+      }
+      basket
     }
   }
 `;
@@ -166,14 +173,22 @@ const index = () => {
                     <option value="">ทั้งหมด</option>
                     <option value="5f446195ecd6732ad8108684">เนื้อสันคอ</option>
                     <option value="5f4461a8ecd6732ad8108685">ที-โบน</option>
-                    <option value="5f4461bfecd6732ad8108686">เนื้อสันนอก</option>
-                    <option value="5f4461d6ecd6732ad8108687">ที-โบน สเต็ก</option>
+                    <option value="5f4461bfecd6732ad8108686">
+                      เนื้อสันนอก
+                    </option>
+                    <option value="5f4461d6ecd6732ad8108687">
+                      ที-โบน สเต็ก
+                    </option>
                     <option value="5f44620cecd6732ad8108688">ริบอาย</option>
                     <option value="5f446224ecd6732ad8108689">ใบบัวสเต็ก</option>
                     <option value="5f44623aecd6732ad810868a">เนื้อสันใน</option>
                     <option value="5f44624fecd6732ad810868b">สันสะโพก</option>
-                    <option value="5f446262ecd6732ad810868c">เสือร้องไห้</option>
-                    <option value="5f44628decd6732ad810868d">เนื้อซี่โครง</option>
+                    <option value="5f446262ecd6732ad810868c">
+                      เสือร้องไห้
+                    </option>
+                    <option value="5f44628decd6732ad810868d">
+                      เนื้อซี่โครง
+                    </option>
                     <option value="5f4462a4ecd6732ad810868e">พับใน</option>
                     <option value="5f4462b6ecd6732ad810868f">ตะพาบ</option>
                     <option value="5f4462c8ecd6732ad8108690">ลูกมะพร้าว</option>

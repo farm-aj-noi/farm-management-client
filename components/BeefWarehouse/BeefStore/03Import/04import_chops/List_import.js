@@ -24,9 +24,9 @@ function List_import({ imchop }) {
         </Barcodebuttoncolor>
       </td>
       <td>{imchopData.chop.weight}</td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td>{imchopData.beefroom.roomname}</td>
+      <td>{imchopData.shelf.shelfname}</td>
+      <td>{imchopData.basket}</td>
       <td>{imchopData.chop.status.nameTH}</td>
       <td>{imchopData.user.name}</td>
     </tr>

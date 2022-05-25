@@ -85,9 +85,18 @@ export const QUERYROOM = gql`
   }
 `;
 
+export const QUERYSHELF = gql`
+  query QUERYSHELF($id: ID) {
+    listShelf(id: $id) {
+      shelfname
+      id
+    }
+  }
+`;
+
 export const CREATBASKET = gql`
-  mutation Mutation($basketname: String) {
-    createBasket(basketname: $basketname) {
+  mutation CREATBASKET($beefroom: String, $shelf: String, $basketname: String) {
+    createBasket(beefroom: $beefroom, shelf: $shelf, basketname: $basketname) {
       id
       basketname
     }
@@ -98,6 +107,7 @@ function index() {
   const MySwal = withReactContent(Swal);
   // query room
   const { data: dataroom } = useQuery(QUERYROOM);
+
   // query room
 
   // room
@@ -263,10 +273,12 @@ function index() {
   const [idshelf, SetidShelf] = useState(""); //get ID room
   const [successCreateShelfname, setSuccessCreateShelfName] = useState(false); //done room name
   const [Infoshelf, SetInfoshelf] = useState("");
+  const [test, Settst] = useState("");
   const [createShelf] = useMutation(CREATESHELF, {
     variables: {
       ...Infoshelf,
     },
+
     onCompleted: (data) => {
       if (data) {
         setSuccessCreateShelfName(true);
@@ -294,9 +306,18 @@ function index() {
   //create shelf
 
   //create basket
+
   const [Infobasket, setInfobasket] = useState({
     basketname: "",
+    shelf: "",
+    beefroom: "",
   });
+  const { data: shelfdata } = useQuery(QUERYSHELF, {
+    variables: {
+      id: Infobasket.beefroom,
+    },
+  });
+
   const [createBasket] = useMutation(CREATBASKET, {
     variables: {
       ...Infobasket,
@@ -935,16 +956,72 @@ function index() {
             </div>
             บันทึกตั้งค่าตะกร้าจัดเก็บ
           </DivFromTop>
-          <DivFromDown>
+          <DivFromDown style={{ display: "flex" }}>
             <div>
+              ห้องจัดเก็บ : {}
+              <select
+                name="beefroom"
+                id="beefroom"
+                value={Infobasket.beefroom}
+                onChange={handleChangeBasket}
+                style={{
+                  height: "38px",
+                  width: "156px",
+                  border: "1px solid #AFAFAF",
+                  borderRadius: "4px",
+                  textAlign: "center",
+                  fontSize: "14px",
+                }}
+              >
+                <option value="">เลือก</option>
+                {dataroom &&
+                  dataroom.allRoom.map((prod) => (
+                    <option key={prod.id} value={prod.id}>
+                      {prod.roomname}
+                    </option>
+                  ))}
+              </select>
+            </div>
+            <div style={{ marginLeft: "10px" }}>
+              ชั้นจัดเก็บ : {}
+              <select
+                disabled={!Infobasket.beefroom}
+                name="shelf"
+                id="shelf"
+                value={Infobasket.shelf}
+                onChange={handleChangeBasket}
+                style={{
+                  height: "38px",
+                  width: "156px",
+                  border: "1px solid #AFAFAF",
+                  borderRadius: "4px",
+                  textAlign: "center",
+                  fontSize: "14px",
+                }}
+              >
+                <option value="">เลือก</option>
+                {shelfdata &&
+                  shelfdata.listShelf.map((prod) => (
+                    <option key={prod.id} value={prod.id}>
+                      {prod.shelfname}
+                    </option>
+                  ))}
+              </select>
+            </div>
+            <div style={{ marginLeft: "10px" }}>
               ชื่อตะกร้าจัดเก็บ : {}
               <Searchinput
+                disabled={!Infobasket.shelf}
                 type="text"
                 id="basketname"
                 name="basketname"
                 value={Infobasket.basketname}
                 onChange={handleChangeBasket}
-                style={{ width: "156px", textAlign: "center" }}
+                style={{
+                  width: "156px",
+                  textAlign: "center",
+                  backgroundColor: `${!Infobasket.shelf ? "#ececec" : ""}`,
+                }}
               />
               <Savebuttoncolor
                 style={{
