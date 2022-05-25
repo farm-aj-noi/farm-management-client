@@ -5,7 +5,7 @@ import { DivFromInsideLeft, Searchinput, Savebutton1 } from "../ImportFrom";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
 import Router from "next/router";
@@ -19,8 +19,31 @@ export const CREATEIMPORTLUMP = gql`
   }
 `;
 
+export const QUERYROOM = gql`
+  query Query {
+    allRoom {
+      id
+      roomname
+    }
+  }
+`;
+
+export const Searchroom = gql`
+  query Roomsearch($roomsearchId: ID) {
+    roomsearch(id: $roomsearchId) {
+      shelf {
+        id
+        shelfname
+      }
+    }
+  }
+`;
+
 const Create_Import = () => {
+  const [selecttypeshelf, setSelecttype] = useState("");
+
   const MySwal = withReactContent(Swal);
+  const { data: dataroom } = useQuery(QUERYROOM, {});
   const [ImportLumpsInfo, setImportLumpsInfo] = useState({
     barcode: "",
     beefstore: "6284d7035415c34e54b2fc2c",
@@ -125,9 +148,12 @@ const Create_Import = () => {
                   }}
                 >
                   <option value="">ห้อง</option>
-                  <option value="">1</option>
-                  <option value="">2</option>
-                  <option value="">3</option>
+                  {dataroom &&
+                    dataroom.allRoom.map((prod) => (
+                      <option key={prod.id} value={prod.id}>
+                        {prod.roomname}
+                      </option>
+                    ))}
                 </select>
                 <select
                   name="shelf"

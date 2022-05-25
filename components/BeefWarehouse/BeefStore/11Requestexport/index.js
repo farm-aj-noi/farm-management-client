@@ -1,25 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 
-import Sidemenu from "../Nav_notify";
+import { Table } from "react-bootstrap";
+import { DivFrom, DivFromTop, DivFromDown, HeaderColor } from "./RequestFrom";
+import { DivBase } from "../../../../utils/divBase";
 
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
+import { iosSearchStrong } from "react-icons-kit/ionicons/iosSearchStrong";
 
-import { DivBase } from "../../../../../utils/divBase";
-import { DivFrom, DivFromTop, DivFromDown, HeaderColor } from "../NavFrom";
-
-import { Table } from "react-bootstrap";
+import Submit_request from "./Submit_Request";
 
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
 import dayjs from "dayjs";
-
-import { Removebuttoncolor } from "../../../../../utils/buttonColor";
-
-import { Removebutton } from "../../../../../utils/button";
-
-import Paper_request from "./paper_request";
 
 export const QUERYREQUESTEX = gql`
   query QUERYREQUESTEX {
@@ -33,13 +27,16 @@ export const QUERYREQUESTEX = gql`
     }
   }
 `;
-
 const index = () => {
   const { data } = useQuery(QUERYREQUESTEX);
+
   return (
-    <>
+    <DivBase>
       <div
-        style={{ display: "flex", justifyContent: "center", marginTop: "30px" }}
+        style={{
+          display: "flex",
+          justifyContent: "center",
+        }}
       >
         <HeaderColor
           style={{
@@ -48,24 +45,41 @@ const index = () => {
             padding: "5px 30px",
           }}
         >
-          การแจ้งเตือน
+          คำร้องขอเบิก
         </HeaderColor>
       </div>
       <DivBase
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 237.5px 900px 1fr",
+          gridTemplateColumns: "1fr 270px 700px 1fr",
           gridRowGap: "15px",
-          gridColumnGap: "50px",
+          gridColumnGap: "20px",
           textAlign: "start",
-          /*  width:"950px",
-        margin:"auto" */
         }}
       >
-        <Sidemenu Sidenumber={2} />
         <DivFrom
           style={{
             width: "100%",
+            marginTop: "0",
+            gridRowStart: "2",
+            gridRowEnd: "5",
+            gridColumnStart: "2",
+          }}
+        >
+          <DivFromTop>
+            <div style={{ margin: "-3px 5px 0px 0px" }}>
+              <Icon size={20} icon={list} />
+            </div>
+            ดำเนินรายการร้องขอเบิก
+          </DivFromTop>
+          <DivFromDown>
+            <Submit_request />
+          </DivFromDown>
+        </DivFrom>
+        <DivFrom
+          style={{
+            width: "100%",
+            gridRowStart: "2",
             gridRowEnd: "3",
             gridColumnStart: "3",
             marginTop: "0px",
@@ -75,17 +89,10 @@ const index = () => {
             <div style={{ margin: "-3px 5px 0px 0px" }}>
               <Icon size={20} icon={list} />
             </div>
-            รายการคำร้องขอเบิก
+            รายการร้องขอเบิก
           </DivFromTop>
           <DivFromDown>
-            <div
-              style={{
-                margin: "auto",
-                minWidth: "100%",
-                float: "right",
-                marginBottom: "15px",
-              }}
-            >
+            <div>
               <Table
                 striped
                 bordered
@@ -100,7 +107,6 @@ const index = () => {
                     <th>ประเภทซาก</th>
                     <th>เกรด</th>
                     <th>จำนวน</th>
-                    <th>ลบ</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -116,35 +122,15 @@ const index = () => {
                         <td>{prod.beeftype.nameTH}</td>
                         <td></td>
                         <td>{prod.quantity}</td>
-                        <td>
-                          <Removebuttoncolor>
-                            <Removebutton />
-                          </Removebuttoncolor>
-                        </td>
                       </tr>
                     ))}
                 </tbody>
               </Table>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginTop: "10px",
-                }}
-              >
-                {data && data.listRequestEx.length > 0 ? (
-                  <div>
-                    <Paper_request prod={data.listRequestEx} />
-                  </div>
-                ) : (
-                  ""
-                )}
-              </div>
             </div>
           </DivFromDown>
         </DivFrom>
       </DivBase>
-    </>
+    </DivBase>
   );
 };
 
