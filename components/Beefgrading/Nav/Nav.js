@@ -111,7 +111,7 @@ const Nav1 = () => {
           </div>
           </ButtonSignUp>
           </Link>
-          <Link href="/beefgrading/">
+          <Link href="/beefgrading/history">
           <ButtonSignUp
             style={{
               display: "flex",
