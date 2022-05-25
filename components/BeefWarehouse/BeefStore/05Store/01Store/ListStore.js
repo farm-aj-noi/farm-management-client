@@ -6,8 +6,8 @@ import {
 import { Qrcodebutton, Editbutton } from "../../../../../utils/button";
 import dayjs from "dayjs";
 
-const ListStore = ({ ListStore }) => {
-  const [ListStoreData, SetListStoreData] = useState(ListStore);
+const ListStore = ({ Liststore }) => {
+  const [ListStoreData, SetListStoreData] = useState(Liststore);
   return (
     <tr style={{ textAlign: "center" }}>
       <td>{ListStoreData.beeftype}</td>
@@ -19,21 +19,14 @@ const ListStore = ({ ListStore }) => {
           <Qrcodebutton />
         </Barcodebuttoncolor>
       </td>
-      {ListStoreData.weightwarm !== null ? (
-        <td>{ListStoreData.weightwarm}</td>
-      ) : (
-        <td>-</td>
-      )}
-      {ListStoreData.weight !== null ? (
-        <td>{ListStoreData.weight}</td>
-      ) : (
-        <td>-</td>
-      )}
+      <td>{ListStoreData.weightwarm ? ListStoreData.weightwarm : "-"}</td>
+      <td>{ListStoreData.weight ? ListStoreData.weight : "-"}</td>
+
       <td></td>
       <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td>{ListStoreData.beefroom ? ListStoreData.beefroom : "-"}</td>
+      <td>-</td>
+      <td>-</td>
       <td>{ListStoreData.status}</td>
       <td>-</td>
       <td>
