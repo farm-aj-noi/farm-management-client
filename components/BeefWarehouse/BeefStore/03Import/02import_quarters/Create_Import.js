@@ -83,7 +83,7 @@ const Create_Import = () => {
           });
           MySwal.fire({
             icon: "error",
-            title: <p>เกิดข้อผิดพลาด</p>,
+            title: <p>{error.graphQLErrors[0].message}</p>,
             text: "กรุณากรอกข้อมูลใหม่อีกครั้ง",
             confirmButtonText: <span>ตกลง</span>,
             confirmButtonColor: "#3085d6",
