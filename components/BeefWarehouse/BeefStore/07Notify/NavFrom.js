@@ -143,3 +143,10 @@ export const ButtonExcel = styled.button`
     background: #719f3f;
   }
 `;
+export const DivBase1 = styled.div`
+  display: block;
+  position: absolute;
+  width: 100%;
+  padding-top: 30px;
+  padding-bottom: 130px;
+`;

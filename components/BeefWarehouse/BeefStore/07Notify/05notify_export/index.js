@@ -2,19 +2,23 @@ import React from "react";
 
 import Sidemenu from "../Nav_notify";
 
-import { Icon } from "react-icons-kit";
-import { list } from "react-icons-kit/fa/list";
+import { DivFrom, HeaderColor, DivBase1 } from "../NavFrom";
 
-import { DivBase } from "../../../../../utils/divBase";
-import { DivFrom, DivFromTop, DivFromDown, HeaderColor } from "../NavFrom";
-
-import { Table } from "react-bootstrap";
+import Halveday from "./halveday";
+import Quarterday from "./quarterday";
+import Lumpday from "./lumpday";
+import Chopday from "./chopday";
+import Entrailday from "./entrailday";
 
 const index = () => {
   return (
     <>
       <div
-        style={{ display: "flex", justifyContent: "center", marginTop: "30px" }}
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "30px",
+        }}
       >
         <HeaderColor
           style={{
@@ -26,13 +30,14 @@ const index = () => {
           การแจ้งเตือน
         </HeaderColor>
       </div>
-      <DivBase
+      <DivBase1
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 237.5px 900px 1fr",
+          gridTemplateColumns: "1fr 237.5px 1300px 1fr",
           gridRowGap: "15px",
           gridColumnGap: "50px",
           textAlign: "start",
+
           /*  width:"950px",
         margin:"auto" */
         }}
@@ -46,50 +51,49 @@ const index = () => {
             marginTop: "0px",
           }}
         >
-          <DivFromTop>
-            <div style={{ margin: "-3px 5px 0px 0px" }}>
-              <Icon size={20} icon={list} />
-            </div>
-            รายการเบิกออก
-          </DivFromTop>
-          <DivFromDown>
-            <div
-              style={{
-                margin: "auto",
-                minWidth: "100%",
-                float: "right",
-                marginBottom: "15px",
-                height: "400px",
-              }}
-            >
-              <Table
-                striped
-                bordered
-                responsive
-                hover
-                style={{ margin: "auto" }}
-              >
-                <thead>
-                  <tr style={{ textAlign: "center" }}>
-                    <th>วันที่ปัจจุบัน</th>
-                    <th>จำนวนรายการ</th>
-                    <th>รายละเอียด</th>
-                    <th>ลบ</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr style={{ textAlign: "center" }}>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </Table>
-            </div>
-          </DivFromDown>
+          <Halveday />
         </DivFrom>
-      </DivBase>
+        <DivFrom
+          style={{
+            width: "100%",
+            gridRowEnd: "4",
+            gridColumnStart: "3",
+            marginTop: "0px",
+          }}
+        >
+          <Quarterday />
+        </DivFrom>
+        <DivFrom
+          style={{
+            width: "100%",
+            gridRowEnd: "5",
+            gridColumnStart: "3",
+            marginTop: "0px",
+          }}
+        >
+          <Lumpday />
+        </DivFrom>
+        <DivFrom
+          style={{
+            width: "100%",
+            gridRowEnd: "6",
+            gridColumnStart: "3",
+            marginTop: "0px",
+          }}
+        >
+          <Chopday />
+        </DivFrom>
+        <DivFrom
+          style={{
+            width: "100%",
+            gridRowEnd: "7",
+            gridColumnStart: "3",
+            marginTop: "0px",
+          }}
+        >
+          <Entrailday />
+        </DivFrom>
+      </DivBase1>
     </>
   );
 };

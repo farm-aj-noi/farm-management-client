@@ -53,6 +53,7 @@ const Nav1 = () => {
         }}
         collapseOnSelect
         expand="lg"
+        /*  fixed="top" */
       >
         <Navbar.Brand style={{ padding: "0" }}>
           <Link href="/beefwarehouse">

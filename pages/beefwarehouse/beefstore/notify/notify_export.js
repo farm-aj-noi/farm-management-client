@@ -6,7 +6,7 @@ import Footer from "../../../../components/BeefWarehouse/Footer";
 const notify_export = () => {
   return (
     <BackgroundStore>
-      <Nav />
+      <Nav/>
       <Notify_export />
       <Footer />
     </BackgroundStore>

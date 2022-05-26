@@ -75,7 +75,7 @@ const index = () => {
           </a>
         </form>
       </div>
-      <Link href="">
+      <Link href="/beefwarehouse/beefstore/Allstore/store">
         <StyleAlertCardDown style={{ marginTop: "7px" }}>
           แสดงรายละเอียด
           <div style={{ margin: "-3px 0px 0px auto" }}>
