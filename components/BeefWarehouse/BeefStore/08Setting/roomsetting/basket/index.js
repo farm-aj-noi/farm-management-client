@@ -1,12 +1,9 @@
 import React from "react";
+import { DivFrom, HeaderColor, DivBase1 } from "../../SettingFrom";
 
-import { DivFrom, HeaderColor, DivBase1 } from "../SettingFrom";
+import Nav_setting from "../../Nav_setting";
 
-import Nav_setting from "../Nav_setting";
-
-import Basket from "./basket/basket";
-import Room from "./room/room";
-import Shelf from "./shelf/shelf";
+import Basket from "./basket";
 
 function index() {
   return (
@@ -52,28 +49,6 @@ function index() {
             width: "100%",
             gridRowStart: "2",
             gridRowEnd: "3",
-            gridColumnStart: "3",
-            marginTop: "0px",
-          }}
-        >
-          <Room />
-        </DivFrom>
-        <DivFrom
-          style={{
-            width: "100%",
-            gridRowStart: "3",
-            gridRowEnd: "3",
-            gridColumnStart: "3",
-            marginTop: "0px",
-          }}
-        >
-          <Shelf />
-        </DivFrom>
-        <DivFrom
-          style={{
-            width: "100%",
-            gridRowStart: "4",
-            gridRowEnd: "4",
             gridColumnStart: "3",
             marginTop: "0px",
           }}

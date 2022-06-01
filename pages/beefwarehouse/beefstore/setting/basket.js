@@ -1,16 +1,17 @@
 import React from "react";
 import Nav from "../../../../components/BeefWarehouse/BeefStore/Nav/Nav";
-import Room from "../../../../components/BeefWarehouse/BeefStore/08Setting/roomsetting/room";
 import { BackgroundStore } from "../../../../utils/background";
 import Footer from "../../../../components/BeefWarehouse/Footer";
-const room = () => {
+import Basket from "../../../../components/BeefWarehouse/BeefStore/08Setting/roomsetting/basket";
+
+const basket = () => {
   return (
     <BackgroundStore>
       <Nav />
-      <Room />
+      <Basket />
       <Footer />
     </BackgroundStore>
   );
 };
 
-export default room;
+export default basket;

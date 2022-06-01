@@ -14,31 +14,27 @@ import gql from "graphql-tag";
 import dayjs from "dayjs";
 
 export const QUERY_EXHALVEDAY = gql`
-  query QUERY_EXHALVEDAY {
+  query Query {
     CardExh {
       id
-      importdate
       user {
         name
       }
       halve {
         weightwarm
-        weightcool
-        beeftype {
-          nameTH
-          code
-        }
+        barcode
         imslaughter {
           numcow
           namefarmer
         }
-        barcode
-        status {
+        beeftype {
           nameTH
+          code
         }
       }
-      beefroom {
-        roomname
+      exportdate
+      storestatus {
+        nameTH
       }
     }
   }
@@ -83,61 +79,29 @@ const halveday = () => {
             </thead>
             <tbody>
               {data &&
-                data.CardImh.map((prod) => (
+                data.CardExh.map((prod) => (
                   <tr key={prod.id} style={{ textAlign: "center" }}>
+                    <td>{prod.halve.imslaughter.namefarmer}</td>
+                    <td>{prod.halve.beeftype.nameTH}</td>
                     <td>
-                      {prod.halve.imslaughter.namefarmer
-                        ? prod.halve.imslaughter.namefarmer
-                        : "-"}
-                    </td>
-                    <td>
-                      {prod.halve.beeftype.nameTH
-                        ? prod.halve.beeftype.nameTH
-                        : "-"}
+                      {dayjs(prod.importdate)
+                        .add(543, "year")
+                        .format("DD/MM/YYYY")}
                     </td>
                     <td>
                       {dayjs(prod.importdate)
                         .add(543, "year")
-                        .format("DD/MM/YYYY")
-                        ? dayjs(prod.importdate)
-                            .add(543, "year")
-                            .format("DD/MM/YYYY")
-                        : "-"}
+                        .format("h:mm:ss A")}
                     </td>
-                    <td>
-                      {dayjs(prod.importdate)
-                        .add(543, "year")
-                        .format("h:mm:ss A")
-                        ? dayjs(prod.importdate)
-                            .add(543, "year")
-                            .format("h:mm:ss A")
-                        : "-"}
-                    </td>
-                    <td>
-                      {prod.halve.imslaughter.numcow
-                        ? prod.halve.imslaughter.numcow
-                        : "-"}
-                    </td>
-                    <td>
-                      {prod.halve.beeftype.code
-                        ? prod.halve.beeftype.code
-                        : "-"}
-                    </td>
-                    <td>{prod.halve.barcode ? prod.halve.barcode : "-"}</td>
-                    <td>
-                      {prod.halve.weightwarm ? prod.halve.weightwarm : "-"}
-                    </td>
-                    <td>
-                      {prod.beefroom.roomname ? prod.beefroom.roomname : "-"}
-                    </td>
+                    <td>{prod.halve.imslaughter.numcow}</td>
+                    <td>{prod.halve.beeftype.code}</td>
+                    <td>{prod.halve.barcode}</td>
+                    <td>{prod.halve.weightwarm}</td>
+                    <td>{/* prod.beefroom.roomname */}</td>
                     <td>-</td>
                     <td>-</td>
-                    <td>
-                      {prod.halve.status.nameTH
-                        ? prod.halve.status.nameTH
-                        : "-"}
-                    </td>
-                    <td>{prod.user.name ? prod.user.name : "-"}</td>
+                    <td>{prod.storestatus.nameTH}</td>
+                    <td>{prod.user.name}</td>
                   </tr>
                 ))}
             </tbody>

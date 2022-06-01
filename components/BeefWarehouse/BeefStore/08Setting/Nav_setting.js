@@ -48,13 +48,27 @@ const Nav_setting = (Sidenumber) => {
                     </Nav.Item>
                     <Nav.Item style={{ marginBottom: "5px" }}>
                       <Nav.Link eventKey="2">
+                        <Link href="/beefwarehouse/beefstore/setting/shelf">
+                          <div style={{ width: "100%" }}>ตั้งค่าชั้นจัดเก็บ</div>
+                        </Link>
+                      </Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item style={{ marginBottom: "5px" }}>
+                      <Nav.Link eventKey="3">
+                        <Link href="/beefwarehouse/beefstore/setting/basket">
+                          <div style={{ width: "100%" }}>ตั่งค่าตะกร้าจัดเก็บ</div>
+                        </Link>
+                      </Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item style={{ marginBottom: "5px" }}>
+                      <Nav.Link eventKey="4">
                         <Link href="/beefwarehouse/beefstore/setting/chillroom">
                           <div style={{ width: "100%" }}>ตั่งค่าการบ่ม</div>
                         </Link>
                       </Nav.Link>
                     </Nav.Item>
                     <Nav.Item style={{ marginBottom: "5px" }}>
-                      <Nav.Link eventKey="3">
+                      <Nav.Link eventKey="5">
                         <Link href="/beefwarehouse/beefstore/setting/date">
                           <div style={{ width: "100%" }}>
                             ตั้งค่าวันใกล้หมดอายุ

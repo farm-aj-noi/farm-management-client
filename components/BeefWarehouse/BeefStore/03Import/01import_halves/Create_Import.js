@@ -58,34 +58,30 @@ export const TEST = gql`
 
 const Create_Import = () => {
   const MySwal = withReactContent(Swal);
-  const [barcode, setInputbarcode] = useState("");
+
   const [test1, test11] = useState("");
   /* console.log(test1); */
   const { data } = useQuery(TEST);
   /*  console.log(data); */
 
-  const { data: halveData } = useQuery(ALLHALVELIST, {
-    variables: {
-      barcode: barcode,
-    },
-  });
-  const [barcodeAlert, setBarcodeAlert] = useState(false);
   const { data: dataroom } = useQuery(QUERYROOM);
   const [ImporthalvesInfo, setImporthalvesInfo] = useState({
+    barcode: "",
     beefstore: "6284d7035415c34e54b2fc2c",
     beefroom: "",
   });
+  console.log(ImporthalvesInfo);
   const [success, setSuccess] = useState(false);
   const [createImHalve, { loading, error }] = useMutation(CREATEIMPORTHALVE, {
     variables: {
-      barcode: barcode,
+      barcode: ImporthalvesInfo.barcode,
       beefstore: ImporthalvesInfo.beefstore,
       beefroom: ImporthalvesInfo.beefroom,
     },
     onCompleted: (data) => {
       if (data) {
         setSuccess(true);
-        setInputbarcode({
+        setImporthalvesInfo({
           barcode: "",
         });
         MySwal.fire({
@@ -107,7 +103,7 @@ const Create_Import = () => {
     },
     onError: (error) => {
       if (error) {
-        setInputbarcode({
+        setImporthalvesInfo({
           barcode: "",
         });
         MySwal.fire({
@@ -118,6 +114,12 @@ const Create_Import = () => {
           confirmButtonColor: "#3085d6",
         });
       }
+    },
+  });
+
+  const { data: halveData } = useQuery(ALLHALVELIST, {
+    variables: {
+      barcode: ImporthalvesInfo.barcode,
     },
   });
 
@@ -150,29 +152,16 @@ const Create_Import = () => {
               }}
             >
               <Searchinput
-                value={barcode}
-                onChange={(event) => {
-                  let input = event.target.value;
-                  let value = input.replace(/[^A-Za-z0-9]/gi, "");
-
-                  if (input !== value) {
-                    setBarcodeAlert(true);
-                  } else {
-                    setBarcodeAlert(false);
-                    setInputbarcode(value);
-                  }
+                name="barcode"
+                value={ImporthalvesInfo.barcode}
+                onChange={handleChange}
+                style={{
+                  borderColor: `${!ImporthalvesInfo.barcode ? "red" : ""}`,
                 }}
-                /*  autoFocus
-                onFocus={(e) => e.currentTarget.select()} */
-                style={{ borderColor: `${!barcode ? "red" : ""}` }}
               />
 
-              {!barcode && !barcodeAlert ? (
+              {!ImporthalvesInfo.barcode ? (
                 <label style={{ color: "red" }}>กรุณากรอกบาร์โค้ด</label>
-              ) : barcodeAlert ? (
-                <label style={{ color: "red" }}>
-                  กรุณากรอกตัวเลข,ภาษาอังกฤษ เท่านั้น
-                </label>
               ) : (
                 halveData &&
                 halveData.allhalve === null && (
@@ -227,13 +216,13 @@ const Create_Import = () => {
           >
             <Savebutton1
               disabled={
-                !barcode ||
+                !ImporthalvesInfo.barcode ||
                 !ImporthalvesInfo.beefroom ||
                 halveData.allhalve === null
               }
               style={{
                 backgroundColor: `${
-                  !barcode ||
+                  !ImporthalvesInfo.barcode ||
                   !ImporthalvesInfo.beefroom ||
                   halveData.allhalve === null
                     ? "gray"

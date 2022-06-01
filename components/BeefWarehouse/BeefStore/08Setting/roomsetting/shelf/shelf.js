@@ -5,13 +5,13 @@ import {
   DivFromDown,
   Searchinput,
   Addbutton,
-} from "../SettingFrom";
+} from "../../SettingFrom";
 import {
   Savebuttoncolor,
   Removebuttoncolor,
-} from "../../../../../utils/buttonColor";
+} from "../../../../../../utils/buttonColor";
 
-import { Removebutton } from "../../../../../utils/button";
+import { Removebutton } from "../../../../../../utils/button";
 
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
@@ -23,6 +23,8 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 import Router from "next/router";
+
+import Listshelf from "./Listshelf";
 
 export const QUERYROOM = gql`
   query Query {
@@ -66,6 +68,7 @@ export const CREATETYPEKEEP = gql`
 
 const shelf = () => {
   const MySwal = withReactContent(Swal);
+
   const { data: dataroom } = useQuery(QUERYROOM);
 
   const [idshelf, SetidShelf] = useState(""); //get ID room
@@ -172,7 +175,6 @@ const shelf = () => {
   };
   return (
     <div>
-      {" "}
       <DivFromTop>
         <div style={{ margin: "-3px 5px 0px 0px" }}>
           <Icon size={20} icon={list} />
@@ -181,77 +183,96 @@ const shelf = () => {
       </DivFromTop>
       <DivFromDown>
         {!successCreateShelfname && (
-          <div style={{ display: "grid", gridTemplateColumns: `230px 300px` }}>
+          <>
             <div
-              style={{
-                width: "100%",
-                gridRowStart: "1",
-                gridRowEnd: "1",
-                gridColumnStart: "1",
-              }}
+              style={{ display: "grid", gridTemplateColumns: `230px 300px` }}
             >
-              ห้องจัดเก็บ : {}
-              <select
-                name="beefroom"
-                id="beefroom"
-                value={Infoshelf.beefroom}
-                onChange={hanndleChangeShelfname}
+              <div
                 style={{
-                  height: "38px",
-                  width: "156px",
-                  border: "1px solid #AFAFAF",
-                  borderRadius: "4px",
-                  textAlign: "center",
-                  fontSize: "14px",
+                  width: "100%",
+                  gridRowStart: "1",
+                  gridRowEnd: "1",
+                  gridColumnStart: "1",
                 }}
               >
-                <option value="">เลือก</option>
-                {dataroom &&
-                  dataroom.allRoom.map((prod) => (
-                    <option key={prod.id} value={prod.id}>
-                      {prod.roomname}
-                    </option>
-                  ))}
-              </select>
+                ห้องจัดเก็บ : {}
+                <select
+                  name="beefroom"
+                  id="beefroom"
+                  value={Infoshelf.beefroom}
+                  onChange={hanndleChangeShelfname}
+                  style={{
+                    height: "38px",
+                    width: "156px",
+                    border: "1px solid #AFAFAF",
+                    borderRadius: "4px",
+                    textAlign: "center",
+                    fontSize: "14px",
+                  }}
+                >
+                  <option value="">เลือก</option>
+                  {dataroom &&
+                    dataroom.allRoom.map((prod) => (
+                      <option key={prod.id} value={prod.id}>
+                        {prod.roomname}
+                      </option>
+                    ))}
+                </select>
+              </div>
+              <div
+                style={{
+                  width: "100%",
+                  gridRowStart: "1",
+                  gridRowEnd: "1",
+                  gridColumnStart: "2",
+                  marginTop: "0px",
+                }}
+              >
+                ชื่อชั้นจัดเก็บ : {}
+                <Searchinput
+                  type="text"
+                  id="shelfname"
+                  name="shelfname"
+                  value={Infoshelf.shelfname}
+                  disabled={!Infoshelf.beefroom}
+                  onChange={hanndleChangeShelfname}
+                  style={{
+                    width: "156px",
+                    textAlign: "center",
+                    backgroundColor: `${!Infoshelf.beefroom ? "#ececec" : ""}`,
+                  }}
+                />
+                <Savebuttoncolor
+                  style={{
+                    height: "38px",
+                    width: " 50px",
+                    backgroundColor: `${
+                      !Infoshelf.beefroom || !Infoshelf.shelfname ? "gray" : ""
+                    }`,
+                  }}
+                  disabled={!Infoshelf.beefroom || !Infoshelf.shelfname}
+                  onClick={handleSubmitShelfname}
+                >
+                  บันทึก
+                </Savebuttoncolor>
+              </div>
             </div>
+
             <div
               style={{
-                width: "100%",
-                gridRowStart: "1",
-                gridRowEnd: "1",
-                gridColumnStart: "2",
-                marginTop: "0px",
+                border: "1px solid #AFAFAF",
+                marginTop: "10px",
+                padding: "10px 20px 20px 20px",
+                borderRadius: "4px",
               }}
             >
-              ชื่อชั้นจัดเก็บ : {}
-              <Searchinput
-                type="text"
-                id="shelfname"
-                name="shelfname"
-                value={Infoshelf.shelfname}
-                disabled={!Infoshelf.beefroom}
-                onChange={hanndleChangeShelfname}
-                style={{
-                  width: "156px",
-                  textAlign: "center",
-                  backgroundColor: `${!Infoshelf.beefroom ? "#ececec" : ""}`,
-                }}
-              />
-              <Savebuttoncolor
-                style={{
-                  height: "38px",
-                  width: " 50px",
-                  backgroundColor: `${
-                    !Infoshelf.beefroom || !Infoshelf.shelfname ? "gray" : ""
-                  }`,
-                }}
-                disabled={!Infoshelf.beefroom || !Infoshelf.shelfname}
-                onClick={handleSubmitShelfname}
-              >
-                บันทึก
-              </Savebuttoncolor>
+              รายการชั้นจัดเก็บ :
+              {dataroom &&
+                dataroom.allRoom.map((prod) => (
+                  <Listshelf key={prod.id} Listshelfs={prod} />
+                ))}
             </div>
-          </div>
+          </>
         )}
 
         {successCreateShelfname && (
@@ -471,6 +492,21 @@ const shelf = () => {
                 </div>
               );
             })}
+            <div
+              style={{
+                border: "1px solid #AFAFAF",
+                marginTop: "10px",
+                padding: "10px 20px 20px 20px",
+                borderRadius: "4px",
+              }}
+            >
+              {" "}
+              รายการชั้นจัดเก็บ :
+              {dataroom &&
+                dataroom.allRoom.map((prod) => (
+                  <Listshelf key={prod.id} Listshelfs={prod} />
+                ))}
+            </div>
           </>
         )}
       </DivFromDown>

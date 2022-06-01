@@ -7,25 +7,26 @@ import {
   HeaderColor,
   Searchinput,
   Addbutton,
-} from "../SettingFrom";
+  DivBase1,
+} from "../../SettingFrom";
 import {
   Savebuttoncolor,
   Editbuttoncolor,
   Removebuttoncolor,
-} from "../../../../../utils/buttonColor";
+} from "../../../../../../utils/buttonColor";
 
 import {
   Savebutton,
   Editbutton,
   Removebutton,
-} from "../../../../../utils/button";
+} from "../../../../../../utils/button";
 
-import { DivBase } from "../../../../../utils/divBase";
+import { DivBase } from "../../../../../../utils/divBase";
 
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
 
-import Nav_setting from "../Nav_setting";
+import Nav_setting from "../../Nav_setting";
 
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
@@ -34,6 +35,9 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 import Router from "next/router";
+
+import List from "./Listroom";
+import Editname from "./editname";
 
 export const CREATEROOMS = gql`
   mutation CREATEROOMS($roomname: String) {
@@ -63,8 +67,28 @@ export const CREATETYPEKEEP = gql`
   }
 `;
 
+export const QUERYROOMS = gql`
+  query QUERYROOMS {
+    allRoom {
+      id
+      roomname
+      typekeep {
+        id
+        totalbeef
+        beeftype {
+          id
+          nameTH
+        }
+      }
+    }
+  }
+`;
+
 const room = () => {
   const MySwal = withReactContent(Swal);
+  const { data: dataroom } = useQuery(QUERYROOMS);
+  console.log(dataroom);
+  /*  console.log(data); */
   const [idroom, SetidRoom] = useState(""); //get ID room
   const [successCreateRoomName, setSuccessCreateRoomName] = useState(false); //done room name
   const [Inforoomname, SetInforoomName] = useState({
@@ -104,10 +128,10 @@ const room = () => {
       beeftype: "",
     }, //get totalbeef & beeftype room
   ]);
+
   const [createtypekeep] = useMutation(CREATETYPEKEEP, {
     onCompleted: (data) => {
       if (data) {
-        //
         MySwal.fire({
           icon: "success",
           title: "สำเร็จ",
@@ -166,9 +190,10 @@ const room = () => {
     }
   };
 
+  const [edit, setedit] = useState(false);
+
   return (
     <div>
-      {" "}
       <DivFromTop>
         <div style={{ margin: "-3px 5px 0px 0px" }}>
           <Icon size={20} icon={list} />
@@ -199,6 +224,35 @@ const room = () => {
               >
                 บันทึก
               </Savebuttoncolor>
+            </div>
+            <div
+              style={{
+                border: "1px solid #AFAFAF",
+                marginTop: "10px",
+                padding: "10px 20px 20px 20px",
+                borderRadius: "4px",
+              }}
+            >
+              รายการห้องจัดเก็บ :
+              {dataroom &&
+                dataroom.allRoom.map((prod) => (
+                  <>
+                    <div
+                      style={{
+                        display: "grid",
+                        gridTemplateColumns: `200px 200px 200px 
+               200px`,
+                        marginTop: "10px",
+                        marginLeft: "30px",
+                        paddingBottom: "20px",
+                        borderBottom: "1px solid #AFAFAF",
+                      }}
+                    >
+                      <Editname key={prod.id} idroom={prod} />
+                      <List key={prod.id} idroom={prod} />
+                    </div>
+                  </>
+                ))}
             </div>
           </>
         )}

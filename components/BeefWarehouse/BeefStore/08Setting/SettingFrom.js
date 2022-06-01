@@ -155,8 +155,8 @@ export const Addbutton = styled.button`
   display: inline-block;
   font-weight: 400;
   color: ${white};
-  width:94px;
-  background-color: #EBB4F1;
+  width: 94px;
+  background-color: #ebb4f1;
   text-align: center;
   vertical-align: middle;
   -webkit-user-select: none;
@@ -169,6 +169,13 @@ export const Addbutton = styled.button`
   border-radius: 0.25rem;
 
   &:hover {
-    background-color: #F29FFC ;
+    background-color: #f29ffc;
   }
+`;
+export const DivBase1 = styled.div`
+  display: block;
+  position: absolute;
+  width: 100%;
+  padding-top: 30px;
+  padding-bottom: 130px;
 `;

@@ -20,30 +20,39 @@ export const EXPORTHALVESSEARCH = gql`
     $startdate: String
     $enddate: String
     $beeftype: String
+    $namefarmer: String
     $userName: String
   ) {
     exporthalve(
       startdate: $startdate
       enddate: $enddate
       beeftype: $beeftype
+      namefarmer: $namefarmer
       userName: $userName
     ) {
       id
+      exporter {
+        name
+      }
       exportdate
       user {
         name
       }
       halve {
         weightwarm
+        weightcool
         barcode
-        imslaughter {
-          numcow
-          namefarmer
-        }
         beeftype {
           code
           nameTH
         }
+        imslaughter {
+          numcow
+          namefarmer
+        }
+      }
+      beefroom {
+        roomname
       }
       storestatus {
         nameTH
@@ -65,6 +74,8 @@ const index = () => {
       userName: inputusername,
     },
   });
+  console.log(data);
+
   return (
     <>
       <div

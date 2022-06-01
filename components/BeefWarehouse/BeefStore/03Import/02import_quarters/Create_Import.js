@@ -126,7 +126,15 @@ const Create_Import = () => {
                 name="barcode"
                 value={ImportQuarterInfo.barcode}
                 onChange={handleChange}
+                style={{
+                  borderColor: `${!ImportQuarterInfo.barcode ? "red" : ""}`,
+                }}
               />
+              {!ImportQuarterInfo.barcode ? (
+                <label style={{ color: "red" }}>กรุณากรอกบาร์โค้ด</label>
+              ) : (
+                ""
+              )}
             </div>
           </DivFromInsideLeft>
           <DivFromInsideLeft style={{ marginTop: "5px" }}>
@@ -141,6 +149,7 @@ const Create_Import = () => {
                 <select
                   name="beefroom"
                   id="beefroom"
+                  value={ImportQuarterInfo.beefroom}
                   onChange={handleChange}
                   style={{
                     height: "35px",
@@ -174,8 +183,16 @@ const Create_Import = () => {
           >
             <Savebutton1
               disabled={
-                loading
-              } /* style={{float:"right",marginRight:"10px"}} */
+                !ImportQuarterInfo.barcode || !ImportQuarterInfo.beefroom
+              }
+              style={{
+                backgroundColor: `${
+                  !ImportQuarterInfo.barcode || !ImportQuarterInfo.beefroom
+                    ? "gray"
+                    : ""
+                }`,
+              }}
+              onClick={handleSubmit}
             >
               บันทึก
             </Savebutton1>

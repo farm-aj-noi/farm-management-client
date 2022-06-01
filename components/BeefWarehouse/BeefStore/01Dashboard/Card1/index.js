@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import { DivAlertCard, StyleAlertCardDown } from "../StyleDashboard";
 import { Logobeefstore } from "../../../../../utils/image";
@@ -8,10 +8,30 @@ import { fileText } from "react-icons-kit/fa/fileText";
 
 import Link from "next/link";
 
+import dayjs from "dayjs";
+import "dayjs/locale/th";
+
 const index = () => {
+  const [date, setDate] = useState();
+  const datetest = () => {
+    setDate(
+      dayjs()
+        .locale("th")
+        .add(543, "year")
+        .format("วันที่ D MMMM พ.ศ.YYYY เวลา hh:mm น.")
+    );
+  };
+
+  useEffect(() => {
+    const interval = setInterval(datetest, 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
   return (
     <DivAlertCard style={{ backgroundColor: "#0DE9BD" }}>
-      <div
+      {/*  <div
         style={{
           display: "flex",
           justifyContent: "center",
@@ -31,12 +51,13 @@ const index = () => {
         <a
           style={{
             color: "#ffffff",
-            marginLeft: "30px",
+            marginLeft: "40px",
             marginTop: "15px",
+            fontSize: "19px",
+            textAlign: "right",
           }}
         >
-          วันที่ 22 เดือน พฤศจิกายน
-          <br /> ปี พ.ศ.2565 เวลา 14.00 น.
+          {date}
         </a>
       </div>
       <div
@@ -59,16 +80,45 @@ const index = () => {
         >
           ยินดีต้อนรับสู่ระบบคลังชิ้นเนื้อ
         </h>
+      </div> */}
+      <div
+        style={{
+          position: "absolute",
+          margin: "110px 0 0 15px",
+          width: "90%",
+          textAlign: "center",
+          background: "#FEF5DB",
+          padding: "6px 0px 0px 0",
+          color: "#AC4B75",
+          borderRadius: "2px",
+          height: "32px",
+          
+        }}
+      >
+        ยินดีต้อนรับสู่ระบบคลังชิ้นเนื้อ
       </div>
-
-      {/*  <Link href="">
-        <StyleAlertCardDown>
-          แสดงรายละเอียด
-          <div style={{ margin: "-3px 0px 0px auto" }}>
-            <Icon size={20} icon={fileText} />
-          </div>
-        </StyleAlertCardDown>
-      </Link> */}
+      <div
+        style={{
+          height: "75%",
+          padding: "10px 10px 0px 10px",
+          display: "inline-flex",
+          width: "100%",
+        }}
+      >
+        <div style={{ width: "fit-content" }}>
+          {" "}
+          <Logobeefstore height="80px" weight="80px" />
+        </div>
+        <div
+          style={{
+            textAlign: "right",
+            fontSize: "20px",
+            padding: "15px 10px 0 0",
+          }}
+        >
+          {date}
+        </div>
+      </div>
     </DivAlertCard>
   );
 };

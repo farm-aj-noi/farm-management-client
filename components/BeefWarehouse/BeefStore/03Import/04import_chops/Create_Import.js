@@ -157,10 +157,18 @@ const Create_Import = () => {
                 name="barcode"
                 value={ImportchopsInfo.barcode}
                 onChange={handleChange}
+                style={{
+                  borderColor: `${!ImportchopsInfo.barcode ? "red" : ""}`,
+                }}
               />
+              {!ImportchopsInfo.barcode ? (
+                <label style={{ color: "red" }}>กรุณากรอกบาร์โค้ด</label>
+              ) : (
+                ""
+              )}
             </div>
           </DivFromInsideLeft>
-          <DivFromInsideLeft>
+          <DivFromInsideLeft style={{ marginTop: "5px" }}>
             ตำแหน่ง :
             <div
               style={{
