@@ -19,11 +19,13 @@ import { Removebuttoncolor } from "../../../../../utils/buttonColor";
 
 import { Removebutton } from "../../../../../utils/button";
 
+import Deltereq from "./deletereq";
 import Paper_request from "./paper_request";
 
 export const QUERYREQUESTEX = gql`
   query QUERYREQUESTEX {
     listRequestEx {
+      id
       name
       quantity
       requestdate
@@ -117,9 +119,7 @@ const index = () => {
                         <td></td>
                         <td>{prod.quantity}</td>
                         <td>
-                          <Removebuttoncolor>
-                            <Removebutton />
-                          </Removebuttoncolor>
+                          <Deltereq key={prod.id} listreq={prod} />
                         </td>
                       </tr>
                     ))}

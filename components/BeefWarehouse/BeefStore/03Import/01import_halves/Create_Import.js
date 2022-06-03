@@ -58,11 +58,11 @@ export const TEST = gql`
 
 const Create_Import = () => {
   const MySwal = withReactContent(Swal);
-
   const [test1, test11] = useState("");
   /* console.log(test1); */
   const { data } = useQuery(TEST);
   /*  console.log(data); */
+  
 
   const { data: dataroom } = useQuery(QUERYROOM);
   const [ImporthalvesInfo, setImporthalvesInfo] = useState({
@@ -105,6 +105,7 @@ const Create_Import = () => {
       if (error) {
         setImporthalvesInfo({
           barcode: "",
+          beefroom:"",
         });
         MySwal.fire({
           icon: "error",
@@ -166,6 +167,7 @@ const Create_Import = () => {
                 halveData &&
                 halveData.allhalve === null && (
                   <label style={{ color: "red" }}>ไม่พบข้อมูล</label>
+                  
                 )
               )}
             </div>

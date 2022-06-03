@@ -201,7 +201,6 @@ const index = () => {
                   </label>
                   <input
                     type="date"
-                    id="ex_chill"
                     name="date"
                     style={{
                       height: "35px",
@@ -220,11 +219,10 @@ const index = () => {
                       margin: "10px 10px",
                     }}
                   >
-                    ถึงวันที่
+                    วันที่บ่มเสร็จ
                   </label>
                   <input
                     type="date"
-                    id="ex_chill"
                     name="date"
                     style={{
                       height: "35px",
@@ -266,6 +264,7 @@ const index = () => {
                   <thead>
                     <tr style={{ textAlign: "center" }}>
                       <th>ผู้บ่มซาก</th>
+                      <th>วันที่บ่ม</th>
                       <th>วันที่บ่มเสร็จ</th>
                       <th>เวลา</th>
                       <th>ประเภทซาก</th>

@@ -45,6 +45,7 @@ export const IMPORTHALVESEARCH = gql`
       }
       halve {
         weightwarm
+        weightcool
         barcode
         status {
           nameTH
@@ -65,14 +66,13 @@ export const IMPORTHALVESEARCH = gql`
   }
 `;
 
-
-
 const index = () => {
   const [selectedbeeftypehalve, SetBeeftypeHalveChange] = useState("");
   const [selectedstartdate, SetStartDateChange] = useState("");
   const [selectedenddate, SetEndDateChange] = useState("");
   const [inputnamefarmer, SetInputnamefarmer] = useState("");
   const [inputusername, SetInputusername] = useState("");
+  const [allweightwarm, setweightwarm] = useState("");
   const { data, loading, error } = useQuery(IMPORTHALVESEARCH, {
     variables: {
       beeftype: selectedbeeftypehalve,
@@ -410,7 +410,8 @@ const index = () => {
                       <th>รหัสซาก</th>
                       <th>รหัสบาร์โค้ด</th>
                       <th>คิวอาร์โค้ด</th>
-                      <th>น้ำหนัก</th>
+                      <th>น้ำหนักอุ่น</th>
+                      <th>น้ำหนักเย็น</th>
                       <th>ห้อง</th>
                       <th>ชั้น</th>
                       <th>ตะกร้า</th>
@@ -425,6 +426,13 @@ const index = () => {
                       ))}
                   </tbody>
                 </Table>
+              </div>
+
+              <div style={{ float: "right", textAlign: "right" }}>
+                จำนวนรายการ {data ? data.imhalveSearch.length : "0"} รายการ
+                <br />
+                น้ำหนักอุ่น {} กิโลกรัม /
+                น้ำหนักเย็น {} กิโลกรัม
               </div>
             </DivFromDown>
           </DivFrom>

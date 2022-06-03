@@ -18,7 +18,6 @@ import Nav_store from "../Nav_store";
 export const STORELIST = gql`
   query STORELIST($beeftype: String, $type: String) {
     liststore(beeftype: $beeftype, type: $type) {
-      id
       barcode
       status
       cownum
@@ -43,6 +42,7 @@ const index = () => {
       type: selecttype,
     },
   });
+  console.log(selectedbeeftype);
   return (
     <DivBase>
       <div
@@ -117,8 +117,8 @@ const index = () => {
                     ซาก
                   </label>
                   <select
-                    name="beef"
-                    id="beef"
+                    name="type"
+                    id="type"
                     style={{
                       height: "35px",
                       width: "120px",
@@ -147,8 +147,8 @@ const index = () => {
                     ประเภทซาก
                   </label>
                   <select
-                    name="beef"
-                    id="beef"
+                    name="beeftype"
+                    id="beeftype"
                     style={{
                       height: "35px",
                       width: "120px",

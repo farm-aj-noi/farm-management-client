@@ -29,8 +29,8 @@ export const CHILLSEARCHLIST = gql`
   ) {
     listchill(startdate: $startdate, enddate: $enddate, beeftype: $beeftype) {
       id
-      chilldate
-      chillday
+      chilldateStart
+      chilldateEnd
       chillroom {
         roomnum
       }
@@ -48,8 +48,13 @@ export const CHILLSEARCHLIST = gql`
           numcow
         }
       }
-      storestatus {
+      chillstatus {
+        id
         nameTH
+      }
+      chillday {
+        id
+        day
       }
     }
   }
@@ -221,6 +226,7 @@ const index = () => {
               <thead>
                 <tr style={{ textAlign: "center" }}>
                   <th>ผู้บ่มซาก</th>
+                  <th>วันที่บ่ม</th>
                   <th>วันที่บ่มเสร็จ</th>
                   <th>เวลา</th>
                   <th>ประเภทซาก</th>
@@ -239,23 +245,31 @@ const index = () => {
                     <tr style={{ textAlign: "center" }}>
                       <td>{prod.user.name}</td>
                       <td>
-                        {dayjs(prod.chilldate)
+                        {dayjs(prod.chilldateStart)
+                          .locale("th")
                           .add(543, "year")
                           .format("DD/MM/YYYY")}
                       </td>
                       <td>
-                        {dayjs(prod.chilldate)
+                        {dayjs(prod.chilldateEnd)
+                          .locale("th")
+                          .add(543, "year")
+                          .format("DD/MM/YYYY")}
+                      </td>
+                      <td>
+                        {dayjs(prod.chilldateEnd)
+                          .locale("th")
                           .add(543, "year")
                           .format("h:mm:ss A")}
                       </td>
                       <td>{prod.halve.beeftype.nameTH}</td>
-                      <td>{prod.chillday}</td>
+                      <td>{prod.chillday.day} วัน</td>
                       <td>{prod.halve.imslaughter.numcow}</td>
                       <td>{prod.halve.beeftype.code}</td>
                       <td>{prod.halve.barcode}</td>
                       <td>{prod.halve.weightwarm}</td>
                       <td>{prod.chillroom.roomnum}</td>
-                      <td>{prod.storestatus.nameTH}</td>
+                      <td>{prod.chillstatus.nameTH}</td>
                     </tr>
                   ))}
               </tbody>

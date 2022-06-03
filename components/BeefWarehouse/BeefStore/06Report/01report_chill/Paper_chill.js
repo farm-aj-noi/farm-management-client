@@ -41,6 +41,7 @@ const Paper_chill = ({ prod }) => {
 
     body.push([
       "ผู้บ่มซาก",
+      "วันที่บ่ม",
       "วันที่บ่มเสร็จ",
       "ประเภทซาก",
       "จำนวนวันที่บ่ม",
@@ -58,12 +59,18 @@ const Paper_chill = ({ prod }) => {
       var dataRow = [];
 
       columns.forEach(function (column) {
-        if (column === "chilldate") {
+        if (column === "chilldateEnd") {
+          dataRow.push(
+            dayjs(row[column]).add(543, "y").locale("th").format("DD MMMM YYYY")
+          );
+        } else if (column === "chilldateStart") {
           dataRow.push(
             dayjs(row[column]).add(543, "y").locale("th").format("DD MMMM YYYY")
           );
         } else if (column === "halve.beeftype.nameTH") {
           dataRow.push(row.halve.beeftype.nameTH);
+        } else if (column === "chillday.day") {
+          dataRow.push(row.chillday.day);
         } else if (column == "halve.imslaughter.numcow") {
           dataRow.push(row.halve.imslaughter.numcow);
         } else if (column === "halve.beeftype.code") {
@@ -72,8 +79,8 @@ const Paper_chill = ({ prod }) => {
           dataRow.push(row.halve.barcode);
         } else if (column === "halve.weightwarm") {
           dataRow.push(row.halve.weightwarm);
-        } else if (column === "storestatus.nameTH") {
-          dataRow.push(row.storestatus.nameTH);
+        } else if (column === "chillstatus.nameTH") {
+          dataRow.push(row.chillstatus.nameTH);
         } else if (column === "user.name") {
           dataRow.push(row.user.name);
         } else if (column === "chillroom.roomnum") {
@@ -100,14 +107,15 @@ const Paper_chill = ({ prod }) => {
         headerRows: 1,
         // alignment: 'center'
         widths: [
+          "star",
+          "star",
+          "star",
+          "star",
           "auto",
+          "star",
           "auto",
           "star",
-          "star",
-          "star",
-          "star",
-          "star",
-          "star",
+          "auto",
           "auto",
           "auto",
         ],
@@ -122,7 +130,7 @@ const Paper_chill = ({ prod }) => {
 
   const printPDF = () => {
     var docDefinition = {
-       pageSize: "A4",
+      pageSize: "A4",
       pageOrientation: "landscape",
       pageMargins: [40, 40, 40, 120],
       content: [
@@ -151,15 +159,16 @@ const Paper_chill = ({ prod }) => {
         },
         table(data, [
           "user.name",
-          "chilldate",
+          "chilldateStart",
+          "chilldateEnd",
           "halve.beeftype.nameTH",
-          "chillday",
+          "chillday.day",
           "halve.imslaughter.numcow",
           "halve.beeftype.code",
           "halve.barcode",
           "halve.weightwarm",
           "chillroom.roomnum",
-          "storestatus.nameTH",
+          "chillstatus.nameTH",
         ]),
       ],
 

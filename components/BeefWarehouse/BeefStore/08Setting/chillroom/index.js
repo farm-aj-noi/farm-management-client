@@ -31,6 +31,7 @@ import withReactContent from "sweetalert2-react-content";
 import Router from "next/router";
 
 import ListChill from "./listChill";
+import ListChillroom from "./listChillroom";
 
 export const CREATECHILLDAY = gql`
   mutation CREATECHILLDAY($day: String) {
@@ -59,16 +60,82 @@ export const CREATECHILLROOM = gql`
   }
 `;
 
+export const QUERYCHILLROOM = gql`
+  query QUERYCHILLROOM {
+    listChillroom {
+      id
+      roomnum
+    }
+  }
+`;
+
 const index = () => {
   const MySwal = withReactContent(Swal);
   const { data } = useQuery(LISTCHILLDAY);
+  const { data: datachillroom } = useQuery(QUERYCHILLROOM);
   const [chillday, setChillday] = useState({
     day: "",
   });
   const [chillroom, setChillroom] = useState({
     roomnum: "",
   });
-  const [createChillroom, { loading, error }] = useMutation(CREATECHILLROOM);
+  const [createChillroom, { loading, error }] = useMutation(CREATECHILLROOM, {
+    variables: {
+      roomnum: chillroom.roomnum,
+    },
+    onCompleted: (data) => {
+      if (data) {
+        setChillroom({
+          roomnum: "",
+        });
+        MySwal.fire({
+          icon: "success",
+          title: "สำเร็จ",
+          text: "ตั้งค่าห้องบ่มเสร็จสิ้น",
+          confirmButtonText: (
+            <span
+              onClick={() =>
+                Router.reload("beefwarehouse/beefstore/setting/chillroom")
+              }
+            >
+              ตกลง
+            </span>
+          ),
+          confirmButtonColor: "#3085d6",
+        });
+      }
+    },
+    onError: (error) => {
+      if (error) {
+        setChillroom({
+          roomnum: "",
+        });
+        MySwal.fire({
+          icon: "error",
+          title: <p>{error.graphQLErrors[0].message}</p>,
+          text: "กรุณากรอกข้อมูลใหม่อีกครั้ง",
+          confirmButtonText: <span>ตกลง</span>,
+          confirmButtonColor: "#3085d6",
+        });
+      }
+    },
+  });
+
+  const handleChange1 = (e) => {
+    setChillroom({
+      ...chillroom,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit1 = async (e) => {
+    try {
+      e.preventDefault();
+      await createChillroom();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const [createChillday] = useMutation(CREATECHILLDAY, {
     variables: {
@@ -149,7 +216,7 @@ const index = () => {
       <DivBase
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 200px 1000px 1fr",
+          gridTemplateColumns: "1fr 200px 450px 450px 1fr",
           gridRowGap: "15px",
           gridColumnGap: "20px",
           textAlign: "start",
@@ -179,7 +246,7 @@ const index = () => {
             <div style={{ margin: "-3px 5px 0px 0px" }}>
               <Icon size={20} icon={list} />
             </div>
-            บันทึกตั้งค่าการบ่ม
+            บันทึกตั้งค่าระยะเวลาบ่ม
           </DivFromTop>
           <DivFromDown>
             <div>
@@ -222,6 +289,65 @@ const index = () => {
                   <ListChill key={prod.id} listchill={prod} />
                 ))}
             </div>
+          </DivFromDown>
+        </DivFrom>
+        <DivFrom
+          style={{
+            width: "100%",
+            marginTop: "0",
+            gridRowStart: "2",
+            gridRowEnd: "5",
+            gridColumnStart: "4",
+          }}
+        >
+          <DivFromTop>
+            <div style={{ margin: "-3px 5px 0px 0px" }}>
+              <Icon size={20} icon={list} />
+            </div>
+            บันทึกตั้งค่าห้องบ่ม
+          </DivFromTop>
+          <DivFromDown>
+            <>
+              <div>
+                ชื่อห้องบ่ม : {}
+                <Searchinput
+                  type="text"
+                  id="roomnum"
+                  name="roomnum"
+                  value={chillroom.roomnum}
+                  onChange={handleChange1}
+                  style={{ width: "150px", textAlign: "center" }}
+                />
+                <Savebuttoncolor
+                  style={{
+                    height: "38px",
+                    width: " 50px",
+                    marginLeft: "10px",
+                    backgroundColor: `${!chillroom.roomnum ? "gray" : ""}`,
+                  }}
+                  disabled={!chillroom.roomnum}
+                  onClick={handleSubmit1}
+                >
+                  บันทึก
+                </Savebuttoncolor>
+              </div>
+              <div
+                style={{
+                  border: "1px solid #AFAFAF",
+                  marginTop: "10px",
+                  padding: "10px 20px 20px 20px",
+                  borderRadius: "4px",
+                  width: "fit-content",
+                  height: "fit-content",
+                }}
+              >
+                รายการห้องบ่ม :
+                {datachillroom &&
+                  datachillroom.listChillroom.map((prod) => (
+                    <ListChillroom key={prod.id} listchillroom={prod} />
+                  ))}
+              </div>
+            </>
           </DivFromDown>
         </DivFrom>
       </DivBase>

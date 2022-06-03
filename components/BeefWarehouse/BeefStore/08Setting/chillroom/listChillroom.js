@@ -1,32 +1,33 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
-import Router from "next/router";
-export const DELETECHILLDAY = gql`
-  mutation DELETECHILLDAY($id: ID) {
-    deleteChillday(id: $id) {
-      id
-      day
-    }
-  }
-`;
 import {
   Savebuttoncolor,
   Editbuttoncolor,
   Removebuttoncolor,
 } from "../../../../../utils/buttonColor";
-const listChill = ({ listchill }) => {
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import Router from "next/router";
+export const DELETECHILLROOM = gql`
+  mutation DELETECHILLROOM($id: ID) {
+    deleteChillroom(id: $id) {
+      id
+      roomnum
+    }
+  }
+`;
+
+const listChillroom = ({ listchillroom }) => {
   const MySwal = withReactContent(Swal);
-  const [chilldayInfo, setChilldayInfo] = useState(listchill);
-  const [deleteChillday] = useMutation(DELETECHILLDAY, {
+  const [infochillroom, setinfochillroom] = useState(listchillroom);
+  const [deleteChillroom] = useMutation(DELETECHILLROOM, {
     onCompleted: (data) => {
       if (data) {
         MySwal.fire({
           icon: "success",
           title: "สำเร็จ",
-          text: "ลบระยะเวลาบ่มเสร็จสิ้น",
+          text: "ลบห้องบ่มเสร็จสิ้น",
           confirmButtonText: (
             <span
               onClick={() =>
@@ -44,9 +45,9 @@ const listChill = ({ listchill }) => {
 
   const handdleSubmitDelete = async () => {
     try {
-      await deleteChillday({
+      await deleteChillroom({
         variables: {
-          id: chilldayInfo.id,
+          id: infochillroom.id,
         },
       });
     } catch (error) {
@@ -55,7 +56,7 @@ const listChill = ({ listchill }) => {
   };
   return (
     <>
-      {chilldayInfo.day} วัน
+      {infochillroom.roomnum}
       <Removebuttoncolor
         style={{
           marginTop: "5px",
@@ -70,4 +71,4 @@ const listChill = ({ listchill }) => {
   );
 };
 
-export default listChill;
+export default listChillroom;

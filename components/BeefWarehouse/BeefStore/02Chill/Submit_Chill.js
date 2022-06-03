@@ -33,8 +33,18 @@ export const LISTCHILLDAY = gql`
   }
 `;
 
+export const LISTCHILLROOM = gql`
+  query QUERYCHILLROOM {
+    listChillroom {
+      id
+      roomnum
+    }
+  }
+`;
+
 const Submit_Chill = () => {
   const MySwal = withReactContent(Swal);
+  const { data: chillroom } = useQuery(LISTCHILLROOM);
   const { data } = useQuery(LISTCHILLDAY);
   const [ImportChillInfo, setChillInfo] = useState({
     barcode: "",
@@ -69,6 +79,8 @@ const Submit_Chill = () => {
       if (error) {
         setChillInfo({
           barcode: "",
+          chillroom: "",
+          chillday: "",
         });
         MySwal.fire({
           icon: "error",
@@ -115,10 +127,18 @@ const Submit_Chill = () => {
                 name="barcode"
                 value={ImportChillInfo.barcode}
                 onChange={handleChange}
+                style={{
+                  borderColor: `${!ImportChillInfo.barcode ? "red" : ""}`,
+                }}
               />
+              {!ImportChillInfo.barcode ? (
+                <label style={{ color: "red" }}>กรุณากรอกบาร์โค้ด</label>
+              ) : (
+                ""
+              )}
             </div>
           </DivFromInsideLeft>
-          <DivFromInsideLeft>
+          <DivFromInsideLeft style={{ marginTop: "5px" }}>
             ระยะเวลาบ่ม :
             <div
               style={{
@@ -141,7 +161,7 @@ const Submit_Chill = () => {
                   value={ImportChillInfo.chillday}
                   onChange={handleChange}
                 >
-                  <option value="">เลือก</option>
+                  <option value="">ระยะเวลาบ่ม</option>
                   {data &&
                     data.listChillday.map((prod) => (
                       <option key={prod.id} value={prod.id}>
@@ -175,9 +195,13 @@ const Submit_Chill = () => {
                   value={ImportChillInfo.chillroom}
                   onChange={handleChange}
                 >
-                  <option value="">เลือก</option>
-                  <option value="627e24744627c3040cc91681">1</option>
-                  <option value="627e24e59e816d47d491f6db">2</option>
+                  <option value="">ห้องบ่ม</option>
+                  {chillroom &&
+                    chillroom.listChillroom.map((prod) => (
+                      <option key={prod.id} value={prod.id}>
+                        {prod.roomnum}
+                      </option>
+                    ))}
                 </select>
               </div>
             </div>

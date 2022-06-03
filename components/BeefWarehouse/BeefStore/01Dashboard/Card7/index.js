@@ -7,7 +7,21 @@ import Icon from "react-icons-kit";
 import { fileText } from "react-icons-kit/fa/fileText";
 
 import Link from "next/link";
+
+import { useQuery } from "@apollo/react-hooks";
+import gql from "graphql-tag";
+
+export const EXCHILL = gql`
+  query EXCHILL {
+    Card10 {
+      id
+      chilldateStart
+    }
+  }
+`;
+
 const index = () => {
+  const { data: datachill } = useQuery(EXCHILL);
   return (
     <DivAlertCard style={{ backgroundColor: "#6156D8" }}>
       <div
@@ -43,7 +57,7 @@ const index = () => {
               height: "62px",
             }}
           >
-            0
+            {datachill ? datachill.Card10.length : "0"}
           </div>
           <a
             style={{
