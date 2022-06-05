@@ -29,7 +29,6 @@ const List_chill = ({ listchill }) => {
   const checkdate = dayjs().format("YYYY-MM-DDTHH:mm:ssZ[Z]");
   console.log(checkdate);
 
-
   const [ListChillInfo, SetListChillInfo] = useState(listchill);
   console.log(ListChillInfo.chilldateEnd);
   /*  console.log(ListChillInfo.chillstatus); */
@@ -96,7 +95,8 @@ const List_chill = ({ listchill }) => {
       <td>{ListChillInfo.chillroom.roomnum}</td>
       <td>{ListChillInfo.chillstatus.nameTH}</td>
       <td>
-        {checkdate >= dayjs(ListChillInfo.chilldateEnd).format("YYYY-MM-DDTHH:mm:ssZ[Z]") ? (
+        {checkdate >=
+        dayjs(ListChillInfo.chilldateEnd).format("YYYY-MM-DDTHH:mm:ssZ[Z]") ? (
           <div>
             <Savebuttoncolor
               disabled={
