@@ -41,14 +41,30 @@ export const UPDATEROOMNAME = gql`
 `;
 
 const editname = ({ idroom }) => {
+  const MySwal = withReactContent(Swal);
   const [Editname, setEditname] = useState(false);
   const [Roominfo, setRoominfo] = useState(idroom);
- /*  console.log(Roominfo); */
+  /*  console.log(Roominfo); */
 
   const [updateBeefroom] = useMutation(UPDATEROOMNAME, {
     onCompleted: (data) => {
       setRoominfo(data.updateBeefroom);
       setEditname(false);
+      MySwal.fire({
+        icon: "success",
+        title: "สำเร็จ",
+        text: "ทำการแก้ไขข้อมูลเสร็จสิ้น",
+        confirmButtonText: (
+          <span
+            onClick={() =>
+              Router.reload("beefwarehouse/beefstore/setting/room")
+            }
+          >
+            ตกลง
+          </span>
+        ),
+        confirmButtonColor: "#3085d6",
+      });
     },
   });
   const handleChangename = (e) => {
@@ -85,9 +101,6 @@ const editname = ({ idroom }) => {
           }}
         >
           ชื่อห้องจัดเก็บ : {}
-          <Savebuttoncolor onClick={handleSubmitname}>
-            <Savebutton />
-          </Savebuttoncolor>
           <Searchinput
             name="roomname"
             value={Roominfo.roomname}
@@ -95,8 +108,12 @@ const editname = ({ idroom }) => {
             style={{
               marginTop: "10px",
               textAlign: "center",
+              width: "140px",
             }}
           ></Searchinput>
+          <Savebuttoncolor onClick={handleSubmitname}>
+            <Savebutton />
+          </Savebuttoncolor>
         </div>
       ) : (
         <>
@@ -109,17 +126,18 @@ const editname = ({ idroom }) => {
             }}
           >
             ชื่อห้องจัดเก็บ : {}
-            <Editbuttoncolor onClick={() => setEditname(true)}>
-              <Editbutton />
-            </Editbuttoncolor>
             <Searchinput
               value={Roominfo.roomname}
               style={{
                 marginTop: "10px",
                 textAlign: "center",
+                width: "140px",
               }}
               disabled
             ></Searchinput>
+            <Editbuttoncolor onClick={() => setEditname(true)}>
+              <Editbutton />
+            </Editbuttoncolor>
           </div>{" "}
         </>
       )}

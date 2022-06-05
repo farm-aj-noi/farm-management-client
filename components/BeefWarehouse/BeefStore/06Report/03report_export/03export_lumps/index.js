@@ -29,14 +29,17 @@ export const CREATEEXPORTLUMP = gql`
     $enddate: String
     $beeftype: String
     $userName: String
+    $exporter: String
   ) {
     exportlump(
       startdate: $startdate
       enddate: $enddate
       beeftype: $beeftype
       userName: $userName
+      exporter: $exporter
     ) {
       id
+      exporter
       user {
         name
       }
@@ -292,7 +295,7 @@ const index = () => {
                         <th>ทะเบียนขุน</th>
                         <th>รหัสซาก</th>
                         <th>รหัสบาร์โค้ด</th>
-                        <th>น้ำหนัก</th>
+                        <th>น้ำหนัก (กก.)</th>
                         <th>สถานะ</th>
                         <th>ผู้ขอเบิก</th>
                         <th>ผู้เบิกออก</th>
@@ -318,7 +321,7 @@ const index = () => {
                             <td>{prod.lump.barcode}</td>
                             <td>{prod.lump.weight}</td>
                             <td>{prod.storestatus.nameTH}</td>
-                            <td>-</td>
+                            <td>{prod.exporter}</td>
                             <td>{prod.user.name}</td>
                           </tr>
                         ))}

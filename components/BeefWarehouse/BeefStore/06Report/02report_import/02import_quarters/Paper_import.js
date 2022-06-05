@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 
 import dayjs from "dayjs";
-import 'dayjs/locale/th'
+import "dayjs/locale/th";
 
 import { AuthContext } from "../../../../../../appState/AuthProvider";
 
@@ -12,7 +12,7 @@ import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-import { ButtonPDF} from "../../ReportFrom";
+import { ButtonPDF } from "../../ReportFrom";
 
 pdfMake.fonts = {
   THSarabunNew: {
@@ -47,7 +47,8 @@ const Paper_import = ({ prod }) => {
       "ทะเบียนขุน",
       "รหัสซาก",
       "รหัสบาร์โค้ด",
-      "น้ำหนัก",
+      "น้ำหนัก (กก.)",
+      "ห้อง",
       "สถานะ",
       "ผู้นำเข้า",
     ]);
@@ -62,6 +63,8 @@ const Paper_import = ({ prod }) => {
           dataRow.push(
             dayjs(row[column]).add(543, "y").locale("th").format("DD MMMM YYYY")
           );
+        } else if (column === "beefroom.roomname") {
+          dataRow.push(row.beefroom.roomname);
         } else if (column === "quarter.imslaughter.namefarmer") {
           dataRow.push(row.quarter.imslaughter.namefarmer);
         } else if (column === "quarter.beeftype.nameTH") {
@@ -100,6 +103,7 @@ const Paper_import = ({ prod }) => {
         headerRows: 1,
         // alignment: 'center'
         widths: [
+          "auto",
           "star",
           "star",
           "star",
@@ -108,7 +112,7 @@ const Paper_import = ({ prod }) => {
           "star",
           "star",
           "star",
-          "star",
+          "auto",
         ],
 
         body: buildTableBody(data, columns),
@@ -121,7 +125,7 @@ const Paper_import = ({ prod }) => {
 
   const printPDF = () => {
     var docDefinition = {
-       pageSize: "A4",
+      pageSize: "A4",
       pageOrientation: "landscape",
       pageMargins: [40, 40, 40, 120],
       content: [
@@ -156,6 +160,7 @@ const Paper_import = ({ prod }) => {
           "quarter.beeftype.code",
           "quarter.barcode",
           "quarter.weight",
+          "beefroom.roomname",
           "quarter.status.nameTH",
           "user.name",
         ]),

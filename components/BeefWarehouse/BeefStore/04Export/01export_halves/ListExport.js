@@ -5,6 +5,7 @@ import dayjs from "dayjs";
 
 const ListExport = ({ exhalve }) => {
   const [exhalveData, SetExhalveData] = useState(exhalve);
+
   return (
     <tr style={{ textAlign: "center" }}>
       <td>{exhalveData.halve.beeftype.nameTH}</td>
@@ -23,11 +24,9 @@ const ListExport = ({ exhalve }) => {
         </Barcodebuttoncolor>
       </td>
       <td>{exhalveData.halve.weightwarm}</td>
-      <td>{/* exhalveData.beefroom.roomname */}</td>
-      <td>-</td>
-      <td>-</td>
+    
       <td>{exhalveData.storestatus.nameTH}</td>
-      <td>{exhalveData.exporter.name}</td>
+      <td>{exhalveData.exporter}</td>
       <td>{exhalveData.user.name}</td>
     </tr>
   );

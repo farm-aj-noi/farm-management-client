@@ -32,6 +32,7 @@ import { DivBase } from "../../../../../../utils/divBase";
 
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
+import Listtypekeep from "./Listtypekeep";
 
 export const QUERYSHELF = gql`
   query ListShelf($id: ID) {
@@ -39,6 +40,7 @@ export const QUERYSHELF = gql`
       id
       shelfname
       typekeep {
+        id
         totalbeef
         beeftype {
           nameTH
@@ -58,118 +60,43 @@ const Listshelf = ({ Listshelfs }) => {
   });
 
   return (
-    <div>
-      <>
-        <div>
-          ห้องจัดเก็บ : {}
-          <Searchinput
-            value={Listshelf.roomname}
-            style={{
-              marginTop: "10px",
-              textAlign: "center",
-            }}
-            disabled
-          ></Searchinput>
-        </div>
-        <div
+    <div
+      style={{
+        border: "1px solid #AFAFAF",
+        padding: "0px 15px 15px 15px",
+        margin: "10px",
+        borderRadius: "4px",
+      }}
+    >
+      <div>
+        ห้องจัดเก็บ : {}
+        <Searchinput
+          value={Listshelf.roomname}
           style={{
-            display: "grid",
-            gridTemplateColumns: `200px 200px 200px 
-         200px`,
             marginTop: "10px",
-            marginLeft: "30px",
-            paddingBottom: "20px",
-            borderBottom: "1px solid #AFAFAF",
+            textAlign: "center",
           }}
-        >
+          disabled
+        ></Searchinput>
+      </div>
+
+      {datashelf &&
+        datashelf.listShelf.map((prod) => (
           <div
             style={{
-              width: "100%",
-              gridRowStart: "1",
-              gridRowEnd: "1",
-              gridColumnStart: "1",
-              marginTop: "0px",
+              display: "grid",
+              gridTemplateColumns: `200px 200px 200px 
+               200px`,
+              marginTop: "10px",
+              marginLeft: "30px",
+              paddingBottom: "20px",
+              /*  backgroundColor: "red", */
+              borderBottom: "1px solid #AFAFAF",
             }}
           >
-            {" "}
-            ชื่อชั้นจัดเก็บ : {}
-            {datashelf &&
-              datashelf.listShelf.map((prod) => {
-                return (
-                  <>
-                    <Searchinput
-                      value={prod.shelfname}
-                      type="text"
-                      id="shelfname"
-                      name="shelfname"
-                      disabled
-                      style={{
-                        width: "156px",
-                        textAlign: "center",
-                        marginTop: "10px",
-                      }}
-                    />
-                  </>
-                );
-              })}
+            <Listtypekeep key={prod.id} listkeep={prod} />
           </div>
-          <div
-            style={{
-              width: "100%",
-              gridRowStart: "1",
-              gridRowEnd: "1",
-              gridColumnStart: "2",
-              marginTop: "0px",
-            }}
-          >
-            {" "}
-            ประเภทจัดเก็บ : {}
-            {datashelf &&
-              datashelf.listShelf.map((x, i) => {
-                return (
-                  <select
-                    style={{
-                      height: "38px",
-                      width: "156px",
-                      border: "1px solid #AFAFAF",
-                      borderRadius: "4px",
-                      textAlign: "center",
-                      fontSize: "14px",
-                      marginTop: "10px",
-                    }}
-                    disabled
-                  >
-                    <option>{datashelf.listShelf[i].typekeep.totalbeef}</option>
-                  </select>
-                );
-              })}
-          </div>
-          <div
-            style={{
-              width: "100%",
-              gridRowStart: "1",
-              gridRowEnd: "1",
-              gridColumnStart: "3",
-              marginTop: "0px",
-            }}
-          >
-            {" "}
-            จำนวน : {}
-            {datashelf &&
-              datashelf.listShelf.map((x, i) => {
-                return (
-                  <Searchinput
-                    style={{
-                      marginTop: "10px",
-                      textAlign: "center",
-                    }}
-                    disabled
-                  ></Searchinput>
-                );
-              })}
-          </div>
-        </div>
-      </>
+        ))}
     </div>
   );
 };

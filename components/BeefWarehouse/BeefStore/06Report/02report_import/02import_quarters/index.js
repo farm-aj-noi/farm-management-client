@@ -58,6 +58,9 @@ export const IMPORTQUARTERSEARCH = gql`
           namefarmer
         }
       }
+      beefroom {
+        roomname
+      }
     }
   }
 `;
@@ -305,7 +308,10 @@ const index = () => {
                         <th>ทะเบียนขุน</th>
                         <th>รหัสซาก</th>
                         <th>รหัสบาร์โค้ด</th>
-                        <th>น้ำหนัก</th>
+                        <th>น้ำหนัก (กก.)</th>
+                        <th>ห้อง</th>
+                        <th>ชั้น</th>
+                        <th>ตะกร้า</th>
                         <th>สถานะ</th>
                         <th>ผู้นำเข้า</th>
                       </tr>
@@ -330,6 +336,9 @@ const index = () => {
                             <td>{prod.quarter.beeftype.code}</td>
                             <td>{prod.quarter.barcode}</td>
                             <td>{prod.quarter.weight}</td>
+                            <td>{prod.beefroom.roomname}</td>
+                            <td>-</td>
+                            <td>-</td>
                             <td>{prod.quarter.status.nameTH}</td>
                             <td>{prod.user.name}</td>
                           </tr>

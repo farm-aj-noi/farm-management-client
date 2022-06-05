@@ -19,8 +19,9 @@ const Excel_export = ({ prod }) => {
     { label: "ทะเบียนขุน", key: "quarter.imslaughter.numcow" },
     { label: "รหัสซาก", key: "quarter.beeftype.code" },
     { label: "รหัสบาร์โค้ด", key: "quarter.barcode" },
-    { label: "น้ำหนัก", key: "quarter.weight" },
+    { label: "น้ำหนัก (กก.)", key: "quarter.weight" },
     { label: "สถานะ", key: "storestatus.nameTH" },
+    { label: "ผู้ขอเบิก", key: "exporter" },
     { label: "ผู้เบิกออก", key: "user.name" },
   ];
   return (

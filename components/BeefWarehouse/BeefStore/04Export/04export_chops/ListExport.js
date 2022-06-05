@@ -23,11 +23,9 @@ const ListExport = ({ exchop }) => {
         </Barcodebuttoncolor>
       </td>
       <td>{exchopData.chop.weight}</td>
-      <td></td>
-      <td></td>
-      <td></td>
+
       <td>{exchopData.storestatus.nameTH}</td>
-      <td></td>
+      <td>{exchopData.exporter}</td>
       <td>{exchopData.user.name}</td>
     </tr>
   );

@@ -23,11 +23,9 @@ const ListExport = ({ exlump }) => {
         </Barcodebuttoncolor>
       </td>
       <td>{exlumpData.lump.weight}</td>
-      <td></td>
-      <td></td>
-      <td></td>
+
       <td>{exlumpData.storestatus.nameTH}</td>
-      <td></td>
+      <td>{exlumpData.exporter}</td>
       <td>{exlumpData.user.name}</td>
     </tr>
   );

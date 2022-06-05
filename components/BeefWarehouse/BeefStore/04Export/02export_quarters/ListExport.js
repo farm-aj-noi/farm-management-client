@@ -23,11 +23,9 @@ const ListExport = ({ exquarter }) => {
         </Barcodebuttoncolor>
       </td>
       <td>{exquarterData.quarter.weight}</td>
-      <td></td>
-      <td></td>
-      <td></td>
+     
       <td>{exquarterData.storestatus.nameTH}</td>
-      <td></td>
+      <td>{exquarterData.exporter}</td>
       <td>{exquarterData.user.name}</td>
     </tr>
   );

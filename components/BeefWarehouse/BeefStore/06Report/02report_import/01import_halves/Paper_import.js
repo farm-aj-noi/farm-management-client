@@ -3,8 +3,7 @@ import React, { useState, useContext } from "react";
 import { AuthContext } from "../../../../../../appState/AuthProvider";
 
 import dayjs from "dayjs";
-import 'dayjs/locale/th'
-
+import "dayjs/locale/th";
 
 import { Icon } from "react-icons-kit";
 import { printer } from "react-icons-kit/ikons/printer";
@@ -48,7 +47,8 @@ const Paper_import = ({ prod }) => {
       "ทะเบียนขุน",
       "รหัสซาก",
       "รหัสบาร์โค้ด",
-      "น้ำหนัก",
+      "น้ำหนัก (กก.)",
+      "ห้อง",
       "สถานะ",
       "ผู้นำเข้า",
     ]);
@@ -63,6 +63,8 @@ const Paper_import = ({ prod }) => {
           dataRow.push(
             dayjs(row[column]).add(543, "y").locale("th").format("DD MMMM YYYY")
           );
+        } else if (column === "beefroom.roomname") {
+          dataRow.push(row.beefroom.roomname);
         } else if (column === "halve.imslaughter.namefarmer") {
           dataRow.push(row.halve.imslaughter.namefarmer);
         } else if (column === "halve.beeftype.nameTH") {
@@ -101,6 +103,7 @@ const Paper_import = ({ prod }) => {
         headerRows: 1,
         // alignment: 'center'
         widths: [
+          "auto",
           "star",
           "star",
           "star",
@@ -109,7 +112,7 @@ const Paper_import = ({ prod }) => {
           "star",
           "star",
           "star",
-          "star",
+          "auto",
         ],
 
         body: buildTableBody(data, columns),
@@ -157,6 +160,7 @@ const Paper_import = ({ prod }) => {
           "halve.beeftype.code",
           "halve.barcode",
           "halve.weightwarm",
+          "beefroom.roomname",
           "halve.status.nameTH",
           "user.name",
         ]),

@@ -299,7 +299,7 @@ const basket = () => {
                 databasket.Baskets.map((prod) => (
                   <>
                     <Searchinput
-                      value={prod.shelf.shelfname}
+                     /*  value={prod.shelf.shelfname} */
                       style={{
                         marginTop: "10px",
                         textAlign: "center",

@@ -15,10 +15,41 @@ import { iosSearchStrong } from "react-icons-kit/ionicons/iosSearchStrong";
 
 import Nav_store from "../Nav_store";
 
+import { useQuery } from "@apollo/react-hooks";
+import gql from "graphql-tag";
+
 import Paper_store from "./Paper_store.js";
 import Excel_store from "./Excel_store.js";
 
+export const STORELIST = gql`
+  query STORELIST($beeftype: String, $type: String, $beefroom: String) {
+    liststore(beeftype: $beeftype, type: $type, beefroom: $beefroom) {
+      barcode
+      status
+      cownum
+      beeftype
+      code
+      weightwarm
+      weight
+      importdate
+      namefarmer
+      beefroom
+      beeftypeid
+      shelf
+      basket
+    }
+  }
+`;
+
 const index = () => {
+  const [selectedbeeftype, SetBeeftypeChange] = useState("");
+  const [selecttype, SettypeChange] = useState("");
+  const { data, loading, error } = useQuery(STORELIST, {
+    variables: {
+      beeftype: selectedbeeftype,
+      type: selecttype,
+    },
+  });
   return (
     <DivBase>
       <div
@@ -211,7 +242,6 @@ const index = () => {
                       <th>ทะเบียนขุน</th>
                       <th>รหัสซาก</th>
                       <th>รหัสบาร์โค้ด</th>
-                      <th>คิวอาร์โค้ด</th>
                       <th>น้ำหนักอุ่น</th>
                       <th>น้ำหนักเย็น</th>
                       <th>อายุ</th>
@@ -224,28 +254,37 @@ const index = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr style={{ textAlign: "center" }}>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
+                    {data &&
+                      data.liststore.map((prod) => (
+                        <tr style={{ textAlign: "center" }}>
+                          <td>{prod.beeftype}</td>
+                          <td>{prod.cownum}</td>
+                          <td>{prod.code}</td>
+                          <td>{prod.barcode}</td>
+                          <td>{prod.weightwarm ? prod.weightwarm : "-"}</td>
+                          <td>{prod.weight ? prod.weight : "-"}</td>
+
+                          <td></td>
+                          <td></td>
+                          <td>{prod.beefroom ? prod.beefroom : "-"}</td>
+                          <td>{prod.shelf ? prod.shelf : "-"}</td>
+                          <td>{prod.basket ? prod.basket : "-"}</td>
+                          <td>{prod.status}</td>
+                          <td>-</td>
+                        </tr>
+                      ))}
                   </tbody>
                 </Table>
               </div>
               <div style={{ display: "flex", justifyContent: "center" }}>
-                <Paper_store />
-                <Excel_store />
+                {data && data.liststore.length > 0 ? (
+                  <div>
+                    <Paper_store prod={data.liststore} />
+                    <Excel_store prod={data.liststore} />
+                  </div>
+                ) : (
+                  ""
+                )}
               </div>
             </DivFromDown>
           </DivFrom>

@@ -10,7 +10,7 @@ import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
 export const CARD_EXHALVE = gql`
-  query CARD_IMHALVE {
+  query CARD_EXHALVE {
     CardExh {
       id
       barcode
@@ -19,7 +19,7 @@ export const CARD_EXHALVE = gql`
 `;
 
 export const CARD_EXQUAR = gql`
-  query CARD_IMQUAR {
+  query CARD_EXQUAR {
     CardExq {
       id
       barcode
@@ -28,7 +28,7 @@ export const CARD_EXQUAR = gql`
 `;
 
 export const CARD_EXLUMP = gql`
-  query CARD_IMQUAR {
+  query CARD_EXLUMP {
     CardExl {
       id
       barcode
@@ -37,7 +37,7 @@ export const CARD_EXLUMP = gql`
 `;
 
 export const CARD_EXCHOP = gql`
-  query CARD_IMQUAR {
+  query CARD_EXCHOP {
     CardExc {
       id
       barcode
@@ -46,7 +46,7 @@ export const CARD_EXCHOP = gql`
 `;
 
 export const CARD_EXENTRAIL = gql`
-  query CARD_IMQUAR {
+  query CARD_EXENTRAIL {
     CardExe {
       id
       barcode
@@ -61,6 +61,7 @@ const index = () => {
   const { data: lump } = useQuery(CARD_EXLUMP);
   const { data: chop } = useQuery(CARD_EXCHOP);
   const { data: entrail } = useQuery(CARD_EXENTRAIL);
+  /*   console.log(entrail); */
   return (
     <DivAlertCard style={{ backgroundColor: "#BF0000" }}>
       <div
