@@ -37,6 +37,7 @@ export const IMPORTHALVESEARCH = gql`
       enddate: $enddate
       startdate: $startdate
     ) {
+      barcode
       id
       importdate
       user {
@@ -44,6 +45,7 @@ export const IMPORTHALVESEARCH = gql`
       }
       halve {
         weightwarm
+        weightcool
         barcode
         status {
           nameTH
@@ -57,120 +59,20 @@ export const IMPORTHALVESEARCH = gql`
           namefarmer
         }
       }
+      beefroom {
+        roomname
+      }
     }
   }
 `;
 
 const index = () => {
-  /* //calendar
-  const dateRef = useRef();
-  const [date, setDate] = useState(null);
-  const [selectedDate, handleDateChange] = useState(
-    null
-  );
-  const dateRef2 = useRef();
-  const [date2, setDate2] = useState(new Date());
-  const [selectedDate2, handleDateChange2] = useState(
-    dayjs(date2).format("YYYY-MM-DD")
-  );
-  // console.log("start : " + selectedDate + " , end : " + selectedDate2);
-  const months = [
-    "มกราคม",
-    "กุมภาพันธ์",
-    "มีนาคม",
-    "เมษายน",
-    "พฤษภาคม",
-    "มิถุนายน",
-    "กรกฎาคม",
-    "สิงหาคม",
-    "กันยายน",
-    "ตุลาคม",
-    "พฤศจิกายน",
-    "ธันวาคม",
-  ];
-
-  const dateValueRef = useRef(date);
-  dateValueRef.current = date;
-
-  const dateValueRef2 = useRef(date2);
-  dateValueRef2.current = date2;
-
-  const changeDateToBuddhist = (changeDate = new Date()) => {
-    const prevDate = new Date(changeDate);
-    // console.log("current date", prevDate === date);
-    const newDate = new Date(
-      prevDate.setFullYear(prevDate.getFullYear() + 543)
-    );
-    // console.log("year", newDate.getFullYear());
-    dateRef.current.input.value = `${newDate.getDate()} ${
-      months[newDate.getMonth()]
-    } ${newDate.getFullYear()}`;
-    // console.log(dateRef.current.input.value);
-  };
-
-  const changeDateToBuddhist2 = (changeDate = new Date()) => {
-    const prevDate = new Date(changeDate);
-    // console.log("current date", prevDate === date);
-    const newDate = new Date(
-      prevDate.setFullYear(prevDate.getFullYear() + 543)
-    );
-    // console.log("year", newDate.getFullYear());
-    dateRef2.current.input.value = `${newDate.getDate()} ${
-      months[newDate.getMonth()]
-    } ${newDate.getFullYear()}`;
-    // console.log(dateRef2.current.input.value);
-  };
-
-  // component did mount
-  useEffect(() => {
-    // console.log("dateRef", dateRef);
-    // change date value in input dom on mounted
-    changeDateToBuddhist(date);
-    const datePicker = dateRef.current;
-    const renderDateInput = datePicker.renderDateInput;
-    // console.log(renderDateInput);
-    datePicker.renderDateInput = function () {
-      const inputDom = renderDateInput();
-      return React.cloneElement(inputDom, {
-        value: changeDateToBuddhist(dateValueRef.current),
-      });
-    };
-  }, []);
-
-  // component did mount
-  useEffect(() => {
-    // console.log("dateRef", dateRef);
-    // change date value in input dom on mounted
-    changeDateToBuddhist2(date2);
-    const datePicker2 = dateRef2.current;
-    const renderDateInput = datePicker2.renderDateInput;
-    // console.log(renderDateInput2);
-    datePicker2.renderDateInput = function () {
-      const inputDom = renderDateInput();
-      return React.cloneElement(inputDom, {
-        value: changeDateToBuddhist2(dateValueRef2.current),
-      });
-    };
-  }, [date2]);
-
-  const onChangeDatePicker = (e) => {
-    // console.log("onChange");
-    setDate(e);
-    handleDateChange(dayjs(e).format("YYYY-MM-DD"));
-  };
-
-  const onChangeDatePicker2 = (e) => {
-    // console.log("onChange");
-    setDate2(e);
-    handleDateChange2(dayjs(e).format("YYYY-MM-DD"));
-  };
-  //calendar */
-
   const [selectedbeeftypehalve, SetBeeftypeHalveChange] = useState("");
   const [selectedstartdate, SetStartDateChange] = useState("");
   const [selectedenddate, SetEndDateChange] = useState("");
   const [inputnamefarmer, SetInputnamefarmer] = useState("");
   const [inputusername, SetInputusername] = useState("");
+  const [allweightwarm, setweightwarm] = useState("");
   const { data, loading, error } = useQuery(IMPORTHALVESEARCH, {
     variables: {
       beeftype: selectedbeeftypehalve,
@@ -508,7 +410,8 @@ const index = () => {
                       <th>รหัสซาก</th>
                       <th>รหัสบาร์โค้ด</th>
                       <th>คิวอาร์โค้ด</th>
-                      <th>น้ำหนัก</th>
+                      <th>น้ำหนักอุ่น</th>
+                      <th>น้ำหนักเย็น</th>
                       <th>ห้อง</th>
                       <th>ชั้น</th>
                       <th>ตะกร้า</th>
@@ -523,6 +426,13 @@ const index = () => {
                       ))}
                   </tbody>
                 </Table>
+              </div>
+
+              <div style={{ float: "right", textAlign: "right" }}>
+                จำนวนรายการ {data ? data.imhalveSearch.length : "0"} รายการ
+                <br />
+                น้ำหนักอุ่น {} กิโลกรัม /
+                น้ำหนักเย็น {} กิโลกรัม
               </div>
             </DivFromDown>
           </DivFrom>

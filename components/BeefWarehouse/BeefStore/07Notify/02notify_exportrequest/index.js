@@ -10,7 +10,34 @@ import { DivFrom, DivFromTop, DivFromDown, HeaderColor } from "../NavFrom";
 
 import { Table } from "react-bootstrap";
 
+import { useQuery } from "@apollo/react-hooks";
+import gql from "graphql-tag";
+
+import dayjs from "dayjs";
+
+import { Removebuttoncolor } from "../../../../../utils/buttonColor";
+
+import { Removebutton } from "../../../../../utils/button";
+
+import Deltereq from "./deletereq";
+import Paper_request from "./paper_request";
+
+export const QUERYREQUESTEX = gql`
+  query QUERYREQUESTEX {
+    listRequestEx {
+      id
+      name
+      quantity
+      requestdate
+      beeftype {
+        nameTH
+      }
+    }
+  }
+`;
+
 const index = () => {
+  const { data } = useQuery(QUERYREQUESTEX);
   return (
     <>
       <div
@@ -59,7 +86,6 @@ const index = () => {
                 minWidth: "100%",
                 float: "right",
                 marginBottom: "15px",
-                height: "400px",
               }}
             >
               <Table
@@ -71,21 +97,49 @@ const index = () => {
               >
                 <thead>
                   <tr style={{ textAlign: "center" }}>
-                    <th>วันที่ปัจจุบัน</th>
-                    <th>จำนวนรายการ</th>
-                    <th>รายละเอียด</th>
+                    <th>วันที่ขอเบิก</th>
+                    <th>ชื่อผู้ขอเบิก</th>
+                    <th>ประเภทซาก</th>
+                    <th>เกรด</th>
+                    <th>จำนวน</th>
                     <th>ลบ</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr style={{ textAlign: "center" }}>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
+                  {data &&
+                    data.listRequestEx.map((prod) => (
+                      <tr style={{ textAlign: "center" }}>
+                        <td>
+                          {dayjs(prod.requestdate)
+                            .add(543, "year")
+                            .format("DD/MM/YYYY")}
+                        </td>
+                        <td>{prod.name}</td>
+                        <td>{prod.beeftype.nameTH}</td>
+                        <td></td>
+                        <td>{prod.quantity}</td>
+                        <td>
+                          <Deltereq key={prod.id} listreq={prod} />
+                        </td>
+                      </tr>
+                    ))}
                 </tbody>
               </Table>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginTop: "10px",
+                }}
+              >
+                {data && data.listRequestEx.length > 0 ? (
+                  <div>
+                    <Paper_request prod={data.listRequestEx} />
+                  </div>
+                ) : (
+                  ""
+                )}
+              </div>
             </div>
           </DivFromDown>
         </DivFrom>

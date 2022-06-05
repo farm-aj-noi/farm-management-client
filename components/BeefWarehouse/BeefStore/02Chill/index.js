@@ -23,8 +23,8 @@ export const CHILLSEARCHLIST = gql`
   ) {
     listchill(startdate: $startdate, enddate: $enddate, beeftype: $beeftype) {
       id
-      chilldate
-      chillday
+      chilldateStart
+      chilldateEnd
       chillroom {
         roomnum
       }
@@ -42,8 +42,13 @@ export const CHILLSEARCHLIST = gql`
           numcow
         }
       }
-      storestatus {
+      chillstatus {
+        id
         nameTH
+      }
+      chillday {
+        id
+        day
       }
     }
   }
@@ -60,7 +65,7 @@ const index = () => {
       enddate: selectedenddate,
     },
   });
-
+  console.log(data);
   return (
     <>
       <div
@@ -83,7 +88,7 @@ const index = () => {
       <DivBase
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 270px 1100px 1fr",
+          gridTemplateColumns: "1fr 270px 1200px 1fr",
           gridRowGap: "15px",
           gridColumnGap: "10px",
           textAlign: "start",
@@ -196,7 +201,6 @@ const index = () => {
                   </label>
                   <input
                     type="date"
-                    id="ex_chill"
                     name="date"
                     style={{
                       height: "35px",
@@ -215,11 +219,10 @@ const index = () => {
                       margin: "10px 10px",
                     }}
                   >
-                    ถึงวันที่
+                    วันที่บ่มเสร็จ
                   </label>
                   <input
                     type="date"
-                    id="ex_chill"
                     name="date"
                     style={{
                       height: "35px",
@@ -261,6 +264,7 @@ const index = () => {
                   <thead>
                     <tr style={{ textAlign: "center" }}>
                       <th>ผู้บ่มซาก</th>
+                      <th>วันที่บ่ม</th>
                       <th>วันที่บ่มเสร็จ</th>
                       <th>เวลา</th>
                       <th>ประเภทซาก</th>
@@ -272,6 +276,7 @@ const index = () => {
                       <th>น้ำหนักอุ่น</th>
                       <th>ห้องบ่ม</th>
                       <th>สถานะ</th>
+                      <th>อัพเดตสถานะ</th>
                     </tr>
                   </thead>
                   <tbody>

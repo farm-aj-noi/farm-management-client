@@ -7,7 +7,22 @@ import Icon from "react-icons-kit";
 import { fileText } from "react-icons-kit/fa/fileText";
 
 import Link from "next/link";
+
+import { useQuery } from "@apollo/react-hooks";
+import gql from "graphql-tag";
+
+export const CARD6 = gql`
+  query CARD6 {
+    listentrail {
+      id
+      barcode
+      cownum
+    }
+  }
+`;
+
 const index = () => {
+  const { data: storedata } = useQuery(CARD6);
   return (
     <DivAlertCard style={{ backgroundColor: "#BB0FBB" }}>
       <div
@@ -43,7 +58,7 @@ const index = () => {
               height: "62px",
             }}
           >
-            0
+            {storedata ? storedata.listentrail.length : "0"}
           </div>
           <a
             style={{
@@ -57,7 +72,7 @@ const index = () => {
           </a>
         </form>
       </div>
-      <Link href="">
+      <Link href="/beefwarehouse/beefstore/Allstore/store">
         <StyleAlertCardDown style={{ marginTop: "7px" }}>
           แสดงรายละเอียด
           <div style={{ margin: "-3px 0px 0px auto" }}>

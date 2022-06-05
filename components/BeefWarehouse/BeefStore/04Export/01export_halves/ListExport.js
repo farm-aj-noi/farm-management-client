@@ -23,11 +23,11 @@ const ListExport = ({ exhalve }) => {
         </Barcodebuttoncolor>
       </td>
       <td>{exhalveData.halve.weightwarm}</td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td>{/* exhalveData.beefroom.roomname */}</td>
+      <td>-</td>
+      <td>-</td>
       <td>{exhalveData.storestatus.nameTH}</td>
-      <td></td>
+      <td>{exhalveData.exporter.name}</td>
       <td>{exhalveData.user.name}</td>
     </tr>
   );

@@ -5,6 +5,7 @@ import dayjs from "dayjs";
 
 function List_import({ imlump }) {
   const [imlumpData, SetImhalveData] = useState(imlump);
+  console.log(imlumpData);
   return (
     <tr style={{ textAlign: "center" }}>
       <td>{imlumpData.lump.imslaughter.namefarmer}</td>
@@ -24,9 +25,9 @@ function List_import({ imlump }) {
         </Barcodebuttoncolor>
       </td>
       <td>{imlumpData.lump.weight}</td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td>{imlumpData.beefroom.roomname}</td>
+      <td>{imlumpData.shelf.shelfname}</td>
+      <td>{imlumpData.basket}</td>
       <td>{imlumpData.lump.status.nameTH}</td>
       <td>{imlumpData.user.name}</td>
     </tr>

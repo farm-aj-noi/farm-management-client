@@ -6,8 +6,21 @@ import { Icon7 } from "../IconStore";
 import Icon from "react-icons-kit";
 import { fileText } from "react-icons-kit/fa/fileText";
 
+import { useQuery } from "@apollo/react-hooks";
+import gql from "graphql-tag";
+
 import Link from "next/link";
+
+export const QUERY_CARD9 = gql`
+  query QUERY_CARD9 {
+    Card9 {
+      id
+      name
+    }
+  }
+`;
 const index = () => {
+  const { data: dataCard9 } = useQuery(QUERY_CARD9);
   return (
     <DivAlertCard style={{ backgroundColor: "#17FF2F" }}>
       <div
@@ -43,7 +56,7 @@ const index = () => {
               height: "62px",
             }}
           >
-            0
+            {dataCard9 ? dataCard9.Card9.length : "0"}
           </div>
           <a
             style={{
@@ -51,13 +64,13 @@ const index = () => {
             }}
           ></a>
           <a style={{ color: "#ffffff", textAlign: "center" }}>
-            จำนวนรายการ
+            จำนวนรายการ (วัน)
             <br />
             คำร้องขอเบิกซาก
           </a>
         </form>
       </div>
-      <Link href="">
+      <Link href="/beefwarehouse/beefstore/notify/notify_exportrequest">
         <StyleAlertCardDown style={{ marginTop: "7px" }}>
           แสดงรายละเอียด
           <div style={{ margin: "-3px 0px 0px auto" }}>
