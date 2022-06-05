@@ -46,8 +46,9 @@ const Paper_export = ({ prod }) => {
       "ทะเบียนขุน",
       "รหัสซาก",
       "รหัสบาร์โค้ด",
-      "น้ำหนัก",
+      "น้ำหนัก (กก.)",
       "สถานะ",
+      "ผู้ขอเบิก",
       "ผู้เบิกออก",
     ]);
     console.log(data);
@@ -97,6 +98,7 @@ const Paper_export = ({ prod }) => {
         headerRows: 1,
         // alignment: 'center'
         widths: [
+          "auto",
           "star",
           "star",
           "star",
@@ -104,7 +106,7 @@ const Paper_export = ({ prod }) => {
           "star",
           "star",
           "star",
-          "star",
+          "auto",
         ],
 
         body: buildTableBody(data, columns),
@@ -152,6 +154,7 @@ const Paper_export = ({ prod }) => {
           "quarter.barcode",
           "quarter.weight",
           "storestatus.nameTH",
+          "exporter",
           "user.name",
         ]),
       ],

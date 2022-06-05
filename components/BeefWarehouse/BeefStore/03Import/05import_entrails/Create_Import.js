@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { DivFromInsideLeft, Searchinput, Savebutton1 } from "../ImportFrom";
 
 import gql from "graphql-tag";
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/react-hooks";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -11,20 +11,38 @@ import withReactContent from "sweetalert2-react-content";
 import Router from "next/router";
 
 export const CREATEIMPORTENTRAIL = gql`
-  mutation CREATEIMPORTENTRAIL($barcode: String!, $entrailstore: String!) {
-    createImentrail(barcode: $barcode, entrailstore: $entrailstore) {
+  mutation CREATEIMPORTENTRAIL(
+    $barcode: String!
+    $entrailstore: String!
+    $beefroom: String!
+  ) {
+    createImentrail(
+      barcode: $barcode
+      entrailstore: $entrailstore
+      beefroom: $beefroom
+    ) {
       id
       importdate
-      name
+    }
+  }
+`;
+
+export const QUERYROOM = gql`
+  query QUERYROOM {
+    allRoom {
+      id
+      roomname
     }
   }
 `;
 
 const Create_Import = () => {
   const MySwal = withReactContent(Swal);
+  const { data: dataroom } = useQuery(QUERYROOM);
   const [ImportentrailInfo, setImportentrailInfo] = useState({
     barcode: "",
     entrailstore: "62837e7631ace600dc6caa23",
+    beefroom: "",
   });
   const [success, setSuccess] = useState(false);
   const [createImentrail, { loading, error }] = useMutation(
@@ -63,7 +81,7 @@ const Create_Import = () => {
           });
           MySwal.fire({
             icon: "error",
-            title: <p>เกิดข้อผิดพลาด</p>,
+            title: <p>{error.graphQLErrors[0].message}</p>,
             text: "กรุณากรอกข้อมูลใหม่อีกครั้ง",
             confirmButtonText: <span>ตกลง</span>,
             confirmButtonColor: "#3085d6",
@@ -120,57 +138,26 @@ const Create_Import = () => {
             >
               <div style={{ display: "inline", width: "170px" }}>
                 <select
-                  name="room"
-                  id="room"
+                  name="beefroom"
+                  id="beefroom"
+                  value={ImportentrailInfo.beefroom}
                   style={{
                     height: "35px",
-                    width: "50px",
+                    width: "160px",
                     border: "1px solid #AFAFAF",
-                    borderRadius: "4px 0px 0px 4px",
+                    borderRadius: "4px",
                     textAlign: "center",
                     fontSize: "14px",
                   }}
+                  onChange={handleChange}
                 >
                   <option value="">ห้อง</option>
-                  <option value="">1</option>
-                  <option value="">2</option>
-                  <option value="">3</option>
-                </select>
-                <select
-                  name="shelf"
-                  id="shelf"
-                  style={{
-                    height: "35px",
-                    width: "50px",
-                    border: "1px solid #AFAFAF",
-                    borderLeft: "none",
-                    textAlign: "center",
-                    fontSize: "14px",
-                  }}
-                >
-                  <option value="">ชั้น</option>
-                  <option value="">1</option>
-                  <option value="">2</option>
-                  <option value="">3</option>
-                </select>
-                <select
-                  name="bucket"
-                  id="bucket"
-                  style={{
-                    height: "35px",
-                    width: "60px",
-                    border: "1px solid #AFAFAF",
-                    borderRadius: "0px 4px 4px 0px",
-                    borderLeft: "none",
-                    textAlign: "center",
-                    fontSize: "14px",
-                    marginRight: "10px",
-                  }}
-                >
-                  <option value="">ตะกร้า</option>
-                  <option value="">1</option>
-                  <option value="">2</option>
-                  <option value="">3</option>
+                  {dataroom &&
+                    dataroom.allRoom.map((prod) => (
+                      <option key={prod.id} value={prod.id}>
+                        {prod.roomname}
+                      </option>
+                    ))}
                 </select>
               </div>
             </div>

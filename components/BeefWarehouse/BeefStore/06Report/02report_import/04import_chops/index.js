@@ -58,6 +58,13 @@ export const IMPORTCHOPSEARCH = gql`
           namefarmer
         }
       }
+      beefroom {
+        roomname
+      }
+      shelf {
+        shelfname
+      }
+      basket
     }
   }
 `;
@@ -167,25 +174,43 @@ const index = () => {
                         SetBeeftypechopsChange(event.target.value)
                       }
                     >
-                     <option value="">ทั้งหมด</option>
-                    <option value="5f446195ecd6732ad8108684">เนื้อสันคอ</option>
-                    <option value="5f4461a8ecd6732ad8108685">ที-โบน</option>
-                    <option value="5f4461bfecd6732ad8108686">เนื้อสันนอก</option>
-                    <option value="5f4461d6ecd6732ad8108687">ที-โบน สเต็ก</option>
-                    <option value="5f44620cecd6732ad8108688">ริบอาย</option>
-                    <option value="5f446224ecd6732ad8108689">ใบบัวสเต็ก</option>
-                    <option value="5f44623aecd6732ad810868a">เนื้อสันใน</option>
-                    <option value="5f44624fecd6732ad810868b">สันสะโพก</option>
-                    <option value="5f446262ecd6732ad810868c">เสือร้องไห้</option>
-                    <option value="5f44628decd6732ad810868d">เนื้อซี่โครง</option>
-                    <option value="5f4462a4ecd6732ad810868e">พับใน</option>
-                    <option value="5f4462b6ecd6732ad810868f">ตะพาบ</option>
-                    <option value="5f4462c8ecd6732ad8108690">ลูกมะพร้าว</option>
-                    <option value="5f4462ddecd6732ad8108691">ปลาบู่ทอง</option>
-                    <option value="5f4462eeecd6732ad8108692">ใบพาย</option>
-                    <option value="5f4462feecd6732ad8108693">หางตะเข้</option>
-                    <option value="5f44630fecd6732ad8108694">น่อง</option>
-                    <option value="5f446320ecd6732ad8108695">พับนอก</option>
+                      <option value="">ทั้งหมด</option>
+                      <option value="5f446195ecd6732ad8108684">
+                        เนื้อสันคอ
+                      </option>
+                      <option value="5f4461a8ecd6732ad8108685">ที-โบน</option>
+                      <option value="5f4461bfecd6732ad8108686">
+                        เนื้อสันนอก
+                      </option>
+                      <option value="5f4461d6ecd6732ad8108687">
+                        ที-โบน สเต็ก
+                      </option>
+                      <option value="5f44620cecd6732ad8108688">ริบอาย</option>
+                      <option value="5f446224ecd6732ad8108689">
+                        ใบบัวสเต็ก
+                      </option>
+                      <option value="5f44623aecd6732ad810868a">
+                        เนื้อสันใน
+                      </option>
+                      <option value="5f44624fecd6732ad810868b">สันสะโพก</option>
+                      <option value="5f446262ecd6732ad810868c">
+                        เสือร้องไห้
+                      </option>
+                      <option value="5f44628decd6732ad810868d">
+                        เนื้อซี่โครง
+                      </option>
+                      <option value="5f4462a4ecd6732ad810868e">พับใน</option>
+                      <option value="5f4462b6ecd6732ad810868f">ตะพาบ</option>
+                      <option value="5f4462c8ecd6732ad8108690">
+                        ลูกมะพร้าว
+                      </option>
+                      <option value="5f4462ddecd6732ad8108691">
+                        ปลาบู่ทอง
+                      </option>
+                      <option value="5f4462eeecd6732ad8108692">ใบพาย</option>
+                      <option value="5f4462feecd6732ad8108693">หางตะเข้</option>
+                      <option value="5f44630fecd6732ad8108694">น่อง</option>
+                      <option value="5f446320ecd6732ad8108695">พับนอก</option>
                     </select>
                     <label
                       for="beef"
@@ -320,7 +345,10 @@ const index = () => {
                         <th>ทะเบียนขุน</th>
                         <th>รหัสซาก</th>
                         <th>รหัสบาร์โค้ด</th>
-                        <th>น้ำหนัก</th>
+                        <th>น้ำหนัก (กก.)</th>
+                        <th>ห้อง</th>
+                        <th>ชั้น</th>
+                        <th>ตะกร้า</th>
                         <th>สถานะ</th>
                         <th>ผู้นำเข้า</th>
                       </tr>
@@ -345,6 +373,9 @@ const index = () => {
                             <td>{prod.chop.beeftype.code}</td>
                             <td>{prod.chop.barcode}</td>
                             <td>{prod.chop.weight}</td>
+                            <td>{prod.beefroom.roomname}</td>
+                            <td>{prod.shelf.shelfname}</td>
+                            <td>{prod.basket}</td>
                             <td>{prod.chop.status.nameTH}</td>
                             <td>{prod.user.name}</td>
                           </tr>

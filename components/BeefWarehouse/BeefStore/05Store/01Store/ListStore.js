@@ -25,8 +25,8 @@ const ListStore = ({ Liststore }) => {
       <td></td>
       <td></td>
       <td>{ListStoreData.beefroom ? ListStoreData.beefroom : "-"}</td>
-      <td>-</td>
-      <td>-</td>
+      <td>{ListStoreData.shelf ? ListStoreData.shelf : "-"}</td>
+      <td>{ListStoreData.basket ? ListStoreData.basket : "-"}</td>
       <td>{ListStoreData.status}</td>
       <td>-</td>
       <td>

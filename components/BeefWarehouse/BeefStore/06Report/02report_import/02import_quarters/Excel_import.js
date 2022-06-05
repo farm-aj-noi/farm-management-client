@@ -20,7 +20,8 @@ const Excel_import = ({ prod }) => {
     { label: "ทะเบียนขุน", key: "quarter.imslaughter.numcow" },
     { label: "รหัสซาก", key: "quarter.beeftype.code" },
     { label: "รหัสบาร์โค้ด", key: "quarter.barcode" },
-    { label: "น้ำหนัก", key: "quarter.weight" },
+    { label: "น้ำหนัก (กก.)", key: "quarter.weight" },
+    { label: "ห้อง", key: "beefroom.roomname" },
     { label: "สถานะ", key: "quarter.status.nameTH" },
     { label: "ผู้นำเข้า", key: "user.name" },
   ];

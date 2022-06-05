@@ -16,8 +16,8 @@ import List_Store from "./ListStore.js";
 import Nav_store from "../Nav_store";
 
 export const STORELIST = gql`
-  query STORELIST($beeftype: String, $type: String) {
-    liststore(beeftype: $beeftype, type: $type) {
+  query STORELIST($beeftype: String, $type: String, $beefroom: String) {
+    liststore(beeftype: $beeftype, type: $type, beefroom: $beefroom) {
       barcode
       status
       cownum
@@ -29,6 +29,8 @@ export const STORELIST = gql`
       namefarmer
       beefroom
       beeftypeid
+      shelf
+      basket
     }
   }
 `;
@@ -42,7 +44,7 @@ const index = () => {
       type: selecttype,
     },
   });
-  console.log(selectedbeeftype);
+/*   console.log(selectedbeeftype); */
   return (
     <DivBase>
       <div
@@ -491,8 +493,8 @@ const index = () => {
                       <th>รหัสซาก</th>
                       <th>รหัสบาร์โค้ด</th>
                       <th>คิวอาร์โค้ด</th>
-                      <th>น้ำหนักอุ่น</th>
-                      <th>น้ำหนักเย็น</th>
+                      <th>น้ำหนักอุ่น (กก.)</th>
+                      <th>น้ำหนักเย็น (กก.)</th>
                       <th>วันหมดอายุ</th>
                       <th>เกรด</th>
                       <th>ห้อง</th>

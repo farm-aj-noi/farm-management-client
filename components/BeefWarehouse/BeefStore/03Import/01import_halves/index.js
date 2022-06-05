@@ -100,7 +100,7 @@ const index = () => {
       <DivBase
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 270px 900px 1fr",
+          gridTemplateColumns: "1fr 270px 1020px 1fr",
           gridRowGap: "15px",
           gridColumnGap: "10px",
           textAlign: "start",
@@ -377,7 +377,7 @@ const index = () => {
           </DivFrom>
           <DivFrom
             style={{
-              width: "1180px",
+              width: "1300px",
               gridRowStart: "5",
               gridRowEnd: "5",
               gridColumnStart: "2",
@@ -410,8 +410,8 @@ const index = () => {
                       <th>รหัสซาก</th>
                       <th>รหัสบาร์โค้ด</th>
                       <th>คิวอาร์โค้ด</th>
-                      <th>น้ำหนักอุ่น</th>
-                      <th>น้ำหนักเย็น</th>
+                      <th>น้ำหนักอุ่น (กก.)</th>
+                      <th>น้ำหนักเย็น (กก.)</th>
                       <th>ห้อง</th>
                       <th>ชั้น</th>
                       <th>ตะกร้า</th>

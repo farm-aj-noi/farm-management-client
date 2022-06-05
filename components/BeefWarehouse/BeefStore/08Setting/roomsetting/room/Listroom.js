@@ -7,6 +7,7 @@ import QUERYROOMS from "./room";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
+import Edittotal from "./edittotalbeef";
 import Router from "next/router";
 
 import {
@@ -65,15 +66,6 @@ export const UPDATETYPEKEEP = gql`
 export const QUERY = gql`
   query TypeRoom($beefroom: String) {
     TypeRoom(beefroom: $beefroom) {
-      id
-      totalbeef
-    }
-  }
-`;
-
-export const UPDATECOUNT = gql`
-  mutation UPDATECOUNT($id: ID, $totalbeef: String) {
-    uppdatetypekeep(id: $id, totalbeef: $totalbeef) {
       id
       totalbeef
     }
@@ -193,33 +185,6 @@ const deleteroom = ({ idroom }) => {
   };
 
   const [edit, setedit] = useState(false);
-  const [editkeep, seteditkeep] = useState(false);
-
-  const [uppdatetypekeep, { loading, error }] = useMutation(UPDATECOUNT, {
-    onCompleted: (data) => {
-      setRoominfo(data.updatetyekeep);
-      seteditkeep(false);
-    },
-  });
-  const handdleChangeupdatetypekeep = (e) => {
-    setRoominfo({ ...roominfo, [e.target.name]: e.target.value });
-  };
-  const handleSubmittypekeep = async () => {
-    if (roominfo === idroom) {
-      setRoominfo(idroom);
-      seteditkeep(false);
-      return;
-    }
-    try {
-      await uppdatetypekeep({
-        variables: {
-          ...roominfo,
-        },
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   return (
     <>
@@ -288,6 +253,7 @@ const deleteroom = ({ idroom }) => {
               return (
                 <div
                   style={{
+                    marginTop: "10px",
                     display: "grid",
                     gridColumStart: "1",
                     gridColumn: `1 ${inputListroom.length !== 1 ? "" : ""}`,
@@ -454,53 +420,10 @@ const deleteroom = ({ idroom }) => {
               }}
             >
               จำนวน : {}
-              {editkeep ? (
-                <Savebuttoncolor onClick={handleSubmittypekeep}>
-                  <Savebutton />
-                </Savebuttoncolor>
-              ) : (
-                <Editbuttoncolor onClick={() => seteditkeep(true)}>
-                  <Editbutton />
-                </Editbuttoncolor>
-              )}
               <>
                 {data &&
                   data.TypeRoom.map((prod) => (
-                    <>
-                      {editkeep ? (
-                        <>
-                          <Searchinput
-                            name="totalbeef"
-                            style={{
-                              marginTop: "10px",
-                              textAlign: "center",
-                              width: "140px",
-                            }}
-                            onChange={handdleChangeupdatetypekeep}
-                          ></Searchinput>
-                        </>
-                      ) : (
-                        <>
-                          <Searchinput
-                            style={{
-                              marginTop: "10px",
-                              textAlign: "center",
-                              width: "140px",
-                            }}
-                            value={prod.totalbeef}
-                            disabled
-                          ></Searchinput>
-                          <Removebuttoncolor
-                            style={{
-                              marginLeft: "10px",
-                              fontSize: "20px",
-                            }}
-                          >
-                            <Removebutton />
-                          </Removebuttoncolor>
-                        </>
-                      )}
-                    </>
+                    <Edittotal key={prod.id} editcount={prod} />
                   ))}
               </>
             </div>

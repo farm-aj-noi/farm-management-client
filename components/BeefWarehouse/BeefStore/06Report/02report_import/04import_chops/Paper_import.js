@@ -46,7 +46,10 @@ const Paper_import = ({ prod }) => {
       "ทะเบียนขุน",
       "รหัสซาก",
       "รหัสบาร์โค้ด",
-      "น้ำหนัก",
+      "น้ำหนัก (กก.)",
+      "ห้อง",
+      "ชั้น",
+      "ตะกร้า",
       "สถานะ",
       "ผู้นำเข้า",
     ]);
@@ -63,6 +66,10 @@ const Paper_import = ({ prod }) => {
           );
         } else if (column === "chop.imslaughter.namefarmer") {
           dataRow.push(row.chop.imslaughter.namefarmer);
+        } else if (column === "beefroom.roomname") {
+          dataRow.push(row.beefroom.roomname);
+        } else if (column === "shelf.shelfname") {
+          dataRow.push(row.shelf.shelfname);
         } else if (column === "chop.beeftype.nameTH") {
           dataRow.push(row.chop.beeftype.nameTH);
         } else if (column == "chop.imslaughter.numcow") {
@@ -99,15 +106,18 @@ const Paper_import = ({ prod }) => {
         headerRows: 1,
         // alignment: 'center'
         widths: [
+          "auto",
+          "auto",
           "star",
           "star",
+          "auto",
           "star",
           "star",
+          "auto",
+          "auto",
+          "auto",
           "star",
-          "star",
-          "star",
-          "star",
-          "star",
+          "auto",
         ],
 
         body: buildTableBody(data, columns),
@@ -155,6 +165,9 @@ const Paper_import = ({ prod }) => {
           "chop.beeftype.code",
           "chop.barcode",
           "chop.weight",
+          "beefroom.roomname",
+          "shelf.shelfname",
+          "basket",
           "chop.status.nameTH",
           "user.name",
         ]),

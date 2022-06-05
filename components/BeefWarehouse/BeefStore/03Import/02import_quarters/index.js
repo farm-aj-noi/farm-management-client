@@ -49,6 +49,9 @@ export const IMPORTQUARTERSEARCH = gql`
           namefarmer
         }
       }
+      beefroom {
+        roomname
+      }
     }
   }
 `;
@@ -379,7 +382,7 @@ const index = () => {
                       <th>รหัสซาก</th>
                       <th>รหัสบาร์โค้ด</th>
                       <th>คิวอาร์โค้ด</th>
-                      <th>น้ำหนัก</th>
+                      <th>น้ำหนัก (กก.)</th>
                       <th>ห้อง</th>
                       <th>ชั้น</th>
                       <th>ตะกร้า</th>

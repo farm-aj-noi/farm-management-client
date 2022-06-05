@@ -261,12 +261,12 @@ const Create_Import = () => {
             }}
           >
             <Savebutton1
-              disabled={
+             /*  disabled={
                 !ImportLumpsInfo.barcode ||
                 !ImportLumpsInfo.beefroom ||
                 !ImportLumpsInfo.shelf ||
                 !!ImportLumpsInfo.basket
-              }
+              } */
               onClick={handleSubmit}
               style={{
                 backgroundColor: `${
