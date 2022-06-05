@@ -15,21 +15,14 @@ const ListGrade = ({ ListGrade }) => {
   console.log (ListGradeData)
   return (
     <tr style={{ textAlign: "center" }}>
-      <td>{ListGradeData.beeftype.code}</td>
+     {/*  <td>{ListGradeData.beeftype.code}</td>
       <td>{ListGradeData.barcode}</td>
       <td>{ListGradeData.weightwarm}</td>
-      <td>{ListGradeData.weigh}</td>
+      <td>{ListGradeData.weightcool}</td>
       <td>{ListGradeData.chill.chilldateStart}</td>
       <td>{ListGradeData.chill.chilldateEnd}</td>
       <td>{ListGradeData.chill.chillroom}</td>
-      <td>{ListGradeData.imslaughter.pun}</td>
-      <td>
-        <Link href="/beefgrading/grading">
-        <ButtonSubmit >
-          รอการตัดเกรด
-         </ButtonSubmit>
-         </Link>
-      </td>
+      <td>{ListGradeData.imslaughter.pun}</td> */}
     </tr>
   );
 };

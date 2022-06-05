@@ -14,7 +14,7 @@ import { Logobeefgrade } from "../../../utils/image";
 import { navbarHeight } from "../../../utils/sizes";
 import { shareSquareO } from "react-icons-kit/fa/shareSquareO";
 import MyCss from "./Nav.module.css";
-import { Icon3, Icon2, Icon4, Icon5, Icon1 } from "../../../utils/Logograde";
+import { Icon3, Icon2, Icon4, Icon5, Icon7 } from "../../../utils/Logograde";
 import { AuthContext } from "../../../appState/AuthProvider";
 
 import { useQuery } from "@apollo/react-hooks";
@@ -42,6 +42,28 @@ const Nav1 = () => {
         collapseOnSelect
         expand="lg"
       >
+        <Link href="/.">
+        <ButtonSignUp
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            paddingTop: "9px",
+            }}
+          >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              marginRight: "5px",
+              }}
+          >
+            <Icon7 height="30px" weight="30px" />
+            </div>
+            หน้าเเรก
+          </ButtonSignUp>
+          </Link>
         <Link href="/beefgrading">
         <ButtonSignUp
           style={{
@@ -59,7 +81,7 @@ const Nav1 = () => {
               marginRight: "5px",
               }}
           >
-            <Logobeefgrade height="50px" weight="50px" />
+            <Logobeefgrade height="30px" weight="30px" />
             </div>
             ระบบการตัดเกรดเนื้อโค
           </ButtonSignUp>

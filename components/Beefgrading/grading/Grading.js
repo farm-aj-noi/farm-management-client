@@ -1,5 +1,7 @@
 import React, { useContext, useState, useRef, useEffect } from "react";
-
+import { useQuery } from "@apollo/react-hooks";
+import gql from "graphql-tag";
+import ListGrade from "./listgrade";
 import {picture} from 'react-icons-kit/ikons/picture';
 import { Icon } from "react-icons-kit";
 import logo from './defultcow.jpg'
@@ -35,8 +37,30 @@ import dayjs from "dayjs";
 import DatePicker, { registerLocale } from "react-datepicker";
 import th from "date-fns/locale/th";
 registerLocale("th", th);
-import gql from "graphql-tag";
 
+
+export const LISTGRADE = gql`
+  query LISTGRADE {
+    listhalvegrade {
+    weightwarm
+    weightcool
+    barcode
+    imslaughter {
+      pun
+    }
+    beeftype {
+      code
+    }
+    chill {
+      chillroom {
+        roomnum
+      }
+      chilldateStart
+      chilldateEnd
+    }
+  }
+  }
+`;
 
 const thstyle = {
   border: "1px solid #dddddd",
@@ -65,7 +89,7 @@ const CREATE = gql`
 `;
 
 const Grading = () => {
-
+  const { data, loading, error } = useQuery(LISTGRADE);
   const [file, setFile] = useState(null);
   const [image, setImage] = useState({ preview: "", raw: "" });
 
@@ -324,36 +348,41 @@ function blobToFile(theBlob, fileName){
             <Table responsive striped bordered hover>
               <thead>
                 <th colspan="2">รหัสซาก</th>
-                <th colSpan="4">00001</th>
+               
               </thead>
               <thead>
                 <th colspan="2">บาร์โค้ด</th>
-                <th colSpan="2">00001-1</th>
-                <th colSpan="2">00001-2</th>
+               
               </thead>
               <thead>
                 <th colspan="2">น้ำหนักซาก Kg.</th>
                 <th>ซากซ้าย</th>
-                <th>406</th>
+                
                 <th>ซากขวา</th>
-                <th>303</th>
+                
               </thead>
               <thead>
                 <th colspan="2">วันที่เข้าบ่ม</th>
-                <th colSpan="4">12/07/2022</th>
+                
               </thead>
               <thead>
                 <th colspan="2">วันที่ตัดเกรด</th>
-                <th colSpan="4">21/07/2022</th>
+                
               </thead>
               <thead>
                 <th colspan="2">ห้องบ่ม</th>
-                <th colSpan="4">01</th>
+                
               </thead>
               <thead>
                 <th colspan="2">สายพันธุ์</th>
-                <th colSpan="4">เเองกัส</th>
+                
               </thead>
+              <tbody>
+                    {data &&
+                      data.listhalvegrade.map((prod) => (
+                        <ListGrade key={prod.id} ListGrade = {prod} />
+                      ))}
+                  </tbody>
               <Link href="/beef_store/grading">
               <ButtonBack>
                 ย้อนกลับ
