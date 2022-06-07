@@ -7,6 +7,15 @@ import withReactContent from "sweetalert2-react-content";
 
 import Router from "next/router";
 
+export const UPDATESHELF = gql`
+  mutation UPDATESHELF($id: ID, $shelfname: String) {
+    updateShelf(id: $id, shelfname: $shelfname) {
+      id
+      shelfname
+    }
+  }
+`;
+
 import {
   DivFrom,
   DivFromTop,
@@ -31,23 +40,13 @@ import {
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
 
-export const UPDATEROOMNAME = gql`
-  mutation UPDATEROOMNAME($id: ID, $roomname: String) {
-    updateBeefroom(id: $id, roomname: $roomname) {
-      id
-      roomname
-    }
-  }
-`;
-
-const editname = ({ idroom }) => {
+const editname = ({ listkeep }) => {
   const MySwal = withReactContent(Swal);
   const [Editname, setEditname] = useState(false);
-  const [Roominfo, setRoominfo] = useState(idroom);
-    console.log(Roominfo); 
-  const [updateBeefroom] = useMutation(UPDATEROOMNAME, {
+  const [infolistkeep, setinfolistkeep] = useState(listkeep);
+  const [updateShelf] = useMutation(UPDATESHELF, {
     onCompleted: (data) => {
-      setRoominfo(data.updateBeefroom);
+      setinfolistkeep(data.updateShelf);
       setEditname(false);
       MySwal.fire({
         icon: "success",
@@ -56,7 +55,7 @@ const editname = ({ idroom }) => {
         confirmButtonText: (
           <span
             onClick={() =>
-              Router.reload("beefwarehouse/beefstore/setting/room")
+              Router.reload("beefwarehouse/beefstore/setting/shelf")
             }
           >
             ตกลง
@@ -66,30 +65,30 @@ const editname = ({ idroom }) => {
       });
     },
   });
-  const handleChangename = (e) => {
-    setRoominfo({
-      ...Roominfo,
-      [e.target.name]: e.target.value,
-    });
+
+  const handdleChange = (e) => {
+    setinfolistkeep({ ...infolistkeep, [e.target.name]: e.target.value });
   };
-  const handleSubmitname = async () => {
-    if (Roominfo === idroom) {
-      setRoominfo(idroom);
+
+  const handdleSubmit = async () => {
+    if (infolistkeep === listkeep) {
+      setinfolistkeep(listkeep);
       setEditname(false);
       return;
     }
     try {
-      await updateBeefroom({
+      await updateShelf({
         variables: {
-          ...Roominfo,
+          ...infolistkeep,
         },
       });
     } catch (error) {
       console.log(error);
     }
   };
+
   return (
-    <>
+    <div>
       {Editname ? (
         <div
           style={{
@@ -97,50 +96,58 @@ const editname = ({ idroom }) => {
             gridRowStart: "1",
             gridRowEnd: "1",
             gridColumnStart: "1",
+            marginTop: "0px",
           }}
         >
-          ชื่อห้องจัดเก็บ : {}
+          ชื่อชั้นจัดเก็บ : {}
           <Searchinput
-            name="roomname"
-            value={Roominfo.roomname}
-            onChange={handleChangename}
+            type="text"
+            id="shelfname"
+            name="shelfname"
+            value={infolistkeep.shelfname}
+            onChange={handdleChange}
             style={{
-              marginTop: "10px",
+              width: "156px",
               textAlign: "center",
+              marginTop: "10px",
               width: "140px",
             }}
-          ></Searchinput>
-          <Savebuttoncolor onClick={handleSubmitname}>
+          />
+          <Savebuttoncolor onClick={handdleSubmit}>
             <Savebutton />
           </Savebuttoncolor>
         </div>
       ) : (
-        <>
-          <div
+        <div
+          style={{
+            width: "100%",
+            gridRowStart: "1",
+            gridRowEnd: "1",
+            gridColumnStart: "1",
+            marginTop: "0px",
+          }}
+        >
+          ชื่อชั้นจัดเก็บ : {}
+          <Searchinput
+            /* value={prod.shelfname} */
+            type="text"
+            id="shelfname"
+            name="shelfname"
+            value={infolistkeep.shelfname}
+            disabled
             style={{
-              width: "100%",
-              gridRowStart: "1",
-              gridRowEnd: "1",
-              gridColumnStart: "1",
+              width: "156px",
+              textAlign: "center",
+              marginTop: "10px",
+              width: "140px",
             }}
-          >
-            ชื่อห้องจัดเก็บ : {}
-            <Searchinput
-              value={Roominfo.roomname}
-              style={{
-                marginTop: "10px",
-                textAlign: "center",
-                width: "140px",
-              }}
-              disabled
-            ></Searchinput>
-            <Editbuttoncolor onClick={() => setEditname(true)}>
-              <Editbutton />
-            </Editbuttoncolor>
-          </div>{" "}
-        </>
+          />
+          <Editbuttoncolor onClick={() => setEditname(true)}>
+            <Editbutton />
+          </Editbuttoncolor>
+        </div>
       )}
-    </>
+    </div>
   );
 };
 

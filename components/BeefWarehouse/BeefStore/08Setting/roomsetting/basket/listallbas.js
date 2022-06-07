@@ -28,36 +28,37 @@ import {
   Removebutton,
 } from "../../../../../../utils/button";
 
+import { DivBase } from "../../../../../../utils/divBase";
+
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
 
-export const UPDATECOUNT = gql`
-  mutation UPDATECOUNT($id: ID, $totalbeef: String) {
-    uppdatetypekeep(id: $id, totalbeef: $totalbeef) {
+export const UPDATEBASKET = gql`
+  mutation UPDATEBASKET($id: ID, $basketname: String) {
+    updateBasket(id: $id, basketname: $basketname) {
       id
-      totalbeef
+      basketname
     }
   }
 `;
 
-export const DELETETYPEKEEP = gql`
-  mutation DELETETYPEKEEP($id: ID) {
-    deletetypekeep(id: $id) {
+export const DELETEBASKET = gql`
+  mutation DELETEBASKET($id: ID) {
+    deleteBasket(id: $id) {
       id
-      totalbeef
+      basketname
     }
   }
 `;
 
-const editkeep = ({ edittype }) => {
+const listallbas = ({ listallbas }) => {
+  const [infobasall, setinfobasall] = useState(listallbas);
   const MySwal = withReactContent(Swal);
-  const [infotype, setinfotype] = useState(edittype);
-  /* console.log(infotype); */
-  const [editkeep, seteditkeep] = useState(false);
-  const [uppdatetypekeep, { loading, error }] = useMutation(UPDATECOUNT, {
+  const [Editname, setEditname] = useState(false);
+  const [updateBasket] = useMutation(UPDATEBASKET, {
     onCompleted: (data) => {
-      setinfotype(data.uppdatetypekeep);
-      seteditkeep(false);
+      setinfobasall(data.updateBasket);
+      setEditname(false);
       MySwal.fire({
         icon: "success",
         title: "สำเร็จ",
@@ -65,7 +66,7 @@ const editkeep = ({ edittype }) => {
         confirmButtonText: (
           <span
             onClick={() =>
-              Router.reload("beefwarehouse/beefstore/setting/shelf")
+              Router.reload("beefwarehouse/beefstore/setting/basket")
             }
           >
             ตกลง
@@ -75,27 +76,28 @@ const editkeep = ({ edittype }) => {
       });
     },
   });
-  const handdleChangeupdatetypekeep = (e) => {
-    setinfotype({ ...infotype, [e.target.name]: e.target.value });
+
+  const handdleChange = (e) => {
+    setinfobasall({ ...infobasall, [e.target.name]: e.target.value });
   };
-  const handleSubmittypekeep = async () => {
-    if (infotype === edittype) {
-      setinfotype(edittype);
-      seteditkeep(false);
+
+  const handdleSubmit = async () => {
+    if (infobasall === listallbas) {
+      setinfobasall(listallbas);
+      setEditname(false);
       return;
     }
     try {
-      await uppdatetypekeep({
+      await updateBasket({
         variables: {
-          ...infotype,
+          ...infobasall,
         },
       });
     } catch (error) {
       console.log(error);
     }
   };
-
-  const [deletetypekeep] = useMutation(DELETETYPEKEEP, {
+  const [deleteBasket] = useMutation(DELETEBASKET, {
     onCompleted: (data) => {
       MySwal.fire({
         icon: "success",
@@ -104,7 +106,7 @@ const editkeep = ({ edittype }) => {
         confirmButtonText: (
           <span
             onClick={() =>
-              Router.reload("beefwarehouse/beefstore/setting/shelf")
+              Router.reload("beefwarehouse/beefstore/setting/basket")
             }
           >
             ตกลง
@@ -114,62 +116,67 @@ const editkeep = ({ edittype }) => {
       });
     },
   });
-
   const handdleSubmitDelete = async () => {
     try {
-      await deletetypekeep({
+      await deleteBasket({
         variables: {
-          id: infotype.id,
+          id: infobasall.id,
         },
       });
-      /* console.log(data.allRoom.id); */
     } catch (error) {
       console.log(error);
     }
   };
   return (
-    <>
-      {editkeep ? (
+    <div>
+      {Editname ? (
         <div>
           <Searchinput
-            name="totalbeef"
+            type="text"
+            id="basketname"
+            name="basketname"
+            value={infobasall.basketname}
+            onChange={handdleChange}
             style={{
-              marginTop: "10px",
+              width: "156px",
               textAlign: "center",
-              width: "110px",
+              marginTop: "10px",
+              width: "140px",
             }}
-            onChange={handdleChangeupdatetypekeep}
-          ></Searchinput>
-          <Savebuttoncolor onClick={handleSubmittypekeep}>
+          />
+          <Savebuttoncolor onClick={handdleSubmit}>
             <Savebutton />
           </Savebuttoncolor>
         </div>
       ) : (
         <div>
           <Searchinput
-            style={{
-              marginTop: "10px",
-              textAlign: "center",
-              width: "110px",
-            }}
+            /* value={prod.shelfname} */
+            type="text"
+            id="basketname"
+            name="basketname"
+            value={infobasall.basketname}
             disabled
-            value={infotype.totalbeef}
-          ></Searchinput>
-          <Editbuttoncolor onClick={() => seteditkeep(true)}>
+            style={{
+              width: "156px",
+              textAlign: "center",
+              marginTop: "10px",
+              width: "120px",
+            }}
+          />
+          <Editbuttoncolor onClick={() => setEditname(true)}>
             <Editbutton />
           </Editbuttoncolor>
           <Removebuttoncolor
-            style={{
-              marginLeft: "5px",
-            }}
-             onClick={handdleSubmitDelete}
+            onClick={handdleSubmitDelete}
+            style={{ marginLeft: "5px" }}
           >
-            <Removebutton />
+            ลบ
           </Removebuttoncolor>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
-export default editkeep;
+export default listallbas;

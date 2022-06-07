@@ -10,7 +10,22 @@ import { DivFrom, DivFromTop, DivFromDown, HeaderColor } from "../NavFrom";
 
 import { Table } from "react-bootstrap";
 
+import { useQuery } from "@apollo/react-hooks";
+import gql from "graphql-tag";
+
+import Listdate from "./ListDate";
+
+export const QUERYLISTEXDATE = gql`
+  query QUERYLISTEXDATE {
+    listExpSetting {
+      id
+      totalday
+    }
+  }
+`;
+
 const index = () => {
+  const { data } = useQuery(QUERYLISTEXDATE);
   return (
     <>
       <div
@@ -61,32 +76,7 @@ const index = () => {
                 marginBottom: "15px",
                 height: "400px",
               }}
-            >
-              <Table
-                striped
-                bordered
-                responsive
-                hover
-                style={{ margin: "auto" }}
-              >
-                <thead>
-                  <tr style={{ textAlign: "center" }}>
-                    <th>วันที่ปัจจุบัน</th>
-                    <th>จำนวนรายการ</th>
-                    <th>รายละเอียด</th>
-                    <th>ลบ</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr style={{ textAlign: "center" }}>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </Table>
-            </div>
+            ></div>
           </DivFromDown>
         </DivFrom>
       </DivBase>

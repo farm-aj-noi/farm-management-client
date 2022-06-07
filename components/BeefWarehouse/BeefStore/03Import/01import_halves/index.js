@@ -392,7 +392,7 @@ const index = () => {
               รายการนำเข้าซากเนื้อโคผ่าซีก
             </DivFromTop>
             <DivFromDown>
-              <div style={{ height: "280px", overflow: "auto" }}>
+              <div style={{ height: "310px", overflow: "auto" }}>
                 <Table
                   striped
                   bordered

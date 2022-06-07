@@ -13,6 +13,8 @@ import { Savebuttoncolor } from "../../../../utils/buttonColor";
 import { Savebutton, Editbutton, Removebutton } from "../../../../utils/button";
 import { Router } from "next/router";
 
+import Modalqrcode from "../12Qrcode/chill";
+
 export const UPDATECHILLSTATUS = gql`
   mutation UpdateChillday($id: ID) {
     updateChillday(id: $id) {
@@ -28,7 +30,6 @@ export const UPDATECHILLSTATUS = gql`
 const List_chill = ({ listchill }) => {
   const checkdate = dayjs().format("YYYY-MM-DDTHH:mm:ssZ[Z]");
   console.log(checkdate);
-
 
   const [ListChillInfo, SetListChillInfo] = useState(listchill);
   console.log(ListChillInfo.chilldateEnd);
@@ -88,15 +89,14 @@ const List_chill = ({ listchill }) => {
       <td>{ListChillInfo.halve.beeftype.code}</td>
       <td>{ListChillInfo.halve.barcode}</td>
       <td>
-        <Barcodebuttoncolor>
-          <Qrcodebutton />
-        </Barcodebuttoncolor>
+        <Modalqrcode key={ListChillInfo.id} listchill={ListChillInfo} />
       </td>
       <td>{ListChillInfo.halve.weightwarm} กก.</td>
       <td>{ListChillInfo.chillroom.roomnum}</td>
       <td>{ListChillInfo.chillstatus.nameTH}</td>
       <td>
-        {checkdate >= dayjs(ListChillInfo.chilldateEnd).format("YYYY-MM-DDTHH:mm:ssZ[Z]") ? (
+        {checkdate >=
+        dayjs(ListChillInfo.chilldateEnd).format("YYYY-MM-DDTHH:mm:ssZ[Z]") ? (
           <div>
             <Savebuttoncolor
               disabled={
@@ -117,10 +117,6 @@ const List_chill = ({ listchill }) => {
         ) : (
           "-"
         )}
-
-        {/*  {error && (
-          <p style={{ color: "red" }}>{error.graphQLErrors[0].message}</p>
-        )} */}
       </td>
     </tr>
   );

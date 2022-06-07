@@ -179,3 +179,4 @@ export const DivBase1 = styled.div`
   padding-top: 30px;
   padding-bottom: 130px;
 `;
+

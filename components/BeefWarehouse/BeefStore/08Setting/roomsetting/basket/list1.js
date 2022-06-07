@@ -32,47 +32,43 @@ import { DivBase } from "../../../../../../utils/divBase";
 
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
-import Listtypekeep from "./Listtypekeep";
-import Editname from "./editname";
+
+import Listbasket from "./listbas";
 
 export const QUERYSHELF = gql`
-  query ListShelf($id: ID) {
+  query QUERYSHELF($id: ID) {
     listShelf(id: $id) {
-      id
       shelfname
-      typekeep {
-        id
-        totalbeef
-        beeftype {
-          nameTH
-          id
-        }
-      }
+      id
     }
   }
 `;
 
-const Listshelf = ({ Listshelfs }) => {
-  const [Listshelf, setListshelf] = useState(Listshelfs);
+const list1 = ({ listroom1 }) => {
+  const [inforoom, setinforoom] = useState(listroom1);
   const { data: datashelf } = useQuery(QUERYSHELF, {
     variables: {
-      id: Listshelf.id,
+      id: inforoom.id,
     },
   });
-
+  console.log(inforoom);
   return (
     <div
       style={{
-        border: "1px solid #AFAFAF",
-        padding: "0px 15px 15px 15px",
-        margin: "10px",
-        borderRadius: "4px",
+        display: "grid",
+        gridTemplateColumns: `200px 200px 200px 
+         200px`,
+        marginTop: "10px",
+        marginLeft: "30px",
+        paddingBottom: "20px",
+        /*  backgroundColor: "red", */
+        borderBottom: "1px solid #AFAFAF",
       }}
     >
       <div>
         ห้องจัดเก็บ : {}
         <Searchinput
-          value={Listshelf.roomname}
+          value={inforoom.roomname}
           style={{
             marginTop: "10px",
             textAlign: "center",
@@ -80,27 +76,25 @@ const Listshelf = ({ Listshelfs }) => {
           disabled
         ></Searchinput>
       </div>
-
-      {datashelf &&
-        datashelf.listShelf.map((prod) => (
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: `200px 200px 200px 
-               200px`,
-              marginTop: "10px",
-              marginLeft: "30px",
-              paddingBottom: "20px",
-              /*  backgroundColor: "red", */
-              borderBottom: "1px solid #AFAFAF",
-            }}
-          >
-          <Editname key={prod.id} listkeep={prod} />
-            <Listtypekeep key={prod.id} listkeep={prod} />
-          </div>
-        ))}
+      <div>
+        {datashelf &&
+          datashelf.listShelf.map((prod) => (
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: `200px 200px 200px 
+                 200px`,
+                /*   marginTop: "10px",
+                marginLeft: "30px",
+                paddingBottom: "20px",  */
+              }}
+            >
+              <Listbasket key={prod.id} listbas={prod} />
+            </div>
+          ))}
+      </div>
     </div>
   );
 };
 
-export default Listshelf;
+export default list1;

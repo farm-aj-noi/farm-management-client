@@ -49,7 +49,7 @@ export const DELETETYPEKEEP = gql`
 const edittotalbeef = ({ editcount }) => {
   const MySwal = withReactContent(Swal);
   const [infoCount, seinfoCount] = useState(editcount);
-  console.log(infoCount);
+ // console.log(infoCount);
   const [editkeep, seteditkeep] = useState(false);
 
   const [uppdatetypekeep, { loading, error }] = useMutation(UPDATECOUNT, {
