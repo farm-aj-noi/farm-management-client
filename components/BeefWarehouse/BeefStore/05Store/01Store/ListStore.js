@@ -5,6 +5,7 @@ import {
 } from "../../../../../utils/buttonColor";
 import { Qrcodebutton, Editbutton } from "../../../../../utils/button";
 import dayjs from "dayjs";
+import Modalqrcode from "../../12Qrcode/store";
 
 const ListStore = ({ Liststore }) => {
   const [ListStoreData, SetListStoreData] = useState(Liststore);
@@ -15,9 +16,7 @@ const ListStore = ({ Liststore }) => {
       <td>{ListStoreData.code}</td>
       <td>{ListStoreData.barcode}</td>
       <td>
-        <Barcodebuttoncolor>
-          <Qrcodebutton />
-        </Barcodebuttoncolor>
+        <Modalqrcode key={ListStoreData.id} liststore={ListStoreData} />
       </td>
       <td>{ListStoreData.weightwarm ? ListStoreData.weightwarm : "-"}</td>
       <td>{ListStoreData.weight ? ListStoreData.weight : "-"}</td>

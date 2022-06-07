@@ -283,112 +283,124 @@ const room = () => {
                   style={{ width: "156px", textAlign: "center" }}
                 />
               </div>
-              {inputListroom.map((x, i) => {
-                return (
-                  <div
-                    style={{
-                      display: "grid",
-                      gridColumStart: "1",
-                      gridColumn: `2 ${inputListroom.length !== 1 ? "" : ""}`,
-                      gridTemplateColumns: `200px 200px 200px ${
-                        inputListroom.length !== 1 ? "40px" : ""
-                      } 200px`,
-                    }}
-                  >
-                    <div
-                      style={{
-                        width: "100%",
-                        gridRowStart: "1",
-                        gridRowEnd: "1",
-                        gridColumnStart: "1",
-                      }}
-                    >
-                      {" "}
-                      ประเภทจัดเก็บ : {}
-                      <select
-                        name="beeftype"
-                        id="beeftype"
-                        value={inputListroom[i].beeftype}
-                        onChange={(e) => handleInputroom(e, i)}
-                        style={{
-                          height: "38px",
-                          width: "156px",
-                          border: "1px solid #AFAFAF",
-                          borderRadius: "4px",
-                          textAlign: "center",
-                          fontSize: "14px",
-                        }}
-                      >
-                        <option value="">เลือก</option>
-                        <option value="5f1000e28d55662dcc23d95e">
-                          ซากซ้าย
-                        </option>
-                        <option value="5f1000ee8d55662dcc23d960">ซากขวา</option>
-                        <option value="5f338f035f7703096453abb8">
-                          ซากขวา-ขาหน้า
-                        </option>
-                        <option value="5f338f0d5f7703096453abb9">
-                          ซากขวา-ขาหลัง
-                        </option>
-                        <option value="5f338eeb5f7703096453abb6">
-                          ซากซ้าย-ขาหน้า
-                        </option>
-                        <option value="5f338ef65f7703096453abb7">
-                          ซากซ้าย-ขาหลัง
-                        </option>
-                      </select>
-                    </div>
-                    <div
-                      style={{
-                        width: "100%",
-                        gridRowStart: "1",
-                        gridRowEnd: "1",
-                        gridColumnStart: "2",
-                      }}
-                    >
-                      จำนวน : {}
-                      <Searchinput
-                        style={{
-                          width: "150px",
-                          textAlign: "center",
-                          backgroundColor: `${
-                            !inputListroom[i].beeftype ? "#ececec" : ""
-                          }`,
-                        }}
-                        disabled={!inputListroom[i].beeftype}
-                        name="totalbeef"
-                        value={inputListroom[i].totalbeef}
-                        onChange={(e) => handleInputroom(e, i)}
-                      ></Searchinput>
-                      {inputListroom.length !== 1 && (
-                        <Removebuttoncolor
-                          style={{
-                            height: "38px",
-                            margin: " auto auto 0",
-                            width: " 38px",
-                          }}
-                          onClick={() => handleRemoveClickroom(i)}
-                        >
-                          <Removebutton />
-                        </Removebuttoncolor>
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
               <div
                 style={{
                   width: "100%",
                   gridRowStart: "1",
                   gridRowEnd: "1",
-                  gridColumnStart: "4",
+                  gridColumnStart: "2",
                   marginTop: "0px",
+                }}
+              >
+                {inputListroom.map((x, i) => {
+                  return (
+                    <div
+                      style={{
+                        display: "grid",
+                        gridColumStart: "1",
+                        gridColumn: `2 ${inputListroom.length !== 1 ? "" : ""}`,
+                        gridTemplateColumns: `200px 200px 200px ${
+                          inputListroom.length !== 1 ? "40px" : ""
+                        } 200px`,
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: "100%",
+                          gridRowStart: "1",
+                          gridRowEnd: "1",
+                          gridColumnStart: "1",
+                        }}
+                      >
+                        {" "}
+                        ประเภทจัดเก็บ : {}
+                        <select
+                          name="beeftype"
+                          id="beeftype"
+                          value={inputListroom[i].beeftype}
+                          onChange={(e) => handleInputroom(e, i)}
+                          style={{
+                            height: "38px",
+                            width: "156px",
+                            border: "1px solid #AFAFAF",
+                            borderRadius: "4px",
+                            textAlign: "center",
+                            fontSize: "14px",
+                          }}
+                        >
+                          <option value="">เลือก</option>
+                          <option value="5f1000e28d55662dcc23d95e">
+                            ซากซ้าย
+                          </option>
+                          <option value="5f1000ee8d55662dcc23d960">
+                            ซากขวา
+                          </option>
+                          <option value="5f338f035f7703096453abb8">
+                            ซากขวา-ขาหน้า
+                          </option>
+                          <option value="5f338f0d5f7703096453abb9">
+                            ซากขวา-ขาหลัง
+                          </option>
+                          <option value="5f338eeb5f7703096453abb6">
+                            ซากซ้าย-ขาหน้า
+                          </option>
+                          <option value="5f338ef65f7703096453abb7">
+                            ซากซ้าย-ขาหลัง
+                          </option>
+                        </select>
+                      </div>
+                      <div
+                        style={{
+                          width: "100%",
+                          gridRowStart: "1",
+                          gridRowEnd: "1",
+                          gridColumnStart: "2",
+                        }}
+                      >
+                        จำนวน : {}
+                        <Searchinput
+                          style={{
+                            width: "150px",
+                            textAlign: "center",
+                            backgroundColor: `${
+                              !inputListroom[i].beeftype ? "#ececec" : ""
+                            }`,
+                          }}
+                          disabled={!inputListroom[i].beeftype}
+                          name="totalbeef"
+                          value={inputListroom[i].totalbeef}
+                          onChange={(e) => handleInputroom(e, i)}
+                        ></Searchinput>
+                        {inputListroom.length !== 1 && (
+                          <Removebuttoncolor
+                            style={{
+                              height: "38px",
+                              margin: " auto auto 0",
+                              width: " 38px",
+                            }}
+                            onClick={() => handleRemoveClickroom(i)}
+                          >
+                            <Removebutton />
+                          </Removebuttoncolor>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <div
+                style={{
+                  width: "100%",
+                  gridRowStart: "3",
+                  gridRowEnd: "3",
+                  gridColumnStart: "3",
+                  marginTop: "20px",
+                  marginRight: "2px",
                 }}
               >
                 <div
                   style={{
                     display: "flex",
-                    margin: "24px 0px 0px 0px",
                     marginLeft: "5px",
                   }}
                 >

@@ -12,6 +12,7 @@ Chart.register(CategoryScale);
 import Chart from "chart.js/auto";
 
 import Paper_Graph from "./Paper_Graph";
+import { Table } from "react-bootstrap";
 
 const data = {
   labels: [
@@ -161,24 +162,190 @@ export const index = () => {
             <div style={{ margin: "-3px 5px 0px 0px" }}>
               <Icon size={20} icon={list} />
             </div>
-            ราลละเอียดข้อมูลกราฟคงคลังยอด นำเข้า-นำออก แต่ละเดือน
+            ราลละเอียดข้อมูลสถิติ นำเข้า-นำออก
           </DivFromTop>
           <DivFromDown>
-            <div style={{ paddingTop: "10px" }}>
-              <Line data={data} width={1500} height={500} />
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  paddingTop: "60px",
-                }}
-              >
-                <Paper_Graph />
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <div style={{ marginTop: "10px" }}>
+                <Line data={data} width={500} height={300} />
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    paddingTop: "60px",
+                  }}
+                >
+                  <Paper_Graph />
+                </div>
+              </div>
+              <div>
+                <h1 style={{ textAlign: "center", fontSize: "24px" }}>
+                  สถิติการนำเข้า
+                </h1>
+                <div style={{ height: "550px", overflowY: "auto" }}>
+                  <Table
+                    striped
+                    bordered
+                    responsive
+                    hover
+                    style={{ margin: "auto" }}
+                  >
+                    <thead>
+                      <tr style={{ textAlign: "center" }}>
+                        <th>ลำดับ</th>
+                        <th>ประเภท</th>
+                        <th>จำนวน</th>
+                        <th>น้ำหนัก (กิโลกรัม)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr style={{ textAlign: "center" }}>
+                        <td>1</td>
+                        <td>ซากซ้าย</td>
+                        <td>0</td>
+                        <td>0 / 0</td>
+                      </tr>
+                      <tr style={{ textAlign: "center" }}>
+                        <td>2</td>
+                        <td>ซากขวา</td>
+                        <td>0</td>
+                        <td>0 / 0</td>
+                      </tr>
+                      <tr style={{ textAlign: "center" }}>
+                        <td>3</td>
+                        <td>ซากซ้ายบน</td>
+                        <td>0</td>
+                        <td>0 / 0</td>
+                      </tr>
+                      <tr style={{ textAlign: "center" }}>
+                        <td>4</td>
+                        <td>ซากซ้ายล่าง</td>
+                        <td>0</td>
+                        <td>0 / 0</td>
+                      </tr>
+                      <tr style={{ textAlign: "center" }}>
+                        <td>5</td>
+                        <td>ซากขวาบน</td>
+                        <td>0</td>
+                        <td>0 / 0</td>
+                      </tr>
+                      <tr style={{ textAlign: "center" }}>
+                        <td>6</td>
+                        <td>ซากขวาล่าง</td>
+                        <td>0</td>
+                        <td>0 / 0</td>
+                      </tr>
+                      <tr style={{ textAlign: "center" }}>
+                        <td>7</td>
+                        <td>ก้อนเนื้อ</td>
+                        <td>0</td>
+                        <td>0 / 0</td>
+                      </tr>
+                      <tr style={{ textAlign: "center" }}>
+                        <td>8</td>
+                        <td>ชิ้นเนื้อ</td>
+                        <td>0</td>
+                        <td>0 / 0</td>
+                      </tr>
+                      <tr style={{ textAlign: "center" }}>
+                        <td>9</td>
+                        <td>ส่วนอื่น ๆ</td>
+                        <td>0</td>
+                        <td>0 / 0</td>
+                      </tr>
+                    </tbody>
+                  </Table>
+                </div>
+              </div>
+              <div>
+                <h1 style={{ textAlign: "center", fontSize: "24px" }}>
+                  สถิติการนำเข้า
+                </h1>
+                <div style={{ height: "550px", overflowY: "auto" }}>
+                  <Table
+                    striped
+                    bordered
+                    responsive
+                    hover
+                    style={{ margin: "auto" }}
+                  >
+                    <thead>
+                      <tr style={{ textAlign: "center" }}>
+                        <th>ลำดับ</th>
+                        <th>ประเภท</th>
+                        <th>จำนวน</th>
+                        <th>น้ำหนัก (กิโลกรัม)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr style={{ textAlign: "center" }}>
+                        <td>1</td>
+                        <td>ซากซ้าย</td>
+                        <td>0</td>
+                        <td>0 / 0</td>
+                      </tr>
+                      <tr style={{ textAlign: "center" }}>
+                        <td>2</td>
+                        <td>ซากขวา</td>
+                        <td>0</td>
+                        <td>0 / 0</td>
+                      </tr>
+                      <tr style={{ textAlign: "center" }}>
+                        <td>3</td>
+                        <td>ซากซ้ายบน</td>
+                        <td>0</td>
+                        <td>0 / 0</td>
+                      </tr>
+                      <tr style={{ textAlign: "center" }}>
+                        <td>4</td>
+                        <td>ซากซ้ายล่าง</td>
+                        <td>0</td>
+                        <td>0 / 0</td>
+                      </tr>
+                      <tr style={{ textAlign: "center" }}>
+                        <td>5</td>
+                        <td>ซากขวาบน</td>
+                        <td>0</td>
+                        <td>0 / 0</td>
+                      </tr>
+                      <tr style={{ textAlign: "center" }}>
+                        <td>6</td>
+                        <td>ซากขวาล่าง</td>
+                        <td>0</td>
+                        <td>0 / 0</td>
+                      </tr>
+                      <tr style={{ textAlign: "center" }}>
+                        <td>7</td>
+                        <td>ก้อนเนื้อ</td>
+                        <td>0</td>
+                        <td>0 / 0</td>
+                      </tr>
+                      <tr style={{ textAlign: "center" }}>
+                        <td>8</td>
+                        <td>ชิ้นเนื้อ</td>
+                        <td>0</td>
+                        <td>0 / 0</td>
+                      </tr>
+                      <tr style={{ textAlign: "center" }}>
+                        <td>9</td>
+                        <td>ส่วนอื่น ๆ</td>
+                        <td>0</td>
+                        <td>0 / 0</td>
+                      </tr>
+                    </tbody>
+                  </Table>
+                </div>
               </div>
             </div>
           </DivFromDown>
         </DivFrom>
-       {/*  <div style={{ paddingTop: "10px" }}>
+        {/*  <div style={{ paddingTop: "10px" }}>
           <Line data={data1} width={1500} height={500} />
         </div> */}
       </DivBase>

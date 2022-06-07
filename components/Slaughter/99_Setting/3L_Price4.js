@@ -55,7 +55,7 @@ const Index = ({ List }) => {
   const router = useRouter();
   // console.log(router.query.trackingId);
   const [prod, setProd] = useState(List);
-  // console.log(prod);
+  //console.log(prod);
   const [edit, setEdit] = useState(false);
   const [errorAlert, setErrorAlert] = useState(false);
 

@@ -33,6 +33,7 @@ import { DivBase } from "../../../../../../utils/divBase";
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
 import Listtypekeep from "./Listtypekeep";
+import Editname from "./editname";
 
 export const QUERYSHELF = gql`
   query ListShelf($id: ID) {
@@ -94,6 +95,7 @@ const Listshelf = ({ Listshelfs }) => {
               borderBottom: "1px solid #AFAFAF",
             }}
           >
+          <Editname key={prod.id} listkeep={prod} />
             <Listtypekeep key={prod.id} listkeep={prod} />
           </div>
         ))}

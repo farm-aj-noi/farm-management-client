@@ -312,7 +312,7 @@ const index = () => {
               รายการนำเข้าซากเนื้อโคส่วนอื่น ๆ
             </DivFromTop>
             <DivFromDown>
-              <div style={{ height: "280px", overflow: "auto" }}>
+              <div style={{ height: "350px", overflow: "auto" }}>
                 <Table
                   striped
                   bordered
@@ -351,6 +351,9 @@ const index = () => {
                       ))}
                   </tbody>
                 </Table>
+              </div>
+              <div style={{ float: "right", textAlign: "right" }}>
+                จำนวนรายการ {data ? data.imentrailSearch.length : "0"} รายการ
               </div>
             </DivFromDown>
           </DivFrom>

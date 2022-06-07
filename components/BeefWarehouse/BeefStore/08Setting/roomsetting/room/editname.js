@@ -44,8 +44,7 @@ const editname = ({ idroom }) => {
   const MySwal = withReactContent(Swal);
   const [Editname, setEditname] = useState(false);
   const [Roominfo, setRoominfo] = useState(idroom);
-  /*  console.log(Roominfo); */
-
+    console.log(Roominfo); 
   const [updateBeefroom] = useMutation(UPDATEROOMNAME, {
     onCompleted: (data) => {
       setRoominfo(data.updateBeefroom);

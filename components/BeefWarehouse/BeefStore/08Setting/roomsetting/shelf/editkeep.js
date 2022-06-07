@@ -52,7 +52,7 @@ export const DELETETYPEKEEP = gql`
 const editkeep = ({ edittype }) => {
   const MySwal = withReactContent(Swal);
   const [infotype, setinfotype] = useState(edittype);
-  console.log(infotype);
+  /* console.log(infotype); */
   const [editkeep, seteditkeep] = useState(false);
   const [uppdatetypekeep, { loading, error }] = useMutation(UPDATECOUNT, {
     onCompleted: (data) => {

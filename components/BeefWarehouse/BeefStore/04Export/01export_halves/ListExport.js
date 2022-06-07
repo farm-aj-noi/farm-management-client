@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Barcodebuttoncolor } from "../../../../../utils/buttonColor";
 import { Qrcodebutton } from "../../../../../utils/button";
 import dayjs from "dayjs";
-
+import Modalqrcode from "../../12Qrcode/Export/exhqr";
 const ListExport = ({ exhalve }) => {
   const [exhalveData, SetExhalveData] = useState(exhalve);
 
@@ -19,12 +19,10 @@ const ListExport = ({ exhalve }) => {
       <td>{exhalveData.halve.beeftype.code}</td>
       <td>{exhalveData.halve.barcode}</td>
       <td>
-        <Barcodebuttoncolor>
-          <Qrcodebutton />
-        </Barcodebuttoncolor>
+        <Modalqrcode key={exhalveData.id} listhalve={exhalveData} />
       </td>
       <td>{exhalveData.halve.weightwarm}</td>
-    
+
       <td>{exhalveData.storestatus.nameTH}</td>
       <td>{exhalveData.exporter}</td>
       <td>{exhalveData.user.name}</td>

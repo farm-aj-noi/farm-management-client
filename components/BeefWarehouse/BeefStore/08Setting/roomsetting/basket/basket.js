@@ -36,6 +36,8 @@ import withReactContent from "sweetalert2-react-content";
 
 import Router from "next/router";
 
+import List1 from "./list1";
+
 export const QUERYROOM = gql`
   query Query {
     allRoom {
@@ -248,94 +250,11 @@ const basket = () => {
             borderRadius: "4px",
           }}
         >
-          {" "}
           รายการตะกร้าจัดเก็บ :
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: `200px 200px 200px 
-           200px`,
-              marginTop: "10px",
-              marginLeft: "30px",
-              paddingBottom: "20px",
-              borderBottom: "1px solid #AFAFAF",
-            }}
-          >
-            <div
-              style={{
-                width: "100%",
-                gridRowStart: "1",
-                gridRowEnd: "1",
-                gridColumnStart: "1",
-                marginTop: "0px",
-              }}
-            >
-              ห้องจัดเก็บ : {}
-              {databasket &&
-                databasket.Baskets.map((prod) => (
-                  <>
-                    <Searchinput
-                      value={prod.beefroom.roomname}
-                      style={{
-                        marginTop: "10px",
-                        textAlign: "center",
-                      }}
-                      disabled
-                    ></Searchinput>
-                  </>
-                ))}
-            </div>
-            <div
-              style={{
-                width: "100%",
-                gridRowStart: "1",
-                gridRowEnd: "1",
-                gridColumnStart: "2",
-                marginTop: "0px",
-              }}
-            >
-              ชื่อชั้นจัดเก็บ : {}
-              {databasket &&
-                databasket.Baskets.map((prod) => (
-                  <>
-                    <Searchinput
-                     /*  value={prod.shelf.shelfname} */
-                      style={{
-                        marginTop: "10px",
-                        textAlign: "center",
-                      }}
-                      disabled
-                    ></Searchinput>
-                  </>
-                ))}
-            </div>
-            <div
-              style={{
-                width: "100%",
-                gridRowStart: "1",
-                gridRowEnd: "1",
-                gridColumnStart: "3",
-                marginTop: "0px",
-              }}
-            >
-              ชื่อตะกร้าจัดเก็บ : {}
-              {databasket &&
-                databasket.Baskets.map((prod) => {
-                  return (
-                    <>
-                      <Searchinput
-                        value={prod.basketname}
-                        style={{
-                          marginTop: "10px",
-                          textAlign: "center",
-                        }}
-                        disabled
-                      ></Searchinput>
-                    </>
-                  );
-                })}
-            </div>
-          </div>
+          {dataroom &&
+            dataroom.allRoom.map((prod) => (
+              <List1 key={prod.id} listroom1={prod} />
+            ))}
         </div>
       </DivFromDown>
     </div>

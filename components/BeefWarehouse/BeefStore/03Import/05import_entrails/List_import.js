@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Barcodebuttoncolor } from "../../../../../utils/buttonColor";
 import { Qrcodebutton } from "../../../../../utils/button";
 import dayjs from "dayjs";
+import Modalqrcode from "../../12Qrcode/Import/imeqr";
 
 const List_import = ({ imentrail }) => {
   const [imentrailData, SetImentrailData] = useState(imentrail);
@@ -27,9 +28,7 @@ const List_import = ({ imentrail }) => {
       <td>{imentrailData.entrail.scrap}</td>
       <td>{imentrailData.entrail.barcode}</td>
       <td>
-        <Barcodebuttoncolor>
-          <Qrcodebutton />
-        </Barcodebuttoncolor>
+        <Modalqrcode key={imentrailData.id} listentrail={imentrailData} />
       </td>
       <td>{}</td>
       <td>{}</td>

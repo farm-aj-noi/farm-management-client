@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Barcodebuttoncolor } from "../../../../../utils/buttonColor";
 import { Qrcodebutton } from "../../../../../utils/button";
 import dayjs from "dayjs";
-
+import Modalqrcode from "../../12Qrcode/Export/exeqr";
 const ListExport = ({ exportentrail }) => {
   const [exentrailData, SetExEntrailData] = useState(exportentrail);
   return (
@@ -27,9 +27,7 @@ const ListExport = ({ exportentrail }) => {
       <td>{exentrailData.entrail.scrap}</td>
       <td>{exentrailData.entrail.barcode}</td>
       <td>
-        <Barcodebuttoncolor>
-          <Qrcodebutton />
-        </Barcodebuttoncolor>
+        <Modalqrcode key={exentrailData.id} listentrail={exentrailData} />
       </td>
       <td>{}</td>
       <td>{}</td>

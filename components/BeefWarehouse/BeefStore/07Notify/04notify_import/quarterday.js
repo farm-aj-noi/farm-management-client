@@ -72,7 +72,8 @@ const quarterday = () => {
                 <th>ทะเบียนขุน</th>
                 <th>รหัสซาก</th>
                 <th>รหัสบาร์โค้ด</th>
-                <th>น้ำหนักอุ่น</th>
+                <th>คิวอาร์โค้ด</th>
+                <th>น้ำหนัก (กก.)</th>
                 <th>ห้อง</th>
                 <th>ชั้น</th>
                 <th>ตะกร้า</th>
@@ -81,7 +82,7 @@ const quarterday = () => {
               </tr>
             </thead>
             <tbody>
-              {data &&
+              {data && data.CardImq.length > 0 ? (
                 data.CardImq.map((prod) => (
                   <tr key={prod.id} style={{ textAlign: "center" }}>
                     <td>{prod.quarter.imslaughter.namefarmer}</td>
@@ -99,6 +100,7 @@ const quarterday = () => {
                     <td>{prod.quarter.imslaughter.numcow}</td>
                     <td>{prod.quarter.beeftype.code}</td>
                     <td>{prod.quarter.barcode}</td>
+                    <td>คิวอาร์โค้ด</td>
                     <td>{prod.quarter.weight}</td>
                     <td>{prod.beefroom.roomname}</td>
                     <td>-</td>
@@ -106,7 +108,25 @@ const quarterday = () => {
                     <td>{prod.quarter.status.nameTH}</td>
                     <td>{prod.user.name}</td>
                   </tr>
-                ))}
+                ))
+              ) : (
+                <tr style={{ textAlign: "center" }}>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                </tr>
+              )}
             </tbody>
           </Table>
         </div>
