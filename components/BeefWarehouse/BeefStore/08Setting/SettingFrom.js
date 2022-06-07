@@ -126,7 +126,7 @@ export const Wightinput = styled.input`
 `;
 export const DivFromInsideLeft = styled.div`
   display: inline-grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 105px 170px 10px;
 `;
 
 export const Savebutton1 = styled.button`
@@ -179,4 +179,3 @@ export const DivBase1 = styled.div`
   padding-top: 30px;
   padding-bottom: 130px;
 `;
-

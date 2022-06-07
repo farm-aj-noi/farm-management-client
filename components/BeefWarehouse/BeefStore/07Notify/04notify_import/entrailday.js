@@ -38,6 +38,9 @@ export const QUERY_IMHALVEDAY = gql`
           namefarmer
         }
       }
+      beefroom {
+        roomname
+      }
     }
   }
 `;
@@ -87,7 +90,7 @@ const entrailday = () => {
               </tr>
             </thead>
             <tbody>
-              {data &&
+              {data && data.CardIme.length > 0 ? (
                 data.CardIme.map((prod) => (
                   <tr key={prod.id} style={{ textAlign: "center" }}>
                     <td>{prod.entrail.imslaughter.namefarmer}</td>
@@ -113,12 +116,36 @@ const entrailday = () => {
                     <td>{prod.entrail.gallbladder}</td>
                     <td>{prod.entrail.scrap}</td>
                     <td>{prod.entrail.barcode}</td>
-                    <td>{}</td>
+                    <td>{prod.beefroom.roomname}</td>
                     <td>{}</td>
                     <td>{}</td>
                     <td>{prod.user.name}</td>
                   </tr>
-                ))}
+                ))
+              ) : (
+                <tr style={{ textAlign: "center" }}>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                </tr>
+              )}
             </tbody>
           </Table>
         </div>

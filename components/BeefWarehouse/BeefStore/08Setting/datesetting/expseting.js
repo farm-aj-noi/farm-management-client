@@ -8,6 +8,7 @@ import {
   DivFromDown,
   HeaderColor,
   Searchinput,
+  DivFromInsideLeft,
 } from "../SettingFrom";
 import { DivBase } from "../../../../../utils/divBase";
 import {
@@ -65,7 +66,7 @@ const UPDATEEXPSETING = gql`
 
 const expseting = ({ listexpseting }) => {
   const [infoexpseting, setinfoexpseting] = useState(listexpseting);
-  console.log(infoexpseting);
+  //console.log(infoexpseting);
   const [Editexp, setEditexp] = useState(false);
   const [updateExpdatesetting] = useMutation(UPDATEEXPSETING, {
     onCompleted: (data) => {
@@ -87,6 +88,11 @@ const expseting = ({ listexpseting }) => {
       return;
     }
     try {
+      infoexpseting.dayH = parseInt(infoexpseting.dayH);
+      infoexpseting.dayQ = parseInt(infoexpseting.dayQ);
+      infoexpseting.dayL = parseInt(infoexpseting.dayL);
+      infoexpseting.dayC = parseInt(infoexpseting.dayC);
+      infoexpseting.dayE = parseInt(infoexpseting.dayE);
       await updateExpdatesetting({
         variables: {
           ...infoexpseting,
@@ -116,7 +122,7 @@ const expseting = ({ listexpseting }) => {
         </Editbuttoncolor>
       )}
       <>
-        <div>
+        <DivFromInsideLeft>
           ซากเนื้อโคผ่าซีก : {}
           {Editexp ? (
             <Searchinput
@@ -134,8 +140,8 @@ const expseting = ({ listexpseting }) => {
             />
           )}
           วัน
-        </div>
-        <div style={{ marginTop: "10px" }}>
+        </DivFromInsideLeft>
+        <DivFromInsideLeft style={{ marginTop: "10px" }}>
           ซากเนื้อโคสี่เสี้ยว : {}
           {Editexp ? (
             <Searchinput
@@ -153,8 +159,8 @@ const expseting = ({ listexpseting }) => {
             />
           )}
           วัน
-        </div>
-        <div style={{ marginTop: "10px" }}>
+        </DivFromInsideLeft>
+        <DivFromInsideLeft style={{ marginTop: "10px" }}>
           ซากเนื้อโคก้อนเนื้อ : {}
           {Editexp ? (
             <Searchinput
@@ -172,8 +178,8 @@ const expseting = ({ listexpseting }) => {
             />
           )}
           วัน
-        </div>
-        <div style={{ marginTop: "10px" }}>
+        </DivFromInsideLeft>
+        <DivFromInsideLeft style={{ marginTop: "10px" }}>
           ซากเนื้อโคชิ้นเนื้อ : {}
           {Editexp ? (
             <Searchinput
@@ -191,8 +197,8 @@ const expseting = ({ listexpseting }) => {
             />
           )}
           วัน
-        </div>
-        <div style={{ marginTop: "10px" }}>
+        </DivFromInsideLeft>
+        <DivFromInsideLeft style={{ marginTop: "10px" }}>
           ซากเนื้อโคส่วนอื่น ๆ : {}
           {Editexp ? (
             <Searchinput
@@ -210,7 +216,7 @@ const expseting = ({ listexpseting }) => {
             />
           )}
           วัน
-        </div>
+        </DivFromInsideLeft>
       </>
     </div>
   );

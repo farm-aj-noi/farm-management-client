@@ -14,25 +14,30 @@ import gql from "graphql-tag";
 import dayjs from "dayjs";
 
 export const QUERY_EXHALVEDAY = gql`
-  query Query {
+  query QUERY_EXHALVEDAY {
     CardExh {
+      exporter
       id
+      exportdate
       user {
         name
       }
       halve {
         weightwarm
-        barcode
-        imslaughter {
-          numcow
-          namefarmer
-        }
+        weightcool
         beeftype {
           nameTH
           code
         }
+        imslaughter {
+          numcow
+          namefarmer
+        }
+        barcode
+        status {
+          nameTH
+        }
       }
-      exportdate
       storestatus {
         nameTH
       }
@@ -62,48 +67,64 @@ const halveday = () => {
           <Table striped bordered responsive hover style={{ margin: "auto" }}>
             <thead>
               <tr style={{ textAlign: "center" }}>
-                <th>เจ้าของซาก</th>
                 <th>ประเภทซาก</th>
-                <th>วันที่นำเข้า</th>
+                <th>วันที่เบิกออก</th>
                 <th>เวลา</th>
                 <th>ทะเบียนขุน</th>
                 <th>รหัสซาก</th>
                 <th>รหัสบาร์โค้ด</th>
-                <th>น้ำหนัก</th>
-                <th>ห้อง</th>
-                <th>ชั้น</th>
-                <th>ตะกร้า</th>
+                <th>คิวอาร์โค้ด</th>
+                <th>น้ำหนักอุ่น (กก.)</th>
+                <th>น้ำหนักเย็น (กก.)</th>
                 <th>สถานะ</th>
-                <th>ผู้นำเข้า</th>
+                <th>ผู้ขอเบิก</th>
+                <th>ผูเบิกออก</th>
               </tr>
             </thead>
             <tbody>
-              {data &&
+              {data && data.CardExh.length > 0 ? (
                 data.CardExh.map((prod) => (
                   <tr key={prod.id} style={{ textAlign: "center" }}>
-                    <td>{prod.halve.imslaughter.namefarmer}</td>
                     <td>{prod.halve.beeftype.nameTH}</td>
                     <td>
-                      {dayjs(prod.importdate)
+                      {dayjs(prod.exportdete)
                         .add(543, "year")
                         .format("DD/MM/YYYY")}
                     </td>
                     <td>
-                      {dayjs(prod.importdate)
+                      {dayjs(prod.exportdete)
                         .add(543, "year")
                         .format("h:mm:ss A")}
                     </td>
                     <td>{prod.halve.imslaughter.numcow}</td>
                     <td>{prod.halve.beeftype.code}</td>
                     <td>{prod.halve.barcode}</td>
+                    <td>คิวอาร์โค้ด</td>
                     <td>{prod.halve.weightwarm}</td>
-                    <td>{/* prod.beefroom.roomname */}</td>
-                    <td>-</td>
-                    <td>-</td>
+                    <td>
+                      {prod.halve.weightcool ? prod.halve.weightcool : "-"}
+                    </td>
                     <td>{prod.storestatus.nameTH}</td>
+                    <td>{prod.exporter}</td>
                     <td>{prod.user.name}</td>
                   </tr>
-                ))}
+                ))
+              ) : (
+                <tr style={{ textAlign: "center" }}>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                </tr>
+              )}
             </tbody>
           </Table>
         </div>

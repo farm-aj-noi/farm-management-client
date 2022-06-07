@@ -382,7 +382,7 @@ const index = () => {
               รายการนำเข้าซากเนื้อโคก้อนเนื้อ
             </DivFromTop>
             <DivFromDown>
-              <div style={{ height: "280px", overflow: "auto" }}>
+              <div style={{ height: "320px", overflow: "auto" }}>
                 <Table
                   striped
                   bordered
@@ -415,6 +415,17 @@ const index = () => {
                       ))}
                   </tbody>
                 </Table>
+              </div>
+              <div style={{ float: "right", textAlign: "right" }}>
+                จำนวนรายการ {data ? data.imlumpSearch.length : "0"} รายการ
+                <br />
+                น้ำหนัก{" "}
+                {data &&
+                  data.imlumpSearch.reduce(
+                    (sum, nex) => sum + nex.lump.weight,
+                    0
+                  )}{" "}
+                กิโลกรัม
               </div>
             </DivFromDown>
           </DivFrom>

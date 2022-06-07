@@ -7,7 +7,7 @@ import Link from "next/link";
 
 const index = ({ listchop }) => {
   const [infodata, setinfodata] = useState(listchop);
-  console.log(infodata);
+  //console.log(infodata);
   const [testshow, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);

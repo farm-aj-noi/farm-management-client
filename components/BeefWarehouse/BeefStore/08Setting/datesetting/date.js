@@ -7,6 +7,7 @@ import {
   HeaderColor,
   Searchinput,
   InputPrice,
+  DivFromInsideLeft,
 } from "../SettingFrom";
 
 import {
@@ -64,7 +65,7 @@ const date = ({ listdate }) => {
     onCompleted: (data) => {
       // console.log(data)
       setinfodate(data.updateTotalExp);
-      setEdit(false);
+      setEditdate(false);
     },
   });
   const handleChange = (e) =>
@@ -76,7 +77,13 @@ const date = ({ listdate }) => {
       setEditdate(false);
       return;
     }
+
     try {
+      infodate.dayH = parseInt(infodate.dayH);
+      infodate.dayQ = parseInt(infodate.dayQ);
+      infodate.dayL = parseInt(infodate.dayL);
+      infodate.dayC = parseInt(infodate.dayC);
+      infodate.dayE = parseInt(infodate.dayE);
       await updateTotalExp({
         variables: {
           ...infodate,
@@ -105,7 +112,7 @@ const date = ({ listdate }) => {
           <Editbutton />
         </Editbuttoncolor>
       )}
-      <div>
+      <DivFromInsideLeft>
         ซากเนื้อโคผ่าซีก : {}
         {Editdate ? (
           <Searchinput
@@ -123,8 +130,8 @@ const date = ({ listdate }) => {
           />
         )}
         วัน
-      </div>
-      <div style={{ marginTop: "10px" }}>
+      </DivFromInsideLeft>
+      <DivFromInsideLeft style={{ marginTop: "10px" }}>
         ซากเนื้อโคสี่เสี้ยว : {}
         {Editdate ? (
           <Searchinput
@@ -142,8 +149,8 @@ const date = ({ listdate }) => {
           />
         )}
         วัน
-      </div>
-      <div style={{ marginTop: "10px" }}>
+      </DivFromInsideLeft>
+      <DivFromInsideLeft style={{ marginTop: "10px" }}>
         ซากเนื้อโคก้อนเนื้อ : {}
         {Editdate ? (
           <Searchinput
@@ -161,8 +168,8 @@ const date = ({ listdate }) => {
           />
         )}
         วัน
-      </div>
-      <div style={{ marginTop: "10px" }}>
+      </DivFromInsideLeft>
+      <DivFromInsideLeft style={{ marginTop: "10px" }}>
         ซากเนื้อโคชิ้นเนื้อ : {}
         {Editdate ? (
           <Searchinput
@@ -180,8 +187,8 @@ const date = ({ listdate }) => {
           />
         )}
         วัน
-      </div>
-      <div style={{ marginTop: "10px" }}>
+      </DivFromInsideLeft>
+      <DivFromInsideLeft style={{ marginTop: "10px" }}>
         ซากเนื้อโคส่วนอื่น ๆ : {}
         {Editdate ? (
           <Searchinput
@@ -199,7 +206,7 @@ const date = ({ listdate }) => {
           />
         )}
         วัน
-      </div>
+      </DivFromInsideLeft>
     </div>
   );
 };

@@ -39,6 +39,10 @@ export const QUERY_IMLUMPDAY = gql`
       beefroom {
         roomname
       }
+      shelf {
+        shelfname
+      }
+      basket
     }
   }
 `;
@@ -72,7 +76,8 @@ const lumpday = () => {
                 <th>ทะเบียนขุน</th>
                 <th>รหัสซาก</th>
                 <th>รหัสบาร์โค้ด</th>
-                <th>น้ำหนักอุ่น</th>
+                <th>คิวอาร์โค้ด</th>
+                <th>น้ำหนัก</th>
                 <th>ห้อง</th>
                 <th>ชั้น</th>
                 <th>ตะกร้า</th>
@@ -81,7 +86,7 @@ const lumpday = () => {
               </tr>
             </thead>
             <tbody>
-              {data &&
+              {data && data.CardIml.length > 0 ? (
                 data.CardIml.map((prod) => (
                   <tr key={prod.id} style={{ textAlign: "center" }}>
                     <td>{prod.lump.imslaughter.namefarmer}</td>
@@ -99,14 +104,33 @@ const lumpday = () => {
                     <td>{prod.lump.imslaughter.numcow}</td>
                     <td>{prod.lump.beeftype.code}</td>
                     <td>{prod.lump.barcode}</td>
+                    <td>คิวอาร์โค้ด</td>
                     <td>{prod.lump.weight}</td>
                     <td>{prod.beefroom.roomname}</td>
-                    <td>-</td>
-                    <td>-</td>
+                    <td>{prod.shelf.shelfname}</td>
+                    <td>{prod.basket}</td>
                     <td>{prod.lump.status.nameTH}</td>
                     <td>{prod.user.name}</td>
                   </tr>
-                ))}
+                ))
+              ) : (
+                <tr style={{ textAlign: "center" }}>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                </tr>
+              )}
             </tbody>
           </Table>
         </div>

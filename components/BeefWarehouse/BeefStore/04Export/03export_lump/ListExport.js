@@ -18,7 +18,7 @@ const ListExport = ({ exlump }) => {
       <td>{exlumpData.lump.beeftype.code}</td>
       <td>{exlumpData.lump.barcode}</td>
       <td>
-        <Modalqrcode key={exlumpData.id} listlump={exlumpData.id} />
+        <Modalqrcode key={exlumpData.id} listlump={exlumpData} />
       </td>
       <td>{exlumpData.lump.weight}</td>
 

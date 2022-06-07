@@ -431,8 +431,19 @@ const index = () => {
               <div style={{ float: "right", textAlign: "right" }}>
                 จำนวนรายการ {data ? data.imhalveSearch.length : "0"} รายการ
                 <br />
-                น้ำหนักอุ่น {} กิโลกรัม /
-                น้ำหนักเย็น {} กิโลกรัม
+                น้ำหนักอุ่น{" "}
+                {data &&
+                  data.imhalveSearch.reduce(
+                    (sum, nex) => sum + nex.halve.weightwarm,
+                    0
+                  )}{" "}
+                กิโลกรัม / น้ำหนักเย็น{" "}
+                {data &&
+                  data.imhalveSearch.reduce(
+                    (sum, nex) => sum + nex.halve.weightcool,
+                    0
+                  )}{" "}
+                กิโลกรัม
               </div>
             </DivFromDown>
           </DivFrom>

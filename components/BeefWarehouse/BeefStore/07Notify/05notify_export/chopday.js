@@ -13,11 +13,12 @@ import gql from "graphql-tag";
 
 import dayjs from "dayjs";
 
-export const QUERY_IMCHOPDAY = gql`
-  query QUERY_IMCHOPDAY {
-    CardImc {
+export const QUERY_EXCHOPDAY = gql`
+  query QUERY_EXCHOPDAY {
+    CardExc {
       id
-      importdate
+      exporter
+      exportdate
       user {
         name
       }
@@ -36,15 +37,15 @@ export const QUERY_IMCHOPDAY = gql`
           nameTH
         }
       }
-      beefroom {
-        roomname
+      storestatus {
+        nameTH
       }
     }
   }
 `;
 
 const chopday = () => {
-  const { data } = useQuery(QUERY_IMCHOPDAY);
+  const { data } = useQuery(QUERY_EXCHOPDAY);
   return (
     <div>
       <DivFromTop>
@@ -65,48 +66,59 @@ const chopday = () => {
           <Table striped bordered responsive hover style={{ margin: "auto" }}>
             <thead>
               <tr style={{ textAlign: "center" }}>
-                <th>เจ้าของซาก</th>
                 <th>ประเภทซาก</th>
-                <th>วันที่นำเข้า</th>
+                <th>วันที่เบิกออก</th>
                 <th>เวลา</th>
                 <th>ทะเบียนขุน</th>
                 <th>รหัสซาก</th>
                 <th>รหัสบาร์โค้ด</th>
-                <th>น้ำหนักอุ่น</th>
-                <th>ห้อง</th>
-                <th>ชั้น</th>
-                <th>ตะกร้า</th>
+                <th>คิวอาร์โค้ด</th>
+                <th>น้ำหนัก (กก.)</th>
                 <th>สถานะ</th>
-                <th>ผู้นำเข้า</th>
+                <th>ผู้ขอเบิก</th>
+                <th>ผู้เบิกออก</th>
               </tr>
             </thead>
             <tbody>
-              {data &&
-                data.CardImc.map((prod) => (
+              {data && data.CardExc.length > 0 ? (
+                data.CardExc.map((prod) => (
                   <tr key={prod.id} style={{ textAlign: "center" }}>
-                    <td>{prod.chop.imslaughter.namefarmer}</td>
                     <td>{prod.chop.beeftype.nameTH}</td>
                     <td>
-                      {dayjs(prod.importdate)
+                      {dayjs(prod.exportdate)
                         .add(543, "year")
                         .format("DD/MM/YYYY")}
                     </td>
                     <td>
-                      {dayjs(prod.importdate)
+                      {dayjs(prod.exportdate)
                         .add(543, "year")
                         .format("h:mm:ss A")}
                     </td>
                     <td>{prod.chop.imslaughter.numcow}</td>
                     <td>{prod.chop.beeftype.code}</td>
                     <td>{prod.chop.barcode}</td>
+                    <td>คิวอาร์โค้ด</td>
                     <td>{prod.chop.weight}</td>
-                    <td>{prod.beefroom.roomname}</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>{prod.chop.status.nameTH}</td>
+                    <td>{prod.storestatus.nameTH}</td>
+                    <td>{prod.exporter}</td>
                     <td>{prod.user.name}</td>
                   </tr>
-                ))}
+                ))
+              ) : (
+                <tr style={{ textAlign: "center" }}>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                </tr>
+              )}
             </tbody>
           </Table>
         </div>

@@ -253,7 +253,7 @@ const index = () => {
               รายการบ่มซากเนื้อโค
             </DivFromTop>
             <DivFromDown>
-              <div style={{ height: "280px", overflow: "auto" }}>
+              <div style={{ height: "420px", overflow: "auto" }}>
                 <Table
                   striped
                   bordered
@@ -287,6 +287,19 @@ const index = () => {
                   </tbody>
                 </Table>
               </div>
+              <div style={{ float: "right", textAlign: "right" }}>
+                จำนวนรายการ {data ? data.listchill.length : "0"} รายการ
+                <br />
+                น้ำหนักอุ่น{" "}
+                {data && data.listchill.length > 0
+                  ? data.listchill.reduce(
+                      (sum, nex) => sum + nex.halve.weightwarm,
+                      0
+                    )
+                  : "0"}{" "}
+                กิโลกรัม
+              </div>
+              <div></div>
             </DivFromDown>
           </DivFrom>
         </>

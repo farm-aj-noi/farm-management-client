@@ -73,7 +73,9 @@ const halveday = () => {
                 <th>ทะเบียนขุน</th>
                 <th>รหัสซาก</th>
                 <th>รหัสบาร์โค้ด</th>
-                <th>น้ำหนัก</th>
+                <th>คิวอาร์โค้ด</th>
+                <th>น้ำหนักอุ่น (กก.)</th>
+                <th>น้ำหนักเย็น (กก.)</th>
                 <th>ห้อง</th>
                 <th>ชั้น</th>
                 <th>ตะกร้า</th>
@@ -82,64 +84,55 @@ const halveday = () => {
               </tr>
             </thead>
             <tbody>
-              {data &&
+              {data && data.CardImh.length > 0 ? (
                 data.CardImh.map((prod) => (
                   <tr key={prod.id} style={{ textAlign: "center" }}>
+                    <td>{prod.halve.imslaughter.namefarmer}</td>
+                    <td>{prod.halve.beeftype.nameTH}</td>
                     <td>
-                      {prod.halve.imslaughter.namefarmer
-                        ? prod.halve.imslaughter.namefarmer
-                        : "-"}
-                    </td>
-                    <td>
-                      {prod.halve.beeftype.nameTH
-                        ? prod.halve.beeftype.nameTH
-                        : "-"}
+                      {dayjs(prod.importdate)
+                        .add(543, "year")
+                        .format("DD/MM/YYYY")}
                     </td>
                     <td>
                       {dayjs(prod.importdate)
                         .add(543, "year")
-                        .format("DD/MM/YYYY")
-                        ? dayjs(prod.importdate)
-                            .add(543, "year")
-                            .format("DD/MM/YYYY")
-                        : "-"}
+                        .format("h:mm:ss A")}
                     </td>
+                    <td>{prod.halve.imslaughter.numcow}</td>
+                    <td>{prod.halve.beeftype.code}</td>
+                    <td>{prod.halve.barcode}</td>
+                    <td>คิวอาร์โค้ด</td>
+                    <td>{prod.halve.weightwarm}</td>
                     <td>
-                      {dayjs(prod.importdate)
-                        .add(543, "year")
-                        .format("h:mm:ss A")
-                        ? dayjs(prod.importdate)
-                            .add(543, "year")
-                            .format("h:mm:ss A")
-                        : "-"}
+                      {prod.halve.weightcool ? prod.halve.weightcool : "-"}
                     </td>
-                    <td>
-                      {prod.halve.imslaughter.numcow
-                        ? prod.halve.imslaughter.numcow
-                        : "-"}
-                    </td>
-                    <td>
-                      {prod.halve.beeftype.code
-                        ? prod.halve.beeftype.code
-                        : "-"}
-                    </td>
-                    <td>{prod.halve.barcode ? prod.halve.barcode : "-"}</td>
-                    <td>
-                      {prod.halve.weightwarm ? prod.halve.weightwarm : "-"}
-                    </td>
-                    <td>
-                      {prod.beefroom.roomname ? prod.beefroom.roomname : "-"}
-                    </td>
+                    <td>{prod.beefroom.roomname}</td>
                     <td>-</td>
                     <td>-</td>
-                    <td>
-                      {prod.halve.status.nameTH
-                        ? prod.halve.status.nameTH
-                        : "-"}
-                    </td>
-                    <td>{prod.user.name ? prod.user.name : "-"}</td>
+                    <td>{prod.halve.status.nameTH}</td>
+                    <td>{prod.user.name}</td>
                   </tr>
-                ))}
+                ))
+              ) : (
+                <tr style={{ textAlign: "center" }}>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                </tr>
+              )}
             </tbody>
           </Table>
         </div>

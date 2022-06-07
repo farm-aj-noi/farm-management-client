@@ -364,7 +364,7 @@ const index = () => {
               รายการนำเข้าซากเนื้อโคสี่เสี้ยว
             </DivFromTop>
             <DivFromDown>
-              <div style={{ height: "280px", overflow: "auto" }}>
+              <div style={{ height: "320px", overflow: "auto" }}>
                 <Table
                   striped
                   bordered
@@ -413,6 +413,17 @@ const index = () => {
                     </tr> */}
                   </tbody>
                 </Table>
+              </div>
+              <div style={{ float: "right", textAlign: "right" }}>
+                จำนวนรายการ {data ? data.imquartSearch.length : "0"} รายการ
+                <br />
+                น้ำหนัก{" "}
+                {data &&
+                  data.imquartSearch.reduce(
+                    (sum, nex) => sum + nex.quarter.weight,
+                    0
+                  )}{" "}
+                กิโลกรัม
               </div>
             </DivFromDown>
           </DivFrom>

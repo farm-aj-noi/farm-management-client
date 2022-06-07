@@ -384,7 +384,7 @@ const index = () => {
               รายการนำเข้าซากเนื้อโคชิ้นเนื้อ
             </DivFromTop>
             <DivFromDown>
-              <div style={{ height: "280px", overflow: "auto" }}>
+              <div style={{ height: "320px", overflow: "auto" }}>
                 <Table
                   striped
                   bordered
@@ -417,6 +417,17 @@ const index = () => {
                       ))}
                   </tbody>
                 </Table>
+              </div>
+              <div style={{ float: "right", textAlign: "right" }}>
+                จำนวนรายการ {data ? data.imchopSearch.length : "0"} รายการ
+                <br />
+                น้ำหนัก{" "}
+                {data &&
+                  data.imchopSearch.reduce(
+                    (sum, nex) => sum + nex.chop.weight,
+                    0
+                  )}{" "}
+                กิโลกรัม
               </div>
             </DivFromDown>
           </DivFrom>
