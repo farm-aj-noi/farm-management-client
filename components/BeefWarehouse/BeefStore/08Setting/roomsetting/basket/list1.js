@@ -59,10 +59,10 @@ const list1 = ({ listroom1 }) => {
         gridTemplateColumns: `200px 200px 200px 
          200px`,
         marginTop: "10px",
-        marginLeft: "30px",
-        paddingBottom: "20px",
+        padding: "20px",
+        borderRadius: "4px",
         /*  backgroundColor: "red", */
-        borderBottom: "1px solid #AFAFAF",
+        border: "1px solid #bcbcbc",
       }}
     >
       <div>

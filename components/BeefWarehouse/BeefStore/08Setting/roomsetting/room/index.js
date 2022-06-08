@@ -5,6 +5,7 @@ import { DivFrom, HeaderColor, DivBase1 } from "../../SettingFrom";
 import Nav_setting from "../../Nav_setting";
 
 import Room from "./room";
+import Room1 from "./room1";
 
 function index() {
   return (
@@ -28,7 +29,7 @@ function index() {
       <DivBase1
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 200px 1000px 1fr",
+          gridTemplateColumns: "1fr 200px 925px 1fr",
           gridRowGap: "15px",
           gridColumnGap: "20px",
           textAlign: "start",
@@ -49,12 +50,23 @@ function index() {
           style={{
             width: "100%",
             gridRowStart: "2",
-            gridRowEnd: "3",
+            gridRowEnd: "2",
             gridColumnStart: "3",
             marginTop: "0px",
           }}
         >
           <Room />
+        </DivFrom>
+        <DivFrom
+          style={{
+            width: "100%",
+            gridRowStart: "3",
+            gridRowEnd: "3",
+            gridColumnStart: "3",
+            marginTop: "0px",
+          }}
+        >
+          <Room1 />
         </DivFrom>
       </DivBase1>
     </DivBase1>

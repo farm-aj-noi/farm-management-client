@@ -122,101 +122,103 @@ const expseting = ({ listexpseting }) => {
         </Editbuttoncolor>
       )}
       <>
-        <DivFromInsideLeft>
-          ซากเนื้อโคผ่าซีก : {}
-          {Editexp ? (
-            <Searchinput
-              name="dayH"
-              style={{ width: "150px", textAlign: "center" }}
-              value={infoexpseting.dayH}
-              onChange={handleChange}
-            />
-          ) : (
-            <Searchinput
-              name="dayH"
-              style={{ width: "150px", textAlign: "center" }}
-              value={infoexpseting.dayH}
-              disabled
-            />
-          )}
-          วัน
-        </DivFromInsideLeft>
-        <DivFromInsideLeft style={{ marginTop: "10px" }}>
-          ซากเนื้อโคสี่เสี้ยว : {}
-          {Editexp ? (
-            <Searchinput
-              name="dayQ"
-              style={{ width: "150px", textAlign: "center" }}
-              value={infoexpseting.dayQ}
-              onChange={handleChange}
-            />
-          ) : (
-            <Searchinput
-              name="dayH"
-              style={{ width: "150px", textAlign: "center" }}
-              value={infoexpseting.dayQ}
-              disabled
-            />
-          )}
-          วัน
-        </DivFromInsideLeft>
-        <DivFromInsideLeft style={{ marginTop: "10px" }}>
-          ซากเนื้อโคก้อนเนื้อ : {}
-          {Editexp ? (
-            <Searchinput
-              name="dayL"
-              style={{ width: "150px", textAlign: "center" }}
-              value={infoexpseting.dayL}
-              onChange={handleChange}
-            />
-          ) : (
-            <Searchinput
-              name="dayL"
-              style={{ width: "150px", textAlign: "center" }}
-              value={infoexpseting.dayL}
-              disabled
-            />
-          )}
-          วัน
-        </DivFromInsideLeft>
-        <DivFromInsideLeft style={{ marginTop: "10px" }}>
-          ซากเนื้อโคชิ้นเนื้อ : {}
-          {Editexp ? (
-            <Searchinput
-              name="dayC"
-              style={{ width: "150px", textAlign: "center" }}
-              value={infoexpseting.dayC}
-              onChange={handleChange}
-            />
-          ) : (
-            <Searchinput
-              name="dayC"
-              style={{ width: "150px", textAlign: "center" }}
-              value={infoexpseting.dayC}
-              disabled
-            />
-          )}
-          วัน
-        </DivFromInsideLeft>
-        <DivFromInsideLeft style={{ marginTop: "10px" }}>
-          ซากเนื้อโคส่วนอื่น ๆ : {}
-          {Editexp ? (
-            <Searchinput
-              name="dayE"
-              style={{ width: "150px", textAlign: "center" }}
-              value={infoexpseting.dayE}
-              onChange={handleChange}
-            />
-          ) : (
-            <Searchinput
-              name="dayE"
-              style={{ width: "150px", textAlign: "center" }}
-              value={infoexpseting.dayE}
-              disabled
-            />
-          )}
-          วัน
-        </DivFromInsideLeft>
+        <div style={{ marginLeft: "38px", marginTop: "10px" }}>
+          <DivFromInsideLeft>
+            ซากเนื้อโคผ่าซีก : {}
+            {Editexp ? (
+              <Searchinput
+                name="dayH"
+                style={{ width: "150px", textAlign: "center" }}
+                value={infoexpseting.dayH}
+                onChange={handleChange}
+              />
+            ) : (
+              <Searchinput
+                name="dayH"
+                style={{ width: "150px", textAlign: "center" }}
+                value={infoexpseting.dayH}
+                disabled
+              />
+            )}
+            วัน
+          </DivFromInsideLeft>
+          <DivFromInsideLeft style={{ marginTop: "10px" }}>
+            ซากเนื้อโคสี่เสี้ยว : {}
+            {Editexp ? (
+              <Searchinput
+                name="dayQ"
+                style={{ width: "150px", textAlign: "center" }}
+                value={infoexpseting.dayQ}
+                onChange={handleChange}
+              />
+            ) : (
+              <Searchinput
+                name="dayH"
+                style={{ width: "150px", textAlign: "center" }}
+                value={infoexpseting.dayQ}
+                disabled
+              />
+            )}
+            วัน
+          </DivFromInsideLeft>
+          <DivFromInsideLeft style={{ marginTop: "10px" }}>
+            ซากเนื้อโคก้อนเนื้อ : {}
+            {Editexp ? (
+              <Searchinput
+                name="dayL"
+                style={{ width: "150px", textAlign: "center" }}
+                value={infoexpseting.dayL}
+                onChange={handleChange}
+              />
+            ) : (
+              <Searchinput
+                name="dayL"
+                style={{ width: "150px", textAlign: "center" }}
+                value={infoexpseting.dayL}
+                disabled
+              />
+            )}
+            วัน
+          </DivFromInsideLeft>
+          <DivFromInsideLeft style={{ marginTop: "10px" }}>
+            ซากเนื้อโคชิ้นเนื้อ : {}
+            {Editexp ? (
+              <Searchinput
+                name="dayC"
+                style={{ width: "150px", textAlign: "center" }}
+                value={infoexpseting.dayC}
+                onChange={handleChange}
+              />
+            ) : (
+              <Searchinput
+                name="dayC"
+                style={{ width: "150px", textAlign: "center" }}
+                value={infoexpseting.dayC}
+                disabled
+              />
+            )}
+            วัน
+          </DivFromInsideLeft>
+          <DivFromInsideLeft style={{ marginTop: "10px" }}>
+            ซากเนื้อโคส่วนอื่น ๆ : {}
+            {Editexp ? (
+              <Searchinput
+                name="dayE"
+                style={{ width: "150px", textAlign: "center" }}
+                value={infoexpseting.dayE}
+                onChange={handleChange}
+              />
+            ) : (
+              <Searchinput
+                name="dayE"
+                style={{ width: "150px", textAlign: "center" }}
+                value={infoexpseting.dayE}
+                disabled
+              />
+            )}
+            วัน
+          </DivFromInsideLeft>
+        </div>
       </>
     </div>
   );

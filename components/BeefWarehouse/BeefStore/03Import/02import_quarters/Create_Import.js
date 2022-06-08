@@ -56,6 +56,7 @@ const Create_Import = () => {
           setSuccess(true);
           setImportquarterInfo({
             barcode: "",
+            beefroom: "",
           });
           MySwal.fire({
             icon: "success",
@@ -80,6 +81,7 @@ const Create_Import = () => {
         if (error) {
           setImportquarterInfo({
             barcode: "",
+            beefroom: "",
           });
           MySwal.fire({
             icon: "error",
@@ -111,7 +113,7 @@ const Create_Import = () => {
   return (
     <>
       <div>
-        <form onSubmit={handleSubmit}>
+        <form>
           <DivFromInsideLeft>
             บาร์โค้ด :
             <div

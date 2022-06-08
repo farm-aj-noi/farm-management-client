@@ -9,6 +9,7 @@ import icon7 from "../../../../images/beefwarehouse/7.jpg";
 import icon8 from "../../../../images/beefwarehouse/8.jpg";
 import icon9 from "../../../../images/beefwarehouse/9.jpg";
 import icon10 from "../../../../images/beefwarehouse/10.png";
+import icon11 from "../../../../images/beefwarehouse/11.png";
 import Image from "next/image";
 
 export const Icon1 = (prop) => {
@@ -133,6 +134,20 @@ export const Icon10 = (prop) => {
   return (
     <Image
       src={icon10}
+      width={prop.weight}
+      height={prop.height}
+      style={{
+        display: "inline",
+        marginRight: "8px",
+      }}
+    />
+  );
+};
+
+export const Icon11 = (prop) => {
+  return (
+    <Image
+      src={icon11}
       width={prop.weight}
       height={prop.height}
       style={{

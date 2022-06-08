@@ -206,8 +206,8 @@ const index = () => {
                       height: "35px",
                       border: "1px solid #AFAFAF",
                       borderRadius: "4px",
-                      color: "#AFAFAF",
                       textAlign: "center",
+                      fontSize: "16px",
                     }}
                     onChange={(event) => SetStartDateChange(event.target.value)}
                   ></input>
@@ -228,8 +228,8 @@ const index = () => {
                       height: "35px",
                       border: "1px solid #AFAFAF",
                       borderRadius: "4px",
-                      color: "#AFAFAF",
                       textAlign: "center",
+                      fontSize: "16px",
                     }}
                     onChange={(event) => SetEndDateChange(event.target.value)}
                   ></input>
@@ -280,10 +280,28 @@ const index = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {data &&
+                    {data && data.listchill.length > 0 ? (
                       data.listchill.map((prod) => (
                         <List_chill key={prod.id} listchill={prod} />
-                      ))}
+                      ))
+                    ) : (
+                      <tr style={{ textAlign: "center" }}>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                      </tr>
+                    )}
                   </tbody>
                 </Table>
               </div>
@@ -299,7 +317,6 @@ const index = () => {
                   : "0"}{" "}
                 กิโลกรัม
               </div>
-              <div></div>
             </DivFromDown>
           </DivFrom>
         </>

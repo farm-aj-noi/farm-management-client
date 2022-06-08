@@ -63,7 +63,7 @@ const Listshelf = ({ Listshelfs }) => {
   return (
     <div
       style={{
-        border: "1px solid #AFAFAF",
+        border: "1px solid #bcbcbc",
         padding: "0px 15px 15px 15px",
         margin: "10px",
         borderRadius: "4px",
@@ -89,13 +89,13 @@ const Listshelf = ({ Listshelfs }) => {
               gridTemplateColumns: `200px 200px 200px 
                200px`,
               marginTop: "10px",
-              marginLeft: "30px",
-              paddingBottom: "20px",
+              borderRadius: "4px",
+              padding: "20px",
               /*  backgroundColor: "red", */
-              borderBottom: "1px solid #AFAFAF",
+              border: "1px solid #e9e9e9",
             }}
           >
-          <Editname key={prod.id} listkeep={prod} />
+            <Editname key={prod.id} listkeep={prod} />
             <Listtypekeep key={prod.id} listkeep={prod} />
           </div>
         ))}

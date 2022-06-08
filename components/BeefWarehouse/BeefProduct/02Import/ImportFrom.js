@@ -1,7 +1,13 @@
 import styled from "styled-components";
 
 import { FromDiv } from "../../../../utils/from";
-import { lightBlue, white, blue } from "../../../../utils/colors";
+import {
+  lightBlue,
+  white,
+  blue,
+  lightGreen,
+  green,
+} from "../../../../utils/colors";
 
 export const ButtonSummit1 = styled.button`
   text-align: center;
@@ -61,8 +67,7 @@ export const DivFromTop = styled.div`
 export const DivFromDown = styled.div`
   height: fit-content;
   border-radius: 10px 10px 0 0;
-  padding: 25px 15px 15px 15px;
- 
+  padding: 15px 15px 15px 15px;
 `;
 
 export const Searchinput = styled.input`
@@ -119,37 +124,30 @@ export const Wightinput = styled.input`
   margin: 0;
   -moz-appearance: textfield;
 `;
-
-export const ButtonPDF = styled.button`
-  margin: 10px;
-  height: 35px;
-  width: 140px;
-  text-align: center;
-  background: #e26e28;
-  color: #ffffff;
-  border: none;
-  border-radius: 4px;
-  font-size: 18px;
-  text-align: center;
-  &:hover,
-  &:focus {
-    background: #cf560d;
-  }
+export const DivFromInsideLeft = styled.div`
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
 `;
 
-export const ButtonExcel = styled.button`
-  margin: 10px;
-  height: 35px;
-  width: 140px;
+export const Savebutton1 = styled.button`
+/*   display: inline-block; */
+  width: 70px;
+ /*  justify-self: right; */
+  font-weight: 400;
+  color: ${white};
+  background-color: ${lightGreen};
   text-align: center;
-  background: #86be4c;
-  color: #ffffff;
-  border: none;
-  border-radius: 4px;
-  font-size: 18px;
-  text-align: center;
-  &:hover,
-  &:focus {
-    background: #719f3f;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  /* padding: 0.375rem 0.75rem; */
+  font-size: 20px;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+
+  &:hover {
+    background-color: ${green};
   }
 `;

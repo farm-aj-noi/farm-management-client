@@ -125,10 +125,18 @@ const Create_Import = () => {
                 name="barcode"
                 value={ImportentrailInfo.barcode}
                 onChange={handleChange}
+                style={{
+                  borderColor: `${!ImportentrailInfo.barcode ? "red" : ""}`,
+                }}
               />
+              {!ImportentrailInfo.barcode ? (
+                <label style={{ color: "red" }}>กรุณากรอกบาร์โค้ด</label>
+              ) : (
+                ""
+              )}
             </div>
           </DivFromInsideLeft>
-          <DivFromInsideLeft>
+          <DivFromInsideLeft style={{ marginTop: "5px" }}>
             ตำแหน่ง :
             <div
               style={{
@@ -171,7 +179,20 @@ const Create_Import = () => {
               paddingBottom: "10px",
             }}
           >
-            <Savebutton1 disabled={loading}>บันทึก</Savebutton1>
+            <Savebutton1
+              disabled={
+                !ImportentrailInfo.barcode || !ImportentrailInfo.beefroom
+              }
+              style={{
+                backgroundColor: `${
+                  !ImportentrailInfo.barcode || !ImportentrailInfo.beefroom
+                    ? "gray"
+                    : ""
+                }`,
+              }}
+            >
+              บันทึก
+            </Savebutton1>
           </div>
         </form>
       </div>

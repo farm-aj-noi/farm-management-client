@@ -112,101 +112,103 @@ const date = ({ listdate }) => {
           <Editbutton />
         </Editbuttoncolor>
       )}
-      <DivFromInsideLeft>
-        ซากเนื้อโคผ่าซีก : {}
-        {Editdate ? (
-          <Searchinput
-            name="dayH"
-            value={infodate.dayH}
-            onChange={handleChange}
-            style={{ width: "150px", textAlign: "center" }}
-          />
-        ) : (
-          <Searchinput
-            name="dayH"
-            style={{ width: "150px", textAlign: "center" }}
-            disabled
-            value={infodate.dayH}
-          />
-        )}
-        วัน
-      </DivFromInsideLeft>
-      <DivFromInsideLeft style={{ marginTop: "10px" }}>
-        ซากเนื้อโคสี่เสี้ยว : {}
-        {Editdate ? (
-          <Searchinput
-            name="dayQ"
-            value={infodate.dayQ}
-            onChange={handleChange}
-            style={{ width: "150px", textAlign: "center" }}
-          />
-        ) : (
-          <Searchinput
-            name="dayQ"
-            style={{ width: "150px", textAlign: "center" }}
-            disabled
-            value={infodate.dayQ}
-          />
-        )}
-        วัน
-      </DivFromInsideLeft>
-      <DivFromInsideLeft style={{ marginTop: "10px" }}>
-        ซากเนื้อโคก้อนเนื้อ : {}
-        {Editdate ? (
-          <Searchinput
-            name="dayL"
-            value={infodate.dayL}
-            onChange={handleChange}
-            style={{ width: "150px", textAlign: "center" }}
-          />
-        ) : (
-          <Searchinput
-            name="dayL"
-            style={{ width: "150px", textAlign: "center" }}
-            disabled
-            value={infodate.dayL}
-          />
-        )}
-        วัน
-      </DivFromInsideLeft>
-      <DivFromInsideLeft style={{ marginTop: "10px" }}>
-        ซากเนื้อโคชิ้นเนื้อ : {}
-        {Editdate ? (
-          <Searchinput
-            name="dayC"
-            value={infodate.dayC}
-            onChange={handleChange}
-            style={{ width: "150px", textAlign: "center" }}
-          />
-        ) : (
-          <Searchinput
-            name="dayC"
-            style={{ width: "150px", textAlign: "center" }}
-            disabled
-            value={infodate.dayC}
-          />
-        )}
-        วัน
-      </DivFromInsideLeft>
-      <DivFromInsideLeft style={{ marginTop: "10px" }}>
-        ซากเนื้อโคส่วนอื่น ๆ : {}
-        {Editdate ? (
-          <Searchinput
-            name="dayE"
-            value={infodate.dayE}
-            onChange={handleChange}
-            style={{ width: "150px", textAlign: "center" }}
-          />
-        ) : (
-          <Searchinput
-            name="dayE"
-            style={{ width: "150px", textAlign: "center" }}
-            disabled
-            value={infodate.dayE}
-          />
-        )}
-        วัน
-      </DivFromInsideLeft>
+      <div style={{ marginLeft: "38px",marginTop:"10px" }}>
+        <DivFromInsideLeft>
+          ซากเนื้อโคผ่าซีก : {}
+          {Editdate ? (
+            <Searchinput
+              name="dayH"
+              value={infodate.dayH}
+              onChange={handleChange}
+              style={{ width: "150px", textAlign: "center" }}
+            />
+          ) : (
+            <Searchinput
+              name="dayH"
+              style={{ width: "150px", textAlign: "center" }}
+              disabled
+              value={infodate.dayH}
+            />
+          )}
+          วัน
+        </DivFromInsideLeft>
+        <DivFromInsideLeft style={{ marginTop: "10px" }}>
+          ซากเนื้อโคสี่เสี้ยว : {}
+          {Editdate ? (
+            <Searchinput
+              name="dayQ"
+              value={infodate.dayQ}
+              onChange={handleChange}
+              style={{ width: "150px", textAlign: "center" }}
+            />
+          ) : (
+            <Searchinput
+              name="dayQ"
+              style={{ width: "150px", textAlign: "center" }}
+              disabled
+              value={infodate.dayQ}
+            />
+          )}
+          วัน
+        </DivFromInsideLeft>
+        <DivFromInsideLeft style={{ marginTop: "10px" }}>
+          ซากเนื้อโคก้อนเนื้อ : {}
+          {Editdate ? (
+            <Searchinput
+              name="dayL"
+              value={infodate.dayL}
+              onChange={handleChange}
+              style={{ width: "150px", textAlign: "center" }}
+            />
+          ) : (
+            <Searchinput
+              name="dayL"
+              style={{ width: "150px", textAlign: "center" }}
+              disabled
+              value={infodate.dayL}
+            />
+          )}
+          วัน
+        </DivFromInsideLeft>
+        <DivFromInsideLeft style={{ marginTop: "10px" }}>
+          ซากเนื้อโคชิ้นเนื้อ : {}
+          {Editdate ? (
+            <Searchinput
+              name="dayC"
+              value={infodate.dayC}
+              onChange={handleChange}
+              style={{ width: "150px", textAlign: "center" }}
+            />
+          ) : (
+            <Searchinput
+              name="dayC"
+              style={{ width: "150px", textAlign: "center" }}
+              disabled
+              value={infodate.dayC}
+            />
+          )}
+          วัน
+        </DivFromInsideLeft>
+        <DivFromInsideLeft style={{ marginTop: "10px" }}>
+          ซากเนื้อโคส่วนอื่น ๆ : {}
+          {Editdate ? (
+            <Searchinput
+              name="dayE"
+              value={infodate.dayE}
+              onChange={handleChange}
+              style={{ width: "150px", textAlign: "center" }}
+            />
+          ) : (
+            <Searchinput
+              name="dayE"
+              style={{ width: "150px", textAlign: "center" }}
+              disabled
+              value={infodate.dayE}
+            />
+          )}
+          วัน
+        </DivFromInsideLeft>
+      </div>
     </div>
   );
 };

@@ -6,6 +6,11 @@ import {
   Editbuttoncolor,
   Removebuttoncolor,
 } from "../../../../../utils/buttonColor";
+import {
+  Savebutton,
+  Editbutton,
+  Removebutton,
+} from "../../../../../utils/button";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import Router from "next/router";
@@ -56,17 +61,14 @@ const listChillroom = ({ listchillroom }) => {
   };
   return (
     <>
-      {infochillroom.roomnum}
-      <Removebuttoncolor
-        style={{
-          marginTop: "5px",
-          marginLeft: "5px",
-          marginRight: "5px",
-        }}
-        onClick={handdleSubmitDelete}
-      >
-        ลบ
-      </Removebuttoncolor>
+      <tr style={{ textAlign: "center" }}>
+        <td> {infochillroom.roomnum}</td>
+        <td>
+          <Removebuttoncolor onClick={handdleSubmitDelete}>
+            <Removebutton />
+          </Removebuttoncolor>
+        </td>
+      </tr>
     </>
   );
 };

@@ -22,6 +22,8 @@ export const IMPORTCHOPSEARCH = gql`
     $startdate: String
     $enddate: String
     $beeftype: String
+    $beefroom: String
+    $shelf: String
   ) {
     imchopSearch(
       startdate: $startdate
@@ -29,6 +31,8 @@ export const IMPORTCHOPSEARCH = gql`
       beeftype: $beeftype
       namefarmer: $namefarmer
       userName: $userName
+      beefroom: $beefroom
+      shelf: $shelf
     ) {
       id
       importdate
@@ -61,12 +65,53 @@ export const IMPORTCHOPSEARCH = gql`
   }
 `;
 
+export const QUERYROOM = gql`
+  query Query {
+    allRoom {
+      id
+      roomname
+    }
+  }
+`;
+
+export const QUERYSHELF = gql`
+  query QUERYSHELF($id: ID) {
+    listShelf(id: $id) {
+      shelfname
+      id
+    }
+  }
+`;
+
+export const QUERYBASKET = gql`
+  query QUERYBASKET($id: ID) {
+    allBasket(id: $id) {
+      id
+      basketname
+    }
+  }
+`;
+
 const index = () => {
+  const { data: dataroom } = useQuery(QUERYROOM);
   const [selectedbeeftypechop, SetBeeftypechopsChange] = useState("");
   const [selectedstartdate, SetStartDateChange] = useState("");
   const [selectedenddate, SetEndDateChange] = useState("");
   const [inputnamefarmer, SetInputnamefarmer] = useState("");
   const [inputusername, SetInputusername] = useState("");
+  const [selectedbeefroom, setselectbeefroom] = useState("");
+  const [selectedshelf, setselectshelf] = useState("");
+  const [selectedbasket, setselectbasket] = useState("");
+  const { data: datashelf } = useQuery(QUERYSHELF, {
+    variables: {
+      id: selectedbeefroom,
+    },
+  });
+  const { data: basketdata } = useQuery(QUERYBASKET, {
+    variables: {
+      id: selectedshelf,
+    },
+  });
   const { data, loading, error } = useQuery(IMPORTCHOPSEARCH, {
     variables: {
       beeftype: selectedbeeftypechop,
@@ -74,6 +119,8 @@ const index = () => {
       enddate: selectedenddate,
       namefarmer: inputnamefarmer,
       userName: inputusername,
+      beefroom: selectedbeefroom,
+      shelf: selectedshelf,
     },
   });
   return (
@@ -255,8 +302,8 @@ const index = () => {
                     ตำแหน่ง
                   </label>
                   <select
-                    name="room"
-                    id="room"
+                    name="roomname"
+                    id="roomname"
                     style={{
                       height: "35px",
                       width: "50px",
@@ -265,15 +312,19 @@ const index = () => {
                       textAlign: "center",
                       fontSize: "14px",
                     }}
+                    onChange={(event) => setselectbeefroom(event.target.value)}
                   >
                     <option value="">ห้อง</option>
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
+                    {dataroom &&
+                      dataroom.allRoom.map((prod) => (
+                        <option key={prod.id} value={prod.id}>
+                          {prod.roomname}
+                        </option>
+                      ))}
                   </select>
                   <select
-                    name="shelf"
-                    id="shelf"
+                    name="shelfname"
+                    id="shelfname"
                     style={{
                       height: "35px",
                       width: "50px",
@@ -282,15 +333,19 @@ const index = () => {
                       textAlign: "center",
                       fontSize: "14px",
                     }}
+                    onChange={(event) => setselectshelf(event.target.value)}
                   >
                     <option value="">ชั้น</option>
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
+                    {datashelf &&
+                      datashelf.listShelf.map((prod) => (
+                        <option key={prod.id} value={prod.id}>
+                          {prod.shelfname}
+                        </option>
+                      ))}
                   </select>
                   <select
-                    name="bucket"
-                    id="bucket"
+                    name="basket"
+                    id="basket"
                     style={{
                       height: "35px",
                       width: "60px",
@@ -303,9 +358,12 @@ const index = () => {
                     }}
                   >
                     <option value="">ตะกร้า</option>
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
+                    {basketdata &&
+                      basketdata.allBasket.map((prod) => (
+                        <option key={prod.id} value={prod.id}>
+                          {prod.basketname}
+                        </option>
+                      ))}
                   </select>
                 </from>
               </div>
@@ -335,7 +393,7 @@ const index = () => {
                       height: "35px",
                       border: "1px solid #AFAFAF",
                       borderRadius: "4px",
-                      color: "#AFAFAF",
+                      fontSize: "16px",
                       textAlign: "center",
                     }}
                     onChange={(event) => SetStartDateChange(event.target.value)}
@@ -358,7 +416,7 @@ const index = () => {
                       height: "35px",
                       border: "1px solid #AFAFAF",
                       borderRadius: "4px",
-                      color: "#AFAFAF",
+                      fontSize: "16px",
                       textAlign: "center",
                     }}
                     onChange={(event) => SetEndDateChange(event.target.value)}
@@ -411,10 +469,28 @@ const index = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {data &&
+                    {data && data.imchopSearch.length > 0 ? (
                       data.imchopSearch.map((prod) => (
                         <List_import key={prod.id} imchop={prod} />
-                      ))}
+                      ))
+                    ) : (
+                      <tr style={{ textAlign: "center" }}>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                      </tr>
+                    )}
                   </tbody>
                 </Table>
               </div>

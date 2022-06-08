@@ -4,6 +4,7 @@ import { DivFrom, HeaderColor, DivBase1 } from "../../SettingFrom";
 import Nav_setting from "../../Nav_setting";
 
 import Basket from "./basket";
+import Basket1 from "./basket1";
 
 function index() {
   return (
@@ -27,7 +28,7 @@ function index() {
       <DivBase1
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 200px 1000px 1fr",
+          gridTemplateColumns: "1fr 200px 700px 1fr",
           gridRowGap: "15px",
           gridColumnGap: "20px",
           textAlign: "start",
@@ -46,7 +47,7 @@ function index() {
         </DivFrom>
         <DivFrom
           style={{
-            width: "100%",
+            width: "800px",
             gridRowStart: "2",
             gridRowEnd: "3",
             gridColumnStart: "3",
@@ -54,6 +55,17 @@ function index() {
           }}
         >
           <Basket />
+        </DivFrom>
+        <DivFrom
+          style={{
+            width: "100%",
+            gridRowStart: "3",
+            gridRowEnd: "3",
+            gridColumnStart: "3",
+            marginTop: "0px",
+          }}
+        >
+          <Basket1 />
         </DivFrom>
       </DivBase1>
     </DivBase1>

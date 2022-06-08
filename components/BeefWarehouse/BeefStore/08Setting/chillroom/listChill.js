@@ -17,6 +17,11 @@ import {
   Editbuttoncolor,
   Removebuttoncolor,
 } from "../../../../../utils/buttonColor";
+import {
+  Savebutton,
+  Editbutton,
+  Removebutton,
+} from "../../../../../utils/button";
 const listChill = ({ listchill }) => {
   const MySwal = withReactContent(Swal);
   const [chilldayInfo, setChilldayInfo] = useState(listchill);
@@ -55,17 +60,15 @@ const listChill = ({ listchill }) => {
   };
   return (
     <>
-      {chilldayInfo.day} วัน
-      <Removebuttoncolor
-        style={{
-          marginTop: "5px",
-          marginLeft: "5px",
-          marginRight: "5px",
-        }}
-        onClick={handdleSubmitDelete}
-      >
-        ลบ
-      </Removebuttoncolor>
+      <tr style={{ textAlign: "center" }}>
+        <td>{chilldayInfo.day} วัน</td>
+
+        <td>
+          <Removebuttoncolor onClick={handdleSubmitDelete}>
+            <Removebutton />
+          </Removebuttoncolor>
+        </td>
+      </tr>
     </>
   );
 };

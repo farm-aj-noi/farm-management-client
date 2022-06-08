@@ -16,8 +16,18 @@ import List_Store from "./ListStore.js";
 import Nav_store from "../Nav_store";
 
 export const STORELIST = gql`
-  query STORELIST($beeftype: String, $type: String, $beefroom: String) {
-    liststore(beeftype: $beeftype, type: $type, beefroom: $beefroom) {
+  query STORELIST(
+    $beeftype: String
+    $type: String
+    $beefroom: String
+    $shelf: String
+  ) {
+    liststore(
+      beeftype: $beeftype
+      type: $type
+      beefroom: $beefroom
+      shelf: $shelf
+    ) {
       barcode
       status
       cownum
@@ -31,20 +41,66 @@ export const STORELIST = gql`
       beeftypeid
       shelf
       basket
+      Expdate
+    }
+  }
+`;
+
+export const QUERYROOM = gql`
+  query Query {
+    allRoom {
+      id
+      roomname
+    }
+  }
+`;
+
+export const QUERYSHELF = gql`
+  query QUERYSHELF($id: ID) {
+    listShelf(id: $id) {
+      shelfname
+      id
+    }
+  }
+`;
+
+export const QUERYBASKET = gql`
+  query QUERYBASKET($id: ID) {
+    allBasket(id: $id) {
+      id
+      basketname
     }
   }
 `;
 
 const index = () => {
+  const { data: dataroom } = useQuery(QUERYROOM);
   const [selectedbeeftype, SetBeeftypeChange] = useState("");
   const [selecttype, SettypeChange] = useState("");
+  const [selectedbeefroom, setselectbeefroom] = useState("");
+  const [selectedshelf, setselectshelf] = useState("");
+  const [selectedbasket, setselectbasket] = useState("");
+  const { data: datashelf } = useQuery(QUERYSHELF, {
+    variables: {
+      id: selectedbeefroom,
+    },
+  });
+
+  const { data: basketdata } = useQuery(QUERYBASKET, {
+    variables: {
+      id: selectedshelf,
+    },
+  });
   const { data, loading, error } = useQuery(STORELIST, {
     variables: {
       beeftype: selectedbeeftype,
       type: selecttype,
+      beefroom: selectedbeefroom,
+      shelf: selectedshelf,
     },
   });
-/*   console.log(selectedbeeftype); */
+
+  /*   console.log(selectedbeeftype); */
   return (
     <DivBase>
       <div
@@ -320,8 +376,8 @@ const index = () => {
                     ตำแหน่ง
                   </label>
                   <select
-                    name="room"
-                    id="room"
+                    name="roomname"
+                    id="roomname"
                     style={{
                       height: "35px",
                       width: "50px",
@@ -330,15 +386,19 @@ const index = () => {
                       textAlign: "center",
                       fontSize: "14px",
                     }}
+                    onChange={(event) => setselectbeefroom(event.target.value)}
                   >
                     <option value="">ห้อง</option>
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
+                    {dataroom &&
+                      dataroom.allRoom.map((prod) => (
+                        <option key={prod.id} value={prod.id}>
+                          {prod.roomname}
+                        </option>
+                      ))}
                   </select>
                   <select
-                    name="shelf"
-                    id="shelf"
+                    name="shelfname"
+                    id="shelfname"
                     style={{
                       height: "35px",
                       width: "50px",
@@ -347,15 +407,19 @@ const index = () => {
                       textAlign: "center",
                       fontSize: "14px",
                     }}
+                    onChange={(event) => setselectshelf(event.target.value)}
                   >
                     <option value="">ชั้น</option>
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
+                    {datashelf &&
+                      datashelf.listShelf.map((prod) => (
+                        <option key={prod.id} value={prod.id}>
+                          {prod.shelfname}
+                        </option>
+                      ))}
                   </select>
                   <select
-                    name="bucket"
-                    id="bucket"
+                    name="basket"
+                    id="basket"
                     style={{
                       height: "35px",
                       width: "60px",
@@ -368,9 +432,12 @@ const index = () => {
                     }}
                   >
                     <option value="">ตะกร้า</option>
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
+                    {basketdata &&
+                      basketdata.allBasket.map((prod) => (
+                        <option key={prod.id} value={prod.id}>
+                          {prod.basketname}
+                        </option>
+                      ))}
                   </select>
                   <label
                     for="beef"
@@ -382,23 +449,18 @@ const index = () => {
                   >
                     วันหมดอายุ
                   </label>
-                  <select
-                    name="room"
-                    id="room"
+                  <input
+                    type="date"
+                    name="date"
+                    id="date"
                     style={{
                       height: "35px",
-                      width: "70px",
                       border: "1px solid #AFAFAF",
                       borderRadius: "4px ",
                       textAlign: "center",
-                      fontSize: "14px",
+                      fontSize: "16px",
                     }}
-                  >
-                    <option value="halve">ทั้งหมด</option>
-                    <option value="quarter">1</option>
-                    <option value="lamp">2</option>
-                    <option value="chop">3</option>
-                  </select>
+                  ></input>
                   <label
                     for="beef"
                     style={{
@@ -477,7 +539,7 @@ const index = () => {
               รายการยอดคงคลังซากเนื้อโค
             </DivFromTop>
             <DivFromDown>
-              <div style={{ height: "280px", overflowY: "auto" }}>
+              <div style={{ height: "320px", overflowY: "auto" }}>
                 <Table
                   striped
                   bordered
@@ -506,12 +568,45 @@ const index = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {data &&
+                    {data && data.liststore.length > 0 ? (
                       data.liststore.map((prod) => (
                         <List_Store key={prod.beeftypeid} Liststore={prod} />
-                      ))}
+                      ))
+                    ) : (
+                      <tr style={{ textAlign: "center" }}>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                      </tr>
+                    )}
                   </tbody>
                 </Table>
+              </div>
+              <div
+                style={{ float: "right", textAlign: "right", marginTop: "5px" }}
+              >
+                จำนวนรายการ {data ? data.liststore.length : "0"} รายการ
+                <br />
+                น้ำหนักอุ่น{" "}
+                {data && data.liststore.length > 0
+                  ? data.liststore.reduce((sum, nex) => sum + nex.weightwarm, 0)
+                  : "0"}{" "}
+                กิโลกรัม / น้ำหนักเย็น{" "}
+                {data &&
+                  data.liststore.reduce((sum, nex) => sum + nex.weight, 0)}{" "}
+                กิโลกรัม
               </div>
             </DivFromDown>
           </DivFrom>

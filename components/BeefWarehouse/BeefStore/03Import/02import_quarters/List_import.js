@@ -24,8 +24,6 @@ function List_import({ imquarter }) {
       </td>
       <td>{imquarterData.quarter.weight}</td>
       <td>{imquarter.beefroom.roomname}</td>
-      <td>-</td>
-      <td>-</td>
       <td>{imquarterData.quarter.status.nameTH}</td>
       <td>{imquarterData.user.name}</td>
     </tr>
