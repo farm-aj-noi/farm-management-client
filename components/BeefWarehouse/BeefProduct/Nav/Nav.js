@@ -111,9 +111,6 @@ const Nav1 = () => {
               <Link href="/beefwarehouse/beefproduct/report/report_store">
                 <NavDropdownItem>ออกรายงานคงคลัง</NavDropdownItem>
               </Link>
-              <Link href="/beefwarehouse/beefproduct/report/report_graph">
-                <NavDropdownItem>รายละเอียดกราฟ</NavDropdownItem>
-              </Link>
             </DropdownButton>
             <Link href="/beefwarehouse/beefproduct/notify/notify_date">
               <NavButtonLeft>
@@ -126,7 +123,7 @@ const Nav1 = () => {
                 <Icon13 height="40px" weight="37px" /> รายละเอียดข้อมูลสถิติ
               </NavButtonLeft>
             </Link>
-            <Link href="/beefwarehouse/beefproduct/setting">
+            <Link href="/beefwarehouse/beefproduct/setting/">
               <NavButtonLeft>
                 <Icon5 height="30px" weight="30px" /> การตั้งค่า
               </NavButtonLeft>

@@ -8,12 +8,12 @@ import {
   Searchinput,
   Gobutton,
   Input,
-} from "./NavFrom";
+} from "./SettingFrom";
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
 import { Form, Row, Col, Tab, Nav } from "react-bootstrap";
 
-const Nav_notify = (Sidenumber) => {
+const Nav_setting = (Sidenumber) => {
   return (
     <>
       <DivFrom
@@ -29,7 +29,7 @@ const Nav_notify = (Sidenumber) => {
           <div style={{ margin: "-3px 5px 0px 0px" }}>
             <Icon size={20} icon={list} />
           </div>
-          ประเภทการแจ้งเตือน
+          รายการตั้งค่า
         </DivFromTop>
         <DivFromDown>
           <div style={{ margin: "auto", minWidth: "100%" }}>
@@ -39,32 +39,33 @@ const Nav_notify = (Sidenumber) => {
                   <Nav variant="pills" className="flex-column">
                     <Nav.Item style={{ marginBottom: "5px" }}>
                       <Nav.Link eventKey="1">
-                        <Link href="/beefwarehouse/beefproduct/notify/notify_date">
-                          <div style={{ width: "100%" }}>วันใกล้หมดอายุ</div>
+                        <Link href="/beefwarehouse/beefproduct/setting/">
+                          <div style={{ width: "100%" }}>
+                            ตั้งค่ารายการประเภทสินค้า
+                          </div>
                         </Link>
                       </Nav.Link>
                     </Nav.Item>
-
                     <Nav.Item style={{ marginBottom: "5px" }}>
                       <Nav.Link eventKey="2">
-                        <Link href="/beefwarehouse/beefproduct/notify/notify_exportrequest">
-                          <div style={{ width: "100%" }}>คำร้องขอเบิก</div>
+                        <Link href="/beefwarehouse/beefproduct/setting/date">
+                          <div style={{ width: "100%" }}>
+                            ตั้งค่าวันใกล้หมดอายุ
+                          </div>
                         </Link>
                       </Nav.Link>
                     </Nav.Item>
-
+                    <Nav.Item style={{ marginBottom: "5px" }}>
+                      <Nav.Link eventKey="3">
+                        <Link href="/beefwarehouse/beefproduct/setting/freezer">
+                          <div style={{ width: "100%" }}>ตั่งค่าตู้แช่เก็บ</div>
+                        </Link>
+                      </Nav.Link>
+                    </Nav.Item>
                     <Nav.Item style={{ marginBottom: "5px" }}>
                       <Nav.Link eventKey="4">
-                        <Link href="/beefwarehouse/beefproduct/notify/notify_import">
-                          <div style={{ width: "100%" }}>การนำเข้า</div>
-                        </Link>
-                      </Nav.Link>
-                    </Nav.Item>
-
-                    <Nav.Item style={{ marginBottom: "5px" }}>
-                      <Nav.Link eventKey="5">
-                        <Link href="/beefwarehouse/beefproduct/notify/notify_export">
-                          <div style={{ width: "100%" }}> การเบิกออก</div>
+                        <Link href="/beefwarehouse/beefproduct/setting/shelf">
+                          <div style={{ width: "100%" }}>ตั่งค่าชั้นวาง</div>
                         </Link>
                       </Nav.Link>
                     </Nav.Item>
@@ -78,12 +79,5 @@ const Nav_notify = (Sidenumber) => {
     </>
   );
 };
-
-export default Nav_notify;
-/* <Nav.Item style={{ marginBottom: "5px" }}>
-                      <Nav.Link eventKey="3">
-                        <Link href="/beefwarehouse/beefstore/notify/notify_chill">
-                          <div style={{ width: "100%" }}>ครบกำหนดบ่ม</div>
-                        </Link>
-                      </Nav.Link>
-                    </Nav.Item>  */
+///
+export default Nav_setting;

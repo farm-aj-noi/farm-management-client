@@ -37,14 +37,6 @@ const index = () => {
             marginRight: "18px",
           }}
         >
-          <div
-            style={{
-              fontSize: "50px",
-              height: "62px",
-            }}
-          >
-            0
-          </div>
           <a
             style={{
               color: "#ffffff",
