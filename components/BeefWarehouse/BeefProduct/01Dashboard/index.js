@@ -17,7 +17,7 @@ import Card7 from "./Card7";
 const index = () => {
   return (
     <DivBase>
-      <DivFrom>
+      <DivFrom style={{width:"1000px"}}>
         <DivFromTop>
           <div style={{ margin: "-3px 5px 0px 0px" }}>
             <Icon size={20} icon={dashboard} />
@@ -27,7 +27,7 @@ const index = () => {
         <DivFromDown
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 1fr 1fr 1fr",
+            gridTemplateColumns: "1fr 1fr 1fr ",
             gridGap: "20px",
           }}
         >
