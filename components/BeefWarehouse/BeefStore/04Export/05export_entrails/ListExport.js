@@ -7,7 +7,6 @@ const ListExport = ({ exportentrail }) => {
   const [exentrailData, SetExEntrailData] = useState(exportentrail);
   return (
     <tr style={{ textAlign: "center" }}>
-      <td>{exentrailData.entrail.imslaughter.namefarmer}</td>
       <td>
         {dayjs(exentrailData.exportdate).add(543, "year").format("DD/MM/YYYY")}
       </td>
@@ -29,9 +28,7 @@ const ListExport = ({ exportentrail }) => {
       <td>
         <Modalqrcode key={exentrailData.id} listentrail={exentrailData} />
       </td>
-      <td>{}</td>
-      <td>{}</td>
-      <td>{}</td>
+      <td>{exentrailData.exporter}</td>
       <td>{exentrailData.user.name}</td>
     </tr>
   );

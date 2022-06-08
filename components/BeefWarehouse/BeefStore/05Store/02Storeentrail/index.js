@@ -31,10 +31,10 @@ export const STOREENTRAIL = gql`
       tail
       gallbladder
       scrap
+      beefroom
     }
   }
 `;
-
 
 const index = () => {
   const { data, loading, error } = useQuery(STOREENTRAIL);
@@ -83,7 +83,23 @@ const index = () => {
             gridRowEnd: "3",
             gridColumnStart: "3",
             marginTop: "0px",
-            height: "500px",
+            height: "170px",
+          }}
+        >
+          <DivFromTop>
+            <div style={{ margin: "-3px 5px 0px 0px" }}>
+              <Icon size={20} icon={iosSearchStrong} />
+            </div>
+            ค้นหารายการ
+          </DivFromTop>
+        </DivFrom>
+        <DivFrom
+          style={{
+            width: "100%",
+            gridRowStart: "3",
+            gridRowEnd: "3",
+            gridColumnStart: "3",
+            marginTop: "0px",
           }}
         >
           <DivFromTop>
@@ -93,7 +109,7 @@ const index = () => {
             รายการยอดคงคลังซากโค
           </DivFromTop>
           <DivFromDown>
-            <div style={{ height: "350px", overflowY: "auto" }}>
+            <div style={{ height: "380px", overflowY: "auto" }}>
               <Table
                 striped
                 bordered
@@ -101,10 +117,8 @@ const index = () => {
                 hover
                 style={{ margin: "auto" }}
               >
-                {/* <LoadingSmall/> */}
                 <thead>
                   <tr style={{ textAlign: "center" }}>
-                    <th>เจ้าของซาก</th>
                     <th>ทะเบียนขุน</th>
                     <th>เครื่องใน</th>
                     <th>ปลายเท้า</th>
@@ -118,20 +132,43 @@ const index = () => {
                     <th>เศษซาก</th>
                     <th>รหัสบาร์โค้ด</th>
                     <th>คิวอาร์โค้ด</th>
+                    <th>วันหมดอายุ</th>
                     <th>ห้อง</th>
-                    <th>ชั้น</th>
-                    <th>ตะกร้า</th>
                     <th>หมายเหตุ</th>
                     <th>แก้ไข</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {data &&
+                  {data && data.listentrail.length > 0 ? (
                     data.listentrail.map((prod) => (
                       <List_Store key={prod.id} Listentrail={prod} />
-                    ))}
+                    ))
+                  ) : (
+                    <tr style={{ textAlign: "center" }}>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                  )}
                 </tbody>
               </Table>
+            </div>
+            <div style={{ float: "right", textAlign: "right" }}>
+              จำนวนรายการ {data ? data.listentrail.length : "0"} รายการ
             </div>
           </DivFromDown>
         </DivFrom>

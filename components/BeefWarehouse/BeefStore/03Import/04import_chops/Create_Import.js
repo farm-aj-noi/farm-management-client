@@ -261,15 +261,13 @@ const Create_Import = () => {
               disabled={
                 !ImportchopsInfo.barcode ||
                 !ImportchopsInfo.beefroom ||
-                !ImportchopsInfo.shelf ||
-                !ImportchopsInfo.basket
+                !ImportchopsInfo.shelf
               }
               style={{
                 backgroundColor: `${
                   !ImportchopsInfo.beefroom ||
                   !ImportchopsInfo.barcode ||
-                  !ImportchopsInfo.shelf ||
-                  !ImportchopsInfo.basket
+                  !ImportchopsInfo.shelf
                     ? "gray"
                     : ""
                 }`,

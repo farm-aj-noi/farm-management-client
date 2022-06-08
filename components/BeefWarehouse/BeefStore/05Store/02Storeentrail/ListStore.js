@@ -1,13 +1,16 @@
 import React, { useState } from "react";
-import { Barcodebuttoncolor } from "../../../../../utils/buttonColor";
-import { Qrcodebutton } from "../../../../../utils/button";
+
+import {
+  Barcodebuttoncolor,
+  Editbuttoncolor,
+} from "../../../../../utils/buttonColor";
+import { Qrcodebutton, Editbutton } from "../../../../../utils/button";
 import dayjs from "dayjs";
 
 const ListStore = ({ Listentrail }) => {
   const [ListEntrailData, SetListStoreData] = useState(Listentrail);
   return (
     <tr style={{ textAlign: "center" }}>
-      <td>{ListEntrailData.namefarmer}</td>
       <td>{ListEntrailData.cownum}</td>
       <td>{ListEntrailData.offal}</td>
       <td>{ListEntrailData.toe}</td>
@@ -22,10 +25,13 @@ const ListStore = ({ Listentrail }) => {
       <td>{ListEntrailData.barcode}</td>
       <td></td>
       <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td>{ListEntrailData.beefroom}</td>
+      <td>-</td>
+      <td>
+        <Editbuttoncolor>
+          <Editbutton />
+        </Editbuttoncolor>
+      </td>
     </tr>
   );
 };

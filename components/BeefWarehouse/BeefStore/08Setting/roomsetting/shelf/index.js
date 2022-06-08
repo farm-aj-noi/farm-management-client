@@ -5,6 +5,7 @@ import { DivFrom, HeaderColor, DivBase1 } from "../../SettingFrom";
 import Nav_setting from "../../Nav_setting";
 
 import Shelf from "./shelf";
+import Shelf1 from "./shelf1";
 
 function index() {
   return (
@@ -49,12 +50,23 @@ function index() {
           style={{
             width: "100%",
             gridRowStart: "2",
-            gridRowEnd: "3",
+            gridRowEnd: "2",
             gridColumnStart: "3",
             marginTop: "0px",
           }}
         >
           <Shelf />
+        </DivFrom>
+        <DivFrom
+          style={{
+            width: "100%",
+            gridRowStart: "3",
+            gridRowEnd: "3",
+            gridColumnStart: "3",
+            marginTop: "0px",
+          }}
+        >
+          <Shelf1 />
         </DivFrom>
       </DivBase1>
     </DivBase1>

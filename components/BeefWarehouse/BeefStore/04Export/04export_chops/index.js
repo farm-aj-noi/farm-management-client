@@ -334,7 +334,7 @@ const index = () => {
                       height: "35px",
                       border: "1px solid #AFAFAF",
                       borderRadius: "4px",
-                      color: "#AFAFAF",
+                      fontSize: "16px",
                       textAlign: "center",
                     }}
                     onChange={(event) => SetStartDateChange(event.target.value)}
@@ -357,7 +357,7 @@ const index = () => {
                       height: "35px",
                       border: "1px solid #AFAFAF",
                       borderRadius: "4px",
-                      color: "#AFAFAF",
+                      fontSize: "16px",
                       textAlign: "center",
                     }}
                     onChange={(event) => SetEndDateChange(event.target.value)}
@@ -413,6 +413,17 @@ const index = () => {
                       ))}
                   </tbody>
                 </Table>
+              </div>
+              <div style={{ float: "right", textAlign: "right" }}>
+                จำนวนรายการ {data ? data.exportchop.length : "0"} รายการ
+                <br />
+                น้ำหนักอุ่น{" "}
+                {data &&
+                  data.exportchop.reduce(
+                    (sum, nex) => sum + nex.chop.weight,
+                    0
+                  )}{" "}
+                กิโลกรัม
               </div>
             </DivFromDown>
           </DivFrom>

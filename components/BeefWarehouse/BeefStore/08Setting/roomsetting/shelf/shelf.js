@@ -257,21 +257,6 @@ const shelf = () => {
                 </Savebuttoncolor>
               </div>
             </div>
-
-            <div
-              style={{
-                border: "1px solid #AFAFAF",
-                marginTop: "10px",
-                padding: "10px 20px 20px 20px",
-                borderRadius: "4px",
-              }}
-            >
-              รายการชั้นจัดเก็บ :
-              {dataroom &&
-                dataroom.allRoom.map((prod) => (
-                  <Listshelf key={prod.id} Listshelfs={prod} />
-                ))}
-            </div>
           </>
         )}
 
@@ -492,21 +477,6 @@ const shelf = () => {
                 </div>
               );
             })}
-            <div
-              style={{
-                border: "1px solid #AFAFAF",
-                marginTop: "10px",
-                padding: "10px 20px 20px 20px",
-                borderRadius: "4px",
-              }}
-            >
-              {" "}
-              รายการชั้นจัดเก็บ :
-              {dataroom &&
-                dataroom.allRoom.map((prod) => (
-                  <Listshelf key={prod.id} Listshelfs={prod} />
-                ))}
-            </div>
           </>
         )}
       </DivFromDown>

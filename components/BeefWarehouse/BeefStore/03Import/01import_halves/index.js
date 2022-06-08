@@ -29,6 +29,7 @@ export const IMPORTHALVESEARCH = gql`
     $beeftype: String
     $enddate: String
     $startdate: String
+    $beefroom: String
   ) {
     imhalveSearch(
       namefarmer: $namefarmer
@@ -36,6 +37,7 @@ export const IMPORTHALVESEARCH = gql`
       beeftype: $beeftype
       enddate: $enddate
       startdate: $startdate
+      beefroom: $beefroom
     ) {
       barcode
       id
@@ -66,13 +68,23 @@ export const IMPORTHALVESEARCH = gql`
   }
 `;
 
+export const QUERYROOM = gql`
+  query Query {
+    allRoom {
+      id
+      roomname
+    }
+  }
+`;
+
 const index = () => {
+  const { data: dataroom } = useQuery(QUERYROOM);
   const [selectedbeeftypehalve, SetBeeftypeHalveChange] = useState("");
   const [selectedstartdate, SetStartDateChange] = useState("");
   const [selectedenddate, SetEndDateChange] = useState("");
   const [inputnamefarmer, SetInputnamefarmer] = useState("");
   const [inputusername, SetInputusername] = useState("");
-  const [allweightwarm, setweightwarm] = useState("");
+  const [selectedbeefroom, setselectbeefroom] = useState("");
   const { data, loading, error } = useQuery(IMPORTHALVESEARCH, {
     variables: {
       beeftype: selectedbeeftypehalve,
@@ -80,6 +92,7 @@ const index = () => {
       enddate: selectedenddate,
       namefarmer: inputnamefarmer,
       userName: inputusername,
+      beefroom: selectedbeefroom,
     },
   });
   return (
@@ -100,7 +113,7 @@ const index = () => {
       <DivBase
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 270px 1020px 1fr",
+          gridTemplateColumns: "1fr 270px 900px 1fr",
           gridRowGap: "15px",
           gridColumnGap: "10px",
           textAlign: "start",
@@ -122,13 +135,7 @@ const index = () => {
               </div>
               ดำเนินการนำเข้าซากเนื้อโคผ่าซีก
             </DivFromTop>
-            <DivFromDown
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr",
-                gridRowGap: "5px",
-              }}
-            >
+            <DivFromDown>
               <Create_Import />
             </DivFromDown>
           </DivFrom>
@@ -239,57 +246,24 @@ const index = () => {
                     ตำแหน่ง
                   </label>
                   <select
-                    name="room"
-                    id="room"
+                    name="roomname"
                     style={{
                       height: "35px",
-                      width: "50px",
+                      width: "110px",
                       border: "1px solid #AFAFAF",
-                      borderRadius: "4px 0px 0px 4px",
+                      borderRadius: "4px ",
                       textAlign: "center",
                       fontSize: "14px",
                     }}
+                    onChange={(event) => setselectbeefroom(event.target.value)}
                   >
                     <option value="">ห้อง</option>
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
-                  </select>
-                  <select
-                    name="shelf"
-                    id="shelf"
-                    style={{
-                      height: "35px",
-                      width: "50px",
-                      border: "1px solid #AFAFAF",
-                      borderLeft: "none",
-                      textAlign: "center",
-                      fontSize: "14px",
-                    }}
-                  >
-                    <option value="">ชั้น</option>
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
-                  </select>
-                  <select
-                    name="bucket"
-                    id="bucket"
-                    style={{
-                      height: "35px",
-                      width: "60px",
-                      border: "1px solid #AFAFAF",
-                      borderRadius: "0px 4px 4px 0px",
-                      borderLeft: "none",
-                      textAlign: "center",
-                      fontSize: "14px",
-                      marginRight: "10px",
-                    }}
-                  >
-                    <option value="">ตะกร้า</option>
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
+                    {dataroom &&
+                      dataroom.allRoom.map((prod) => (
+                        <option key={prod.id} value={prod.id}>
+                          {prod.roomname}
+                        </option>
+                      ))}
                   </select>
                 </from>
               </div>
@@ -319,8 +293,9 @@ const index = () => {
                       height: "35px",
                       border: "1px solid #AFAFAF",
                       borderRadius: "4px",
-                      color: "#AFAFAF",
+                     
                       textAlign: "center",
+                      fontSize: "16px",
                     }}
                     onChange={(event) => SetStartDateChange(event.target.value)}
                   ></input>
@@ -354,7 +329,7 @@ const index = () => {
                       height: "35px",
                       border: "1px solid #AFAFAF",
                       borderRadius: "4px",
-                      color: "#AFAFAF",
+                      fontSize: "16px",
                       textAlign: "center",
                     }}
                     onChange={(event) => SetEndDateChange(event.target.value)}
@@ -377,7 +352,7 @@ const index = () => {
           </DivFrom>
           <DivFrom
             style={{
-              width: "1300px",
+              width: "1180px",
               gridRowStart: "5",
               gridRowEnd: "5",
               gridColumnStart: "2",
@@ -392,7 +367,7 @@ const index = () => {
               รายการนำเข้าซากเนื้อโคผ่าซีก
             </DivFromTop>
             <DivFromDown>
-              <div style={{ height: "310px", overflow: "auto" }}>
+              <div style={{ height: "320px", overflow: "auto" }}>
                 <Table
                   striped
                   bordered
@@ -413,17 +388,33 @@ const index = () => {
                       <th>น้ำหนักอุ่น (กก.)</th>
                       <th>น้ำหนักเย็น (กก.)</th>
                       <th>ห้อง</th>
-                      <th>ชั้น</th>
-                      <th>ตะกร้า</th>
+
                       <th>สถานะ</th>
                       <th>ผู้นำเข้า</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {data &&
+                    {data && data.imhalveSearch.length > 0 ? (
                       data.imhalveSearch.map((prod) => (
                         <List_import key={prod.id} imhalve={prod} />
-                      ))}
+                      ))
+                    ) : (
+                      <tr style={{ textAlign: "center" }}>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                      </tr>
+                    )}
                   </tbody>
                 </Table>
               </div>

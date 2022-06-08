@@ -270,7 +270,7 @@ const index = () => {
                       height: "35px",
                       border: "1px solid #AFAFAF",
                       borderRadius: "4px",
-                      color: "#AFAFAF",
+                      fontSize: "16px",
                       textAlign: "center",
                     }}
                   ></input>
@@ -293,7 +293,7 @@ const index = () => {
                       height: "35px",
                       border: "1px solid #AFAFAF",
                       borderRadius: "4px",
-                      color: "#AFAFAF",
+                      fontSize: "16px",
                       textAlign: "center",
                     }}
                     onChange={(event) => SetEndDateChange(event.target.value)}
@@ -349,6 +349,17 @@ const index = () => {
                       ))}
                   </tbody>
                 </Table>
+              </div>
+              <div style={{ float: "right", textAlign: "right" }}>
+                จำนวนรายการ {data ? data.exportlump.length : "0"} รายการ
+                <br />
+                น้ำหนักอุ่น{" "}
+                {data &&
+                  data.exportlump.reduce(
+                    (sum, nex) => sum + nex.lump.weight,
+                    0
+                  )}{" "}
+                กิโลกรัม
               </div>
             </DivFromDown>
           </DivFrom>

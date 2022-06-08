@@ -56,7 +56,6 @@ export const EXPORTQUARTERSEARCH = gql`
       storestatus {
         nameTH
       }
-     
     }
   }
 `;
@@ -259,7 +258,7 @@ const index = () => {
                       height: "35px",
                       border: "1px solid #AFAFAF",
                       borderRadius: "4px",
-                      color: "#AFAFAF",
+                      fontSize: "16px",
                       textAlign: "center",
                     }}
                     onChange={(event) => SetStartDateChange(event.target.value)}
@@ -283,7 +282,7 @@ const index = () => {
                       height: "35px",
                       border: "1px solid #AFAFAF",
                       borderRadius: "4px",
-                      color: "#AFAFAF",
+                      fontSize: "16px",
                       textAlign: "center",
                     }}
                     onChange={(event) => SetEndDateChange(event.target.value)}
@@ -327,7 +326,6 @@ const index = () => {
                       <th>รหัสบาร์โค้ด</th>
                       <th>คิวอาร์โค้ด</th>
                       <th>น้ำหนัก (กก.)</th>
-                      
                       <th>สถานะ</th>
                       <th>ผู้ขอเบิก</th>
                       <th>ผู้เบิกออก</th>
@@ -340,6 +338,17 @@ const index = () => {
                       ))}
                   </tbody>
                 </Table>
+              </div>
+              <div style={{ float: "right", textAlign: "right" }}>
+                จำนวนรายการ {data ? data.exportquart.length : "0"} รายการ
+                <br />
+                น้ำหนักอุ่น{" "}
+                {data &&
+                  data.exportquart.reduce(
+                    (sum, nex) => sum + nex.quarter.weight,
+                    0
+                  )}{" "}
+                กิโลกรัม
               </div>
             </DivFromDown>
           </DivFrom>

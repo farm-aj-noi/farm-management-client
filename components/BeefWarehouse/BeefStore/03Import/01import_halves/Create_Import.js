@@ -62,7 +62,6 @@ const Create_Import = () => {
   /* console.log(test1); */
   const { data } = useQuery(TEST);
   /*  console.log(data); */
-  
 
   const { data: dataroom } = useQuery(QUERYROOM);
   const [ImporthalvesInfo, setImporthalvesInfo] = useState({
@@ -83,6 +82,7 @@ const Create_Import = () => {
         setSuccess(true);
         setImporthalvesInfo({
           barcode: "",
+          beefroom: "",
         });
         MySwal.fire({
           icon: "success",
@@ -105,7 +105,7 @@ const Create_Import = () => {
       if (error) {
         setImporthalvesInfo({
           barcode: "",
-          beefroom:"",
+          beefroom: "",
         });
         MySwal.fire({
           icon: "error",
@@ -164,11 +164,7 @@ const Create_Import = () => {
               {!ImporthalvesInfo.barcode ? (
                 <label style={{ color: "red" }}>กรุณากรอกบาร์โค้ด</label>
               ) : (
-                halveData &&
-                halveData.allhalve === null && (
-                  <label style={{ color: "red" }}>ไม่พบข้อมูล</label>
-                  
-                )
+                ""
               )}
             </div>
           </DivFromInsideLeft>
@@ -213,7 +209,6 @@ const Create_Import = () => {
               float: "right",
               paddingRight: "10px",
               paddingBottom: "10px",
-              margin: "0",
             }}
           >
             <Savebutton1

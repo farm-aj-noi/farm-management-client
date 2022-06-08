@@ -6,6 +6,7 @@ import Modalqrcode from "../../12Qrcode/Import/imeqr";
 
 const List_import = ({ imentrail }) => {
   const [imentrailData, SetImentrailData] = useState(imentrail);
+  console.log(imentrailData);
   return (
     <tr style={{ textAlign: "center" }}>
       <td>{imentrailData.entrail.imslaughter.namefarmer}</td>
@@ -30,9 +31,7 @@ const List_import = ({ imentrail }) => {
       <td>
         <Modalqrcode key={imentrailData.id} listentrail={imentrailData} />
       </td>
-      <td>{}</td>
-      <td>{}</td>
-      <td>{}</td>
+      <td>{imentrailData.beefroom.roomname}</td>
       <td>{imentrailData.user.name}</td>
     </tr>
   );

@@ -93,6 +93,9 @@ const Create_Import = () => {
       if (data) {
         setImportLumpsInfo({
           barcode: "",
+          beefroom: "",
+          shelf: "",
+          basket: "",
         });
         MySwal.fire({
           icon: "success",
@@ -115,6 +118,9 @@ const Create_Import = () => {
       if (error) {
         setImportLumpsInfo({
           barcode: "",
+          beefroom: "",
+          shelf: "",
+          basket: "",
         });
         MySwal.fire({
           icon: "error",
@@ -261,19 +267,17 @@ const Create_Import = () => {
             }}
           >
             <Savebutton1
-             /*  disabled={
+              disabled={
                 !ImportLumpsInfo.barcode ||
                 !ImportLumpsInfo.beefroom ||
-                !ImportLumpsInfo.shelf ||
-                !!ImportLumpsInfo.basket
-              } */
+                !ImportLumpsInfo.shelf
+              }
               onClick={handleSubmit}
               style={{
                 backgroundColor: `${
                   !ImportLumpsInfo.beefroom ||
                   !ImportLumpsInfo.barcode ||
-                  !ImportLumpsInfo.shelf ||
-                  !ImportLumpsInfo.basket
+                  !ImportLumpsInfo.shelf
                     ? "gray"
                     : ""
                 }`,

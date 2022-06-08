@@ -137,11 +137,7 @@ const Nav1 = () => {
                 คงคลัง
               </NavButtonLeft>
             </Link>
-            <Link href="/beefwarehouse/beefstore/graph">
-              <NavButtonLeft>
-                <Icon13 height="40px" weight="37px" /> รายละเอียดกราฟ
-              </NavButtonLeft>
-            </Link>
+
             <DropdownButton
               drop="down"
               title={
@@ -173,6 +169,11 @@ const Nav1 = () => {
             <Link href="/beefwarehouse/beefstore/notify/notify_date">
               <NavButtonLeft>
                 <Icon10 height="30px" weight="30px" /> การแจ้งเตือน
+              </NavButtonLeft>
+            </Link>
+            <Link href="/beefwarehouse/beefstore/graph">
+              <NavButtonLeft>
+                <Icon13 height="40px" weight="37px" /> รายละเอียดข้อมูลสถิติ
               </NavButtonLeft>
             </Link>
             <Link href="/beefwarehouse/beefstore/setting/room">

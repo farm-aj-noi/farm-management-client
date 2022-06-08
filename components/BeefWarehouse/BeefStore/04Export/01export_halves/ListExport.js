@@ -21,8 +21,12 @@ const ListExport = ({ exhalve }) => {
       <td>
         <Modalqrcode key={exhalveData.id} listhalve={exhalveData} />
       </td>
-      <td>{exhalveData.halve.weightwarm}</td>
-
+      <td>
+        {exhalveData.halve.weightwarm ? exhalveData.halve.weightwarm : "-"}
+      </td>
+      <td>
+        {exhalveData.halve.weightcool ? exhalveData.halve.weightcool : "-"}
+      </td>
       <td>{exhalveData.storestatus.nameTH}</td>
       <td>{exhalveData.exporter}</td>
       <td>{exhalveData.user.name}</td>

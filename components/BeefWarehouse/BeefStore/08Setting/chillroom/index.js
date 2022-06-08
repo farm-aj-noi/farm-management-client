@@ -216,7 +216,7 @@ const index = () => {
       <DivBase
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 200px 450px 450px 1fr",
+          gridTemplateColumns: "1fr 200px 350px 350px 1fr",
           gridRowGap: "15px",
           gridColumnGap: "20px",
           textAlign: "start",
@@ -237,7 +237,7 @@ const index = () => {
           style={{
             width: "100%",
             gridRowStart: "2",
-            gridRowEnd: "3",
+            gridRowEnd: "2",
             gridColumnStart: "3",
             marginTop: "0px",
           }}
@@ -273,22 +273,6 @@ const index = () => {
                 บันทึก
               </Savebuttoncolor>
             </div>
-            <div
-              style={{
-                border: "1px solid #AFAFAF",
-                marginTop: "10px",
-                padding: "10px 20px 20px 20px",
-                borderRadius: "4px",
-                width: "fit-content",
-                height: "fit-content",
-              }}
-            >
-              รายการระยะเวลาบ่ม :
-              {data &&
-                data.listChillday.map((prod) => (
-                  <ListChill key={prod.id} listchill={prod} />
-                ))}
-            </div>
           </DivFromDown>
         </DivFrom>
         <DivFrom
@@ -296,7 +280,7 @@ const index = () => {
             width: "100%",
             marginTop: "0",
             gridRowStart: "2",
-            gridRowEnd: "5",
+            gridRowEnd: "2",
             gridColumnStart: "4",
           }}
         >
@@ -331,23 +315,71 @@ const index = () => {
                   บันทึก
                 </Savebuttoncolor>
               </div>
-              <div
-                style={{
-                  border: "1px solid #AFAFAF",
-                  marginTop: "10px",
-                  padding: "10px 20px 20px 20px",
-                  borderRadius: "4px",
-                  width: "fit-content",
-                  height: "fit-content",
-                }}
-              >
-                รายการห้องบ่ม :
+            </>
+          </DivFromDown>
+        </DivFrom>
+        <DivFrom
+          style={{
+            width: "100%",
+            gridRowStart: "3",
+            gridRowEnd: "3",
+            gridColumnStart: "3",
+            marginTop: "0px",
+          }}
+        >
+          <DivFromTop>
+            <div style={{ margin: "-3px 5px 0px 0px" }}>
+              <Icon size={20} icon={list} />
+            </div>
+            รายการระยะเวลาบ่ม
+          </DivFromTop>
+          <DivFromDown>
+            <Table striped bordered responsive hover style={{ margin: "auto" }}>
+              <thead>
+                <tr style={{ textAlign: "center" }}>
+                  <th>ระยะเวลาบ่ม</th>
+                  <th>ลบ</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data &&
+                  data.listChillday.map((prod) => (
+                    <ListChill key={prod.id} listchill={prod} />
+                  ))}
+              </tbody>
+            </Table>
+          </DivFromDown>
+        </DivFrom>
+        <DivFrom
+          style={{
+            width: "100%",
+            gridRowStart: "3",
+            gridRowEnd: "3",
+            gridColumnStart: "4",
+            marginTop: "0px",
+          }}
+        >
+          <DivFromTop>
+            <div style={{ margin: "-3px 5px 0px 0px" }}>
+              <Icon size={20} icon={list} />
+            </div>
+            รายการระยะเวลาบ่ม
+          </DivFromTop>
+          <DivFromDown>
+            <Table striped bordered responsive hover style={{ margin: "auto" }}>
+              <thead>
+                <tr style={{ textAlign: "center" }}>
+                  <th>ห้องบ่ม</th>
+                  <th>ลบ</th>
+                </tr>
+              </thead>
+              <tbody>
                 {datachillroom &&
                   datachillroom.listChillroom.map((prod) => (
                     <ListChillroom key={prod.id} listchillroom={prod} />
                   ))}
-              </div>
-            </>
+              </tbody>
+            </Table>
           </DivFromDown>
         </DivFrom>
       </DivBase>

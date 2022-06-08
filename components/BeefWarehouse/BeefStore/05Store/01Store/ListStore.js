@@ -21,7 +21,9 @@ const ListStore = ({ Liststore }) => {
       <td>{ListStoreData.weightwarm ? ListStoreData.weightwarm : "-"}</td>
       <td>{ListStoreData.weight ? ListStoreData.weight : "-"}</td>
 
-      <td></td>
+      <td>
+        {dayjs(ListStoreData.Expdate).add(543, "year").format("DD/MM/YYYY")}
+      </td>
       <td></td>
       <td>{ListStoreData.beefroom ? ListStoreData.beefroom : "-"}</td>
       <td>{ListStoreData.shelf ? ListStoreData.shelf : "-"}</td>

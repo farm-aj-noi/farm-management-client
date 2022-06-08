@@ -225,35 +225,6 @@ const room = () => {
                 บันทึก
               </Savebuttoncolor>
             </div>
-            <div
-              style={{
-                border: "1px solid #AFAFAF",
-                marginTop: "10px",
-                padding: "10px 20px 20px 20px",
-                borderRadius: "4px",
-              }}
-            >
-              รายการห้องจัดเก็บ :
-              {dataroom &&
-                dataroom.allRoom.map((prod) => (
-                  <>
-                    <div
-                      style={{
-                        display: "grid",
-                        gridTemplateColumns: `200px 200px 200px 
-               200px`,
-                        marginTop: "10px",
-                        marginLeft: "30px",
-                        paddingBottom: "20px",
-                        borderBottom: "1px solid #AFAFAF",
-                      }}
-                    >
-                      <Editname key={prod.id} idroom={prod} />
-                      <List key={prod.id} idroom={prod} />
-                    </div>
-                  </>
-                ))}
-            </div>
           </>
         )}
         {successCreateRoomName && (

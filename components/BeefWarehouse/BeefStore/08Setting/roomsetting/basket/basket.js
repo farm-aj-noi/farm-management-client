@@ -150,114 +150,104 @@ const basket = () => {
   };
 
   return (
-    <div>
-      <DivFromTop>
-        <div style={{ margin: "-3px 5px 0px 0px" }}>
-          <Icon size={20} icon={list} />
-        </div>
-        บันทึกตั้งค่าตะกร้าจัดเก็บ
-      </DivFromTop>
-      <DivFromDown>
-        <div
-          style={{ display: "grid", gridTemplateColumns: `230px  230px 350px` }}
-        >
-          {" "}
-          <div>
-            ห้องจัดเก็บ : {}
-            <select
-              name="beefroom"
-              id="beefroom"
-              value={Infobasket.beefroom}
-              onChange={handleChangeBasket}
-              style={{
-                height: "38px",
-                width: "156px",
-                border: "1px solid #AFAFAF",
-                borderRadius: "4px",
-                textAlign: "center",
-                fontSize: "14px",
-              }}
-            >
-              <option value="">เลือก</option>
-              {dataroom &&
-                dataroom.allRoom.map((prod) => (
-                  <option key={prod.id} value={prod.id}>
-                    {prod.roomname}
-                  </option>
-                ))}
-            </select>
+    <>
+      <div>
+        <DivFromTop>
+          <div style={{ margin: "-3px 5px 0px 0px" }}>
+            <Icon size={20} icon={list} />
           </div>
-          <div style={{ marginLeft: "10px" }}>
-            ชั้นจัดเก็บ : {}
-            <select
-              disabled={!Infobasket.beefroom}
-              name="shelf"
-              id="shelf"
-              value={Infobasket.shelf}
-              onChange={handleChangeBasket}
-              style={{
-                height: "38px",
-                width: "156px",
-                border: "1px solid #AFAFAF",
-                borderRadius: "4px",
-                textAlign: "center",
-                fontSize: "14px",
-              }}
-            >
-              <option value="">เลือก</option>
-              {shelfdata &&
-                shelfdata.listShelf.map((prod) => (
-                  <option key={prod.id} value={prod.id}>
-                    {prod.shelfname}
-                  </option>
-                ))}
-            </select>
+          บันทึกตั้งค่าตะกร้าจัดเก็บ
+        </DivFromTop>
+        <DivFromDown>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: `230px  230px 350px`,
+            }}
+          >
+            {" "}
+            <div>
+              ห้องจัดเก็บ : {}
+              <select
+                name="beefroom"
+                id="beefroom"
+                value={Infobasket.beefroom}
+                onChange={handleChangeBasket}
+                style={{
+                  height: "38px",
+                  width: "156px",
+                  border: "1px solid #AFAFAF",
+                  borderRadius: "4px",
+                  textAlign: "center",
+                  fontSize: "14px",
+                }}
+              >
+                <option value="">เลือก</option>
+                {dataroom &&
+                  dataroom.allRoom.map((prod) => (
+                    <option key={prod.id} value={prod.id}>
+                      {prod.roomname}
+                    </option>
+                  ))}
+              </select>
+            </div>
+            <div style={{ marginLeft: "10px" }}>
+              ชั้นจัดเก็บ : {}
+              <select
+                disabled={!Infobasket.beefroom}
+                name="shelf"
+                id="shelf"
+                value={Infobasket.shelf}
+                onChange={handleChangeBasket}
+                style={{
+                  height: "38px",
+                  width: "156px",
+                  border: "1px solid #AFAFAF",
+                  borderRadius: "4px",
+                  textAlign: "center",
+                  fontSize: "14px",
+                }}
+              >
+                <option value="">เลือก</option>
+                {shelfdata &&
+                  shelfdata.listShelf.map((prod) => (
+                    <option key={prod.id} value={prod.id}>
+                      {prod.shelfname}
+                    </option>
+                  ))}
+              </select>
+            </div>
+            <div style={{ marginLeft: "10px" }}>
+              ชื่อตะกร้าจัดเก็บ : {}
+              <Searchinput
+                disabled={!Infobasket.shelf}
+                type="text"
+                id="basketname"
+                name="basketname"
+                value={Infobasket.basketname}
+                onChange={handleChangeBasket}
+                style={{
+                  width: "156px",
+                  textAlign: "center",
+                  backgroundColor: `${!Infobasket.shelf ? "#ececec" : ""}`,
+                }}
+              />
+              <Savebuttoncolor
+                style={{
+                  height: "38px",
+                  width: " 50px",
+                  backgroundColor: `${!Infobasket.basketname ? "gray" : ""}`,
+                }}
+                disabled={!Infobasket.basketname}
+                onClick={handleSubmitBasket}
+              >
+                บันทึก
+              </Savebuttoncolor>
+            </div>
           </div>
-          <div style={{ marginLeft: "10px" }}>
-            ชื่อตะกร้าจัดเก็บ : {}
-            <Searchinput
-              disabled={!Infobasket.shelf}
-              type="text"
-              id="basketname"
-              name="basketname"
-              value={Infobasket.basketname}
-              onChange={handleChangeBasket}
-              style={{
-                width: "156px",
-                textAlign: "center",
-                backgroundColor: `${!Infobasket.shelf ? "#ececec" : ""}`,
-              }}
-            />
-            <Savebuttoncolor
-              style={{
-                height: "38px",
-                width: " 50px",
-                backgroundColor: `${!Infobasket.basketname ? "gray" : ""}`,
-              }}
-              disabled={!Infobasket.basketname}
-              onClick={handleSubmitBasket}
-            >
-              บันทึก
-            </Savebuttoncolor>
-          </div>
-        </div>
-
-        <div
-          style={{
-            border: "1px solid #AFAFAF",
-            marginTop: "10px",
-            padding: "10px 20px 20px 20px",
-            borderRadius: "4px",
-          }}
-        >
-          รายการตะกร้าจัดเก็บ :
-          {dataroom &&
-            dataroom.allRoom.map((prod) => (
-              <List1 key={prod.id} listroom1={prod} />
-            ))}
-        </div>
-      </DivFromDown>
-    </div>
+        </DivFromDown>
+      </div>
+    </>
   );
 };
 

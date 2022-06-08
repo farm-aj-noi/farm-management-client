@@ -47,6 +47,7 @@ export const EXPORTENTRAILSEARCH = gql`
         }
       }
       exportdate
+      exporter
       storestatus {
         nameTH
       }
@@ -177,72 +178,10 @@ const index = () => {
                       border: "1px solid #AFAFAF",
                       fontSize: "14px",
                       textAlign: "center",
+                      marginRight: "10px",
                     }}
                     onChange={(event) => SetInputusername(event.target.value)}
                   />
-                  <label
-                    for="beef"
-                    style={{
-                      textAlign: "center",
-                      fontSize: "18px",
-                      margin: "10px 10px",
-                    }}
-                  >
-                    ตำแหน่ง
-                  </label>
-                  <select
-                    name="room"
-                    id="room"
-                    style={{
-                      height: "35px",
-                      width: "50px",
-                      border: "1px solid #AFAFAF",
-                      borderRadius: "4px 0px 0px 4px",
-                      textAlign: "center",
-                      fontSize: "14px",
-                    }}
-                  >
-                    <option value="">ห้อง</option>
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
-                  </select>
-                  <select
-                    name="shelf"
-                    id="shelf"
-                    style={{
-                      height: "35px",
-                      width: "50px",
-                      border: "1px solid #AFAFAF",
-                      borderLeft: "none",
-                      textAlign: "center",
-                      fontSize: "14px",
-                    }}
-                  >
-                    <option value="">ชั้น</option>
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
-                  </select>
-                  <select
-                    name="bucket"
-                    id="bucket"
-                    style={{
-                      height: "35px",
-                      width: "60px",
-                      border: "1px solid #AFAFAF",
-                      borderRadius: "0px 4px 4px 0px",
-                      borderLeft: "none",
-                      textAlign: "center",
-                      fontSize: "14px",
-                      marginRight: "10px",
-                    }}
-                  >
-                    <option value="">ตะกร้า</option>
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
-                  </select>
                   <label
                     for="date"
                     style={{
@@ -261,7 +200,7 @@ const index = () => {
                       height: "35px",
                       border: "1px solid #AFAFAF",
                       borderRadius: "4px",
-                      color: "#AFAFAF",
+                      fontSize: "16px",
                       textAlign: "center",
                     }}
                     onChange={(event) => SetStartDateChange(event.target.value)}
@@ -284,7 +223,7 @@ const index = () => {
                       height: "35px",
                       border: "1px solid #AFAFAF",
                       borderRadius: "4px",
-                      color: "#AFAFAF",
+                      fontSize: "16px",
                       textAlign: "center",
                     }}
                     onChange={(event) => SetEndDateChange(event.target.value)}
@@ -310,7 +249,7 @@ const index = () => {
               รายการเบิกออก
             </DivFromTop>
             <DivFromDown>
-              <div style={{ height: "280px", overflow: "auto" }}>
+              <div style={{ height: "300px", overflow: "auto" }}>
                 <Table
                   striped
                   bordered
@@ -335,9 +274,6 @@ const index = () => {
                       <th>เศษซาก</th>
                       <th>รหัสบาร์โค้ด</th>
                       <th>คิวอาร์โค้ด</th>
-                      <th>ห้อง</th>
-                      <th>ชั้น</th>
-                      <th>ตะกร้า</th>
                       <th>ผู้ขอเบิก</th>
                       <th>ผู้เบิกออก</th>
                     </tr>
@@ -349,6 +285,9 @@ const index = () => {
                       ))}
                   </tbody>
                 </Table>
+              </div>
+              <div style={{ float: "right", textAlign: "right" }}>
+                จำนวนรายการ {data ? data.exportentrail.length : "0"} รายการ
               </div>
             </DivFromDown>
           </DivFrom>
