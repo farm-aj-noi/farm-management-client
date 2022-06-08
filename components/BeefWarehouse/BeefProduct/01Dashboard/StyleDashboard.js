@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { FromDiv } from "../../../utils/from";
-import { lightBlue, white } from "../../../utils/colors";
+import { FromDiv } from "../../../../utils/from";
+import { lightBlue, white } from "../../../../utils/colors";
 
 export const DivAlertCard = styled.div`
   position: relative;
@@ -13,7 +13,6 @@ export const DivAlertCard = styled.div`
   box-shadow: 0px 0px 2px grey;
   color: #ffffff;
 `;
-import styled from "styled-components";
 
 export const DivFrom = styled.div`
   ${FromDiv}
