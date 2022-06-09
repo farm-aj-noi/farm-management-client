@@ -62,7 +62,6 @@ export const DivFromDown = styled.div`
   height: fit-content;
   border-radius: 10px 10px 0 0;
   padding: 25px 15px 15px 15px;
- 
 `;
 
 export const Searchinput = styled.input`

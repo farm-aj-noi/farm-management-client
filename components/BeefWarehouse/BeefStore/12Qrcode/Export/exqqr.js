@@ -4,12 +4,16 @@ import { Qrcodebutton } from "../../../../../utils/button";
 import { Modal, Button } from "react-bootstrap";
 import QRCode from "qrcode.react";
 import Link from "next/link";
+import Router from "next/router";
 
 const index = ({ listquarter }) => {
   const [infodata, setinfodata] = useState(listquarter);
   console.log(infodata);
   const [testshow, setShow] = useState(false);
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    Router.reload("beefwarehouse/beefstore/export/export_quarters");
+  };
   const handleShow = () => setShow(true);
 
   return (
@@ -50,26 +54,24 @@ const index = ({ listquarter }) => {
               alignItems: "center",
             }}
           >
-            <Link
+            <a
               href={
                 "http://localhost:3000/slaughter/tracking/" +
                 infodata.quarter.barcode
               }
+              target="popup"
+              style={{
+                fontSize: "10px",
+                backgroundColor: "#f3f3f3",
+                padding: "5px",
+                color: "#3775e9",
+                cursor: "pointer",
+                textDecoration: "underline",
+              }}
             >
-              <p
-                style={{
-                  fontSize: "10px",
-                  backgroundColor: "#f3f3f3",
-                  padding: "5px",
-                  color: "#3775e9",
-                  cursor: "pointer",
-                  textDecoration: "underline",
-                }}
-              >
-                http://localhost:3000/slaughter/tracking/
-                {infodata.quarter.barcode}
-              </p>
-            </Link>
+              http://localhost:3000/slaughter/tracking/
+              {infodata.quarter.barcode}
+            </a>
           </div>
         </Modal.Body>
       </Modal>

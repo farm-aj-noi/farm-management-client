@@ -16,7 +16,7 @@ import { useQuery } from "@apollo/react-hooks";
 import List_import from "./List_import";
 
 import th from "date-fns/locale/th";
-registerLocale("th", th);
+
 import Datestyle from "../../../helps/datepicker.module.css";
 
 import dayjs from "dayjs";

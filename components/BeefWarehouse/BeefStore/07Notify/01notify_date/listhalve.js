@@ -13,6 +13,8 @@ import gql from "graphql-tag";
 
 import dayjs from "dayjs";
 
+import Paperdate from "./paperh";
+
 const EXPH = gql`
   query EXPIM {
     Card8h {
@@ -77,6 +79,15 @@ const listhalve = () => {
           )}
         </tbody>
       </Table>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        {data && data.Card8h.length > 0 ? (
+          <div>
+            <Paperdate prod={data.Card8h} />
+          </div>
+        ) : (
+          ""
+        )}
+      </div>
     </div>
   );
 };

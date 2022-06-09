@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
 
+import { AuthContext } from "../../../../../appState/AuthProvider";
+
 import dayjs from "dayjs";
 import "dayjs/locale/th";
-
-import { AuthContext } from "../../../../../../appState/AuthProvider";
 
 import { Icon } from "react-icons-kit";
 import { printer } from "react-icons-kit/ikons/printer";
@@ -12,7 +12,7 @@ import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-import { ButtonPDF, ButtonExcel } from "../../ReportFrom";
+import { ButtonPDF } from "../NavFrom";
 
 pdfMake.fonts = {
   THSarabunNew: {
@@ -29,7 +29,7 @@ pdfMake.fonts = {
   },
 };
 
-const Paper_store = ({ prod }) => {
+const paperh = ({ prod }) => {
   const [data, setdata] = useState(prod);
   const { user } = useContext(AuthContext);
 
@@ -40,31 +40,26 @@ const Paper_store = ({ prod }) => {
   const buildTableBody = (data, columns) => {
     var body = [];
 
-    body.push([
-      "ประเภทซาก",
-      "ทะเบียนขุน",
-      "รหัสซาก",
-      "รหัสบาร์โค้ด",
-      "น้ำหนักอุ่น (กก.)",
-      "น้ำหนักเย็น (กก.)",
-      "วันหมดอายุ",
-      "ห้อง",
-      "ชั้น",
-      "ตะกร้า",
-      "สถานะ",
-    ]);
+    body.push(["ประเภทซาก", "รหัสซาก", "รหัสบาร์โค้ด", "ห้อง", "วันหมดอายุ"]);
     console.log(data);
 
     data.forEach(function (row) {
       console.log(row);
       var dataRow = [];
+
       columns.forEach(function (column) {
-        if (column === "user.name") {
-          dataRow.push(row.user.name);
-        } else if (column === "Expdate") {
+        if (column === "Expdate") {
           dataRow.push(
             dayjs(row[column]).add(543, "y").locale("th").format("DD MMMM YYYY")
           );
+        } else if (column === "halve.beeftype.nameTH") {
+          dataRow.push(row.halve.beeftype.nameTH);
+        } else if (column === "halve.beeftype.code") {
+          dataRow.push(row.halve.beeftype.code);
+        } else if (column === "halve.barcode") {
+          dataRow.push(row.halve.barcode);
+        } else if (column == "beefroom.roomname") {
+          dataRow.push(row.beefroom.roomname);
         } else {
           /* console.log(row[column]) */
           // console.log(column);
@@ -86,19 +81,7 @@ const Paper_store = ({ prod }) => {
       table: {
         headerRows: 1,
         // alignment: 'center'
-        widths: [
-          "star",
-          "auto",
-          "star",
-          "star",
-          "auto",
-          "auto",
-          "star",
-          "auto",
-          "auto",
-          "auto",
-          "auto",
-        ],
+        widths: ["star", "star", "star", "star", "star"],
 
         body: buildTableBody(data, columns),
       },
@@ -133,22 +116,16 @@ const Paper_store = ({ prod }) => {
           ],
         },
         {
-          text: "รายงานยอดคงคลัง\n\n",
+          text: "รายงานนำเข้าซากโคผ่าซีก\n\n",
           style: "header",
           alignment: "center",
         },
         table(data, [
-          "beeftype",
-          "cownum",
-          "code",
-          "barcode",
-          "weightwarm",
-          "weight",
+          "halve.beeftype.nameTH",
+          "halve.beeftype.code",
+          "halve.barcode",
+          "beefroom.roomname",
           "Expdate",
-          "beefroom",
-          "shelf",
-          "basket",
-          "status",
         ]),
       ],
 
@@ -220,4 +197,4 @@ const Paper_store = ({ prod }) => {
   );
 };
 
-export default Paper_store;
+export default paperh;

@@ -13,6 +13,8 @@ import gql from "graphql-tag";
 
 import dayjs from "dayjs";
 
+import Paperdate from "./paperc";
+
 const EXPC = gql`
   query EXPC {
     Card8c {
@@ -81,6 +83,15 @@ const listchop = () => {
           )}
         </tbody>
       </Table>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        {data && data.Card8c.length > 0 ? (
+          <div>
+            <Paperdate prod={data.Card8c} />
+          </div>
+        ) : (
+          ""
+        )}
+      </div>
     </div>
   );
 };

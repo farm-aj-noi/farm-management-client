@@ -6,9 +6,10 @@ import {
 } from "../../../../../utils/buttonColor";
 import { Qrcodebutton, Editbutton } from "../../../../../utils/button";
 import dayjs from "dayjs";
-
+import Modalqrcode from "../../12Qrcode/storeen";
 const ListStore = ({ Listentrail }) => {
   const [ListEntrailData, SetListStoreData] = useState(Listentrail);
+  console.log(ListEntrailData);
   return (
     <tr style={{ textAlign: "center" }}>
       <td>{ListEntrailData.cownum}</td>
@@ -23,8 +24,12 @@ const ListStore = ({ Listentrail }) => {
       <td>{ListEntrailData.gallbladder}</td>
       <td>{ListEntrailData.scrap}</td>
       <td>{ListEntrailData.barcode}</td>
-      <td></td>
-      <td></td>
+      <td>
+        <Modalqrcode key={ListEntrailData.id} listen={ListEntrailData} />
+      </td>
+      <td>
+        {dayjs(ListEntrailData.Expdate).add(543, "year").format("DD/MM/YYYY")}
+      </td>
       <td>{ListEntrailData.beefroom}</td>
       <td>-</td>
       <td>

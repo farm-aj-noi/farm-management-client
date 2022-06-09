@@ -12,6 +12,7 @@ import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
 import dayjs from "dayjs";
+import Paperdate from "./paperl";
 
 const EXPL = gql`
   query EXPL {
@@ -82,6 +83,15 @@ const listlump = () => {
           )}
         </tbody>
       </Table>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+      {data && data.Card8l.length > 0 ? (
+        <div>
+          <Paperdate prod={data.Card8l} />
+        </div>
+      ) : (
+        ""
+      )}
+    </div>
     </div>
   );
 };

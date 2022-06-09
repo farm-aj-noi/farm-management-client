@@ -21,12 +21,14 @@ export const STORELIST = gql`
     $type: String
     $beefroom: String
     $shelf: String
+    $expdate: String
   ) {
     liststore(
       beeftype: $beeftype
       type: $type
       beefroom: $beefroom
       shelf: $shelf
+      expdate: $expdate
     ) {
       barcode
       status
@@ -80,6 +82,7 @@ const index = () => {
   const [selectedbeefroom, setselectbeefroom] = useState("");
   const [selectedshelf, setselectshelf] = useState("");
   const [selectedbasket, setselectbasket] = useState("");
+  const [expdate, setexpdate] = useState("");
   const { data: datashelf } = useQuery(QUERYSHELF, {
     variables: {
       id: selectedbeefroom,
@@ -97,6 +100,7 @@ const index = () => {
       type: selecttype,
       beefroom: selectedbeefroom,
       shelf: selectedshelf,
+      expdate: expdate,
     },
   });
 
@@ -147,7 +151,6 @@ const index = () => {
               gridRowEnd: "3",
               gridColumnStart: "3",
               marginTop: "0px",
-              height: "170px",
             }}
           >
             <DivFromTop>
@@ -440,7 +443,7 @@ const index = () => {
                       ))}
                   </select>
                   <label
-                    for="beef"
+                    for="expdate"
                     style={{
                       textAlign: "center",
                       fontSize: "18px",
@@ -451,7 +454,7 @@ const index = () => {
                   </label>
                   <input
                     type="date"
-                    name="date"
+                    name="expdate"
                     id="date"
                     style={{
                       height: "35px",
@@ -460,6 +463,7 @@ const index = () => {
                       textAlign: "center",
                       fontSize: "16px",
                     }}
+                    onChange={(event) => setexpdate(event.target.value)}
                   ></input>
                   <label
                     for="beef"

@@ -9,16 +9,6 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 import Router from "next/router";
-import { NavItem } from "react-bootstrap";
-
-export const ALLHALVELIST = gql`
-  query ALLHALVELIST($barcode: String) {
-    allhalve(barcode: $barcode) {
-      id
-      barcode
-    }
-  }
-`;
 
 export const CREATEIMPORTHALVE = gql`
   mutation CREATEIMPORTHALVE(
@@ -47,21 +37,8 @@ export const QUERYROOM = gql`
   }
 `;
 
-export const TEST = gql`
-  query TEST {
-    imhalveSearch {
-      id
-      barcode
-    }
-  }
-`;
-
 const Create_Import = () => {
   const MySwal = withReactContent(Swal);
-  const [test1, test11] = useState("");
-  /* console.log(test1); */
-  const { data } = useQuery(TEST);
-  /*  console.log(data); */
 
   const { data: dataroom } = useQuery(QUERYROOM);
   const [ImporthalvesInfo, setImporthalvesInfo] = useState({
@@ -69,7 +46,7 @@ const Create_Import = () => {
     beefstore: "6284d7035415c34e54b2fc2c",
     beefroom: "",
   });
-  console.log(ImporthalvesInfo);
+
   const [success, setSuccess] = useState(false);
   const [createImHalve, { loading, error }] = useMutation(CREATEIMPORTHALVE, {
     variables: {
@@ -111,18 +88,21 @@ const Create_Import = () => {
           icon: "error",
           title: <p>{error.graphQLErrors[0].message}</p>,
           text: "กรุณากรอกข้อมูลใหม่อีกครั้ง",
-          confirmButtonText: <span>ตกลง</span>,
+          confirmButtonText: (
+            <span
+              onClick={() =>
+                Router.reload("beefwarehouse/beefstore/import/import_halves")
+              }
+            >
+              ตกลง
+            </span>
+          ),
           confirmButtonColor: "#3085d6",
         });
       }
     },
   });
-
-  const { data: halveData } = useQuery(ALLHALVELIST, {
-    variables: {
-      barcode: ImporthalvesInfo.barcode,
-    },
-  });
+  console.log(ImporthalvesInfo.barcode);
 
   const handleChange = (e) => {
     setImporthalvesInfo({
@@ -161,10 +141,8 @@ const Create_Import = () => {
                 }}
               />
 
-              {!ImporthalvesInfo.barcode ? (
+              {!ImporthalvesInfo.barcode && (
                 <label style={{ color: "red" }}>กรุณากรอกบาร์โค้ด</label>
-              ) : (
-                ""
               )}
             </div>
           </DivFromInsideLeft>
@@ -212,16 +190,10 @@ const Create_Import = () => {
             }}
           >
             <Savebutton1
-              disabled={
-                !ImporthalvesInfo.barcode ||
-                !ImporthalvesInfo.beefroom ||
-                halveData.allhalve === null
-              }
+              disabled={!ImporthalvesInfo.barcode || !ImporthalvesInfo.beefroom}
               style={{
                 backgroundColor: `${
-                  !ImporthalvesInfo.barcode ||
-                  !ImporthalvesInfo.beefroom ||
-                  halveData.allhalve === null
+                  !ImporthalvesInfo.barcode || !ImporthalvesInfo.beefroom
                     ? "gray"
                     : ""
                 }`,

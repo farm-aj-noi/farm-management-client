@@ -126,7 +126,15 @@ const Create_Import = () => {
           icon: "error",
           title: <p>{error.graphQLErrors[0].message}</p>,
           text: "กรุณากรอกข้อมูลใหม่อีกครั้ง",
-          confirmButtonText: <span>ตกลง</span>,
+          confirmButtonText: (
+            <span
+              onClick={() =>
+                Router.reload("beefwarehouse/beefstore/import/import_lumps")
+              }
+            >
+              ตกลง
+            </span>
+          ),
           confirmButtonColor: "#3085d6",
         });
       }

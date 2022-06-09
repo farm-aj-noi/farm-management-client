@@ -1,18 +1,19 @@
 import React, { useState } from "react";
-import { Barcodebuttoncolor } from "../../../../../utils/buttonColor";
-import { Qrcodebutton } from "../../../../../utils/button";
+import { Barcodebuttoncolor } from "../../../../utils/buttonColor";
+import { Qrcodebutton } from "../../../../utils/button";
 import { Modal, Button } from "react-bootstrap";
 import QRCode from "qrcode.react";
 import Link from "next/link";
+
 import Router from "next/router";
 
-const index = ({ listhalve }) => {
-  const [infodata, setinfodata] = useState(listhalve);
+const storeen = ({ listen }) => {
+  const [infodata, setinfodata] = useState(listen);
   console.log(infodata);
   const [testshow, setShow] = useState(false);
   const handleClose = () => {
     setShow(false);
-    Router.reload("beefwarehouse/beefstore/export/export_halves");
+    Router.reload("beefwarehouse/beefstore/Allstore/storeentrail");
   };
   const handleShow = () => setShow(true);
 
@@ -41,8 +42,7 @@ const index = ({ listhalve }) => {
             <QRCode
               size={100}
               value={
-                "http://localhost:3000/slaughter/tracking/" +
-                infodata.halve.barcode
+                "http://localhost:3000/slaughter/tracking/" + infodata.barcode
               }
             />
           </div>
@@ -56,8 +56,7 @@ const index = ({ listhalve }) => {
           >
             <a
               href={
-                "http://localhost:3000/slaughter/tracking/" +
-                infodata.halve.barcode
+                "http://localhost:3000/slaughter/tracking/" + infodata.barcode
               }
               target="popup"
               style={{
@@ -69,8 +68,7 @@ const index = ({ listhalve }) => {
                 textDecoration: "underline",
               }}
             >
-              http://localhost:3000/slaughter/tracking/
-              {infodata.halve.barcode}
+              http://localhost:3000/slaughter/tracking/{infodata.barcode}
             </a>
           </div>
         </Modal.Body>
@@ -79,4 +77,4 @@ const index = ({ listhalve }) => {
   );
 };
 
-export default index;
+export default storeen;

@@ -12,6 +12,7 @@ import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
 import dayjs from "dayjs";
+import Paperdate from "./paperq";
 
 const EXPQ = gql`
   query EXPQ {
@@ -77,6 +78,15 @@ const listquar = () => {
           )}
         </tbody>
       </Table>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        {data && data.Card8q.length > 0 ? (
+          <div>
+            <Paperdate prod={data.Card8q} />
+          </div>
+        ) : (
+          ""
+        )}
+      </div>
     </div>
   );
 };

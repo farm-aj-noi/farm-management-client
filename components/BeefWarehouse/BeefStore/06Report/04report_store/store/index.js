@@ -20,10 +20,23 @@ import gql from "graphql-tag";
 
 import Paper_store from "./Paper_store.js";
 import Excel_store from "./Excel_store.js";
+import dayjs from "dayjs";
 
 export const STORELIST = gql`
-  query STORELIST($beeftype: String, $type: String, $beefroom: String) {
-    liststore(beeftype: $beeftype, type: $type, beefroom: $beefroom) {
+  query STORELIST(
+    $beeftype: String
+    $type: String
+    $beefroom: String
+    $shelf: String
+    $expdate: String
+  ) {
+    liststore(
+      beeftype: $beeftype
+      type: $type
+      beefroom: $beefroom
+      shelf: $shelf
+      expdate: $expdate
+    ) {
       barcode
       status
       cownum
@@ -37,17 +50,64 @@ export const STORELIST = gql`
       beeftypeid
       shelf
       basket
+      Expdate
+    }
+  }
+`;
+
+export const QUERYROOM = gql`
+  query Query {
+    allRoom {
+      id
+      roomname
+    }
+  }
+`;
+
+export const QUERYSHELF = gql`
+  query QUERYSHELF($id: ID) {
+    listShelf(id: $id) {
+      shelfname
+      id
+    }
+  }
+`;
+
+export const QUERYBASKET = gql`
+  query QUERYBASKET($id: ID) {
+    allBasket(id: $id) {
+      id
+      basketname
     }
   }
 `;
 
 const index = () => {
+  const { data: dataroom } = useQuery(QUERYROOM);
   const [selectedbeeftype, SetBeeftypeChange] = useState("");
   const [selecttype, SettypeChange] = useState("");
+  const [selectedbeefroom, setselectbeefroom] = useState("");
+  const [selectedshelf, setselectshelf] = useState("");
+  const [selectedbasket, setselectbasket] = useState("");
+  const [expdate, setexpdate] = useState("");
+  const { data: datashelf } = useQuery(QUERYSHELF, {
+    variables: {
+      id: selectedbeefroom,
+    },
+  });
+
+  const { data: basketdata } = useQuery(QUERYBASKET, {
+    variables: {
+      id: selectedshelf,
+    },
+  });
   const { data, loading, error } = useQuery(STORELIST, {
     variables: {
       beeftype: selectedbeeftype,
       type: selecttype,
+      beefroom: selectedbeefroom,
+      shelf: selectedshelf,
+      expdate: expdate,
     },
   });
   return (
@@ -111,7 +171,6 @@ const index = () => {
                 style={{
                   display: "flex",
                   justifyContent: "center",
-                  marginBottom: "10px",
                 }}
               >
                 <from style={{ fontSize: "20px" }}>
@@ -123,11 +182,11 @@ const index = () => {
                       marginRight: "10px",
                     }}
                   >
-                    ประเภทซาก
+                    ซาก
                   </label>
                   <select
-                    name="beef"
-                    id="beef"
+                    name="type"
+                    id="type"
                     style={{
                       height: "35px",
                       width: "120px",
@@ -137,16 +196,160 @@ const index = () => {
                       fontSize: "14px",
                       marginRight: "10px",
                     }}
+                    onChange={(event) => SettypeChange(event.target.value)}
                   >
                     <option value="">ทั้งหมด</option>
-                    <option value="5f1000e28d55662dcc23d95e">ซากซ้าย</option>
-                    <option value="5f1000ee8d55662dcc23d960">ซากขวา</option>
+                    <option value="ซากโคผ่าซีก">ซากโคผ่าซีก</option>
+                    <option value="ซากโคสี่เสี้ยว">ซากโคสี่เสี้ยว</option>
+                    <option value="ก้อนเนื้อ">ก้อนเนื้อ</option>
+                    <option value="ชิ้นเนื้อ">ชิ้นเนื้อ</option>
                   </select>
                   <label
                     for="beef"
                     style={{
                       textAlign: "center",
                       fontSize: "18px",
+                      marginRight: "10px",
+                    }}
+                  >
+                    ประเภทซาก
+                  </label>
+                  <select
+                    name="beeftype"
+                    id="beeftype"
+                    style={{
+                      height: "35px",
+                      width: "120px",
+                      border: "1px solid #AFAFAF",
+                      borderRadius: "4px",
+                      textAlign: "center",
+                      fontSize: "14px",
+                    }}
+                    onChange={(event) => SetBeeftypeChange(event.target.value)}
+                  >
+                    {selecttype == "ซากโคผ่าซีก" ? (
+                      <>
+                        <option value="">ทั้งหมด</option>
+                        <option value="5f1000e28d55662dcc23d95e">
+                          ซากซ้าย
+                        </option>
+                        <option value="5f1000ee8d55662dcc23d960">ซากขวา</option>
+                      </>
+                    ) : selecttype == "ซากโคสี่เสี้ยว" ? (
+                      <>
+                        <option value="">ทั้งหมด</option>
+                        <option value="5f338f035f7703096453abb8">
+                          ซากขวา-ขาหน้า
+                        </option>
+                        <option value="5f338f0d5f7703096453abb9">
+                          ซากขวา-ขาหลัง
+                        </option>
+                        <option value="5f338eeb5f7703096453abb6">
+                          ซากซ้าย-ขาหน้า
+                        </option>
+                        <option value="5f338ef65f7703096453abb7">
+                          ซากซ้าย-ขาหลัง
+                        </option>
+                      </>
+                    ) : selecttype == "ก้อนเนื้อ" ? (
+                      <>
+                        <option value="">ทั้งหมด</option>
+                        <option value="5f446195ecd6732ad8108684">
+                          เนื้อสันคอ
+                        </option>
+                        <option value="5f4461a8ecd6732ad8108685">ที-โบน</option>
+                        <option value="5f4461bfecd6732ad8108686">
+                          เนื้อสันนอก
+                        </option>
+                        <option value="5f4461d6ecd6732ad8108687">
+                          ที-โบน สเต็ก
+                        </option>
+                        <option value="5f44620cecd6732ad8108688">ริบอาย</option>
+                        <option value="5f446224ecd6732ad8108689">
+                          ใบบัวสเต็ก
+                        </option>
+                        <option value="5f44623aecd6732ad810868a">
+                          เนื้อสันใน
+                        </option>
+                        <option value="5f44624fecd6732ad810868b">
+                          สันสะโพก
+                        </option>
+                        <option value="5f446262ecd6732ad810868c">
+                          เสือร้องไห้
+                        </option>
+                        <option value="5f44628decd6732ad810868d">
+                          เนื้อซี่โครง
+                        </option>
+                        <option value="5f4462a4ecd6732ad810868e">พับใน</option>
+                        <option value="5f4462b6ecd6732ad810868f">ตะพาบ</option>
+                        <option value="5f4462c8ecd6732ad8108690">
+                          ลูกมะพร้าว
+                        </option>
+                        <option value="5f4462ddecd6732ad8108691">
+                          ปลาบู่ทอง
+                        </option>
+                        <option value="5f4462eeecd6732ad8108692">ใบพาย</option>
+                        <option value="5f4462feecd6732ad8108693">
+                          หางตะเข้
+                        </option>
+                        <option value="5f44630fecd6732ad8108694">น่อง</option>
+                        <option value="5f446320ecd6732ad8108695">พับนอก</option>
+                      </>
+                    ) : selecttype == "ชิ้นเนื้อ" ? (
+                      <>
+                        <option value="">ทั้งหมด</option>
+                        <option value="5f446195ecd6732ad8108684">
+                          เนื้อสันคอ
+                        </option>
+                        <option value="5f4461a8ecd6732ad8108685">ที-โบน</option>
+                        <option value="5f4461bfecd6732ad8108686">
+                          เนื้อสันนอก
+                        </option>
+                        <option value="5f4461d6ecd6732ad8108687">
+                          ที-โบน สเต็ก
+                        </option>
+                        <option value="5f44620cecd6732ad8108688">ริบอาย</option>
+                        <option value="5f446224ecd6732ad8108689">
+                          ใบบัวสเต็ก
+                        </option>
+                        <option value="5f44623aecd6732ad810868a">
+                          เนื้อสันใน
+                        </option>
+                        <option value="5f44624fecd6732ad810868b">
+                          สันสะโพก
+                        </option>
+                        <option value="5f446262ecd6732ad810868c">
+                          เสือร้องไห้
+                        </option>
+                        <option value="5f44628decd6732ad810868d">
+                          เนื้อซี่โครง
+                        </option>
+                        <option value="5f4462a4ecd6732ad810868e">พับใน</option>
+                        <option value="5f4462b6ecd6732ad810868f">ตะพาบ</option>
+                        <option value="5f4462c8ecd6732ad8108690">
+                          ลูกมะพร้าว
+                        </option>
+                        <option value="5f4462ddecd6732ad8108691">
+                          ปลาบู่ทอง
+                        </option>
+                        <option value="5f4462eeecd6732ad8108692">ใบพาย</option>
+                        <option value="5f4462feecd6732ad8108693">
+                          หางตะเข้
+                        </option>
+                        <option value="5f44630fecd6732ad8108694">น่อง</option>
+                        <option value="5f446320ecd6732ad8108695">พับนอก</option>
+                      </>
+                    ) : (
+                      <option value="">ทั้งหมด</option>
+                    )}
+                  </select>
+
+                  <label
+                    for="beef"
+                    style={{
+                      textAlign: "center",
+                      fontSize: "18px",
+                      marginLeft: "10px",
                       marginRight: "10px",
                     }}
                   >
@@ -160,53 +363,173 @@ const index = () => {
                       border: "1px solid #AFAFAF",
                       fontSize: "14px",
                       textAlign: "center",
-                      marginRight: "10px",
                     }}
                   />
+                </from>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginBottom: "10px",
+                }}
+              >
+                <from style={{ fontSize: "20px" }}>
                   <label
-                    for="date"
-                    style={{
-                      textAlign: "center",
-                      fontSize: "18px",
-                      marginRight: "10px",
-                    }}
-                  >
-                    วันที่นำเข้า
-                  </label>
-                  <input
-                    type="date"
-                    id="ex_chill"
-                    name="date"
-                    style={{
-                      height: "35px",
-                      border: "1px solid #AFAFAF",
-                      borderRadius: "4px",
-                      color: "#AFAFAF",
-                      textAlign: "center",
-                    }}
-                  ></input>
-                  <label
-                    for="date"
+                    for="beef"
                     style={{
                       textAlign: "center",
                       fontSize: "18px",
                       margin: "10px 10px",
                     }}
                   >
-                    ถึงวันที่
+                    ตำแหน่ง
+                  </label>
+                  <select
+                    name="roomname"
+                    id="roomname"
+                    style={{
+                      height: "35px",
+                      width: "50px",
+                      border: "1px solid #AFAFAF",
+                      borderRadius: "4px 0px 0px 4px",
+                      textAlign: "center",
+                      fontSize: "14px",
+                    }}
+                    onChange={(event) => setselectbeefroom(event.target.value)}
+                  >
+                    <option value="">ห้อง</option>
+                    {dataroom &&
+                      dataroom.allRoom.map((prod) => (
+                        <option key={prod.id} value={prod.id}>
+                          {prod.roomname}
+                        </option>
+                      ))}
+                  </select>
+                  <select
+                    name="shelfname"
+                    id="shelfname"
+                    style={{
+                      height: "35px",
+                      width: "50px",
+                      border: "1px solid #AFAFAF",
+                      borderLeft: "none",
+                      textAlign: "center",
+                      fontSize: "14px",
+                    }}
+                    onChange={(event) => setselectshelf(event.target.value)}
+                  >
+                    <option value="">ชั้น</option>
+                    {datashelf &&
+                      datashelf.listShelf.map((prod) => (
+                        <option key={prod.id} value={prod.id}>
+                          {prod.shelfname}
+                        </option>
+                      ))}
+                  </select>
+                  <select
+                    name="basket"
+                    id="basket"
+                    style={{
+                      height: "35px",
+                      width: "60px",
+                      border: "1px solid #AFAFAF",
+                      borderRadius: "0px 4px 4px 0px",
+                      borderLeft: "none",
+                      textAlign: "center",
+                      fontSize: "14px",
+                      marginRight: "10px",
+                    }}
+                  >
+                    <option value="">ตะกร้า</option>
+                    {basketdata &&
+                      basketdata.allBasket.map((prod) => (
+                        <option key={prod.id} value={prod.id}>
+                          {prod.basketname}
+                        </option>
+                      ))}
+                  </select>
+                  <label
+                    for="expdate"
+                    style={{
+                      textAlign: "center",
+                      fontSize: "18px",
+                      margin: "10px 10px",
+                    }}
+                  >
+                    วันหมดอายุ
                   </label>
                   <input
                     type="date"
-                    id="ex_chill"
-                    name="date"
+                    name="expdate"
+                    id="date"
                     style={{
                       height: "35px",
                       border: "1px solid #AFAFAF",
-                      borderRadius: "4px",
-                      color: "#AFAFAF",
+                      borderRadius: "4px ",
                       textAlign: "center",
+                      fontSize: "16px",
                     }}
+                    onChange={(event) => setexpdate(event.target.value)}
                   ></input>
+                  <label
+                    for="beef"
+                    style={{
+                      textAlign: "center",
+                      fontSize: "18px",
+                      margin: "10px 10px",
+                    }}
+                  >
+                    เกรด
+                  </label>
+                  <select
+                    name="room"
+                    id="room"
+                    style={{
+                      height: "35px",
+                      width: "70px",
+                      border: "1px solid #AFAFAF",
+                      borderRadius: "4px",
+                      textAlign: "center",
+                      fontSize: "14px",
+                    }}
+                  >
+                    <option value="halve">ทั้งหมด</option>
+                    <option value="quarter">1</option>
+                    <option value="lamp">2</option>
+                    <option value="chop">3</option>
+                    <option value="chop">4</option>
+                    <option value="chop">5</option>
+                  </select>
+                  <label
+                    for="beef"
+                    style={{
+                      textAlign: "center",
+                      fontSize: "18px",
+                      margin: "10px 10px",
+                    }}
+                  >
+                    สถานะ
+                  </label>
+                  <select
+                    name="beef"
+                    id="beef"
+                    style={{
+                      height: "35px",
+                      width: "120px",
+                      border: "1px solid #AFAFAF",
+                      textAlign: "center",
+                      borderRadius: "4px",
+                      fontSize: "14px",
+                    }}
+                  >
+                    <option value="all">ทั้งหมด</option>
+                    <option value="halve">ตัดแต่งซ้ายขวา</option>
+                    <option value="quarter">ตัดแต่ง(สี่เสี้ยว)</option>
+                    <option value="lamp">ตัดแต่ง(สี่เสี้ยว)</option>
+                    <option value="chop">ตัดแต่ง(ก้อนเนื้อ)</option>
+                    <option value="chop">ตัดแต่ง(ชิ้นเนื้อ)</option>
+                  </select>
                 </from>
               </div>
             </DivFromDown>
@@ -244,7 +567,7 @@ const index = () => {
                       <th>รหัสบาร์โค้ด</th>
                       <th>น้ำหนักอุ่น</th>
                       <th>น้ำหนักเย็น</th>
-                      <th>อายุ</th>
+                      <th>วันหมดอายุ</th>
                       <th>เกรด</th>
                       <th>ห้อง</th>
                       <th>ชั้น</th>
@@ -254,7 +577,7 @@ const index = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {data &&
+                    {data && data.liststore.length > 0 ? (
                       data.liststore.map((prod) => (
                         <tr style={{ textAlign: "center" }}>
                           <td>{prod.beeftype}</td>
@@ -264,7 +587,11 @@ const index = () => {
                           <td>{prod.weightwarm ? prod.weightwarm : "-"}</td>
                           <td>{prod.weight ? prod.weight : "-"}</td>
 
-                          <td></td>
+                          <td>
+                            {dayjs(prod.Expdate)
+                              .add(543, "year")
+                              .format("DD/MM/YYYY")}
+                          </td>
                           <td></td>
                           <td>{prod.beefroom ? prod.beefroom : "-"}</td>
                           <td>{prod.shelf ? prod.shelf : "-"}</td>
@@ -272,7 +599,24 @@ const index = () => {
                           <td>{prod.status}</td>
                           <td>-</td>
                         </tr>
-                      ))}
+                      ))
+                    ) : (
+                      <tr style={{ textAlign: "center" }}>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                      </tr>
+                    )}
                   </tbody>
                 </Table>
               </div>

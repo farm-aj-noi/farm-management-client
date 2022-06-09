@@ -84,6 +84,8 @@ const index = () => {
       beefroom: selectedbeefroom,
     },
   });
+  console.log(selectedstartdate);
+
   return (
     <>
       <div
