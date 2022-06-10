@@ -14,6 +14,8 @@ import gql from "graphql-tag";
 import dayjs from "dayjs";
 import Paperdate from "./paperq";
 
+import Modalqrcode from "../../12Qrcode/Notify/date/expqqr";
+
 const EXPQ = gql`
   query EXPQ {
     Card8q {
@@ -56,7 +58,9 @@ const listquar = () => {
                 <td>{prod.quarter.beeftype.nameTH}</td>
                 <td>{prod.quarter.beeftype.code}</td>
                 <td>{prod.quarter.barcode}</td>
-                <td>คิวอาร์โค้ด</td>
+                <td>
+                  <Modalqrcode key={prod.id} dateq={prod} />
+                </td>
                 <td>{prod.beefroom.roomname}</td>
 
                 <td>

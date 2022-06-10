@@ -14,6 +14,8 @@ import gql from "graphql-tag";
 import dayjs from "dayjs";
 import Paperdate from "./papere";
 
+import Modalqrcode from "../../12Qrcode/Notify/date/expeqr";
+
 const EXPEN = gql`
   query EXPEN {
     Card8e {
@@ -84,7 +86,7 @@ const listen = () => {
                 <td>{prod.entrail.gallbladder}</td>
                 <td>{prod.entrail.scrap}</td>
                 <td>{prod.entrail.barcode}</td>
-                <td>-</td>
+                <td><Modalqrcode key={prod.id} datee={prod}/></td>
                 <td>{prod.beefroom.roomname}</td>
                 <td>
                   {" "}

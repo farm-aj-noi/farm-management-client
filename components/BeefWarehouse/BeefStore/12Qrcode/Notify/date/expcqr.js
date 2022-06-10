@@ -6,13 +6,12 @@ import QRCode from "qrcode.react";
 import Link from "next/link";
 import Router from "next/router";
 
-const index = ({ notifychop }) => {
-  const [infodata, setinfodata] = useState(notifychop);
-  //console.log(infodata);
+const index = ({ datee }) => {
+  const [infodata, setinfodata] = useState(datee);
   const [testshow, setShow] = useState(false);
   const handleClose = () => {
     setShow(false);
-    Router.reload("/beefwarehouse/beefstore/notify/notify_export");
+    Router.reload("beefwarehouse/beefstore/notify/notify_date");
   };
   const handleShow = () => setShow(true);
 

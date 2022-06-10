@@ -12,6 +12,7 @@ import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
 import dayjs from "dayjs";
+import Modalqrcode from "../../12Qrcode/Notify/Import/imeqr";
 
 export const QUERY_IMHALVEDAY = gql`
   query QUERY_IMHALVEDAY {
@@ -84,8 +85,6 @@ const entrailday = () => {
                 <th>รหัสบาร์โค้ด</th>
                 <th>คิวอาร์โค้ด</th>
                 <th>ห้อง</th>
-                <th>ชั้น</th>
-                <th>ตะกร้า</th>
                 <th>ผู้นำเข้า</th>
               </tr>
             </thead>
@@ -116,9 +115,10 @@ const entrailday = () => {
                     <td>{prod.entrail.gallbladder}</td>
                     <td>{prod.entrail.scrap}</td>
                     <td>{prod.entrail.barcode}</td>
+                    <td>
+                      <Modalqrcode key={prod.id} notifyime={prod} />
+                    </td>
                     <td>{prod.beefroom.roomname}</td>
-                    <td>{}</td>
-                    <td>{}</td>
                     <td>{prod.user.name}</td>
                   </tr>
                 ))

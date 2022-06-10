@@ -12,6 +12,7 @@ import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
 import dayjs from "dayjs";
+import Modalqrcode from "../../12Qrcode/Notify/Export/exeqr";
 
 export const QUERY_EXENTRAILDAY = gql`
   query QUERY_EXENTRAILDAY {
@@ -113,7 +114,9 @@ const entrailday = () => {
                     <td>{prod.entrail.gallbladder}</td>
                     <td>{prod.entrail.scrap}</td>
                     <td>{prod.entrail.barcode}</td>
-                    <td>คิวอาร์โค้ด</td>
+                    <td>
+                      <Modalqrcode key={prod.id} notifyentrail={prod} />
+                    </td>
                     <td>{prod.exporter}</td>
                     <td>{prod.user.name}</td>
                   </tr>

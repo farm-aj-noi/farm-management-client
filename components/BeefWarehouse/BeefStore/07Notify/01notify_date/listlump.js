@@ -14,6 +14,8 @@ import gql from "graphql-tag";
 import dayjs from "dayjs";
 import Paperdate from "./paperl";
 
+import Modalqrcode from "../../12Qrcode/Notify/date/exphqr";
+
 const EXPL = gql`
   query EXPL {
     Card8l {
@@ -63,7 +65,9 @@ const listlump = () => {
                 <td>{prod.lump.beeftype.nameTH}</td>
                 <td>{prod.lump.beeftype.code}</td>
                 <td>{prod.lump.barcode}</td>
-                <td>คิวอาร์โค้ด</td>
+                <td>
+                  <Modalqrcode key={prod.id} datel={prod} />
+                </td>
                 <td>{prod.beefroom.roomname}</td>
                 <td>{prod.shelf.shelfname}</td>
                 <td>{prod.basket}</td>

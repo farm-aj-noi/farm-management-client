@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import { Barcodebuttoncolor } from "../../../../../utils/buttonColor";
-import { Qrcodebutton } from "../../../../../utils/button";
+import { Barcodebuttoncolor } from "../../../../../../utils/buttonColor";
+import { Qrcodebutton } from "../../../../../../utils/button";
 import { Modal, Button } from "react-bootstrap";
 import QRCode from "qrcode.react";
 import Link from "next/link";
 import Router from "next/router";
 
-const index = ({ listlump }) => {
-  const [infodata, setinfodata] = useState(listlump);
+const index = ({ notifylump }) => {
+  const [infodata, setinfodata] = useState(notifylump);
   console.log(infodata);
   const [testshow, setShow] = useState(false);
   const handleClose = () => {
-    Router.reload("beefwarehouse/beefstore/export/export_lumps");
+    Router.reload("/beefwarehouse/beefstore/notify/notify_export");
   };
   const handleShow = () => setShow(true);
 

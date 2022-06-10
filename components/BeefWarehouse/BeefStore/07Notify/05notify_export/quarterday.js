@@ -9,9 +9,11 @@ import { DivFrom, DivFromTop, DivFromDown, HeaderColor } from "../NavFrom";
 import { NavItem, Table } from "react-bootstrap";
 
 import { useQuery } from "@apollo/react-hooks";
-import gql from "graphql-tag";
 
+import gql from "graphql-tag";
 import dayjs from "dayjs";
+
+import Modalqrcode from "../../12Qrcode/Notify/Export/exqqr";
 
 export const QUERY_EXQUARTERDAY = gql`
   query QUERY_EXQUARTERDAY {
@@ -83,7 +85,6 @@ const quarterday = () => {
               {data && data.CardExq.length > 0 ? (
                 data.CardExq.map((prod) => (
                   <tr key={prod.id} style={{ textAlign: "center" }}>
-                    <td>{prod.quarter.imslaughter.namefarmer}</td>
                     <td>{prod.quarter.beeftype.nameTH}</td>
                     <td>
                       {dayjs(prod.exportdate)
@@ -98,7 +99,9 @@ const quarterday = () => {
                     <td>{prod.quarter.imslaughter.numcow}</td>
                     <td>{prod.quarter.beeftype.code}</td>
                     <td>{prod.quarter.barcode}</td>
-                    <td>คิวอาร์โค้ด</td>
+                    <td>
+                      <Modalqrcode key={prod.id} notifyquarter={prod} />
+                    </td>
                     <td>{prod.quarter.weight}</td>
                     <td>{prod.storestatus.nameTH}</td>
                     <td>{prod.exporter}</td>

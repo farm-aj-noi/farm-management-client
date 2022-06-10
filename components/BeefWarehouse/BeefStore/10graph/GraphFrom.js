@@ -60,9 +60,8 @@ export const DivFromTop = styled.div`
 
 export const DivFromDown = styled.div`
   height: fit-content;
- 
   border-radius: 10px 10px 0 0;
-  padding: 25px 15px 15px 15px;
+  padding: 15px 15px 15px 15px;
 `;
 
 export const Searchinput = styled.input`
@@ -152,4 +151,11 @@ export const ButtonExcel = styled.button`
   &:focus {
     background: #719f3f;
   }
+`;
+export const DivBase1 = styled.div`
+  display: block;
+  position: absolute;
+  width: 100%;
+  padding-top: 30px;
+  padding-bottom: 130px;
 `;

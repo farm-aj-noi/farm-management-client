@@ -6,13 +6,12 @@ import QRCode from "qrcode.react";
 import Link from "next/link";
 import Router from "next/router";
 
-const index = ({ notifychop }) => {
-  const [infodata, setinfodata] = useState(notifychop);
-  //console.log(infodata);
+const index = ({ dateq }) => {
+  const [infodata, setinfodata] = useState(dateq);
   const [testshow, setShow] = useState(false);
   const handleClose = () => {
     setShow(false);
-    Router.reload("/beefwarehouse/beefstore/notify/notify_export");
+    Router.reload("beefwarehouse/beefstore/notify/notify_date");
   };
   const handleShow = () => setShow(true);
 
@@ -42,7 +41,7 @@ const index = ({ notifychop }) => {
               size={100}
               value={
                 "http://localhost:3000/slaughter/tracking/" +
-                infodata.chop.barcode
+                infodata.quarter.barcode
               }
             />
           </div>
@@ -57,7 +56,7 @@ const index = ({ notifychop }) => {
             <a
               href={
                 "http://localhost:3000/slaughter/tracking/" +
-                infodata.chop.barcode
+                infodata.quarter.barcode
               }
               target="popup"
               style={{
@@ -69,7 +68,8 @@ const index = ({ notifychop }) => {
                 textDecoration: "underline",
               }}
             >
-              http://localhost:3000/slaughter/tracking/{infodata.chop.barcode}
+              http://localhost:3000/slaughter/tracking/
+              {infodata.quarter.barcode}
             </a>
           </div>
         </Modal.Body>

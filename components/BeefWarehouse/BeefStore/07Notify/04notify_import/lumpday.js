@@ -12,6 +12,7 @@ import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
 import dayjs from "dayjs";
+import Modalqrcode from "../../12Qrcode/Notify/Import/imlqr";
 
 export const QUERY_IMLUMPDAY = gql`
   query QUERY_IMLUMPDAY {
@@ -104,7 +105,9 @@ const lumpday = () => {
                     <td>{prod.lump.imslaughter.numcow}</td>
                     <td>{prod.lump.beeftype.code}</td>
                     <td>{prod.lump.barcode}</td>
-                    <td>คิวอาร์โค้ด</td>
+                    <td>
+                      <Modalqrcode key={prod.id} notifyiml={prod} />
+                    </td>
                     <td>{prod.lump.weight}</td>
                     <td>{prod.beefroom.roomname}</td>
                     <td>{prod.shelf.shelfname}</td>
@@ -129,7 +132,6 @@ const lumpday = () => {
                   <td>-</td>
                   <td>-</td>
                   <td>-</td>
-                  
                 </tr>
               )}
             </tbody>

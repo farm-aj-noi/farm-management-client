@@ -15,6 +15,8 @@ import dayjs from "dayjs";
 import "dayjs/locale/th";
 import Paperdate from "./paperh";
 
+import Modalqrcode from "../../12Qrcode/Notify/date/exphqr";
+
 const EXPH = gql`
   query EXPIM {
     Card8h {
@@ -58,7 +60,9 @@ const listhalve = () => {
                 <td>{prod.halve.beeftype.nameTH}</td>
                 <td>{prod.halve.beeftype.code}</td>
                 <td>{prod.halve.barcode}</td>
-                <td>คิวอาร์โค้ด</td>
+                <td>
+                  <Modalqrcode key={prod.id} dateh={prod} />
+                </td>
                 <td>{prod.beefroom.roomname}</td>
 
                 <td>

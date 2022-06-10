@@ -18,7 +18,7 @@ const ListExport = ({ exquarter }) => {
       <td>{exquarterData.quarter.beeftype.code}</td>
       <td>{exquarterData.quarter.barcode}</td>
       <td>
-        <Modalqrcode key={exchopData.id} listquarter={exchopData} />
+        <Modalqrcode key={exquarterData.id} listquarter={exquarterData} />
       </td>
       <td>{exquarterData.quarter.weight}</td>
 

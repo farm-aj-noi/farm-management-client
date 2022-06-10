@@ -15,6 +15,8 @@ import dayjs from "dayjs";
 
 import Paperdate from "./paperc";
 
+import Modalqrcode from "../../12Qrcode/Notify/date/expcqr";
+
 const EXPC = gql`
   query EXPC {
     Card8c {
@@ -62,7 +64,7 @@ const listchop = () => {
                 <td>{prod.chop.beeftype.nameTH}</td>
                 <td>{prod.chop.beeftype.code}</td>
                 <td>{prod.chop.barcode}</td>
-                <td>คิวอาร์โค้ด</td>
+                <td><Modalqrcode key={prod.id} datec={prod}/></td>
                 <td>{prod.beefroom.roomname}</td>
                 <td>{prod.shelf.shelfname}</td>
                 <td>{prod.basket}</td>

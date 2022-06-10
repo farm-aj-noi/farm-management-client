@@ -6,20 +6,20 @@ import { printer } from "react-icons-kit/ikons/printer";
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 
-import { ButtonPDF } from "./GraphFrom.js";
+import {ButtonExcel } from "../GraphFrom.js";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const Paper_Graph = () => {
   return (
-    <ButtonPDF>
+    <ButtonExcel>
       <Icon
         style={{ verticalAlign: "text-bottom", marginRight: "5px" }}
         icon={printer}
         size={20}
       />
-      รายงานกราฟ
-    </ButtonPDF>
+      พิมพ์รายการ
+    </ButtonExcel>
   );
 };
 

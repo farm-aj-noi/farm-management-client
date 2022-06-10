@@ -12,6 +12,7 @@ import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
 import dayjs from "dayjs";
+import Modalqrcode from "../../12Qrcode/Notify/Import/imhqr";
 
 export const QUERY_IMHALVEDAY = gql`
   query QUERY_IMHALVEDAY {
@@ -102,7 +103,9 @@ const halveday = () => {
                     <td>{prod.halve.imslaughter.numcow}</td>
                     <td>{prod.halve.beeftype.code}</td>
                     <td>{prod.halve.barcode}</td>
-                    <td>คิวอาร์โค้ด</td>
+                    <td>
+                    <Modalqrcode key={prod.id} notifyimh={prod} />
+                    </td>
                     <td>{prod.halve.weightwarm}</td>
                     <td>
                       {prod.halve.weightcool ? prod.halve.weightcool : "-"}

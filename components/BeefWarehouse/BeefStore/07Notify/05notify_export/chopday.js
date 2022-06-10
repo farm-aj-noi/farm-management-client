@@ -13,7 +13,7 @@ import gql from "graphql-tag";
 
 import dayjs from "dayjs";
 
-import Modalqrcode from "../../"
+import Modalqrcode from "../../12Qrcode/Notify/Export/excqr";
 
 export const QUERY_EXCHOPDAY = gql`
   query QUERY_EXCHOPDAY {
@@ -99,7 +99,9 @@ const chopday = () => {
                     <td>{prod.chop.imslaughter.numcow}</td>
                     <td>{prod.chop.beeftype.code}</td>
                     <td>{prod.chop.barcode}</td>
-                    <td>คิวอาร์โค้ด</td>
+                    <td>
+                      <Modalqrcode key={prod.id} notifychop={prod}/>
+                    </td>
                     <td>{prod.chop.weight}</td>
                     <td>{prod.storestatus.nameTH}</td>
                     <td>{prod.exporter}</td>
