@@ -10,7 +10,61 @@ import { iosSearchStrong } from "react-icons-kit/ionicons/iosSearchStrong";
 
 import Create from "./create";
 
+import gql from "graphql-tag";
+import { useQuery } from "@apollo/react-hooks";
+
+import Listim from "./listimproduct";
+
+export const IMPRODUCTSEARCH = gql`
+  query ImproductSearch(
+    $startdate: String
+    $enddate: String
+    $producttype: String
+    $userName: String
+    $productroom: String
+    $freezer: String
+  ) {
+    improductSearch(
+      startdate: $startdate
+      enddate: $enddate
+      producttype: $producttype
+      userName: $userName
+      productroom: $productroom
+      freezer: $freezer
+    ) {
+      id
+      importdate
+      name
+      user {
+        name
+      }
+      beefproduct {
+        weight
+        barcode
+        MFG
+        BBE
+        status {
+          code
+          nameTH
+        }
+        producttype {
+          code
+          nameTH
+        }
+      }
+      productroom {
+        roomname
+      }
+      freezer {
+        freezername
+      }
+      pbasket
+    }
+  }
+`;
+
 const index = () => {
+  const { data } = useQuery(IMPRODUCTSEARCH);
   return (
     <div>
       <div
@@ -29,7 +83,7 @@ const index = () => {
       <DivBase
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 270px 900px 1fr",
+          gridTemplateColumns: "1fr 270px 1100px 1fr",
           gridRowGap: "15px",
           gridColumnGap: "10px",
           textAlign: "start",
@@ -206,34 +260,50 @@ const index = () => {
                     <th>รหัสสินค้า</th>
                     <th>รหัสบาร์โค้ด</th>
                     <th>คิวอาร์โค้ด</th>
-                    <th>น้ำหนัก</th>
+                    <th>น้ำหนัก (กก.)</th>
                     <th>วันที่ผลิต</th>
                     <th>วันหมดอายุ</th>
-                    <th>ตู้แช่ </th>
+                    <th>ห้อง</th>
+                    <th>ตู้แช่</th>
                     <th>ชั้นวาง</th>
                     <th>ผู้นำเข้า</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr style={{ textAlign: "center" }}>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
+                  {data && data.improductSearch.length > 0 ? (
+                    data.improductSearch.map((prod) => (
+                      <Listim key={prod} listim={prod} />
+                    ))
+                  ) : (
+                    <tr style={{ textAlign: "center" }}>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                  )}
                 </tbody>
               </Table>
             </div>
             <div style={{ float: "right", textAlign: "right" }}>
-              จำนวนรายการ รายการ
+              จำนวนรายการ {data ? data.improductSearch.length : "0"} รายการ
+              <br />
+              น้ำหนัก{" "}
+              {data &&
+                data.improductSearch.reduce(
+                  (sum, nex) => sum + nex.beefproduct.weight,
+                  0
+                )}{" "}
+              กิโลกรัม
             </div>
           </DivFromDown>
         </DivFrom>

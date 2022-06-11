@@ -71,7 +71,7 @@ const Nav_setting = (Sidenumber) => {
                       <Nav.Link eventKey="5">
                         <Link href="/beefwarehouse/beefstore/setting/date">
                           <div style={{ width: "100%" }}>
-                            ตั้งค่าวันใกล้หมดอายุ
+                            ตั้งค่าวันหมดอายุ
                           </div>
                         </Link>
                       </Nav.Link>

@@ -105,7 +105,7 @@ const expseting = ({ listexpseting }) => {
 
   return (
     <div>
-      ตั้งค่ารายการแจ้งเตือนวันใกล้หมดอายุ :
+      ตั้งค่ารายการแจ้งเตือน :
       {Editexp ? (
         <Savebuttoncolor
           style={{ marginLeft: "5px", marginBottom: "10px" }}

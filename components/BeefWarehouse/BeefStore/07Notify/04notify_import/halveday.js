@@ -78,8 +78,6 @@ const halveday = () => {
                 <th>น้ำหนักอุ่น (กก.)</th>
                 <th>น้ำหนักเย็น (กก.)</th>
                 <th>ห้อง</th>
-                <th>ชั้น</th>
-                <th>ตะกร้า</th>
                 <th>สถานะ</th>
                 <th>ผู้นำเข้า</th>
               </tr>
@@ -111,16 +109,12 @@ const halveday = () => {
                       {prod.halve.weightcool ? prod.halve.weightcool : "-"}
                     </td>
                     <td>{prod.beefroom.roomname}</td>
-                    <td>-</td>
-                    <td>-</td>
                     <td>{prod.halve.status.nameTH}</td>
                     <td>{prod.user.name}</td>
                   </tr>
                 ))
               ) : (
                 <tr style={{ textAlign: "center" }}>
-                  <td>-</td>
-                  <td>-</td>
                   <td>-</td>
                   <td>-</td>
                   <td>-</td>

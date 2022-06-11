@@ -104,7 +104,7 @@ const index = () => {
             <div style={{ margin: "-3px 5px 0px 0px" }}>
               <Icon size={20} icon={list} />
             </div>
-            ตั้งค่าวันใกล้หมดอายุ
+            ตั้งค่าแจ้งเตือนก่อนวันหมดอายุ
           </DivFromTop>
           <DivFromDown>
             {expseting &&
