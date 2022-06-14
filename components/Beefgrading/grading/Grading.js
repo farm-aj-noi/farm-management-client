@@ -38,7 +38,6 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import th from "date-fns/locale/th";
 registerLocale("th", th);
 
-
 export const LISTGRADE = gql`
   query LISTGRADE {
     listhalvegrade {

@@ -35,6 +35,7 @@ const tdstyle = {
 export const LISTGRADE = gql`
   query LISTGRADE {
     listhalvegrade {
+      id
     weightwarm
     weightcool
     barcode

@@ -427,7 +427,7 @@ const ProductId = () => {
                   <Searchinput
                     name="weightbirht"
                     value={cowdetailData.bodyscore}
-                    maxLength="20"
+                    maxLength="20"  
                     style={{ backgroundColor: "#ececec" }}
 
                   />

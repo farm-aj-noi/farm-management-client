@@ -184,7 +184,7 @@ function History() {
                         <td>เเองกัส</td>
                         <td>สรุปเเล้ว</td>
                         <td>
-                          <Link href="/beefgrading/sum/summarize">
+                          <Link href="/beefgrading/grading">
                           <ButtonSubmit style={{ fontSize: "16px"}}>
                             สรุปเกรด
                           </ButtonSubmit>
