@@ -14,7 +14,7 @@ import gql from "graphql-tag";
 import dayjs from "dayjs";
 import Paperdate from "./paperl";
 
-import Modalqrcode from "../../12Qrcode/Notify/date/exphqr";
+import Modalqrcode from "../../12Qrcode/Notify/date/explqr";
 
 const EXPL = gql`
   query EXPL {
