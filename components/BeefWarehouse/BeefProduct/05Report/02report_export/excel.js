@@ -10,9 +10,26 @@ import { CSVLink } from "react-csv";
 import dayjs from "dayjs";
 import "dayjs/locale/th";
 
-const excel = () => {
+const excel = ({ prod }) => {
+  const [data, setdata] = useState(prod);
+  if (data !== prod) setdata(prod);
+  const headers = [
+    { label: "ประเภทสินค้า", key: "beefproduct.producttype.nameTH" },
+    { label: "วันที่เบิกออก", key: "exportdate" },
+    { label: "รหัสสินค้า", key: "beefproduct.producttype.code" },
+    { label: "รหัสบาร์โค้ด", key: "beefproduct.barcode" },
+    { label: "น้ำหนัก (กก.)	", key: "beefproduct.weight" },
+    { label: "วันที่ผลิต	", key: "beefproduct.MFG" },
+    { label: "วันหมดอายุ", key: "beefproduct.BBE" },
+    { label: "ผู้ขอเบิก", key: "name" },
+    { label: "ผู้เบิกออก", key: "user.name" },
+  ];
   return (
-    <div>
+    <CSVLink
+      filename={dayjs().format("Report YYYYMMDDTHHmmss") + ".csv"}
+      data={data}
+      headers={headers}
+    >
       <ButtonExcel type="button" value="print Excel">
         <Icon
           style={{ verticalAlign: "text-bottom", marginRight: "5px" }}
@@ -21,7 +38,7 @@ const excel = () => {
         />
         รายงานExcel
       </ButtonExcel>
-    </div>
+    </CSVLink>
   );
 };
 

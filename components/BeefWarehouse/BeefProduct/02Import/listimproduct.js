@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import dayjs from "dayjs";
+import Qrcode from "./Qrcode";
 
 const listimproduct = ({ listim }) => {
   const [infoimproduct, setinfoimproduct] = useState(listim);
@@ -20,7 +21,9 @@ const listimproduct = ({ listim }) => {
       </td>
       <td>{infoimproduct.beefproduct.producttype.code}</td>
       <td>{infoimproduct.beefproduct.barcode}</td>
-      <td></td>
+      <td>
+        <Qrcode key={infoimproduct.id} listim={infoimproduct} />
+      </td>
       <td>{infoimproduct.beefproduct.weight}</td>
       <td>
         {dayjs(infoimproduct.beefproduct.MFG)
@@ -29,7 +32,6 @@ const listimproduct = ({ listim }) => {
           .format("DD/MM/YYYY")}
       </td>
       <td>
-        {" "}
         {dayjs(infoimproduct.beefproduct.BBE)
           .locale("th")
           .add(543, "year")

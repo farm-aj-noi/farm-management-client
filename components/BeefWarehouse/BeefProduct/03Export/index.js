@@ -8,9 +8,74 @@ import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
 import { iosSearchStrong } from "react-icons-kit/ionicons/iosSearchStrong";
 
+import gql from "graphql-tag";
+import { useQuery } from "@apollo/react-hooks";
+
 import Create from "./create";
 
+import Listex from "./listexproduct";
+
+export const EXPRODUCTSEARCH = gql`
+  query EXPRODUCTSEARCH(
+    $startdate: String
+    $enddate: String
+    $userName: String
+    $producttype: String
+  ) {
+    exproductSearch(
+      startdate: $startdate
+      enddate: $enddate
+      userName: $userName
+      producttype: $producttype
+    ) {
+      id
+      exportdate
+      name
+      user {
+        name
+      }
+      beefproduct {
+        weight
+        barcode
+        MFG
+        BBE
+        status {
+          code
+          nameTH
+        }
+        producttype {
+          code
+          nameTH
+        }
+      }
+    }
+  }
+`;
+
+const QUERYTYPE = gql`
+  query QUERYTYPE {
+    allproducttype {
+      id
+      code
+      nameTH
+    }
+  }
+`;
+
 const index = () => {
+  const [selectstartdate, setselectstartdate] = useState("");
+  const [selectenddate, setselectenddate] = useState("");
+  const [exporter, setexporter] = useState("");
+  const [producttype, setproducttype] = useState("");
+  const { data: type } = useQuery(QUERYTYPE);
+  const { data } = useQuery(EXPRODUCTSEARCH, {
+    variables: {
+      startdate: selectstartdate,
+      enddate: selectenddate,
+      userName: exporter,
+      producttype: producttype,
+    },
+  });
   return (
     <div>
       <div
@@ -78,7 +143,7 @@ const index = () => {
             >
               <from style={{ fontSize: "20px" }}>
                 <label
-                  for="beef"
+                  for="producttype"
                   style={{
                     textAlign: "center",
                     fontSize: "18px",
@@ -88,8 +153,8 @@ const index = () => {
                   ประเภทสินค้า
                 </label>
                 <select
-                  name="beef"
-                  id="beef"
+                  name="producttype"
+                  id="producttype"
                   style={{
                     height: "35px",
                     width: "120px",
@@ -98,8 +163,15 @@ const index = () => {
                     textAlign: "center",
                     fontSize: "14px",
                   }}
+                  onChange={(event) => setproducttype(event.target.value)}
                 >
                   <option value="">ทั้งหมด</option>
+                  {type &&
+                    type.allproducttype.map((prod) => (
+                      <option key={prod.id} value={prod.id}>
+                        {prod.nameTH}
+                      </option>
+                    ))}
                 </select>
                 <label
                   for="beef"
@@ -144,6 +216,7 @@ const index = () => {
                     textAlign: "center",
                     marginRight: "10px",
                   }}
+                  onChange={(event) => setexporter(event.target.value)}
                 />
                 <label
                   for="date"
@@ -157,8 +230,8 @@ const index = () => {
                 </label>
                 <input
                   type="date"
-                  id="ex_chill"
-                  name="date"
+                  id="startdate"
+                  name="startdate"
                   style={{
                     height: "35px",
                     border: "1px solid #AFAFAF",
@@ -167,8 +240,8 @@ const index = () => {
                     textAlign: "center",
                     fontSize: "16px",
                   }}
-                ></input>
-
+                  onChange={(event) => setselectstartdate(event.target.value)}
+                />
                 <label
                   for="date"
                   style={{
@@ -181,8 +254,8 @@ const index = () => {
                 </label>
                 <input
                   type="date"
-                  id="ex_chill"
-                  name="date"
+                  id="enddate"
+                  name="enddate"
                   style={{
                     height: "35px",
                     border: "1px solid #AFAFAF",
@@ -190,7 +263,8 @@ const index = () => {
                     fontSize: "16px",
                     textAlign: "center",
                   }}
-                ></input>
+                  onChange={(event) => setselectenddate(event.target.value)}
+                />
               </from>
             </div>
           </DivFromDown>
@@ -212,7 +286,7 @@ const index = () => {
             รายการนำเข้าซากเนื้อโคผ่าซีก
           </DivFromTop>
           <DivFromDown>
-            <div style={{ height: "450px", overflow: "auto" }}>
+            <div style={{ height: "430px", overflow: "auto" }}>
               <Table
                 striped
                 bordered
@@ -236,24 +310,38 @@ const index = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr style={{ textAlign: "center" }}>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
+                  {data && data.exproductSearch.length > 0 ? (
+                    data.exproductSearch.map((prod) => (
+                      <Listex key={prod.id} listex={prod} />
+                    ))
+                  ) : (
+                    <tr style={{ textAlign: "center" }}>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                  )}
                 </tbody>
               </Table>
             </div>
             <div style={{ float: "right", textAlign: "right" }}>
-              จำนวนรายการ รายการ
+              จำนวนรายการ {data ? data.exproductSearch.length : "0"} รายการ
+              <br />
+              น้ำหนัก{" "}
+              {data &&
+                data.exproductSearch.reduce(
+                  (sum, nex) => sum + nex.beefproduct.weight,
+                  0
+                )}{" "}
+              กิโลกรัม
             </div>
           </DivFromDown>
         </DivFrom>

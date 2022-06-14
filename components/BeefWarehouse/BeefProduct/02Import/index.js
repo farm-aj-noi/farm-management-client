@@ -63,8 +63,76 @@ export const IMPRODUCTSEARCH = gql`
   }
 `;
 
+const QUERYTYPE = gql`
+  query QUERYTYPE {
+    allproducttype {
+      id
+      code
+      nameTH
+    }
+  }
+`;
+
+const PRODUCTROOM = gql`
+  query PRODUCTROOM {
+    allproductroom {
+      id
+      roomname
+    }
+  }
+`;
+
+const PRODUCTFREEZER = gql`
+  query ListFreezer($id: ID) {
+    listFreezer(id: $id) {
+      id
+      freezername
+    }
+  }
+`;
+
+const PRODUCTBASKET = gql`
+  query Allpbasket($id: ID) {
+    allpbasket(id: $id) {
+      id
+      basketname
+    }
+  }
+`;
+
 const index = () => {
-  const { data } = useQuery(IMPRODUCTSEARCH);
+  const [selectstartdate, setselectstartdate] = useState("");
+  const [selectenddate, setselectenddate] = useState("");
+  const [importer, setimporter] = useState("");
+  const [producttype, setproducttype] = useState("");
+  const [selectroom, setselectroom] = useState("");
+  const [selectfreezer, setselectfreezer] = useState("");
+  const [selectpbasket, setselectpbasket] = useState("");
+
+  const { data: type } = useQuery(QUERYTYPE);
+  const { data: room } = useQuery(PRODUCTROOM);
+  const { data: freezer } = useQuery(PRODUCTFREEZER, {
+    variables: {
+      id: selectroom,
+    },
+  });
+  const { data: basket } = useQuery(PRODUCTBASKET, {
+    variables: {
+      id: selectfreezer,
+    },
+  });
+
+  const { data } = useQuery(IMPRODUCTSEARCH, {
+    variables: {
+      startdate: selectstartdate,
+      enddate: selectenddate,
+      producttype: producttype,
+      userName: importer,
+      productroom: selectroom,
+      freezer: selectfreezer,
+    },
+  });
+  
   return (
     <div>
       <div
@@ -130,9 +198,9 @@ const index = () => {
                 justifyContent: "center",
               }}
             >
-              <from style={{ fontSize: "20px" }}>
+              <from>
                 <label
-                  for="beef"
+                  for="producttype"
                   style={{
                     textAlign: "center",
                     fontSize: "18px",
@@ -142,8 +210,8 @@ const index = () => {
                   ประเภทสินค้า
                 </label>
                 <select
-                  name="beef"
-                  id="beef"
+                  name="producttype"
+                  id="producttype"
                   style={{
                     height: "35px",
                     width: "120px",
@@ -152,11 +220,18 @@ const index = () => {
                     textAlign: "center",
                     fontSize: "14px",
                   }}
+                  onChange={(event) => setproducttype(event.target.value)}
                 >
                   <option value="">ทั้งหมด</option>
+                  {type &&
+                    type.allproducttype.map((prod) => (
+                      <option key={prod.id} value={prod.id}>
+                        {prod.nameTH}
+                      </option>
+                    ))}
                 </select>
                 <label
-                  for="beef"
+                  for="userName"
                   style={{
                     textAlign: "center",
                     fontSize: "18px",
@@ -174,11 +249,83 @@ const index = () => {
                     border: "1px solid #AFAFAF",
                     fontSize: "14px",
                     textAlign: "center",
-                    marginRight: "10px",
                   }}
+                  onChange={(event) => setimporter(event.target.value)}
                 />
                 <label
-                  for="date"
+                  for="beef"
+                  style={{
+                    textAlign: "center",
+                    fontSize: "18px",
+                    margin: "10px 10px",
+                  }}
+                >
+                  ตำแหน่ง
+                </label>
+                <select
+                  name="roomname"
+                  style={{
+                    height: "35px",
+                    width: "50px",
+                    border: "1px solid #AFAFAF",
+                    borderRadius: "4px 0px 0px 4px",
+                    textAlign: "center",
+                    fontSize: "14px",
+                  }}
+                  onChange={(event) => setselectroom(event.target.value)}
+                >
+                  <option value="">ห้อง</option>
+                  {room &&
+                    room.allproductroom.map((prod) => (
+                      <option key={prod.id} value={prod.id}>
+                        {prod.roomname}
+                      </option>
+                    ))}
+                </select>
+                <select
+                  name="freezername"
+                  style={{
+                    height: "35px",
+                    width: "50px",
+                    border: "1px solid #AFAFAF",
+                    borderLeft: "none",
+                    textAlign: "center",
+                    fontSize: "14px",
+                  }}
+                  onChange={(event) => setselectfreezer(event.target.value)}
+                >
+                  <option value="">ตู้แช่</option>
+                  {freezer &&
+                    freezer.listFreezer.map((prod) => (
+                      <option key={prod.id} value={prod.id}>
+                        {prod.freezername}
+                      </option>
+                    ))}
+                </select>
+                <select
+                  name="basketname"
+                  style={{
+                    height: "35px",
+                    width: "60px",
+                    border: "1px solid #AFAFAF",
+                    borderRadius: "0px 4px 4px 0px",
+                    borderLeft: "none",
+                    textAlign: "center",
+                    fontSize: "14px",
+                    marginRight: "10px",
+                  }}
+                  onChange={(event) => setselectpbasket(event.target.value)}
+                >
+                  <option value="">ชั้นวาง</option>
+                  {basket &&
+                    basket.allpbasket.map((prod) => (
+                      <option key={prod.id} value={prod.id}>
+                        {prod.basketname}
+                      </option>
+                    ))}
+                </select>
+                <label
+                  for="startdate"
                   style={{
                     textAlign: "center",
                     fontSize: "18px",
@@ -189,18 +336,17 @@ const index = () => {
                 </label>
                 <input
                   type="date"
-                  id="ex_chill"
-                  name="date"
+                  id="startdate"
+                  name="startdate"
                   style={{
                     height: "35px",
                     border: "1px solid #AFAFAF",
                     borderRadius: "4px",
-
                     textAlign: "center",
                     fontSize: "16px",
                   }}
-                ></input>
-
+                  onChange={(event) => setselectstartdate(event.target.value)}
+                />
                 <label
                   for="date"
                   style={{
@@ -222,6 +368,7 @@ const index = () => {
                     fontSize: "16px",
                     textAlign: "center",
                   }}
+                  onChange={(event) => setselectenddate(event.target.value)}
                 ></input>
               </from>
             </div>
@@ -244,7 +391,7 @@ const index = () => {
             รายการนำเข้าซากเนื้อโคผ่าซีก
           </DivFromTop>
           <DivFromDown>
-            <div style={{ height: "450px", overflow: "auto" }}>
+            <div style={{ height: "430px", overflow: "auto" }}>
               <Table
                 striped
                 bordered
@@ -272,7 +419,7 @@ const index = () => {
                 <tbody>
                   {data && data.improductSearch.length > 0 ? (
                     data.improductSearch.map((prod) => (
-                      <Listim key={prod} listim={prod} />
+                      <Listim key={prod.id} listim={prod} />
                     ))
                   ) : (
                     <tr style={{ textAlign: "center" }}>
