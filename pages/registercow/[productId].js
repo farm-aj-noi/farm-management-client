@@ -13,4 +13,4 @@ const ProductId = () => {
 </BackgroundCow>
 }
 
-export default ProductId
+export default ProductId;

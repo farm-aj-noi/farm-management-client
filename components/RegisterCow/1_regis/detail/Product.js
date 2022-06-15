@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+ import React, { useState } from "react"
 import styled from "styled-components";
 import { useRouter } from "next/router"
 import logo from '../defultcow.jpg'
@@ -427,7 +427,7 @@ const ProductId = () => {
                   <Searchinput
                     name="weightbirht"
                     value={cowdetailData.bodyscore}
-                    maxLength="20"
+                    maxLength="20"  
                     style={{ backgroundColor: "#ececec" }}
 
                   />
