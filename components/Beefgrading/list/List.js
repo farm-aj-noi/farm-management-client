@@ -32,8 +32,8 @@ const ListGrade = ({ ListGrade }) => {
       <td>{ListGradeData.imslaughter.pun}</td>
       <td>
         <Link
-          href="/beefgrading/[gradeId]"
-          as={`/beefgrading/${ListGradeData.id}`}
+          href="grade/[gradeId]"
+          as={`grade/${ListGradeData.id}`}
         >
           <ButtonSubmit>รอการตัดเกรด</ButtonSubmit>
         </Link>

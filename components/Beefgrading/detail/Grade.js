@@ -505,7 +505,6 @@ const Product = () => {
                                         !onEdite ? "#ececec" : "white"
                                       }`,
                                     }}
-                                    onChange={handleChange}
                                   />
                                 </div>
                               </div>
@@ -527,7 +526,6 @@ const Product = () => {
                                         !onEdite ? "#ececec" : "white"
                                       }`,
                                     }}
-                                    onChange={handleChange}
                                   />
                                 </div>
                               </div>
@@ -549,7 +547,6 @@ const Product = () => {
                                         !onEdite ? "#ececec" : "white"
                                       }`,
                                     }}
-                                    onChange={handleChange}
                                   />
                                 </div>
                               </div>
@@ -654,7 +651,6 @@ const Product = () => {
                                         !onEdite ? "#ececec" : "white"
                                       }`,
                                     }}
-                                    onChange={handleChange}
                                   />
                                 </div>
                               </div>
@@ -697,7 +693,7 @@ const Product = () => {
                             variant="primary"
                           />
                         ) : (
-                          <Gobutton onClick={handleSubmit}>บันทึก</Gobutton>
+                          <Gobutton onClick={handleSubmit}>ประมวลผล</Gobutton>
                         )}
                         {success && (
                           <p
@@ -708,7 +704,7 @@ const Product = () => {
                               margin: "410px 0px 0px 78%",
                             }}
                           >
-                            บันทึกสำเร็จ
+                            ประมวณผลสำเร็จ
                           </p>
                         )}
                         <Link href="/beefgrading/list">

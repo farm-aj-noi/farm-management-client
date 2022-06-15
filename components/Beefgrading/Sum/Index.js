@@ -8,6 +8,9 @@ import { DivCenter, TableForm, TableHead } from "../Styleclass/Table";
 import {image} from 'react-icons-kit/fa/image'
 import { Icon2 } from "../../../utils/Logograde";
 import Link from "next/link";
+import ListSum from "./SumList";
+import { useQuery } from "@apollo/react-hooks";
+import gql from "graphql-tag";
 import {
   ButtonQrcodeColor,
   ButtonHeaderColor,
@@ -30,7 +33,33 @@ const tdstyle = {
   padding: "5px",
   fontSize: "14px",
 };
+
+export const LISTSUM = gql`
+  query LISTSUM {
+    listhalvegrade {
+      id
+    weightwarm
+    weightcool
+    barcode
+    imslaughter {
+      pun
+    }
+    beeftype {
+      code
+    }
+    chill {
+      chillroom {
+        roomnum
+      }
+      chilldateStart
+      chilldateEnd
+    }
+  }
+  }
+`;
+
 function Sum() {
+  const { data, loading, error } = useQuery(LISTSUM);       
     return (
         <div>
           <DivCenter style={{ fontSize: "36px", paddingTop: "30px" }}>
@@ -144,21 +173,18 @@ function Sum() {
                   <Table responsive striped bordered hover>
                     <thead>
                       <tr style={{ textAlign: "center", fontSize: "22px" }}>
-                        <th rowspan="2">ลำดับ</th>
                         <th rowspan="2">รหัสซากโค</th>
-                        <th colspan="2">บาร์โค้ด</th>
+                        <th rowspan="2">บาร์โค้ด</th>
                         <th colspan="2">น้ำหนักซาก Kg.</th>
                         <th rowspan="2">วันที่เข้าบ่ม</th>
                         <th rowspan="2">วันที่ตัดเกรด</th>
                         <th rowspan="2">ห้องบ่ม</th>
-                        <th colspan="2">เกรด</th>
                         <th rowspan="2">สายพันธุ์</th>
+                        <th colspan="2">เกรด</th> 
                         <th colspan="2">การสรุปเกรด</th>
     
                       </tr>
                       <tr style={{ textAlign: "center", fontSize: "18px" }}>
-                        <th>ซากซ้าย</th>
-                        <th>ซากขวา</th>
                         <th>ซากอุ่น</th>
                         <th>ซากเย็น</th>
                         <th>จากระบบ</th>
@@ -168,30 +194,12 @@ function Sum() {
                       </tr>
                       
                     </thead>
-                    <tbody style={{ borderTop: "none" }}>
-                      <tr style={{ textAlign: "center", fontSize: "18px" }}>
-                        <td>1</td>
-                        <td>0001</td>
-                        <td>0001-1</td>
-                        <td>0001-2</td>
-                        <td>406</td>
-                        <td>322</td>
-                        <td>12/07/2022</td>
-                        <td>21/07/2022</td>
-                        <td>01</td> 
-                        <td>3.5</td>  
-                        <td >3.5</td>
-                        <td>เเองกัส</td>
-                        <td>สรุปเเล้ว</td>
-                        <td>
-                          <Link href="/beefgrading/sum/summarize">
-                          <ButtonSubmit style={{ fontSize: "16px"}}>
-                            สรุปเกรด
-                          </ButtonSubmit>
-                          </Link>
-                        </td> 
-                      </tr>
-                    </tbody>
+                    <tbody>
+                    {data &&
+                      data.listhalvegrade.map((prod) => (
+                        <ListSum key={prod.id} ListSum = {prod} />
+                      ))}
+                  </tbody>
                   </Table>
                 </div>
               </DivCenter>

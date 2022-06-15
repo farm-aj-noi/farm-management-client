@@ -29,7 +29,6 @@ export const DivFromTop = styled.div`
 
 export const DivFromDown = styled.div`
   height: fit-content;
-  width: 100px;
   border-radius: 10px 10px 0 0;
   padding: 25px 15px 15px 15px;
   padding-bottom: 5%;
@@ -56,11 +55,10 @@ export const Divimg = styled.div`
   width: 250px;
   height: 100%;
   objectFit:"scale-down"`;
-  
 export const Uploads = styled.button`
 
-height: 390px;
-width: 390px;
+height: 200px;
+width:240px;
 overflow: hidden;
 margin: 0 auto;
 background: #f5f5f5c4;

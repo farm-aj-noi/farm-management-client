@@ -111,7 +111,8 @@ const Nav1 = () => {
               รายการซากโค
           </ButtonSignUp>
           </Link>
-          <Link href="/beefgrading/sum/sum">
+
+          <Link href="/beefgrading/indexsum">
           <ButtonSignUp 
             style={{
               display: "flex",
@@ -133,6 +134,7 @@ const Nav1 = () => {
           </div>
           </ButtonSignUp>
           </Link>
+
           <Link href="/beefgrading/history">
           <ButtonSignUp
             style={{

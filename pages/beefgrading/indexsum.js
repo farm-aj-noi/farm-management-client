@@ -1,13 +1,13 @@
 import React from "react";
 import Nav from "../../components/Beefgrading/Nav/Nav";
-import Grading from "../../components/beefgrading/grading/Grading";
-const grading = () => {
+import Index from "../../components/Beefgrading/Sum/Index";
+const sum = () => {
   return (
     <div>
       <Nav/>
-      <Grading/> 
+      <Index/> 
     </div>
   );
 };
 
-export default grading;
+export default sum;

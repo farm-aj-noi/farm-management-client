@@ -6,7 +6,7 @@ import { print } from 'react-icons-kit/fa/print'
 import { iosSearchStrong } from "react-icons-kit/ionicons/iosSearchStrong";
 import { DivCenter, TableForm, TableHead } from "../Styleclass/Table";
 import {image} from 'react-icons-kit/fa/image'
-import { Icon2 } from "../../../utils/Logograde";
+import { Icon4 } from "../../../utils/Logograde";
 import Link from "next/link";
 import {
   ButtonQrcodeColor,
@@ -34,8 +34,8 @@ function History() {
     return (
         <div>
           <DivCenter style={{ fontSize: "36px", paddingTop: "30px" }}>
-          <Icon2 height="70px" weight="70px" />
-            
+          <Icon4 height="70px" weight="70px" />
+            ประวัติการตัดเกรด
           </DivCenter>
           
           <DivCenter>
