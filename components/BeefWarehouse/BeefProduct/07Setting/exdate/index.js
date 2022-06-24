@@ -17,8 +17,23 @@ import {
   Removebuttoncolor,
 } from "../../../../../utils/buttonColor";
 
+import gql from "graphql-tag";
+import { useQuery } from "@apollo/react-hooks";
+
 import Nav_seting from "../Nav_setting";
+import List from "./list";
+
+export const QUERYEXPDATE = gql`
+  query QUERYEXPDATE {
+    listExpSetting2 {
+      id
+      day
+    }
+  }
+`;
+
 const index = () => {
+  const { data } = useQuery(QUERYEXPDATE);
   return (
     <DivBase>
       <div
@@ -40,7 +55,7 @@ const index = () => {
       <DivBase
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 200px 400px 400px 1fr",
+          gridTemplateColumns: "1fr 200px  400px 1fr",
           gridRowGap: "15px",
           gridColumnGap: "20px",
           textAlign: "start",
@@ -66,72 +81,17 @@ const index = () => {
             marginTop: "0px",
           }}
         >
-          {" "}
           <DivFromTop>
             <div style={{ margin: "-3px 5px 0px 0px" }}>
               <Icon size={20} icon={list} />
             </div>
-            ตั้งค่าวันใกล้หมดอายุ
+            ตั้งค่าแจ้งเตือนก่อนวันหมดอายุ
           </DivFromTop>
           <DivFromDown>
-            {" "}
-            <div>
-              วันใกล้หมดอายุ : {}
-              <Searchinput
-                type="text"
-                id="day"
-                name="day"
-                style={{ width: "150px", textAlign: "center" }}
-              />{" "}
-              วัน
-              <Savebuttoncolor
-                style={{
-                  height: "38px",
-                  width: " 50px",
-                  marginLeft: "10px",
-                }}
-              >
-                บันทึก
-              </Savebuttoncolor>
-            </div>
-          </DivFromDown>
-        </DivFrom>
-        <DivFrom
-          style={{
-            width: "100%",
-            gridRowStart: "2",
-            gridRowEnd: "3",
-            gridColumnStart: "4",
-            marginTop: "0px",
-          }}
-        >
-          {" "}
-          <DivFromTop>
-            <div style={{ margin: "-3px 5px 0px 0px" }}>
-              <Icon size={20} icon={list} />
-            </div>
-          </DivFromTop>
-          <DivFromDown>
-            {" "}
-            <div>
-              วันหมดอายุ : {}
-              <Searchinput
-                type="text"
-                id="day"
-                name="day"
-                style={{ width: "150px", textAlign: "center" }}
-              />{" "}
-              วัน
-              <Savebuttoncolor
-                style={{
-                  height: "38px",
-                  width: " 50px",
-                  marginLeft: "10px",
-                }}
-              >
-                บันทึก
-              </Savebuttoncolor>
-            </div>
+            {data &&
+              data.listExpSetting2.map((prod) => (
+                <List key={prod.id} listexpdate={prod} />
+              ))}
           </DivFromDown>
         </DivFrom>
       </DivBase>

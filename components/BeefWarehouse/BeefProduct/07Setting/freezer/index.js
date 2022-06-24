@@ -18,7 +18,27 @@ import {
 } from "../../../../../utils/buttonColor";
 
 import Nav_seting from "../Nav_setting";
+
+import Create from "./create"
+import List from "./listfreezer"
+import { Table } from "react-bootstrap";
+import { useQuery } from "@apollo/react-hooks";
+import gql from "graphql-tag";
+
+export const QUERYFREEZER = gql`
+query QUERYFREEZER {
+  allFreezer {
+    id
+    freezername
+    productroom {
+      roomname
+    }
+  }
+}
+`;
+
 const index = () => {
+  const { data } = useQuery(QUERYFREEZER);
   return (
     <DivBase>
       <div
@@ -40,7 +60,7 @@ const index = () => {
       <DivBase
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 200px 400px 1fr",
+          gridTemplateColumns: "1fr 200px 550px 1fr",
           gridRowGap: "15px",
           gridColumnGap: "20px",
           textAlign: "start",
@@ -74,25 +94,50 @@ const index = () => {
             ตั้งค่าตู้แช่
           </DivFromTop>
           <DivFromDown>
-            {" "}
-            <div>
-              ชื่อตู้แช่ : {}
-              <Searchinput
-                type="text"
-                id="day"
-                name="day"
-                style={{ width: "150px", textAlign: "center" }}
-              />
-              <Savebuttoncolor
-                style={{
-                  height: "38px",
-                  width: " 50px",
-                  marginLeft: "10px",
-                }}
-              >
-                บันทึก
-              </Savebuttoncolor>
+            <Create />
+          </DivFromDown>
+        </DivFrom>
+        <DivFrom
+          style={{
+            width: "100%",
+            marginTop: "0",
+            gridRowStart: "2",
+            gridRowEnd: "5",
+            gridColumnStart: "2",
+          }}
+        >
+          <Nav_seting />
+        </DivFrom>
+        <DivFrom
+          style={{
+            width: "100%",
+            gridRowStart: "3",
+            gridRowEnd: "4",
+            gridColumnStart: "3",
+            marginTop: "0px",
+          }}
+        >
+          {" "}
+          <DivFromTop>
+            <div style={{ margin: "-3px 5px 0px 0px" }}>
+              <Icon size={20} icon={list} />
             </div>
+            รายการตู้แช่
+          </DivFromTop>
+          <DivFromDown>
+            <Table striped bordered responsive hover style={{ margin: "auto" }}>
+              <thead>
+                <tr style={{ textAlign: "center" }}>
+                  <th>ชื่อตู้แช่</th>
+                  <th>ชื่อห้องจัดเก็บ</th>
+                  <th>แก้ไข</th>
+                  <th>ลบ</th>
+                </tr>
+              </thead>
+              <tbody>
+                <List />
+              </tbody>
+            </Table>
           </DivFromDown>
         </DivFrom>
       </DivBase>

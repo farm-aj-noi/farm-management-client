@@ -19,9 +19,40 @@ import { Table } from "react-bootstrap";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
+import Qrcode from "./Qrcode";
 
+import dayjs from "dayjs";
+
+const EXPDATE = gql`
+  query EXPDATE {
+    card8product {
+      id
+      beefproduct {
+        id
+        weight
+        barcode
+        MFG
+        BBE
+        producttype {
+          code
+          nameTH
+        }
+      }
+      productroom {
+        roomname
+        id
+      }
+      freezer {
+        id
+        freezername
+      }
+      pbasket
+    }
+  }
+`;
 
 const index = () => {
+  const { data } = useQuery(EXPDATE);
   return (
     <div>
       <div
@@ -73,6 +104,7 @@ const index = () => {
                   <th>รหัสบาร์โค้ด</th>
                   <th>คิวอาร์โค้ด</th>
                   <th>น้ำหนัก</th>
+                  <th>ห้อง</th>
                   <th>ตู้แช่</th>
                   <th>ชั้นวาง</th>
                   <th>วันที่ผลิต</th>
@@ -80,20 +112,62 @@ const index = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr style={{ textAlign: "center" }}>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                </tr>
+                {data && data.card8product.length > 0 ? (
+                  data.card8product.map((prod) => (
+                    <tr style={{ textAlign: "center" }}>
+                      <td>{prod.beefproduct.producttype.nameTH}</td>
+                      <td>{prod.beefproduct.producttype.code}</td>
+                      <td>{prod.beefproduct.barcode}</td>
+                      <td>
+                        <Qrcode key={prod.id} notifydate={prod} />
+                      </td>
+                      <td>{prod.beefproduct.weight}</td>
+                      <td>{prod.productroom.roomname}</td>
+                      <td>{prod.freezer.freezername}</td>
+                      <td>{prod.pbasket}</td>
+                      <td>
+                        {dayjs(prod.beefproduct.MFG)
+                          .add(543, "y")
+                          .locale("th")
+                          .format("DD MMMM YYYY")}
+                      </td>
+                      <td>
+                        {dayjs(prod.beefproduct.BBE)
+                          .add(543, "y")
+                          .locale("th")
+                          .format("DD MMMM YYYY")}
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr style={{ textAlign: "center" }}>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                  </tr>
+                )}
               </tbody>
             </Table>
-         
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "10px",
+              }}
+            >
+              {data && data.card8product.length > 0 ? (
+                <Paper prod={data.card8product} />
+              ) : (
+                ""
+              )}
+            </div>
           </DivFromDown>
         </DivFrom>
       </DivBase1>

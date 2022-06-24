@@ -626,7 +626,7 @@ const Product = () => {
                                 >
                                   <Searchinput
                                     name=""
-                                    /* value={prod.chill.chillroom.roomnum} */
+                                    value={prod.chill[0].chillroom.roomnum}
                                     maxLength="5"
                                     disabled
                                     style={{ backgroundColor: "#ececec" }}

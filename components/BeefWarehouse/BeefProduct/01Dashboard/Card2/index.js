@@ -11,7 +11,18 @@ import Link from "next/link";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
+const CARDALLPRODUCT = gql`
+  query Allproduct {
+    allproduct {
+      producttypeid
+      productroomid
+      freezerid
+    }
+  }
+`;
+
 const index = () => {
+  const { data: dataproduct } = useQuery(CARDALLPRODUCT);
   return (
     <DivAlertCard style={{ backgroundColor: "#BB0FBB" }}>
       <div
@@ -47,7 +58,7 @@ const index = () => {
               height: "62px",
             }}
           >
-            0
+            {dataproduct ? dataproduct.allproduct.length : "0"}
           </div>
           <a
             style={{

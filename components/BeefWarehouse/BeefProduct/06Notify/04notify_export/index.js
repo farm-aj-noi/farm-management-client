@@ -19,7 +19,36 @@ import { Table } from "react-bootstrap";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
+import dayjs from "dayjs";
+import "dayjs/locale/th";
+
+import Qrcode from "./Qrcode";
+
+const NOTIFYEX = gql`
+  query NOTIFYEX {
+    cardExP {
+      id
+      exportdate
+      name
+      user {
+        name
+      }
+      beefproduct {
+        weight
+        barcode
+        MFG
+        BBE
+        producttype {
+          code
+          nameTH
+        }
+      }
+    }
+  }
+`;
+
 const index = () => {
+  const { data } = useQuery(NOTIFYEX);
   return (
     <div>
       <div
@@ -80,19 +109,49 @@ const index = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr style={{ textAlign: "center" }}>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                </tr>
+                {data && data.cardExP.length > 0 ? (
+                  data.cardExP.map((prod) => (
+                    <tr style={{ textAlign: "center" }}>
+                      <td>{prod.beefproduct.producttype.nameTH}</td>
+                      <td>
+                        {dayjs(prod.exportdate)
+                          .locale("th")
+                          .add(543, "year")
+                          .format("DD/MM/YYYY")}
+                      </td>
+                      <td>
+                        {dayjs(prod.exportdate)
+                          .locale("th")
+                          .add(543, "year")
+                          .format("h:mm:ss A")}
+                      </td>
+                      <td>{prod.beefproduct.producttype.code}</td>
+                      <td>{prod.beefproduct.barcode}</td>
+                      <td>
+                        <Qrcode key={prod.id} notifyex={prod} />
+                      </td>
+                      <td>{prod.beefproduct.weight}</td>
+                      <td>{prod.beefproduct.MFG}</td>
+                      <td>{prod.beefproduct.BBE}</td>
+                      <td>{prod.name}</td>
+                      <td>{prod.user.name}</td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr style={{ textAlign: "center" }}>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                  </tr>
+                )}
               </tbody>
             </Table>
           </DivFromDown>

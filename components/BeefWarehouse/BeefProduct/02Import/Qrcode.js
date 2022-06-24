@@ -7,6 +7,7 @@ import Router from "next/router";
 
 const Qrcode = ({ listim }) => {
   const [infodata, setinfodata] = useState(listim);
+  console.log(infodata);
   const [testshow, setShow] = useState(false);
   const handleClose = () => {
     setShow(false);
@@ -21,7 +22,7 @@ const Qrcode = ({ listim }) => {
       <Modal
         show={testshow}
         onHide={handleClose}
-        size="sm"
+        size="md"
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
@@ -35,12 +36,12 @@ const Qrcode = ({ listim }) => {
               justifyContent: "center",
             }}
           >
-            {/* <QRCode
+            <QRcode
               size={100}
               value={
-                "http://localhost:3000/slaughter/tracking/" + infodata.barcode
+                "http://localhost:3000/beefwarehouse/beefproduct/tracking/" + infodata.beefproduct.barcode
               }
-            /> */}
+            />
           </div>
           <div
             style={{
@@ -50,11 +51,11 @@ const Qrcode = ({ listim }) => {
               alignItems: "center",
             }}
           >
-            {/* <a
+            <a
               href={
-                "http://localhost:3000/slaughter/tracking/" + infodata.barcode
+                "http://localhost:3000/beefwarehouse/beefproduct/tracking/" + infodata.beefproduct.barcode
               }
-              target="popup"
+
               style={{
                 fontSize: "10px",
                 backgroundColor: "#f3f3f3",
@@ -64,8 +65,8 @@ const Qrcode = ({ listim }) => {
                 textDecoration: "underline",
               }}
             >
-              http://localhost:3000/slaughter/tracking/{infodata.barcode}
-            </a> */}
+              http://localhost:3000/beefwarehouse/beefproduct/tracking/ {infodata.beefproduct.barcode}
+            </a>
           </div>
         </Modal.Body>
       </Modal>

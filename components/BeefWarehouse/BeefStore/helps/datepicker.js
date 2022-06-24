@@ -50,8 +50,8 @@ const HomePage = () => {
     handleDateChange(dayjs(date).format("YYYY-MM-DD"));
   };
   return (
-      <div className={Datestyle.customDatePickerWidth}>
-        <DatePicker
+    <div className={Datestyle.customDatePickerWidth}>
+      <DatePicker
         className={Datestyle.datepicker}
         selected={date}
         onChange={onChangeDatePicker}
@@ -63,7 +63,7 @@ const HomePage = () => {
         showYearDropdown
         dropdownMode="select"
       />
-      </div>
+    </div>
   );
 };
 

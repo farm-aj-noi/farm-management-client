@@ -7,7 +7,21 @@ import Icon from "react-icons-kit";
 import { fileText } from "react-icons-kit/fa/fileText";
 
 import Link from "next/link";
+
+import { useQuery } from "@apollo/react-hooks";
+import gql from "graphql-tag";
+
+const CARD2 = gql`
+  query CARD2 {
+    card8product {
+      id
+      barcode
+    }
+  }
+`;
+
 const index = () => {
+  const { data: datacard2 } = useQuery(CARD2);
   return (
     <DivAlertCard style={{ backgroundColor: "#979797" }}>
       <div
@@ -43,7 +57,7 @@ const index = () => {
               height: "62px",
             }}
           >
-            0
+            {datacard2 ? datacard2.card8product.length : "0"}
           </div>
           <a
             style={{

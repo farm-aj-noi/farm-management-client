@@ -30,14 +30,14 @@ const CREATEPRODUCT = gql`
     $code: String!
     $nameTH: String!
     $nameEN: String!
-    $bbe: Int
+    $BBE: Int
     $unit: String
   ) {
     createProducttype(
       code: $code
       nameTH: $nameTH
       nameEN: $nameEN
-      BBE: $bbe
+      BBE: $BBE
       unit: $unit
     ) {
       id
@@ -70,7 +70,7 @@ const type = () => {
       code: infoproduct.code,
       nameTH: infoproduct.nameTH,
       nameEN: infoproduct.nameEN,
-      BBE: infoproduct.BBE,
+      BBE: (infoproduct.BBE = parseInt(infoproduct.BBE)),
       unit: infoproduct.unit,
     },
     onCompleted: (data) => {
@@ -133,7 +133,6 @@ const type = () => {
   };
 
   const handleSubmit = async (e) => {
-    infoproduct.BBE = parseInt(infoproduct.BBE);
     try {
       e.preventDefault();
       await createProducttype();
@@ -141,7 +140,7 @@ const type = () => {
       console.log(error);
     }
   };
-  console.log(infoproduct);
+
   return (
     <>
       <div>

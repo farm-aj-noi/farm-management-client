@@ -21,7 +21,25 @@ import gql from "graphql-tag";
 
 import Deletereq from "./deleterequest";
 import Paper from "./paper";
+
+import dayjs from "dayjs";
+
+export const QUERYREQUESTEXPORT = gql`
+query QUERYREQUESTEXPORT {
+  listRequestExP {
+    id
+    producttype {
+      nameTH
+      code
+    }
+    quantity
+    name
+    requestdate
+  }
+}
+`;
 const index = () => {
+  const { data } = useQuery(QUERYREQUESTEXPORT);
   return (
     <div>
       <div
@@ -71,20 +89,27 @@ const index = () => {
                   <th>วันที่ขอเบิก</th>
                   <th>ชื่อผู้ขอเบิก</th>
                   <th>ประเภทสินค้า</th>
+                  <th>รหัสสินค้า</th>
                   <th>จำนวน</th>
                   <th>ลบ</th>
                 </tr>
               </thead>
               <tbody>
-                <tr style={{ textAlign: "center" }}>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>
-                    <Deletereq />
-                  </td>
-                </tr>
+                {data && data.listRequestExP.map((prod) => (
+                  <tr style={{ textAlign: "center" }}>
+                    <td>{dayjs(prod.requestdate)
+                      .add(543, "year")
+                      .format("DD/MM/YYYY")}</td>
+                    <td>{prod.name}</td>
+                    <td>{prod.producttype.nameTH}</td>
+                    <td>{prod.producttype.code}</td>
+                    <td>{prod.quantity}</td>
+                    <td>
+                      <Deletereq key={prod.id} listre={prod} />
+                    </td>
+                  </tr>
+                ))}
+
               </tbody>
             </Table>
             <div
@@ -94,7 +119,8 @@ const index = () => {
                 marginTop: "10px",
               }}
             >
-              <Paper />
+              {data && data.listRequestExP.length > 0 ? (<Paper prod={data.listRequestExP} />) : ("")}
+
             </div>
           </DivFromDown>
         </DivFrom>

@@ -11,7 +11,17 @@ import gql from "graphql-tag";
 
 import Link from "next/link";
 
+const CARD5 = gql`
+  query CARD5 {
+    cardImP {
+      id
+      barcode
+    }
+  }
+`;
+
 const index = () => {
+  const { data } = useQuery(CARD5);
   return (
     <DivAlertCard style={{ backgroundColor: "#EF9813" }}>
       <div
@@ -47,7 +57,7 @@ const index = () => {
               height: "62px",
             }}
           >
-            0
+            {data ? data.cardImP.length : "0"}
           </div>
           <a
             style={{

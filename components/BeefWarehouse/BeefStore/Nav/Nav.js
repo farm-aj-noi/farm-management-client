@@ -23,6 +23,7 @@ import {
   Icon11,
   Icon12,
   Icon13,
+  Icon14
 } from "../../../../utils/naviconbeefstore";
 
 import { blue, white } from "../../../../utils/colors";
@@ -53,7 +54,7 @@ const Nav1 = () => {
         }}
         collapseOnSelect
         expand="lg"
-        /*  fixed="top" */
+      /*  fixed="top" */
       >
         <Navbar.Brand style={{ padding: "0" }}>
           <Link href="/beefwarehouse">
@@ -169,6 +170,11 @@ const Nav1 = () => {
             <Link href="/beefwarehouse/beefstore/notify/notify_date">
               <NavButtonLeft>
                 <Icon10 height="30px" weight="30px" /> การแจ้งเตือน
+              </NavButtonLeft>
+            </Link>
+            <Link href="/beefwarehouse/beefstore/transport">
+              <NavButtonLeft>
+                <Icon14 height="30px" weight="30px" /> บันทึกการขนส่ง
               </NavButtonLeft>
             </Link>
             <Link href="/beefwarehouse/beefstore/graph">

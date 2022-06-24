@@ -34,6 +34,9 @@ import {
   Icon11,
   Icon12,
   Icon13,
+  Icon14,
+  Icon15,
+  Icon16
 } from "../../../../utils/naviconbeefstore";
 
 const Nav1 = () => {
@@ -76,6 +79,12 @@ const Nav1 = () => {
             <Link href="/beefwarehouse/beefproduct/imports">
               <NavButtonLeft>
                 {" "}
+                <Icon16 height="30px" weight="30px" /> แปรรูปสินค้า
+              </NavButtonLeft>
+            </Link>
+            <Link href="/beefwarehouse/beefproduct/imports">
+              <NavButtonLeft>
+                {" "}
                 <Icon12 height="30px" weight="30px" /> การนำเข้า
               </NavButtonLeft>
             </Link>
@@ -112,13 +121,23 @@ const Nav1 = () => {
                 <NavDropdownItem>ออกรายงานคงคลัง</NavDropdownItem>
               </Link>
             </DropdownButton>
+            <Link href="/beefwarehouse/beefproduct/requestexport">
+              <NavButtonLeft>
+                <Icon2 height="30px" weight="30px" /> ร้องขอเบิก
+              </NavButtonLeft>
+            </Link>
             <Link href="/beefwarehouse/beefproduct/notify/notify_date">
               <NavButtonLeft>
                 <Icon10 height="30px" weight="30px" />
                 การแจ้งเตือน
               </NavButtonLeft>
             </Link>
-            <Link href="/beefwarehouse/beefstore/graph">
+            <Link href="/beefwarehouse/beefproduct/transport">
+              <NavButtonLeft>
+                <Icon14 height="30px" weight="30px" /> บันทึกการขนส่ง
+              </NavButtonLeft>
+            </Link>
+            <Link href="/beefwarehouse/beefproduct/graph">
               <NavButtonLeft>
                 <Icon13 height="40px" weight="37px" /> รายละเอียดข้อมูลสถิติ
               </NavButtonLeft>

@@ -15,7 +15,7 @@ import {
   ButtonSearchColor,
   ButtonRecordColor,
   ButtonSubmit,
-  ButtonImagecolor
+  ButtonImagecolor,
 } from "../Styleclass/Button";
 
 const thstyle = {
@@ -36,23 +36,23 @@ export const LISTGRADE = gql`
   query LISTGRADE {
     listhalvegrade {
       id
-    weightwarm
-    weightcool
-    barcode
-    imslaughter {
-      pun
-    }
-    beeftype {
-      code
-    }
-    chill {
-      chillroom {
-        roomnum
+      weightwarm
+      weightcool
+      barcode
+      imslaughter {
+        pun
       }
-      chilldateStart
-      chilldateEnd
+      beeftype {
+        code
+      }
+      chill {
+        chillroom {
+          roomnum
+        }
+        chilldateStart
+        chilldateEnd
+      }
     }
-  }
   }
 `;
 
@@ -60,22 +60,23 @@ function index() {
   const { data, loading, error } = useQuery(LISTGRADE);
   return (
     <div>
-      <DivCenter style={{ fontSize: "36px", 
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              paddingTop: "30px", 
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                marginRight: "5px",
-              }}
-            >
-            </div>
+      <DivCenter
+        style={{
+          fontSize: "36px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          paddingTop: "30px",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            marginRight: "5px",
+          }}
+        ></div>
         <Icon3 height="70px" weight="70px" />
         รายการซากโค
       </DivCenter>
@@ -123,7 +124,6 @@ function index() {
             <div style={{ height: "450px", overflowY: "auto" }}>
               <Table responsive striped bordered hover>
                 <thead>
-                 
                   <tr style={{ textAlign: "center", fontSize: "18px" }}>
                     <th rowspan="2">รหัสซากโค</th>
                     <th rowspan="2">บาร์โค้ด</th>
@@ -133,20 +133,19 @@ function index() {
                     <th rowspan="2">ห้องบ่ม</th>
                     <th rowspan="2">สายพันธุ์</th>
                     <th rowspan="2">สถานะการตัดเกรด</th>
-                  </tr>     
+                  </tr>
                   <tr style={{ textAlign: "center", fontSize: "18px" }}>
-                        <th>ซากอุ่น</th>
-                        <th>ซากเย็น</th>
-                      </tr>           
+                    <th>ซากอุ่น</th>
+                    <th>ซากเย็น</th>
+                  </tr>
                 </thead>
-              
-                  <tbody>
-                    {data &&
-                      data.listhalvegrade.map((prod) => (
-                        <ListGrade key={prod.id} ListGrade = {prod} />
-                      ))}
-                  </tbody>
-                    
+
+                <tbody>
+                  {data &&
+                    data.listhalvegrade.map((prod) => (
+                      <ListGrade key={prod.id} ListGrade={prod} />
+                    ))}
+                </tbody>
               </Table>
             </div>
           </DivCenter>

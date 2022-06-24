@@ -57,13 +57,22 @@ const Nav_setting = (Sidenumber) => {
                     </Nav.Item>
                     <Nav.Item style={{ marginBottom: "5px" }}>
                       <Nav.Link eventKey="3">
+                        <Link href="/beefwarehouse/beefproduct/setting/room">
+                          <div style={{ width: "100%" }}>
+                            ตั่งค่าห้องจัดเก็บ
+                          </div>
+                        </Link>
+                      </Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item style={{ marginBottom: "5px" }}>
+                      <Nav.Link eventKey="4">
                         <Link href="/beefwarehouse/beefproduct/setting/freezer">
                           <div style={{ width: "100%" }}>ตั่งค่าตู้แช่เก็บ</div>
                         </Link>
                       </Nav.Link>
                     </Nav.Item>
                     <Nav.Item style={{ marginBottom: "5px" }}>
-                      <Nav.Link eventKey="4">
+                      <Nav.Link eventKey="5">
                         <Link href="/beefwarehouse/beefproduct/setting/shelf">
                           <div style={{ width: "100%" }}>ตั่งค่าชั้นวาง</div>
                         </Link>

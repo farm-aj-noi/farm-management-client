@@ -10,8 +10,18 @@ import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
 import Link from "next/link";
+
+const CARD6 = gql`
+  query CardExP {
+    cardExP {
+      id
+      barcode
+    }
+  }
+`;
+
 const index = () => {
-  /*   console.log(entrail); */
+  const { data } = useQuery(CARD6);
   return (
     <DivAlertCard style={{ backgroundColor: "#BF0000" }}>
       <div
@@ -47,7 +57,7 @@ const index = () => {
               height: "62px",
             }}
           >
-            0
+            {data ? data.cardExP.length : "0"}
           </div>
           <a
             style={{

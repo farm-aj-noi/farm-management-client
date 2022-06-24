@@ -22,15 +22,15 @@ const ListGrade = ({ ListGrade }) => {
       <td>{ListGradeData.barcode}</td>
       <td>{ListGradeData.weightwarm}</td>
       <td>{ListGradeData.weightcool ? ListGradeData.weightcool : "-"}</td>
-
-      {ListGradeData &&
-        ListGradeData.chill.map((prod) => (
-          <>
-            <td>{dayjs(prod.chilldateStart).format("DD-MM-YYYY")}</td>
-            <td>{dayjs(prod.chilldateEnd).format("DD-MM-YYYY")}</td>
-            <td>{prod.chillroom.roomnum ? prod.chillroom.roomnum : "-"}</td>
-          </>
-        ))}
+      <td>
+        {dayjs(ListGradeData.chill[0].chilldateStart).format("DD-MM-YYYY")}
+      </td>
+      <td>{dayjs(ListGradeData.chill[0].chilldateEnd).format("DD-MM-YYYY")}</td>
+      <td>
+        {ListGradeData.chill[0].chillroom.roomnum
+          ? ListGradeData.chill[0].chillroom.roomnum
+          : "-"}
+      </td>
 
       <td>{ListGradeData.imslaughter.pun}</td>
       <td>
