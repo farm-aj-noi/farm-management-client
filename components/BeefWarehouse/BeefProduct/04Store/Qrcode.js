@@ -35,12 +35,12 @@ const Qrcode = ({ alllist }) => {
               justifyContent: "center",
             }}
           >
-            {/* <QRCode
+            <QRcode
               size={100}
               value={
-                "http://localhost:3000/slaughter/tracking/" + infodata.barcode
+                "http://localhost:3000/beefwarehouse/beefproduct/tracking/" + infodata.barcode
               }
-            /> */}
+            />
           </div>
           <div
             style={{
@@ -50,9 +50,9 @@ const Qrcode = ({ alllist }) => {
               alignItems: "center",
             }}
           >
-           { /* <a
+            <a
               href={
-                "http://localhost:3000/slaughter/tracking/" + infodata.barcode
+                "http://localhost:3000/beefwarehouse/beefproduct/tracking/" + infodata.barcode
               }
               target="popup"
               style={{
@@ -64,8 +64,8 @@ const Qrcode = ({ alllist }) => {
                 textDecoration: "underline",
               }}
             >
-              http://localhost:3000/slaughter/tracking/{infodata.barcode}
-            </a> */}
+              http://localhost:3000/beefwarehouse/beefproduct/tracking/{infodata.barcode}
+            </a>
           </div>
         </Modal.Body>
       </Modal>

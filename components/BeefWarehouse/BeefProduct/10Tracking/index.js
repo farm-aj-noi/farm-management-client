@@ -194,46 +194,46 @@ const index = () => {
                         รายละเอียดข้อมูลก้อนเนื้อที่นำมาแปรรูป{" "}
                     </DivFromTop>
                     <DivFromDown>
-
-                        <Table striped bordered responsive hover style={{ margin: "auto" }}>
-                            <thead style={{ display: "table", tableLayout: "fixed", width: "100%" }}>
-                                <tr style={{ textAlign: "center", display: "table", tableLayout: "fixed", width: "100%" }}>
-                                    <th>ประเภทซาก</th>
-                                    <th>รหัสซาก</th>
-                                    <th>บาร์โค้ด</th>
-                                    <th>ทะเบียนขุน</th>
-                                    <th>น้ำหนัก (กก.)</th>
-                                    <th>ตรวจสอบข้อมูล</th>
-                                </tr>
-                            </thead>
-                            <tbody style={{ display: "block", overflow: "auto", tableLayout: "fixed", maxHeight: "130px" }}>
-                                {data && data.ProductTracking.lump.length > 0 ? (
-                                    data.ProductTracking.lump.map((prod) => (
-                                        <tr style={{ textAlign: "center", display: "table", tableLayout: "fixed", width: "100%" }}>
-                                            <td></td>
-                                            <td></td>
-                                            <td>{prod.imslaughter.numcow}</td>
-                                            <td>{prod.barcode}</td>
-                                            <td>{prod.weight}</td>
-                                            <td>
-                                                <a href={"http://localhost:3000/slaughter/tracking/" + prod.barcode}
-                                                    target="popup">
-                                                    <Editbuttoncolor>
-                                                        <Icon size={30} icon={iosSearchStrong} />
-                                                    </Editbuttoncolor>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    ))
-                                ) : (
-                                    <tr style={{ textAlign: "center" }}>
-                                        <td colspan="6">ไม่พบข้อมูล</td>
+                        <div style={{ height: "170px", overflow: "auto" }}>
+                            <Table striped bordered responsive hover style={{ margin: "auto" }}>
+                                <thead /* style={{ display: "table", tableLayout: "fixed", width: "100%" }} */>
+                                    <tr style={{ textAlign: "center", /* display: "table", tableLayout: "fixed", width: "100%" */ }}>
+                                        <th>ประเภทซาก</th>
+                                        <th>รหัสซาก</th>
+                                        <th>บาร์โค้ด</th>
+                                        <th>ทะเบียนขุน</th>
+                                        <th>น้ำหนัก (กก.)</th>
+                                        <th>ตรวจสอบข้อมูล</th>
                                     </tr>
-                                )}
+                                </thead>
+                                <tbody /* style={{ display: "block", overflow: "auto", tableLayout: "fixed", maxHeight: "130px" }} */>
+                                    {data && data.ProductTracking.lump.length > 0 ? (
+                                        data.ProductTracking.lump.map((prod) => (
+                                            <tr style={{ textAlign: "center", /* display: "table", tableLayout: "fixed", width: "100%" */ }}>
+                                                <td></td>
+                                                <td></td>
+                                                <td>{prod.imslaughter.numcow}</td>
+                                                <td>{prod.barcode}</td>
+                                                <td>{prod.weight}</td>
+                                                <td>
+                                                    <a href={"http://localhost:3000/slaughter/tracking/" + prod.barcode}
+                                                        target="popup">
+                                                        <Editbuttoncolor>
+                                                            <Icon size={30} icon={iosSearchStrong} />
+                                                        </Editbuttoncolor>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        ))
+                                    ) : (
+                                        <tr style={{ textAlign: "center" }}>
+                                            <td colspan="6">ไม่พบข้อมูล</td>
+                                        </tr>
+                                    )}
 
-                            </tbody>
-                        </Table>
-
+                                </tbody>
+                            </Table>
+                        </div>
                     </DivFromDown>
                 </DivFrom>
                 <DivFrom
