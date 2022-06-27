@@ -53,6 +53,10 @@ query QUERY($barcode: String) {
       imslaughter {
         numcow
       }
+      beeftype {
+        code
+        nameTH
+      }
     }
     lump {
       id
@@ -60,6 +64,10 @@ query QUERY($barcode: String) {
       barcode
       imslaughter {
         numcow
+      }
+      beeftype {
+        code
+        nameTH
       }
     }
   }
@@ -210,8 +218,8 @@ const index = () => {
                                     {data && data.ProductTracking.lump.length > 0 ? (
                                         data.ProductTracking.lump.map((prod) => (
                                             <tr style={{ textAlign: "center", /* display: "table", tableLayout: "fixed", width: "100%" */ }}>
-                                                <td></td>
-                                                <td></td>
+                                                <td>{prod.beeftype.nameTH}</td>
+                                                <td>{prod.beeftype.code}</td>
                                                 <td>{prod.imslaughter.numcow}</td>
                                                 <td>{prod.barcode}</td>
                                                 <td>{prod.weight}</td>
@@ -267,8 +275,8 @@ const index = () => {
                                     {data && data.ProductTracking.chop.length > 0 ? (
                                         data.ProductTracking.chop.map((prod) => (
                                             <tr style={{ textAlign: "center" }}>
-                                                <td></td>
-                                                <td></td>
+                                                <td>{prod.beeftype.nameTH}</td>
+                                                <td>{prod.beeftype.code}</td>
                                                 <td>{prod.imslaughter.numcow}</td>
                                                 <td>{prod.barcode}</td>
                                                 <td>{prod.weight}</td>

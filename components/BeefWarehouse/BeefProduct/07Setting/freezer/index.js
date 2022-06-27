@@ -135,7 +135,10 @@ const index = () => {
                 </tr>
               </thead>
               <tbody>
-                <List />
+                {data && data.allFreezer.map((prod) => (
+                  <List key={prod.id} listf={prod} />
+                ))}
+
               </tbody>
             </Table>
           </DivFromDown>
