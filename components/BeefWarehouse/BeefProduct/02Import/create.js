@@ -151,7 +151,7 @@ const create = () => {
               gridTemplateRows: "1fr 15px",
             }}
           >
-            <Searchinput name="barcode" />
+            <Searchinput name="barcode" value={createimproduct.barcode} onChange={handleChange} />
           </div>
         </DivFromInsideLeft>
         <DivFromInsideLeft style={{ marginTop: "5px" }}>

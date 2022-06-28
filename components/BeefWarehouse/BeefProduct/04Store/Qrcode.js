@@ -21,7 +21,7 @@ const Qrcode = ({ alllist }) => {
       <Modal
         show={testshow}
         onHide={handleClose}
-        size="sm"
+        size="md"
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
