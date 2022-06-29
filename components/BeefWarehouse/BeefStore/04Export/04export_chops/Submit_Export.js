@@ -189,6 +189,7 @@ const Submit_Export = () => {
                     นำตัดเเต่ง(ก้อนเนื้อ)
                   </option>
                   <option value="6280fac6d3dbf7345093676f">นำจำหน่าย</option>
+                  <option value="62821d931768cd521052118b">นำแปรรูป</option>
                 </select>
               </div>
             </div>
@@ -210,13 +211,12 @@ const Submit_Export = () => {
                 !ExportchopInfo.storestatus
               }
               style={{
-                backgroundColor: `${
-                  !ExportchopInfo.barcode ||
+                backgroundColor: `${!ExportchopInfo.barcode ||
                   !ExportchopInfo.exporter ||
                   !ExportchopInfo.storestatus
-                    ? "gray"
-                    : ""
-                }`,
+                  ? "gray"
+                  : ""
+                  }`,
               }}
             >
               บันทึก

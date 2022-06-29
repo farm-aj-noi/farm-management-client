@@ -191,6 +191,7 @@ const Submit_Export = () => {
                     นำตัดเเต่ง(ชิ้นเนื้อ)
                   </option>
                   <option value="6280fac6d3dbf7345093676f">นำจำหน่าย</option>
+                  <option value="62821d931768cd521052118b">นำแปรรูป</option>
                 </select>
               </div>
             </div>
@@ -212,13 +213,12 @@ const Submit_Export = () => {
                 !ExportlumpInfo.storestatus
               }
               style={{
-                backgroundColor: `${
-                  !ExportlumpInfo.barcode ||
-                  !ExportlumpInfo.exporter ||
-                  !ExportlumpInfo.storestatus
+                backgroundColor: `${!ExportlumpInfo.barcode ||
+                    !ExportlumpInfo.exporter ||
+                    !ExportlumpInfo.storestatus
                     ? "gray"
                     : ""
-                }`,
+                  }`,
               }}
             >
               บันทึก

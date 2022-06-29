@@ -46,9 +46,6 @@ query QUERYLUMP {
   LumpForProduct {
     id
     weight
-    imslaughter {
-      numcow
-    }
     beeftype {
       nameTH
       code
@@ -64,9 +61,6 @@ query QUERYCHOP {
     id
     weight
     barcode
-    imslaughter {
-      numcow
-    }
     beeftype {
       code
       nameTH
@@ -79,6 +73,7 @@ const index = () => {
     const { data: type } = useQuery(QUERYTYPE)
     const { data: lump } = useQuery(QUERYLUMP)
     const { data: chop } = useQuery(QUERYCHOP)
+
     return (
         <div>
             <div
@@ -97,7 +92,7 @@ const index = () => {
             <DivBase
                 style={{
                     display: "grid",
-                    gridTemplateColumns: "1fr 270px 500px 500px 1fr",
+                    gridTemplateColumns: "1fr 270px 1300px  1fr",
                     gridRowGap: "15px",
                     gridColumnGap: "10px",
                     textAlign: "start",
@@ -194,91 +189,86 @@ const index = () => {
                         <div style={{ margin: "-3px 5px 0px 0px" }}>
                             <Icon size={20} icon={list} />
                         </div>
-                        รายการซากโคก้อนเนื้อ
+                        รายการซากโค
                     </DivFromTop>
                     <DivFromDown>
-                        <div style={{ height: "200px", overflow: "auto" }}>
-                            <Table
-                                striped
-                                bordered
-                                responsive
-                                hover
-                                style={{ margin: "auto" }}
-                            >
-                                <thead>
-                                    <tr style={{ textAlign: "center" }}>
-                                        <th>ประเภทซาก</th>
-                                        <th>รหัสซาก</th>
-                                        <th>ทะเบียนขุน</th>
-                                        <th>น้ำหนัก</th>
-                                        <th>รหัสบาร์โค้ด</th>
-                                        <th>เลือก</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    <tr style={{ textAlign: "center" }}>
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td><input type="checkbox" /></td>
-                                    </tr>
-
-                                </tbody>
-                            </Table>
+                        <div style={{
+                            display: "grid",
+                            gridTemplateColumns: "1fr 1fr",
+                            gridColumnGap: "10px",
+                        }}>
+                            <div style={{ height: "250px", overflow: "auto" }}>
+                                <p style={{ textAlign: "center" }}>รายการซากโคก้อนเนื้อ</p>
+                                <Table
+                                    striped
+                                    bordered
+                                    responsive
+                                    hover
+                                    style={{ margin: "auto" }}
+                                >
+                                    <thead>
+                                        <tr style={{ textAlign: "center" }}>
+                                            <th>ประเภทซาก</th>
+                                            <th>รหัสซาก</th>
+                                            <th>ทะเบียนขุน</th>
+                                            <th>น้ำหนัก</th>
+                                            <th>รหัสบาร์โค้ด</th>
+                                            <th>เลือก</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {lump && lump.LumpForProduct.map((prod) => (
+                                            <tr style={{ textAlign: "center" }}>
+                                                <td>{prod.beeftype.nameTH}</td>
+                                                <td>{prod.beeftype.code}</td>
+                                                <td>{ }</td>
+                                                <td>{prod.weight}</td>
+                                                <td>{prod.barcode}</td>
+                                                <td><input type="checkbox" value={prod.id} name="id" /></td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </Table>
+                            </div>
+                            <div style={{ height: "250px", overflow: "auto" }}>
+                                <p style={{ textAlign: "center" }}>รายการซากโคชิ้นเนื้อ</p>
+                                <Table
+                                    striped
+                                    bordered
+                                    responsive
+                                    hover
+                                    style={{ margin: "auto" }}
+                                >
+                                    <thead>
+                                        <tr style={{ textAlign: "center" }}>
+                                            <th>ประเภทซาก</th>
+                                            <th>รหัสซาก</th>
+                                            <th>ทะเบียนขุน</th>
+                                            <th>น้ำหนัก</th>
+                                            <th>รหัสบาร์โค้ด</th>
+                                            <th>เลือก</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {chop && chop.ChopForProduct.map((prod) => (
+                                            <tr style={{ textAlign: "center" }}>
+                                                <td>{prod.beeftype.nameTH}</td>
+                                                <td>{prod.beeftype.code}</td>
+                                                <td>{ }</td>
+                                                <td>{prod.weight}</td>
+                                                <td>{prod.barcode}</td>
+                                                <td><input type="checkbox" value={prod.id} /></td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </Table>
+                            </div>
                         </div>
+
+
                     </DivFromDown>
                 </DivFrom>
-                <DivFrom
-                    style={{
-                        width: "100%",
-                        gridRowStart: "2",
-                        gridRowEnd: "2",
-                        gridColumnStart: "4",
-                    }}
-                >
-                    <DivFromTop>
-                        <div style={{ margin: "-3px 5px 0px 0px" }}>
-                            <Icon size={20} icon={list} />
-                        </div>
-                        รายการซากโคชิ้นเนื้อ
-                    </DivFromTop>
-                    <DivFromDown>
-                        <div style={{ height: "200px", overflow: "auto" }}>
-                            <Table
-                                striped
-                                bordered
-                                responsive
-                                hover
-                                style={{ margin: "auto" }}
-                            >
-                                <thead>
-                                    <tr style={{ textAlign: "center" }}>
-                                        <th>ประเภทซาก</th>
-                                        <th>รหัสซาก</th>
-                                        <th>ทะเบียนขุน</th>
-                                        <th>น้ำหนัก</th>
-                                        <th>รหัสบาร์โค้ด</th>
-                                        <th>เลือก</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr style={{ textAlign: "center" }}>
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td><input type="checkbox" /></td>
-                                    </tr>
 
-                                </tbody>
-                            </Table>
-                        </div>
-                    </DivFromDown>
-                </DivFrom>
                 <DivFrom
                     style={{
                         width: "1010px",
