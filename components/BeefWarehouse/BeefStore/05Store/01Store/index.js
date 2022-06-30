@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Table } from "react-bootstrap";
 import { DivFrom, DivFromTop, DivFromDown, HeaderColor } from "../StoreFrom.js";
@@ -16,21 +16,95 @@ import List_Store from "./ListStore.js";
 import Nav_store from "../Nav_store";
 
 export const STORELIST = gql`
-  query STORELIST {
-    liststore {
-      beeftype
-      cownum
-      code
+  query STORELIST(
+    $beeftype: String
+    $type: String
+    $beefroom: String
+    $shelf: String
+    $expdate: String
+  ) {
+    liststore(
+      beeftype: $beeftype
+      type: $type
+      beefroom: $beefroom
+      shelf: $shelf
+      expdate: $expdate
+    ) {
       barcode
+      status
+      cownum
+      beeftype
+      code
       weightwarm
       weight
-      status
+      importdate
+      namefarmer
+      beefroom
+      beeftypeid
+      shelf
+      basket
+      Expdate
+    }
+  }
+`;
+
+export const QUERYROOM = gql`
+  query Query {
+    allRoom {
+      id
+      roomname
+    }
+  }
+`;
+
+export const QUERYSHELF = gql`
+  query QUERYSHELF($id: ID) {
+    listShelf(id: $id) {
+      shelfname
+      id
+    }
+  }
+`;
+
+export const QUERYBASKET = gql`
+  query QUERYBASKET($id: ID) {
+    allBasket(id: $id) {
+      id
+      basketname
     }
   }
 `;
 
 const index = () => {
-  const { data, loading, error } = useQuery(STORELIST);
+  const { data: dataroom } = useQuery(QUERYROOM);
+  const [selectedbeeftype, SetBeeftypeChange] = useState("");
+  const [selecttype, SettypeChange] = useState("");
+  const [selectedbeefroom, setselectbeefroom] = useState("");
+  const [selectedshelf, setselectshelf] = useState("");
+  const [selectedbasket, setselectbasket] = useState("");
+  const [expdate, setexpdate] = useState("");
+  const { data: datashelf } = useQuery(QUERYSHELF, {
+    variables: {
+      id: selectedbeefroom,
+    },
+  });
+
+  const { data: basketdata } = useQuery(QUERYBASKET, {
+    variables: {
+      id: selectedshelf,
+    },
+  });
+  const { data, loading, error } = useQuery(STORELIST, {
+    variables: {
+      beeftype: selectedbeeftype,
+      type: selecttype,
+      beefroom: selectedbeefroom,
+      shelf: selectedshelf,
+      expdate: expdate,
+    },
+  });
+
+  /*   console.log(selectedbeeftype); */
   return (
     <DivBase>
       <div
@@ -77,7 +151,6 @@ const index = () => {
               gridRowEnd: "3",
               gridColumnStart: "3",
               marginTop: "0px",
-              height: "170px",
             }}
           >
             <DivFromTop>
@@ -102,11 +175,41 @@ const index = () => {
                       marginRight: "10px",
                     }}
                   >
+                    ซาก
+                  </label>
+                  <select
+                    name="type"
+                    id="type"
+                    style={{
+                      height: "35px",
+                      width: "120px",
+                      border: "1px solid #AFAFAF",
+                      borderRadius: "4px",
+                      textAlign: "center",
+                      fontSize: "14px",
+                      marginRight: "10px",
+                    }}
+                    onChange={(event) => SettypeChange(event.target.value)}
+                  >
+                    <option value="">ทั้งหมด</option>
+                    <option value="ซากโคผ่าซีก">ซากโคผ่าซีก</option>
+                    <option value="ซากโคสี่เสี้ยว">ซากโคสี่เสี้ยว</option>
+                    <option value="ก้อนเนื้อ">ก้อนเนื้อ</option>
+                    <option value="ชิ้นเนื้อ">ชิ้นเนื้อ</option>
+                  </select>
+                  <label
+                    for="beef"
+                    style={{
+                      textAlign: "center",
+                      fontSize: "18px",
+                      marginRight: "10px",
+                    }}
+                  >
                     ประเภทซาก
                   </label>
                   <select
-                    name="beef"
-                    id="beef"
+                    name="beeftype"
+                    id="beeftype"
                     style={{
                       height: "35px",
                       width: "120px",
@@ -115,10 +218,123 @@ const index = () => {
                       textAlign: "center",
                       fontSize: "14px",
                     }}
+                    onChange={(event) => SetBeeftypeChange(event.target.value)}
                   >
-                    <option value="">ทั้งหมด</option>
-                    <option value="">ซากซ้าย</option>
-                    <option value="">ซากขวา</option>
+                    {selecttype == "ซากโคผ่าซีก" ? (
+                      <>
+                        <option value="">ทั้งหมด</option>
+                        <option value="5f1000e28d55662dcc23d95e">
+                          ซากซ้าย
+                        </option>
+                        <option value="5f1000ee8d55662dcc23d960">ซากขวา</option>
+                      </>
+                    ) : selecttype == "ซากโคสี่เสี้ยว" ? (
+                      <>
+                        <option value="">ทั้งหมด</option>
+                        <option value="5f338f035f7703096453abb8">
+                          ซากขวา-ขาหน้า
+                        </option>
+                        <option value="5f338f0d5f7703096453abb9">
+                          ซากขวา-ขาหลัง
+                        </option>
+                        <option value="5f338eeb5f7703096453abb6">
+                          ซากซ้าย-ขาหน้า
+                        </option>
+                        <option value="5f338ef65f7703096453abb7">
+                          ซากซ้าย-ขาหลัง
+                        </option>
+                      </>
+                    ) : selecttype == "ก้อนเนื้อ" ? (
+                      <>
+                        <option value="">ทั้งหมด</option>
+                        <option value="5f446195ecd6732ad8108684">
+                          เนื้อสันคอ
+                        </option>
+                        <option value="5f4461a8ecd6732ad8108685">ที-โบน</option>
+                        <option value="5f4461bfecd6732ad8108686">
+                          เนื้อสันนอก
+                        </option>
+                        <option value="5f4461d6ecd6732ad8108687">
+                          ที-โบน สเต็ก
+                        </option>
+                        <option value="5f44620cecd6732ad8108688">ริบอาย</option>
+                        <option value="5f446224ecd6732ad8108689">
+                          ใบบัวสเต็ก
+                        </option>
+                        <option value="5f44623aecd6732ad810868a">
+                          เนื้อสันใน
+                        </option>
+                        <option value="5f44624fecd6732ad810868b">
+                          สันสะโพก
+                        </option>
+                        <option value="5f446262ecd6732ad810868c">
+                          เสือร้องไห้
+                        </option>
+                        <option value="5f44628decd6732ad810868d">
+                          เนื้อซี่โครง
+                        </option>
+                        <option value="5f4462a4ecd6732ad810868e">พับใน</option>
+                        <option value="5f4462b6ecd6732ad810868f">ตะพาบ</option>
+                        <option value="5f4462c8ecd6732ad8108690">
+                          ลูกมะพร้าว
+                        </option>
+                        <option value="5f4462ddecd6732ad8108691">
+                          ปลาบู่ทอง
+                        </option>
+                        <option value="5f4462eeecd6732ad8108692">ใบพาย</option>
+                        <option value="5f4462feecd6732ad8108693">
+                          หางตะเข้
+                        </option>
+                        <option value="5f44630fecd6732ad8108694">น่อง</option>
+                        <option value="5f446320ecd6732ad8108695">พับนอก</option>
+                      </>
+                    ) : selecttype == "ชิ้นเนื้อ" ? (
+                      <>
+                        <option value="">ทั้งหมด</option>
+                        <option value="5f446195ecd6732ad8108684">
+                          เนื้อสันคอ
+                        </option>
+                        <option value="5f4461a8ecd6732ad8108685">ที-โบน</option>
+                        <option value="5f4461bfecd6732ad8108686">
+                          เนื้อสันนอก
+                        </option>
+                        <option value="5f4461d6ecd6732ad8108687">
+                          ที-โบน สเต็ก
+                        </option>
+                        <option value="5f44620cecd6732ad8108688">ริบอาย</option>
+                        <option value="5f446224ecd6732ad8108689">
+                          ใบบัวสเต็ก
+                        </option>
+                        <option value="5f44623aecd6732ad810868a">
+                          เนื้อสันใน
+                        </option>
+                        <option value="5f44624fecd6732ad810868b">
+                          สันสะโพก
+                        </option>
+                        <option value="5f446262ecd6732ad810868c">
+                          เสือร้องไห้
+                        </option>
+                        <option value="5f44628decd6732ad810868d">
+                          เนื้อซี่โครง
+                        </option>
+                        <option value="5f4462a4ecd6732ad810868e">พับใน</option>
+                        <option value="5f4462b6ecd6732ad810868f">ตะพาบ</option>
+                        <option value="5f4462c8ecd6732ad8108690">
+                          ลูกมะพร้าว
+                        </option>
+                        <option value="5f4462ddecd6732ad8108691">
+                          ปลาบู่ทอง
+                        </option>
+                        <option value="5f4462eeecd6732ad8108692">ใบพาย</option>
+                        <option value="5f4462feecd6732ad8108693">
+                          หางตะเข้
+                        </option>
+                        <option value="5f44630fecd6732ad8108694">น่อง</option>
+                        <option value="5f446320ecd6732ad8108695">พับนอก</option>
+                      </>
+                    ) : (
+                      <option value="">ทั้งหมด</option>
+                    )}
                   </select>
 
                   <label
@@ -163,8 +379,8 @@ const index = () => {
                     ตำแหน่ง
                   </label>
                   <select
-                    name="room"
-                    id="room"
+                    name="roomname"
+                    id="roomname"
                     style={{
                       height: "35px",
                       width: "50px",
@@ -173,15 +389,19 @@ const index = () => {
                       textAlign: "center",
                       fontSize: "14px",
                     }}
+                    onChange={(event) => setselectbeefroom(event.target.value)}
                   >
                     <option value="">ห้อง</option>
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
+                    {dataroom &&
+                      dataroom.allRoom.map((prod) => (
+                        <option key={prod.id} value={prod.id}>
+                          {prod.roomname}
+                        </option>
+                      ))}
                   </select>
                   <select
-                    name="shelf"
-                    id="shelf"
+                    name="shelfname"
+                    id="shelfname"
                     style={{
                       height: "35px",
                       width: "50px",
@@ -190,15 +410,19 @@ const index = () => {
                       textAlign: "center",
                       fontSize: "14px",
                     }}
+                    onChange={(event) => setselectshelf(event.target.value)}
                   >
                     <option value="">ชั้น</option>
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
+                    {datashelf &&
+                      datashelf.listShelf.map((prod) => (
+                        <option key={prod.id} value={prod.id}>
+                          {prod.shelfname}
+                        </option>
+                      ))}
                   </select>
                   <select
-                    name="bucket"
-                    id="bucket"
+                    name="basket"
+                    id="basket"
                     style={{
                       height: "35px",
                       width: "60px",
@@ -211,37 +435,36 @@ const index = () => {
                     }}
                   >
                     <option value="">ตะกร้า</option>
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
+                    {basketdata &&
+                      basketdata.allBasket.map((prod) => (
+                        <option key={prod.id} value={prod.id}>
+                          {prod.basketname}
+                        </option>
+                      ))}
                   </select>
                   <label
-                    for="beef"
+                    for="expdate"
                     style={{
                       textAlign: "center",
                       fontSize: "18px",
                       margin: "10px 10px",
                     }}
                   >
-                    อายุ
+                    วันหมดอายุ
                   </label>
-                  <select
-                    name="room"
-                    id="room"
+                  <input
+                    type="date"
+                    name="expdate"
+                    id="date"
                     style={{
                       height: "35px",
-                      width: "70px",
                       border: "1px solid #AFAFAF",
                       borderRadius: "4px ",
                       textAlign: "center",
-                      fontSize: "14px",
+                      fontSize: "16px",
                     }}
-                  >
-                    <option value="halve">ทั้งหมด</option>
-                    <option value="quarter">1</option>
-                    <option value="lamp">2</option>
-                    <option value="chop">3</option>
-                  </select>
+                    onChange={(event) => setexpdate(event.target.value)}
+                  ></input>
                   <label
                     for="beef"
                     style={{
@@ -311,7 +534,6 @@ const index = () => {
               gridRowEnd: "5",
               gridColumnStart: "2",
               gridColumnEnd: "4",
-           
             }}
           >
             <DivFromTop>
@@ -321,7 +543,7 @@ const index = () => {
               รายการยอดคงคลังซากเนื้อโค
             </DivFromTop>
             <DivFromDown>
-              <div style={{ height: "280px", overflowY: "auto" }}>
+              <div style={{ height: "320px", overflowY: "auto" }}>
                 <Table
                   striped
                   bordered
@@ -337,25 +559,58 @@ const index = () => {
                       <th>รหัสซาก</th>
                       <th>รหัสบาร์โค้ด</th>
                       <th>คิวอาร์โค้ด</th>
-                      <th>น้ำหนักอุ่น</th>
-                      <th>น้ำหนักเย็น</th>
-                      <th>อายุ</th>
+                      <th>น้ำหนักอุ่น (กก.)</th>
+                      <th>น้ำหนักเย็น (กก.)</th>
+                      <th>วันหมดอายุ</th>
                       <th>เกรด</th>
                       <th>ห้อง</th>
                       <th>ชั้น</th>
                       <th>ตะกร้า</th>
                       <th>สถานะ</th>
                       <th>หมายเหตุ</th>
-                      <th>แก้ไข</th>
+                      <th>จัดการ</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {data &&
+                    {data && data.liststore.length > 0 ? (
                       data.liststore.map((prod) => (
-                        <List_Store key={prod.id} ListStore={prod} />
-                      ))}
+                        <List_Store key={prod.beeftypeid} Liststore={prod} />
+                      ))
+                    ) : (
+                      <tr style={{ textAlign: "center" }}>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                      </tr>
+                    )}
                   </tbody>
                 </Table>
+              </div>
+              <div
+                style={{ float: "right", textAlign: "right", marginTop: "5px" }}
+              >
+                จำนวนรายการ {data ? data.liststore.length : "0"} รายการ
+                <br />
+                น้ำหนักอุ่น{" "}
+                {data && data.liststore.length > 0
+                  ? data.liststore.reduce((sum, nex) => sum + nex.weightwarm, 0)
+                  : "0"}{" "}
+                กิโลกรัม / น้ำหนักเย็น{" "}
+                {data &&
+                  data.liststore.reduce((sum, nex) => sum + nex.weight, 0)}{" "}
+                กิโลกรัม
               </div>
             </DivFromDown>
           </DivFrom>

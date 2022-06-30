@@ -15,10 +15,8 @@ import { useQuery } from "@apollo/react-hooks";
 
 import List_import from "./List_import";
 
-import DatePicker, { registerLocale } from "react-datepicker";
 import th from "date-fns/locale/th";
-registerLocale("th", th);
-import Datestyle from "../../../helps/datepicker.module.css";
+
 
 import dayjs from "dayjs";
 
@@ -29,6 +27,7 @@ export const IMPORTHALVESEARCH = gql`
     $beeftype: String
     $enddate: String
     $startdate: String
+    $beefroom: String
   ) {
     imhalveSearch(
       namefarmer: $namefarmer
@@ -36,7 +35,9 @@ export const IMPORTHALVESEARCH = gql`
       beeftype: $beeftype
       enddate: $enddate
       startdate: $startdate
+      beefroom: $beefroom
     ) {
+      barcode
       id
       importdate
       user {
@@ -44,6 +45,7 @@ export const IMPORTHALVESEARCH = gql`
       }
       halve {
         weightwarm
+        weightcool
         barcode
         status {
           nameTH
@@ -57,120 +59,31 @@ export const IMPORTHALVESEARCH = gql`
           namefarmer
         }
       }
+      beefroom {
+        roomname
+      }
+    }
+  }
+`;
+
+export const QUERYROOM = gql`
+  query Query {
+    allRoom {
+      id
+      roomname
     }
   }
 `;
 
 const index = () => {
-  /* //calendar
-  const dateRef = useRef();
-  const [date, setDate] = useState(null);
-  const [selectedDate, handleDateChange] = useState(
-    null
-  );
-  const dateRef2 = useRef();
-  const [date2, setDate2] = useState(new Date());
-  const [selectedDate2, handleDateChange2] = useState(
-    dayjs(date2).format("YYYY-MM-DD")
-  );
-  // console.log("start : " + selectedDate + " , end : " + selectedDate2);
-  const months = [
-    "มกราคม",
-    "กุมภาพันธ์",
-    "มีนาคม",
-    "เมษายน",
-    "พฤษภาคม",
-    "มิถุนายน",
-    "กรกฎาคม",
-    "สิงหาคม",
-    "กันยายน",
-    "ตุลาคม",
-    "พฤศจิกายน",
-    "ธันวาคม",
-  ];
-
-  const dateValueRef = useRef(date);
-  dateValueRef.current = date;
-
-  const dateValueRef2 = useRef(date2);
-  dateValueRef2.current = date2;
-
-  const changeDateToBuddhist = (changeDate = new Date()) => {
-    const prevDate = new Date(changeDate);
-    // console.log("current date", prevDate === date);
-    const newDate = new Date(
-      prevDate.setFullYear(prevDate.getFullYear() + 543)
-    );
-    // console.log("year", newDate.getFullYear());
-    dateRef.current.input.value = `${newDate.getDate()} ${
-      months[newDate.getMonth()]
-    } ${newDate.getFullYear()}`;
-    // console.log(dateRef.current.input.value);
-  };
-
-  const changeDateToBuddhist2 = (changeDate = new Date()) => {
-    const prevDate = new Date(changeDate);
-    // console.log("current date", prevDate === date);
-    const newDate = new Date(
-      prevDate.setFullYear(prevDate.getFullYear() + 543)
-    );
-    // console.log("year", newDate.getFullYear());
-    dateRef2.current.input.value = `${newDate.getDate()} ${
-      months[newDate.getMonth()]
-    } ${newDate.getFullYear()}`;
-    // console.log(dateRef2.current.input.value);
-  };
-
-  // component did mount
-  useEffect(() => {
-    // console.log("dateRef", dateRef);
-    // change date value in input dom on mounted
-    changeDateToBuddhist(date);
-    const datePicker = dateRef.current;
-    const renderDateInput = datePicker.renderDateInput;
-    // console.log(renderDateInput);
-    datePicker.renderDateInput = function () {
-      const inputDom = renderDateInput();
-      return React.cloneElement(inputDom, {
-        value: changeDateToBuddhist(dateValueRef.current),
-      });
-    };
-  }, []);
-
-  // component did mount
-  useEffect(() => {
-    // console.log("dateRef", dateRef);
-    // change date value in input dom on mounted
-    changeDateToBuddhist2(date2);
-    const datePicker2 = dateRef2.current;
-    const renderDateInput = datePicker2.renderDateInput;
-    // console.log(renderDateInput2);
-    datePicker2.renderDateInput = function () {
-      const inputDom = renderDateInput();
-      return React.cloneElement(inputDom, {
-        value: changeDateToBuddhist2(dateValueRef2.current),
-      });
-    };
-  }, [date2]);
-
-  const onChangeDatePicker = (e) => {
-    // console.log("onChange");
-    setDate(e);
-    handleDateChange(dayjs(e).format("YYYY-MM-DD"));
-  };
-
-  const onChangeDatePicker2 = (e) => {
-    // console.log("onChange");
-    setDate2(e);
-    handleDateChange2(dayjs(e).format("YYYY-MM-DD"));
-  };
-  //calendar */
+  const { data: dataroom } = useQuery(QUERYROOM);
 
   const [selectedbeeftypehalve, SetBeeftypeHalveChange] = useState("");
   const [selectedstartdate, SetStartDateChange] = useState("");
   const [selectedenddate, SetEndDateChange] = useState("");
   const [inputnamefarmer, SetInputnamefarmer] = useState("");
   const [inputusername, SetInputusername] = useState("");
+  const [selectedbeefroom, setselectbeefroom] = useState("");
   const { data, loading, error } = useQuery(IMPORTHALVESEARCH, {
     variables: {
       beeftype: selectedbeeftypehalve,
@@ -178,6 +91,7 @@ const index = () => {
       enddate: selectedenddate,
       namefarmer: inputnamefarmer,
       userName: inputusername,
+      beefroom: selectedbeefroom,
     },
   });
   return (
@@ -220,13 +134,7 @@ const index = () => {
               </div>
               ดำเนินการนำเข้าซากเนื้อโคผ่าซีก
             </DivFromTop>
-            <DivFromDown
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr",
-                gridRowGap: "5px",
-              }}
-            >
+            <DivFromDown>
               <Create_Import />
             </DivFromDown>
           </DivFrom>
@@ -337,57 +245,24 @@ const index = () => {
                     ตำแหน่ง
                   </label>
                   <select
-                    name="room"
-                    id="room"
+                    name="roomname"
                     style={{
                       height: "35px",
-                      width: "50px",
+                      width: "110px",
                       border: "1px solid #AFAFAF",
-                      borderRadius: "4px 0px 0px 4px",
+                      borderRadius: "4px ",
                       textAlign: "center",
                       fontSize: "14px",
                     }}
+                    onChange={(event) => setselectbeefroom(event.target.value)}
                   >
                     <option value="">ห้อง</option>
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
-                  </select>
-                  <select
-                    name="shelf"
-                    id="shelf"
-                    style={{
-                      height: "35px",
-                      width: "50px",
-                      border: "1px solid #AFAFAF",
-                      borderLeft: "none",
-                      textAlign: "center",
-                      fontSize: "14px",
-                    }}
-                  >
-                    <option value="">ชั้น</option>
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
-                  </select>
-                  <select
-                    name="bucket"
-                    id="bucket"
-                    style={{
-                      height: "35px",
-                      width: "60px",
-                      border: "1px solid #AFAFAF",
-                      borderRadius: "0px 4px 4px 0px",
-                      borderLeft: "none",
-                      textAlign: "center",
-                      fontSize: "14px",
-                      marginRight: "10px",
-                    }}
-                  >
-                    <option value="">ตะกร้า</option>
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
+                    {dataroom &&
+                      dataroom.allRoom.map((prod) => (
+                        <option key={prod.id} value={prod.id}>
+                          {prod.roomname}
+                        </option>
+                      ))}
                   </select>
                 </from>
               </div>
@@ -417,8 +292,9 @@ const index = () => {
                       height: "35px",
                       border: "1px solid #AFAFAF",
                       borderRadius: "4px",
-                      color: "#AFAFAF",
+
                       textAlign: "center",
+                      fontSize: "16px",
                     }}
                     onChange={(event) => SetStartDateChange(event.target.value)}
                   ></input>
@@ -452,7 +328,7 @@ const index = () => {
                       height: "35px",
                       border: "1px solid #AFAFAF",
                       borderRadius: "4px",
-                      color: "#AFAFAF",
+                      fontSize: "16px",
                       textAlign: "center",
                     }}
                     onChange={(event) => SetEndDateChange(event.target.value)}
@@ -490,7 +366,7 @@ const index = () => {
               รายการนำเข้าซากเนื้อโคผ่าซีก
             </DivFromTop>
             <DivFromDown>
-              <div style={{ height: "280px", overflow: "auto" }}>
+              <div style={{ height: "320px", overflow: "auto" }}>
                 <Table
                   striped
                   bordered
@@ -508,21 +384,56 @@ const index = () => {
                       <th>รหัสซาก</th>
                       <th>รหัสบาร์โค้ด</th>
                       <th>คิวอาร์โค้ด</th>
-                      <th>น้ำหนัก</th>
+                      <th>น้ำหนักอุ่น (กก.)</th>
+                      <th>น้ำหนักเย็น (กก.)</th>
                       <th>ห้อง</th>
-                      <th>ชั้น</th>
-                      <th>ตะกร้า</th>
+
                       <th>สถานะ</th>
                       <th>ผู้นำเข้า</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {data &&
+                    {data && data.imhalveSearch.length > 0 ? (
                       data.imhalveSearch.map((prod) => (
                         <List_import key={prod.id} imhalve={prod} />
-                      ))}
+                      ))
+                    ) : (
+                      <tr style={{ textAlign: "center" }}>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                      </tr>
+                    )}
                   </tbody>
                 </Table>
+              </div>
+
+              <div style={{ float: "right", textAlign: "right" }}>
+                จำนวนรายการ {data ? data.imhalveSearch.length : "0"} รายการ
+                <br />
+                น้ำหนักอุ่น{" "}
+                {data &&
+                  data.imhalveSearch.reduce(
+                    (sum, nex) => sum + nex.halve.weightwarm,
+                    0
+                  )}{" "}
+                กิโลกรัม / น้ำหนักเย็น{" "}
+                {data &&
+                  data.imhalveSearch.reduce(
+                    (sum, nex) => sum + nex.halve.weightcool,
+                    0
+                  )}{" "}
+                กิโลกรัม
               </div>
             </DivFromDown>
           </DivFrom>

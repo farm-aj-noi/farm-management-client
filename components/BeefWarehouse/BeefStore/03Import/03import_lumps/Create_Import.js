@@ -5,34 +5,97 @@ import { DivFromInsideLeft, Searchinput, Savebutton1 } from "../ImportFrom";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
 import Router from "next/router";
 
 export const CREATEIMPORTLUMP = gql`
-  mutation CreateImlump($barcode: String!, $beefstore: String!) {
-    createImlump(barcode: $barcode, beefstore: $beefstore) {
+  mutation CREATEIMPORTLUMP(
+    $barcode: String!
+    $beefstore: String!
+    $beefroom: String!
+    $shelf: String
+    $basket: String
+  ) {
+    createImlump(
+      barcode: $barcode
+      beefstore: $beefstore
+      beefroom: $beefroom
+      shelf: $shelf
+      basket: $basket
+    ) {
       id
       importdate
     }
   }
 `;
 
+export const QUERYROOM = gql`
+  query Query {
+    allRoom {
+      id
+      roomname
+    }
+  }
+`;
+
+export const QUERYSHELF = gql`
+  query QUERYSHELF($id: ID) {
+    listShelf(id: $id) {
+      shelfname
+      id
+    }
+  }
+`;
+
+export const QUERYBASKET = gql`
+  query QUERYBASKET($id: ID) {
+    allBasket(id: $id) {
+      id
+      basketname
+    }
+  }
+`;
+
 const Create_Import = () => {
   const MySwal = withReactContent(Swal);
+
+  const { data } = useQuery(QUERYROOM);
+
   const [ImportLumpsInfo, setImportLumpsInfo] = useState({
     barcode: "",
     beefstore: "6284d7035415c34e54b2fc2c",
+    beefroom: "",
+    shelf: "",
+    basket: "",
   });
-  const [success, setSuccess] = useState(false);
+  /* console.log(ImportLumpsInfo.shelf); */
+
+  const { data: datashelf } = useQuery(QUERYSHELF, {
+    variables: {
+      id: ImportLumpsInfo.beefroom,
+    },
+  });
+
+  const { data: basketdata } = useQuery(QUERYBASKET, {
+    variables: {
+      id: ImportLumpsInfo.shelf,
+    },
+  });
+
+  /*  console.log(datashelf);
+  console.log(ImportLumpsInfo.beefroom); */
+
   const [createImlump, { loading, error }] = useMutation(CREATEIMPORTLUMP, {
     variables: { ...ImportLumpsInfo },
     onCompleted: (data) => {
       if (data) {
-        setSuccess(true);
         setImportLumpsInfo({
           barcode: "",
+          beefroom: "",
+          shelf: "",
+          basket: "",
         });
         MySwal.fire({
           icon: "success",
@@ -55,12 +118,23 @@ const Create_Import = () => {
       if (error) {
         setImportLumpsInfo({
           barcode: "",
+          beefroom: "",
+          shelf: "",
+          basket: "",
         });
         MySwal.fire({
           icon: "error",
-          title: <p>เกิดข้อผิดพลาด</p>,
+          title: <p>{error.graphQLErrors[0].message}</p>,
           text: "กรุณากรอกข้อมูลใหม่อีกครั้ง",
-          confirmButtonText: <span>ตกลง</span>,
+          confirmButtonText: (
+            <span
+              onClick={() =>
+                Router.reload("beefwarehouse/beefstore/import/import_lumps")
+              }
+            >
+              ตกลง
+            </span>
+          ),
           confirmButtonColor: "#3085d6",
         });
       }
@@ -100,10 +174,18 @@ const Create_Import = () => {
                 name="barcode"
                 value={ImportLumpsInfo.barcode}
                 onChange={handleChange}
+                style={{
+                  borderColor: `${!ImportLumpsInfo.barcode ? "red" : ""}`,
+                }}
               />
+              {!ImportLumpsInfo.barcode ? (
+                <label style={{ color: "red" }}>กรุณากรอกบาร์โค้ด</label>
+              ) : (
+                ""
+              )}
             </div>
           </DivFromInsideLeft>
-          <DivFromInsideLeft>
+          <DivFromInsideLeft style={{ marginTop: "5px" }}>
             ตำแหน่ง :
             <div
               style={{
@@ -113,8 +195,10 @@ const Create_Import = () => {
             >
               <div style={{ display: "inline", width: "170px" }}>
                 <select
-                  name="room"
-                  id="room"
+                  name="beefroom"
+                  id="beefroom"
+                  value={ImportLumpsInfo.beefroom}
+                  onChange={handleChange}
                   style={{
                     height: "35px",
                     width: "50px",
@@ -125,13 +209,18 @@ const Create_Import = () => {
                   }}
                 >
                   <option value="">ห้อง</option>
-                  <option value="">1</option>
-                  <option value="">2</option>
-                  <option value="">3</option>
+                  {data &&
+                    data.allRoom.map((prod) => (
+                      <option key={prod.id} value={prod.id}>
+                        {prod.roomname}
+                      </option>
+                    ))}
                 </select>
                 <select
                   name="shelf"
                   id="shelf"
+                  value={ImportLumpsInfo.shelf}
+                  onChange={handleChange}
                   style={{
                     height: "35px",
                     width: "50px",
@@ -142,13 +231,18 @@ const Create_Import = () => {
                   }}
                 >
                   <option value="">ชั้น</option>
-                  <option value="">1</option>
-                  <option value="">2</option>
-                  <option value="">3</option>
+                  {datashelf &&
+                    datashelf.listShelf.map((prod) => (
+                      <option key={prod.id} value={prod.id}>
+                        {prod.shelfname}
+                      </option>
+                    ))}
                 </select>
                 <select
-                  name="bucket"
-                  id="bucket"
+                  name="basket"
+                  id="basket"
+                  value={ImportLumpsInfo.basket}
+                  onChange={handleChange}
                   style={{
                     height: "35px",
                     width: "60px",
@@ -161,9 +255,12 @@ const Create_Import = () => {
                   }}
                 >
                   <option value="">ตะกร้า</option>
-                  <option value="">1</option>
-                  <option value="">2</option>
-                  <option value="">3</option>
+                  {basketdata &&
+                    basketdata.allBasket.map((prod) => (
+                      <option key={prod.id} value={prod.id}>
+                        {prod.basketname}
+                      </option>
+                    ))}
                 </select>
               </div>
             </div>
@@ -177,7 +274,25 @@ const Create_Import = () => {
               paddingBottom: "10px",
             }}
           >
-            <Savebutton1 disabled={loading}>บันทึก</Savebutton1>
+            <Savebutton1
+              disabled={
+                !ImportLumpsInfo.barcode ||
+                !ImportLumpsInfo.beefroom ||
+                !ImportLumpsInfo.shelf
+              }
+              onClick={handleSubmit}
+              style={{
+                backgroundColor: `${
+                  !ImportLumpsInfo.beefroom ||
+                  !ImportLumpsInfo.barcode ||
+                  !ImportLumpsInfo.shelf
+                    ? "gray"
+                    : ""
+                }`,
+              }}
+            >
+              บันทึก
+            </Savebutton1>
           </div>
         </form>
       </div>

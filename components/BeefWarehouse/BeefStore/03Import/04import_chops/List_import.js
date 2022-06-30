@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Barcodebuttoncolor } from "../../../../../utils/buttonColor";
 import { Qrcodebutton } from "../../../../../utils/button";
 import dayjs from "dayjs";
+import Modalqrcode from "../../12Qrcode/Import/imcqr";
 
 function List_import({ imchop }) {
   const [imchopData, SetImchopData] = useState(imchop);
@@ -19,14 +20,12 @@ function List_import({ imchop }) {
       <td>{imchopData.chop.beeftype.code}</td>
       <td>{imchopData.chop.barcode}</td>
       <td>
-        <Barcodebuttoncolor>
-          <Qrcodebutton />
-        </Barcodebuttoncolor>
+        <Modalqrcode key={imchopData.id} listchop={imchopData} />
       </td>
       <td>{imchopData.chop.weight}</td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td>{imchopData.beefroom.roomname}</td>
+      <td>{imchopData.shelf.shelfname}</td>
+      <td>{imchopData.basket}</td>
       <td>{imchopData.chop.status.nameTH}</td>
       <td>{imchopData.user.name}</td>
     </tr>

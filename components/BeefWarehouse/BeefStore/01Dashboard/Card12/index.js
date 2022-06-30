@@ -37,14 +37,6 @@ const index = () => {
             marginRight: "18px",
           }}
         >
-          <div
-            style={{
-              fontSize: "50px",
-              height: "62px",
-            }}
-          >
-            0
-          </div>
           <a
             style={{
               color: "#ffffff",
@@ -57,7 +49,7 @@ const index = () => {
           </a>
         </form>
       </div>
-      <Link href="">
+      <Link href="beefstore/graph">
         <StyleAlertCardDown style={{ marginTop: "7px" }}>
           แสดงรายละเอียด
           <div style={{ margin: "-3px 0px 0px auto" }}>

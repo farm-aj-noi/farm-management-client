@@ -53,14 +53,7 @@ const Nav_notify = (Sidenumber) => {
                       </Nav.Link>
                     </Nav.Item>
 
-                    <Nav.Item style={{ marginBottom: "5px" }}>
-                      <Nav.Link eventKey="3">
-                        <Link href="/beefwarehouse/beefstore/notify/notify_chill">
-                          <div style={{ width: "100%" }}>ครบกำหนดบ่ม</div>
-                        </Link>
-                      </Nav.Link>
-                    </Nav.Item>
-
+                    
                     <Nav.Item style={{ marginBottom: "5px" }}>
                       <Nav.Link eventKey="4">
                         <Link href="/beefwarehouse/beefstore/notify/notify_import">
@@ -86,5 +79,12 @@ const Nav_notify = (Sidenumber) => {
     </>
   );
 };
-///
+
 export default Nav_notify;
+/* <Nav.Item style={{ marginBottom: "5px" }}>
+                      <Nav.Link eventKey="3">
+                        <Link href="/beefwarehouse/beefstore/notify/notify_chill">
+                          <div style={{ width: "100%" }}>ครบกำหนดบ่ม</div>
+                        </Link>
+                      </Nav.Link>
+                    </Nav.Item>  */

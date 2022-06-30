@@ -53,16 +53,15 @@ const Nav1 = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
-
-          {(user.role.nameEN === "booster"||
-              user.role.nameEN === "slaughter"||
+            {(user.role.nameEN === "booster" ||
+              user.role.nameEN === "slaughter" ||
               user.role.nameEN === "accounter" ||
               user.role.nameEN === "admin") && (
               <>
-            <Link href="/slaughter/alert">
-              <NavButtonLeft>แจ้งเตือน</NavButtonLeft>
-            </Link>
-            </>
+                <Link href="/slaughter/alert">
+                  <NavButtonLeft>แจ้งเตือน</NavButtonLeft>
+                </Link>
+              </>
             )}
 
             {(user.role.nameEN === "booster" ||
@@ -122,7 +121,7 @@ const Nav1 = () => {
             {(user.role.nameEN === "storer" ||
               user.role.nameEN === "admin") && (
               <>
-                <DropdownButton
+                {/* <DropdownButton
                   drop="down"
                   title={`ส่งตัดแต่ง`}
                   bsPrefix={MyCss.nstdropleft}
@@ -137,6 +136,7 @@ const Nav1 = () => {
                     <NavDropdownItem>ก้อนเนื้อ</NavDropdownItem>
                   </Link>
                 </DropdownButton>
+              </> */}
               </>
             )}
 

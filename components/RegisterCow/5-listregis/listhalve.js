@@ -139,7 +139,7 @@ const Index = ({ List }) => {
                 <td> {prod.numkun} </td>
                 <td> {prod.numcow}</td>
                 <td>{prod.namecow}</td>
-                <td> {prod.pun} </td>
+                <td> {prod.apun} </td>
                 <td>{
                 timeDifference(prod.date)
                   }</td>

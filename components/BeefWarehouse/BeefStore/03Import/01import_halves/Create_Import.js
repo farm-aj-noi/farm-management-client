@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { DivFromInsideLeft, Searchinput, Savebutton1 } from "../ImportFrom";
 
 import gql from "graphql-tag";
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/react-hooks";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -11,28 +11,55 @@ import withReactContent from "sweetalert2-react-content";
 import Router from "next/router";
 
 export const CREATEIMPORTHALVE = gql`
-  mutation CREATEIMPORTHALVE($barcode: String!, $beefstore: String!) {
-    createImHalve(barcode: $barcode, beefstore: $beefstore) {
+  mutation CREATEIMPORTHALVE(
+    $barcode: String!
+    $beefstore: String!
+    $beefroom: String!
+  ) {
+    createImHalve(
+      barcode: $barcode
+      beefstore: $beefstore
+      beefroom: $beefroom
+    ) {
       id
       importdate
+      barcode
     }
   }
 `;
+
+export const QUERYROOM = gql`
+  query Query {
+    allRoom {
+      id
+      roomname
+    }
+  }
+`;
+
 const Create_Import = () => {
   const MySwal = withReactContent(Swal);
 
+  const { data: dataroom } = useQuery(QUERYROOM);
   const [ImporthalvesInfo, setImporthalvesInfo] = useState({
     barcode: "",
     beefstore: "6284d7035415c34e54b2fc2c",
+    beefroom: "",
   });
+
   const [success, setSuccess] = useState(false);
   const [createImHalve, { loading, error }] = useMutation(CREATEIMPORTHALVE, {
-    variables: { ...ImporthalvesInfo },
+    variables: {
+      barcode: ImporthalvesInfo.barcode,
+      beefstore: ImporthalvesInfo.beefstore,
+      beefroom: ImporthalvesInfo.beefroom,
+    },
     onCompleted: (data) => {
       if (data) {
         setSuccess(true);
         setImporthalvesInfo({
           barcode: "",
+          beefroom: "",
         });
         MySwal.fire({
           icon: "success",
@@ -55,17 +82,27 @@ const Create_Import = () => {
       if (error) {
         setImporthalvesInfo({
           barcode: "",
+          beefroom: "",
         });
         MySwal.fire({
           icon: "error",
-          title: <p>เกิดข้อผิดพลาด</p>,
+          title: <p>{error.graphQLErrors[0].message}</p>,
           text: "กรุณากรอกข้อมูลใหม่อีกครั้ง",
-          confirmButtonText: <span>ตกลง</span>,
+          confirmButtonText: (
+            <span
+              onClick={() =>
+                Router.reload("beefwarehouse/beefstore/import/import_halves")
+              }
+            >
+              ตกลง
+            </span>
+          ),
           confirmButtonColor: "#3085d6",
         });
       }
     },
   });
+  console.log(ImporthalvesInfo.barcode);
 
   const handleChange = (e) => {
     setImporthalvesInfo({
@@ -86,7 +123,7 @@ const Create_Import = () => {
   return (
     <>
       <div>
-        <form onSubmit={handleSubmit}>
+        <form>
           <DivFromInsideLeft>
             บาร์โค้ด :
             <div
@@ -96,15 +133,20 @@ const Create_Import = () => {
               }}
             >
               <Searchinput
-                type="text"
-                id="barcode"
                 name="barcode"
                 value={ImporthalvesInfo.barcode}
                 onChange={handleChange}
+                style={{
+                  borderColor: `${!ImporthalvesInfo.barcode ? "red" : ""}`,
+                }}
               />
+
+              {!ImporthalvesInfo.barcode && (
+                <label style={{ color: "red" }}>กรุณากรอกบาร์โค้ด</label>
+              )}
             </div>
           </DivFromInsideLeft>
-          <DivFromInsideLeft>
+          <DivFromInsideLeft style={{ marginTop: "5px" }}>
             ตำแหน่ง :
             <div
               style={{
@@ -114,57 +156,26 @@ const Create_Import = () => {
             >
               <div style={{ display: "inline", width: "170px" }}>
                 <select
-                  name="room"
-                  id="room"
+                  name="beefroom"
+                  id="beefroom"
+                  onChange={handleChange}
                   style={{
                     height: "35px",
-                    width: "50px",
+                    width: "160px",
                     border: "1px solid #AFAFAF",
-                    borderRadius: "4px 0px 0px 4px",
+                    borderRadius: "4px",
                     textAlign: "center",
                     fontSize: "14px",
                   }}
                 >
                   <option value="">ห้อง</option>
-                  <option value="">1</option>
-                  <option value="">2</option>
-                  <option value="">3</option>
-                </select>
-                <select
-                  name="shelf"
-                  id="shelf"
-                  style={{
-                    height: "35px",
-                    width: "50px",
-                    border: "1px solid #AFAFAF",
-                    borderLeft: "none",
-                    textAlign: "center",
-                    fontSize: "14px",
-                  }}
-                >
-                  <option value="">ชั้น</option>
-                  <option value="">1</option>
-                  <option value="">2</option>
-                  <option value="">3</option>
-                </select>
-                <select
-                  name="bucket"
-                  id="bucket"
-                  style={{
-                    height: "35px",
-                    width: "60px",
-                    border: "1px solid #AFAFAF",
-                    borderRadius: "0px 4px 4px 0px",
-                    borderLeft: "none",
-                    textAlign: "center",
-                    fontSize: "14px",
-                    marginRight: "10px",
-                  }}
-                >
-                  <option value="">ตะกร้า</option>
-                  <option value="">1</option>
-                  <option value="">2</option>
-                  <option value="">3</option>
+                  {dataroom &&
+                    dataroom.allRoom.map((prod) => (
+                      <option key={prod.id} value={prod.id}>
+                        {prod.roomname}
+                      </option>
+                    ))}
+                  {/*  <option value="62875e0171c2560f802d9f89">A1</option> */}
                 </select>
               </div>
             </div>
@@ -178,7 +189,19 @@ const Create_Import = () => {
               paddingBottom: "10px",
             }}
           >
-            <Savebutton1 disabled={loading}>บันทึก</Savebutton1>
+            <Savebutton1
+              disabled={!ImporthalvesInfo.barcode || !ImporthalvesInfo.beefroom}
+              style={{
+                backgroundColor: `${
+                  !ImporthalvesInfo.barcode || !ImporthalvesInfo.beefroom
+                    ? "gray"
+                    : ""
+                }`,
+              }}
+              onClick={handleSubmit}
+            >
+              บันทึก
+            </Savebutton1>
           </div>
         </form>
       </div>

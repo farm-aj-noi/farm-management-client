@@ -7,7 +7,60 @@ import Icon from "react-icons-kit";
 import { fileText } from "react-icons-kit/fa/fileText";
 
 import Link from "next/link";
+
+import gql from "graphql-tag";
+import { useQuery } from "@apollo/react-hooks";
+
+const EXPC = gql`
+  query EXPC {
+    Card8c {
+      id
+      Expdate
+    }
+  }
+`;
+const EXPH = gql`
+  query EXPIM {
+    Card8h {
+      id
+      Expdate
+    }
+  }
+`;
+
+const EXPL = gql`
+  query EXPL {
+    Card8l {
+      id
+      Expdate
+    }
+  }
+`;
+
+const EXPQ = gql`
+  query EXPQ {
+    Card8q {
+      id
+      Expdate
+    }
+  }
+`;
+
+const EXPEN = gql`
+  query EXPEN {
+    Card8e {
+      id
+      Expdate
+    }
+  }
+`;
+
 const index = () => {
+  const { data: expc } = useQuery(EXPC);
+  const { data: exph } = useQuery(EXPH);
+  const { data: expl } = useQuery(EXPL);
+  const { data: expq } = useQuery(EXPQ);
+  const { data: expen } = useQuery(EXPEN);
   return (
     <DivAlertCard style={{ backgroundColor: "#979797" }}>
       <div
@@ -43,7 +96,13 @@ const index = () => {
               height: "62px",
             }}
           >
-            0
+            {expc && exph && expl && expq && expen
+              ? expc.Card8c.length +
+                exph.Card8h.length +
+                expl.Card8l.length +
+                expq.Card8q.length +
+                expen.Card8e.length
+              : "0"}
           </div>
           <a
             style={{
@@ -57,7 +116,7 @@ const index = () => {
           </a>
         </form>
       </div>
-      <Link href="">
+      <Link href="/beefwarehouse/beefstore/notify/notify_date">
         <StyleAlertCardDown style={{ marginTop: "7px" }}>
           แสดงรายละเอียด
           <div style={{ margin: "-3px 0px 0px auto" }}>

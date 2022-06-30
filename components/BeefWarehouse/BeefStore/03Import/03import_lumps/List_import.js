@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { Barcodebuttoncolor } from "../../../../../utils/buttonColor";
 import { Qrcodebutton } from "../../../../../utils/button";
 import dayjs from "dayjs";
+import Modalqrcode from "../../12Qrcode/Import/imlqr";
 
 function List_import({ imlump }) {
   const [imlumpData, SetImhalveData] = useState(imlump);
+ 
   return (
     <tr style={{ textAlign: "center" }}>
       <td>{imlumpData.lump.imslaughter.namefarmer}</td>
@@ -19,14 +21,12 @@ function List_import({ imlump }) {
       <td>{imlumpData.lump.beeftype.code}</td>
       <td>{imlumpData.lump.barcode}</td>
       <td>
-        <Barcodebuttoncolor>
-          <Qrcodebutton />
-        </Barcodebuttoncolor>
+        <Modalqrcode key={imlumpData.id} listlump={imlumpData} />
       </td>
       <td>{imlumpData.lump.weight}</td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td>{imlumpData.beefroom.roomname}</td>
+      <td>{imlumpData.shelf.shelfname}</td>
+      <td>{imlumpData.basket ? imlumpData.basket : "-"}</td>
       <td>{imlumpData.lump.status.nameTH}</td>
       <td>{imlumpData.user.name}</td>
     </tr>

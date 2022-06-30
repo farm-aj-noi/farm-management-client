@@ -25,19 +25,20 @@ import dayjs from "dayjs";
 
 export const IMPORTHALVESEARCH = gql`
   query IMPORTHALVESEARCH(
-    $startdate: String
-    $enddate: String
-    $beeftype: String
     $namefarmer: String
     $userName: String
+    $beeftype: String
+    $enddate: String
+    $startdate: String
   ) {
     imhalveSearch(
-      startdate: $startdate
-      enddate: $enddate
-      beeftype: $beeftype
       namefarmer: $namefarmer
       userName: $userName
+      beeftype: $beeftype
+      enddate: $enddate
+      startdate: $startdate
     ) {
+      barcode
       id
       importdate
       user {
@@ -45,6 +46,7 @@ export const IMPORTHALVESEARCH = gql`
       }
       halve {
         weightwarm
+        weightcool
         barcode
         status {
           nameTH
@@ -58,9 +60,13 @@ export const IMPORTHALVESEARCH = gql`
           namefarmer
         }
       }
+      beefroom {
+        roomname
+      }
     }
   }
 `;
+
 const index = () => {
   const [selectedbeeftypehalve, SetBeeftypeHalveChange] = useState("");
   const [selectedstartdate, SetStartDateChange] = useState("");
@@ -304,7 +310,10 @@ const index = () => {
                         <th>ทะเบียนขุน</th>
                         <th>รหัสซาก</th>
                         <th>รหัสบาร์โค้ด</th>
-                        <th>น้ำหนัก</th>
+                        <th>น้ำหนัก (กก.)</th>
+                        <th>ห้อง</th>
+                        <th>ชั้น</th>
+                        <th>ตะกร้า</th>
                         <th>สถานะ</th>
                         <th>ผู้นำเข้า</th>
                       </tr>
@@ -329,6 +338,9 @@ const index = () => {
                             <td>{prod.halve.beeftype.code}</td>
                             <td>{prod.halve.barcode}</td>
                             <td>{prod.halve.weightwarm}</td>
+                            <td>{prod.beefroom.roomname}</td>
+                            <td>-</td>
+                            <td>-</td>
                             <td>{prod.halve.status.nameTH}</td>
                             <td>{prod.user.name}</td>
                           </tr>

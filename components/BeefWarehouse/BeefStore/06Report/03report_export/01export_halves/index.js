@@ -28,31 +28,38 @@ export const EXPORTHALVESSEARCH = gql`
     $startdate: String
     $enddate: String
     $beeftype: String
+    $namefarmer: String
     $userName: String
+    $exporter: String
   ) {
     exporthalve(
       startdate: $startdate
       enddate: $enddate
       beeftype: $beeftype
+      namefarmer: $namefarmer
       userName: $userName
+      exporter: $exporter
     ) {
       id
+      exporter
       exportdate
       user {
         name
       }
       halve {
         weightwarm
+        weightcool
         barcode
-        imslaughter {
-          numcow
-          namefarmer
-        }
         beeftype {
           code
           nameTH
         }
+        imslaughter {
+          numcow
+          namefarmer
+        }
       }
+
       storestatus {
         nameTH
       }
@@ -275,7 +282,7 @@ const index = () => {
                         <th>ทะเบียนขุน</th>
                         <th>รหัสซาก</th>
                         <th>รหัสบาร์โค้ด</th>
-                        <th>น้ำหนัก</th>
+                        <th>น้ำหนัก (กก.)</th>
                         <th>สถานะ</th>
                         <th>ผู้ขอเบิก</th>
                         <th>ผู้เบิกออก</th>
@@ -301,7 +308,7 @@ const index = () => {
                             <td>{prod.halve.barcode}</td>
                             <td>{prod.halve.weightwarm}</td>
                             <td>{prod.storestatus.nameTH}</td>
-                            <td>-</td>
+                            <td>{prod.exporter}</td>
                             <td>{prod.user.name}</td>
                           </tr>
                         ))}

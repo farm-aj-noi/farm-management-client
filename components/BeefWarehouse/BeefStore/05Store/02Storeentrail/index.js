@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Table } from "react-bootstrap";
 import { DivFrom, DivFromTop, DivFromDown, HeaderColor } from "../StoreFrom.js";
@@ -16,8 +16,8 @@ import List_Store from "./ListStore.js";
 import Nav_store from "../Nav_store";
 
 export const STOREENTRAIL = gql`
-  query STOREENTRAIL {
-    listentrail {
+  query STOREENTRAIL($beefroom: String, $expdate: String) {
+    listentrail(beefroom: $beefroom, expdate: $expdate) {
       namefarmer
       barcode
       cownum
@@ -31,13 +31,31 @@ export const STOREENTRAIL = gql`
       tail
       gallbladder
       scrap
+      beefroom
+      Expdate
     }
   }
 `;
 
+export const QUERYROOM = gql`
+  query Query {
+    allRoom {
+      id
+      roomname
+    }
+  }
+`;
 
 const index = () => {
-  const { data, loading, error } = useQuery(STOREENTRAIL);
+  const [selectedbeefroom, setselectbeefroom] = useState("");
+  const [expdate, setexpdate] = useState("");
+  const { data, loading, error } = useQuery(STOREENTRAIL, {
+    variables: {
+      beefroom: selectedbeefroom,
+      expdate: expdate,
+    },
+  });
+  const { data: dataroom } = useQuery(QUERYROOM);
   return (
     <DivBase>
       <div
@@ -80,10 +98,110 @@ const index = () => {
           style={{
             width: "100%",
             gridRowStart: "2",
+            gridRowEnd: "2",
+            gridColumnStart: "3",
+          }}
+        >
+          <DivFromTop>
+            <div style={{ margin: "-3px 5px 0px 0px" }}>
+              <Icon size={20} icon={iosSearchStrong} />
+            </div>
+            ค้นหารายการ
+          </DivFromTop>
+          <DivFromDown>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <from style={{ fontSize: "20px" }}>
+                <label
+                  for="beef"
+                  style={{
+                    textAlign: "center",
+                    fontSize: "18px",
+                    marginLeft: "10px",
+                    marginRight: "10px",
+                  }}
+                >
+                  ทะเบียนขุน
+                </label>
+                <input
+                  style={{
+                    height: "35px",
+                    width: "110px",
+                    borderRadius: "4px",
+                    border: "1px solid #AFAFAF",
+                    fontSize: "14px",
+                    textAlign: "center",
+                  }}
+                />
+                <label
+                  for="expdate"
+                  style={{
+                    textAlign: "center",
+                    fontSize: "18px",
+                    margin: "10px 10px",
+                  }}
+                >
+                  <label
+                    for="beef"
+                    style={{
+                      textAlign: "center",
+                      fontSize: "18px",
+                      margin: "10px 10px",
+                    }}
+                  >
+                    ตำแหน่ง
+                  </label>
+                  <select
+                    name="roomname"
+                    style={{
+                      height: "35px",
+                      width: "110px",
+                      border: "1px solid #AFAFAF",
+                      borderRadius: "4px ",
+                      textAlign: "center",
+                      fontSize: "14px",
+                      marginRight: "10px",
+                    }}
+                    onChange={(event) => setselectbeefroom(event.target.value)}
+                  >
+                    <option value="">ห้อง</option>
+                    {dataroom &&
+                      dataroom.allRoom.map((prod) => (
+                        <option key={prod.id} value={prod.id}>
+                          {prod.roomname}
+                        </option>
+                      ))}
+                  </select>
+                  วันหมดอายุ
+                </label>
+                <input
+                  type="date"
+                  name="expdate"
+                  id="date"
+                  style={{
+                    height: "35px",
+                    border: "1px solid #AFAFAF",
+                    borderRadius: "4px ",
+                    textAlign: "center",
+                    fontSize: "16px",
+                  }}
+                  onChange={(event) => setexpdate(event.target.value)}
+                ></input>
+              </from>
+            </div>
+          </DivFromDown>
+        </DivFrom>
+        <DivFrom
+          style={{
+            width: "100%",
+            gridRowStart: "3",
             gridRowEnd: "3",
             gridColumnStart: "3",
             marginTop: "0px",
-            height: "500px",
           }}
         >
           <DivFromTop>
@@ -93,7 +211,7 @@ const index = () => {
             รายการยอดคงคลังซากโค
           </DivFromTop>
           <DivFromDown>
-            <div style={{ height: "350px", overflowY: "auto" }}>
+            <div style={{ height: "380px", overflowY: "auto" }}>
               <Table
                 striped
                 bordered
@@ -101,10 +219,8 @@ const index = () => {
                 hover
                 style={{ margin: "auto" }}
               >
-                {/* <LoadingSmall/> */}
                 <thead>
                   <tr style={{ textAlign: "center" }}>
-                    <th>เจ้าของซาก</th>
                     <th>ทะเบียนขุน</th>
                     <th>เครื่องใน</th>
                     <th>ปลายเท้า</th>
@@ -118,20 +234,43 @@ const index = () => {
                     <th>เศษซาก</th>
                     <th>รหัสบาร์โค้ด</th>
                     <th>คิวอาร์โค้ด</th>
+                    <th>วันหมดอายุ</th>
                     <th>ห้อง</th>
-                    <th>ชั้น</th>
-                    <th>ตะกร้า</th>
                     <th>หมายเหตุ</th>
                     <th>แก้ไข</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {data &&
+                  {data && data.listentrail.length > 0 ? (
                     data.listentrail.map((prod) => (
                       <List_Store key={prod.id} Listentrail={prod} />
-                    ))}
+                    ))
+                  ) : (
+                    <tr style={{ textAlign: "center" }}>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                  )}
                 </tbody>
               </Table>
+            </div>
+            <div style={{ float: "right", textAlign: "right" }}>
+              จำนวนรายการ {data ? data.listentrail.length : "0"} รายการ
             </div>
           </DivFromDown>
         </DivFrom>

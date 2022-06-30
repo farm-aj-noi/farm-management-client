@@ -23,6 +23,7 @@ import {
   Icon11,
   Icon12,
   Icon13,
+  Icon14
 } from "../../../../utils/naviconbeefstore";
 
 import { blue, white } from "../../../../utils/colors";
@@ -53,6 +54,7 @@ const Nav1 = () => {
         }}
         collapseOnSelect
         expand="lg"
+      /*  fixed="top" */
       >
         <Navbar.Brand style={{ padding: "0" }}>
           <Link href="/beefwarehouse">
@@ -136,16 +138,12 @@ const Nav1 = () => {
                 คงคลัง
               </NavButtonLeft>
             </Link>
-            <Link href="/beefwarehouse/beefstore/graph">
-              <NavButtonLeft>
-                <Icon13 height="40px" weight="37px" /> รายละเอียดกราฟ
-              </NavButtonLeft>
-            </Link>
+
             <DropdownButton
               drop="down"
               title={
                 <span>
-                  <Icon4 height="30px" weight="30px" />
+                  <Icon3 height="30px" weight="30px" />
                   ออกรายงาน
                 </span>
               }
@@ -164,12 +162,27 @@ const Nav1 = () => {
                 <NavDropdownItem>ออกรายงานคงคลัง</NavDropdownItem>
               </Link>
             </DropdownButton>
+            <Link href="/beefwarehouse/beefstore/requestexport">
+              <NavButtonLeft>
+                <Icon2 height="30px" weight="30px" /> ร้องขอเบิก
+              </NavButtonLeft>
+            </Link>
             <Link href="/beefwarehouse/beefstore/notify/notify_date">
               <NavButtonLeft>
                 <Icon10 height="30px" weight="30px" /> การแจ้งเตือน
               </NavButtonLeft>
             </Link>
-            <Link href="/beefwarehouse/beefstore/setting">
+            <Link href="/beefwarehouse/beefstore/transport">
+              <NavButtonLeft>
+                <Icon14 height="30px" weight="30px" /> บันทึกการขนส่ง
+              </NavButtonLeft>
+            </Link>
+            <Link href="/beefwarehouse/beefstore/graph">
+              <NavButtonLeft>
+                <Icon13 height="40px" weight="37px" /> รายละเอียดข้อมูลสถิติ
+              </NavButtonLeft>
+            </Link>
+            <Link href="/beefwarehouse/beefstore/setting/room">
               <NavButtonLeft>
                 <Icon5 height="30px" weight="30px" /> การตั้งค่า
               </NavButtonLeft>

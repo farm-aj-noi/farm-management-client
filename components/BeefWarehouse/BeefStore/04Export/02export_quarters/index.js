@@ -20,14 +20,19 @@ export const EXPORTQUARTERSEARCH = gql`
     $startdate: String
     $enddate: String
     $beeftype: String
+    $namefarmer: String
     $userName: String
+    $exporter: String
   ) {
     exportquart(
       startdate: $startdate
       enddate: $enddate
       beeftype: $beeftype
+      namefarmer: $namefarmer
       userName: $userName
+      exporter: $exporter
     ) {
+      exporter
       id
       exportdate
       user {
@@ -59,12 +64,14 @@ const index = () => {
   const [selectedstartdate, SetStartDateChange] = useState("");
   const [selectedenddate, SetEndDateChange] = useState("");
   const [inputusername, SetInputusername] = useState("");
+  const [inputexporter, SetinputExporter] = useState("");
   const { data, loading, error } = useQuery(EXPORTQUARTERSEARCH, {
     variables: {
       beeftype: selectedbeeftypequarter,
       startdate: selectedstartdate,
       enddate: selectedenddate,
       userName: inputusername,
+      exporter: inputexporter,
     },
   });
   return (
@@ -199,6 +206,7 @@ const index = () => {
                       fontSize: "14px",
                       textAlign: "center",
                     }}
+                    onChange={(event) => SetinputExporter(event.target.value)}
                   />
                   <label
                     for="beef"
@@ -222,69 +230,6 @@ const index = () => {
                     }}
                     onChange={(event) => SetInputusername(event.target.value)}
                   />
-                  <label
-                    for="beef"
-                    style={{
-                      textAlign: "center",
-                      fontSize: "18px",
-                      margin: "10px 10px",
-                    }}
-                  >
-                    ตำแหน่ง
-                  </label>
-                  <select
-                    name="room"
-                    id="room"
-                    style={{
-                      height: "35px",
-                      width: "50px",
-                      border: "1px solid #AFAFAF",
-                      borderRadius: "4px 0px 0px 4px",
-                      textAlign: "center",
-                      fontSize: "14px",
-                    }}
-                  >
-                    <option value="">ห้อง</option>
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
-                  </select>
-                  <select
-                    name="shelf"
-                    id="shelf"
-                    style={{
-                      height: "35px",
-                      width: "50px",
-                      border: "1px solid #AFAFAF",
-                      borderLeft: "none",
-                      textAlign: "center",
-                      fontSize: "14px",
-                    }}
-                  >
-                    <option value="">ชั้น</option>
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
-                  </select>
-                  <select
-                    name="bucket"
-                    id="bucket"
-                    style={{
-                      height: "35px",
-                      width: "60px",
-                      border: "1px solid #AFAFAF",
-                      borderRadius: "0px 4px 4px 0px",
-                      borderLeft: "none",
-                      textAlign: "center",
-                      fontSize: "14px",
-                      marginRight: "10px",
-                    }}
-                  >
-                    <option value="">ตะกร้า</option>
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
-                  </select>
                 </from>
               </div>
               <div
@@ -313,7 +258,7 @@ const index = () => {
                       height: "35px",
                       border: "1px solid #AFAFAF",
                       borderRadius: "4px",
-                      color: "#AFAFAF",
+                      fontSize: "16px",
                       textAlign: "center",
                     }}
                     onChange={(event) => SetStartDateChange(event.target.value)}
@@ -337,7 +282,7 @@ const index = () => {
                       height: "35px",
                       border: "1px solid #AFAFAF",
                       borderRadius: "4px",
-                      color: "#AFAFAF",
+                      fontSize: "16px",
                       textAlign: "center",
                     }}
                     onChange={(event) => SetEndDateChange(event.target.value)}
@@ -380,10 +325,7 @@ const index = () => {
                       <th>รหัสซาก</th>
                       <th>รหัสบาร์โค้ด</th>
                       <th>คิวอาร์โค้ด</th>
-                      <th>น้ำหนัก</th>
-                      <th>ห้อง</th>
-                      <th>ชั้น</th>
-                      <th>ตะกร้า</th>
+                      <th>น้ำหนัก (กก.)</th>
                       <th>สถานะ</th>
                       <th>ผู้ขอเบิก</th>
                       <th>ผู้เบิกออก</th>
@@ -396,6 +338,17 @@ const index = () => {
                       ))}
                   </tbody>
                 </Table>
+              </div>
+              <div style={{ float: "right", textAlign: "right" }}>
+                จำนวนรายการ {data ? data.exportquart.length : "0"} รายการ
+                <br />
+                น้ำหนักอุ่น{" "}
+                {data &&
+                  data.exportquart.reduce(
+                    (sum, nex) => sum + nex.quarter.weight,
+                    0
+                  )}{" "}
+                กิโลกรัม
               </div>
             </DivFromDown>
           </DivFrom>

@@ -20,6 +20,25 @@ import {
 import MyCss from "./Nav.module.css";
 import { AuthContext } from "../../../../appState/AuthProvider";
 
+import {
+  Icon1,
+  Icon2,
+  Icon3,
+  Icon4,
+  Icon5,
+  Icon6,
+  Icon7,
+  Icon8,
+  Icon9,
+  Icon10,
+  Icon11,
+  Icon12,
+  Icon13,
+  Icon14,
+  Icon15,
+  Icon16
+} from "../../../../utils/naviconbeefstore";
+
 const Nav1 = () => {
   const { user, signout } = useContext(AuthContext);
   return (
@@ -58,17 +77,38 @@ const Nav1 = () => {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
             <Link href="/beefwarehouse/beefproduct/imports">
-              <NavButtonLeft> การนำเข้า</NavButtonLeft>
+              <NavButtonLeft>
+                {" "}
+                <Icon16 height="30px" weight="30px" /> แปรรูปสินค้า
+              </NavButtonLeft>
+            </Link>
+            <Link href="/beefwarehouse/beefproduct/imports">
+              <NavButtonLeft>
+                {" "}
+                <Icon12 height="30px" weight="30px" /> การนำเข้า
+              </NavButtonLeft>
             </Link>
             <Link href="/beefwarehouse/beefproduct/exports">
-              <NavButtonLeft> การเบิกออก</NavButtonLeft>
+              <NavButtonLeft>
+                {" "}
+                <Icon11 height="30px" weight="30px" /> การเบิกออก
+              </NavButtonLeft>
             </Link>
             <Link href="/beefwarehouse/beefproduct/store">
-              <NavButtonLeft> คงคลัง</NavButtonLeft>
+              <NavButtonLeft>
+                {" "}
+                <Icon9 height="30px" weight="30px" />
+                คงคลัง
+              </NavButtonLeft>
             </Link>
             <DropdownButton
               drop="down"
-              title={`ออกรายงาน`}
+              title={
+                <span>
+                  <Icon3 height="30px" weight="30px" />
+                  ออกรายงาน
+                </span>
+              }
               bsPrefix={MyCss.nstdropleft}
             >
               <Link href="/beefwarehouse/beefproduct/report/report_import">
@@ -80,15 +120,32 @@ const Nav1 = () => {
               <Link href="/beefwarehouse/beefproduct/report/report_store">
                 <NavDropdownItem>ออกรายงานคงคลัง</NavDropdownItem>
               </Link>
-              <Link href="/beefwarehouse/beefproduct/report/report_graph">
-                <NavDropdownItem>รายละเอียดกราฟ</NavDropdownItem>
-              </Link>
             </DropdownButton>
-            <Link href="/beefwarehouse/beefproduct/notify/notify_date">
-              <NavButtonLeft> การแจ้งเตือน</NavButtonLeft>
+            <Link href="/beefwarehouse/beefproduct/requestexport">
+              <NavButtonLeft>
+                <Icon2 height="30px" weight="30px" /> ร้องขอเบิก
+              </NavButtonLeft>
             </Link>
-            <Link href="/beefwarehouse/beefproduct/setting">
-              <NavButtonLeft> การตั้งค่า</NavButtonLeft>
+            <Link href="/beefwarehouse/beefproduct/notify/notify_date">
+              <NavButtonLeft>
+                <Icon10 height="30px" weight="30px" />
+                การแจ้งเตือน
+              </NavButtonLeft>
+            </Link>
+            <Link href="/beefwarehouse/beefproduct/transport">
+              <NavButtonLeft>
+                <Icon14 height="30px" weight="30px" /> บันทึกการขนส่ง
+              </NavButtonLeft>
+            </Link>
+            <Link href="/beefwarehouse/beefproduct/graph">
+              <NavButtonLeft>
+                <Icon13 height="40px" weight="37px" /> รายละเอียดข้อมูลสถิติ
+              </NavButtonLeft>
+            </Link>
+            <Link href="/beefwarehouse/beefproduct/setting/">
+              <NavButtonLeft>
+                <Icon5 height="30px" weight="30px" /> การตั้งค่า
+              </NavButtonLeft>
             </Link>
           </Nav>
           <Nav>

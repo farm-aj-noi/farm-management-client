@@ -6,8 +6,26 @@ import { Icon2 } from "../IconStore";
 import Icon from "react-icons-kit";
 import { fileText } from "react-icons-kit/fa/fileText";
 
+import { useQuery } from "@apollo/react-hooks";
+import gql from "graphql-tag";
+
+export const CARD3 = gql`
+  query CARD3($beeftype: String, $type: String) {
+    liststore(beeftype: $beeftype, type: $type) {
+      id
+      barcode
+      beeftype
+    }
+  }
+`;
+
 import Link from "next/link";
 const index = () => {
+  const { data: storedata } = useQuery(CARD3, {
+    variables: {
+      type: "ซากโคสี่เสี้ยว",
+    },
+  });
   return (
     <DivAlertCard style={{ backgroundColor: "#00A7D2" }}>
       <div
@@ -43,7 +61,7 @@ const index = () => {
               height: "62px",
             }}
           >
-            0
+            {storedata ? storedata.liststore.length : "0"}
           </div>
           <a
             style={{
@@ -57,7 +75,7 @@ const index = () => {
           </a>
         </form>
       </div>
-      <Link href="">
+      <Link href="/beefwarehouse/beefstore/Allstore/store">
         <StyleAlertCardDown style={{ marginTop: "7px" }}>
           แสดงรายละเอียด
           <div style={{ margin: "-3px 0px 0px auto" }}>

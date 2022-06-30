@@ -23,8 +23,8 @@ export const CHILLSEARCHLIST = gql`
   ) {
     listchill(startdate: $startdate, enddate: $enddate, beeftype: $beeftype) {
       id
-      chilldate
-      chillday
+      chilldateStart
+      chilldateEnd
       chillroom {
         roomnum
       }
@@ -42,8 +42,13 @@ export const CHILLSEARCHLIST = gql`
           numcow
         }
       }
-      storestatus {
+      chillstatus {
+        id
         nameTH
+      }
+      chillday {
+        id
+        day
       }
     }
   }
@@ -60,7 +65,7 @@ const index = () => {
       enddate: selectedenddate,
     },
   });
-
+  console.log(data);
   return (
     <>
       <div
@@ -83,7 +88,7 @@ const index = () => {
       <DivBase
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 270px 1100px 1fr",
+          gridTemplateColumns: "1fr 270px 1200px 1fr",
           gridRowGap: "15px",
           gridColumnGap: "10px",
           textAlign: "start",
@@ -196,14 +201,13 @@ const index = () => {
                   </label>
                   <input
                     type="date"
-                    id="ex_chill"
                     name="date"
                     style={{
                       height: "35px",
                       border: "1px solid #AFAFAF",
                       borderRadius: "4px",
-                      color: "#AFAFAF",
                       textAlign: "center",
+                      fontSize: "16px",
                     }}
                     onChange={(event) => SetStartDateChange(event.target.value)}
                   ></input>
@@ -215,18 +219,17 @@ const index = () => {
                       margin: "10px 10px",
                     }}
                   >
-                    ถึงวันที่
+                    วันที่บ่มเสร็จ
                   </label>
                   <input
                     type="date"
-                    id="ex_chill"
                     name="date"
                     style={{
                       height: "35px",
                       border: "1px solid #AFAFAF",
                       borderRadius: "4px",
-                      color: "#AFAFAF",
                       textAlign: "center",
+                      fontSize: "16px",
                     }}
                     onChange={(event) => SetEndDateChange(event.target.value)}
                   ></input>
@@ -250,7 +253,7 @@ const index = () => {
               รายการบ่มซากเนื้อโค
             </DivFromTop>
             <DivFromDown>
-              <div style={{ height: "280px", overflow: "auto" }}>
+              <div style={{ height: "420px", overflow: "auto" }}>
                 <Table
                   striped
                   bordered
@@ -261,6 +264,7 @@ const index = () => {
                   <thead>
                     <tr style={{ textAlign: "center" }}>
                       <th>ผู้บ่มซาก</th>
+                      <th>วันที่บ่ม</th>
                       <th>วันที่บ่มเสร็จ</th>
                       <th>เวลา</th>
                       <th>ประเภทซาก</th>
@@ -272,15 +276,46 @@ const index = () => {
                       <th>น้ำหนักอุ่น</th>
                       <th>ห้องบ่ม</th>
                       <th>สถานะ</th>
+                      <th>อัพเดตสถานะ</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {data &&
+                    {data && data.listchill.length > 0 ? (
                       data.listchill.map((prod) => (
                         <List_chill key={prod.id} listchill={prod} />
-                      ))}
+                      ))
+                    ) : (
+                      <tr style={{ textAlign: "center" }}>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                      </tr>
+                    )}
                   </tbody>
                 </Table>
+              </div>
+              <div style={{ float: "right", textAlign: "right" }}>
+                จำนวนรายการ {data ? data.listchill.length : "0"} รายการ
+                <br />
+                น้ำหนักอุ่น{" "}
+                {data && data.listchill.length > 0
+                  ? data.listchill.reduce(
+                      (sum, nex) => sum + nex.halve.weightwarm,
+                      0
+                    )
+                  : "0"}{" "}
+                กิโลกรัม
               </div>
             </DivFromDown>
           </DivFrom>

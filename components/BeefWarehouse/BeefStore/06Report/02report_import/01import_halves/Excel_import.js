@@ -8,7 +8,7 @@ import { CSVLink } from "react-csv";
 import { ButtonExcel } from "../../ReportFrom";
 
 import dayjs from "dayjs";
-import 'dayjs/locale/th'
+import "dayjs/locale/th";
 
 const Excel_import = ({ prod }) => {
   const [data, setdata] = useState(prod);
@@ -21,7 +21,8 @@ const Excel_import = ({ prod }) => {
     { label: "ทะเบียนขุน", key: "halve.imslaughter.numcow" },
     { label: "รหัสซาก", key: "halve.beeftype.code" },
     { label: "รหัสบาร์โค้ด", key: "halve.barcode" },
-    { label: "น้ำหนัก", key: "halve.weightwarm" },
+    { label: "น้ำหนัก (กก.)", key: "halve.weightwarm" },
+    { label: "ห้อง", key: "beefroom.roomname" },
     { label: "สถานะ", key: "halve.status.nameTH" },
     { label: "ผู้นำเข้า", key: "user.name" },
   ];

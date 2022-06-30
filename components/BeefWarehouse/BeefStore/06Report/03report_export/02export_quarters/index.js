@@ -28,14 +28,19 @@ export const EXPORTQUARTERSEARCH = gql`
     $startdate: String
     $enddate: String
     $beeftype: String
+    $namefarmer: String
     $userName: String
+    $exporter: String
   ) {
     exportquart(
       startdate: $startdate
       enddate: $enddate
       beeftype: $beeftype
+      namefarmer: $namefarmer
       userName: $userName
+      exporter: $exporter
     ) {
+      exporter
       id
       exportdate
       user {
@@ -277,7 +282,7 @@ const index = () => {
                         <th>ทะเบียนขุน</th>
                         <th>รหัสซาก</th>
                         <th>รหัสบาร์โค้ด</th>
-                        <th>น้ำหนัก</th>
+                        <th>น้ำหนัก (กก.)</th>
                         <th>สถานะ</th>
                         <th>ผู้ขอเบิก</th>
                         <th>ผู้เบิกออก</th>
@@ -303,7 +308,7 @@ const index = () => {
                             <td>{prod.quarter.barcode}</td>
                             <td>{prod.quarter.weight}</td>
                             <td>{prod.storestatus.nameTH}</td>
-                            <td>-</td>
+                            <td>{prod.exporter}</td>
                             <td>{prod.user.name}</td>
                           </tr>
                         ))}

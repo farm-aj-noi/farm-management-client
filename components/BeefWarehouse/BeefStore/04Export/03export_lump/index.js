@@ -21,14 +21,17 @@ export const CREATEEXPORTLUMP = gql`
     $enddate: String
     $beeftype: String
     $userName: String
+    $exporter: String
   ) {
     exportlump(
       startdate: $startdate
       enddate: $enddate
       beeftype: $beeftype
       userName: $userName
+      exporter: $exporter
     ) {
       id
+      exporter
       user {
         name
       }
@@ -59,11 +62,14 @@ const index = () => {
   const [selectedstartdate, SetStartDateChange] = useState("");
   const [selectedenddate, SetEndDateChange] = useState("");
   const [inputusername, SetInputusername] = useState("");
+  const [inputexporter, SetinputExporter] = useState("");
   const { data, loading, error } = useQuery(CREATEEXPORTLUMP, {
     variables: {
       beeftype: selectedbeeftypelump,
       startdate: selectedstartdate,
       enddate: selectedenddate,
+      userName: inputusername,
+      exporter: inputexporter,
     },
   });
   return (
@@ -165,8 +171,32 @@ const index = () => {
                     }
                   >
                     <option value="">ทั้งหมด</option>
-                    <option value="">ซากซ้าย</option>
-                    <option value="">ซากขวา</option>
+                    <option value="5f446195ecd6732ad8108684">เนื้อสันคอ</option>
+                    <option value="5f4461a8ecd6732ad8108685">ที-โบน</option>
+                    <option value="5f4461bfecd6732ad8108686">
+                      เนื้อสันนอก
+                    </option>
+                    <option value="5f4461d6ecd6732ad8108687">
+                      ที-โบน สเต็ก
+                    </option>
+                    <option value="5f44620cecd6732ad8108688">ริบอาย</option>
+                    <option value="5f446224ecd6732ad8108689">ใบบัวสเต็ก</option>
+                    <option value="5f44623aecd6732ad810868a">เนื้อสันใน</option>
+                    <option value="5f44624fecd6732ad810868b">สันสะโพก</option>
+                    <option value="5f446262ecd6732ad810868c">
+                      เสือร้องไห้
+                    </option>
+                    <option value="5f44628decd6732ad810868d">
+                      เนื้อซี่โครง
+                    </option>
+                    <option value="5f4462a4ecd6732ad810868e">พับใน</option>
+                    <option value="5f4462b6ecd6732ad810868f">ตะพาบ</option>
+                    <option value="5f4462c8ecd6732ad8108690">ลูกมะพร้าว</option>
+                    <option value="5f4462ddecd6732ad8108691">ปลาบู่ทอง</option>
+                    <option value="5f4462eeecd6732ad8108692">ใบพาย</option>
+                    <option value="5f4462feecd6732ad8108693">หางตะเข้</option>
+                    <option value="5f44630fecd6732ad8108694">น่อง</option>
+                    <option value="5f446320ecd6732ad8108695">พับนอก</option>
                   </select>
                   <label
                     for="beef"
@@ -188,6 +218,7 @@ const index = () => {
                       fontSize: "14px",
                       textAlign: "center",
                     }}
+                    onChange={(event) => SetinputExporter(event.target.value)}
                   />
                   <label
                     for="beef"
@@ -211,69 +242,6 @@ const index = () => {
                     }}
                     onChange={(event) => SetInputusername(event.target.value)}
                   />
-                  <label
-                    for="beef"
-                    style={{
-                      textAlign: "center",
-                      fontSize: "18px",
-                      margin: "10px 10px",
-                    }}
-                  >
-                    ตำแหน่ง
-                  </label>
-                  <select
-                    name="room"
-                    id="room"
-                    style={{
-                      height: "35px",
-                      width: "50px",
-                      border: "1px solid #AFAFAF",
-                      borderRadius: "4px 0px 0px 4px",
-                      textAlign: "center",
-                      fontSize: "14px",
-                    }}
-                  >
-                    <option value="">ห้อง</option>
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
-                  </select>
-                  <select
-                    name="shelf"
-                    id="shelf"
-                    style={{
-                      height: "35px",
-                      width: "50px",
-                      border: "1px solid #AFAFAF",
-                      borderLeft: "none",
-                      textAlign: "center",
-                      fontSize: "14px",
-                    }}
-                  >
-                    <option value="">ชั้น</option>
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
-                  </select>
-                  <select
-                    name="bucket"
-                    id="bucket"
-                    style={{
-                      height: "35px",
-                      width: "60px",
-                      border: "1px solid #AFAFAF",
-                      borderRadius: "0px 4px 4px 0px",
-                      borderLeft: "none",
-                      textAlign: "center",
-                      fontSize: "14px",
-                      marginRight: "10px",
-                    }}
-                  >
-                    <option value="">ตะกร้า</option>
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
-                  </select>
                 </from>
               </div>
               <div
@@ -302,7 +270,7 @@ const index = () => {
                       height: "35px",
                       border: "1px solid #AFAFAF",
                       borderRadius: "4px",
-                      color: "#AFAFAF",
+                      fontSize: "16px",
                       textAlign: "center",
                     }}
                   ></input>
@@ -325,7 +293,7 @@ const index = () => {
                       height: "35px",
                       border: "1px solid #AFAFAF",
                       borderRadius: "4px",
-                      color: "#AFAFAF",
+                      fontSize: "16px",
                       textAlign: "center",
                     }}
                     onChange={(event) => SetEndDateChange(event.target.value)}
@@ -368,10 +336,7 @@ const index = () => {
                       <th>รหัสซาก</th>
                       <th>รหัสบาร์โค้ด</th>
                       <th>คิวอาร์โค้ด</th>
-                      <th>น้ำหนัก</th>
-                      <th>ห้อง</th>
-                      <th>ชั้น</th>
-                      <th>ตะกร้า</th>
+                      <th>น้ำหนัก (กก.)</th>
                       <th>สถานะ</th>
                       <th>ผู้ขอเบิก</th>
                       <th>ผู้เบิกออก</th>
@@ -384,6 +349,17 @@ const index = () => {
                       ))}
                   </tbody>
                 </Table>
+              </div>
+              <div style={{ float: "right", textAlign: "right" }}>
+                จำนวนรายการ {data ? data.exportlump.length : "0"} รายการ
+                <br />
+                น้ำหนักอุ่น{" "}
+                {data &&
+                  data.exportlump.reduce(
+                    (sum, nex) => sum + nex.lump.weight,
+                    0
+                  )}{" "}
+                กิโลกรัม
               </div>
             </DivFromDown>
           </DivFrom>
