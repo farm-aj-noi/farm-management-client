@@ -21,7 +21,7 @@ const Qrcode = ({ exlist }) => {
       <Modal
         show={testshow}
         onHide={handleClose}
-        size="sm"
+        size="md"
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
@@ -35,12 +35,12 @@ const Qrcode = ({ exlist }) => {
               justifyContent: "center",
             }}
           >
-            {/* <QRCode
+            <QRcode
               size={100}
               value={
-                "http://localhost:3000/slaughter/tracking/" + infodata.barcode
+                "http://localhost:3000/beefwarehouse/beefproduct/tracking/" + infodata.beefproduct.barcode
               }
-            /> */}
+            />
           </div>
           <div
             style={{
@@ -50,9 +50,9 @@ const Qrcode = ({ exlist }) => {
               alignItems: "center",
             }}
           >
-            {/* <a
+            <a
               href={
-                "http://localhost:3000/slaughter/tracking/" + infodata.barcode
+                "http://localhost:3000/beefwarehouse/beefproduct/tracking/" + infodata.beefproduct.barcode
               }
               target="popup"
               style={{
@@ -64,8 +64,8 @@ const Qrcode = ({ exlist }) => {
                 textDecoration: "underline",
               }}
             >
-              http://localhost:3000/slaughter/tracking/{infodata.barcode}
-            </a> */}
+              http://localhost:3000/beefwarehouse/beefproduct/tracking/{infodata.beefproduct.barcode}
+            </a>
           </div>
         </Modal.Body>
       </Modal>
