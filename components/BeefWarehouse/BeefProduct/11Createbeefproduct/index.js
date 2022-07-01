@@ -12,6 +12,8 @@ import { iosSearchStrong } from "react-icons-kit/ionicons/iosSearchStrong";
 import gql from "graphql-tag";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 
+import Test from "./test"
+
 
 const QUERYTYPE = gql`
   query QUERYTYPE {
@@ -74,6 +76,39 @@ const index = () => {
     const { data: lump } = useQuery(QUERYLUMP)
     const { data: chop } = useQuery(QUERYCHOP)
 
+    const [idcreate, setidcreate] = useState("")
+    /* console.log(idcreate) */
+    const [createpro, setcreatepro] = useState({
+        weight: "",
+        producttype: "",
+    })
+    /* console.log(createpro) */
+    const [createBeefproduct] = useMutation(CREATEPRODUCT, {
+        variables: {
+            weight: (createpro.weight = parseInt(createpro.weight)),
+            producttype: createpro.producttype,
+        },
+        onCompleted: (data) => {
+            if (data) {
+                setidcreate(data.createBeefproduct.id);
+            }
+        }
+    })
+    const handleChangeCreate = (e) => {
+        setcreatepro({
+            ...createpro,
+            [e.target.name]: e.target.value,
+        })
+    }
+    const handleSubmitCreate = async (e) => {
+        try {
+            e.preventDefault();
+            await createBeefproduct();
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <div>
             <div
@@ -126,7 +161,9 @@ const index = () => {
                                     >
                                         <div style={{ display: "inline", width: "170px" }}>
                                             <select
-                                                name="productroom"
+                                                name="producttype"
+                                                value={createpro.producttype}
+                                                onChange={handleChangeCreate}
                                                 style={{
                                                     height: "35px",
                                                     width: "160px",
@@ -152,7 +189,10 @@ const index = () => {
                                             gridTemplateRows: "1fr 15px",
                                         }}
                                     >
-                                        <Searchinput name="barcode" />
+                                        <Searchinput type="number" name="weight" value={createpro.weight} style={{
+                                            textAlign: "center"
+                                        }}
+                                            onChange={handleChangeCreate} />
                                     </div>
                                 </DivFromInsideLeft>
                                 <div
@@ -171,7 +211,7 @@ const index = () => {
                                                 ? "gray"
                                                 : ""
                                                 }`,
-                                        }} */>บันทึก</Savebutton1>
+                                        }} */  onClick={handleSubmitCreate}>บันทึก</Savebutton1>
                                 </div>
                             </from>
                         </div>
@@ -224,8 +264,9 @@ const index = () => {
                                                 <td>{ }</td>
                                                 <td>{prod.weight}</td>
                                                 <td>{prod.barcode}</td>
-                                                <td><input type="checkbox" value={prod.id} name="id" /></td>
+                                                <td ><input type="checkbox" name="id" id="prod.id" /></td>
                                             </tr>
+
                                         ))}
                                     </tbody>
                                 </Table>
@@ -317,7 +358,7 @@ const index = () => {
                     </DivFromDown>
                 </DivFrom>
             </DivBase>
-        </div>
+        </div >
     );
 };
 
