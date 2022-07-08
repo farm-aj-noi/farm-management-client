@@ -12,7 +12,8 @@ import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-import { ButtonPDF } from "../NavFrom";
+
+import { ButtonExcel } from "../NavFrom";
 
 pdfMake.fonts = {
   THSarabunNew: {
@@ -186,14 +187,14 @@ const paperh = ({ prod }) => {
     pdfMake.createPdf(docDefinition).open();
   };
   return (
-    <ButtonPDF type="button" value="print PDF" onClick={printPDF}>
+    <ButtonExcel type="button" value="print PDF" onClick={printPDF}>
       <Icon
         style={{ verticalAlign: "text-bottom", marginRight: "5px" }}
         icon={printer}
         size={20}
       />
-      รายงานPDF
-    </ButtonPDF>
+      พิมพ์รายการ
+    </ButtonExcel>
   );
 };
 

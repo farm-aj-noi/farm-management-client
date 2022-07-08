@@ -5,6 +5,7 @@ import {
 } from "../../../../../utils/buttonColor";
 import { Qrcodebutton, Editbutton } from "../../../../../utils/button";
 import dayjs from "dayjs";
+import "dayjs/locale/th";
 import Modalqrcode from "../../12Qrcode/store";
 
 const ListStore = ({ Liststore }) => {
@@ -22,7 +23,10 @@ const ListStore = ({ Liststore }) => {
       <td>{ListStoreData.weight ? ListStoreData.weight : "-"}</td>
 
       <td>
-        {dayjs(ListStoreData.Expdate).add(543, "year").format("DD/MM/YYYY")}
+        {dayjs(ListStoreData.Expdate)
+          .locale("th")
+          .add(543, "year")
+          .format("DD/MM/YYYY")}
       </td>
       <td></td>
       <td>{ListStoreData.beefroom ? ListStoreData.beefroom : "-"}</td>

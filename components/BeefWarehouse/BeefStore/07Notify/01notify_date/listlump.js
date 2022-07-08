@@ -18,6 +18,7 @@ const EXPL = gql`
   query EXPL {
     Card8l {
       id
+
       lump {
         beeftype {
           code
@@ -39,6 +40,7 @@ const EXPL = gql`
 
 const listlump = () => {
   const { data } = useQuery(EXPL);
+  console.log(data);
   return (
     <div>
       <Table striped bordered responsive hover style={{ margin: "auto" }}>
@@ -65,7 +67,10 @@ const listlump = () => {
                 <td>{prod.beefroom.roomname}</td>
                 <td>{prod.shelf.shelfname}</td>
                 <td>{prod.basket}</td>
-                <td>{prod.Expdate}</td>
+                <td>
+                  {" "}
+                  {dayjs(prod.Expdate).add(543, "year").format("DD/MM/YYYY")}
+                </td>
               </tr>
             ))
           ) : (
@@ -78,20 +83,19 @@ const listlump = () => {
               <td>-</td>
               <td>-</td>
               <td>-</td>
-              
             </tr>
           )}
         </tbody>
       </Table>
       <div style={{ display: "flex", justifyContent: "center" }}>
-      {data && data.Card8l.length > 0 ? (
-        <div>
-          <Paperdate prod={data.Card8l} />
-        </div>
-      ) : (
-        ""
-      )}
-    </div>
+        {data && data.Card8l.length > 0 ? (
+          <div>
+            <Paperdate prod={data.Card8l} />
+          </div>
+        ) : (
+          ""
+        )}
+      </div>
     </div>
   );
 };

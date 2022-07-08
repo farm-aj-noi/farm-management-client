@@ -12,7 +12,7 @@ import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-import { ButtonPDF } from "../NavFrom";
+import { ButtonExcel } from "../NavFrom";
 
 pdfMake.fonts = {
   THSarabunNew: {
@@ -40,15 +40,7 @@ const paperq = ({ prod }) => {
   const buildTableBody = (data, columns) => {
     var body = [];
 
-    body.push([
-      "ประเภทซาก",
-      "รหัสซาก",
-      "รหัสบาร์โค้ด",
-      "ห้อง",
-      "ชั้น",
-      "ตะกร้า",
-      "วันหมดอายุ",
-    ]);
+    body.push(["ประเภทซาก", "รหัสซาก", "รหัสบาร์โค้ด", "ห้อง", "วันหมดอายุ"]);
     console.log(data);
 
     data.forEach(function (row) {
@@ -68,8 +60,6 @@ const paperq = ({ prod }) => {
           dataRow.push(row.quarter.barcode);
         } else if (column == "beefroom.roomname") {
           dataRow.push(row.beefroom.roomname);
-        } else if (column === "shelf.shelfname") {
-          dataRow.push(row.shelf.shelfname);
         } else {
           /* console.log(row[column]) */
           // console.log(column);
@@ -91,7 +81,7 @@ const paperq = ({ prod }) => {
       table: {
         headerRows: 1,
         // alignment: 'center'
-        widths: ["star", "star", "star", "star", "star", "star", "star"],
+        widths: ["star", "star", "star", "star", "star"],
 
         body: buildTableBody(data, columns),
       },
@@ -135,8 +125,6 @@ const paperq = ({ prod }) => {
           "quarter.beeftype.code",
           "quarter.barcode",
           "beefroom.roomname",
-          "shelf.shelfname",
-          "basket",
           "Expdate",
         ]),
       ],
@@ -198,14 +186,14 @@ const paperq = ({ prod }) => {
     pdfMake.createPdf(docDefinition).open();
   };
   return (
-    <ButtonPDF type="button" value="print PDF" onClick={printPDF}>
+    <ButtonExcel type="button" value="print PDF" onClick={printPDF}>
       <Icon
         style={{ verticalAlign: "text-bottom", marginRight: "5px" }}
         icon={printer}
         size={20}
       />
-      รายงานPDF
-    </ButtonPDF>
+      พิมพ์รายการ
+    </ButtonExcel>
   );
 };
 

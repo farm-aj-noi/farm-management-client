@@ -18,6 +18,7 @@ const EXPQ = gql`
   query EXPQ {
     Card8q {
       id
+
       quarter {
         beeftype {
           code
@@ -45,8 +46,6 @@ const listquar = () => {
             <th>รหัสบาร์โค้ด</th>
             <th>คิวอาร์โค้ด</th>
             <th>ห้อง</th>
-            <th>ชั้น</th>
-            <th>ตะกร้า</th>
             <th>วันหมดอายุ</th>
           </tr>
         </thead>
@@ -59,15 +58,14 @@ const listquar = () => {
                 <td>{prod.quarter.barcode}</td>
                 <td>คิวอาร์โค้ด</td>
                 <td>{prod.beefroom.roomname}</td>
-                <td>-</td>
-                <td>-</td>
-                <td>{prod.Expdate}</td>
+
+                <td>
+                  {dayjs(prod.Expdate).add(543, "year").format("DD/MM/YYYY")}
+                </td>
               </tr>
             ))
           ) : (
             <tr style={{ textAlign: "center" }}>
-              <td>-</td>
-              <td>-</td>
               <td>-</td>
               <td>-</td>
               <td>-</td>

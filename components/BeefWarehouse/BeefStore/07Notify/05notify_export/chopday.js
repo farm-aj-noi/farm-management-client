@@ -13,6 +13,8 @@ import gql from "graphql-tag";
 
 import dayjs from "dayjs";
 
+import Modalqrcode from "../../"
+
 export const QUERY_EXCHOPDAY = gql`
   query QUERY_EXCHOPDAY {
     CardExc {

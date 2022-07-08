@@ -12,7 +12,7 @@ import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-import { ButtonPDF } from "../NavFrom";
+import { ButtonExcel } from "../NavFrom";
 
 pdfMake.fonts = {
   THSarabunNew: {
@@ -31,14 +31,14 @@ pdfMake.fonts = {
 
 const papere = () => {
   return (
-    <ButtonPDF type="button" value="print PDF" onClick={printPDF}>
+    <ButtonExcel type="button" value="print PDF" >
       <Icon
         style={{ verticalAlign: "text-bottom", marginRight: "5px" }}
         icon={printer}
         size={20}
       />
-      รายงานPDF
-    </ButtonPDF>
+      พิมพ์รายการ
+    </ButtonExcel>
   );
 };
 

@@ -17,6 +17,8 @@ import Paperdate from "./papere";
 const EXPEN = gql`
   query EXPEN {
     Card8e {
+      id
+      
       entrail {
         id
         offal
@@ -33,6 +35,9 @@ const EXPEN = gql`
         imslaughter {
           numcow
         }
+      }
+      beefroom{
+        roomname
       }
       Expdate
     }
@@ -79,9 +84,12 @@ const listen = () => {
                 <td>{prod.entrail.gallbladder}</td>
                 <td>{prod.entrail.scrap}</td>
                 <td>{prod.entrail.barcode}</td>
-                <td>คิวอาร์โค้ด</td>
-                <td>{prod.beefroom.roomname}</td>
                 <td>-</td>
+                <td>{prod.beefroom.roomname}</td>
+                <td>
+                  {" "}
+                  {dayjs(prod.Expdate).add(543, "year").format("DD/MM/YYYY")}
+                </td>
               </tr>
             ))
           ) : (

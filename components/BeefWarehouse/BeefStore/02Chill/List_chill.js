@@ -28,7 +28,7 @@ export const UPDATECHILLSTATUS = gql`
 `;
 
 const List_chill = ({ listchill }) => {
-  const checkdate = dayjs().format("YYYY-MM-DDTHH:mm:ssZ[Z]");
+  const checkdate = dayjs().locale("th").format("YYYY-MM-DDTHH:mm:ssZ[Z]");
   console.log(checkdate);
 
   const [ListChillInfo, SetListChillInfo] = useState(listchill);
@@ -96,7 +96,9 @@ const List_chill = ({ listchill }) => {
       <td>{ListChillInfo.chillstatus.nameTH}</td>
       <td>
         {checkdate >=
-        dayjs(ListChillInfo.chilldateEnd).format("YYYY-MM-DDTHH:mm:ssZ[Z]") ? (
+        dayjs(ListChillInfo.chilldateEnd)
+          .locale("th")
+          .format("YYYY-MM-DDTHH:mm:ssZ[Z]") ? (
           <div>
             <Savebuttoncolor
               disabled={

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Barcodebuttoncolor } from "../../../../../utils/buttonColor";
 import { Qrcodebutton } from "../../../../../utils/button";
 import dayjs from "dayjs";
+import "dayjs/locale/th";
 import Modalqrcode from "../../12Qrcode/Export/exhqr";
 const ListExport = ({ exhalve }) => {
   const [exhalveData, SetExhalveData] = useState(exhalve);
@@ -10,10 +11,16 @@ const ListExport = ({ exhalve }) => {
     <tr style={{ textAlign: "center" }}>
       <td>{exhalveData.halve.beeftype.nameTH}</td>
       <td>
-        {dayjs(exhalveData.exportdate).add(543, "year").format("DD/MM/YYYY")}
+        {dayjs(exhalveData.exportdate)
+          .locale("th")
+          .add(543, "year")
+          .format("DD/MM/YYYY")}
       </td>
       <td>
-        {dayjs(exhalveData.exportdate).add(543, "year").format("h:mm:ss A")}
+        {dayjs(exhalveData.exportdate)
+          .locale("th")
+          .add(543, "year")
+          .format("h:mm:ss A")}
       </td>
       <td>{exhalveData.halve.imslaughter.numcow}</td>
       <td>{exhalveData.halve.beeftype.code}</td>

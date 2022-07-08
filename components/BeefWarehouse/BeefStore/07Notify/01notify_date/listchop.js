@@ -66,7 +66,9 @@ const listchop = () => {
                 <td>{prod.beefroom.roomname}</td>
                 <td>{prod.shelf.shelfname}</td>
                 <td>{prod.basket}</td>
-                <td>{prod.Expdate}</td>
+                <td>
+                  {dayjs(prod.Expdate).add(543, "year").format("DD/MM/YYYY")}
+                </td>
               </tr>
             ))
           ) : (

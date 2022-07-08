@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Barcodebuttoncolor } from "../../../../../utils/buttonColor";
 import { Qrcodebutton } from "../../../../../utils/button";
 import dayjs from "dayjs";
+import "dayjs/locale/th";
 import Modalqrcode from "../../12Qrcode/Import/imhqr";
 
 function List_import({ imhalve }) {
@@ -13,10 +14,16 @@ function List_import({ imhalve }) {
       <td>{imhalveData.halve.imslaughter.namefarmer}</td>
       <td>{imhalveData.halve.beeftype.nameTH}</td>
       <td>
-        {dayjs(imhalveData.importdate).add(543, "year").format("DD/MM/YYYY")}
+        {dayjs(imhalveData.importdate)
+          .locale("th")
+          .add(543, "year")
+          .format("DD/MM/YYYY")}
       </td>
       <td>
-        {dayjs(imhalveData.importdate).add(543, "year").format("h:mm:ss A")}
+        {dayjs(imhalveData.importdate)
+          .locale("th")
+          .add(543, "year")
+          .format("h:mm:ss A")}
       </td>
       <td>{imhalveData.halve.imslaughter.numcow}</td>
       <td>{imhalveData.halve.beeftype.code}</td>
