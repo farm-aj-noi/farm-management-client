@@ -6,8 +6,11 @@ import Modalqrcode from "../../12Qrcode/Import/imqqr";
 
 function List_import({ imquarter }) {
   const [imquarterData, SetImhalveData] = useState(imquarter);
+  const tdStyle = {
+    fontSize: "16px"
+  }
   return (
-    <tr style={{ textAlign: "center" }}>
+    <tr style={{ textAlign: "center", fontSize: "16px" }}>
       <td>{imquarterData.quarter.imslaughter.namefarmer}</td>
       <td>{imquarterData.quarter.beeftype.nameTH}</td>
       <td>

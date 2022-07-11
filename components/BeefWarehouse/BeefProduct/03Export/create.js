@@ -32,7 +32,7 @@ const create = () => {
   const { data } = useQuery(QUERYNAMERE)
   const [createexproduct, setcreateexproduct] = useState({
     barcode: "",
-    storestatus: "",
+    storestatus: "629cb4035d8e2a65ce3e3800",
     exporter: "",
   })
   const [createExproduct] = useMutation(CREATEEXPORTPRODUCT, {

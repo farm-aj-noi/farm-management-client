@@ -40,7 +40,7 @@ query QUERYFREEZER {
 const index = () => {
   const { data } = useQuery(QUERYFREEZER);
   return (
-    <DivBase>
+    <div style={{ marginTop: "100px" }}>
       <div
         style={{
           display: "flex",
@@ -144,7 +144,7 @@ const index = () => {
           </DivFromDown>
         </DivFrom>
       </DivBase>
-    </DivBase>
+    </div>
   );
 };
 

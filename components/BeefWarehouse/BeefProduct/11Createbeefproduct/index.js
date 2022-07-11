@@ -14,6 +14,14 @@ import { useQuery, useMutation } from "@apollo/react-hooks";
 
 import Test from "./test"
 
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
+import Router from "next/router";
+
+import TableCss from "./Table.module.css";
+import Listp from "./Listproduct";
+
 
 const QUERYTYPE = gql`
   query QUERYTYPE {
@@ -71,18 +79,91 @@ query QUERYCHOP {
 }
 `
 
-const index = () => {
-    const { data: type } = useQuery(QUERYTYPE)
-    const { data: lump } = useQuery(QUERYLUMP)
-    const { data: chop } = useQuery(QUERYCHOP)
 
+
+export const PRODUCTSEARCH = gql`
+query ProductSearch {
+  ProductSearch {
+    id
+    barcode
+    weight
+    MFG
+    BBE
+    producttype {
+      code
+      nameTH
+    }
+  }
+}
+`
+const UPDATETYPEPRODUCT = gql`
+mutation UpdateBeefProduct($id: ID!, $barcode: String) {
+  updateBeefProduct(id: $id, barcode: $barcode) {
+    id
+  }
+}
+`
+
+const index = () => {
+    const MySwal = withReactContent(Swal);
+    const [success, setsuccess] = useState(false);
+    const [successtype, setsuccesstype] = useState(false);
+    const { data: type } = useQuery(QUERYTYPE)
     const [idcreate, setidcreate] = useState("")
-    /* console.log(idcreate) */
+    console.log(idcreate)
+
     const [createpro, setcreatepro] = useState({
         weight: "",
         producttype: "",
     })
-    /* console.log(createpro) */
+
+    const [typebeef, settypebeef] = useState({
+        barcode: "",
+    })
+
+    const [UpdateBeefProduct] = useMutation(UPDATETYPEPRODUCT, {
+        onCompleted: (data) => {
+            if (data) {
+                settypebeef({
+                    barcode: "",
+                })
+                MySwal.fire({
+                    icon: "success",
+                    title: "สำเร็จ",
+                    text: "ทำการเลือกซากแปรรูปเสร็จสิ้น",
+                    confirmButtonText: (
+                        <span
+                        >
+                            ตกลง
+                        </span>
+                    ),
+                    confirmButtonColor: "#3085d6",
+                });
+            }
+        }
+    }
+    )
+    const handleChangeupdate = (e) => {
+        settypebeef({
+            ...typebeef,
+            [e.target.name]: e.target.value,
+        })
+    }
+
+    const handleSubmitupdate = async (e) => {
+        try {
+            e.preventDefault();
+            await UpdateBeefProduct({
+                variables: {
+                    barcode: typebeef.barcode,
+                    id: idcreate,
+                }
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     const [createBeefproduct] = useMutation(CREATEPRODUCT, {
         variables: {
             weight: (createpro.weight = parseInt(createpro.weight)),
@@ -90,9 +171,12 @@ const index = () => {
         },
         onCompleted: (data) => {
             if (data) {
+                setsuccess(true);
                 setidcreate(data.createBeefproduct.id);
             }
+
         }
+
     })
     const handleChangeCreate = (e) => {
         setcreatepro({
@@ -108,9 +192,9 @@ const index = () => {
             console.log(error)
         }
     }
-
+    const { data: Psearch } = useQuery(PRODUCTSEARCH)
     return (
-        <div>
+        <div style={{ marginTop: "100px" }}>
             <div
                 style={{ display: "flex", justifyContent: "center", marginTop: "30px" }}
             >
@@ -127,7 +211,7 @@ const index = () => {
             <DivBase
                 style={{
                     display: "grid",
-                    gridTemplateColumns: "1fr 270px 1300px  1fr",
+                    gridTemplateColumns: "1fr 270px 800px  1fr",
                     gridRowGap: "15px",
                     gridColumnGap: "10px",
                     textAlign: "start",
@@ -164,6 +248,7 @@ const index = () => {
                                                 name="producttype"
                                                 value={createpro.producttype}
                                                 onChange={handleChangeCreate}
+                                                disabled={success}
                                                 style={{
                                                     height: "35px",
                                                     width: "160px",
@@ -182,7 +267,7 @@ const index = () => {
                                     </div>
                                 </DivFromInsideLeft>
                                 <DivFromInsideLeft>
-                                    น้ำหนัก :
+                                    น้ำหนัก (กก.) :
                                     <div
                                         style={{
                                             display: "grid",
@@ -190,29 +275,32 @@ const index = () => {
                                         }}
                                     >
                                         <Searchinput type="number" name="weight" value={createpro.weight} style={{
+                                            backgroundColor: `${!createpro.producttype ? "#ececec" : ""}`,
                                             textAlign: "center"
                                         }}
-                                            onChange={handleChangeCreate} />
+                                            onChange={handleChangeCreate} disabled={!createpro.producttype || success} />
                                     </div>
                                 </DivFromInsideLeft>
-                                <div
-                                    style={{
-                                        display: "inline-block",
-                                        justifySelf: "right",
-                                        float: "right",
-                                        paddingRight: "10px",
-                                        paddingBottom: "10px",
-                                    }}
-                                >
-                                    <Savebutton1 /* onClick={handleSubmit} */
-                                      /*   disabled={}
+                                {!success && (
+                                    <div
                                         style={{
-                                            backgroundColor: `${
-                                                ? "gray"
-                                                : ""
-                                                }`,
-                                        }} */  onClick={handleSubmitCreate}>บันทึก</Savebutton1>
-                                </div>
+                                            display: "inline-block",
+                                            justifySelf: "right",
+                                            float: "right",
+                                            paddingRight: "10px",
+                                            paddingBottom: "10px",
+                                        }}
+                                    >
+                                        <Savebutton1
+                                            disabled={!createpro.weight}
+                                            style={{
+                                                backgroundColor: `${!createpro.weight
+                                                    ? "gray"
+                                                    : ""
+                                                    }`,
+                                            }} onClick={handleSubmitCreate}>บันทึก</Savebutton1>
+                                    </div>
+                                )}
                             </from>
                         </div>
                     </DivFromDown>
@@ -221,7 +309,7 @@ const index = () => {
                     style={{
                         width: "100%",
                         gridRowStart: "2",
-                        gridRowEnd: "3",
+                        gridRowEnd: "2",
                         gridColumnStart: "3",
                     }}
                 >
@@ -229,50 +317,29 @@ const index = () => {
                         <div style={{ margin: "-3px 5px 0px 0px" }}>
                             <Icon size={20} icon={list} />
                         </div>
-                        รายการซากโค
+                        ดำเนินรายการเลือกซากโคนำมาแปรรูป
                     </DivFromTop>
                     <DivFromDown>
-                        <div style={{
-                            display: "grid",
-                            gridTemplateColumns: "1fr 1fr",
-                            gridColumnGap: "10px",
-                        }}>
-                            <div style={{ height: "250px", overflow: "auto" }}>
-                                <p style={{ textAlign: "center" }}>รายการซากโคก้อนเนื้อ</p>
-                                <Table
-                                    striped
-                                    bordered
-                                    responsive
-                                    hover
-                                    style={{ margin: "auto" }}
-                                >
-                                    <thead>
-                                        <tr style={{ textAlign: "center" }}>
-                                            <th>ประเภทซาก</th>
-                                            <th>รหัสซาก</th>
-                                            <th>ทะเบียนขุน</th>
-                                            <th>น้ำหนัก</th>
-                                            <th>รหัสบาร์โค้ด</th>
-                                            <th>เลือก</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {lump && lump.LumpForProduct.map((prod) => (
-                                            <tr style={{ textAlign: "center" }}>
-                                                <td>{prod.beeftype.nameTH}</td>
-                                                <td>{prod.beeftype.code}</td>
-                                                <td>{ }</td>
-                                                <td>{prod.weight}</td>
-                                                <td>{prod.barcode}</td>
-                                                <td ><input type="checkbox" name="id" id="prod.id" /></td>
-                                            </tr>
 
-                                        ))}
-                                    </tbody>
-                                </Table>
-                            </div>
-                            <div style={{ height: "250px", overflow: "auto" }}>
-                                <p style={{ textAlign: "center" }}>รายการซากโคชิ้นเนื้อ</p>
+                        <div>
+                            บาร์โค้ด : { }
+                            <Searchinput
+                                style={{ width: "170px" }}
+                                type="text"
+                                id="barcode"
+                                name="barcode"
+                                onChange={handleChangeupdate}
+                                value={typebeef.barcode}>
+                            </Searchinput>
+                        </div>
+
+                        <div style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            marginTop: "10px"
+                        }}>
+                            <div style={{ height: `${!success ? "" : "200px"}`, overflow: `${!success ? "" : "auto"}` }}>
+                                <p style={{ textAlign: "center" }}>รายการซากโคนำมาแปรรูป</p>
                                 <Table
                                     striped
                                     bordered
@@ -285,34 +352,39 @@ const index = () => {
                                             <th>ประเภทซาก</th>
                                             <th>รหัสซาก</th>
                                             <th>ทะเบียนขุน</th>
-                                            <th>น้ำหนัก</th>
+                                            <th>น้ำหนัก (กก.)</th>
                                             <th>รหัสบาร์โค้ด</th>
-                                            <th>เลือก</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {chop && chop.ChopForProduct.map((prod) => (
-                                            <tr style={{ textAlign: "center" }}>
-                                                <td>{prod.beeftype.nameTH}</td>
-                                                <td>{prod.beeftype.code}</td>
-                                                <td>{ }</td>
-                                                <td>{prod.weight}</td>
-                                                <td>{prod.barcode}</td>
-                                                <td><input type="checkbox" value={prod.id} /></td>
-                                            </tr>
-                                        ))}
+                                        {!success && (
+                                            <>
+                                                <tr style={{ textAlign: "center" }}>
+                                                    <td colspan="6">ไม่พบข้อมูล</td>
+                                                </tr>
+                                            </>
+                                        )}
                                     </tbody>
                                 </Table>
+                               
+                                    <div style={{ display: "flex", justifyContent: "center", paddingTop: "10px" }}>
+                                        <Savebutton1 style={{ width: "200px", backgroundColor: `${!typebeef.barcode ? "gray" : ""}` }}
+                                            onClick={handleSubmitupdate}
+                                            disabled={!typebeef.barcode}>
+                                            เสร็จสิ้นกระบวนการแปรรูป</Savebutton1>
+                                    </div>
+                               
                             </div>
                         </div>
 
 
+
                     </DivFromDown>
                 </DivFrom>
-
                 <DivFrom
                     style={{
-                        width: "1010px",
+                        width: "100%",
                         gridRowStart: "3",
                         gridRowEnd: "3",
                         gridColumnStart: "3",
@@ -324,7 +396,7 @@ const index = () => {
                         รายการสินค้าผลิตภัณฑ์
                     </DivFromTop>
                     <DivFromDown>
-                        <div style={{ height: "200px", overflow: "auto" }}>
+                        <div style={{ height: `${Psearch && Psearch.ProductSearch.length > 5 ? "300px" : ""}`, overflow: `${Psearch && Psearch.ProductSearch.length > 5 ? "auto" : ""}` }}>
                             <Table
                                 striped
                                 bordered
@@ -336,28 +408,30 @@ const index = () => {
                                     <tr style={{ textAlign: "center" }}>
                                         <th>ประเภทสินค้า</th>
                                         <th>รหัสสินค้า</th>
-                                        <th>บาร์โค้ด</th>
                                         <th>น้ำหนัก (กก.)</th>
                                         <th>วันที่ผลิต</th>
                                         <th>วันหมดอายุ</th>
+                                        <th>บาร์โค้ด</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr style={{ textAlign: "center" }}>
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                    </tr>
-
+                                <tbody >
+                                    {Psearch && Psearch.ProductSearch.length > 0 ? (
+                                        Psearch.ProductSearch.map((prod) => (
+                                            <Listp key={prod.id} listp={prod} />
+                                        ))
+                                    ) : (
+                                        <tr style={{ textAlign: "center" }}>
+                                            <td colSpan="6">ไม่พบข้อมูล</td>
+                                        </tr>
+                                    )
+                                    }
                                 </tbody>
                             </Table>
                         </div>
+
                     </DivFromDown>
                 </DivFrom>
-            </DivBase>
+            </DivBase >
         </div >
     );
 };

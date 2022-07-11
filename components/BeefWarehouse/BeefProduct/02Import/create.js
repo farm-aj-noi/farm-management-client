@@ -47,6 +47,7 @@ query Allpbasket($id: ID) {
 
 
 const create = () => {
+
   const MySwal = withReactContent(Swal);
   const { data: room } = useQuery(QUERYROOM);
   const [createimproduct, setcreateimproduct] = useState({
@@ -203,6 +204,7 @@ const create = () => {
               <select
                 name="pbasket"
                 value={createimproduct.pbasket}
+                onChange={handleChange}
                 style={{
                   height: "35px",
                   width: "60px",

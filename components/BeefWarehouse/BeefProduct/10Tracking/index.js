@@ -94,7 +94,7 @@ const index = () => {
         }
     }
     return (
-        <>
+        <div style={{ marginTop: "100px" }}>
             <div style={{ display: "flex", justifyContent: "center", marginTop: "30px" }}>
                 <HeaderColor style={{
                     width: "fit-content",
@@ -304,7 +304,7 @@ const index = () => {
                     </DivFromDown>
                 </DivFrom>
             </DivBase1 >
-        </>
+        </div>
     )
 }
 
