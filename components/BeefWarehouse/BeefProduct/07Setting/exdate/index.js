@@ -35,7 +35,7 @@ export const QUERYEXPDATE = gql`
 const index = () => {
   const { data } = useQuery(QUERYEXPDATE);
   return (
-    <DivBase>
+    <div style={{ marginTop: "100px" }}>
       <div
         style={{
           display: "flex",
@@ -95,7 +95,7 @@ const index = () => {
           </DivFromDown>
         </DivFrom>
       </DivBase>
-    </DivBase>
+    </div>
   );
 };
 

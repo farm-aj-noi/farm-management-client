@@ -54,7 +54,7 @@ const EXPDATE = gql`
 const index = () => {
   const { data } = useQuery(EXPDATE);
   return (
-    <div>
+    <div style={{ marginTop: "100px" }}>
       <div
         style={{ display: "flex", justifyContent: "center", marginTop: "30px" }}
       >

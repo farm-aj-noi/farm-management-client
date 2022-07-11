@@ -129,6 +129,7 @@ const Submit_Chill = () => {
                 onChange={handleChange}
                 style={{
                   borderColor: `${!ImportChillInfo.barcode ? "red" : ""}`,
+                  height: "35px"
                 }}
               />
               {!ImportChillInfo.barcode ? (
@@ -154,9 +155,9 @@ const Submit_Chill = () => {
                     border: "1px solid #AFAFAF",
                     borderRadius: "4px",
                     textAlign: "center",
-                    fontSize: "14px",
+                    fontSize: "16px",
                   }}
-                  id="chillday"
+                  disabled={!ImportChillInfo.barcode}
                   name="chillday"
                   value={ImportChillInfo.chillday}
                   onChange={handleChange}
@@ -188,9 +189,9 @@ const Submit_Chill = () => {
                     border: "1px solid #AFAFAF",
                     borderRadius: "4px",
                     textAlign: "center",
-                    fontSize: "14px",
+                    fontSize: "16px",
                   }}
-                  id="chillroom"
+                  disabled={!ImportChillInfo.chillday || !ImportChillInfo.barcode}
                   name="chillroom"
                   value={ImportChillInfo.chillroom}
                   onChange={handleChange}
@@ -223,13 +224,12 @@ const Submit_Chill = () => {
                 !ImportChillInfo.chillroom
               }
               style={{
-                backgroundColor: `${
-                  !ImportChillInfo.barcode ||
+                backgroundColor: `${!ImportChillInfo.barcode ||
                   !ImportChillInfo.chillday ||
                   !ImportChillInfo.chillroom
-                    ? "gray"
-                    : ""
-                }`,
+                  ? "gray"
+                  : ""
+                  }`,
               }}
             >
               บันทึก

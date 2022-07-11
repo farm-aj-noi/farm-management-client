@@ -10,10 +10,10 @@ function List_import({ imhalve }) {
   console.log(imhalveData.id);
 
   return (
-    <tr style={{ textAlign: "center" }}>
-      <td>{imhalveData.halve.imslaughter.namefarmer}</td>
-      <td>{imhalveData.halve.beeftype.nameTH}</td>
-      <td>
+    <tr style={{ textAlign: "center", fontSize: "16px" }}>
+      <td >{imhalveData.halve.imslaughter.namefarmer}</td>
+      <td >{imhalveData.halve.beeftype.nameTH}</td>
+      <td >
         {dayjs(imhalveData.importdate)
           .locale("th")
           .add(543, "year")
@@ -35,10 +35,10 @@ function List_import({ imhalve }) {
       <td>
         {imhalveData.halve.weightcool ? imhalveData.halve.weightcool : "-"}
       </td>
-      <td>{imhalveData.beefroom.roomname}</td>
+      <td >{imhalveData.beefroom.roomname}</td>
 
-      <td>{imhalveData.halve.status.nameTH}</td>
-      <td>{imhalveData.user.name}</td>
+      <td >{imhalveData.halve.status.nameTH}</td>
+      <td >{imhalveData.user.name}</td>
     </tr>
   );
 }

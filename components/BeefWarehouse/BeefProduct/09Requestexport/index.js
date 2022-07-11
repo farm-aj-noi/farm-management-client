@@ -33,7 +33,7 @@ query QUERYRE {
 function index() {
     const { data } = useQuery(QUERYRE);
     return (
-        <DivBase>
+        <div style={{ marginTop: "100px" }}>
             <div
                 style={{
                     display: "flex",
@@ -129,7 +129,7 @@ function index() {
                     </DivFromDown>
                 </DivFrom>
             </DivBase>
-        </DivBase>
+        </div>
     )
 }
 

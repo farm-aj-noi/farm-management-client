@@ -40,7 +40,7 @@ query QUERYFREEZER {
 const index = () => {
   const { data } = useQuery(QUERYFREEZER);
   return (
-    <DivBase>
+    <div style={{ marginTop: "100px" }}>
       <div
         style={{
           display: "flex",
@@ -135,13 +135,16 @@ const index = () => {
                 </tr>
               </thead>
               <tbody>
-                <List />
+                {data && data.allFreezer.map((prod) => (
+                  <List key={prod.id} listf={prod} />
+                ))}
+
               </tbody>
             </Table>
           </DivFromDown>
         </DivFrom>
       </DivBase>
-    </DivBase>
+    </div>
   );
 };
 

@@ -67,7 +67,7 @@ const index = () => {
   });
   console.log(data);
   return (
-    <>
+    <div style={{ marginTop: "100px" }}>
       <div
         style={{
           display: "flex",
@@ -88,7 +88,7 @@ const index = () => {
       <DivBase
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 270px 1200px 1fr",
+          gridTemplateColumns: "1fr 270px 1250px 1fr",
           gridRowGap: "15px",
           gridColumnGap: "10px",
           textAlign: "start",
@@ -134,7 +134,7 @@ const index = () => {
                 style={{
                   display: "flex",
                   justifyContent: "center",
-                  marginBottom: "10px",
+
                 }}
               >
                 <from style={{ fontSize: "20px" }}>
@@ -143,7 +143,7 @@ const index = () => {
                     style={{
                       textAlign: "center",
                       fontSize: "18px",
-                      marginRight: "10px",
+
                     }}
                   >
                     ประเภทซาก
@@ -157,8 +157,9 @@ const index = () => {
                       border: "1px solid #AFAFAF",
                       borderRadius: "4px",
                       textAlign: "center",
-                      fontSize: "14px",
-                      marginRight: "10px",
+                      fontSize: "16px",
+                      marginLeft: "10px"
+
                     }}
                     onChange={(event) =>
                       SetBeeftypeChillChange(event.target.value)
@@ -174,6 +175,7 @@ const index = () => {
                       textAlign: "center",
                       fontSize: "18px",
                       marginRight: "10px",
+                      marginLeft: "10px",
                     }}
                   >
                     ผู้บ่มซาก
@@ -184,7 +186,7 @@ const index = () => {
                       width: "110px",
                       borderRadius: "4px",
                       border: "1px solid #AFAFAF",
-                      fontSize: "14px",
+                      fontSize: "16px",
                       textAlign: "center",
                       marginRight: "10px",
                     }}
@@ -253,16 +255,16 @@ const index = () => {
               รายการบ่มซากเนื้อโค
             </DivFromTop>
             <DivFromDown>
-              <div style={{ height: "420px", overflow: "auto" }}>
+              <div style={{ height: `${data && data.listchill.length > 7 ? "420px" : ""}`, overflow: `${data && data.listchill.length > 7 ? "auto" : ""}` }}>
                 <Table
                   striped
                   bordered
                   responsive
                   hover
-                  style={{ margin: "auto" }}
+
                 >
                   <thead>
-                    <tr style={{ textAlign: "center" }}>
+                    <tr style={{ textAlign: "center", fontSize: "18px" }}>
                       <th>ผู้บ่มซาก</th>
                       <th>วันที่บ่ม</th>
                       <th>วันที่บ่มเสร็จ</th>
@@ -286,34 +288,22 @@ const index = () => {
                       ))
                     ) : (
                       <tr style={{ textAlign: "center" }}>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
+                        <td colSpan="14">ไม่พบข้อมูล</td>
                       </tr>
                     )}
                   </tbody>
                 </Table>
               </div>
+
               <div style={{ float: "right", textAlign: "right" }}>
                 จำนวนรายการ {data ? data.listchill.length : "0"} รายการ
                 <br />
                 น้ำหนักอุ่น{" "}
                 {data && data.listchill.length > 0
                   ? data.listchill.reduce(
-                      (sum, nex) => sum + nex.halve.weightwarm,
-                      0
-                    )
+                    (sum, nex) => sum + nex.halve.weightwarm,
+                    0
+                  )
                   : "0"}{" "}
                 กิโลกรัม
               </div>
@@ -321,7 +311,7 @@ const index = () => {
           </DivFrom>
         </>
       </DivBase>
-    </>
+    </div>
   );
 };
 

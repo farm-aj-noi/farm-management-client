@@ -57,6 +57,7 @@ const Nav1 = () => {
         }}
         collapseOnSelect
         expand="lg"
+        fixed="top"
       >
         <Navbar.Brand style={{ padding: "0" }}>
           <Link href="/beefwarehouse">
@@ -76,7 +77,7 @@ const Nav1 = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
-            <Link href="/beefwarehouse/beefproduct/imports">
+            <Link href="/beefwarehouse/beefproduct/createproduct">
               <NavButtonLeft>
                 {" "}
                 <Icon16 height="30px" weight="30px" /> แปรรูปสินค้า

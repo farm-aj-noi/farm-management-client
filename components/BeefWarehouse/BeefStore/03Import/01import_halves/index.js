@@ -77,7 +77,6 @@ export const QUERYROOM = gql`
 
 const index = () => {
   const { data: dataroom } = useQuery(QUERYROOM);
-
   const [selectedbeeftypehalve, SetBeeftypeHalveChange] = useState("");
   const [selectedstartdate, SetStartDateChange] = useState("");
   const [selectedenddate, SetEndDateChange] = useState("");
@@ -95,7 +94,7 @@ const index = () => {
     },
   });
   return (
-    <>
+    <div style={{ marginTop: "100px" }}>
       <div
         style={{ display: "flex", justifyContent: "center", marginTop: "30px" }}
       >
@@ -112,7 +111,7 @@ const index = () => {
       <DivBase
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 270px 900px 1fr",
+          gridTemplateColumns: "1fr 270px 1230px 1fr",
           gridRowGap: "15px",
           gridColumnGap: "10px",
           textAlign: "start",
@@ -180,7 +179,7 @@ const index = () => {
                       border: "1px solid #AFAFAF",
                       borderRadius: "4px",
                       textAlign: "center",
-                      fontSize: "14px",
+                      fontSize: "16px",
                     }}
                     onChange={(event) =>
                       SetBeeftypeHalveChange(event.target.value)
@@ -207,7 +206,7 @@ const index = () => {
                       width: "110px",
                       borderRadius: "4px",
                       border: "1px solid #AFAFAF",
-                      fontSize: "14px",
+                      fontSize: "16px",
                       textAlign: "center",
                     }}
                     onChange={(event) => SetInputnamefarmer(event.target.value)}
@@ -229,7 +228,7 @@ const index = () => {
                       width: "110px",
                       borderRadius: "4px",
                       border: "1px solid #AFAFAF",
-                      fontSize: "14px",
+                      fontSize: "16px",
                       textAlign: "center",
                     }}
                     onChange={(event) => SetInputusername(event.target.value)}
@@ -252,7 +251,7 @@ const index = () => {
                       border: "1px solid #AFAFAF",
                       borderRadius: "4px ",
                       textAlign: "center",
-                      fontSize: "14px",
+                      fontSize: "16px",
                     }}
                     onChange={(event) => setselectbeefroom(event.target.value)}
                   >
@@ -264,22 +263,13 @@ const index = () => {
                         </option>
                       ))}
                   </select>
-                </from>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginBottom: "10px",
-                }}
-              >
-                <from style={{ fontSize: "20px" }}>
                   <label
                     for="date"
                     style={{
                       textAlign: "center",
                       fontSize: "18px",
                       marginRight: "10px",
+                      marginLeft: "10px"
                     }}
                   >
                     วันที่นำเข้า
@@ -298,18 +288,6 @@ const index = () => {
                     }}
                     onChange={(event) => SetStartDateChange(event.target.value)}
                   ></input>
-                  {/* <DatePicker
-                    className={Datestyle.datepicker}
-                    selected={date}
-                    onChange={onChangeDatePicker}
-                    dateFormat="dd/mm/yyyy"
-                    ref={dateRef}
-                    locale="th"
-                    peekNextMonth
-                    showMonthDropdown
-                    showYearDropdown
-                    dropdownMode="select"
-                  /> */}
                   <label
                     for="date"
                     style={{
@@ -333,29 +311,17 @@ const index = () => {
                     }}
                     onChange={(event) => SetEndDateChange(event.target.value)}
                   ></input>
-                  {/*  <DatePicker
-                    className={Datestyle.datepicker}
-                    selected={date2}
-                    onChange={onChangeDatePicker2}
-                    dateFormat="dd/mm/yyyy"
-                    ref={dateRef2}
-                    locale="th"
-                    peekNextMonth
-                    showMonthDropdown
-                    showYearDropdown
-                    dropdownMode="select"
-                  /> */}
                 </from>
               </div>
             </DivFromDown>
           </DivFrom>
           <DivFrom
             style={{
-              width: "1180px",
-              gridRowStart: "5",
-              gridRowEnd: "5",
-              gridColumnStart: "2",
-              gridColumnEnd: "4",
+              width: "100%",
+              gridRowStart: "3",
+              gridRowEnd: "3",
+              gridColumnStart: "3",
+              gridColumnEnd: "3",
               marginTop: "20px",
             }}
           >
@@ -366,28 +332,26 @@ const index = () => {
               รายการนำเข้าซากเนื้อโคผ่าซีก
             </DivFromTop>
             <DivFromDown>
-              <div style={{ height: "320px", overflow: "auto" }}>
+              <div style={{ height: `${data && data.imhalveSearch.length > 7 ? "320px" : ""}`, overflow: `${data && data.imhalveSearch.length > 7 ? "auto" : ""}` }}>
                 <Table
                   striped
                   bordered
                   responsive
                   hover
-                  style={{ margin: "auto" }}
                 >
                   <thead>
-                    <tr style={{ textAlign: "center" }}>
-                      <th>เจ้าของซาก</th>
-                      <th>ประเภทซาก</th>
-                      <th>วันที่นำเข้า</th>
-                      <th>เวลา</th>
-                      <th>ทะเบียนขุน</th>
-                      <th>รหัสซาก</th>
-                      <th>รหัสบาร์โค้ด</th>
-                      <th>คิวอาร์โค้ด</th>
-                      <th>น้ำหนักอุ่น (กก.)</th>
-                      <th>น้ำหนักเย็น (กก.)</th>
-                      <th>ห้อง</th>
-
+                    <tr style={{ textAlign: "center", fontSize: "18px" }}>
+                      <th >เจ้าของซาก</th>
+                      <th >ประเภทซาก</th>
+                      <th >วันที่นำเข้า</th>
+                      <th >เวลา</th>
+                      <th >ทะเบียนขุน</th>
+                      <th >รหัสซาก</th>
+                      <th >รหัสบาร์โค้ด</th>
+                      <th >คิวอาร์โค้ด</th>
+                      <th >น้ำหนักอุ่น (กก.)</th>
+                      <th >น้ำหนักเย็น (กก.)</th>
+                      <th >ห้อง</th>
                       <th>สถานะ</th>
                       <th>ผู้นำเข้า</th>
                     </tr>
@@ -399,19 +363,7 @@ const index = () => {
                       ))
                     ) : (
                       <tr style={{ textAlign: "center" }}>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
+                        <td colSpan="13">ไม่พบข้อมูล</td>
                       </tr>
                     )}
                   </tbody>
@@ -439,7 +391,7 @@ const index = () => {
           </DivFrom>
         </>
       </DivBase>
-    </>
+    </div>
   );
 };
 

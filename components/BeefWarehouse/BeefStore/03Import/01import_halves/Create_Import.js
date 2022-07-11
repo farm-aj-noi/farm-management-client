@@ -138,6 +138,7 @@ const Create_Import = () => {
                 onChange={handleChange}
                 style={{
                   borderColor: `${!ImporthalvesInfo.barcode ? "red" : ""}`,
+                  height: "35px"
                 }}
               />
 
@@ -192,11 +193,10 @@ const Create_Import = () => {
             <Savebutton1
               disabled={!ImporthalvesInfo.barcode || !ImporthalvesInfo.beefroom}
               style={{
-                backgroundColor: `${
-                  !ImporthalvesInfo.barcode || !ImporthalvesInfo.beefroom
-                    ? "gray"
-                    : ""
-                }`,
+                backgroundColor: `${!ImporthalvesInfo.barcode || !ImporthalvesInfo.beefroom
+                  ? "gray"
+                  : ""
+                  }`,
               }}
               onClick={handleSubmit}
             >
