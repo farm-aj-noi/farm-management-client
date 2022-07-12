@@ -38,7 +38,7 @@ const listimproduct = ({ listim }) => {
           .format("DD/MM/YYYY")}
       </td>
       <td>{infoimproduct.productroom.roomname}</td>
-      <td>{/* infoimproduct.freezer.freezername */}</td>
+      <td>{infoimproduct.freezer.freezername}</td>
       <td>{infoimproduct.pbasket}</td>
       <td>{infoimproduct.user.name}</td>
     </tr>

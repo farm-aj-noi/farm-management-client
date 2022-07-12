@@ -8,20 +8,18 @@ import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
 import { iosSearchStrong } from "react-icons-kit/ionicons/iosSearchStrong";
 
-
 import gql from "graphql-tag";
 import { useQuery, useMutation } from "@apollo/react-hooks";
-
-import Test from "./test"
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 import Router from "next/router";
 
-import TableCss from "./Table.module.css";
 import Listp from "./Listproduct";
 
+import Listlump from "./listlump";
+import Listchop from "./listchop";
 
 const QUERYTYPE = gql`
   query QUERYTYPE {
@@ -50,37 +48,6 @@ mutation CREATEPRODUCT($weight: Int, $producttype: String) {
   }
 }
 `
-
-export const QUERYLUMP = gql`
-query QUERYLUMP {
-  LumpForProduct {
-    id
-    weight
-    beeftype {
-      nameTH
-      code
-    }
-    barcode
-  }
-}
-`
-
-export const QUERYCHOP = gql`
-query QUERYCHOP {
-  ChopForProduct {
-    id
-    weight
-    barcode
-    beeftype {
-      code
-      nameTH
-    }
-  }
-}
-`
-
-
-
 export const PRODUCTSEARCH = gql`
 query ProductSearch {
   ProductSearch {
@@ -104,6 +71,39 @@ mutation UpdateBeefProduct($id: ID!, $barcode: String) {
 }
 `
 
+export const PRODUCTSEARCH2 = gql`
+query ProductSearch2($id: ID) {
+  ProductSearch2(id: $id) {
+    id
+    chop {
+      id
+      weight
+      barcode
+      beeftype {
+        code
+        nameTH
+      }
+      imslaughter {
+        numcow
+      }
+      id
+    }
+    lump {
+      id
+      weight
+      barcode
+      imslaughter {
+        numcow
+      }
+      beeftype {
+        code
+        nameTH
+      }
+    }
+  }
+}
+`
+
 const index = () => {
     const MySwal = withReactContent(Swal);
     const [success, setsuccess] = useState(false);
@@ -121,16 +121,24 @@ const index = () => {
         barcode: "",
     })
 
+    const { data } = useQuery(PRODUCTSEARCH2, {
+        variables: {
+            id: idcreate,
+        }
+    })
+    console.log(data)
     const [UpdateBeefProduct] = useMutation(UPDATETYPEPRODUCT, {
+        refetchQueries: [{ query: PRODUCTSEARCH2 }],
         onCompleted: (data) => {
             if (data) {
                 settypebeef({
                     barcode: "",
                 })
+                setsuccesstype(true)
                 MySwal.fire({
                     icon: "success",
                     title: "สำเร็จ",
-                    text: "ทำการเลือกซากแปรรูปเสร็จสิ้น",
+                    text: "เสร็จสิ้นกระบวนการแปรรูป",
                     confirmButtonText: (
                         <span
                         >
@@ -140,7 +148,8 @@ const index = () => {
                     confirmButtonColor: "#3085d6",
                 });
             }
-        }
+        },
+
     }
     )
     const handleChangeupdate = (e) => {
@@ -193,6 +202,24 @@ const index = () => {
         }
     }
     const { data: Psearch } = useQuery(PRODUCTSEARCH)
+    const handleClick = () => {
+        MySwal.fire({
+            icon: "success",
+            title: "สำเร็จ",
+            text: "ทำการเลือกซากแปรรูปเสร็จสิ้น",
+            confirmButtonText: (
+                <span onClick={() =>
+                    Router.reload("beefwarehouse/beefproduct/createproduct")
+                }
+                >
+                    ตกลง
+                </span>
+            ),
+            confirmButtonColor: "#3085d6",
+        })
+    }
+
+
     return (
         <div style={{ marginTop: "100px" }}>
             <div
@@ -211,7 +238,7 @@ const index = () => {
             <DivBase
                 style={{
                     display: "grid",
-                    gridTemplateColumns: "1fr 270px 800px  1fr",
+                    gridTemplateColumns: "1fr 270px 1000px 1fr",
                     gridRowGap: "15px",
                     gridColumnGap: "10px",
                     textAlign: "start",
@@ -230,7 +257,7 @@ const index = () => {
                         <div style={{ margin: "-3px 5px 0px 0px" }}>
                             <Icon size={20} icon={list} />
                         </div>
-                        ดำเนินการแปรรูปสินค้าผลิตภัณฑ์
+                        ดำเนินการเลือกผลิตภัณฑ์แปรรูป
                     </DivFromTop>
                     <DivFromDown>
                         <div>
@@ -317,29 +344,38 @@ const index = () => {
                         <div style={{ margin: "-3px 5px 0px 0px" }}>
                             <Icon size={20} icon={list} />
                         </div>
-                        ดำเนินรายการเลือกซากโคนำมาแปรรูป
+                        ดำเนินรายการแปรรูปสินค้าผลิตภัณฑ์
                     </DivFromTop>
                     <DivFromDown>
-
-                        <div>
-                            บาร์โค้ด : { }
-                            <Searchinput
-                                style={{ width: "170px" }}
-                                type="text"
-                                id="barcode"
-                                name="barcode"
-                                onChange={handleChangeupdate}
-                                value={typebeef.barcode}>
-                            </Searchinput>
-                        </div>
-
+                        {success && (
+                            <div>
+                                บาร์โค้ด : { }
+                                <Searchinput
+                                    style={{ width: "170px", height: "35px" }}
+                                    type="text"
+                                    id="barcode"
+                                    name="barcode"
+                                    onChange={handleChangeupdate}
+                                    value={typebeef.barcode}>
+                                </Searchinput>
+                                <Savebutton1 style={{
+                                    height: "35px",
+                                    width: " 50px",
+                                    marginBottom: "4px",
+                                    backgroundColor: `${!typebeef.barcode ? "gray" : ""}`
+                                }}
+                                    onClick={handleSubmitupdate}
+                                    disabled={!typebeef.barcode}>
+                                    บันทึก</Savebutton1>
+                            </div>
+                        )}
                         <div style={{
                             display: "flex",
                             justifyContent: "center",
                             marginTop: "10px"
                         }}>
-                            <div style={{ height: `${!success ? "" : "200px"}`, overflow: `${!success ? "" : "auto"}` }}>
-                                <p style={{ textAlign: "center" }}>รายการซากโคนำมาแปรรูป</p>
+                            <div style={{ height: `${!success ? "" : "200px"}`, overflow: `${!success ? "" : "auto"}`, marginRight: "20px" }}>
+                                <p style={{ textAlign: "center", margin: "0px" }}>รายการซากโคก้อนเนื้อ</p>
                                 <Table
                                     striped
                                     bordered
@@ -358,27 +394,58 @@ const index = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {!success && (
-                                            <>
-                                                <tr style={{ textAlign: "center" }}>
-                                                    <td colspan="6">ไม่พบข้อมูล</td>
-                                                </tr>
-                                            </>
-                                        )}
+                                        {success ? (<> {data && data.ProductSearch2.map((prod) => (
+                                            <Listlump key={prod.id} listl={prod} />
+                                        ))}</>) : (<tr style={{ textAlign: "center" }}>
+                                            <td colspan="6">กรุณาเลือกประเภทสินค้า</td>
+                                        </tr>)}
+
+
                                     </tbody>
                                 </Table>
-                               
-                                    <div style={{ display: "flex", justifyContent: "center", paddingTop: "10px" }}>
-                                        <Savebutton1 style={{ width: "200px", backgroundColor: `${!typebeef.barcode ? "gray" : ""}` }}
-                                            onClick={handleSubmitupdate}
-                                            disabled={!typebeef.barcode}>
-                                            เสร็จสิ้นกระบวนการแปรรูป</Savebutton1>
-                                    </div>
-                               
+                            </div>
+                            <div style={{ height: `${!success ? "" : "200px"}`, overflow: `${!success ? "" : "auto"}` }}>
+                                <p style={{ textAlign: "center", margin: "0px" }}>รายการซากโคชิ้นเนื้อ</p>
+                                <Table
+                                    striped
+                                    bordered
+                                    responsive
+                                    hover
+                                    style={{ margin: "auto" }}
+                                >
+                                    <thead>
+                                        <tr style={{ textAlign: "center" }}>
+                                            <th>ประเภทซาก</th>
+                                            <th>รหัสซาก</th>
+                                            <th>ทะเบียนขุน</th>
+                                            <th>น้ำหนัก (กก.)</th>
+                                            <th>รหัสบาร์โค้ด</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <>
+                                            {success ? (<>
+                                                {data && data.ProductSearch2.map((prod) => (
+                                                    <Listchop key={prod.id} listc={prod} />
+                                                ))}
+                                            </>) : (<tr style={{ textAlign: "center" }}>
+                                                <td colspan="6">กรุณาเลือกประเภทสินค้า</td>
+                                            </tr>)}
+
+                                        </>
+                                    </tbody>
+                                </Table>
                             </div>
                         </div>
+                        {successtype && (
+                            <div style={{ display: "flex", justifyContent: "center", paddingTop: "10px" }}>
+                                <Savebutton1 style={{ width: "150px", backgroundColor: `${!typebeef.barcode ? "gray" : ""}` }}
+                                    onClick={handleClick}>
+                                    เสร็จสิ้น</Savebutton1>
 
-
+                            </div>
+                        )}
 
                     </DivFromDown>
                 </DivFrom>
@@ -388,6 +455,7 @@ const index = () => {
                         gridRowStart: "3",
                         gridRowEnd: "3",
                         gridColumnStart: "3",
+
                     }}
                 ><DivFromTop>
                         <div style={{ margin: "-3px 5px 0px 0px" }}>
@@ -396,7 +464,7 @@ const index = () => {
                         รายการสินค้าผลิตภัณฑ์
                     </DivFromTop>
                     <DivFromDown>
-                        <div style={{ height: `${Psearch && Psearch.ProductSearch.length > 5 ? "300px" : ""}`, overflow: `${Psearch && Psearch.ProductSearch.length > 5 ? "auto" : ""}` }}>
+                        <div style={{ height: `${Psearch && Psearch.ProductSearch.length > 5 ? "250px" : ""}`, overflow: `${Psearch && Psearch.ProductSearch.length > 5 ? "auto" : ""}` }}>
                             <Table
                                 striped
                                 bordered
