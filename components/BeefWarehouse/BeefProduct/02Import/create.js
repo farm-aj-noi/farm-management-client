@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 import Router from "next/router";
+import { IMPRODUCTSEARCH } from "./index"
 
 const CREATEIMPORTPRODUCT = gql`
 mutation CREATEIMPORTPRODUCT($barcode: String, $productstore: String, $productroom: String, $freezer: String, $pbasket: String) {
@@ -88,9 +89,9 @@ const create = () => {
           text: "ทำการนำเข้าคลังผลิตภัณฑ์เสร็จสิ้น",
           confirmButtonText: (
             <span
-              onClick={() =>
-                Router.reload("beefwarehouse/beefproduct/imports")
-              }
+             onClick={() =>
+               Router.reload("beefwarehouse/beefproduct/imports")
+             }
             >
               ตกลง
             </span>
