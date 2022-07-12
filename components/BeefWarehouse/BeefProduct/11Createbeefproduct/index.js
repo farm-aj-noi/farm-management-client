@@ -49,7 +49,7 @@ mutation CREATEPRODUCT($weight: Int, $producttype: String) {
 }
 `
 export const PRODUCTSEARCH = gql`
-query ProductSearch {
+query PRODUCTSEARCH {
   ProductSearch {
     id
     barcode
@@ -64,7 +64,7 @@ query ProductSearch {
 }
 `
 const UPDATETYPEPRODUCT = gql`
-mutation UpdateBeefProduct($id: ID!, $barcode: String) {
+mutation UPDATETYPEPRODUCT($id: ID!, $barcode: String) {
   updateBeefProduct(id: $id, barcode: $barcode) {
     id
   }
@@ -72,7 +72,7 @@ mutation UpdateBeefProduct($id: ID!, $barcode: String) {
 `
 
 export const PRODUCTSEARCH2 = gql`
-query ProductSearch2($id: ID) {
+query PRODUCTSEARCH2($id: ID) {
   ProductSearch2(id: $id) {
     id
     chop {
@@ -126,27 +126,31 @@ const index = () => {
             id: idcreate,
         }
     })
-    console.log(data)
+
     const [UpdateBeefProduct] = useMutation(UPDATETYPEPRODUCT, {
-        refetchQueries: [{ query: PRODUCTSEARCH2 }],
+        refetchQueries: [
+            {
+                query: PRODUCTSEARCH2
+            }
+        ],
         onCompleted: (data) => {
             if (data) {
                 settypebeef({
                     barcode: "",
                 })
                 setsuccesstype(true)
-                MySwal.fire({
-                    icon: "success",
-                    title: "สำเร็จ",
-                    text: "เสร็จสิ้นกระบวนการแปรรูป",
-                    confirmButtonText: (
-                        <span
-                        >
-                            ตกลง
-                        </span>
-                    ),
-                    confirmButtonColor: "#3085d6",
-                });
+                /*   MySwal.fire({
+                      icon: "success",
+                      title: "สำเร็จ",
+                      text: "เสร็จสิ้นกระบวนการแปรรูป",
+                      confirmButtonText: (
+                          <span
+                          >
+                              ตกลง
+                          </span>
+                      ),
+                      confirmButtonColor: "#3085d6",
+                  }); */
             }
         },
 
@@ -218,8 +222,6 @@ const index = () => {
             confirmButtonColor: "#3085d6",
         })
     }
-
-
     return (
         <div style={{ marginTop: "100px" }}>
             <div
@@ -394,11 +396,17 @@ const index = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {success ? (<> {data && data.ProductSearch2.map((prod) => (
-                                            <Listlump key={prod.id} listl={prod} />
-                                        ))}</>) : (<tr style={{ textAlign: "center" }}>
-                                            <td colspan="6">กรุณาเลือกประเภทสินค้า</td>
-                                        </tr>)}
+                                        {success ? (
+                                            <>
+                                                {data && data.ProductSearch2.map((prod) => (
+                                                    <Listlump key={prod.id} listl={prod} />
+                                                ))}
+                                            </>
+                                        ) : (
+                                            <tr style={{ textAlign: "center" }}>
+                                                <td colspan="6">กรุณาเลือกประเภทสินค้า</td>
+                                            </tr>
+                                        )}
 
 
                                     </tbody>
@@ -440,7 +448,7 @@ const index = () => {
                         </div>
                         {successtype && (
                             <div style={{ display: "flex", justifyContent: "center", paddingTop: "10px" }}>
-                                <Savebutton1 style={{ width: "150px", backgroundColor: `${!typebeef.barcode ? "gray" : ""}` }}
+                                <Savebutton1 style={{ width: "150px" }}
                                     onClick={handleClick}>
                                     เสร็จสิ้น</Savebutton1>
 

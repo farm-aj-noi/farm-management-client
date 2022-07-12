@@ -10,6 +10,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 import Router from "next/router";
+import { QUERYROOM } from "./index"
 
 const CREATEROOM = gql`
   mutation CREATEROOM($roomname: String) {
@@ -29,6 +30,7 @@ const create = () => {
     variables: {
       roomname: inforoom.roomname,
     },
+   
     onCompleted: (data) => {
       if (data) {
         setinforoom({
@@ -92,7 +94,7 @@ const create = () => {
   return (
     <>
       <div>
-        ชื่อห้องจัดเก็บ : {}
+        ชื่อห้องจัดเก็บ : { }
         <Searchinput
           value={inforoom.roomname}
           onChange={handleChange}

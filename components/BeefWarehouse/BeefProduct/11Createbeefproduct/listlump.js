@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 function listlump({ listl }) {
     const [infolump, setinfolump] = useState(listl);
+    console.log(infolump)
     return (
         <>
             {infolump && infolump.lump.length > 0 ? (
