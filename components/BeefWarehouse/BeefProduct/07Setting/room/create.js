@@ -82,9 +82,9 @@ const create = () => {
     });
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
     try {
-     
+      e.preventDefault();
       await createProductroom();
     } catch (error) {
       console.log(error);

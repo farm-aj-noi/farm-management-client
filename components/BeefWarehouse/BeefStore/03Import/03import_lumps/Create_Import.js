@@ -148,8 +148,9 @@ const Create_Import = () => {
     });
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
     try {
+      e.preventDefault();
       await createImlump();
     } catch (error) {
       console.log(error);
@@ -205,7 +206,7 @@ const Create_Import = () => {
                     border: "1px solid #AFAFAF",
                     borderRadius: "4px 0px 0px 4px",
                     textAlign: "center",
-                    fontSize: "14px",
+                    fontSize: "16px",
                   }}
                 >
                   <option value="">ห้อง</option>
@@ -228,7 +229,7 @@ const Create_Import = () => {
                     border: "1px solid #AFAFAF",
                     borderLeft: "none",
                     textAlign: "center",
-                    fontSize: "14px",
+                    fontSize: "16px",
                   }}
                 >
                   <option value="">ชั้น</option>
@@ -252,7 +253,7 @@ const Create_Import = () => {
                     borderRadius: "0px 4px 4px 0px",
                     borderLeft: "none",
                     textAlign: "center",
-                    fontSize: "14px",
+                    fontSize: "16px",
                     marginRight: "10px",
                   }}
                 >

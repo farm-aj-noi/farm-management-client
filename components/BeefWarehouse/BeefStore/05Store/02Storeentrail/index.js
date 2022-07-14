@@ -57,7 +57,7 @@ const index = () => {
   });
   const { data: dataroom } = useQuery(QUERYROOM);
   return (
-    <DivBase>
+    <div style={{ marginTop: "100px" }}>
       <div
         style={{
           display: "flex",
@@ -211,7 +211,7 @@ const index = () => {
             รายการยอดคงคลังซากโค
           </DivFromTop>
           <DivFromDown>
-            <div style={{ height: "380px", overflowY: "auto" }}>
+            <div style={{ height: `${data && data.listentrail.length > 7 ? "380px" : ""}`, overflow: "auto" }}>
               <Table
                 striped
                 bordered
@@ -247,23 +247,7 @@ const index = () => {
                     ))
                   ) : (
                     <tr style={{ textAlign: "center" }}>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
+                      <td colSpan="17">ไม่พบข้อมูล</td>
                     </tr>
                   )}
                 </tbody>
@@ -275,7 +259,7 @@ const index = () => {
           </DivFromDown>
         </DivFrom>
       </DivBase>
-    </DivBase>
+    </div>
   );
 };
 

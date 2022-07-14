@@ -158,6 +158,7 @@ const Create_Import = () => {
                 <select
                   name="beefroom"
                   id="beefroom"
+                  disabled={!ImportentrailInfo.barcode}
                   value={ImportentrailInfo.beefroom}
                   style={{
                     height: "35px",
@@ -165,7 +166,7 @@ const Create_Import = () => {
                     border: "1px solid #AFAFAF",
                     borderRadius: "4px",
                     textAlign: "center",
-                    fontSize: "14px",
+                    fontSize: "16px",
                   }}
                   onChange={handleChange}
                 >
@@ -194,11 +195,10 @@ const Create_Import = () => {
                 !ImportentrailInfo.barcode || !ImportentrailInfo.beefroom
               }
               style={{
-                backgroundColor: `${
-                  !ImportentrailInfo.barcode || !ImportentrailInfo.beefroom
-                    ? "gray"
-                    : ""
-                }`,
+                backgroundColor: `${!ImportentrailInfo.barcode || !ImportentrailInfo.beefroom
+                  ? "gray"
+                  : ""
+                  }`,
               }}
             >
               บันทึก

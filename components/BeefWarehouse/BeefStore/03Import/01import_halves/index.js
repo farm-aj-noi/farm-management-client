@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 
 import { Table } from "react-bootstrap";
 import { DivFrom, DivFromTop, DivFromDown, HeaderColor } from "../ImportFrom";
@@ -111,7 +111,7 @@ const index = () => {
       <DivBase
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 270px 1280px 1fr",
+          gridTemplateColumns: "1fr 270px 1300px 1fr",
           gridRowGap: "15px",
           gridColumnGap: "10px",
           textAlign: "start",
@@ -332,7 +332,7 @@ const index = () => {
               รายการนำเข้าซากเนื้อโคผ่าซีก
             </DivFromTop>
             <DivFromDown>
-              <div style={{ height: `${data && data.imhalveSearch.length > 6 ? "320px" : ""}`, overflow: `${data && data.imhalveSearch.length > 6 ? "auto" : ""}` }}>
+              <div style={{ height: `${data && data.imhalveSearch.length > 6 ? "400px" : ""}`, overflow: `${data && data.imhalveSearch.length > 6 ? "auto" : ""}` }}>
                 <Table
                   striped
                   bordered

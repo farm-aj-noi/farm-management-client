@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
 import {
-  Barcodebuttoncolor,
+
   Editbuttoncolor,
 } from "../../../../../utils/buttonColor";
-import { Qrcodebutton, Editbutton } from "../../../../../utils/button";
+import { Editbutton } from "../../../../../utils/button";
 import dayjs from "dayjs";
 import Modalqrcode from "../../12Qrcode/storeen";
 const ListStore = ({ Listentrail }) => {

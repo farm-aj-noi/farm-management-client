@@ -106,7 +106,7 @@ const index = () => {
 
   /*   console.log(selectedbeeftype); */
   return (
-    <DivBase>
+    <div style={{ marginTop: "100px" }}>
       <div
         style={{
           display: "flex",
@@ -186,7 +186,7 @@ const index = () => {
                       border: "1px solid #AFAFAF",
                       borderRadius: "4px",
                       textAlign: "center",
-                      fontSize: "14px",
+                      fontSize: "16px",
                       marginRight: "10px",
                     }}
                     onChange={(event) => SettypeChange(event.target.value)}
@@ -216,7 +216,7 @@ const index = () => {
                       border: "1px solid #AFAFAF",
                       borderRadius: "4px",
                       textAlign: "center",
-                      fontSize: "14px",
+                      fontSize: "16px",
                     }}
                     onChange={(event) => SetBeeftypeChange(event.target.value)}
                   >
@@ -354,7 +354,7 @@ const index = () => {
                       width: "110px",
                       borderRadius: "4px",
                       border: "1px solid #AFAFAF",
-                      fontSize: "14px",
+                      fontSize: "16px",
                       textAlign: "center",
                     }}
                   />
@@ -387,7 +387,7 @@ const index = () => {
                       border: "1px solid #AFAFAF",
                       borderRadius: "4px 0px 0px 4px",
                       textAlign: "center",
-                      fontSize: "14px",
+                      fontSize: "16px",
                     }}
                     onChange={(event) => setselectbeefroom(event.target.value)}
                   >
@@ -408,7 +408,7 @@ const index = () => {
                       border: "1px solid #AFAFAF",
                       borderLeft: "none",
                       textAlign: "center",
-                      fontSize: "14px",
+                      fontSize: "16px",
                     }}
                     onChange={(event) => setselectshelf(event.target.value)}
                   >
@@ -430,7 +430,7 @@ const index = () => {
                       borderRadius: "0px 4px 4px 0px",
                       borderLeft: "none",
                       textAlign: "center",
-                      fontSize: "14px",
+                      fontSize: "16px",
                       marginRight: "10px",
                     }}
                   >
@@ -484,7 +484,7 @@ const index = () => {
                       border: "1px solid #AFAFAF",
                       borderRadius: "4px",
                       textAlign: "center",
-                      fontSize: "14px",
+                      fontSize: "16px",
                     }}
                   >
                     <option value="halve">ทั้งหมด</option>
@@ -493,35 +493,6 @@ const index = () => {
                     <option value="chop">3</option>
                     <option value="chop">4</option>
                     <option value="chop">5</option>
-                  </select>
-                  <label
-                    for="beef"
-                    style={{
-                      textAlign: "center",
-                      fontSize: "18px",
-                      margin: "10px 10px",
-                    }}
-                  >
-                    สถานะ
-                  </label>
-                  <select
-                    name="beef"
-                    id="beef"
-                    style={{
-                      height: "35px",
-                      width: "120px",
-                      border: "1px solid #AFAFAF",
-                      textAlign: "center",
-                      borderRadius: "4px",
-                      fontSize: "14px",
-                    }}
-                  >
-                    <option value="all">ทั้งหมด</option>
-                    <option value="halve">ตัดแต่งซ้ายขวา</option>
-                    <option value="quarter">ตัดแต่ง(สี่เสี้ยว)</option>
-                    <option value="lamp">ตัดแต่ง(สี่เสี้ยว)</option>
-                    <option value="chop">ตัดแต่ง(ก้อนเนื้อ)</option>
-                    <option value="chop">ตัดแต่ง(ชิ้นเนื้อ)</option>
                   </select>
                 </from>
               </div>
@@ -543,7 +514,7 @@ const index = () => {
               รายการยอดคงคลังซากเนื้อโค
             </DivFromTop>
             <DivFromDown>
-              <div style={{ height: "320px", overflowY: "auto" }}>
+              <div style={{ height: `${data && data.liststore.length > 5 ? "320px" : ""}`, overflow: "auto" }}>
                 <Table
                   striped
                   bordered
@@ -551,9 +522,8 @@ const index = () => {
                   hover
                   style={{ margin: "auto" }}
                 >
-                  {/* <LoadingSmall/> */}
                   <thead>
-                    <tr style={{ textAlign: "center" }}>
+                    <tr style={{ textAlign: "center", fontSize: "18px" }}>
                       <th>ประเภทซาก</th>
                       <th>ทะเบียนขุน</th>
                       <th>รหัสซาก</th>
@@ -578,21 +548,7 @@ const index = () => {
                       ))
                     ) : (
                       <tr style={{ textAlign: "center" }}>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
+                        <td colSpan="15">ไม่พบข้อมูล</td>
                       </tr>
                     )}
                   </tbody>
@@ -616,7 +572,7 @@ const index = () => {
           </DivFrom>
         </>
       </DivBase>
-    </DivBase>
+    </div>
   );
 };
 

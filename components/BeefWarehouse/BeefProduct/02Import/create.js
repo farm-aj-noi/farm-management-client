@@ -134,8 +134,9 @@ const create = () => {
     })
   }
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
     try {
+      e.preventDefault();
       await createImproduct();
     } catch (error) {
       console.log(error);

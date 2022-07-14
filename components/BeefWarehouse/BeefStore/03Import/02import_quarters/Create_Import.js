@@ -112,8 +112,9 @@ const Create_Import = () => {
     });
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
     try {
+      e.preventDefault();
       await createImQuarter();
     } catch (error) {
       console.log(error);
@@ -169,7 +170,7 @@ const Create_Import = () => {
                     border: "1px solid #AFAFAF",
                     borderRadius: "4px",
                     textAlign: "center",
-                    fontSize: "14px",
+                    fontSize: "16px",
                   }}
                 >
                   <option value="">ห้อง</option>

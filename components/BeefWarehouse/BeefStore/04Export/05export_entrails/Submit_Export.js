@@ -139,6 +139,7 @@ const Submit_Export = () => {
               <div style={{ display: "inline", width: "170px" }}>
                 <select
                   name="exporter"
+                  disabled={!ExportentrailInfo.barcode}
                   value={ExportentrailInfo.exporter}
                   onChange={handleChange}
                   style={{
@@ -147,7 +148,7 @@ const Submit_Export = () => {
                     border: "1px solid #AFAFAF",
                     borderRadius: "4px",
                     textAlign: "center",
-                    fontSize: "14px",
+                    fontSize: "16px",
                   }}
                 >
                   <option value="">รายชื่อ</option>
@@ -172,6 +173,7 @@ const Submit_Export = () => {
               <div style={{ display: "inline", width: "170px" }}>
                 <select
                   name="storestatus"
+                  disabled={!ExportentrailInfo.barcode || !ExportentrailInfo.exporter}
                   value={ExportentrailInfo.storestatus}
                   onChange={handleChange}
                   style={{
@@ -180,7 +182,7 @@ const Submit_Export = () => {
                     border: "1px solid #AFAFAF",
                     borderRadius: "4px",
                     textAlign: "center",
-                    fontSize: "14px",
+                    fontSize: "16px",
                   }}
                 >
                   <option value="">เลือกสถานะ</option>
@@ -206,13 +208,12 @@ const Submit_Export = () => {
                 !ExportentrailInfo.storestatus
               }
               style={{
-                backgroundColor: `${
-                  !ExportentrailInfo.barcode ||
+                backgroundColor: `${!ExportentrailInfo.barcode ||
                   !ExportentrailInfo.exporter ||
                   !ExportentrailInfo.storestatus
-                    ? "gray"
-                    : ""
-                }`,
+                  ? "gray"
+                  : ""
+                  }`,
               }}
             >
               บันทึก

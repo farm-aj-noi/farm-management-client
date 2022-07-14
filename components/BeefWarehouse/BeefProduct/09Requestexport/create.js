@@ -85,8 +85,9 @@ function create() {
         })
     };
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (e) => {
         try {
+            e.preventDefault();
             await createRequestExportP();
         } catch (error) {
             console.log(error);

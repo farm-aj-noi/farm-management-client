@@ -188,6 +188,7 @@ const Create_Import = () => {
                 <select
                   name="beefroom"
                   id="beefroom"
+                  disabled={!ImportchopsInfo.barcode}
                   value={ImportchopsInfo.beefroom}
                   onChange={handleChange}
                   style={{
@@ -196,7 +197,7 @@ const Create_Import = () => {
                     border: "1px solid #AFAFAF",
                     borderRadius: "4px 0px 0px 4px",
                     textAlign: "center",
-                    fontSize: "14px",
+                    fontSize: "16px",
                   }}
                 >
                   <option value="">ห้อง</option>
@@ -210,6 +211,7 @@ const Create_Import = () => {
                 <select
                   name="shelf"
                   id="shelf"
+                  disabled={!ImportchopsInfo.barcode || !ImportchopsInfo.beefroom}
                   value={ImportchopsInfo.shelf}
                   onChange={handleChange}
                   style={{
@@ -218,7 +220,7 @@ const Create_Import = () => {
                     border: "1px solid #AFAFAF",
                     borderLeft: "none",
                     textAlign: "center",
-                    fontSize: "14px",
+                    fontSize: "16px",
                   }}
                 >
                   <option value="">ชั้น</option>
@@ -232,6 +234,7 @@ const Create_Import = () => {
                 <select
                   name="basket"
                   id="basket"
+                  disabled={!ImportchopsInfo.barcode || !ImportchopsInfo.beefroom || !ImportchopsInfo.shelf}
                   value={ImportchopsInfo.basket}
                   onChange={handleChange}
                   style={{
@@ -241,7 +244,7 @@ const Create_Import = () => {
                     borderRadius: "0px 4px 4px 0px",
                     borderLeft: "none",
                     textAlign: "center",
-                    fontSize: "14px",
+                    fontSize: "16px",
                     marginRight: "10px",
                   }}
                 >
@@ -272,13 +275,12 @@ const Create_Import = () => {
                 !ImportchopsInfo.shelf
               }
               style={{
-                backgroundColor: `${
-                  !ImportchopsInfo.beefroom ||
+                backgroundColor: `${!ImportchopsInfo.beefroom ||
                   !ImportchopsInfo.barcode ||
                   !ImportchopsInfo.shelf
-                    ? "gray"
-                    : ""
-                }`,
+                  ? "gray"
+                  : ""
+                  }`,
               }}
               onClick={handleSubmit}
             >

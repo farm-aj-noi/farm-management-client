@@ -74,7 +74,7 @@ const index = () => {
     },
   });
   return (
-    <>
+    <div style={{ marginTop: "100px" }}>
       <div
         style={{
           display: "flex",
@@ -95,7 +95,7 @@ const index = () => {
       <DivBase
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 270px 900px 1fr",
+          gridTemplateColumns: "1fr 270px 1150px 1fr",
           gridRowGap: "15px",
           gridColumnGap: "10px",
           textAlign: "start",
@@ -165,7 +165,7 @@ const index = () => {
                       border: "1px solid #AFAFAF",
                       borderRadius: "4px",
                       textAlign: "center",
-                      fontSize: "14px",
+                      fontSize: "16px",
                     }}
                     onChange={(event) =>
                       SetBeeftypeChopChange(event.target.value)
@@ -216,7 +216,7 @@ const index = () => {
                       width: "110px",
                       borderRadius: "4px",
                       border: "1px solid #AFAFAF",
-                      fontSize: "14px",
+                      fontSize: "16px",
                       textAlign: "center",
                     }}
                     onChange={(event) => SetinputExporter(event.target.value)}
@@ -238,90 +238,17 @@ const index = () => {
                       width: "110px",
                       borderRadius: "4px",
                       border: "1px solid #AFAFAF",
-                      fontSize: "14px",
+                      fontSize: "16px",
                       textAlign: "center",
                     }}
                     onChange={(event) => SetInputusername(event.target.value)}
                   />
                   <label
-                    for="beef"
-                    style={{
-                      textAlign: "center",
-                      fontSize: "18px",
-                      margin: "10px 10px",
-                    }}
-                  >
-                    ตำแหน่ง
-                  </label>
-                  <select
-                    name="room"
-                    id="room"
-                    style={{
-                      height: "35px",
-                      width: "50px",
-                      border: "1px solid #AFAFAF",
-                      borderRadius: "4px 0px 0px 4px",
-                      textAlign: "center",
-                      fontSize: "14px",
-                    }}
-                  >
-                    <option value="">ห้อง</option>
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
-                  </select>
-                  <select
-                    name="shelf"
-                    id="shelf"
-                    style={{
-                      height: "35px",
-                      width: "50px",
-                      border: "1px solid #AFAFAF",
-                      borderLeft: "none",
-                      textAlign: "center",
-                      fontSize: "14px",
-                    }}
-                  >
-                    <option value="">ชั้น</option>
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
-                  </select>
-                  <select
-                    name="bucket"
-                    id="bucket"
-                    style={{
-                      height: "35px",
-                      width: "60px",
-                      border: "1px solid #AFAFAF",
-                      borderRadius: "0px 4px 4px 0px",
-                      borderLeft: "none",
-                      textAlign: "center",
-                      fontSize: "14px",
-                      marginRight: "10px",
-                    }}
-                  >
-                    <option value="">ตะกร้า</option>
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
-                  </select>
-                </from>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginBottom: "10px",
-                }}
-              >
-                <from style={{ fontSize: "20px" }}>
-                  <label
                     for="date"
                     style={{
                       textAlign: "center",
                       fontSize: "18px",
-                      marginRight: "10px",
+                      margin: "10px 10px",
                     }}
                   >
                     วันที่เบิกออก
@@ -368,11 +295,11 @@ const index = () => {
           </DivFrom>
           <DivFrom
             style={{
-              width: "1180px",
-              gridRowStart: "5",
-              gridRowEnd: "5",
-              gridColumnStart: "2",
-              gridColumnEnd: "4",
+              width: "100%",
+              gridRowStart: "3",
+              gridRowEnd: "3",
+              gridColumnStart: "3",
+              gridColumnEnd: "3",
               marginTop: "20px",
             }}
           >
@@ -383,7 +310,7 @@ const index = () => {
               รายการเบิกออกซากเนื้อโคชิ้นเนื้อ
             </DivFromTop>
             <DivFromDown>
-              <div style={{ height: "280px", overflow: "auto" }}>
+              <div style={{ height: `${data && data.exportchop.length > 6 ? "400px" : ""}`, overflow: `${data && data.exportchop.length > 6 ? "auto" : ""}` }}>
                 <Table
                   striped
                   bordered
@@ -392,7 +319,7 @@ const index = () => {
                   style={{ margin: "auto" }}
                 >
                   <thead>
-                    <tr style={{ textAlign: "center" }}>
+                    <tr style={{ textAlign: "center", fontSize: "18px" }}>
                       <th>ประเภทซาก</th>
                       <th>วันที่เบิกออก</th>
                       <th>เวลา</th>
@@ -407,10 +334,12 @@ const index = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {data &&
-                      data.exportchop.map((prod) => (
-                        <List_export key={prod.id} exchop={prod} />
-                      ))}
+                    {data && data.exportchop.length > 0 ? (data.exportchop.map((prod) => (
+                      <List_export key={prod.id} exchop={prod} />
+                    ))) : (<tr style={{ textAlign: "center" }}>
+                      <td colSpan="12">ไม่พบข้อมูล</td>
+                    </tr>)
+                    }
                   </tbody>
                 </Table>
               </div>
@@ -429,7 +358,7 @@ const index = () => {
           </DivFrom>
         </>
       </DivBase>
-    </>
+    </div>
   );
 };
 

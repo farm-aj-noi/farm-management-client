@@ -56,7 +56,7 @@ const Submit_Export = () => {
         MySwal.fire({
           icon: "success",
           title: "สำเร็จ",
-          text: "ทำการนำเข้าคลังชิ้นเนื้อเสร็จสิ้น",
+          text: "ทำการเบิกออกคลังชิ้นเนื้อเสร็จสิ้น",
           confirmButtonText: (
             <span
               onClick={() =>
@@ -79,7 +79,9 @@ const Submit_Export = () => {
           icon: "error",
           title: <p>{error.graphQLErrors[0].message}</p>,
           text: "กรุณากรอกข้อมูลใหม่อีกครั้ง",
-          confirmButtonText: <span>ตกลง</span>,
+          confirmButtonText: <span onClick={() =>
+            Router.reload("beefwarehouse/beefstore/export/export_chops")
+          }>ตกลง</span>,
           confirmButtonColor: "#3085d6",
         });
       }
@@ -142,6 +144,7 @@ const Submit_Export = () => {
               <div style={{ display: "inline", width: "170px" }}>
                 <select
                   name="exporter"
+                  disabled={!ExportlumpInfo.barcode}
                   value={ExportlumpInfo.exporter}
                   onChange={handleChange}
                   style={{
@@ -150,7 +153,7 @@ const Submit_Export = () => {
                     border: "1px solid #AFAFAF",
                     borderRadius: "4px",
                     textAlign: "center",
-                    fontSize: "14px",
+                    fontSize: "16px",
                   }}
                 >
                   <option value="">รายชื่อ</option>
@@ -174,6 +177,7 @@ const Submit_Export = () => {
             >
               <div style={{ display: "inline", width: "170px" }}>
                 <select
+                  disabled={!ExportlumpInfo.barcode || !ExportlumpInfo.exporter}
                   name="storestatus"
                   value={ExportlumpInfo.storestatus}
                   onChange={handleChange}
@@ -183,7 +187,7 @@ const Submit_Export = () => {
                     border: "1px solid #AFAFAF",
                     borderRadius: "4px",
                     textAlign: "center",
-                    fontSize: "14px",
+                    fontSize: "16px",
                   }}
                 >
                   <option value="">เลือกสถานะ</option>
@@ -214,10 +218,10 @@ const Submit_Export = () => {
               }
               style={{
                 backgroundColor: `${!ExportlumpInfo.barcode ||
-                    !ExportlumpInfo.exporter ||
-                    !ExportlumpInfo.storestatus
-                    ? "gray"
-                    : ""
+                  !ExportlumpInfo.exporter ||
+                  !ExportlumpInfo.storestatus
+                  ? "gray"
+                  : ""
                   }`,
               }}
             >
