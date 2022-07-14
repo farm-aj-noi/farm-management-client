@@ -123,7 +123,7 @@ const index = () => {
 
     const { data } = useQuery(PRODUCTSEARCH2, {
         variables: {
-            id: idcreate,
+            id: "62c2a8cbb262634328fc79b8",
         }
     })
 
@@ -240,7 +240,7 @@ const index = () => {
             <DivBase
                 style={{
                     display: "grid",
-                    gridTemplateColumns: "1fr 270px 1000px 1fr",
+                    gridTemplateColumns: "1fr 270px 1000px  1fr",
                     gridRowGap: "15px",
                     gridColumnGap: "10px",
                     textAlign: "start",
@@ -305,7 +305,8 @@ const index = () => {
                                     >
                                         <Searchinput type="number" name="weight" value={createpro.weight} style={{
                                             backgroundColor: `${!createpro.producttype ? "#ececec" : ""}`,
-                                            textAlign: "center"
+                                            textAlign: "center",
+                                            height: "35px",
                                         }}
                                             onChange={handleChangeCreate} disabled={!createpro.producttype || success} />
                                     </div>
@@ -377,7 +378,7 @@ const index = () => {
                             marginTop: "10px"
                         }}>
                             <div style={{ height: `${!success ? "" : "200px"}`, overflow: `${!success ? "" : "auto"}`, marginRight: "20px" }}>
-                                <p style={{ textAlign: "center", margin: "0px" }}>รายการซากโคก้อนเนื้อ</p>
+                                <p style={{ textAlign: "center", margin: "0px", fontSize: "16px" }}>รายการซากโคก้อนเนื้อ</p>
                                 <Table
                                     striped
                                     bordered
@@ -386,7 +387,7 @@ const index = () => {
                                     style={{ margin: "auto" }}
                                 >
                                     <thead>
-                                        <tr style={{ textAlign: "center" }}>
+                                        <tr style={{ textAlign: "center", fontSize: "18px" }}>
                                             <th>ประเภทซาก</th>
                                             <th>รหัสซาก</th>
                                             <th>ทะเบียนขุน</th>
@@ -413,6 +414,12 @@ const index = () => {
                                 </Table>
                             </div>
                             <div style={{ height: `${!success ? "" : "200px"}`, overflow: `${!success ? "" : "auto"}` }}>
+                                {data && data.ProductSearch2 ? (<>{data && data.ProductSearch2 && data.ProductSearch2.chop && data.ProductSearch2.chop.map((prod) => (
+                                    <> <p>{prod.beeftype.nameTH}</p>
+                                        <p>{prod.barcode}</p></>
+
+                                ))}</>) : ("")}
+                                { }
                                 <p style={{ textAlign: "center", margin: "0px" }}>รายการซากโคชิ้นเนื้อ</p>
                                 <Table
                                     striped
@@ -422,13 +429,12 @@ const index = () => {
                                     style={{ margin: "auto" }}
                                 >
                                     <thead>
-                                        <tr style={{ textAlign: "center" }}>
+                                        <tr style={{ textAlign: "center", fontSize: "18px" }}>
                                             <th>ประเภทซาก</th>
                                             <th>รหัสซาก</th>
                                             <th>ทะเบียนขุน</th>
                                             <th>น้ำหนัก (กก.)</th>
                                             <th>รหัสบาร์โค้ด</th>
-
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -472,7 +478,10 @@ const index = () => {
                         รายการสินค้าผลิตภัณฑ์
                     </DivFromTop>
                     <DivFromDown>
-                        <div style={{ height: `${Psearch && Psearch.ProductSearch.length > 5 ? "250px" : ""}`, overflow: `${Psearch && Psearch.ProductSearch.length > 5 ? "auto" : ""}` }}>
+                        <div style={{
+                            height: `${Psearch && Psearch.ProductSearch.length > 5 ? "250px" : ""}`,
+                            overflow: `${Psearch && Psearch.ProductSearch.length > 5 ? "auto" : ""}`
+                        }}>
                             <Table
                                 striped
                                 bordered
@@ -481,7 +490,7 @@ const index = () => {
                                 style={{ margin: "auto" }}
                             >
                                 <thead>
-                                    <tr style={{ textAlign: "center" }}>
+                                    <tr style={{ textAlign: "center", fontSize: "18px" }}>
                                         <th>ประเภทสินค้า</th>
                                         <th>รหัสสินค้า</th>
                                         <th>น้ำหนัก (กก.)</th>

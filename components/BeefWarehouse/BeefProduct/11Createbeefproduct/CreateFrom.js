@@ -61,6 +61,7 @@ export const DivFromTop = styled.div`
   height: fit-content;
   border-radius: 10px 10px 0 0;
   padding: 0.2rem 15px;
+  font-size: 20px;
   color: ${white};
 `;
 
@@ -127,6 +128,7 @@ export const Wightinput = styled.input`
 export const DivFromInsideLeft = styled.div`
   display: inline-grid;
   grid-template-columns: 1fr 1fr;
+  
 `;
 
 export const Savebutton1 = styled.button`

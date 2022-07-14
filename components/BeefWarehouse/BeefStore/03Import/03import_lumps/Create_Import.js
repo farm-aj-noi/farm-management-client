@@ -148,9 +148,8 @@ const Create_Import = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
     try {
-      e.preventDefault();
       await createImlump();
     } catch (error) {
       console.log(error);
@@ -197,6 +196,7 @@ const Create_Import = () => {
                 <select
                   name="beefroom"
                   id="beefroom"
+                  disabled={!ImportLumpsInfo.barcode}
                   value={ImportLumpsInfo.beefroom}
                   onChange={handleChange}
                   style={{
@@ -219,6 +219,7 @@ const Create_Import = () => {
                 <select
                   name="shelf"
                   id="shelf"
+                  disabled={!ImportLumpsInfo.barcode || !ImportLumpsInfo.beefroom}
                   value={ImportLumpsInfo.shelf}
                   onChange={handleChange}
                   style={{
@@ -241,6 +242,7 @@ const Create_Import = () => {
                 <select
                   name="basket"
                   id="basket"
+                  disabled={!ImportLumpsInfo.barcode || !ImportLumpsInfo.beefroom || !ImportLumpsInfo.shelf}
                   value={ImportLumpsInfo.basket}
                   onChange={handleChange}
                   style={{
@@ -282,13 +284,12 @@ const Create_Import = () => {
               }
               onClick={handleSubmit}
               style={{
-                backgroundColor: `${
-                  !ImportLumpsInfo.beefroom ||
+                backgroundColor: `${!ImportLumpsInfo.beefroom ||
                   !ImportLumpsInfo.barcode ||
                   !ImportLumpsInfo.shelf
-                    ? "gray"
-                    : ""
-                }`,
+                  ? "gray"
+                  : ""
+                  }`,
               }}
             >
               บันทึก

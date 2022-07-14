@@ -1,11 +1,9 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import {
   DivFrom,
   DivFromTop,
   DivFromDown,
   HeaderColor,
-  ButtonExcel,
-  ButtonPDF,
 } from "../ReportFrom";
 import { DivBase } from "../../../../../utils/divBase";
 import { Table } from "react-bootstrap";
@@ -156,7 +154,7 @@ const index = () => {
       <DivBase
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr  1100px 1fr",
+          gridTemplateColumns: "1fr  1150px 1fr",
           gridRowGap: "15px",
           gridColumnGap: "10px",
           textAlign: "start",
@@ -205,7 +203,7 @@ const index = () => {
                     border: "1px solid #AFAFAF",
                     borderRadius: "4px",
                     textAlign: "center",
-                    fontSize: "14px",
+                    fontSize: "16px",
                   }}
                   onChange={(event) => setproducttype(event.target.value)}
                 >
@@ -234,7 +232,7 @@ const index = () => {
                     width: "110px",
                     borderRadius: "4px",
                     border: "1px solid #AFAFAF",
-                    fontSize: "14px",
+                    fontSize: "16px",
                     textAlign: "center",
                   }}
                   onChange={(event) => setimporter(event.target.value)}
@@ -257,7 +255,7 @@ const index = () => {
                     border: "1px solid #AFAFAF",
                     borderRadius: "4px 0px 0px 4px",
                     textAlign: "center",
-                    fontSize: "14px",
+                    fontSize: "16px",
                   }}
                   onChange={(event) => setselectroom(event.target.value)}
                 >
@@ -271,13 +269,14 @@ const index = () => {
                 </select>
                 <select
                   name="freezername"
+                  disabled={!selectroom}
                   style={{
                     height: "35px",
                     width: "50px",
                     border: "1px solid #AFAFAF",
                     borderLeft: "none",
                     textAlign: "center",
-                    fontSize: "14px",
+                    fontSize: "16px",
                   }}
                   onChange={(event) => setselectfreezer(event.target.value)}
                 >
@@ -291,6 +290,7 @@ const index = () => {
                 </select>
                 <select
                   name="basketname"
+                  disabled={!selectroom || !selectfreezer}
                   style={{
                     height: "35px",
                     width: "60px",
@@ -298,7 +298,7 @@ const index = () => {
                     borderRadius: "0px 4px 4px 0px",
                     borderLeft: "none",
                     textAlign: "center",
-                    fontSize: "14px",
+                    fontSize: "16px",
                     marginRight: "10px",
                   }}
                   onChange={(event) => setselectpbasket(event.target.value)}
@@ -375,10 +375,10 @@ const index = () => {
             <div style={{ margin: "-3px 5px 0px 0px" }}>
               <Icon size={20} icon={list} />
             </div>
-            รายการนำเข้าซากเนื้อโคผ่าซีก
+            รายการนำเข้าผลิตภัณฑ์
           </DivFromTop>
           <DivFromDown>
-            <div style={{ height: "380px", overflow: "auto" }}>
+            <div style={{ height: `${data && data.improductSearch.length > 7 ? "380px" : ""}`, overflow: `${data && data.improductSearch.length > 7 ? "auto" : ""}` }}>
               <Table
                 striped
                 bordered
@@ -387,7 +387,7 @@ const index = () => {
                 style={{ margin: "auto" }}
               >
                 <thead>
-                  <tr style={{ textAlign: "center" }}>
+                  <tr style={{ textAlign: "center", fontSize: "18px" }}>
                     <th>ประเภทสินค้า</th>
                     <th>วันที่นำเข้า</th>
                     <th>เวลา</th>
@@ -442,18 +442,8 @@ const index = () => {
                     ))
                   ) : (
                     <tr style={{ textAlign: "center" }}>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
+                      <td colSpan="16">ไม่พอข้อมูล</td>
+
                     </tr>
                   )}
                 </tbody>
@@ -466,7 +456,7 @@ const index = () => {
                   <Excel prod={data.improductSearch} />
                 </>
               ) : (
-                "-"
+                ""
               )}
             </div>
           </DivFromDown>

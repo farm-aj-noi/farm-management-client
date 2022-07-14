@@ -94,7 +94,7 @@ const index = () => {
       <DivBase
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 270px 1000px 1fr",
+          gridTemplateColumns: "1fr 270px 1050px 1fr",
           gridRowGap: "15px",
           gridColumnGap: "10px",
           textAlign: "start",
@@ -161,7 +161,7 @@ const index = () => {
                     border: "1px solid #AFAFAF",
                     borderRadius: "4px",
                     textAlign: "center",
-                    fontSize: "14px",
+                    fontSize: "16px",
                   }}
                   onChange={(event) => setproducttype(event.target.value)}
                 >
@@ -190,7 +190,7 @@ const index = () => {
                     width: "110px",
                     borderRadius: "4px",
                     border: "1px solid #AFAFAF",
-                    fontSize: "14px",
+                    fontSize: "16px",
                     textAlign: "center",
                     marginRight: "10px",
                   }}
@@ -212,7 +212,7 @@ const index = () => {
                     width: "110px",
                     borderRadius: "4px",
                     border: "1px solid #AFAFAF",
-                    fontSize: "14px",
+                    fontSize: "16px",
                     textAlign: "center",
                     marginRight: "10px",
                   }}
@@ -283,10 +283,10 @@ const index = () => {
             <div style={{ margin: "-3px 5px 0px 0px" }}>
               <Icon size={20} icon={list} />
             </div>
-            รายการนำเข้าซากเนื้อโคผ่าซีก
+            รายการเบิกออกผลิตภัณฑ์
           </DivFromTop>
           <DivFromDown>
-            <div style={{ height: "430px", overflow: "auto" }}>
+            <div style={{ height: `${data && data.exproductSearch.length > 7 ? "430px" : ""}`, overflow: `${data && data.exproductSearch.length > 7 ? "auto" : ""}` }} >
               <Table
                 striped
                 bordered
@@ -316,17 +316,7 @@ const index = () => {
                     ))
                   ) : (
                     <tr style={{ textAlign: "center" }}>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
+                      <td colSpan="11">ไม่พบข้อมูล</td>
                     </tr>
                   )}
                 </tbody>

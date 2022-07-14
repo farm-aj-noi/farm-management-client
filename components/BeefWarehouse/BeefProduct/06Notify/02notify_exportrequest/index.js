@@ -5,7 +5,6 @@ import Sidemenu from "../Nav_notify";
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
 
-import { DivBase } from "../../../../../utils/divBase";
 import {
   DivFrom,
   DivFromTop,
@@ -82,36 +81,42 @@ const index = () => {
             รายการคำร้องขอเบิก
           </DivFromTop>
           <DivFromDown>
-            {" "}
-            <Table striped bordered responsive hover style={{ margin: "auto" }}>
-              <thead>
-                <tr style={{ textAlign: "center" }}>
-                  <th>วันที่ขอเบิก</th>
-                  <th>ชื่อผู้ขอเบิก</th>
-                  <th>ประเภทสินค้า</th>
-                  <th>รหัสสินค้า</th>
-                  <th>จำนวน</th>
-                  <th>ลบ</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data && data.listRequestExP.map((prod) => (
-                  <tr style={{ textAlign: "center" }}>
-                    <td>{dayjs(prod.requestdate)
-                      .add(543, "year")
-                      .format("DD/MM/YYYY")}</td>
-                    <td>{prod.name}</td>
-                    <td>{prod.producttype.nameTH}</td>
-                    <td>{prod.producttype.code}</td>
-                    <td>{prod.quantity}</td>
-                    <td>
-                      <Deletereq key={prod.id} listre={prod} />
-                    </td>
+            <div style={{ height: `${data && data.listRequestExP.length > 9 ? "500px" : ""}`, overflow: `${data && data.listRequestExP.length > 9 ? "auto" : ""}` }}>
+              <Table striped bordered responsive hover style={{ margin: "auto" }}>
+                <thead>
+                  <tr style={{ textAlign: "center", fontSize: "18px" }}>
+                    <th>วันที่ขอเบิก</th>
+                    <th>ชื่อผู้ขอเบิก</th>
+                    <th>ประเภทสินค้า</th>
+                    <th>รหัสสินค้า</th>
+                    <th>จำนวน</th>
+                    <th>ลบ</th>
                   </tr>
-                ))}
-
-              </tbody>
-            </Table>
+                </thead>
+                <tbody>
+                  {data && data.listRequestExP.length > 0 ? (
+                    data.listRequestExP.map((prod) => (
+                      <tr style={{ textAlign: "center" }}>
+                        <td>{dayjs(prod.requestdate)
+                          .add(543, "year")
+                          .format("DD/MM/YYYY")}</td>
+                        <td>{prod.name}</td>
+                        <td>{prod.producttype.nameTH}</td>
+                        <td>{prod.producttype.code}</td>
+                        <td>{prod.quantity}</td>
+                        <td>
+                          <Deletereq key={prod.id} listre={prod} />
+                        </td>
+                      </tr>
+                    ))) : (
+                    <tr style={{ textAlign: "center" }}>
+                      <td colSpan="6">ไม่พบข้อมูล</td>
+                    </tr>
+                  )
+                  }
+                </tbody>
+              </Table>
+            </div>
             <div
               style={{
                 display: "flex",

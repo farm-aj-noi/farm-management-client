@@ -21,7 +21,7 @@ function Qrcode({ notifydate }) {
       <Modal
         show={testshow}
         onHide={handleClose}
-        size="sm"
+        size="md"
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
@@ -35,12 +35,12 @@ function Qrcode({ notifydate }) {
               justifyContent: "center",
             }}
           >
-            {/* <QRCode
-                size={100}
-                value={
-                  "http://localhost:3000/slaughter/tracking/" + infodata.barcode
-                }
-              /> */}
+            <QRcode
+              size={100}
+              value={
+                "http://localhost:3000/beefwarehouse/beefproduct/tracking/" + infodata.beefproduct.barcode
+              }
+            />
           </div>
           <div
             style={{
@@ -50,22 +50,22 @@ function Qrcode({ notifydate }) {
               alignItems: "center",
             }}
           >
-            {/* <a
-                href={
-                  "http://localhost:3000/slaughter/tracking/" + infodata.barcode
-                }
-                target="popup"
-                style={{
-                  fontSize: "10px",
-                  backgroundColor: "#f3f3f3",
-                  padding: "5px",
-                  color: "#3775e9",
-                  cursor: "pointer",
-                  textDecoration: "underline",
-                }}
-              >
-                http://localhost:3000/slaughter/tracking/{infodata.barcode}
-              </a> */}
+            <a
+              href={
+                "http://localhost:3000/beefwarehouse/beefproduct/tracking/" + infodata.beefproduct.barcode
+              }
+              target="popup"
+              style={{
+                fontSize: "10px",
+                backgroundColor: "#f3f3f3",
+                padding: "5px",
+                color: "#3775e9",
+                cursor: "pointer",
+                textDecoration: "underline",
+              }}
+            >
+              http://localhost:3000/beefwarehouse/beefproduct/tracking/{infodata.beefproduct.barcode}
+            </a>
           </div>
         </Modal.Body>
       </Modal>

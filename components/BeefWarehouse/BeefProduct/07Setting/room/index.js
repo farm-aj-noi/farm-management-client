@@ -12,18 +12,12 @@ import {
   DivFromTop,
   DivFromDown,
   HeaderColor,
-  Searchinput,
+ 
 } from "../SettingFrom";
 import { DivBase } from "../../../../../utils/divBase";
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
-import { iosSearchStrong } from "react-icons-kit/ionicons/iosSearchStrong";
 
-import {
-  Savebuttoncolor,
-  Editbuttoncolor,
-  Removebuttoncolor,
-} from "../../../../../utils/buttonColor";
 
 import Nav_seting from "../Nav_setting";
 
@@ -124,25 +118,27 @@ const index = () => {
             รายการห้องจัดเก็บ
           </DivFromTop>
           <DivFromDown>
-            <Table striped bordered responsive hover style={{ margin: "auto" }}>
-              <thead>
-                <tr style={{ textAlign: "center" }}>
-                  <th>ชื่อห้องจัดเก็บ</th>
-                  <th>แก้ไข</th>
-                  <th>ลบ</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data &&
-                  data.allproductroom.map((prod) => (
-                    <List key={prod.id} listr={prod} />
-                  ))}
-              </tbody>
-            </Table>
+            <div style={{ height: `${data && data.allproductroom.length > 8 ? "460px" : ""}`, overflow: `${data && data.allproductroom.length > 8 ? "auto" : ""}` }}>
+              <Table striped bordered responsive hover style={{ margin: "auto" }}>
+                <thead>
+                  <tr style={{ textAlign: "center", fontSize: "18px" }}>
+                    <th>ชื่อห้องจัดเก็บ</th>
+                    <th>แก้ไข</th>
+                    <th>ลบ</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data &&
+                    data.allproductroom.map((prod) => (
+                      <List key={prod.id} listr={prod} />
+                    ))}
+                </tbody>
+              </Table>
+            </div>
           </DivFromDown>
         </DivFrom>
       </DivBase>
-    </div>
+    </div >
   );
 };
 

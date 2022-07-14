@@ -125,7 +125,7 @@ const index = () => {
   });
 
   return (
-    <>
+    <div style={{ marginTop: "100px" }}>
       <div
         style={{
           display: "flex",
@@ -510,7 +510,7 @@ const index = () => {
           </DivFrom>
         </>
       </DivBase>
-    </>
+    </div>
   );
 };
 

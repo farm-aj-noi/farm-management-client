@@ -5,13 +5,10 @@ import {
   DivFrom,
   DivFromTop,
   DivFromDown,
-  Searchinput,
-  Gobutton,
-  Input,
 } from "./SettingFrom";
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
-import { Form, Row, Col, Tab, Nav } from "react-bootstrap";
+import { Row, Col, Tab, Nav } from "react-bootstrap";
 
 const Nav_setting = (Sidenumber) => {
   return (

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Barcodebuttoncolor } from "../../../../utils/buttonColor";
-import { Qrcodebutton } from "../../../../utils/button";
+
 import dayjs from "dayjs";
 import "dayjs/locale/th";
 
@@ -10,8 +9,8 @@ import gql from "graphql-tag";
 import { CHILLSEARCHLIST } from "./index";
 
 import { Savebuttoncolor } from "../../../../utils/buttonColor";
-import { Savebutton, Editbutton, Removebutton } from "../../../../utils/button";
-import { Router } from "next/router";
+import { Savebutton } from "../../../../utils/button";
+
 
 import Modalqrcode from "../12Qrcode/chill";
 

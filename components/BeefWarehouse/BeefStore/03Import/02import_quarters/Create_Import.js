@@ -112,9 +112,8 @@ const Create_Import = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
     try {
-      e.preventDefault();
       await createImQuarter();
     } catch (error) {
       console.log(error);
@@ -163,6 +162,7 @@ const Create_Import = () => {
                   id="beefroom"
                   value={ImportQuarterInfo.beefroom}
                   onChange={handleChange}
+                  disabled={!ImportQuarterInfo.barcode}
                   style={{
                     height: "35px",
                     width: "160px",
@@ -198,11 +198,10 @@ const Create_Import = () => {
                 !ImportQuarterInfo.barcode || !ImportQuarterInfo.beefroom
               }
               style={{
-                backgroundColor: `${
-                  !ImportQuarterInfo.barcode || !ImportQuarterInfo.beefroom
-                    ? "gray"
-                    : ""
-                }`,
+                backgroundColor: `${!ImportQuarterInfo.barcode || !ImportQuarterInfo.beefroom
+                  ? "gray"
+                  : ""
+                  }`,
               }}
               onClick={handleSubmit}
             >

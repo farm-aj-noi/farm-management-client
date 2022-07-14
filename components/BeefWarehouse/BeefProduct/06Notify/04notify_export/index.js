@@ -5,7 +5,6 @@ import Sidemenu from "../Nav_notify";
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
 
-import { DivBase } from "../../../../../utils/divBase";
 import {
   DivFrom,
   DivFromTop,
@@ -67,12 +66,11 @@ const index = () => {
       <DivBase1
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 237.5px 1000px 1fr",
+          gridTemplateColumns: "1fr 237.5px 1050px 1fr",
           gridRowGap: "15px",
           gridColumnGap: "50px",
           textAlign: "start",
-          /*  width:"950px",
-        margin:"auto" */
+
         }}
       >
         <Sidemenu Sidenumber={4} />
@@ -88,72 +86,71 @@ const index = () => {
             <div style={{ margin: "-3px 5px 0px 0px" }}>
               <Icon size={20} icon={list} />
             </div>
-            รายการเบิกผลิตภัณฑ์ (วัน)
+            รายการเบิกออกผลิตภัณฑ์ (วัน)
           </DivFromTop>
           <DivFromDown>
-            {" "}
-            <Table striped bordered responsive hover style={{ margin: "auto" }}>
-              <thead>
-                <tr style={{ textAlign: "center" }}>
-                  <th>ประเภทสินค้า</th>
-                  <th>วันที่เบิกออก</th>
-                  <th>เวลา</th>
-                  <th>รหัสสินค้า</th>
-                  <th>รหัสบาร์โค้ด</th>
-                  <th>คิวอาร์โค้ด</th>
-                  <th>น้ำหนัก</th>
-                  <th>วันที่ผลิต</th>
-                  <th>วันหมดอายุ</th>
-                  <th>ผู้ขอเบิก</th>
-                  <th>ผู้เบิกออก</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data && data.cardExP.length > 0 ? (
-                  data.cardExP.map((prod) => (
-                    <tr style={{ textAlign: "center" }}>
-                      <td>{prod.beefproduct.producttype.nameTH}</td>
-                      <td>
-                        {dayjs(prod.exportdate)
+            <div style={{ height: `${data && data.cardExP.length > 9 ? "500px" : ""}`, overflow: `${data && data.cardExP.length > 9 ? "auto" : ""}` }}>
+              <Table striped bordered responsive hover style={{ margin: "auto" }}>
+                <thead>
+                  <tr style={{ textAlign: "center", fontSize: "18px" }}>
+                    <th>ประเภทสินค้า</th>
+                    <th>วันที่เบิกออก</th>
+                    <th>เวลา</th>
+                    <th>รหัสสินค้า</th>
+                    <th>รหัสบาร์โค้ด</th>
+                    <th>คิวอาร์โค้ด</th>
+                    <th>น้ำหนัก</th>
+                    <th>วันที่ผลิต</th>
+                    <th>วันหมดอายุ</th>
+                    <th>ผู้ขอเบิก</th>
+                    <th>ผู้เบิกออก</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data && data.cardExP.length > 0 ? (
+                    data.cardExP.map((prod) => (
+                      <tr style={{ textAlign: "center" }}>
+                        <td>{prod.beefproduct.producttype.nameTH}</td>
+                        <td>
+                          {dayjs(prod.exportdate)
+                            .locale("th")
+                            .add(543, "year")
+                            .format("DD/MM/YYYY")}
+                        </td>
+                        <td>
+                          {dayjs(prod.exportdate)
+                            .locale("th")
+                            .add(543, "year")
+                            .format("h:mm:ss A")}
+                        </td>
+                        <td>{prod.beefproduct.producttype.code}</td>
+                        <td>{prod.beefproduct.barcode}</td>
+                        <td>
+                          <Qrcode key={prod.id} notifyex={prod} />
+                        </td>
+                        <td>{prod.beefproduct.weight}</td>
+                        <td> {dayjs(prod.beefproduct.MFG)
                           .locale("th")
                           .add(543, "year")
                           .format("DD/MM/YYYY")}
-                      </td>
-                      <td>
-                        {dayjs(prod.exportdate)
+                        </td>
+                        <td>{dayjs(prod.beefproduct.BBE)
                           .locale("th")
                           .add(543, "year")
-                          .format("h:mm:ss A")}
-                      </td>
-                      <td>{prod.beefproduct.producttype.code}</td>
-                      <td>{prod.beefproduct.barcode}</td>
-                      <td>
-                        <Qrcode key={prod.id} notifyex={prod} />
-                      </td>
-                      <td>{prod.beefproduct.weight}</td>
-                      <td>{prod.beefproduct.MFG}</td>
-                      <td>{prod.beefproduct.BBE}</td>
-                      <td>{prod.name}</td>
-                      <td>{prod.user.name}</td>
+                          .format("DD/MM/YYYY")}
+                        </td>
+                        <td>{prod.name}</td>
+                        <td>{prod.user.name}</td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr style={{ textAlign: "center" }}>
+                      <td colSpan="11">ไม่พบข้อมูล</td>
                     </tr>
-                  ))
-                ) : (
-                  <tr style={{ textAlign: "center" }}>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                )}
-              </tbody>
-            </Table>
+                  )}
+                </tbody>
+              </Table>
+            </div>
           </DivFromDown>
         </DivFrom>
       </DivBase1>

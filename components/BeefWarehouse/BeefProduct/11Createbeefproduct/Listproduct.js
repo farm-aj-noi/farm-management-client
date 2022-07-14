@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import dayjs from "dayjs";
 const Listimproduct = ({ listp }) => {
     const [infoproduct, setinfoproduct] = useState(listp);
- 
+
     return (
-        <tr style={{ textAlign: "center" }}>
+        <tr style={{ textAlign: "center"}}>
             <td>{infoproduct.producttype.nameTH}</td>
             <td>{infoproduct.producttype.code}</td>
             <td>{infoproduct.weight}</td>

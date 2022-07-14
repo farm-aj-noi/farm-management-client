@@ -1,14 +1,9 @@
 import React, { useState } from "react";
-import { Barcodebuttoncolor } from "../../../../../utils/buttonColor";
-import { Qrcodebutton } from "../../../../../utils/button";
 import dayjs from "dayjs";
 import Modalqrcode from "../../12Qrcode/Import/imqqr";
 
 function List_import({ imquarter }) {
   const [imquarterData, SetImhalveData] = useState(imquarter);
-  const tdStyle = {
-    fontSize: "16px"
-  }
   return (
     <tr style={{ textAlign: "center", fontSize: "16px" }}>
       <td>{imquarterData.quarter.imslaughter.namefarmer}</td>

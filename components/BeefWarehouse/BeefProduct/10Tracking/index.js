@@ -1,16 +1,11 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import Link from "next/link";
-import styled from "styled-components";
 
 import { Icon } from "react-icons-kit";
 import { Table } from "react-bootstrap";
 
 import { iosSearchStrong } from "react-icons-kit/ionicons/iosSearchStrong";
 import { ic_info_outline } from "react-icons-kit/md/ic_info_outline";
-import { ic_create } from "react-icons-kit/md/ic_create";
-import { Button } from "react-bootstrap";
-
 
 // import DatePicker from "react-datepicker";
 
@@ -22,9 +17,6 @@ import {
     DivFrom,
     DivFromTop,
     DivFromDown,
-    Searchinput,
-    Gobutton,
-    Wightinput,
     DivBase1,
     HeaderColor
 } from "./ListcuttwoFrom";
@@ -202,10 +194,10 @@ const index = () => {
                         รายละเอียดข้อมูลก้อนเนื้อที่นำมาแปรรูป{" "}
                     </DivFromTop>
                     <DivFromDown>
-                        <div style={{ height: "170px", overflow: "auto" }}>
+                        <div style={{ height: `${data && data.ProductTracking.lump.length > 2 ? "170px" : ""}`, overflow: `${data && data.ProductTracking.lump.length > 2 ? "auto" : ""}` }}>
                             <Table striped bordered responsive hover style={{ margin: "auto" }}>
                                 <thead /* style={{ display: "table", tableLayout: "fixed", width: "100%" }} */>
-                                    <tr style={{ textAlign: "center", /* display: "table", tableLayout: "fixed", width: "100%" */ }}>
+                                    <tr style={{ textAlign: "center", fontSize: "18px" /* display: "table", tableLayout: "fixed", width: "100%" */ }}>
                                         <th>ประเภทซาก</th>
                                         <th>รหัสซาก</th>
                                         <th>บาร์โค้ด</th>
@@ -217,7 +209,7 @@ const index = () => {
                                 <tbody /* style={{ display: "block", overflow: "auto", tableLayout: "fixed", maxHeight: "130px" }} */>
                                     {data && data.ProductTracking.lump.length > 0 ? (
                                         data.ProductTracking.lump.map((prod) => (
-                                            <tr style={{ textAlign: "center", /* display: "table", tableLayout: "fixed", width: "100%" */ }}>
+                                            <tr style={{ textAlign: "center",/* display: "table", tableLayout: "fixed", width: "100%" */ }}>
                                                 <td>{prod.beeftype.nameTH}</td>
                                                 <td>{prod.beeftype.code}</td>
                                                 <td>{prod.imslaughter.numcow}</td>
@@ -259,10 +251,10 @@ const index = () => {
                         รายละเอียดข้อมูลชิ้นเนื้อที่นำมาแปรรูป{" "}
                     </DivFromTop>
                     <DivFromDown>
-                        <div style={{ height: "170px", overflow: "auto" }}>
+                        <div style={{ height: `${data && data.ProductTracking.chop.length > 2 ? "170px" : ""}`, overflow: `${data && data.ProductTracking.chop.length > 2 ? "auto" : ""}` }}>
                             <Table striped bordered responsive hover style={{ margin: "auto" }}>
                                 <thead>
-                                    <tr style={{ textAlign: "center" }}>
+                                    <tr style={{ textAlign: "center", fontSize: "18px" }}>
                                         <th>ประเภทซาก</th>
                                         <th>รหัสซาก</th>
                                         <th>ทะเบียนขุน</th>
@@ -296,7 +288,6 @@ const index = () => {
                                             <td colspan="6">ไม่พบข้อมูล</td>
                                         </tr>
                                     )}
-
                                 </tbody>
                             </Table>
                         </div>

@@ -132,7 +132,7 @@ const index = () => {
       freezer: selectfreezer,
     },
   });
-  
+
   return (
     <div style={{ marginTop: "100px" }}>
       <div
@@ -151,7 +151,7 @@ const index = () => {
       <DivBase
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 270px 1100px 1fr",
+          gridTemplateColumns: "1fr 270px 1150px 1fr",
           gridRowGap: "15px",
           gridColumnGap: "10px",
           textAlign: "start",
@@ -284,6 +284,7 @@ const index = () => {
                 </select>
                 <select
                   name="freezername"
+                  disabled={!selectroom}
                   style={{
                     height: "35px",
                     width: "50px",
@@ -304,6 +305,7 @@ const index = () => {
                 </select>
                 <select
                   name="basketname"
+                  disabled={!selectfreezer || !selectroom}
                   style={{
                     height: "35px",
                     width: "60px",
@@ -388,10 +390,10 @@ const index = () => {
             <div style={{ margin: "-3px 5px 0px 0px" }}>
               <Icon size={20} icon={list} />
             </div>
-            รายการนำเข้าซากเนื้อโคผ่าซีก
+            รายการนำเข้าผลิตภัณฑ์
           </DivFromTop>
           <DivFromDown>
-            <div style={{ height: "430px", overflow: "auto" }}>
+            <div style={{ height: `${data && data.improductSearch.length > 7 ? "430px" : ""}`, overflow: `${data && data.improductSearch.length > 7 ? "auto" : ""}` }}>
               <Table
                 striped
                 bordered
@@ -400,7 +402,7 @@ const index = () => {
                 style={{ margin: "auto" }}
               >
                 <thead>
-                  <tr style={{ textAlign: "center" }}>
+                  <tr style={{ textAlign: "center", fontSize: "18px" }}>
                     <th>ประเภทสินค้า</th>
                     <th>วันที่นำเข้า</th>
                     <th>เวลา</th>
@@ -423,19 +425,7 @@ const index = () => {
                     ))
                   ) : (
                     <tr style={{ textAlign: "center" }}>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
+                      <td colSpan="13">ไม่พบข้อมูล</td>
                     </tr>
                   )}
                 </tbody>

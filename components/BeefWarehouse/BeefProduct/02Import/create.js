@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 import Router from "next/router";
-import { IMPRODUCTSEARCH } from "./index"
+
 
 const CREATEIMPORTPRODUCT = gql`
 mutation CREATEIMPORTPRODUCT($barcode: String, $productstore: String, $productroom: String, $freezer: String, $pbasket: String) {
@@ -89,9 +89,9 @@ const create = () => {
           text: "ทำการนำเข้าคลังผลิตภัณฑ์เสร็จสิ้น",
           confirmButtonText: (
             <span
-             onClick={() =>
-               Router.reload("beefwarehouse/beefproduct/imports")
-             }
+              onClick={() =>
+                Router.reload("beefwarehouse/beefproduct/imports")
+              }
             >
               ตกลง
             </span>
@@ -134,9 +134,8 @@ const create = () => {
     })
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
     try {
-      e.preventDefault();
       await createImproduct();
     } catch (error) {
       console.log(error);
@@ -167,6 +166,7 @@ const create = () => {
             <div style={{ display: "inline", width: "170px" }}>
               <select
                 name="productroom"
+                disabled={!createimproduct.barcode}
                 value={createimproduct.productroom}
                 onChange={handleChange}
                 style={{
@@ -187,6 +187,7 @@ const create = () => {
                 name="freezer"
                 value={createimproduct.freezer}
                 onChange={handleChange}
+                disabled={!createimproduct.barcode || !createimproduct.productroom}
                 style={{
                   height: "35px",
                   width: "50px",
@@ -206,6 +207,7 @@ const create = () => {
                 name="pbasket"
                 value={createimproduct.pbasket}
                 onChange={handleChange}
+                disabled={!createimproduct.barcode || !createimproduct.productroom || !createimproduct.freezer}
                 style={{
                   height: "35px",
                   width: "60px",

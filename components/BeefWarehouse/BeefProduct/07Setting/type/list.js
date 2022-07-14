@@ -16,10 +16,6 @@ import withReactContent from "sweetalert2-react-content";
 import Router from "next/router";
 
 import {
-  DivFrom,
-  DivFromTop,
-  DivFromDown,
-  HeaderColor,
   Searchinput,
 } from "../SettingFrom";
 

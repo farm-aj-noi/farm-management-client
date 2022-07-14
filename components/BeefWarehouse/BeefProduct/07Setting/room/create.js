@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
 import { Searchinput } from "../SettingFrom";
@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 import Router from "next/router";
-import { QUERYROOM } from "./index"
+
 
 const CREATEROOM = gql`
   mutation CREATEROOM($roomname: String) {
@@ -82,9 +82,9 @@ const create = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
     try {
-      e.preventDefault();
+     
       await createProductroom();
     } catch (error) {
       console.log(error);

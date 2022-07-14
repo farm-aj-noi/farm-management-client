@@ -94,9 +94,8 @@ const create = () => {
         });
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async () => {
         try {
-            e.preventDefault();
             await createFreezer();
         } catch (error) {
             console.log(error);

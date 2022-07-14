@@ -4,18 +4,10 @@ import {
   DivFromTop,
   DivFromDown,
   HeaderColor,
-  Searchinput,
 } from "../SettingFrom";
 import { DivBase } from "../../../../../utils/divBase";
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
-import { iosSearchStrong } from "react-icons-kit/ionicons/iosSearchStrong";
-
-import {
-  Savebuttoncolor,
-  Editbuttoncolor,
-  Removebuttoncolor,
-} from "../../../../../utils/buttonColor";
 
 import Nav_seting from "../Nav_setting";
 
@@ -125,22 +117,23 @@ const index = () => {
             รายการตู้แช่
           </DivFromTop>
           <DivFromDown>
-            <Table striped bordered responsive hover style={{ margin: "auto" }}>
-              <thead>
-                <tr style={{ textAlign: "center" }}>
-                  <th>ชื่อตู้แช่</th>
-                  <th>ชื่อห้องจัดเก็บ</th>
-                  <th>แก้ไข</th>
-                  <th>ลบ</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data && data.allFreezer.map((prod) => (
-                  <List key={prod.id} listf={prod} />
-                ))}
-
-              </tbody>
-            </Table>
+            <div style={{ height: `${data && data.allFreezer.length > 8 ? "460px" : ""}`, overflow: `${data && data.allFreezer.length > 8 ? "auto" : ""}` }}>
+              <Table striped bordered responsive hover style={{ margin: "auto" }}>
+                <thead>
+                  <tr style={{ textAlign: "center", fontSize: "18px" }}>
+                    <th>ชื่อตู้แช่</th>
+                    <th>ชื่อห้องจัดเก็บ</th>
+                    <th>แก้ไข</th>
+                    <th>ลบ</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data && data.allFreezer.map((prod) => (
+                    <List key={prod.id} listf={prod} />
+                  ))}
+                </tbody>
+              </Table>
+            </div>
           </DivFromDown>
         </DivFrom>
       </DivBase>

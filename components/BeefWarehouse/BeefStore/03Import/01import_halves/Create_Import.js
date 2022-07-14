@@ -111,9 +111,8 @@ const Create_Import = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
     try {
-      e.preventDefault();
       await createImHalve();
     } catch (error) {
       console.log(error);
@@ -160,6 +159,7 @@ const Create_Import = () => {
                   name="beefroom"
                   id="beefroom"
                   onChange={handleChange}
+                  disabled={!ImporthalvesInfo.barcode}
                   style={{
                     height: "35px",
                     width: "160px",

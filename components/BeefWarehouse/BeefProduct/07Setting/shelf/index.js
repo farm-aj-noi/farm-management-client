@@ -4,18 +4,11 @@ import {
   DivFromTop,
   DivFromDown,
   HeaderColor,
-  Searchinput,
+
 } from "../SettingFrom";
 import { DivBase } from "../../../../../utils/divBase";
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
-import { iosSearchStrong } from "react-icons-kit/ionicons/iosSearchStrong";
-
-import {
-  Savebuttoncolor,
-  Editbuttoncolor,
-  Removebuttoncolor,
-} from "../../../../../utils/buttonColor";
 
 import Nav_seting from "../Nav_setting";
 import Create from "./create";
@@ -117,26 +110,28 @@ const index = () => {
             รายการห้องจัดเก็บ
           </DivFromTop>
           <DivFromDown>
-            <Table striped bordered responsive hover style={{ margin: "auto" }}>
-              <thead>
-                <tr style={{ textAlign: "center" }}>
-                  <th>ชั้นจับเก็บ</th>
-                  <th>ห้องจัดเก็บ</th>
-                  <th>ตู้แช่</th>
-                  <th>แก้ไข</th>
-                  <th>ลบ</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data && data.pbasket.map((prod) => (
-                  <List key={prod.id} listpbasket={prod} />
-                ))}
-              </tbody>
-            </Table>
+            <div style={{ height: `${data && data.pbasket.length > 8 ? "460px" : ""}`, overflow: `${data && data.pbasket.length > 8 ? "auto" : ""}` }}>
+              <Table striped bordered responsive hover style={{ margin: "auto" }}>
+                <thead>
+                  <tr style={{ textAlign: "center" }}>
+                    <th>ชั้นจับเก็บ</th>
+                    <th>ห้องจัดเก็บ</th>
+                    <th>ตู้แช่</th>
+                    <th>แก้ไข</th>
+                    <th>ลบ</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data && data.pbasket.map((prod) => (
+                    <List key={prod.id} listpbasket={prod} />
+                  ))}
+                </tbody>
+              </Table>
+            </div>
           </DivFromDown>
         </DivFrom>
       </DivBase>
-    </div>
+    </div >
   );
 };
 

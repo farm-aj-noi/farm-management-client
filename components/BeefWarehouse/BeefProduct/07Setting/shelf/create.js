@@ -68,7 +68,7 @@ const create = () => {
                 MySwal.fire({
                     icon: "success",
                     title: "สำเร็จ",
-                    text: "ทำการบึนทึกข้อมูลสิ้น",
+                    text: "ทำการบันทึกข้อมูลสิ้น",
                     confirmButtonText: (
                         <span
                             onClick={() =>
@@ -113,9 +113,8 @@ const create = () => {
         })
     }
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async () => {
         try {
-            e.preventDefault();
             await createPbasket();
         } catch (error) {
             console.log(error);
@@ -184,7 +183,7 @@ const create = () => {
                     marginLeft: "10px",
                     backgroundColor: `${!infopbasket.productroom || !infopbasket.freezer || !infopbasket.basketname ? "gray" : ""}`,
                 }}
-             disabled={!infopbasket.productroom || !infopbasket.freezer || !infopbasket.basketname}
+                disabled={!infopbasket.productroom || !infopbasket.freezer || !infopbasket.basketname}
             >
                 บันทึก
             </Savebuttoncolor>

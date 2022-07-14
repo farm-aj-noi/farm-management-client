@@ -339,7 +339,7 @@ const index = () => {
               รายการนำเข้าซากเนื้อโคสี่เสี้ยว
             </DivFromTop>
             <DivFromDown>
-              <div style={{ height: "320px", overflow: "auto" }}>
+              <div style={{ height: `${data && data.imquartSearch.length > 6 ? "320px" : ""}`, overflow: `${data && data.imquartSearch.length > 6 ? "auto" : ""}` }}>
                 <Table
                   striped
                   bordered
