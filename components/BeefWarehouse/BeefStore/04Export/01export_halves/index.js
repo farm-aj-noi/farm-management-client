@@ -74,7 +74,7 @@ const index = () => {
       exporter: inputexporter,
     },
   });
-  console.log(data);
+ /*  console.log(data); */
 
   return (
     <div style={{ marginTop: "100px" }}>

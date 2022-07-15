@@ -17,14 +17,14 @@ export const DivFromTop = styled.div`
   height: fit-content;
   border-radius: 10px 10px 0 0;
   padding: 0.2rem 15px;
+  font-size: 20px;
   color: ${white};
 `;
 
 export const DivFromDown = styled.div`
   height: fit-content;
   border-radius: 10px 10px 0 0;
-  padding: 25px 15px 15px 15px;
-  padding-bottom: 5%;
+  padding: 15px 15px 15px 15px;
 `;
 
 export const Searchinput = styled.input`
@@ -120,4 +120,16 @@ export const Gobutton1 = styled.button`
   &:hover{
     background-color: ${blue};
   }
+`;
+export const HeaderColor = styled.div`
+  text-align: center;
+  background: #da4453;
+  border: none;
+  border-radius: 4px;
+  font-size: 30px;
+  color: #ffffff;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

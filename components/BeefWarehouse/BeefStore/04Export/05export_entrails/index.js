@@ -20,11 +20,13 @@ export const EXPORTENTRAILSEARCH = gql`
     $startdate: String
     $enddate: String
     $userName: String
+    $exporter: String
   ) {
     exportentrail(
       startdate: $startdate
       enddate: $enddate
       userName: $userName
+      exporter: $exporter
     ) {
       user {
         name
@@ -58,10 +60,13 @@ const index = () => {
   const [selectedstartdate, SetStartDateChange] = useState("");
   const [selectedenddate, SetEndDateChange] = useState("");
   const [inputusername, SetInputusername] = useState("");
+  const [inputexporter, SetinputExporter] = useState("");
   const { data, loading, error } = useQuery(EXPORTENTRAILSEARCH, {
     variables: {
       startdate: selectedstartdate,
       enddate: selectedenddate,
+      userName: inputusername,
+      exporter: inputexporter,
     },
   });
   return (
@@ -158,6 +163,7 @@ const index = () => {
                       fontSize: "16px",
                       textAlign: "center",
                     }}
+                    onChange={(event) => SetinputExporter(event.target.value)}
                   />
                   <label
                     for="beef"
@@ -283,7 +289,7 @@ const index = () => {
                       <List_export key={prod.id} exportentrail={prod} />
                     ))) : (
                       <tr style={{ textAlign: "center" }}>
-                        <td colSpan="12">ไม่พบข้อมูล</td>
+                        <td colSpan="17">ไม่พบข้อมูล</td>
                       </tr>
                     )
                     }

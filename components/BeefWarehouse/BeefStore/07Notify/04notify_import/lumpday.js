@@ -60,16 +60,11 @@ const lumpday = () => {
       </DivFromTop>{" "}
       <DivFromDown>
         <div
-          style={{
-            margin: "auto",
-            minWidth: "100%",
-            float: "right",
-            marginBottom: "15px",
-          }}
+          style={{ height: `${data && data.CardIml.length > 9 ? "550px" : ""}`, overflow: "auto" }}
         >
           <Table striped bordered responsive hover style={{ margin: "auto" }}>
             <thead>
-              <tr style={{ textAlign: "center" }}>
+              <tr style={{ textAlign: "center", fontSize: "18px" }}>
                 <th>เจ้าของซาก</th>
                 <th>ประเภทซาก</th>
                 <th>วันที่นำเข้า</th>
@@ -118,20 +113,8 @@ const lumpday = () => {
                 ))
               ) : (
                 <tr style={{ textAlign: "center" }}>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
+                  <td colSpan="14">ไม่พบข้อมูล</td>
+                  
                 </tr>
               )}
             </tbody>

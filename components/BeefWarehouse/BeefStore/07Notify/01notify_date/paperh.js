@@ -117,7 +117,7 @@ const paperh = ({ prod }) => {
           ],
         },
         {
-          text: "รายงานนำเข้าซากโคผ่าซีก\n\n",
+          text: "รายงานวันใกล้หมดอายุซากโคผ่าซีก\n\n",
           style: "header",
           alignment: "center",
         },

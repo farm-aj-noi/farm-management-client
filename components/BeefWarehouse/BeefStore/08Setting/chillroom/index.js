@@ -196,7 +196,7 @@ const index = () => {
   };
 
   return (
-    <DivBase>
+    <div style={{ marginTop: "100px" }}>
       <div
         style={{
           display: "flex",
@@ -250,7 +250,7 @@ const index = () => {
           </DivFromTop>
           <DivFromDown>
             <div>
-              ระยะเวลาบ่ม : {}
+              ระยะเวลาบ่ม : { }
               <Searchinput
                 type="text"
                 id="day"
@@ -293,7 +293,7 @@ const index = () => {
           <DivFromDown>
             <>
               <div>
-                ชื่อห้องบ่ม : {}
+                ชื่อห้องบ่ม : { }
                 <Searchinput
                   type="text"
                   id="roomnum"
@@ -336,7 +336,7 @@ const index = () => {
           <DivFromDown>
             <Table striped bordered responsive hover style={{ margin: "auto" }}>
               <thead>
-                <tr style={{ textAlign: "center" }}>
+                <tr style={{ textAlign: "center", fontSize: "18px" }}>
                   <th>ระยะเวลาบ่ม</th>
                   <th>ลบ</th>
                 </tr>
@@ -368,7 +368,7 @@ const index = () => {
           <DivFromDown>
             <Table striped bordered responsive hover style={{ margin: "auto" }}>
               <thead>
-                <tr style={{ textAlign: "center" }}>
+                <tr style={{ textAlign: "center", fontSize: "18px" }}>
                   <th>ห้องบ่ม</th>
                   <th>ลบ</th>
                 </tr>
@@ -383,7 +383,7 @@ const index = () => {
           </DivFromDown>
         </DivFrom>
       </DivBase>
-    </DivBase>
+    </div>
   );
 };
 

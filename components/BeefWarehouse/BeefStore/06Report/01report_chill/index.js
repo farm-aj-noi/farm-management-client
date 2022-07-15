@@ -7,7 +7,6 @@ import {
   DivFromDown,
   HeaderColor,
 } from "../ReportFrom.js";
-import { DivBase } from "../../../../../utils/divBase";
 
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
@@ -72,7 +71,7 @@ const index = () => {
     },
   });
   return (
-    <DivBase>
+    <div style={{ marginTop: "100px" }}>
       <div
         style={{
           display: "flex",
@@ -132,7 +131,7 @@ const index = () => {
                   border: "1px solid #AFAFAF",
                   borderRadius: "4px",
                   textAlign: "center",
-                  fontSize: "14px",
+                  fontSize: "16px",
                   marginRight: "10px",
                 }}
                 onChange={(event) => SetBeeftypeChillChange(event.target.value)}
@@ -157,7 +156,7 @@ const index = () => {
                   width: "110px",
                   borderRadius: "4px",
                   border: "1px solid #AFAFAF",
-                  fontSize: "14px",
+                  fontSize: "16px",
                   textAlign: "center",
                   marginRight: "10px",
                 }}
@@ -220,11 +219,11 @@ const index = () => {
           รายการที่ค้นหา
         </DivFromTop>
         <DivFromDown>
-          <div style={{ height: "250px", overflowY: "auto" }}>
-            <Table striped bordered responsive hover style={{ margin: "auto" }}>
+          <div style={{ height: `${data && data.listchill.length > 6 ? "380px" : ""}`, overflowY: "auto" }}>
+            <Table striped bordered responsive hover >
               {/* <LoadingSmall/> */}
               <thead>
-                <tr style={{ textAlign: "center" }}>
+                <tr style={{ textAlign: "center", fontSize: "18px" }}>
                   <th>ผู้บ่มซาก</th>
                   <th>วันที่บ่ม</th>
                   <th>วันที่บ่มเสร็จ</th>
@@ -240,38 +239,40 @@ const index = () => {
                 </tr>
               </thead>
               <tbody>
-                {data &&
-                  data.listchill.map((prod) => (
-                    <tr style={{ textAlign: "center" }}>
-                      <td>{prod.user.name}</td>
-                      <td>
-                        {dayjs(prod.chilldateStart)
-                          .locale("th")
-                          .add(543, "year")
-                          .format("DD/MM/YYYY")}
-                      </td>
-                      <td>
-                        {dayjs(prod.chilldateEnd)
-                          .locale("th")
-                          .add(543, "year")
-                          .format("DD/MM/YYYY")}
-                      </td>
-                      <td>
-                        {dayjs(prod.chilldateEnd)
-                          .locale("th")
-                          .add(543, "year")
-                          .format("h:mm:ss A")}
-                      </td>
-                      <td>{prod.halve.beeftype.nameTH}</td>
-                      <td>{prod.chillday.day} วัน</td>
-                      <td>{prod.halve.imslaughter.numcow}</td>
-                      <td>{prod.halve.beeftype.code}</td>
-                      <td>{prod.halve.barcode}</td>
-                      <td>{prod.halve.weightwarm}</td>
-                      <td>{prod.chillroom.roomnum}</td>
-                      <td>{prod.chillstatus.nameTH}</td>
-                    </tr>
-                  ))}
+                {data && data.listchill.length > 0 ? (data.listchill.map((prod) => (
+                  <tr style={{ textAlign: "center" }}>
+                    <td>{prod.user.name}</td>
+                    <td>
+                      {dayjs(prod.chilldateStart)
+                        .locale("th")
+                        .add(543, "year")
+                        .format("DD/MM/YYYY")}
+                    </td>
+                    <td>
+                      {dayjs(prod.chilldateEnd)
+                        .locale("th")
+                        .add(543, "year")
+                        .format("DD/MM/YYYY")}
+                    </td>
+                    <td>
+                      {dayjs(prod.chilldateEnd)
+                        .locale("th")
+                        .add(543, "year")
+                        .format("h:mm:ss A")}
+                    </td>
+                    <td>{prod.halve.beeftype.nameTH}</td>
+                    <td>{prod.chillday.day} วัน</td>
+                    <td>{prod.halve.imslaughter.numcow}</td>
+                    <td>{prod.halve.beeftype.code}</td>
+                    <td>{prod.halve.barcode}</td>
+                    <td>{prod.halve.weightwarm}</td>
+                    <td>{prod.chillroom.roomnum}</td>
+                    <td>{prod.chillstatus.nameTH}</td>
+                  </tr>
+                ))) : (<tr style={{ textAlign: "center" }}>
+                  <td colSpan="12">ไม่พบข้อมูล</td>
+                </tr>)
+                }
               </tbody>
             </Table>
           </div>
@@ -287,7 +288,7 @@ const index = () => {
           </div>
         </DivFromDown>
       </DivFrom>
-    </DivBase>
+    </div>
   );
 };
 

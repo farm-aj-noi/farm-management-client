@@ -36,7 +36,6 @@ const Paper_store = ({ prod }) => {
   if (data !== prod) setdata(prod);
   /* console.log(data)
    console.log(prod)  */
-
   const buildTableBody = (data, columns) => {
     var body = [];
 
@@ -53,19 +52,29 @@ const Paper_store = ({ prod }) => {
       "ตะกร้า",
       "สถานะ",
     ]);
-    console.log(data);
+    /* console.log(data); */
 
     data.forEach(function (row) {
-      console.log(row);
       var dataRow = [];
       columns.forEach(function (column) {
         if (column === "user.name") {
           dataRow.push(row.user.name);
-        } else if (column === "Expdate") {
+
+        } else if (column === "weightwarm") {
+          dataRow.push(row.weightwarm ? row.weightwarm : "-");
+        } else if (column === "weight") {
+          dataRow.push(row.weight ? row.weight : "-");
+        } else if (column === "shelf") {
+          dataRow.push(row.shelf ? row.shelf : "-");
+        } else if (column === "basket") {
+          dataRow.push(row.basket ? row.basket : "-");
+        }
+        else if (column === "Expdate") {
           dataRow.push(
             dayjs(row[column]).add(543, "y").locale("th").format("DD MMMM YYYY")
           );
-        } else {
+        }
+        else {
           /* console.log(row[column]) */
           // console.log(column);
           // console.log(

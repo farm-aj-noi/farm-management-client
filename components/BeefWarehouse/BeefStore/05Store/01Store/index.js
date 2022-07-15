@@ -136,7 +136,6 @@ const index = () => {
           <DivFrom
             style={{
               width: "100%",
-              marginTop: "0",
               gridRowStart: "2",
               gridRowEnd: "5",
               gridColumnStart: "2",
@@ -364,7 +363,6 @@ const index = () => {
                 style={{
                   display: "flex",
                   justifyContent: "center",
-                  marginBottom: "10px",
                 }}
               >
                 <from style={{ fontSize: "20px" }}>
@@ -431,7 +429,7 @@ const index = () => {
                       borderLeft: "none",
                       textAlign: "center",
                       fontSize: "16px",
-                      marginRight: "10px",
+
                     }}
                   >
                     <option value="">ตะกร้า</option>

@@ -16,7 +16,7 @@ import Graphexport from "./graphexport";
 
 export const index = () => {
   return (
-    <>
+    <div style={{ marginTop: "100px" }}>
       <div
         style={{
           display: "flex",
@@ -40,7 +40,7 @@ export const index = () => {
             <div style={{ margin: "-3px 5px 0px 0px" }}>
               <Icon size={20} icon={list} />
             </div>
-            ราลละเอียดข้อมูลสถิตินำเข้า 
+            ราลละเอียดข้อมูลสถิตินำเข้า
           </DivFromTop>
           <DivFromDown>
             <Graphimport />
@@ -58,7 +58,7 @@ export const index = () => {
           </DivFromDown>
         </DivFrom>
       </DivBase1>
-    </>
+    </div>
   );
 };
 

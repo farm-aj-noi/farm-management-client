@@ -54,6 +54,7 @@ const Paper_import = ({ prod }) => {
       "ถุงน้ำดี",
       "เศษซาก",
       "รหัสบาร์โค้ด",
+      "ห้อง",
       "ผู้นำเข้า",
     ]);
     console.log(data);
@@ -93,7 +94,10 @@ const Paper_import = ({ prod }) => {
           dataRow.push(row.entrail.imslaughter.numcow);
         } else if (column === "entrail.imslaughter.namefarmer") {
           dataRow.push(row.entrail.imslaughter.namefarmer);
-        } else if (column === "user.name") {
+        } else if (column == "beefroom.roomname") {
+          dataRow.push(row.beefroom.roomname);
+        }
+        else if (column === "user.name") {
           dataRow.push(row.user.name);
         } else {
           /* console.log(row[column]) */
@@ -117,19 +121,20 @@ const Paper_import = ({ prod }) => {
         headerRows: 1,
         // alignment: 'center'
         widths: [
-          "auto",
-          "auto",
-          "auto",
-          "star",
-          "star",
-          "star",
-          "star",
-          "star",
-          "star",
-          "star",
           "star",
           "star",
           "auto",
+          "auto",
+          "auto",
+          "auto",
+          "auto",
+          "auto",
+          "auto",
+          "auto",
+          "auto",
+          "auto",
+          "auto",
+          "star",
           "auto",
           "auto",
         ],
@@ -144,7 +149,7 @@ const Paper_import = ({ prod }) => {
 
   const printPDF = () => {
     var docDefinition = {
-       pageSize: "A4",
+      pageSize: "A4",
       pageOrientation: "landscape",
       pageMargins: [40, 40, 40, 120],
       content: [
@@ -186,6 +191,7 @@ const Paper_import = ({ prod }) => {
           "entrail.gallbladder",
           "entrail.scrap",
           "entrail.barcode",
+          "beefroom.roomname",
           "user.name",
         ]),
       ],

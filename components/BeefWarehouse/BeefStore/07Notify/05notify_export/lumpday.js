@@ -57,16 +57,11 @@ const lumpday = () => {
       </DivFromTop>{" "}
       <DivFromDown>
         <div
-          style={{
-            margin: "auto",
-            minWidth: "100%",
-            float: "right",
-            marginBottom: "15px",
-          }}
+          style={{ height: `${data && data.CardExl.length > 9 ? "550px" : ""}`, overflow: "auto" }}
         >
           <Table striped bordered responsive hover style={{ margin: "auto" }}>
             <thead>
-              <tr style={{ textAlign: "center" }}>
+              <tr style={{ textAlign: "center", fontSize: "18px" }}>
                 <th>ประเภทซาก</th>
                 <th>วันที่เบิกออก</th>
                 <th>เวลา</th>
@@ -74,7 +69,7 @@ const lumpday = () => {
                 <th>รหัสซาก</th>
                 <th>รหัสบาร์โค้ด</th>
                 <th>คิวอาร์โค้ด</th>
-                <th>น้ำหนัก</th>
+                <th>น้ำหนัก (กก.)</th>
                 <th>สถานะ</th>
                 <th>ผู้ขอเบิก</th>
                 <th>ผู้เบิกออก</th>
@@ -109,17 +104,8 @@ const lumpday = () => {
                 ))
               ) : (
                 <tr style={{ textAlign: "center" }}>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
+                  <td colSpan="11">ไม่พบข้อมูล</td>
+
                 </tr>
               )}
             </tbody>

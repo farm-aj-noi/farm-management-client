@@ -57,16 +57,11 @@ const halveday = () => {
       </DivFromTop>{" "}
       <DivFromDown>
         <div
-          style={{
-            margin: "auto",
-            minWidth: "100%",
-            float: "right",
-            marginBottom: "15px",
-          }}
+          style={{ height: `${data && data.CardImh.length > 9 ? "550px" : ""}`, overflow: "auto" }}
         >
           <Table striped bordered responsive hover style={{ margin: "auto" }}>
             <thead>
-              <tr style={{ textAlign: "center" }}>
+              <tr style={{ textAlign: "center", fontSize: "18px" }}>
                 <th>เจ้าของซาก</th>
                 <th>ประเภทซาก</th>
                 <th>วันที่นำเข้า</th>
@@ -102,7 +97,7 @@ const halveday = () => {
                     <td>{prod.halve.beeftype.code}</td>
                     <td>{prod.halve.barcode}</td>
                     <td>
-                    <Modalqrcode key={prod.id} notifyimh={prod} />
+                      <Modalqrcode key={prod.id} notifyimh={prod} />
                     </td>
                     <td>{prod.halve.weightwarm}</td>
                     <td>
@@ -115,19 +110,8 @@ const halveday = () => {
                 ))
               ) : (
                 <tr style={{ textAlign: "center" }}>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
+                  <td colSpan="13">ไม่พบข้อมูล</td>
+
                 </tr>
               )}
             </tbody>

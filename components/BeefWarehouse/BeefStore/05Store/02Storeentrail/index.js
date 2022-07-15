@@ -137,45 +137,46 @@ const index = () => {
                     textAlign: "center",
                   }}
                 />
+
                 <label
-                  for="expdate"
+                  for="beef"
                   style={{
                     textAlign: "center",
                     fontSize: "18px",
                     margin: "10px 10px",
                   }}
                 >
-                  <label
-                    for="beef"
-                    style={{
-                      textAlign: "center",
-                      fontSize: "18px",
-                      margin: "10px 10px",
-                    }}
-                  >
-                    ตำแหน่ง
-                  </label>
-                  <select
-                    name="roomname"
-                    style={{
-                      height: "35px",
-                      width: "110px",
-                      border: "1px solid #AFAFAF",
-                      borderRadius: "4px ",
-                      textAlign: "center",
-                      fontSize: "14px",
-                      marginRight: "10px",
-                    }}
-                    onChange={(event) => setselectbeefroom(event.target.value)}
-                  >
-                    <option value="">ห้อง</option>
-                    {dataroom &&
-                      dataroom.allRoom.map((prod) => (
-                        <option key={prod.id} value={prod.id}>
-                          {prod.roomname}
-                        </option>
-                      ))}
-                  </select>
+                  ตำแหน่ง
+                </label>
+                <select
+                  name="roomname"
+                  style={{
+                    height: "35px",
+                    width: "110px",
+                    border: "1px solid #AFAFAF",
+                    borderRadius: "4px ",
+                    textAlign: "center",
+                    fontSize: "14px",
+                    marginRight: "10px",
+                  }}
+                  onChange={(event) => setselectbeefroom(event.target.value)}
+                >
+                  <option value="">ห้อง</option>
+                  {dataroom &&
+                    dataroom.allRoom.map((prod) => (
+                      <option key={prod.id} value={prod.id}>
+                        {prod.roomname}
+                      </option>
+                    ))}
+                </select>
+                <label
+                  for="expdate"
+                  style={{
+                    textAlign: "center",
+                    fontSize: "18px",
+                    marginRight: "10px",
+                  }}
+                >
                   วันหมดอายุ
                 </label>
                 <input

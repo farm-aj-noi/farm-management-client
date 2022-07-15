@@ -8,7 +8,7 @@ import Basket1 from "./basket1";
 
 function index() {
   return (
-    <DivBase1>
+    <div style={{ marginTop: "100px" }}>
       <div
         style={{
           display: "flex",
@@ -68,7 +68,7 @@ function index() {
           <Basket1 />
         </DivFrom>
       </DivBase1>
-    </DivBase1>
+    </div>
   );
 }
 

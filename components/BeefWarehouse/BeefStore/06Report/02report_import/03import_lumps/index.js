@@ -30,6 +30,8 @@ export const IMPORTLUMPSEARCH = gql`
     $beeftype: String
     $namefarmer: String
     $userName: String
+    $beefroom: String
+    $shelf: String
   ) {
     imlumpSearch(
       startdate: $startdate
@@ -37,6 +39,8 @@ export const IMPORTLUMPSEARCH = gql`
       beeftype: $beeftype
       namefarmer: $namefarmer
       userName: $userName
+      beefroom: $beefroom
+      shelf: $shelf
     ) {
       importdate
       user {
@@ -67,12 +71,56 @@ export const IMPORTLUMPSEARCH = gql`
     }
   }
 `;
+
+export const QUERYROOM = gql`
+  query Query {
+    allRoom {
+      id
+      roomname
+    }
+  }
+`;
+
+export const QUERYSHELF = gql`
+  query QUERYSHELF($id: ID) {
+    listShelf(id: $id) {
+      shelfname
+      id
+    }
+  }
+`;
+
+export const QUERYBASKET = gql`
+  query QUERYBASKET($id: ID) {
+    allBasket(id: $id) {
+      id
+      basketname
+    }
+  }
+`;
+
+
 const index = () => {
+  const { data: dataroom } = useQuery(QUERYROOM);
   const [selectedbeeftypelump, SetBeeftypeLumpChange] = useState("");
   const [selectedstartdate, SetStartDateChange] = useState("");
   const [selectedenddate, SetEndDateChange] = useState("");
   const [inputnamefarmer, SetInputnamefarmer] = useState("");
   const [inputusername, SetInputusername] = useState("");
+  const [selectedbeefroom, setselectbeefroom] = useState("");
+  const [selectedshelf, setselectshelf] = useState("");
+  const [selectedbasket, setselectbasket] = useState("");
+  const { data: datashelf } = useQuery(QUERYSHELF, {
+    variables: {
+      id: selectedbeefroom,
+    },
+  });
+
+  const { data: basketdata } = useQuery(QUERYBASKET, {
+    variables: {
+      id: selectedshelf,
+    },
+  });
   const { data, loading, error } = useQuery(IMPORTLUMPSEARCH, {
     variables: {
       beeftype: selectedbeeftypelump,
@@ -80,10 +128,12 @@ const index = () => {
       enddate: selectedenddate,
       namefarmer: inputnamefarmer,
       userName: inputusername,
+      beefroom: selectedbeefroom,
+      shelf: selectedshelf,
     },
   });
   return (
-    <DivBase>
+    <div style={{ marginTop: "100px" }}>
       <>
         <div
           style={{
@@ -104,7 +154,7 @@ const index = () => {
         <DivBase
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 270px 1100px 1fr",
+            gridTemplateColumns: "1fr 270px 1300px 1fr",
             gridRowGap: "15px",
             gridColumnGap: "20px",
             textAlign: "start",
@@ -129,7 +179,6 @@ const index = () => {
                 gridRowEnd: "3",
                 gridColumnStart: "3",
                 marginTop: "0px",
-                height: "130px",
               }}
             >
               <DivFromTop>
@@ -143,7 +192,6 @@ const index = () => {
                   style={{
                     display: "flex",
                     justifyContent: "center",
-                    marginBottom: "10px",
                   }}
                 >
                   <from style={{ fontSize: "20px" }}>
@@ -166,8 +214,8 @@ const index = () => {
                         border: "1px solid #AFAFAF",
                         borderRadius: "4px",
                         textAlign: "center",
-                        fontSize: "14px",
-                        marginRight: "10px",
+                        fontSize: "16px",
+
                       }}
                       onChange={(event) =>
                         SetBeeftypeLumpChange(event.target.value)
@@ -228,7 +276,7 @@ const index = () => {
                         width: "110px",
                         borderRadius: "4px",
                         border: "1px solid #AFAFAF",
-                        fontSize: "14px",
+                        fontSize: "16px",
                         textAlign: "center",
                       }}
                       onChange={(event) =>
@@ -252,12 +300,85 @@ const index = () => {
                         width: "110px",
                         borderRadius: "4px",
                         border: "1px solid #AFAFAF",
-                        fontSize: "14px",
+                        fontSize: "16px",
                         textAlign: "center",
                         marginRight: "10px",
                       }}
                       onChange={(event) => SetInputusername(event.target.value)}
                     />
+                    <label
+                      for="beef"
+                      style={{
+                        textAlign: "center",
+                        fontSize: "18px",
+                        marginRight: "10px",
+                      }}
+                    >
+                      ตำแหน่ง
+                    </label>
+                    <select
+                      name="roomname"
+                      style={{
+                        height: "35px",
+                        width: "50px",
+                        border: "1px solid #AFAFAF",
+                        borderRadius: "4px 0px 0px 4px",
+                        textAlign: "center",
+                        fontSize: "16px",
+                      }}
+                      onChange={(event) => setselectbeefroom(event.target.value)}
+                    >
+                      <option value="">ห้อง</option>
+                      {dataroom &&
+                        dataroom.allRoom.map((prod) => (
+                          <option key={prod.id} value={prod.id}>
+                            {prod.roomname}
+                          </option>
+                        ))}
+                    </select>
+                    <select
+                      name="shelfname"
+                      disabled={!selectedbeefroom}
+                      style={{
+                        height: "35px",
+                        width: "50px",
+                        border: "1px solid #AFAFAF",
+                        borderLeft: "none",
+                        textAlign: "center",
+                        fontSize: "16px",
+                      }}
+                      onChange={(event) => setselectshelf(event.target.value)}
+                    >
+                      <option value="">ชั้น</option>
+                      {datashelf &&
+                        datashelf.listShelf.map((prod) => (
+                          <option key={prod.id} value={prod.id}>
+                            {prod.shelfname}
+                          </option>
+                        ))}
+                    </select>
+                    <select
+                      name="basket"
+                      disabled={!selectedbeefroom || !selectedshelf}
+                      style={{
+                        height: "35px",
+                        width: "60px",
+                        border: "1px solid #AFAFAF",
+                        borderRadius: "0px 4px 4px 0px",
+                        borderLeft: "none",
+                        textAlign: "center",
+                        fontSize: "16px",
+                        marginRight: "10px",
+                      }}
+                    >
+                      <option value="">ตะกร้า</option>
+                      {basketdata &&
+                        basketdata.allBasket.map((prod) => (
+                          <option key={prod.id} value={prod.id}>
+                            {prod.basketname}
+                          </option>
+                        ))}
+                    </select>
                     <label
                       for="date"
                       style={{
@@ -326,17 +447,16 @@ const index = () => {
                 รายการที่ค้นหา
               </DivFromTop>
               <DivFromDown>
-                <div style={{ height: "250px", overflowY: "auto" }}>
+                <div style={{ height: `${data && data.imlumpSearch.length > 6 ? "380px" : ""}`, overflowY: "auto" }}>
                   <Table
                     striped
                     bordered
                     responsive
                     hover
-                    style={{ margin: "auto" }}
                   >
                     {/* <LoadingSmall/> */}
                     <thead>
-                      <tr style={{ textAlign: "center" }}>
+                      <tr style={{ textAlign: "center", fontSize: "18px" }}>
                         <th>เจ้าของซาก</th>
                         <th>ประเภทซาก</th>
                         <th>วันที่นำเข้า</th>
@@ -353,32 +473,34 @@ const index = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {data &&
-                        data.imlumpSearch.map((prod) => (
-                          <tr style={{ textAlign: "center" }}>
-                            <td>{prod.lump.imslaughter.namefarmer}</td>
-                            <td>{prod.lump.beeftype.nameTH}</td>
-                            <td>
-                              {dayjs(prod.importdate)
-                                .add(543, "year")
-                                .format("DD/MM/YYYY")}
-                            </td>
-                            <td>
-                              {dayjs(prod.importdate)
-                                .add(543, "year")
-                                .format("h:mm:ss A")}
-                            </td>
-                            <td>{prod.lump.imslaughter.numcow}</td>
-                            <td>{prod.lump.beeftype.code}</td>
-                            <td>{prod.lump.barcode}</td>
-                            <td>{prod.lump.weight}</td>
-                            <td>{prod.beefroom.roomname}</td>
-                            <td>{prod.shelf.shelfname}</td>
-                            <td>{prod.basket}</td>
-                            <td>{prod.lump.status.nameTH}</td>
-                            <td>{prod.user.name}</td>
-                          </tr>
-                        ))}
+                      {data && data.imlumpSearch.length > 0 ? (data.imlumpSearch.map((prod) => (
+                        <tr style={{ textAlign: "center" }}>
+                          <td>{prod.lump.imslaughter.namefarmer}</td>
+                          <td>{prod.lump.beeftype.nameTH}</td>
+                          <td>
+                            {dayjs(prod.importdate)
+                              .add(543, "year")
+                              .format("DD/MM/YYYY")}
+                          </td>
+                          <td>
+                            {dayjs(prod.importdate)
+                              .add(543, "year")
+                              .format("h:mm:ss A")}
+                          </td>
+                          <td>{prod.lump.imslaughter.numcow}</td>
+                          <td>{prod.lump.beeftype.code}</td>
+                          <td>{prod.lump.barcode}</td>
+                          <td>{prod.lump.weight}</td>
+                          <td>{prod.beefroom.roomname}</td>
+                          <td>{prod.shelf.shelfname}</td>
+                          <td>{prod.basket}</td>
+                          <td>{prod.lump.status.nameTH}</td>
+                          <td>{prod.user.name}</td>
+                        </tr>
+                      ))) : (<tr style={{ textAlign: "center" }}>
+                        <td colSpan="14">ไม่พบข้อมูล</td>
+                      </tr>)
+                      }
                     </tbody>
                   </Table>
                 </div>
@@ -399,7 +521,7 @@ const index = () => {
           </>
         </DivBase>
       </>
-    </DivBase>
+    </div >
   );
 };
 

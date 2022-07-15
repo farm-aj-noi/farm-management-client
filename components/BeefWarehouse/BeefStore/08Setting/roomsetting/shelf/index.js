@@ -9,7 +9,7 @@ import Shelf1 from "./shelf1";
 
 function index() {
   return (
-    <DivBase1>
+    <div style={{ marginTop: "100px" }}>
       <div
         style={{
           display: "flex",
@@ -69,7 +69,7 @@ function index() {
           <Shelf1 />
         </DivFrom>
       </DivBase1>
-    </DivBase1>
+    </div>
   );
 }
 

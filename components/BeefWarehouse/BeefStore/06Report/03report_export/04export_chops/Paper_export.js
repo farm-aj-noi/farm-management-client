@@ -47,6 +47,7 @@ const Paper_export = ({ prod }) => {
       "รหัสบาร์โค้ด",
       "น้ำหนัก",
       "สถานะ",
+      "ผู้ขอเบิก",
       "ผู้เบิกออก",
     ]);
     console.log(data);
@@ -96,6 +97,7 @@ const Paper_export = ({ prod }) => {
         headerRows: 1,
         // alignment: 'center'
         widths: [
+          "auto",
           "star",
           "star",
           "star",
@@ -103,7 +105,7 @@ const Paper_export = ({ prod }) => {
           "star",
           "star",
           "star",
-          "star",
+          "auto",
         ],
 
         body: buildTableBody(data, columns),
@@ -151,6 +153,7 @@ const Paper_export = ({ prod }) => {
           "chop.barcode",
           "chop.weight",
           "storestatus.nameTH",
+          "exporter",
           "user.name",
         ]),
       ],

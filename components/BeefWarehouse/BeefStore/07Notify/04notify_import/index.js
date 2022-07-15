@@ -29,7 +29,7 @@ import Entrailday from "./entrailday";
 
 const index = () => {
   return (
-    <>
+    <div style={{ marginTop: "100px" }}>
       <div
         style={{ display: "flex", justifyContent: "center", marginTop: "30px" }}
       >
@@ -107,7 +107,7 @@ const index = () => {
           <Entrailday />
         </DivFrom>
       </DivBase1>
-    </>
+    </div>
   );
 };
 

@@ -39,7 +39,7 @@ export const QUERYREQUESTEX = gql`
 const index = () => {
   const { data } = useQuery(QUERYREQUESTEX);
   return (
-    <>
+    <div style={{ marginTop: "100px" }}>
       <div
         style={{ display: "flex", justifyContent: "center", marginTop: "30px" }}
       >
@@ -81,12 +81,7 @@ const index = () => {
           </DivFromTop>
           <DivFromDown>
             <div
-              style={{
-                margin: "auto",
-                minWidth: "100%",
-                float: "right",
-                marginBottom: "15px",
-              }}
+              style={{ height: `${data && data.listRequestEx.length > 9 ? "550px" : ""}`, overflow: "auto" }}
             >
               <Table
                 striped
@@ -96,7 +91,7 @@ const index = () => {
                 style={{ margin: "auto" }}
               >
                 <thead>
-                  <tr style={{ textAlign: "center" }}>
+                  <tr style={{ textAlign: "center", fontSize: "18px" }}>
                     <th>วันที่ขอเบิก</th>
                     <th>ชื่อผู้ขอเบิก</th>
                     <th>ประเภทซาก</th>
@@ -106,45 +101,46 @@ const index = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data &&
-                    data.listRequestEx.map((prod) => (
-                      <tr style={{ textAlign: "center" }}>
-                        <td>
-                          {dayjs(prod.requestdate)
-                            .add(543, "year")
-                            .format("DD/MM/YYYY")}
-                        </td>
-                        <td>{prod.name}</td>
-                        <td>{prod.beeftype.nameTH}</td>
-                        <td></td>
-                        <td>{prod.quantity}</td>
-                        <td>
-                          <Deltereq key={prod.id} listreq={prod} />
-                        </td>
-                      </tr>
-                    ))}
+                  {data && data.listRequestEx.length > 0 ? (data.listRequestEx.map((prod) => (
+                    <tr style={{ textAlign: "center" }}>
+                      <td>
+                        {dayjs(prod.requestdate)
+                          .add(543, "year")
+                          .format("DD/MM/YYYY")}
+                      </td>
+                      <td>{prod.name}</td>
+                      <td>{prod.beeftype.nameTH}</td>
+                      <td></td>
+                      <td>{prod.quantity}</td>
+                      <td>
+                        <Deltereq key={prod.id} listreq={prod} />
+                      </td>
+                    </tr>
+                  ))) : (<tr style={{ textAlign: "center" }}>
+                    <td colSpan="6">ไม่พบข้อมูล</td>
+                  </tr>)
+                  }
                 </tbody>
               </Table>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginTop: "10px",
-                }}
-              >
-                {data && data.listRequestEx.length > 0 ? (
-                  <div>
-                    <Paper_request prod={data.listRequestEx} />
-                  </div>
-                ) : (
-                  ""
-                )}
-              </div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              {data && data.listRequestEx.length > 0 ? (
+                <div>
+                  <Paper_request prod={data.listRequestEx} />
+                </div>
+              ) : (
+                ""
+              )}
             </div>
           </DivFromDown>
         </DivFrom>
       </DivBase>
-    </>
+    </div >
   );
 };
 

@@ -246,6 +246,7 @@ const index = () => {
               gridRowEnd: "3",
               gridColumnStart: "3",
               gridColumnEnd: "3",
+              marginTop: "20px",
             }}
           >
             <DivFromTop>
@@ -261,7 +262,7 @@ const index = () => {
                   bordered
                   responsive
                   hover
-
+                  style={{ margin: "auto" }}
                 >
                   <thead>
                     <tr style={{ textAlign: "center", fontSize: "18px" }}>
@@ -294,7 +295,6 @@ const index = () => {
                   </tbody>
                 </Table>
               </div>
-
               <div style={{ float: "right", textAlign: "right" }}>
                 จำนวนรายการ {data ? data.listchill.length : "0"} รายการ
                 <br />

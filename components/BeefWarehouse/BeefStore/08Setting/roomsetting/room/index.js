@@ -4,12 +4,14 @@ import { DivFrom, HeaderColor, DivBase1 } from "../../SettingFrom";
 
 import Nav_setting from "../../Nav_setting";
 
+
+
 import Room from "./room";
 import Room1 from "./room1";
 
 function index() {
   return (
-    <DivBase1>
+    <div style={{ marginTop: "100px" }}>
       <div
         style={{
           display: "flex",
@@ -69,7 +71,7 @@ function index() {
           <Room1 />
         </DivFrom>
       </DivBase1>
-    </DivBase1>
+    </div>
   );
 }
 

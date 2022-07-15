@@ -206,17 +206,8 @@ const room1 = () => {
             dataroom.allRoom.map((prod) => (
               <>
                 <div
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: `200px 200px 200px 
-               200px`,
-                    padding: "20px",
-                    border: "1px solid #bcbcbc",
-                    borderRadius: "4px",
-                    marginTop: "10px",
-                  }}
+                  style={{ margin: "auto", minWidth: "100%" }}
                 >
-                  <Editname key={prod.id} idroom={prod} />
                   <List key={prod.id} idroom={prod} />
                 </div>
               </>

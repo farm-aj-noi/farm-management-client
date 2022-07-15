@@ -61,6 +61,7 @@ export const DivFromTop = styled.div`
   height: fit-content;
   border-radius: 10px 10px 0 0;
   padding: 0.2rem 15px;
+  font-size:20px;
   color: ${white};
 `;
 

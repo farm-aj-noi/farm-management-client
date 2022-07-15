@@ -338,6 +338,7 @@ const index = () => {
                   bordered
                   responsive
                   hover
+                  style={{ margin: "auto" }}
                 >
                   <thead>
                     <tr style={{ textAlign: "center", fontSize: "18px" }}>

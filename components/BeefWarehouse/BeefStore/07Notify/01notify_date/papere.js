@@ -29,9 +29,224 @@ pdfMake.fonts = {
   },
 };
 
-const papere = () => {
+const papere = ({ prod }) => {
+  const [data, setdata] = useState(prod);
+  const { user } = useContext(AuthContext);
+
+  if (data !== prod) setdata(prod);
+  /* console.log(data)
+   console.log(prod)  */
+
+  const buildTableBody = (data, columns) => {
+    var body = [];
+
+    body.push([
+      "ทะเบียนขุน",
+      "เครื่องใน",
+      "ปลายเท้า",
+      "หัว",
+      "หนังสด",
+      "ตับ",
+      "ไขมันอุ่น",
+      "องแคล",
+      "หาง",
+      "ถุงน้ำดี",
+      "เศษซาก",
+      "รหัสบาร์โค้ด",
+      "ห้อง",
+      "วันหมดอายุ",
+
+    ]);
+    console.log(data);
+
+    data.forEach(function (row) {
+      console.log(row);
+      var dataRow = [];
+
+      columns.forEach(function (column) {
+        if (column === "Expdate") {
+          dataRow.push(
+            dayjs(row[column]).add(543, "y").locale("th").format("DD MMMM YYYY")
+          );
+        } else if (column === "entrail.imslaughter.numcow") {
+          dataRow.push(row.entrail.imslaughter.numcow)
+        } else if (column === "entrail.offal") {
+          dataRow.push(row.entrail.offal)
+        } else if (column === "entrail.toe") {
+          dataRow.push(row.entrail.toe)
+        } else if (column === "entrail.head") {
+          dataRow.push(row.entrail.head)
+        } else if (column === "entrail.skin") {
+          dataRow.push(row.entrail.skin)
+        } else if (column === "entrail.liver") {
+          dataRow.push(row.entrail.liver)
+        } else if (column === "entrail.fat") {
+          dataRow.push(row.entrail.fat)
+        } else if (column === "entrail.onkale") {
+          dataRow.push(row.entrail.onkale)
+        } else if (column === "entrail.tail") {
+          dataRow.push(row.entrail.tail)
+        } else if (column === "entrail.gallbladder") {
+          dataRow.push(row.entrail.gallbladder)
+        } else if (column === "entrail.scrap") {
+          dataRow.push(row.entrail.scrap)
+        } else if (column === "entrail.barcode") {
+          dataRow.push(row.entrail.barcode)
+        } else if (column === "beefroom.roomname") {
+          dataRow.push(row.beefroom.roomname)
+        }
+        else {
+          /* console.log(row[column]) */
+          // console.log(column);
+          // console.log(
+          //   dayjs(row[column]).add(543, "y").locale("th").format("DD-MMMM-YYYY")
+          // );
+          dataRow.push(row[column]);
+        }
+      });
+      body.push(dataRow);
+    });
+
+    return body;
+  };
+
+  const table = (data, columns) => {
+    // console.log(data)
+    return {
+      table: {
+        headerRows: 1,
+        // alignment: 'center'
+        widths: [
+          "star",
+          "auto",
+          "auto",
+          "auto",
+          "auto",
+          "auto",
+          "auto",
+          "auto",
+          "auto",
+          "auto",
+          "auto",
+          "star",
+          "auto",
+          "star",
+
+        ],
+
+        body: buildTableBody(data, columns),
+      },
+      layout: "headerLineOnly",
+      fontSize: 12,
+      alignment: "center",
+    };
+  };
+
+  const printPDF = () => {
+    var docDefinition = {
+      pageSize: "A4",
+      pageOrientation: "landscape",
+      pageMargins: [40, 40, 40, 120],
+      content: [
+        {
+          columns: [
+            {
+              // auto-sized columns have their widths based on their content
+              width: "*",
+              text: `ผู้พิมพ์ ${user.name}`,
+              style: "printer",
+            },
+            {
+              width: "*",
+              text: `${dayjs()
+                .add(543, "y")
+                .locale("th")
+                .format("วันที่พิมพ์ วันdddd ที่ DD เดือนMMMM พ.ศ.YYYY")}`,
+              style: "date",
+            },
+          ],
+        },
+        {
+          text: "รายงานนำเข้าซากโคส่วนอื่น ๆ\n\n",
+          style: "header",
+          alignment: "center",
+        },
+        table(data, [
+          "entrail.imslaughter.numcow",
+          "entrail.offal",
+          "entrail.toe",
+          "entrail.head",
+          "entrail.skin",
+          "entrail.liver",
+          "entrail.fat",
+          "entrail.onkale",
+          "entrail.tail",
+          "entrail.gallbladder",
+          "entrail.scrap",
+          "entrail.barcode",
+          "beefroom.roomname",
+          "Expdate",
+        ]),
+      ],
+
+      footer: function (currentPage, pageCount) {
+        if (currentPage == pageCount) {
+          return [
+            {
+              alignment: "justify",
+              columns: [
+                {
+                  style: "confirm",
+                  text: "ผู้พิมพ์รายงาน\n..........................................................\n( .......................................................... )\nตำแหน่ง..........................................................",
+                },
+                {
+                  style: "confirm",
+                  text: "ผู้รับรอง\n............................................................\n( .......................................................... )\nตำแหน่ง..........................................................",
+                },
+              ],
+            },
+          ];
+        } else {
+          return {
+            // absolutePosition: { y: 20 },
+            margin: [0, 50, 20, 0],
+            text: `${currentPage.toString() + " of " + pageCount}`,
+            alignment: "right",
+          };
+        }
+      },
+      defaultStyle: {
+        font: "THSarabunNew",
+      },
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true,
+          alignment: "justify",
+        },
+
+        date: {
+          fontSize: 10,
+          color: "black",
+          alignment: "right",
+        },
+        printer: {
+          fontSize: 10,
+          color: "black",
+          alignment: "left",
+        },
+        confirm: {
+          fontSize: 14,
+          color: "black",
+          alignment: "center",
+          margin: [0, 30, 0, 0],
+        },
+      },
+    };
+    pdfMake.createPdf(docDefinition).open();
+  };
   return (
-    <ButtonExcel type="button" value="print PDF" >
+    <ButtonExcel type="button" value="print PDF" onClick={printPDF}>
       <Icon
         style={{ verticalAlign: "text-bottom", marginRight: "5px" }}
         icon={printer}

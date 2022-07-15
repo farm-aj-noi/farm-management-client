@@ -87,10 +87,19 @@ const Submit_Request = () => {
               name="name"
               value={RequestInfo.name}
               onChange={handleChange}
+              style={{
+                borderColor: `${!RequestInfo.name ? "red" : ""}`,
+                height: "35px"
+              }}
             />
+            {!RequestInfo.name ? (
+              <label style={{ color: "red" }}>กรุณากรอกชื่อ</label>
+            ) : (
+              ""
+            )}
           </div>
         </DivFromInsideLeft>
-        <DivFromInsideLeft>
+        <DivFromInsideLeft style={{ marginTop: "5px" }}>
           ประเภทซาก :
           <div
             style={{
@@ -102,6 +111,7 @@ const Submit_Request = () => {
               <select
                 name="beeftype"
                 id="beeftype"
+                disabled={!RequestInfo.name}
                 style={{
                   height: "35px",
                   width: "160px",
@@ -154,6 +164,7 @@ const Submit_Request = () => {
               type="text"
               id="quantity"
               name="quantity"
+              disabled={!RequestInfo.name || !RequestInfo.beeftype}
               value={RequestInfo.quantity}
               onChange={handleChange}
             />
@@ -168,7 +179,18 @@ const Submit_Request = () => {
             paddingBottom: "10px",
           }}
         >
-          <Savebutton1 onClick={handdleSummit}>บันทึก</Savebutton1>
+          <Savebutton1 onClick={handdleSummit} style={{
+            backgroundColor: `${!RequestInfo.name ||
+              !RequestInfo.beeftype ||
+              !RequestInfo.quantity
+              ? "gray"
+              : ""
+              }`,
+          }}
+            disabled={!RequestInfo.name ||
+              !RequestInfo.beeftype ||
+              !RequestInfo.quantity}
+          >บันทึก</Savebutton1>
         </div>
       </form>
     </div>

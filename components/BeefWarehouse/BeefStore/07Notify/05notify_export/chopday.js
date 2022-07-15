@@ -58,16 +58,11 @@ const chopday = () => {
       </DivFromTop>{" "}
       <DivFromDown>
         <div
-          style={{
-            margin: "auto",
-            minWidth: "100%",
-            float: "right",
-            marginBottom: "15px",
-          }}
+          style={{ height: `${data && data.CardExc.length > 9 ? "550px" : ""}`, overflow: "auto" }}
         >
           <Table striped bordered responsive hover style={{ margin: "auto" }}>
             <thead>
-              <tr style={{ textAlign: "center" }}>
+              <tr style={{ textAlign: "center", fontSize: "18px" }}>
                 <th>ประเภทซาก</th>
                 <th>วันที่เบิกออก</th>
                 <th>เวลา</th>
@@ -100,7 +95,7 @@ const chopday = () => {
                     <td>{prod.chop.beeftype.code}</td>
                     <td>{prod.chop.barcode}</td>
                     <td>
-                      <Modalqrcode key={prod.id} notifychop={prod}/>
+                      <Modalqrcode key={prod.id} notifychop={prod} />
                     </td>
                     <td>{prod.chop.weight}</td>
                     <td>{prod.storestatus.nameTH}</td>
@@ -110,17 +105,8 @@ const chopday = () => {
                 ))
               ) : (
                 <tr style={{ textAlign: "center" }}>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
+                  <td colSpan="11">ไม่พบข้อมูล</td>
+
                 </tr>
               )}
             </tbody>

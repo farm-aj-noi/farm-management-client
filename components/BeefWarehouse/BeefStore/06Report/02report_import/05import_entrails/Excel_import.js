@@ -28,6 +28,7 @@ const Excel_import = ({ prod }) => {
     { label: "ถุงน้ำดี", key: "entrail.gallbladder" },
     { label: "เศษซาก", key: "entrail.scrap" },
     { label: "รหัสบาร์โค้ด", key: "entrail.barcode" },
+    { label: "ห้อง", key: "beefroom.roomname" },
     { label: "ผู้นำเข้า", key: "user.name" },
   ];
   return (

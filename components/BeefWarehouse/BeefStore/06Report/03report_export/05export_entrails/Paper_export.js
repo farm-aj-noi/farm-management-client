@@ -41,7 +41,7 @@ const Paper_export = ({ prod }) => {
     var body = [];
 
     body.push([
-      "เจ้าของซาก",
+
       "วันที่เบิกออก",
       "ทะเบียนขุน",
       "เครื่องใน",
@@ -92,8 +92,6 @@ const Paper_export = ({ prod }) => {
           dataRow.push(row.entrail.barcode);
         } else if (column == "entrail.imslaughter.numcow") {
           dataRow.push(row.entrail.imslaughter.numcow);
-        } else if (column === "entrail.imslaughter.namefarmer") {
-          dataRow.push(row.entrail.imslaughter.namefarmer);
         } else if (column === "user.name") {
           dataRow.push(row.user.name);
         } else {
@@ -118,7 +116,6 @@ const Paper_export = ({ prod }) => {
         headerRows: 1,
         // alignment: 'center'
         widths: [
-          "auto",
           "auto",
           "auto",
           "star",
@@ -168,12 +165,12 @@ const Paper_export = ({ prod }) => {
           ],
         },
         {
-          text: "รายงานนำเข้าซากโคส่วนอื่น ๆ\n\n",
+          text: "รายงานเบิกออกซากโคส่วนอื่น ๆ\n\n",
           style: "header",
           alignment: "center",
         },
         table(data, [
-          "entrail.imslaughter.namefarmer",
+         
           "exportdate",
           "entrail.imslaughter.numcow",
           "entrail.offal",
