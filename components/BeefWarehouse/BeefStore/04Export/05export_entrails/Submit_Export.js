@@ -40,7 +40,7 @@ const Submit_Export = () => {
   const { data: requestdata } = useQuery(LISTREQUEST);
   const [ExportentrailInfo, setExportentrailInfo] = useState({
     barcode: "",
-    storestatus: "",
+    storestatus: "6280fac6d3dbf7345093676f",
     exporter: "",
   });
   const [successs, setSuccess] = useState(false);
@@ -171,23 +171,7 @@ const Submit_Export = () => {
               }}
             >
               <div style={{ display: "inline", width: "170px" }}>
-                <select
-                  name="storestatus"
-                  disabled={!ExportentrailInfo.barcode || !ExportentrailInfo.exporter}
-                  value={ExportentrailInfo.storestatus}
-                  onChange={handleChange}
-                  style={{
-                    height: "35px",
-                    width: "160px",
-                    border: "1px solid #AFAFAF",
-                    borderRadius: "4px",
-                    textAlign: "center",
-                    fontSize: "16px",
-                  }}
-                >
-                  <option value="">เลือกสถานะ</option>
-                  <option value="6280fac6d3dbf7345093676f">นำจำหน่าย</option>
-                </select>
+                <Searchinput type="text" disabled value="นำจำหน่าย" style={{ textAlign: "center" }} />
               </div>
             </div>
           </DivFromInsideLeft>

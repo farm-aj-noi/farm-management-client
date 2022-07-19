@@ -34,6 +34,7 @@ import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
 
 import Basket from "./listallbas";
+import { NavItem, Card } from "react-bootstrap";
 
 export const QUERYBASKET = gql`
   query QUERYBASKET($id: ID) {
@@ -53,47 +54,39 @@ const listbas = ({ listbas }) => {
   });
   console.log(databasket);
   return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: `200px 200px 200px 200px`,
-      }}
-    >
-      <div
-        style={{
-          width: "100%",
-          gridRowStart: "1",
-          gridRowEnd: "1",
-          gridColumnStart: "1",
-        }}
-      >
-        ชั้นจัดเก็บ : {}
-        <Searchinput
-          value={infobasket.shelfname}
-          style={{
-            marginTop: "10px",
-            textAlign: "center",
-            marginBottom: "10px",
-          }}
-          disabled
-        ></Searchinput>
-      </div>
-      <div
-        style={{
-          width: "100%",
-          gridRowStart: "1",
-          gridRowEnd: "1",
-          gridColumnStart: "2",
-          marginBottom: "10px",
-        }}
-      >
-        ตะกร้าจัดเก็บ : {}
-        {databasket &&
-          databasket.allBasket.map((prod) => (
+    <>
+      <div style={{
+        marginTop: "10px",
+        border: "1px solid #d9d9d9",
+        padding: "15px",
+        borderRadius: "4px",
+      }}>
+        <div>
+          ชั้นจัดเก็บ : { }
+          <Searchinput
+            value={infobasket.shelfname}
+            style={{
+              marginTop: "10px",
+              textAlign: "center",
+              marginBottom: "10px",
+            }}
+            disabled
+          ></Searchinput>
+        </div>
+       
+        {databasket && databasket.allBasket.length > 0 ? (databasket.allBasket.map((prod) => (
+          <div
+            style={{ margin: "auto", minWidth: "100%" }}
+          >
             <Basket key={prod.id} listallbas={prod} />
-          ))}
+          </div>
+        ))) : (<Card style={{ marginTop: "10px", textAlign: "center", padding: "20px", backgroundColor: "#f7f7f7" }}>ไม่พบข้อมูล</Card>)
+        }
       </div>
-    </div>
+
+
+
+    </>
   );
 };
 

@@ -123,14 +123,15 @@ const index = () => {
 
     const { data } = useQuery(PRODUCTSEARCH2, {
         variables: {
-            id: "62c2a8cbb262634328fc79b8",
+            id: idcreate,
         }
     })
 
     const [UpdateBeefProduct] = useMutation(UPDATETYPEPRODUCT, {
         refetchQueries: [
             {
-                query: PRODUCTSEARCH2
+                query: PRODUCTSEARCH2,
+                variables: { id: idcreate }
             }
         ],
         onCompleted: (data) => {

@@ -18,12 +18,15 @@ export const ALLPRODUCT = gql`
     $producttype: String
     $productroom: String
     $freezer: String
+    $pbasket: String
   ) {
     allproduct(
       producttype: $producttype
       productroom: $productroom
       freezer: $freezer
+      pbasket: $pbasket
     ) {
+      id
       barcode
       status
       producttype
@@ -36,6 +39,7 @@ export const ALLPRODUCT = gql`
       producttypeid
       productroomid
       freezerid
+      info
     }
   }
 `;
@@ -99,6 +103,7 @@ const index = () => {
       producttype: producttype,
       productroom: selectroom,
       freezer: selectfreezer,
+      pbasket: selectpbasket
     },
   });
   console.log(data);
@@ -272,7 +277,7 @@ const index = () => {
                   <option value="">ชั้นวาง</option>
                   {basket &&
                     basket.allpbasket.map((prod) => (
-                      <option key={prod.id} value={prod.id}>
+                      <option key={prod.id} value={prod.basketname}>
                         {prod.basketname}
                       </option>
                     ))}

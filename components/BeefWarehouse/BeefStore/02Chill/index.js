@@ -17,52 +17,68 @@ import List_chill from "./List_chill";
 
 export const CHILLSEARCHLIST = gql`
   query CHILLSEARCHLIST(
-    $startdate: String
-    $enddate: String
-    $beeftype: String
+  $startdate: String
+  $enddate: String
+  $beeftype: String
+  $startdate2: String
+  $enddate2: String
+  $name: String
+) {
+  listchill(
+    startdate: $startdate
+    enddate: $enddate
+    beeftype: $beeftype
+    startdate2: $startdate2
+    enddate2: $enddate2
+    name: $name
   ) {
-    listchill(startdate: $startdate, enddate: $enddate, beeftype: $beeftype) {
-      id
-      chilldateStart
-      chilldateEnd
-      chillroom {
-        roomnum
-      }
-      user {
-        name
-      }
-      halve {
-        barcode
-        beeftype {
-          nameTH
-          code
-        }
-        weightwarm
-        imslaughter {
-          numcow
-        }
-      }
-      chillstatus {
-        id
+    id
+    chilldateStart
+    chilldateEnd
+    chillroom {
+      roomnum
+    }
+    user {
+      name
+    }
+    halve {
+      barcode
+      beeftype {
         nameTH
+        code
       }
-      chillday {
-        id
-        day
+      weightwarm
+      imslaughter {
+        numcow
       }
     }
+    chillstatus {
+      id
+      nameTH
+    }
+    chillday {
+      id
+      day
+    }
   }
+}
 `;
 
 const index = () => {
   const [selectedbeeftypeChill, SetBeeftypeChillChange] = useState("");
   const [selectedstartdate, SetStartDateChange] = useState("");
   const [selectedenddate, SetEndDateChange] = useState("");
+  const [selectedstartdate2, SetStartDateChange2] = useState("");
+  const [selectedenddate2, SetEndDateChange2] = useState("");
+  const [selectname, SetnameChange] = useState("");
   const { data, loading, error } = useQuery(CHILLSEARCHLIST, {
     variables: {
       beeftype: selectedbeeftypeChill,
       startdate: selectedstartdate,
       enddate: selectedenddate,
+      startdate2: selectedstartdate2,
+      enddate2: selectedenddate2,
+      name: selectname,
     },
   });
   console.log(data);
@@ -190,6 +206,7 @@ const index = () => {
                       textAlign: "center",
                       marginRight: "10px",
                     }}
+                    onChange={(event) => SetnameChange(event.target.value)}
                   />
                   <label
                     for="date"
@@ -221,7 +238,7 @@ const index = () => {
                       margin: "10px 10px",
                     }}
                   >
-                    วันที่บ่มเสร็จ
+                    ถึงวันที่
                   </label>
                   <input
                     type="date"
@@ -234,6 +251,50 @@ const index = () => {
                       fontSize: "16px",
                     }}
                     onChange={(event) => SetEndDateChange(event.target.value)}
+                  ></input>
+                  <label
+                    for="date"
+                    style={{
+                      textAlign: "center",
+                      fontSize: "18px",
+                      margin: "10px 10px",
+                    }}
+                  >
+                    วันที่บ่มเสร็จ
+                  </label>
+                  <input
+                    type="date"
+                    name="date"
+                    style={{
+                      height: "35px",
+                      border: "1px solid #AFAFAF",
+                      borderRadius: "4px",
+                      textAlign: "center",
+                      fontSize: "16px",
+                    }}
+                    onChange={(event) => SetStartDateChange2(event.target.value)}
+                  ></input>
+                  <label
+                    for="date"
+                    style={{
+                      textAlign: "center",
+                      fontSize: "18px",
+                      margin: "10px 10px",
+                    }}
+                  >
+                    ถึงวันที่
+                  </label>
+                  <input
+                    type="date"
+                    name="date"
+                    style={{
+                      height: "35px",
+                      border: "1px solid #AFAFAF",
+                      borderRadius: "4px",
+                      textAlign: "center",
+                      fontSize: "16px",
+                    }}
+                    onChange={(event) => SetEndDateChange2(event.target.value)}
                   ></input>
                 </from>
               </div>

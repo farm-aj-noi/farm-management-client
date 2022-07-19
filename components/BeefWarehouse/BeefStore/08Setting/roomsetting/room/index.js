@@ -31,7 +31,7 @@ function index() {
       <DivBase1
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 200px 925px 1fr",
+          gridTemplateColumns: "1fr 200px 900px 1fr",
           gridRowGap: "15px",
           gridColumnGap: "20px",
           textAlign: "start",

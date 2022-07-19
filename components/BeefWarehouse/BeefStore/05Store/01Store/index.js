@@ -22,6 +22,8 @@ export const STORELIST = gql`
     $beefroom: String
     $shelf: String
     $expdate: String
+    $cownum: String
+    $basket: String
   ) {
     liststore(
       beeftype: $beeftype
@@ -29,7 +31,11 @@ export const STORELIST = gql`
       beefroom: $beefroom
       shelf: $shelf
       expdate: $expdate
+      cownum: $cownum
+      basket: $basket
     ) {
+      beefname
+      id
       barcode
       status
       cownum
@@ -44,6 +50,7 @@ export const STORELIST = gql`
       shelf
       basket
       Expdate
+      info
     }
   }
 `;
@@ -82,6 +89,7 @@ const index = () => {
   const [selectedbeefroom, setselectbeefroom] = useState("");
   const [selectedshelf, setselectshelf] = useState("");
   const [selectedbasket, setselectbasket] = useState("");
+  const [inputnumcow, setnumcow] = useState("");
   const [expdate, setexpdate] = useState("");
   const { data: datashelf } = useQuery(QUERYSHELF, {
     variables: {
@@ -101,6 +109,9 @@ const index = () => {
       beefroom: selectedbeefroom,
       shelf: selectedshelf,
       expdate: expdate,
+      basket: selectedbasket,
+      cownum: inputnumcow,
+
     },
   });
 
@@ -126,8 +137,7 @@ const index = () => {
       <DivBase
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 200px 1000px 1fr",
-          gridRowGap: "15px",
+          gridTemplateColumns: "1fr 200px 1100px 1fr",
           gridColumnGap: "20px",
           textAlign: "start",
         }}
@@ -209,6 +219,7 @@ const index = () => {
                   <select
                     name="beeftype"
                     id="beeftype"
+                    disabled={!selecttype}
                     style={{
                       height: "35px",
                       width: "120px",
@@ -356,6 +367,7 @@ const index = () => {
                       fontSize: "16px",
                       textAlign: "center",
                     }}
+                    onChange={(event) => setnumcow(event.target.value)}
                   />
                 </from>
               </div>
@@ -400,6 +412,7 @@ const index = () => {
                   <select
                     name="shelfname"
                     id="shelfname"
+                    disabled={!selectedbeefroom}
                     style={{
                       height: "35px",
                       width: "50px",
@@ -421,6 +434,7 @@ const index = () => {
                   <select
                     name="basket"
                     id="basket"
+                    disabled={!selectedbeefroom || !selectedshelf}
                     style={{
                       height: "35px",
                       width: "60px",
@@ -431,11 +445,12 @@ const index = () => {
                       fontSize: "16px",
 
                     }}
+                    onChange={(event) => setselectbasket(event.target.value)}
                   >
                     <option value="">ตะกร้า</option>
                     {basketdata &&
                       basketdata.allBasket.map((prod) => (
-                        <option key={prod.id} value={prod.id}>
+                        <option key={prod.id} value={prod.basketname}>
                           {prod.basketname}
                         </option>
                       ))}
@@ -498,11 +513,12 @@ const index = () => {
           </DivFrom>
           <DivFrom
             style={{
-              width: "1220px",
+              width: "1320px",
               gridRowStart: "5",
               gridRowEnd: "5",
               gridColumnStart: "2",
               gridColumnEnd: "4",
+              marginTop: "20px"
             }}
           >
             <DivFromTop>
@@ -542,7 +558,7 @@ const index = () => {
                   <tbody>
                     {data && data.liststore.length > 0 ? (
                       data.liststore.map((prod) => (
-                        <List_Store key={prod.beeftypeid} Liststore={prod} />
+                        <List_Store key={prod.id} Liststore={prod} />
                       ))
                     ) : (
                       <tr style={{ textAlign: "center" }}>

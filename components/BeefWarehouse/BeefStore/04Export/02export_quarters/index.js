@@ -23,6 +23,7 @@ export const EXPORTQUARTERSEARCH = gql`
     $namefarmer: String
     $userName: String
     $exporter: String
+    $exportstatus: String
   ) {
     exportquart(
       startdate: $startdate
@@ -31,6 +32,7 @@ export const EXPORTQUARTERSEARCH = gql`
       namefarmer: $namefarmer
       userName: $userName
       exporter: $exporter
+      exportstatus:$exportstatus
     ) {
       exporter
       id
@@ -65,6 +67,7 @@ const index = () => {
   const [selectedenddate, SetEndDateChange] = useState("");
   const [inputusername, SetInputusername] = useState("");
   const [inputexporter, SetinputExporter] = useState("");
+  const [exportstatus, Setexportstatus] = useState("");
   const { data, loading, error } = useQuery(EXPORTQUARTERSEARCH, {
     variables: {
       beeftype: selectedbeeftypequarter,
@@ -72,6 +75,7 @@ const index = () => {
       enddate: selectedenddate,
       userName: inputusername,
       exporter: inputexporter,
+      exportstatus: exportstatus
     },
   });
   return (
@@ -230,6 +234,33 @@ const index = () => {
                     }}
                     onChange={(event) => SetInputusername(event.target.value)}
                   />
+                  <label
+                    for="status"
+                    style={{
+                      textAlign: "center",
+                      fontSize: "18px",
+                      margin: "10px 10px",
+                    }}>
+                    สถานะ
+                    <select
+                      style={{
+                        height: "35px",
+                        width: "110px",
+                        border: "1px solid #AFAFAF",
+                        borderRadius: "4px",
+                        textAlign: "center",
+                        fontSize: "16px",
+                        marginLeft: "10px"
+                      }}
+                      onChange={(event) => Setexportstatus(event.target.value)}
+                    >
+                      <option value="">เลือก</option>
+                      <option value="6281fb683dd2ff4e1495d6bd">
+                        นำตัดเเต่ง(ก้อนเนื้อ)
+                      </option>
+                      <option value="6280fac6d3dbf7345093676f">นำจำหน่าย</option>
+                    </select>
+                  </label>
                   <label
                     for="date"
                     style={{

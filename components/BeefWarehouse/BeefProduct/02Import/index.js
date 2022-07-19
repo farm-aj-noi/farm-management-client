@@ -23,6 +23,7 @@ export const IMPRODUCTSEARCH = gql`
     $userName: String
     $productroom: String
     $freezer: String
+    $pbasket: String
   ) {
     improductSearch(
       startdate: $startdate
@@ -31,6 +32,7 @@ export const IMPRODUCTSEARCH = gql`
       userName: $userName
       productroom: $productroom
       freezer: $freezer
+      pbasket: $pbasket
     ) {
       id
       importdate
@@ -130,6 +132,7 @@ const index = () => {
       userName: importer,
       productroom: selectroom,
       freezer: selectfreezer,
+      pbasket: selectpbasket,
     },
   });
 
@@ -321,7 +324,7 @@ const index = () => {
                   <option value="">ชั้นวาง</option>
                   {basket &&
                     basket.allpbasket.map((prod) => (
-                      <option key={prod.id} value={prod.id}>
+                      <option key={prod.id} value={prod.basketname}>
                         {prod.basketname}
                       </option>
                     ))}
