@@ -24,6 +24,7 @@ export const ALLPRODUCT = gql`
       productroom: $productroom
       freezer: $freezer
     ) {
+      id
       barcode
       status
       producttype
