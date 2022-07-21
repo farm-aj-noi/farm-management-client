@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Table } from "react-bootstrap";
 import {
   DivFrom,
   DivFromTop,
@@ -57,6 +57,27 @@ export const index = () => {
             <Graphexport />
           </DivFromDown>
         </DivFrom>
+
+        <Table
+          striped
+          bordered
+          responsive
+          hover
+        >
+          <thead>
+            <tr style={{ textAlign: "center", fontSize: "18px" }}>
+              <th>ประเภทซาก</th>
+              <th>จำนวน</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </Table>
+
       </DivBase1>
     </div>
   );

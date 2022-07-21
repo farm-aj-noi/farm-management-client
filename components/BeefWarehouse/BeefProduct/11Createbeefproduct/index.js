@@ -63,6 +63,7 @@ query PRODUCTSEARCH {
   }
 }
 `
+
 const UPDATETYPEPRODUCT = gql`
 mutation UPDATETYPEPRODUCT($id: ID!, $barcode: String) {
   updateBeefProduct(id: $id, barcode: $barcode) {
@@ -126,7 +127,7 @@ const index = () => {
             id: idcreate,
         }
     })
-
+    console.log(data)
     const [UpdateBeefProduct] = useMutation(UPDATETYPEPRODUCT, {
         refetchQueries: [
             {
@@ -398,11 +399,24 @@ const index = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        {data && data.ProductSearch2 !== [] ? (
+                                            data.ProductSearch2.lump !== [] ? (
+                                                data.ProductSearch2.lump.map((prod) => (
+                                                    <p>test</p>
+                                                ))
+                                            ) : (
+                                                <tr><td>ไม่มี</td></tr>
+                                            )
+                                        ) : (
+                                            <tr>
+                                                <td>ไม่ผ่าน</td>
+                                            </tr>)}
                                         {success ? (
                                             <>
-                                                {data && data.ProductSearch2.map((prod) => (
+
+                                                {/*  {data && data.ProductSearch2.map((prod) => (
                                                     <Listlump key={prod.id} listl={prod} />
-                                                ))}
+                                                ))} */}
                                             </>
                                         ) : (
                                             <tr style={{ textAlign: "center" }}>
