@@ -139,71 +139,74 @@ class Mydoc extends React.Component {
                     <div
                         style={{
                             display: "inline-grid",
-                            gridTemplateColumns: "1fr",
+                            gridTemplateColumns: "1fr 1fr",
                         }}
                     >
-                        <label
-                            style={{
-                                marginBottom: 0,
-                                textAlign: "center",
-                                width: "100%",
-                                backgroundColor: "black",
-                                color: "white",
-                            }}
-                        >
-                            วันผลิต / MFD
-                        </label>
-                        <label
-                            style={{
-                                marginBottom: 0,
-                                textAlign: "center",
-                                width: "100%",
-                                color: "black",
-                                border: "1px solid black",
-                            }}
-                        >
-                            {dayjs(prod.MFG)
-                                .add(543, "y")
-                                .locale("th")
-                                .format("DD/MM/YYYY")}
-                        </label>
+                        <div>
+                            <label
+                                style={{
+                                    marginBottom: 0,
+                                    textAlign: "center",
+                                    width: "100%",
+                                    backgroundColor: "black",
+                                    color: "white",
+                                    height: "25px"
+                                }}
+                            >
+                                วันที่ผลิต / MFD
+                            </label>
+                            <label
+                                style={{
+                                    marginBottom: 0,
+                                    textAlign: "center",
+                                    width: "100%",
+                                    backgroundColor: "black",
+                                    color: "white",
+                                    height: "25px"
+                                }}
+                            >
+                                วันหมดอายุ / BBE
+                            </label>
+                        </div>
+                        <div>
+                            <label
+                                style={{
+                                    marginBottom: 0,
+                                    textAlign: "center",
+                                    width: "100%",
+                                    color: "black",
+                                    border: "1px solid black",
+                                    height: "25px"
+                                }}
+                            >
+                                {dayjs(prod.MFG)
+                                    .add(543, "y")
+                                    .locale("th")
+                                    .format("DD/MM/YYYY")}
+                            </label>
+                            <label
+                                style={{
+                                    marginBottom: 0,
+                                    textAlign: "center",
+                                    width: "100%",
+                                    color: "black",
+                                    border: "1px solid black",
+                                    height: "25px"
+                                }}
+                            >
+                                {dayjs(prod.BBE)
+                                    .add(543, "y")
+                                    .locale("th")
+                                    .format("DD/MM/YYYY")}
+                            </label>
+                        </div>
+
                     </div>
                 </div>
-
                 <div
                     style={{
                         display: "inline-grid",
-                        gridTemplateColumns: "0.20fr 1fr 0.20fr",
-                        padding: "2px 5px",
-                        fontWeight: "bolder",
-                        color: "black",
-                        marginBottom: "-25px",
-                    }}
-                >
-                    <label style={{ marginTop: "-6px", fontSize: "30px" }}>ราคา</label>
-                    <label
-                        style={{
-                            marginBottom: 0,
-                            textAlign: "center",
-                            fontSize: "35px",
-                            marginTop: "-8px",
-                        }}
-                    >
-                        {/*  {prod.price.toLocaleString(undefined, {
-                            maximumFractionDigits: 2,
-                        })} */}
-                    </label>
-                    <label
-                        style={{ marginTop: "-6px", fontSize: "30px", textAlign: "right" }}
-                    >
-                        บาท
-                    </label>
-                </div>
-
-                <div
-                    style={{
-                        display: "inline-grid",
-                        padding: "5px 5px 0px 5px",
+                        padding: "5px 2px 0px 5px",
                         margin: "auto",
                         color: "black",
                         gridTemplateColumns: "1fr 0.25fr",
@@ -257,7 +260,7 @@ class Mydoc extends React.Component {
                     <label style={{ marginBottom: 0, textAlign: "left", height: 15 }}>
                         {prod.barcode}
                     </label>
-                    <label style={{ marginBottom: 0, textAlign: "right", height: 15}}>
+                    <label style={{ marginBottom: 0, textAlign: "right", height: 15 }}>
                         {prod.barcode.slice(11)}
                     </label>
                 </div>
