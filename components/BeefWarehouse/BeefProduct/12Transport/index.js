@@ -19,6 +19,7 @@ import {
 import dayjs from "dayjs";
 import DatePicker, { registerLocale } from "react-datepicker";
 import th from "date-fns/locale/th";
+import "dayjs/locale/th";
 registerLocale("th", th);
 
 import Datestyle from "../helps/datepicker.module.css"
@@ -32,19 +33,20 @@ import { DivBase } from "../../../../utils/divBase";
 
 
 
-const QUERYTRACKING = gql`
-query QUERYTRACKING($barcode: String) {
+export const QUERY = gql`
+query QUERY($barcode: String) {
   ProductTracking(barcode: $barcode) {
+    id
     weight
     barcode
     MFG
     BBE
     producttype {
-      id
       code
       nameTH
     }
     producttransport {
+      id
       date
       name
       place
@@ -52,7 +54,6 @@ query QUERYTRACKING($barcode: String) {
     }
   }
 }
-
 `
 
 const CREATETRANSPORT = gql`
@@ -70,7 +71,6 @@ mutation CREATETRANSPORT(
     date: $date
     note: $note
   ) {
-    id
     date
     place
     name
@@ -85,10 +85,11 @@ const Index = () => {
     //calendar
     const dateRef = useRef();
     const [date, setDate] = useState(new Date());
+
     const [selectedDate, handleDateChange] = useState(
         dayjs(date).format("YYYY-MM-DD")
     );
-    // console.log(selectedDate);
+    console.log(selectedDate);
     const months = [
         "มกราคม",
         "กุมภาพันธ์",
@@ -156,11 +157,12 @@ const Index = () => {
 
     // const event1 = new Date("July 1, 1999");
 
-    const { data } = useQuery(QUERYTRACKING, {
+    const { data } = useQuery(QUERY, {
         variables: {
             barcode: barcode
         }
     })
+    console.log(data)
 
     const [createProductTransport] = useMutation(CREATETRANSPORT, {
         onCompleted: (data) => {
@@ -171,7 +173,7 @@ const Index = () => {
         },
         refetchQueries: [
             {
-                query: QUERYTRACKING,
+                query: QUERY,
                 variables: {
                     barcode: barcode,
                 },
@@ -217,10 +219,10 @@ const Index = () => {
                             padding: "5px 30px",
                         }}
                     >
-                        การแจ้งเตือน
+                        บันทึกการขนส่ง
                     </HeaderColor>
                 </div>
-                <DivBase>x
+                <DivBase>
                     <DivFrom style={{ marginBottom: "15px" }}>
                         <DivFromTop>
                             <div style={{ margin: "-3px 5px 0px 0px" }}>
@@ -239,13 +241,14 @@ const Index = () => {
                             {/* ใส่ card */}
                             <div style={{ margin: "auto" }}>
                                 <div style={{ margin: "auto", width: "100%" }}>
-                                    กรุณากรอกบาร์โค๊ด : { }
+                                    กรุณากรอกบาร์โค้ด : { }
                                     <Searchinput
                                         value={barcode}
                                         onChange={(event) => setBarcode(event.target.value)}
                                         style={{
                                             // marginRight: 10,
                                             width: "250px",
+                                            textAlign: "center"
                                         }}
                                         autoFocus
                                     />
@@ -261,35 +264,40 @@ const Index = () => {
                                     paddingTop: "15px",
                                 }}
                             >
+                                <div>
+                                    ชื่อสินค้า :{" "}
+                                    {data && data.ProductTracking !== null ?
+                                        data.ProductTracking.producttype.nameTH : "-"}
+                                </div>
+                                <div>
+                                    รหัสสินค้า :{" "}
+                                    {data && data.ProductTracking !== null ?
+                                        data.ProductTracking.producttype.code : "-"}
+                                </div>
+                                <div>
+                                    น้ำหนัก :{" "}
+                                    {data && data.ProductTracking !== null ?
+                                        data.ProductTracking.weight : "-"}
+                                </div>
+                                <div>
+                                    วันที่ผลิต :{" "}
+                                    {data && data.ProductTracking !== null ?
+                                        dayjs(data.ProductTracking.MFG)
+                                            .add(543, "y")
+                                            .locale("th")
+                                            .format("DD MMMM YYYY")
+                                        : "-"
+                                    }
+                                </div>
 
-
-                                <>
-                                    {data && data.ProductTracking !== null ? (
-                                        data.ProductTracking.map((prod) => (<p>{prod.weight}</p>))
-                                    ) : ("-")}
-                                    <div>
-                                        ชื่อสินค้า :{" "}
-                                       
-                                    </div>
-                                    <div>
-                                        รหัสสินค้า :{" "}
-                                        { }
-                                    </div>
-                                    <div>
-                                        น้ำหนัก :{" "}
-                                        { }
-                                    </div>
-                                    <div>
-                                        วันที่ผลิต :{" "}
-                                        { }
-                                    </div>
-
-                                    <div>
-                                        วันหมดอายุ :{" "}
-                                        { }
-                                    </div>
-                                </>
-
+                                <div>
+                                    วันหมดอายุ :{" "}
+                                    {data && data.ProductTracking !== null ?
+                                        dayjs(data.ProductTracking.BBE)
+                                            .add(543, "y")
+                                            .locale("th")
+                                            .format("DD MMMM YYYY") : "-"}
+                                </div>
                             </div>
 
                         </DivFromDown>
@@ -465,22 +473,22 @@ const Index = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {data && data.Tracking && data.Tracking.MFG !== null && (
+                                        {data && data.ProductTracking && data.ProductTracking.MFG !== null && (
                                             <tr style={{ textAlign: "center" }}>
                                                 <td>
-                                                    {data.Tracking.MFG
-                                                        ? dayjs(data.Tracking.MFG)
+                                                    {data.ProductTracking.MFG
+                                                        ? dayjs(data.ProductTracking.MFG)
                                                             .add(543, "y")
                                                             .locale("th")
                                                             .format("DD MMMM YYYY")
                                                         : "ไม่ระบุ"}
                                                 </td>
                                                 <td>
-                                                    {data.Tracking.MFG
-                                                        ? dayjs(data.Tracking.MFG)
+                                                    {data.ProductTracking.MFG
+                                                        ? dayjs(data.ProductTracking.MFG)
                                                             .add(543, "y")
                                                             .locale("th")
-                                                            .format("HH : MM น.")
+                                                            .format("HH : mm น.")
                                                         : "ไม่ระบุ"}
                                                 </td>
                                                 <td>-</td>
@@ -490,9 +498,9 @@ const Index = () => {
                                         )}
 
                                         {data &&
-                                            data.Tracking &&
-                                            data.Tracking.transports !== null ? (
-                                            data.Tracking.transports.map((prod) => (
+                                            data.ProductTracking &&
+                                            data.ProductTracking.producttransport !== null ? (
+                                            data.ProductTracking.producttransport.map((prod) => (
                                                 <tr key={prod.id} style={{ textAlign: "center" }}>
                                                     <td>
                                                         {prod.date
@@ -507,7 +515,8 @@ const Index = () => {
                                                             ? dayjs(prod.date)
                                                                 .add(543, "y")
                                                                 .locale("th")
-                                                                .format("HH : MM น.")
+                                                                .format("HH : mm น.")
+
                                                             : "ไม่ระบุ"}
                                                     </td>
                                                     <td>{prod.name}</td>

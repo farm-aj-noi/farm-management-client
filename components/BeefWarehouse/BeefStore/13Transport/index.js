@@ -483,7 +483,7 @@ const Index = () => {
                                                         ? dayjs(data.Tracking.MFG)
                                                             .add(543, "y")
                                                             .locale("th")
-                                                            .format("HH : MM น.")
+                                                            .format("HH : mm น.")
                                                         : "ไม่ระบุ"}
                                                 </td>
                                                 <td>-</td>
@@ -510,7 +510,7 @@ const Index = () => {
                                                             ? dayjs(prod.date)
                                                                 .add(543, "y")
                                                                 .locale("th")
-                                                                .format("HH : MM น.")
+                                                                .format("HH : mm น.")
                                                             : "ไม่ระบุ"}
                                                     </td>
                                                     <td>{prod.name}</td>
@@ -526,7 +526,7 @@ const Index = () => {
                                     </tbody>
                                 </Table>
                             </div>
-                            <div style={{ display: "flex", justifyContent: "center" }}>
+                            <div style={{ display: "flex", justifyContent: "center", marginTop: "10px" }}>
                                 {data && data.Tracking.numkun !== null
                                     ?
                                     <a href={

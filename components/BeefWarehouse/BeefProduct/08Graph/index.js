@@ -14,6 +14,8 @@ import { list } from "react-icons-kit/fa/list";
 import Graphimport from "./graphimport";
 import Graphexport from "./graphexport";
 
+import Top10Product from "./Top10"
+
 export const index = () => {
   return (
     <div style={{ marginTop: "100px" }}>
@@ -36,6 +38,17 @@ export const index = () => {
       </div>
       <DivBase1>
         <DivFrom>
+          <DivFromTop>
+            <div style={{ margin: "-3px 5px 0px 0px" }}>
+              <Icon size={20} icon={list} />
+            </div>
+            10 อันดับรายการยอดนิยมเบิกออกจำหน่าย (ประจำเดือน)
+          </DivFromTop>
+          <DivFromDown>
+            <Top10Product />
+          </DivFromDown>
+        </DivFrom>
+        <DivFrom style={{ marginTop: "20px" }}>
           <DivFromTop>
             <div style={{ margin: "-3px 5px 0px 0px" }}>
               <Icon size={20} icon={list} />

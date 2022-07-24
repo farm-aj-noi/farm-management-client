@@ -45,7 +45,7 @@ const index = () => {
           <a style={{ color: "#ffffff", textAlign: "center" }}>
             10 อันดับรายการ
             <br />
-            ยอดนิยมเบิกออกจำหน่าย
+            ยอดนิยมเบิกออก
           </a>
         </form>
       </div>

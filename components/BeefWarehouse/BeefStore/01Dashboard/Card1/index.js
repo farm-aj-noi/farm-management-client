@@ -30,7 +30,7 @@ const index = () => {
     };
   }, []);
   return (
-    <DivAlertCard style={{ backgroundColor: "#0DE9BD" }}>
+    <DivAlertCard style={{ backgroundColor: "#6db909" }}>
       {/*  <div
         style={{
           display: "flex",

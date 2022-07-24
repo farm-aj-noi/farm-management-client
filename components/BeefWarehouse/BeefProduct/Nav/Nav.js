@@ -30,7 +30,8 @@ import {
   Icon12,
   Icon13,
   Icon14,
-  Icon16
+  Icon16,
+  Icon17
 } from "../../../../utils/naviconbeefstore";
 
 const Nav1 = () => {
@@ -130,6 +131,11 @@ const Nav1 = () => {
             <Link href="/beefwarehouse/beefproduct/transport">
               <NavButtonLeft>
                 <Icon14 height="30px" weight="30px" /> บันทึกการขนส่ง
+              </NavButtonLeft>
+            </Link>
+            <Link href="/beefwarehouse/beefproduct/trace">
+              <NavButtonLeft>
+                <Icon17 height="30px" weight="30px" /> ตรวจสอบสินค้า
               </NavButtonLeft>
             </Link>
             <Link href="/beefwarehouse/beefproduct/graph">

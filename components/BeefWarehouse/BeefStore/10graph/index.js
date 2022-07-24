@@ -13,8 +13,24 @@ import { list } from "react-icons-kit/fa/list";
 
 import Graphimport from "./graphimport";
 import Graphexport from "./graphexport";
+import Top10beef from "./Top10"
+import { useQuery } from "@apollo/react-hooks";
+import gql from "graphql-tag";
+
+const TOP10BEEF = gql`
+query Top10beef {
+  top10beef {
+    nameth
+    nameen
+    count
+  }
+}
+`
+
 
 export const index = () => {
+  const { data } = useQuery(TOP10BEEF);
+  console.log(data)
   return (
     <div style={{ marginTop: "100px" }}>
       <div
@@ -35,7 +51,18 @@ export const index = () => {
         </HeaderColor>
       </div>
       <DivBase1>
-        <DivFrom>
+        <DivFrom >
+          <DivFromTop>
+            <div style={{ margin: "-3px 5px 0px 0px" }}>
+              <Icon size={20} icon={list} />
+            </div>
+            10 อันดับรายการยอดนิยมเบิกออกซากโค (ประจำเดือน)
+          </DivFromTop>
+          <DivFromDown>
+            <Top10beef />
+          </DivFromDown>
+        </DivFrom>
+        <DivFrom style={{ marginTop: "20px" }}>
           <DivFromTop>
             <div style={{ margin: "-3px 5px 0px 0px" }}>
               <Icon size={20} icon={list} />
@@ -57,26 +84,6 @@ export const index = () => {
             <Graphexport />
           </DivFromDown>
         </DivFrom>
-
-        <Table
-          striped
-          bordered
-          responsive
-          hover
-        >
-          <thead>
-            <tr style={{ textAlign: "center", fontSize: "18px" }}>
-              <th>ประเภทซาก</th>
-              <th>จำนวน</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </Table>
 
       </DivBase1>
     </div>

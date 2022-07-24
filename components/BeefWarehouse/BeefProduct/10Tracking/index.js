@@ -10,6 +10,7 @@ import { ic_info_outline } from "react-icons-kit/md/ic_info_outline";
 // import DatePicker from "react-datepicker";
 
 import dayjs from "dayjs";
+import "dayjs/locale/th";
 
 import { list } from "react-icons-kit/fa/list";
 
@@ -64,7 +65,6 @@ query QUERY($barcode: String) {
     }
   }
 }
-
 `
 
 const index = () => {
