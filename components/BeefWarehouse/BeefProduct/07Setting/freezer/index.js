@@ -128,9 +128,16 @@ const index = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data && data.allFreezer.map((prod) => (
-                    <List key={prod.id} listf={prod} />
-                  ))}
+                  {data && data.allFreezer > 0 ? (
+                    data.allFreezer.map((prod) => (
+                      <List key={prod.id} listf={prod} />
+                    ))
+                  ) : (
+                    <tr style={{ textAlign: "center" }}>
+                      <td colSpan="4">ไม่พบข้อมูล</td>
+                    </tr>
+                  )
+                  }
                 </tbody>
               </Table>
             </div>

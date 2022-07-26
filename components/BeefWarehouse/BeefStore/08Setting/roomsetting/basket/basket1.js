@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { ic_info_outline } from "react-icons-kit/md/ic_info_outline";
 import {
   DivFrom,
   DivFromTop,
@@ -110,11 +110,33 @@ const basket1 = () => {
           รายการตะกร้าจัดเก็บ
         </DivFromTop>
         <DivFromDown>
-          <div style={{}}>
-            {dataroom &&
+          <div>
+            {dataroom && dataroom.allRoom.length > 0 ? 
+            (
               dataroom.allRoom.map((prod) => (
-                <List1 key={prod.id} listroom1={prod} />
-              ))}
+              <List1 key={prod.id} listroom1={prod} />
+            ))
+            ) : (
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center"
+                }}
+              >
+                <div
+                  style={{
+                    margin: "auto",
+                    textAlign: "center",
+                    color: "#ff0000",
+                  }}
+                >
+                  <Icon size={150} icon={ic_info_outline} />
+                  <br />
+                  ไม่พบข้อมูล
+                </div>
+              </div>
+            )
+            }
           </div>
         </DivFromDown>
       </div>

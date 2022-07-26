@@ -43,7 +43,6 @@ mutation UPDATEFREEZER($id: ID, $freezername: String) {
 const listfreezer = ({ listf }) => {
     const MySwal = withReactContent(Swal);
     const [infofreezer, setinfofreezer] = useState(listf)
-        console.log(infofreezer)
     const [edit, setedit] = useState(false);
     const [updateFreezer] = useMutation(UPDATEFREEZER, {
         onCompleted: (data) => {

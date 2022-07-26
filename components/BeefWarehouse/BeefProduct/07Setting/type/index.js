@@ -4,7 +4,7 @@ import {
   DivFromTop,
   DivFromDown,
   HeaderColor,
- 
+
 } from "../SettingFrom";
 import { DivBase } from "../../../../../utils/divBase";
 import { Icon } from "react-icons-kit";
@@ -151,10 +151,14 @@ const index = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data &&
+                  {data && data.allproducttype.length > 0 ? (
                     data.allproducttype.map((prod) => (
                       <List key={prod.id} listtype={prod} />
-                    ))}
+                    ))
+                  ) : (<tr style={{ textAlign: "center" }}>
+                    <td colSpan="7">ไม่พบข้อมูล</td>
+                  </tr>)
+                  }
                 </tbody>
               </Table>
             </div>

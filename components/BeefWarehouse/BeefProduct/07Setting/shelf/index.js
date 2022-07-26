@@ -122,9 +122,16 @@ const index = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data && data.pbasket.map((prod) => (
-                    <List key={prod.id} listpbasket={prod} />
-                  ))}
+                  {data && data.pbasket.length > 0 ? (
+                    data.pbasket.map((prod) => (
+                      <List key={prod.id} listpbasket={prod} />
+                    ))
+                  ) : (
+                    <tr style={{ textAlign: "center" }}>
+                      <td colSpan="5">ไม่พบข้อมูล</td>
+                    </tr>
+                  )
+                  }
                 </tbody>
               </Table>
             </div>
