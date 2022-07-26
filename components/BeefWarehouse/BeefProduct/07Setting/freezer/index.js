@@ -31,6 +31,7 @@ query QUERYFREEZER {
 
 const index = () => {
   const { data } = useQuery(QUERYFREEZER);
+  console.log(data)
   return (
     <div style={{ marginTop: "100px" }}>
       <div
@@ -128,7 +129,7 @@ const index = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data && data.allFreezer > 0 ? (
+                  {data && data.allFreezer.length > 0 ? (
                     data.allFreezer.map((prod) => (
                       <List key={prod.id} listf={prod} />
                     ))

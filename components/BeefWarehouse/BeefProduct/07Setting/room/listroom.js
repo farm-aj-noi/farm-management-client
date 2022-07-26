@@ -44,6 +44,7 @@ const listroom = ({ listr }) => {
   const MySwal = withReactContent(Swal);
   const [edit, setedit] = useState(false);
   const [inforoom, setinforoom] = useState(listr);
+  console.log(inforoom)
   const [updateProductroom] = useMutation(UPDATEROOM, {
     onCompleted: (data) => {
       setedit(false);
