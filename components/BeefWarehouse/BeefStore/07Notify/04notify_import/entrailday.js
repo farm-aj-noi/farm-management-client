@@ -111,7 +111,7 @@ const entrailday = () => {
                     <td>{prod.entrail.scrap}</td>
                     <td>{prod.entrail.barcode}</td>
                     <td>
-                      <Modalqrcode key={prod.id} notifyime={prod} />
+                       <Modalqrcode key={prod.id} notifyime={prod} /> 
                     </td>
                     <td>{prod.beefroom.roomname}</td>
                     <td>{prod.user.name}</td>

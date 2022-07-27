@@ -12,7 +12,7 @@ import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
 import dayjs from "dayjs";
-import Modalqrcode from "../../12Qrcode/Notify/Import/imeqr";
+import Modalqrcode from "../../12Qrcode/Notify/Import/imcqr";
 
 export const QUERY_IMCHOPDAY = gql`
   query QUERY_IMCHOPDAY {
