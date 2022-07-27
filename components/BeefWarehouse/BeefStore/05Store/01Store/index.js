@@ -117,7 +117,7 @@ const index = () => {
 
     },
   });
-
+  console.log(selecttype)
   /*   console.log(selectedbeeftype); */
   return (
     <div style={{ marginTop: "100px" }}>
