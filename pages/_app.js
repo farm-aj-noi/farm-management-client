@@ -119,7 +119,15 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
   if (!token) {
     if (
       router.pathname === "/beefwarehouse" ||
-      router.pathname === "/beefwarehouse/beefstore"
+      router.pathname === "/beefwarehouse/beefstore" ||
+      router.pathname === "beefwarhouse/beefstore/chill" ||
+      router.pathname === "beefwarhouse/beefstore/import/import_halves" ||
+      router.pathname === "beefwarhouse/beefstore/import/import_quarters" ||
+      router.pathname === "beefwarhouse/beefstore/import/import_lumps" ||
+      router.pathname === "beefwarhouse/beefstore/import/import_chops" ||
+      router.pathname === "beefwarhouse/beefstore/import/import_entrails"||
+      router.pathname === "beefwarhouse/beefstore/export/export_entrails"||
+
     ) {
       ctx.res.writeHead(302, { Location: "/signin" });
       ctx.res.end();

@@ -24,6 +24,7 @@ export const STORELIST = gql`
     $expdate: String
     $cownum: String
     $basket: String
+    $grade: String
   ) {
     liststore(
       beeftype: $beeftype
@@ -33,6 +34,7 @@ export const STORELIST = gql`
       expdate: $expdate
       cownum: $cownum
       basket: $basket
+      grade: $grade
     ) {
       beefname
       id
@@ -51,6 +53,7 @@ export const STORELIST = gql`
       basket
       Expdate
       info
+      grade
     }
   }
 `;

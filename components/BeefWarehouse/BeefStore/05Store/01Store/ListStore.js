@@ -171,8 +171,7 @@ const ListStore = ({ Liststore }) => {
       console.log(error)
     }
   }
-  console.log(ListStoreData.id)
-  console.log(ListStoreData.beefname)
+
   return (
     <tr style={{ textAlign: "center" }}>
       <td>{ListStoreData.beeftype}</td>
@@ -191,7 +190,7 @@ const ListStore = ({ Liststore }) => {
           .add(543, "year")
           .format("DD/MM/YYYY")}
       </td>
-      <td></td>
+      <td>{ListStoreData.grade}</td>
       <td>{ListStoreData.beefroom ? ListStoreData.beefroom : "-"}</td>
       <td>{ListStoreData.shelf ? ListStoreData.shelf : "-"}</td>
       <td>{ListStoreData.basket ? ListStoreData.basket : "-"}</td>

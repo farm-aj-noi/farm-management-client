@@ -23,8 +23,8 @@ import withReactContent from "sweetalert2-react-content";
 import Router from "next/router";
 
 const UPDATEROOM = gql`
-  mutation Mutation($id: ID, $productroomname: String) {
-    updateProductroom(id: $id, productroomname: $productroomname) {
+  mutation Mutation($id: ID, $roomname: String) {
+    updateProductroom(id: $id, roomname: $roomname) {
       id
       roomname
     }
