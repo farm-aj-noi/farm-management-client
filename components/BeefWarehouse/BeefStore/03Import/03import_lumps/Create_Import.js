@@ -70,7 +70,7 @@ const Create_Import = () => {
     shelf: "",
     basket: "",
   });
-  /* console.log(ImportLumpsInfo.shelf); */
+ 
 
   const { data: datashelf } = useQuery(QUERYSHELF, {
     variables: {
@@ -83,9 +83,6 @@ const Create_Import = () => {
       id: ImportLumpsInfo.shelf,
     },
   });
-
-  /*  console.log(datashelf);
-  console.log(ImportLumpsInfo.beefroom); */
 
   const [createImlump, { loading, error }] = useMutation(CREATEIMPORTLUMP, {
     variables: { ...ImportLumpsInfo },

@@ -30,6 +30,7 @@ export const IMPOERTENTRAILSEARCH = gql`
       enddate: $enddate
       beefroom: $beefroom
     ) {
+      id
       importdate
       user {
         name

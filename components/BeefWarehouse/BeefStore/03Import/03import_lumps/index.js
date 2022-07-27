@@ -36,6 +36,7 @@ export const IMPORTLUMPSEARCH = gql`
       shelf: $shelf
       basket: $basket
     ) {
+      id
       importdate
       user {
         name
