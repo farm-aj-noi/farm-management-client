@@ -76,10 +76,6 @@ mutation UPDATETYPEPRODUCT($id: ID!, $barcode: String) {
       id
       weight
       barcode
-      beeftype {
-        code
-        nameTH
-      }
       imslaughter {
         numcow
       }
@@ -90,10 +86,6 @@ mutation UPDATETYPEPRODUCT($id: ID!, $barcode: String) {
       barcode
       imslaughter {
         numcow
-      }
-      beeftype {
-        code
-        nameTH
       }
     }
   }
@@ -138,7 +130,7 @@ const index = () => {
     const [successtype, setsuccesstype] = useState(false);
     const { data: type } = useQuery(QUERYTYPE)
     const [idcreate, setidcreate] = useState("")
-    /*  console.log(idcreate) */
+    console.log(idcreate)
 
     const [createpro, setcreatepro] = useState({
         weight: "",
@@ -153,7 +145,7 @@ const index = () => {
             id: idcreate,
         }
     })
-    /*  console.log(data) */
+    console.log(data)
     const [UpdateBeefProduct] = useMutation(UPDATETYPEPRODUCT, {
         onCompleted: (data) => {
             settypebeef({
@@ -204,7 +196,7 @@ const index = () => {
 
     const [createBeefproduct] = useMutation(CREATEPRODUCT, {
         variables: {
-            weight: (createpro.weight = parseInt(createpro.weight)),
+            weight: (createpro.weight = parseFloat(createpro.weight)),
             producttype: createpro.producttype,
         },
         onCompleted: (data) => {

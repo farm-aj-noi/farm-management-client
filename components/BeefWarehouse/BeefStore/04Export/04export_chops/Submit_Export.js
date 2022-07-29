@@ -191,9 +191,6 @@ const Submit_Export = () => {
                   }}
                 >
                   <option value="">เลือกสถานะ</option>
-                  <option value="6281fb683dd2ff4e1495d6bd">
-                    นำตัดเเต่ง(ก้อนเนื้อ)
-                  </option>
                   <option value="6280fac6d3dbf7345093676f">นำจำหน่าย</option>
                   <option value="62821d931768cd521052118b">นำแปรรูป</option>
                 </select>
