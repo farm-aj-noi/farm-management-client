@@ -26,12 +26,21 @@ const ALLPRODUCT = gql`
     $producttype: String
     $productroom: String
     $freezer: String
+    $pbasket: String
+    $code: String
+    $mfgdate: String
+    $bbedate: String
   ) {
     allproduct(
       producttype: $producttype
       productroom: $productroom
       freezer: $freezer
+      pbasket: $pbasket
+      code: $code
+      mfgdate: $mfgdate
+      bbedate: $bbedate
     ) {
+      id
       barcode
       status
       producttype
@@ -44,6 +53,9 @@ const ALLPRODUCT = gql`
       producttypeid
       productroomid
       freezerid
+      info
+      MFGdate
+      BBEdate
     }
   }
 `;
@@ -90,6 +102,9 @@ const index = () => {
   const [selectroom, setselectroom] = useState("");
   const [selectfreezer, setselectfreezer] = useState("");
   const [selectpbasket, setselectpbasket] = useState("");
+  const [inputcode, setInputcode] = useState("");
+  const [selectMFGdate, setMfgdate] = useState("");
+  const [selectBBEdate, setBBEdate] = useState("");
   const { data: type } = useQuery(QUERYTYPE);
   const { data: room } = useQuery(PRODUCTROOM);
   const { data: freezer } = useQuery(PRODUCTFREEZER, {
@@ -107,6 +122,10 @@ const index = () => {
       producttype: producttype,
       productroom: selectroom,
       freezer: selectfreezer,
+      pbasket: selectpbasket,
+      code: inputcode,
+      mfgdate: selectMFGdate,
+      bbedate: selectBBEdate,
     },
   });
   return (
@@ -209,6 +228,7 @@ const index = () => {
                     textAlign: "center",
                     marginRight: "10px",
                   }}
+                  onChange={(event) => setInputcode(event.target.value)}
                 />
                 <label
                   for="beef"
@@ -279,7 +299,7 @@ const index = () => {
                   <option value="">ชั้นวาง</option>
                   {basket &&
                     basket.allpbasket.map((prod) => (
-                      <option key={prod.id} value={prod.id}>
+                      <option key={prod.id} value={prod.basketname}>
                         {prod.basketname}
                       </option>
                     ))}
@@ -302,10 +322,10 @@ const index = () => {
                     height: "35px",
                     border: "1px solid #AFAFAF",
                     borderRadius: "4px",
-
                     textAlign: "center",
                     fontSize: "16px",
                   }}
+                  onChange={(event) => setMfgdate(event.target.value)}
                 ></input>
 
                 <label
@@ -329,6 +349,7 @@ const index = () => {
                     fontSize: "16px",
                     textAlign: "center",
                   }}
+                  onChange={(event) => setBBEdate(event.target.value)}
                 ></input>
               </from>
             </div>
@@ -367,9 +388,9 @@ const index = () => {
                     <th>น้ำหนัก (กก.)</th>
                     <th>วันที่ผลิต</th>
                     <th>วันหมดอายุ</th>
-                    <th>ห้อง</th>
                     <th>ตู้แช่</th>
-                    <th>ชั้นวาง</th>
+                    <th>ชั้น</th>
+                    <th>ตะกร้า</th>
                     <th>หมายเหตุ</th>
                   </tr>
                 </thead>
@@ -383,13 +404,13 @@ const index = () => {
 
                         <td>{prod.weight}</td>
                         <td>
-                          {dayjs(prod.MFG)
+                          {dayjs(prod.MFGdate)
                             .locale("th")
                             .add(543, "year")
                             .format("DD/MM/YYYY")}
                         </td>
                         <td>
-                          {dayjs(prod.BBE)
+                          {dayjs(prod.BBEdate)
                             .locale("th")
                             .add(543, "year")
                             .format("DD/MM/YYYY")}
@@ -397,7 +418,7 @@ const index = () => {
                         <td>{prod.productroom}</td>
                         <td>{prod.freezer}</td>
                         <td>{prod.pbasket}</td>
-                        <td>-</td>
+                        <td>{prod.info ? prod.info : "-"}</td>
                       </tr>
                     ))
                   ) : (

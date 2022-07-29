@@ -185,8 +185,18 @@ const index = () => {
                       }
                     >
                       <option value="">ทั้งหมด</option>
-                      <option value="5f1000e28d55662dcc23d95e">ซากซ้าย</option>
-                      <option value="5f1000ee8d55662dcc23d960">ซากขวา</option>
+                      <option value="5f338f035f7703096453abb8">
+                        ซากขวา-ขาหน้า
+                      </option>
+                      <option value="5f338f0d5f7703096453abb9">
+                        ซากขวา-ขาหลัง
+                      </option>
+                      <option value="5f338eeb5f7703096453abb6">
+                        ซากซ้าย-ขาหน้า
+                      </option>
+                      <option value="5f338ef65f7703096453abb7">
+                        ซากซ้าย-ขาหลัง
+                      </option>
                     </select>
                     <label
                       for="beef"

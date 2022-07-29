@@ -81,7 +81,7 @@ const index = () => {
       name: selectname,
     },
   });
-  console.log(data);
+/*   console.log(data); */
   return (
     <div style={{ marginTop: "100px" }}>
       <div

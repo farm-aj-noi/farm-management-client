@@ -21,9 +21,9 @@ const excel = ({ prod }) => {
     { label: "น้ำหนัก (กก.)	", key: "beefproduct.weight" },
     { label: "วันที่ผลิต	", key: "beefproduct.MFG" },
     { label: "วันหมดอายุ", key: "beefproduct.BBE" },
-    { label: "ห้อง", key: "productroom.roomname" },
-    { label: "ตู้แช่", key: "freezer.freezername" },
-    { label: "ชั้นวาง", key: "pbasket" },
+    { label: "ตู้แช่", key: "productroom.roomname" },
+    { label: "ชั้น", key: "freezer.freezername" },
+    { label: "ตะกร้า", key: "pbasket" },
     { label: "ผู้นำเข้า", key: "user.name" },
   ];
   return (

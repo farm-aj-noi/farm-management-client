@@ -47,10 +47,12 @@ const Paper_store = ({ prod }) => {
       "น้ำหนักอุ่น (กก.)",
       "น้ำหนักเย็น (กก.)",
       "วันหมดอายุ",
+      "เกรด",
       "ห้อง",
       "ชั้น",
       "ตะกร้า",
       "สถานะ",
+      "หมายเหตุ"
     ]);
     /* console.log(data); */
 
@@ -68,6 +70,8 @@ const Paper_store = ({ prod }) => {
           dataRow.push(row.shelf ? row.shelf : "-");
         } else if (column === "basket") {
           dataRow.push(row.basket ? row.basket : "-");
+        } else if (column === "info") {
+          dataRow.push(row.info ? row.info : "-");
         }
         else if (column === "Expdate") {
           dataRow.push(
@@ -103,6 +107,8 @@ const Paper_store = ({ prod }) => {
           "auto",
           "auto",
           "star",
+          "auto",
+          "auto",
           "auto",
           "auto",
           "auto",
@@ -160,10 +166,12 @@ const Paper_store = ({ prod }) => {
           "weightwarm",
           "weight",
           "Expdate",
+          "grade",
           "beefroom",
           "shelf",
           "basket",
           "status",
+          "info",
         ]),
       ],
 

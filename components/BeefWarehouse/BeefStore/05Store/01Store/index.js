@@ -94,6 +94,8 @@ const index = () => {
   const [selectedbasket, setselectbasket] = useState("");
   const [inputnumcow, setnumcow] = useState("");
   const [expdate, setexpdate] = useState("");
+  const [selectedgrade, setInputgrade] = useState("");
+  console.log(expdate)
   const { data: datashelf } = useQuery(QUERYSHELF, {
     variables: {
       id: selectedbeefroom,
@@ -114,6 +116,7 @@ const index = () => {
       expdate: expdate,
       basket: selectedbasket,
       cownum: inputnumcow,
+      grade: selectedgrade,
 
     },
   });
@@ -502,13 +505,16 @@ const index = () => {
                       textAlign: "center",
                       fontSize: "16px",
                     }}
+                    onChange={(event) => setInputgrade(event.target.value)}
                   >
-                    <option value="halve">ทั้งหมด</option>
-                    <option value="quarter">1</option>
-                    <option value="lamp">2</option>
-                    <option value="chop">3</option>
-                    <option value="chop">4</option>
-                    <option value="chop">5</option>
+                    <option value="">ทั้งหมด</option>
+                    <option value="2">2</option>
+                    <option value="2.5">2.5</option>
+                    <option value="3">3</option>
+                    <option value="3.5">3.5</option>
+                    <option value="4">4</option>
+                    <option value="4.5">4.5</option>
+                    <option value="5">5</option>
                   </select>
                 </from>
               </div>

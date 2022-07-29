@@ -61,7 +61,7 @@ const liststore = ({ listall }) => {
       console.log(error)
     }
   }
-
+console.log(infoall.MFGdate)
   return (
     <tr style={{ textAlign: "center" }}>
       <td>{infoall.producttype}</td>
@@ -72,10 +72,10 @@ const liststore = ({ listall }) => {
       </td>
       <td>{infoall.weight}</td>
       <td>
-        {dayjs(infoall.MFG).locale("th").add(543, "year").format("DD/MM/YYYY")}
+        {dayjs(infoall.MFGdate).locale("th").add(543, "year").format("DD/MM/YYYY")}
       </td>
       <td>
-        {dayjs(infoall.BBE).locale("th").add(543, "year").format("DD/MM/YYYY")}
+        {dayjs(infoall.BBEdate).locale("th").add(543, "year").format("DD/MM/YYYY")}
       </td>
       <td>{infoall.productroom}</td>
       <td>{infoall.freezer}</td>

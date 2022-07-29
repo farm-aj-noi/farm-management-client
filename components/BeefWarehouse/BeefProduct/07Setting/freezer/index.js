@@ -84,7 +84,7 @@ const index = () => {
             <div style={{ margin: "-3px 5px 0px 0px" }}>
               <Icon size={20} icon={list} />
             </div>
-            ตั้งค่าตู้แช่
+            ตั้งค่าชั้นจัดเก็บ
           </DivFromTop>
           <DivFromDown>
             <Create />
@@ -115,7 +115,7 @@ const index = () => {
             <div style={{ margin: "-3px 5px 0px 0px" }}>
               <Icon size={20} icon={list} />
             </div>
-            รายการตู้แช่
+            รายการชั้นจัดเก็บ
           </DivFromTop>
           <DivFromDown>
             <div style={{ height: `${data && data.allFreezer.length > 8 ? "460px" : ""}`, overflow: `${data && data.allFreezer.length > 8 ? "auto" : ""}` }}>

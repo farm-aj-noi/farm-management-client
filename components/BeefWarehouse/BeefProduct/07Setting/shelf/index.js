@@ -87,7 +87,7 @@ const index = () => {
             <div style={{ margin: "-3px 5px 0px 0px" }}>
               <Icon size={20} icon={list} />
             </div>
-            ตั้งค่าชั้นวาง
+            ตั้งค่าตะกร้าจัดเก็บ
           </DivFromTop>
           <DivFromDown>
             <Create />
@@ -107,7 +107,7 @@ const index = () => {
             <div style={{ margin: "-3px 5px 0px 0px" }}>
               <Icon size={20} icon={list} />
             </div>
-            รายการห้องจัดเก็บ
+            รายการตะกร้าจัดเก็บ
           </DivFromTop>
           <DivFromDown>
             <div style={{ height: `${data && data.pbasket.length > 8 ? "460px" : ""}`, overflow: `${data && data.pbasket.length > 8 ? "auto" : ""}` }}>

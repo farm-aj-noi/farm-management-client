@@ -46,9 +46,10 @@ const paper = ({ prod }) => {
       "น้ำหนัก (กก.)",
       "วันที่ผลิต",
       "วันหมดอายุ",
-      "ห้อง",
       "ตู้แช่",
-      "ชั้นวาง",
+      "ชั้น",
+      "ตะกร้า",
+      "หมายเหตุ",
     ]);
     console.log(data);
 
@@ -57,15 +58,18 @@ const paper = ({ prod }) => {
       var dataRow = [];
 
       columns.forEach(function (column) {
-        if (column === "MFG") {
+        if (column === "MFGdate") {
           dataRow.push(
             dayjs(row[column]).add(543, "y").locale("th").format("DD MMMM YYYY")
           );
-        } else if (column === "BBE") {
+        } else if (column === "BBEdate") {
           dataRow.push(
             dayjs(row[column]).add(543, "y").locale("th").format("DD MMMM YYYY")
           );
-        } else {
+        } else if (column === "info") {
+          dataRow.push(row.info ? row.info : "-")
+        }
+        else {
           /* console.log(row[column]) */
           // console.log(column);
           // console.log(
@@ -95,6 +99,7 @@ const paper = ({ prod }) => {
           "star",
           "auto",
           "star",
+          "auto",
           "auto",
         ],
 
@@ -146,11 +151,12 @@ const paper = ({ prod }) => {
           "code",
           "barcode",
           "weight",
-          "MFG",
-          "BBE",
+          "MFGdate",
+          "BBEdate",
           "productroom",
           "freezer",
           "pbasket",
+          "info",
         ]),
       ],
 

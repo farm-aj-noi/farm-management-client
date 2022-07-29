@@ -171,6 +171,7 @@ const ListStore = ({ Liststore }) => {
       console.log(error)
     }
   }
+  console.log(ListStoreData.Expdate)
 
   return (
     <tr style={{ textAlign: "center" }}>

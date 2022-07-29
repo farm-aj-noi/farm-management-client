@@ -171,7 +171,7 @@ const paper = ({ prod }) => {
           "beefproduct.weight",
           "beefproduct.MFG",
           "beefproduct.BBE",
-          "name",
+          "exporter",
           "user.name",
         ]),
       ],

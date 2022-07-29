@@ -19,12 +19,18 @@ export const ALLPRODUCT = gql`
     $productroom: String
     $freezer: String
     $pbasket: String
+    $code: String
+    $mfgdate: String
+    $bbedate: String
   ) {
     allproduct(
       producttype: $producttype
       productroom: $productroom
       freezer: $freezer
       pbasket: $pbasket
+      code: $code
+      mfgdate: $mfgdate
+      bbedate: $bbedate
     ) {
       id
       barcode
@@ -40,6 +46,8 @@ export const ALLPRODUCT = gql`
       productroomid
       freezerid
       info
+      MFGdate
+      BBEdate
     }
   }
 `;
@@ -86,6 +94,9 @@ const index = () => {
   const [selectroom, setselectroom] = useState("");
   const [selectfreezer, setselectfreezer] = useState("");
   const [selectpbasket, setselectpbasket] = useState("");
+  const [inputcode, setInputcode] = useState("");
+  const [selectMFGdate, setMfgdate] = useState("");
+  const [selectBBEdate, setBBEdate] = useState("");
   const { data: type } = useQuery(QUERYTYPE);
   const { data: room } = useQuery(PRODUCTROOM);
   const { data: freezer } = useQuery(PRODUCTFREEZER, {
@@ -103,10 +114,13 @@ const index = () => {
       producttype: producttype,
       productroom: selectroom,
       freezer: selectfreezer,
-      pbasket: selectpbasket
+      pbasket: selectpbasket,
+      code: inputcode,
+      mfgdate: selectMFGdate,
+      bbedate: selectBBEdate,
     },
   });
-  console.log(data);
+  console.log(selectBBEdate);
   return (
     <div style={{ marginTop: "100px" }}>
       <div
@@ -207,6 +221,7 @@ const index = () => {
                     textAlign: "center",
                     marginRight: "10px",
                   }}
+                  onChange={(event) => setInputcode(event.target.value)}
                 />
                 <label
                   for="beef"
@@ -295,15 +310,15 @@ const index = () => {
                 <input
                   type="date"
                   id="ex_chill"
-                  name="date"
+                  name="mfgdate"
                   style={{
                     height: "35px",
                     border: "1px solid #AFAFAF",
                     borderRadius: "4px",
-
                     textAlign: "center",
                     fontSize: "16px",
                   }}
+                  onChange={(event) => setMfgdate(event.target.value)}
                 ></input>
 
                 <label
@@ -319,7 +334,7 @@ const index = () => {
                 <input
                   type="date"
                   id="ex_chill"
-                  name="date"
+                  name="expdate"
                   style={{
                     height: "35px",
                     border: "1px solid #AFAFAF",
@@ -327,6 +342,7 @@ const index = () => {
                     fontSize: "16px",
                     textAlign: "center",
                   }}
+                  onChange={(event) => setBBEdate(event.target.value)}
                 ></input>
               </from>
             </div>
@@ -366,9 +382,9 @@ const index = () => {
                     <th>น้ำหนัก</th>
                     <th>วันที่ผลิต</th>
                     <th>วันหมดอายุ</th>
-                    <th>ห้อง</th>
                     <th>ตู้แช่</th>
-                    <th>ชั้นวาง</th>
+                    <th>ชั้น</th>
+                    <th>ตะกร้า</th>
                     <th>หมายเหตุ</th>
                     <th>จัดการ</th>
                   </tr>

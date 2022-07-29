@@ -84,7 +84,7 @@ const index = () => {
             <div style={{ margin: "-3px 5px 0px 0px" }}>
               <Icon size={20} icon={list} />
             </div>
-            ตั้งค่าห้องจัดเก็บ
+            ตั้งค่าตู้แช่จัดเก็บ
           </DivFromTop>
           <DivFromDown>
             <Create />
@@ -115,7 +115,7 @@ const index = () => {
             <div style={{ margin: "-3px 5px 0px 0px" }}>
               <Icon size={20} icon={list} />
             </div>
-            รายการห้องจัดเก็บ
+            รายการตู้แช่จัดเก็บ
           </DivFromTop>
           <DivFromDown>
             <div style={{ height: `${data && data.allproductroom.length > 8 ? "460px" : ""}`, overflow: `${data && data.allproductroom.length > 8 ? "auto" : ""}` }}>

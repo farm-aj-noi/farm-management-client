@@ -18,17 +18,22 @@ import Listex from "./listexproduct";
 export const EXPRODUCTSEARCH = gql`
   query EXPRODUCTSEARCH(
     $startdate: String
-    $enddate: String
+    $exporter: String
+    $exportstatus: String
     $userName: String
     $producttype: String
+    $enddate: String
   ) {
     exproductSearch(
       startdate: $startdate
-      enddate: $enddate
+      exporter: $exporter
+      exportstatus: $exportstatus
       userName: $userName
       producttype: $producttype
+      enddate: $enddate
     ) {
       id
+      exporter
       exportdate
       name
       user {
@@ -67,6 +72,7 @@ const index = () => {
   const [selectenddate, setselectenddate] = useState("");
   const [exporter, setexporter] = useState("");
   const [producttype, setproducttype] = useState("");
+  const [inputexporter, setInputexporter] = useState("");
   const { data: type } = useQuery(QUERYTYPE);
   const { data } = useQuery(EXPRODUCTSEARCH, {
     variables: {
@@ -74,6 +80,7 @@ const index = () => {
       enddate: selectenddate,
       userName: exporter,
       producttype: producttype,
+      exporter: inputexporter,
     },
   });
   return (
@@ -194,6 +201,7 @@ const index = () => {
                     textAlign: "center",
                     marginRight: "10px",
                   }}
+                  onChange={(event) => setInputexporter(event.target.value)}
                 />
                 <label
                   for="beef"
@@ -226,7 +234,7 @@ const index = () => {
                     marginRight: "10px",
                   }}
                 >
-                  วันที่นำเข้า
+                  วันที่เบิกออก
                 </label>
                 <input
                   type="date"

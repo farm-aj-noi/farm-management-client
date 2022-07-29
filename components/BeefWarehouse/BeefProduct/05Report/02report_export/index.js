@@ -24,19 +24,24 @@ import dayjs from "dayjs";
 export const EXPRODUCTSEARCH = gql`
   query EXPRODUCTSEARCH(
     $startdate: String
-    $enddate: String
+    $exporter: String
+    $exportstatus: String
     $userName: String
     $producttype: String
+    $enddate: String
   ) {
     exproductSearch(
       startdate: $startdate
-      enddate: $enddate
+      exporter: $exporter
+      exportstatus: $exportstatus
       userName: $userName
       producttype: $producttype
+      enddate: $enddate
     ) {
       id
       exportdate
       name
+      exporter
       user {
         name
       }
@@ -73,6 +78,7 @@ const index = () => {
   const [selectenddate, setselectenddate] = useState("");
   const [exporter, setexporter] = useState("");
   const [producttype, setproducttype] = useState("");
+  const [inputexporter, setInputexporter] = useState("");
   const { data: type } = useQuery(QUERYTYPE);
   const { data } = useQuery(EXPRODUCTSEARCH, {
     variables: {
@@ -80,6 +86,7 @@ const index = () => {
       enddate: selectenddate,
       userName: exporter,
       producttype: producttype,
+      exporter: inputexporter,
     },
   });
   return (
@@ -182,6 +189,7 @@ const index = () => {
                     textAlign: "center",
                     marginRight: "10px",
                   }}
+                  onChange={(event) => setInputexporter(event.target.value)}
                 />
                 <label
                   for="beef"
@@ -328,7 +336,7 @@ const index = () => {
                             .add(543, "year")
                             .format("DD/MM/YYYY")}
                         </td>
-                        <td>{prod.name}</td>
+                        <td>{prod.exporter}</td>
                         <td>{prod.user.name}</td>
                       </tr>
                     ))

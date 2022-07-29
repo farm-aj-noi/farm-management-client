@@ -166,9 +166,7 @@ const complete = () => {
                                 ข้อมูลการขนส่ง
                             </DivFromTop>
                             <DivFromDown>
-                                <div style={{
-                                    height: "360px"
-                                }}>
+                                <div >
                                     <Table
                                         striped
                                         bordered

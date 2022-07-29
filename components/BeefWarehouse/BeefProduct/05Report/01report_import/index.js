@@ -28,6 +28,7 @@ const IMPRODUCTSEARCH = gql`
     $userName: String
     $productroom: String
     $freezer: String
+    $pbasket: String
   ) {
     improductSearch(
       startdate: $startdate
@@ -36,6 +37,7 @@ const IMPRODUCTSEARCH = gql`
       userName: $userName
       productroom: $productroom
       freezer: $freezer
+      pbasket: $pbasket
     ) {
       id
       importdate
@@ -134,6 +136,7 @@ const index = () => {
       userName: importer,
       productroom: selectroom,
       freezer: selectfreezer,
+      pbasket: selectpbasket,
     },
   });
   return (
@@ -259,7 +262,7 @@ const index = () => {
                   }}
                   onChange={(event) => setselectroom(event.target.value)}
                 >
-                  <option value="">ห้อง</option>
+                  <option value="">ตู้แช่</option>
                   {room &&
                     room.allproductroom.map((prod) => (
                       <option key={prod.id} value={prod.id}>
@@ -280,7 +283,7 @@ const index = () => {
                   }}
                   onChange={(event) => setselectfreezer(event.target.value)}
                 >
-                  <option value="">ตู้แช่</option>
+                  <option value="">ชั้น</option>
                   {freezer &&
                     freezer.listFreezer.map((prod) => (
                       <option key={prod.id} value={prod.id}>
@@ -303,10 +306,10 @@ const index = () => {
                   }}
                   onChange={(event) => setselectpbasket(event.target.value)}
                 >
-                  <option value="">ชั้นวาง</option>
+                  <option value="">ตะกร้า</option>
                   {basket &&
                     basket.allpbasket.map((prod) => (
-                      <option key={prod.id} value={prod.id}>
+                      <option key={prod.id} value={prod.basketname}>
                         {prod.basketname}
                       </option>
                     ))}
@@ -396,9 +399,9 @@ const index = () => {
                     <th>น้ำหนัก (กก.)</th>
                     <th>วันที่ผลิต</th>
                     <th>วันหมดอายุ</th>
-                    <th>ห้อง</th>
                     <th>ตู้แช่</th>
-                    <th>ชั้นวาง</th>
+                    <th>ชั้น</th>
+                    <th>ตะกร้า</th>
                     <th>ผู้นำเข้า</th>
                   </tr>
                 </thead>

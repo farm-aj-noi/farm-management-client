@@ -25,8 +25,18 @@ export const CHILLSEARCHLIST = gql`
     $startdate: String
     $enddate: String
     $beeftype: String
+    $startdate2: String
+    $enddate2: String
+    $name: String
   ) {
-    listchill(startdate: $startdate, enddate: $enddate, beeftype: $beeftype) {
+    listchill(
+    startdate: $startdate
+    enddate: $enddate
+    beeftype: $beeftype
+    startdate2: $startdate2
+    enddate2: $enddate2
+    name: $name
+    ) {
       id
       chilldateStart
       chilldateEnd
@@ -63,11 +73,17 @@ const index = () => {
   const [selectedbeeftypeChill, SetBeeftypeChillChange] = useState("");
   const [selectedstartdate, SetStartDateChange] = useState("");
   const [selectedenddate, SetEndDateChange] = useState("");
+  const [selectedstartdate2, SetStartDateChange2] = useState("");
+  const [selectedenddate2, SetEndDateChange2] = useState("");
+  const [selectname, SetnameChange] = useState("");
   const { data, loading, error } = useQuery(CHILLSEARCHLIST, {
     variables: {
       beeftype: selectedbeeftypeChill,
       startdate: selectedstartdate,
       enddate: selectedenddate,
+      startdate2: selectedstartdate2,
+      enddate2: selectedenddate2,
+      name: selectname,
     },
   });
   return (
@@ -94,7 +110,7 @@ const index = () => {
           marginTop: "30px",
           marginBottom: "30px",
           height: "130px",
-          width: "900px",
+          width: "1250px",
         }}
       >
         <DivFromTop>
@@ -108,7 +124,7 @@ const index = () => {
             style={{
               display: "flex",
               justifyContent: "center",
-              marginBottom: "10px",
+
             }}
           >
             <from style={{ fontSize: "20px" }}>
@@ -117,7 +133,7 @@ const index = () => {
                 style={{
                   textAlign: "center",
                   fontSize: "18px",
-                  marginRight: "10px",
+
                 }}
               >
                 ประเภทซาก
@@ -132,9 +148,12 @@ const index = () => {
                   borderRadius: "4px",
                   textAlign: "center",
                   fontSize: "16px",
-                  marginRight: "10px",
+                  marginLeft: "10px"
+
                 }}
-                onChange={(event) => SetBeeftypeChillChange(event.target.value)}
+                onChange={(event) =>
+                  SetBeeftypeChillChange(event.target.value)
+                }
               >
                 <option value="">ทั้งหมด</option>
                 <option value="5f1000e28d55662dcc23d95e">ซากซ้าย</option>
@@ -146,6 +165,7 @@ const index = () => {
                   textAlign: "center",
                   fontSize: "18px",
                   marginRight: "10px",
+                  marginLeft: "10px",
                 }}
               >
                 ผู้บ่มซาก
@@ -160,29 +180,76 @@ const index = () => {
                   textAlign: "center",
                   marginRight: "10px",
                 }}
+                onChange={(event) => SetnameChange(event.target.value)}
               />
+              <from>
+                <label
+                  for="date"
+                  style={{
+                    textAlign: "center",
+                    fontSize: "18px",
+                    marginRight: "10px",
+                  }}
+                >
+                  วันที่บ่ม
+                </label>
+                <input
+                  type="date"
+                  name="date"
+                  style={{
+                    height: "35px",
+                    border: "1px solid #AFAFAF",
+                    borderRadius: "4px",
+                    textAlign: "center",
+                    fontSize: "16px",
+                  }}
+                  onChange={(event) => SetStartDateChange(event.target.value)}
+                ></input>
+                <label
+                  for="date"
+                  style={{
+                    textAlign: "center",
+                    fontSize: "18px",
+                    margin: "10px 10px",
+                  }}
+                >
+                  ถึงวันที่
+                </label>
+                <input
+                  type="date"
+                  name="date"
+                  style={{
+                    height: "35px",
+                    border: "1px solid #AFAFAF",
+                    borderRadius: "4px",
+                    textAlign: "center",
+                    fontSize: "16px",
+                  }}
+                  onChange={(event) => SetEndDateChange(event.target.value)}
+                ></input>
+              </from>
+
               <label
                 for="date"
                 style={{
                   textAlign: "center",
                   fontSize: "18px",
-                  marginRight: "10px",
+                  margin: "10px 10px",
                 }}
               >
-                วันที่นำเข้า
+                วันที่บ่มเสร็จ
               </label>
               <input
                 type="date"
-                id="ex_chill"
                 name="date"
                 style={{
                   height: "35px",
                   border: "1px solid #AFAFAF",
                   borderRadius: "4px",
-                  color: "#AFAFAF",
                   textAlign: "center",
+                  fontSize: "16px",
                 }}
-                onChange={(event) => SetStartDateChange(event.target.value)}
+                onChange={(event) => SetStartDateChange2(event.target.value)}
               ></input>
               <label
                 for="date"
@@ -196,16 +263,15 @@ const index = () => {
               </label>
               <input
                 type="date"
-                id="ex_chill"
                 name="date"
                 style={{
                   height: "35px",
                   border: "1px solid #AFAFAF",
                   borderRadius: "4px",
-                  color: "#AFAFAF",
                   textAlign: "center",
+                  fontSize: "16px",
                 }}
-                onChange={(event) => SetEndDateChange(event.target.value)}
+                onChange={(event) => SetEndDateChange2(event.target.value)}
               ></input>
             </from>
           </div>
@@ -288,7 +354,7 @@ const index = () => {
           </div>
         </DivFromDown>
       </DivFrom>
-    </div>
+    </div >
   );
 };
 
