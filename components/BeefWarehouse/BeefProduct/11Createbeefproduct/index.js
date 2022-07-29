@@ -41,7 +41,7 @@ const QUERYTYPE = gql`
 `;
 
 const CREATEPRODUCT = gql`
-mutation CREATEPRODUCT($weight: Int, $producttype: String) {
+mutation CREATEPRODUCT($weight: Float, $producttype: String) {
   createBeefproduct(weight: $weight, producttype: $producttype) {
     id
     weight

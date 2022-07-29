@@ -179,7 +179,7 @@ const create = () => {
                   fontSize: "14px",
                 }}
               >
-                <option value="">ห้อง</option>
+                <option value="">ตู้แช่</option>
                 {room && room.allproductroom.map((prod) => (
                   <option key={prod.id} value={prod.id}>{prod.roomname}</option>
                 ))}
@@ -199,7 +199,7 @@ const create = () => {
                   fontSize: "14px",
                 }}
               >
-                <option value="">ตู้แช่</option>
+                <option value="">ชั้น</option>
                 {freezer && freezer.listFreezer.map((prod) => (
                   <option key={prod.id} value={prod.id}>{prod.freezername}</option>
                 ))}
@@ -219,7 +219,7 @@ const create = () => {
                   fontSize: "14px",
                 }}
               >
-                <option value="">ชั้นวาง</option>
+                <option value="">ตะกร้า</option>
                 {pbasket && pbasket.allpbasket.map((prod) => (
                   <option key={prod.id} value={prod.id}>{prod.basketname}</option>
                 ))}
