@@ -40,7 +40,7 @@ const Submit_Export = () => {
   const { data: requestdata } = useQuery(LISTREQUEST);
   const [ExportentrailInfo, setExportentrailInfo] = useState({
     barcode: "",
-    storestatus: "",
+    storestatus: "6280fac6d3dbf7345093676f",
     exporter: "",
   });
   const [successs, setSuccess] = useState(false);
@@ -139,6 +139,7 @@ const Submit_Export = () => {
               <div style={{ display: "inline", width: "170px" }}>
                 <select
                   name="exporter"
+                  disabled={!ExportentrailInfo.barcode}
                   value={ExportentrailInfo.exporter}
                   onChange={handleChange}
                   style={{
@@ -147,7 +148,7 @@ const Submit_Export = () => {
                     border: "1px solid #AFAFAF",
                     borderRadius: "4px",
                     textAlign: "center",
-                    fontSize: "14px",
+                    fontSize: "16px",
                   }}
                 >
                   <option value="">รายชื่อ</option>
@@ -170,22 +171,7 @@ const Submit_Export = () => {
               }}
             >
               <div style={{ display: "inline", width: "170px" }}>
-                <select
-                  name="storestatus"
-                  value={ExportentrailInfo.storestatus}
-                  onChange={handleChange}
-                  style={{
-                    height: "35px",
-                    width: "160px",
-                    border: "1px solid #AFAFAF",
-                    borderRadius: "4px",
-                    textAlign: "center",
-                    fontSize: "14px",
-                  }}
-                >
-                  <option value="">เลือกสถานะ</option>
-                  <option value="6280fac6d3dbf7345093676f">นำจำหน่าย</option>
-                </select>
+                <Searchinput type="text" disabled value="นำจำหน่าย" style={{ textAlign: "center" }} />
               </div>
             </div>
           </DivFromInsideLeft>
@@ -206,13 +192,12 @@ const Submit_Export = () => {
                 !ExportentrailInfo.storestatus
               }
               style={{
-                backgroundColor: `${
-                  !ExportentrailInfo.barcode ||
+                backgroundColor: `${!ExportentrailInfo.barcode ||
                   !ExportentrailInfo.exporter ||
                   !ExportentrailInfo.storestatus
-                    ? "gray"
-                    : ""
-                }`,
+                  ? "gray"
+                  : ""
+                  }`,
               }}
             >
               บันทึก

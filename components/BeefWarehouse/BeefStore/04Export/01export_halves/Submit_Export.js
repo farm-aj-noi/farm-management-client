@@ -47,11 +47,13 @@ const Submit_Export = () => {
         setSuccess(true);
         setExporthalvesInfo({
           barcode: "",
+          storestatus: "",
+          exporter: "",
         });
         MySwal.fire({
           icon: "success",
           title: "สำเร็จ",
-          text: "ทำการนำเข้าคลังชิ้นเนื้อเสร็จสิ้น",
+          text: "ทำการเบิกออกคลังชิ้นเนื้อเสร็จสิ้น",
           confirmButtonText: (
             <span
               onClick={() =>
@@ -69,12 +71,16 @@ const Submit_Export = () => {
       if (error) {
         setExporthalvesInfo({
           barcode: "",
+          storestatus: "",
+          exporter: "",
         });
         MySwal.fire({
           icon: "error",
           title: <p>{error.graphQLErrors[0].message}</p>,
           text: "กรุณากรอกข้อมูลใหม่อีกครั้ง",
-          confirmButtonText: <span>ตกลง</span>,
+          confirmButtonText: <span onClick={() =>
+            Router.reload("beefwarehouse/beefstore/export/export_chops")
+          }>ตกลง</span>,
           confirmButtonColor: "#3085d6",
         });
       }
@@ -139,13 +145,14 @@ const Submit_Export = () => {
                   name="exporter"
                   value={ExporthalvesInfo.exporter}
                   onChange={handleChange}
+                  disabled={!ExporthalvesInfo.barcode}
                   style={{
                     height: "35px",
                     width: "160px",
                     border: "1px solid #AFAFAF",
                     borderRadius: "4px",
                     textAlign: "center",
-                    fontSize: "14px",
+                    fontSize: "16px",
                   }}
                 >
                   <option value="">รายชื่อ</option>
@@ -171,6 +178,7 @@ const Submit_Export = () => {
                 <select
                   name="storestatus"
                   value={ExporthalvesInfo.storestatus}
+                  disabled={!ExporthalvesInfo.barcode || !ExporthalvesInfo.exporter}
                   onChange={handleChange}
                   style={{
                     height: "35px",
@@ -178,11 +186,10 @@ const Submit_Export = () => {
                     border: "1px solid #AFAFAF",
                     borderRadius: "4px",
                     textAlign: "center",
-                    fontSize: "14px",
+                    fontSize: "16px",
                   }}
                 >
                   <option value="">เลือกสถานะ</option>
-                  <option value="628ddcf810c46c0b18e8e8cd">นำตัดเกรด</option>
                   <option value="6280fa87d3dbf7345093676e">
                     นำตัดเเต่ง(ซาก4)
                   </option>
@@ -208,13 +215,12 @@ const Submit_Export = () => {
                 !ExporthalvesInfo.storestatus
               }
               style={{
-                backgroundColor: `${
-                  !ExporthalvesInfo.barcode ||
+                backgroundColor: `${!ExporthalvesInfo.barcode ||
                   !ExporthalvesInfo.exporter ||
                   !ExporthalvesInfo.storestatus
-                    ? "gray"
-                    : ""
-                }`,
+                  ? "gray"
+                  : ""
+                  }`,
               }}
             >
               บันทึก

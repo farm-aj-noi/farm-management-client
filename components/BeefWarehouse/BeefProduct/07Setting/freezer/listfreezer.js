@@ -2,16 +2,9 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import {
-    DivFrom,
-    DivFromTop,
-    DivFromDown,
-    HeaderColor,
     Searchinput,
 } from "../SettingFrom";
-import { DivBase } from "../../../../../utils/divBase";
-import { Icon } from "react-icons-kit";
-import { list } from "react-icons-kit/fa/list";
-import { iosSearchStrong } from "react-icons-kit/ionicons/iosSearchStrong";
+
 
 import {
     Savebuttoncolor,
@@ -30,14 +23,121 @@ import withReactContent from "sweetalert2-react-content";
 import Router from "next/router";
 
 
-const listfreezer = () => {
+const DELETEFREEZER = gql`
+mutation DELETEFREEZER($id: ID) {
+  deleteFreezer(id: $id) {
+    id
+  }
+}
+`
+
+const UPDATEFREEZER = gql`
+mutation UPDATEFREEZER($id: ID, $freezername: String) {
+  updateFreezer(id: $id, freezername: $freezername) {
+    id
+    freezername
+  }
+}
+`
+
+const listfreezer = ({ listf }) => {
+    const MySwal = withReactContent(Swal);
+    const [infofreezer, setinfofreezer] = useState(listf)
     const [edit, setedit] = useState(false);
+    const [updateFreezer] = useMutation(UPDATEFREEZER, {
+        onCompleted: (data) => {
+            setedit(false);
+            MySwal.fire({
+                icon: "success",
+                title: "สำเร็จ",
+                text: "ทำการแก้ไขข้อมูลสิ้น",
+                confirmButtonText: (
+                    <span
+                        onClick={() =>
+                            Router.reload("beefwarehouse/beefproduct/setting/freezer")
+                        }
+                    >
+                        ตกลง
+                    </span>
+                ),
+                confirmButtonColor: "#3085d6",
+            });
+        }
+    })
+
+    const handleChange = (e) => {
+        setinfofreezer({
+            ...infofreezer,
+            [e.target.name]: e.target.value,
+        })
+    }
+
+    const handleSubmit = async () => {
+        if (infofreezer === listf) {
+            setinfofreezer(listf)
+            setedit(false)
+            return
+        }
+        try {
+            await updateFreezer({
+                variables: {
+                    ...infofreezer
+                }
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const [deleteFreezer] = useMutation(DELETEFREEZER, {
+        onCompleted: (data) => {
+            MySwal.fire({
+                icon: "success",
+                title: "สำเร็จ",
+                text: "ทำการลบข้อมูลสิ้น",
+                confirmButtonText: (
+                    <span
+                        onClick={() =>
+                            Router.reload("beefwarehouse/beefproduct/setting/freezer")
+                        }
+                    >
+                        ตกลง
+                    </span>
+                ),
+                confirmButtonColor: "#3085d6",
+            });
+        }
+    })
+
+    const handdleSubmitDelete = async () => {
+        try {
+            await deleteFreezer({
+                variables: {
+                    id: infofreezer.id
+                }
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
     return (
         <tr style={{ textAlign: "center" }}>
-            <td></td>
-            <td></td>
+
+            <td>
+                {edit ? (<Searchinput
+                    value={infofreezer.freezername}
+                    name="freezername"
+                    style={{ width: "100px", textAlign: "center" }}
+                    onChange={handleChange}
+                />
+                ) : (
+                    infofreezer.freezername
+                )}
+            </td>
+            <td>{infofreezer.productroom.roomname}
+            </td>
             <td> {edit ? (
-                <Savebuttoncolor /* onClick={handleSubmit} */>
+                <Savebuttoncolor onClick={handleSubmit}>
                     <Savebutton />
                 </Savebuttoncolor>
             ) : (
@@ -46,7 +146,7 @@ const listfreezer = () => {
                 </Editbuttoncolor>
             )}
             </td>
-            <td> <Removebuttoncolor /* onClick={handdleSubmitDelete} */>
+            <td> <Removebuttoncolor onClick={handdleSubmitDelete}>
                 <Removebutton />
             </Removebuttoncolor>
             </td>

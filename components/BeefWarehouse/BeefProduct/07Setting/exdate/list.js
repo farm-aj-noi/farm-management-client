@@ -1,15 +1,11 @@
 import React, { useState } from "react";
 import {
-  DivFrom,
-  DivFromTop,
-  DivFromDown,
-  HeaderColor,
+ 
   Searchinput,
 } from "../SettingFrom";
 import {
   Savebuttoncolor,
   Editbuttoncolor,
-  Removebuttoncolor,
 } from "../../../../../utils/buttonColor";
 
 import { Editbutton, Savebutton } from "../../../../../utils/button";

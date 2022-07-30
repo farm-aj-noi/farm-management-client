@@ -34,6 +34,9 @@ import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
 import Listtypekeep from "./Listtypekeep";
 import Editname from "./editname";
+import { NavItem, Card } from "react-bootstrap";
+
+
 
 export const QUERYSHELF = gql`
   query ListShelf($id: ID) {
@@ -54,51 +57,44 @@ export const QUERYSHELF = gql`
 
 const Listshelf = ({ Listshelfs }) => {
   const [Listshelf, setListshelf] = useState(Listshelfs);
+
   const { data: datashelf } = useQuery(QUERYSHELF, {
     variables: {
       id: Listshelf.id,
     },
   });
-
+  console.log(datashelf)
   return (
     <div
       style={{
         border: "1px solid #bcbcbc",
-        padding: "0px 15px 15px 15px",
+        padding: "15px ",
         margin: "10px",
         borderRadius: "4px",
       }}
     >
       <div>
-        ห้องจัดเก็บ : {}
+        ห้องจัดเก็บ : { }
         <Searchinput
           value={Listshelf.roomname}
           style={{
-            marginTop: "10px",
+
             textAlign: "center",
+            marginBottom: "10px",
           }}
           disabled
         ></Searchinput>
       </div>
+      {datashelf && datashelf.listShelf.length > 0 ? (datashelf.listShelf.map((prod) => (
+        <div
+          style={{ margin: "auto", minWidth: "100%" }}
+        >
+          {/* <Editname key={prod.id} listkeep={prod} /> */}
+          <Listtypekeep key={prod.id} listkeep={prod} />
+        </div>
+      ))) : (<Card style={{ textAlign: "center", padding: "20px", backgroundColor: "#f7f7f7" }}>ไม่พบข้อมูล</Card>)}
 
-      {datashelf &&
-        datashelf.listShelf.map((prod) => (
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: `200px 200px 200px 
-               200px`,
-              marginTop: "10px",
-              borderRadius: "4px",
-              padding: "20px",
-              /*  backgroundColor: "red", */
-              border: "1px solid #e9e9e9",
-            }}
-          >
-            <Editname key={prod.id} listkeep={prod} />
-            <Listtypekeep key={prod.id} listkeep={prod} />
-          </div>
-        ))}
+
     </div>
   );
 };

@@ -54,18 +54,18 @@ const Nav1 = () => {
         }}
         collapseOnSelect
         expand="lg"
-      /*  fixed="top" */
+        fixed="top"
       >
         <Navbar.Brand style={{ padding: "0" }}>
           <Link href="/beefwarehouse">
             <a style={{ color: "white" }}>
-              <p style={{ padding: "0 10px", display: "inline" }}>หน้าแรก</p>
+              <p style={{ padding: "0 10px", display: "inline", fontSize: "20px" }}>หน้าแรก</p>
             </a>
           </Link>
           <Link href="/beefwarehouse/beefstore">
             <a style={{ color: "white" }}>
               <Logobeefstore height="30px" weight="30px" />
-              <p style={{ padding: "0 10px", display: "inline" }}>
+              <p style={{ padding: "0 10px", display: "inline", fontSize: "20px" }}>
                 ระบบคลังชิ้นเนื้อ
               </p>
             </a>
@@ -75,7 +75,7 @@ const Nav1 = () => {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
             <Link href="/beefwarehouse/beefstore/chill">
-              <NavButtonLeft>
+              <NavButtonLeft >
                 <Icon7 height="30px" weight="30px" />
                 บ่มซากเนื้อโค
               </NavButtonLeft>
@@ -83,7 +83,7 @@ const Nav1 = () => {
             <DropdownButton
               drop="down"
               title={
-                <span>
+                <span style={{ fontSize: "18px" }}>
                   <Icon12 height="30px" weight="30px" />
                   การนำเข้า
                 </span>
@@ -109,7 +109,7 @@ const Nav1 = () => {
             <DropdownButton
               drop="down"
               title={
-                <span>
+                <span style={{ fontSize: "18px" }}>
                   <Icon11 height="30px" weight="30px" />
                   การเบิกออก
                 </span>
@@ -142,7 +142,7 @@ const Nav1 = () => {
             <DropdownButton
               drop="down"
               title={
-                <span>
+                <span style={{ fontSize: "18px" }}>
                   <Icon3 height="30px" weight="30px" />
                   ออกรายงาน
                 </span>
@@ -191,11 +191,11 @@ const Nav1 = () => {
           <Nav>
             {user && (
               <>
-                <a style={{ margin: "auto 5px", textAlign: "left" }}>
+                <a style={{ margin: "auto 5px", textAlign: "left", fontSize: "18px" }}>
                   สวัสดี {user.name}
                 </a>
 
-                <NavButtonSigninComplete onClick={signout}>
+                <NavButtonSigninComplete onClick={signout} style={{ fontSize: "18px" }}>
                   <Icon
                     style={{ verticalAlign: "text-bottom" }}
                     icon={shareSquareO}

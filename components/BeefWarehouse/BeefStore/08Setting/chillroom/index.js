@@ -196,7 +196,7 @@ const index = () => {
   };
 
   return (
-    <DivBase>
+    <div style={{ marginTop: "100px" }}>
       <div
         style={{
           display: "flex",
@@ -250,7 +250,7 @@ const index = () => {
           </DivFromTop>
           <DivFromDown>
             <div>
-              ระยะเวลาบ่ม : {}
+              ระยะเวลาบ่ม : { }
               <Searchinput
                 type="text"
                 id="day"
@@ -293,7 +293,7 @@ const index = () => {
           <DivFromDown>
             <>
               <div>
-                ชื่อห้องบ่ม : {}
+                ชื่อห้องบ่ม : { }
                 <Searchinput
                   type="text"
                   id="roomnum"
@@ -336,16 +336,20 @@ const index = () => {
           <DivFromDown>
             <Table striped bordered responsive hover style={{ margin: "auto" }}>
               <thead>
-                <tr style={{ textAlign: "center" }}>
+                <tr style={{ textAlign: "center", fontSize: "18px" }}>
                   <th>ระยะเวลาบ่ม</th>
                   <th>ลบ</th>
                 </tr>
               </thead>
               <tbody>
-                {data &&
-                  data.listChillday.map((prod) => (
-                    <ListChill key={prod.id} listchill={prod} />
-                  ))}
+                {data && data.listChillday.length > 0 ? (data.listChillday.map((prod) => (
+                  <ListChill key={prod.id} listchill={prod} />
+                ))) : (
+                  <tr style={{ textAlign: "center" }}>
+                    <td colSpan="2">ไม่พบข้อมูล</td>
+                  </tr>
+                )
+                }
               </tbody>
             </Table>
           </DivFromDown>
@@ -363,27 +367,32 @@ const index = () => {
             <div style={{ margin: "-3px 5px 0px 0px" }}>
               <Icon size={20} icon={list} />
             </div>
-            รายการระยะเวลาบ่ม
+            รายการห้องบ่ม
           </DivFromTop>
           <DivFromDown>
             <Table striped bordered responsive hover style={{ margin: "auto" }}>
               <thead>
-                <tr style={{ textAlign: "center" }}>
+                <tr style={{ textAlign: "center", fontSize: "18px" }}>
                   <th>ห้องบ่ม</th>
                   <th>ลบ</th>
                 </tr>
               </thead>
               <tbody>
-                {datachillroom &&
+                {datachillroom && datachillroom.listChillroom.length > 0 ? (
                   datachillroom.listChillroom.map((prod) => (
                     <ListChillroom key={prod.id} listchillroom={prod} />
-                  ))}
+                  ))
+                ) : (
+                  <tr style={{ textAlign: "center" }}>
+                    <td colSpan="2">ไม่พบข้อมูล</td>
+                  </tr>
+                )}
               </tbody>
             </Table>
           </DivFromDown>
         </DivFrom>
       </DivBase>
-    </DivBase>
+    </div >
   );
 };
 

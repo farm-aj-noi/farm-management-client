@@ -138,6 +138,7 @@ const Create_Import = () => {
                 onChange={handleChange}
                 style={{
                   borderColor: `${!ImporthalvesInfo.barcode ? "red" : ""}`,
+                  height: "35px"
                 }}
               />
 
@@ -159,13 +160,14 @@ const Create_Import = () => {
                   name="beefroom"
                   id="beefroom"
                   onChange={handleChange}
+                  disabled={!ImporthalvesInfo.barcode}
                   style={{
                     height: "35px",
                     width: "160px",
                     border: "1px solid #AFAFAF",
                     borderRadius: "4px",
                     textAlign: "center",
-                    fontSize: "14px",
+                    fontSize: "16px",
                   }}
                 >
                   <option value="">ห้อง</option>
@@ -192,11 +194,10 @@ const Create_Import = () => {
             <Savebutton1
               disabled={!ImporthalvesInfo.barcode || !ImporthalvesInfo.beefroom}
               style={{
-                backgroundColor: `${
-                  !ImporthalvesInfo.barcode || !ImporthalvesInfo.beefroom
-                    ? "gray"
-                    : ""
-                }`,
+                backgroundColor: `${!ImporthalvesInfo.barcode || !ImporthalvesInfo.beefroom
+                  ? "gray"
+                  : ""
+                  }`,
               }}
               onClick={handleSubmit}
             >

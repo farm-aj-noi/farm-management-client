@@ -4,8 +4,6 @@ import {
   DivFromTop,
   DivFromDown,
   HeaderColor,
-  ButtonExcel,
-  ButtonPDF,
 } from "../ReportFrom";
 import { DivBase } from "../../../../../utils/divBase";
 import { Table } from "react-bootstrap";
@@ -26,19 +24,24 @@ import dayjs from "dayjs";
 export const EXPRODUCTSEARCH = gql`
   query EXPRODUCTSEARCH(
     $startdate: String
-    $enddate: String
+    $exporter: String
+    $exportstatus: String
     $userName: String
     $producttype: String
+    $enddate: String
   ) {
     exproductSearch(
       startdate: $startdate
-      enddate: $enddate
+      exporter: $exporter
+      exportstatus: $exportstatus
       userName: $userName
       producttype: $producttype
+      enddate: $enddate
     ) {
       id
       exportdate
       name
+      exporter
       user {
         name
       }
@@ -75,6 +78,7 @@ const index = () => {
   const [selectenddate, setselectenddate] = useState("");
   const [exporter, setexporter] = useState("");
   const [producttype, setproducttype] = useState("");
+  const [inputexporter, setInputexporter] = useState("");
   const { data: type } = useQuery(QUERYTYPE);
   const { data } = useQuery(EXPRODUCTSEARCH, {
     variables: {
@@ -82,10 +86,11 @@ const index = () => {
       enddate: selectenddate,
       userName: exporter,
       producttype: producttype,
+      exporter: inputexporter,
     },
   });
   return (
-    <div>
+    <div style={{ marginTop: "100px" }}>
       <div
         style={{ display: "flex", justifyContent: "center", marginTop: "30px" }}
       >
@@ -102,7 +107,7 @@ const index = () => {
       <DivBase
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr  1100px 1fr",
+          gridTemplateColumns: "1fr  1150px 1fr",
           gridRowGap: "15px",
           gridColumnGap: "10px",
           textAlign: "start",
@@ -151,7 +156,7 @@ const index = () => {
                     border: "1px solid #AFAFAF",
                     borderRadius: "4px",
                     textAlign: "center",
-                    fontSize: "14px",
+                    fontSize: "16px",
                   }}
                   onChange={(event) => setproducttype(event.target.value)}
                 >
@@ -180,10 +185,11 @@ const index = () => {
                     width: "110px",
                     borderRadius: "4px",
                     border: "1px solid #AFAFAF",
-                    fontSize: "14px",
+                    fontSize: "16px",
                     textAlign: "center",
                     marginRight: "10px",
                   }}
+                  onChange={(event) => setInputexporter(event.target.value)}
                 />
                 <label
                   for="beef"
@@ -202,7 +208,7 @@ const index = () => {
                     width: "110px",
                     borderRadius: "4px",
                     border: "1px solid #AFAFAF",
-                    fontSize: "14px",
+                    fontSize: "16px",
                     textAlign: "center",
                     marginRight: "10px",
                   }}
@@ -273,10 +279,10 @@ const index = () => {
             <div style={{ margin: "-3px 5px 0px 0px" }}>
               <Icon size={20} icon={list} />
             </div>
-            รายการนำเข้าซากเนื้อโคผ่าซีก
+            รายการเบิกออกผลิตภัณฑ์
           </DivFromTop>
           <DivFromDown>
-            <div style={{ height: "380px", overflow: "auto" }}>
+            <div style={{ height: `${data && data.exproductSearch.length > 7 ? "380px" : ""}`, overflow: `${data && data.exproductSearch.length > 7 ? "auto" : ""}` }}>
               <Table
                 striped
                 bordered
@@ -330,23 +336,13 @@ const index = () => {
                             .add(543, "year")
                             .format("DD/MM/YYYY")}
                         </td>
-                        <td>{prod.name}</td>
+                        <td>{prod.exporter}</td>
                         <td>{prod.user.name}</td>
                       </tr>
                     ))
                   ) : (
                     <tr style={{ textAlign: "center" }}>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
+                      <td colSpan="16">ไม่พอข้อมูล</td>
                     </tr>
                   )}
                 </tbody>
@@ -359,7 +355,7 @@ const index = () => {
                   <Excel prod={data.exproductSearch} />
                 </>
               ) : (
-                "-"
+                ""
               )}
             </div>
           </DivFromDown>

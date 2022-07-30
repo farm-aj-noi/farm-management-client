@@ -24,6 +24,7 @@ export const IMPORTCHOPSEARCH = gql`
     $beeftype: String
     $beefroom: String
     $shelf: String
+    $basket: String
   ) {
     imchopSearch(
       startdate: $startdate
@@ -33,6 +34,7 @@ export const IMPORTCHOPSEARCH = gql`
       userName: $userName
       beefroom: $beefroom
       shelf: $shelf
+      basket: $basket
     ) {
       id
       importdate
@@ -102,6 +104,7 @@ const index = () => {
   const [selectedbeefroom, setselectbeefroom] = useState("");
   const [selectedshelf, setselectshelf] = useState("");
   const [selectedbasket, setselectbasket] = useState("");
+  console.log(selectedbasket)
   const { data: datashelf } = useQuery(QUERYSHELF, {
     variables: {
       id: selectedbeefroom,
@@ -121,10 +124,11 @@ const index = () => {
       userName: inputusername,
       beefroom: selectedbeefroom,
       shelf: selectedshelf,
+      basket: selectedbasket
     },
   });
   return (
-    <>
+    <div style={{ marginTop: "100px" }}>
       <div
         style={{
           display: "flex",
@@ -145,7 +149,7 @@ const index = () => {
       <DivBase
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 270px 900px 1fr",
+          gridTemplateColumns: "1fr 270px 1300px 1fr",
           gridRowGap: "15px",
           gridColumnGap: "10px",
           textAlign: "start",
@@ -213,7 +217,7 @@ const index = () => {
                       border: "1px solid #AFAFAF",
                       borderRadius: "4px",
                       textAlign: "center",
-                      fontSize: "14px",
+                      fontSize: "16px",
                     }}
                     onChange={(event) =>
                       SetBeeftypechopsChange(event.target.value)
@@ -264,7 +268,7 @@ const index = () => {
                       width: "110px",
                       borderRadius: "4px",
                       border: "1px solid #AFAFAF",
-                      fontSize: "14px",
+                      fontSize: "16px",
                       textAlign: "center",
                     }}
                     onChange={(event) => SetInputnamefarmer(event.target.value)}
@@ -286,7 +290,7 @@ const index = () => {
                       width: "110px",
                       borderRadius: "4px",
                       border: "1px solid #AFAFAF",
-                      fontSize: "14px",
+                      fontSize: "16px",
                       textAlign: "center",
                     }}
                     onChange={(event) => SetInputusername(event.target.value)}
@@ -310,7 +314,7 @@ const index = () => {
                       border: "1px solid #AFAFAF",
                       borderRadius: "4px 0px 0px 4px",
                       textAlign: "center",
-                      fontSize: "14px",
+                      fontSize: "16px",
                     }}
                     onChange={(event) => setselectbeefroom(event.target.value)}
                   >
@@ -325,13 +329,14 @@ const index = () => {
                   <select
                     name="shelfname"
                     id="shelfname"
+                    disabled={!selectedbeefroom}
                     style={{
                       height: "35px",
                       width: "50px",
                       border: "1px solid #AFAFAF",
                       borderLeft: "none",
                       textAlign: "center",
-                      fontSize: "14px",
+                      fontSize: "16px",
                     }}
                     onChange={(event) => setselectshelf(event.target.value)}
                   >
@@ -346,6 +351,7 @@ const index = () => {
                   <select
                     name="basket"
                     id="basket"
+                    disabled={!selectedbeefroom || !selectedshelf}
                     style={{
                       height: "35px",
                       width: "60px",
@@ -353,28 +359,19 @@ const index = () => {
                       borderRadius: "0px 4px 4px 0px",
                       borderLeft: "none",
                       textAlign: "center",
-                      fontSize: "14px",
+                      fontSize: "16px",
                       marginRight: "10px",
                     }}
+                    onChange={(event) => setselectbasket(event.target.value)}
                   >
                     <option value="">ตะกร้า</option>
                     {basketdata &&
                       basketdata.allBasket.map((prod) => (
-                        <option key={prod.id} value={prod.id}>
+                        <option key={prod.id} value={prod.basketname}>
                           {prod.basketname}
                         </option>
                       ))}
                   </select>
-                </from>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginBottom: "10px",
-                }}
-              >
-                <from style={{ fontSize: "20px" }}>
                   <label
                     for="date"
                     style={{
@@ -427,11 +424,11 @@ const index = () => {
           </DivFrom>
           <DivFrom
             style={{
-              width: "1180px",
-              gridRowStart: "5",
-              gridRowEnd: "5",
-              gridColumnStart: "2",
-              gridColumnEnd: "4",
+              width: "100%",
+              gridRowStart: "3",
+              gridRowEnd: "3",
+              gridColumnStart: "3",
+              gridColumnEnd: "3",
               marginTop: "20px",
             }}
           >
@@ -442,7 +439,7 @@ const index = () => {
               รายการนำเข้าซากเนื้อโคชิ้นเนื้อ
             </DivFromTop>
             <DivFromDown>
-              <div style={{ height: "320px", overflow: "auto" }}>
+              <div style={{ height: `${data && data.imchopSearch.length > 6 ? "400px" : ""}`, overflow: `${data && data.imchopSearch.length > 6 ? "auto" : ""}` }}>
                 <Table
                   striped
                   bordered
@@ -451,7 +448,7 @@ const index = () => {
                   style={{ margin: "auto" }}
                 >
                   <thead>
-                    <tr style={{ textAlign: "center" }}>
+                    <tr style={{ textAlign: "center", fontSize: "18px" }}>
                       <th>เจ้าของซาก</th>
                       <th>ประเภทซาก</th>
                       <th>วันที่นำเข้า</th>
@@ -475,20 +472,7 @@ const index = () => {
                       ))
                     ) : (
                       <tr style={{ textAlign: "center" }}>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
+                        <td colSpan="14">ไม่พบข้อมูล</td>
                       </tr>
                     )}
                   </tbody>
@@ -509,7 +493,7 @@ const index = () => {
           </DivFrom>
         </>
       </DivBase>
-    </>
+    </div>
   );
 };
 

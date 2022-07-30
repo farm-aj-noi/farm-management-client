@@ -58,16 +58,11 @@ const halveday = () => {
       </DivFromTop>{" "}
       <DivFromDown>
         <div
-          style={{
-            margin: "auto",
-            minWidth: "100%",
-            float: "right",
-            marginBottom: "15px",
-          }}
+          style={{ height: `${data && data.CardExh.length > 9 ? "550px" : ""}`, overflow: "auto" }}
         >
           <Table striped bordered responsive hover style={{ margin: "auto" }}>
             <thead>
-              <tr style={{ textAlign: "center" }}>
+              <tr style={{ textAlign: "center", fontSize: "18px" }}>
                 <th>ประเภทซาก</th>
                 <th>วันที่เบิกออก</th>
                 <th>เวลา</th>
@@ -100,7 +95,7 @@ const halveday = () => {
                     <td>{prod.halve.imslaughter.numcow}</td>
                     <td>{prod.halve.beeftype.code}</td>
                     <td>{prod.halve.barcode}</td>
-                    <td><Modalqrcode key={prod.id} notifyhalve={prod}/></td>
+                    <td><Modalqrcode key={prod.id} notifyhalve={prod} /></td>
                     <td>{prod.halve.weightwarm}</td>
                     <td>
                       {prod.halve.weightcool ? prod.halve.weightcool : "-"}
@@ -112,18 +107,7 @@ const halveday = () => {
                 ))
               ) : (
                 <tr style={{ textAlign: "center" }}>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
+                  <td colSpan="12">ไม่พบข้อมูล</td>
                 </tr>
               )}
             </tbody>

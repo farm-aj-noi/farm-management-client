@@ -195,7 +195,7 @@ const shelf = () => {
                   gridColumnStart: "1",
                 }}
               >
-                ห้องจัดเก็บ : {}
+                ห้องจัดเก็บ : { }
                 <select
                   name="beefroom"
                   id="beefroom"
@@ -228,7 +228,7 @@ const shelf = () => {
                   marginTop: "0px",
                 }}
               >
-                ชื่อชั้นจัดเก็บ : {}
+                ชื่อชั้นจัดเก็บ : { }
                 <Searchinput
                   type="text"
                   id="shelfname"
@@ -246,9 +246,8 @@ const shelf = () => {
                   style={{
                     height: "38px",
                     width: " 50px",
-                    backgroundColor: `${
-                      !Infoshelf.beefroom || !Infoshelf.shelfname ? "gray" : ""
-                    }`,
+                    backgroundColor: `${!Infoshelf.beefroom || !Infoshelf.shelfname ? "gray" : ""
+                      }`,
                   }}
                   disabled={!Infoshelf.beefroom || !Infoshelf.shelfname}
                   onClick={handleSubmitShelfname}
@@ -277,7 +276,7 @@ const shelf = () => {
                   gridColumnStart: "1",
                 }}
               >
-                ห้องจัดเก็บ : {}
+                ห้องจัดเก็บ : { }
                 <select
                   name="beefroom"
                   id="beefroom"
@@ -310,7 +309,7 @@ const shelf = () => {
                   marginTop: "0px",
                 }}
               >
-                ชื่อชั้นจัดเก็บ : {}
+                ชื่อชั้นจัดเก็บ : { }
                 <Searchinput
                   type="text"
                   id="shelfname"
@@ -322,161 +321,176 @@ const shelf = () => {
               </div>
               <div
                 style={{
-                  display: "flex",
-                  margin: "0px 0px 0px 0px",
-                  marginLeft: "5px",
-                  paddingBottom: "10px",
-                  float: "right",
-                  marginTop: "24px",
+                  width: "100%",
+                  gridRowStart: "1",
+                  gridRowEnd: "1",
+                  gridColumnStart: "2",
+
+                }}>
+                {inputListshelf.map((x, j) => {
+                  return (
+                    <div
+                      style={{
+                        display: "grid",
+                        gridTemplateColumns: ` 200px 200px 200px 200px`,
+                      }}
+                    >
+                      <div
+                        style={{
+                          display: "grid",
+                          gridColumStart: "1",
+                          gridRowStart: "1",
+                          gridColumn: `2 ${inputListshelf.length !== 1 ? "" : ""}`,
+                          gridTemplateColumns: `200px 200px 200px ${inputListshelf.length !== 1 ? "40px" : ""
+                            } 200px`,
+                        }}
+                      >
+                        <div
+                          style={{
+                            width: "100%",
+                            gridRowStart: "1",
+                            gridRowEnd: "1",
+                            gridColumnStart: "1",
+                          }}
+                        >
+                          {" "}
+                          ประเภทจัดเก็บ : { }
+                          <select
+                            name="beeftype"
+                            id="beeftype"
+                            value={inputListshelf[j].beeftype}
+                            onChange={(e) => handleInputshelf(e, j)}
+                            style={{
+                              height: "38px",
+                              width: "156px",
+                              border: "1px solid #AFAFAF",
+                              borderRadius: "4px",
+                              textAlign: "center",
+                              fontSize: "14px",
+                            }}
+                          >
+                            <option value="">เลือก</option>
+                            <option value="5f446195ecd6732ad8108684">
+                              เนื้อสันคอ
+                            </option>
+                            <option value="5f4461a8ecd6732ad8108685">ที-โบน</option>
+                            <option value="5f4461bfecd6732ad8108686">
+                              เนื้อสันนอก
+                            </option>
+                            <option value="5f4461d6ecd6732ad8108687">
+                              ที-โบน สเต็ก
+                            </option>
+                            <option value="5f44620cecd6732ad8108688">ริบอาย</option>
+                            <option value="5f446224ecd6732ad8108689">
+                              ใบบัวสเต็ก
+                            </option>
+                            <option value="5f44623aecd6732ad810868a">
+                              เนื้อสันใน
+                            </option>
+                            <option value="5f44624fecd6732ad810868b">
+                              สันสะโพก
+                            </option>
+                            <option value="5f446262ecd6732ad810868c">
+                              เสือร้องไห้
+                            </option>
+                            <option value="5f44628decd6732ad810868d">
+                              เนื้อซี่โครง
+                            </option>
+                            <option value="5f4462a4ecd6732ad810868e">พับใน</option>
+                            <option value="5f4462b6ecd6732ad810868f">ตะพาบ</option>
+                            <option value="5f4462c8ecd6732ad8108690">
+                              ลูกมะพร้าว
+                            </option>
+                            <option value="5f4462ddecd6732ad8108691">
+                              ปลาบู่ทอง
+                            </option>
+                            <option value="5f4462eeecd6732ad8108692">ใบพาย</option>
+                            <option value="5f4462feecd6732ad8108693">
+                              หางตะเข้
+                            </option>
+                            <option value="5f44630fecd6732ad8108694">น่อง</option>
+                            <option value="5f446320ecd6732ad8108695">พับนอก</option>
+                          </select>
+                        </div>
+                        <div
+                          style={{
+                            width: "100%",
+                            gridRowStart: "1",
+                            gridRowEnd: "1",
+                            gridColumnStart: "2",
+                          }}
+                        >
+                          จำนวน : { }
+                          <Searchinput
+                            style={{
+                              width: "150px",
+                              textAlign: "center",
+                              backgroundColor: `${!inputListshelf[j].beeftype ? "#ececec" : ""
+                                }`,
+                            }}
+                            disabled={!inputListshelf[j].beeftype}
+                            name="totalbeef"
+                            value={inputListshelf[j].totalbeef}
+                            onChange={(e) => handleInputshelf(e, j)}
+                          ></Searchinput>
+                          {inputListshelf.length !== 1 && (
+                            <Removebuttoncolor
+                              style={{
+                                height: "38px",
+                                margin: " auto auto 0",
+                                width: " 38px",
+                              }}
+                              onClick={() => handleRemoveClickshelf(j)}
+                            >
+                              <Removebutton />
+                            </Removebuttoncolor>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <div
+                style={{
+                  width: "100%",
+                  gridRowStart: "3",
+                  gridRowEnd: "3",
+                  gridColumnStart: "4",
+                  marginTop: "20px",
+                  marginRight: "2px",
                 }}
               >
-                <Addbutton
+                <div
+                  style={{
+                    display: "flex",
+                    marginLeft: "5px",
+                  }}
+                >
+                  <Addbutton
                   style={{
                     height: "38px",
                     width: " 150px",
                     marginRight: "5px",
+                    fontSize: "16px"
                   }}
                   onClick={handleAddClickshelf}
                 >
-                  เพิ่มประเภทจัดเก็บ
-                </Addbutton>
-                <Savebuttoncolor
-                  style={{
-                    height: "38px",
-                    width: " 50px",
-                  }}
-                  onClick={handleSubmitshelf}
-                >
-                  บันทึก
-                </Savebuttoncolor>
+                    เพิ่มประเภทจัดเก็บ
+                  </Addbutton>
+                  <Savebuttoncolor
+                    style={{
+                      height: "38px",
+                      width: " 50px",
+                      fontSize: "16px"
+                    }}
+                    onClick={handleSubmitshelf}
+                  >
+                    บันทึก
+                  </Savebuttoncolor></div>
+
               </div>
             </div>
-
-            {inputListshelf.map((x, j) => {
-              return (
-                <div
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: ` 200px 200px 200px 200px`,
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "grid",
-                      gridColumStart: "1",
-                      gridRowStart: "1",
-                      gridColumn: `2 ${inputListshelf.length !== 1 ? "" : ""}`,
-                      gridTemplateColumns: `200px 200px 200px ${
-                        inputListshelf.length !== 1 ? "40px" : ""
-                      } 200px`,
-                    }}
-                  >
-                    <div
-                      style={{
-                        width: "100%",
-                        gridRowStart: "1",
-                        gridRowEnd: "1",
-                        gridColumnStart: "1",
-                      }}
-                    >
-                      {" "}
-                      ประเภทจัดเก็บ : {}
-                      <select
-                        name="beeftype"
-                        id="beeftype"
-                        value={inputListshelf[j].beeftype}
-                        onChange={(e) => handleInputshelf(e, j)}
-                        style={{
-                          height: "38px",
-                          width: "156px",
-                          border: "1px solid #AFAFAF",
-                          borderRadius: "4px",
-                          textAlign: "center",
-                          fontSize: "14px",
-                        }}
-                      >
-                        <option value="">เลือก</option>
-                        <option value="5f446195ecd6732ad8108684">
-                          เนื้อสันคอ
-                        </option>
-                        <option value="5f4461a8ecd6732ad8108685">ที-โบน</option>
-                        <option value="5f4461bfecd6732ad8108686">
-                          เนื้อสันนอก
-                        </option>
-                        <option value="5f4461d6ecd6732ad8108687">
-                          ที-โบน สเต็ก
-                        </option>
-                        <option value="5f44620cecd6732ad8108688">ริบอาย</option>
-                        <option value="5f446224ecd6732ad8108689">
-                          ใบบัวสเต็ก
-                        </option>
-                        <option value="5f44623aecd6732ad810868a">
-                          เนื้อสันใน
-                        </option>
-                        <option value="5f44624fecd6732ad810868b">
-                          สันสะโพก
-                        </option>
-                        <option value="5f446262ecd6732ad810868c">
-                          เสือร้องไห้
-                        </option>
-                        <option value="5f44628decd6732ad810868d">
-                          เนื้อซี่โครง
-                        </option>
-                        <option value="5f4462a4ecd6732ad810868e">พับใน</option>
-                        <option value="5f4462b6ecd6732ad810868f">ตะพาบ</option>
-                        <option value="5f4462c8ecd6732ad8108690">
-                          ลูกมะพร้าว
-                        </option>
-                        <option value="5f4462ddecd6732ad8108691">
-                          ปลาบู่ทอง
-                        </option>
-                        <option value="5f4462eeecd6732ad8108692">ใบพาย</option>
-                        <option value="5f4462feecd6732ad8108693">
-                          หางตะเข้
-                        </option>
-                        <option value="5f44630fecd6732ad8108694">น่อง</option>
-                        <option value="5f446320ecd6732ad8108695">พับนอก</option>
-                      </select>
-                    </div>
-                    <div
-                      style={{
-                        width: "100%",
-                        gridRowStart: "1",
-                        gridRowEnd: "1",
-                        gridColumnStart: "2",
-                      }}
-                    >
-                      จำนวน : {}
-                      <Searchinput
-                        style={{
-                          width: "150px",
-                          textAlign: "center",
-                          backgroundColor: `${
-                            !inputListshelf[j].beeftype ? "#ececec" : ""
-                          }`,
-                        }}
-                        disabled={!inputListshelf[j].beeftype}
-                        name="totalbeef"
-                        value={inputListshelf[j].totalbeef}
-                        onChange={(e) => handleInputshelf(e, j)}
-                      ></Searchinput>
-                      {inputListshelf.length !== 1 && (
-                        <Removebuttoncolor
-                          style={{
-                            height: "38px",
-                            margin: " auto auto 0",
-                            width: " 38px",
-                          }}
-                          onClick={() => handleRemoveClickshelf(j)}
-                        >
-                          <Removebutton />
-                        </Removebuttoncolor>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
           </>
         )}
       </DivFromDown>

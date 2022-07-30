@@ -163,13 +163,14 @@ const Create_Import = () => {
                   id="beefroom"
                   value={ImportQuarterInfo.beefroom}
                   onChange={handleChange}
+                  disabled={!ImportQuarterInfo.barcode}
                   style={{
                     height: "35px",
                     width: "160px",
                     border: "1px solid #AFAFAF",
                     borderRadius: "4px",
                     textAlign: "center",
-                    fontSize: "14px",
+                    fontSize: "16px",
                   }}
                 >
                   <option value="">ห้อง</option>
@@ -198,11 +199,10 @@ const Create_Import = () => {
                 !ImportQuarterInfo.barcode || !ImportQuarterInfo.beefroom
               }
               style={{
-                backgroundColor: `${
-                  !ImportQuarterInfo.barcode || !ImportQuarterInfo.beefroom
-                    ? "gray"
-                    : ""
-                }`,
+                backgroundColor: `${!ImportQuarterInfo.barcode || !ImportQuarterInfo.beefroom
+                  ? "gray"
+                  : ""
+                  }`,
               }}
               onClick={handleSubmit}
             >

@@ -37,7 +37,7 @@ const listexproduct = ({ listex }) => {
           .add(543, "year")
           .format("DD/MM/YYYY")}
       </td>
-      <td>{infoexproduct.name}</td>
+      <td>{infoexproduct.exporter}</td>
       <td>{infoexproduct.user.name}</td>
     </tr>
   );

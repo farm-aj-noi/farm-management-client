@@ -5,7 +5,6 @@ import Sidemenu from "../Nav_notify";
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
 
-import { DivBase } from "../../../../../utils/divBase";
 import {
   DivFrom,
   DivFromTop,
@@ -57,7 +56,7 @@ const NOTIFYIM = gql`
 const index = () => {
   const { data } = useQuery(NOTIFYIM);
   return (
-    <div>
+    <div style={{ marginTop: "100px" }}>
       <div
         style={{ display: "flex", justifyContent: "center", marginTop: "30px" }}
       >
@@ -74,12 +73,10 @@ const index = () => {
       <DivBase1
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 237.5px 1000px 1fr",
+          gridTemplateColumns: "1fr 237.5px 1100px 1fr",
           gridRowGap: "15px",
           gridColumnGap: "50px",
           textAlign: "start",
-          /*  width:"950px",
-        margin:"auto" */
         }}
       >
         <Sidemenu Sidenumber={3} />
@@ -98,73 +95,70 @@ const index = () => {
             รายการนำเข้าผลิตภัณฑ์ (วัน)
           </DivFromTop>
           <DivFromDown>
-            {" "}
-            <Table striped bordered responsive hover style={{ margin: "auto" }}>
-              <thead>
-                <tr style={{ textAlign: "center" }}>
-                  <th>ประเภทสินค้า</th>
-
-                  <th>วันที่นำเข้า</th>
-                  <th>เวลา</th>
-                  <th>รหัสสินค้า</th>
-                  <th>รหัสบาร์โค้ด</th>
-                  <th>คิวอาร์โค้ด</th>
-                  <th>น้ำหนัก</th>
-                  <th>วันที่ผลิต</th>
-                  <th>วันหมดอายุ</th>
-                  <th>ตู้แช่ </th>
-                  <th>ชั้นวาง</th>
-                  <th>ผู้นำเข้า</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data && data.cardImP.length > 0 ? (
-                  data.cardImP.map((prod) => (
-                    <tr style={{ textAlign: "center" }}>
-                      <td>{prod.beefproduct.producttype.nameTH}</td>
-                      <td>
-                        {dayjs(prod.importdate)
+            <div style={{ height: `${data && data.cardImP.length > 9 ? "500px" : ""}`, overflow: `${data && data.cardImP.length > 9 ? "auto" : ""}` }}>
+              <Table striped bordered responsive hover style={{ margin: "auto" }}>
+                <thead>
+                  <tr style={{ textAlign: "center", fontSize: "18px" }}>
+                    <th>ประเภทสินค้า</th>
+                    <th>วันที่นำเข้า</th>
+                    <th>เวลา</th>
+                    <th>รหัสสินค้า</th>
+                    <th>รหัสบาร์โค้ด</th>
+                    <th>คิวอาร์โค้ด</th>
+                    <th>น้ำหนัก</th>
+                    <th>วันที่ผลิต</th>
+                    <th>วันหมดอายุ</th>
+                    <th>ตู้แช่ </th>
+                    <th>ชั้นวาง</th>
+                    <th>ผู้นำเข้า</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data && data.cardImP.length > 0 ? (
+                    data.cardImP.map((prod) => (
+                      <tr style={{ textAlign: "center" }}>
+                        <td>{prod.beefproduct.producttype.nameTH}</td>
+                        <td>
+                          {dayjs(prod.importdate)
+                            .locale("th")
+                            .add(543, "year")
+                            .format("DD/MM/YYYY")}
+                        </td>
+                        <td>
+                          {dayjs(prod.importdate)
+                            .locale("th")
+                            .add(543, "year")
+                            .format("h:mm:ss A")}
+                        </td>
+                        <td>{prod.beefproduct.producttype.code}</td>
+                        <td>{prod.beefproduct.barcode}</td>
+                        <td>
+                          <Qrcode key={prod.id} notifyim={prod} />
+                        </td>
+                        <td>{prod.beefproduct.weight}</td>
+                        <td> {dayjs(prod.beefproduct.MFG)
                           .locale("th")
                           .add(543, "year")
                           .format("DD/MM/YYYY")}
-                      </td>
-                      <td>
-                        {dayjs(prod.importdate)
+                        </td>
+                        <td>{dayjs(prod.beefproduct.BBE)
                           .locale("th")
                           .add(543, "year")
-                          .format("h:mm:ss A")}
-                      </td>
-                      <td>{prod.beefproduct.producttype.code}</td>
-                      <td>{prod.beefproduct.barcode}</td>
-                      <td>
-                        <Qrcode key={prod.id} notifyim={prod} />
-                      </td>
-                      <td>{prod.beefproduct.weight}</td>
-                      <td>{prod.beefproduct.MFG}</td>
-                      <td>{prod.beefproduct.BBE}</td>
-                      <td>{prod.productroom.roomname}</td>
-                      <td>{prod.freezer.freezername}</td>
-                      <td>{prod.pbasket}</td>
+                          .format("DD/MM/YYYY")}
+                        </td>
+                        <td>{prod.productroom.roomname}</td>
+                        <td>{prod.freezer.freezername}</td>
+                        <td>{prod.pbasket}</td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr style={{ textAlign: "center" }}>
+                      <td colSpan="12">ไม่พบข้อมูล</td>
                     </tr>
-                  ))
-                ) : (
-                  <tr style={{ textAlign: "center" }}>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                )}
-              </tbody>
-            </Table>
+                  )}
+                </tbody>
+              </Table>
+            </div>
           </DivFromDown>
         </DivFrom>
       </DivBase1>

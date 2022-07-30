@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { ic_info_outline } from "react-icons-kit/md/ic_info_outline";
 import {
   DivFromTop,
   DivFromDown,
@@ -183,13 +183,34 @@ const shelf1 = () => {
       </DivFromTop>
       <DivFromDown>
         <div>
-          {dataroom &&
+          {dataroom && dataroom.allRoom.length > 0 ? (
             dataroom.allRoom.map((prod) => (
               <Listshelf key={prod.id} Listshelfs={prod} />
-            ))}
+            ))
+          ) : (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center"
+              }}
+            >
+              <div
+                style={{
+                  margin: "auto",
+                  textAlign: "center",
+                  color: "#ff0000",
+                }}
+              >
+                <Icon size={150} icon={ic_info_outline} />
+                <br />
+                ไม่พบข้อมูล
+              </div>
+            </div>
+          )
+          }
         </div>
-      </DivFromDown>
-    </div>
+      </DivFromDown >
+    </div >
   );
 };
 

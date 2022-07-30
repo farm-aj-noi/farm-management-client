@@ -20,11 +20,13 @@ export const EXPORTENTRAILSEARCH = gql`
     $startdate: String
     $enddate: String
     $userName: String
+    $exporter: String
   ) {
     exportentrail(
       startdate: $startdate
       enddate: $enddate
       userName: $userName
+      exporter: $exporter
     ) {
       user {
         name
@@ -58,14 +60,17 @@ const index = () => {
   const [selectedstartdate, SetStartDateChange] = useState("");
   const [selectedenddate, SetEndDateChange] = useState("");
   const [inputusername, SetInputusername] = useState("");
+  const [inputexporter, SetinputExporter] = useState("");
   const { data, loading, error } = useQuery(EXPORTENTRAILSEARCH, {
     variables: {
       startdate: selectedstartdate,
       enddate: selectedenddate,
+      userName: inputusername,
+      exporter: inputexporter,
     },
   });
   return (
-    <>
+    <div style={{ marginTop: "100px" }}>
       <div
         style={{
           display: "flex",
@@ -86,7 +91,7 @@ const index = () => {
       <DivBase
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 270px 1100px 1fr",
+          gridTemplateColumns: "1fr 290px 1100px 1fr",
           gridRowGap: "15px",
           gridColumnGap: "10px",
           textAlign: "start",
@@ -108,7 +113,7 @@ const index = () => {
               <div style={{ margin: "-3px 5px 0px 0px" }}>
                 <Icon size={20} icon={list} />
               </div>
-              ดำเนินการเบิกออก
+              ดำเนินการเบิกออกซากเนื้อโคส่วนอื่น ๆ
             </DivFromTop>
             <DivFromDown>
               <Submit_Export />
@@ -155,9 +160,10 @@ const index = () => {
                       width: "110px",
                       borderRadius: "4px",
                       border: "1px solid #AFAFAF",
-                      fontSize: "14px",
+                      fontSize: "16px",
                       textAlign: "center",
                     }}
+                    onChange={(event) => SetinputExporter(event.target.value)}
                   />
                   <label
                     for="beef"
@@ -176,7 +182,7 @@ const index = () => {
                       width: "110px",
                       borderRadius: "4px",
                       border: "1px solid #AFAFAF",
-                      fontSize: "14px",
+                      fontSize: "16px",
                       textAlign: "center",
                       marginRight: "10px",
                     }}
@@ -234,7 +240,7 @@ const index = () => {
           </DivFrom>
           <DivFrom
             style={{
-              width: "1380px",
+              width: "1400px",
               gridRowStart: "5",
               gridRowEnd: "5",
               gridColumnStart: "2",
@@ -249,7 +255,7 @@ const index = () => {
               รายการเบิกออก
             </DivFromTop>
             <DivFromDown>
-              <div style={{ height: "300px", overflow: "auto" }}>
+              <div style={{ height: `${data && data.exportentrail.length > 3 ? "300px" : ""}`, overflow: "auto" }}>
                 <Table
                   striped
                   bordered
@@ -258,7 +264,7 @@ const index = () => {
                   style={{ margin: "auto" }}
                 >
                   <thead>
-                    <tr style={{ textAlign: "center" }}>
+                    <tr style={{ textAlign: "center", fontSize: "18px" }}>
                       <th>วันที่เบิกออก</th>
                       <th>เวลา</th>
                       <th>ทะเบียนขุน</th>
@@ -279,10 +285,14 @@ const index = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {data &&
-                      data.exportentrail.map((prod) => (
-                        <List_export key={prod.id} exportentrail={prod} />
-                      ))}
+                    {data && data.exportentrail.length > 0 ? (data.exportentrail.map((prod) => (
+                      <List_export key={prod.id} exportentrail={prod} />
+                    ))) : (
+                      <tr style={{ textAlign: "center" }}>
+                        <td colSpan="17">ไม่พบข้อมูล</td>
+                      </tr>
+                    )
+                    }
                   </tbody>
                 </Table>
               </div>
@@ -293,7 +303,7 @@ const index = () => {
           </DivFrom>
         </>
       </DivBase>
-    </>
+    </div>
   );
 };
 

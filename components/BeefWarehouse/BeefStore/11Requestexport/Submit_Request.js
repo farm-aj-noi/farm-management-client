@@ -11,17 +11,22 @@ import withReactContent from "sweetalert2-react-content";
 import Router from "next/router";
 
 export const REQUESTEX = gql`
-  mutation REQUESTEX($name: String, $beeftype: String, $quantity: String) {
-    createRequestExport(name: $name, beeftype: $beeftype, quantity: $quantity) {
-      name
-      beeftype {
-        nameTH
-        code
-      }
-      quantity
-      requestdate
-    }
+ mutation REQUESTEX(
+  $name: String
+  $beeftype: String
+  $status: String
+  $quantity: String
+) {
+  createRequestExport(
+    name: $name
+    beeftype: $beeftype
+    status: $status
+    quantity: $quantity
+  ) {
+    id
+    name
   }
+}
 `;
 
 const Submit_Request = () => {
@@ -30,7 +35,9 @@ const Submit_Request = () => {
     name: "",
     beeftype: "",
     quantity: "",
+    status: "",
   });
+  console.log(RequestInfo.beeftype)
   const [createRequestExport] = useMutation(REQUESTEX, {
     variables: { ...RequestInfo },
     onCompleted: (data) => {
@@ -39,6 +46,7 @@ const Submit_Request = () => {
           name: "",
           beeftype: "",
           quantity: "",
+          status: "",
         });
         MySwal.fire({
           icon: "success",
@@ -87,10 +95,20 @@ const Submit_Request = () => {
               name="name"
               value={RequestInfo.name}
               onChange={handleChange}
+              style={{
+                borderColor: `${!RequestInfo.name ? "red" : ""}`,
+                height: "35px",
+                textAlign: "center"
+              }}
             />
+            {!RequestInfo.name ? (
+              <label style={{ color: "red" }}>กรุณากรอกชื่อ</label>
+            ) : (
+              ""
+            )}
           </div>
         </DivFromInsideLeft>
-        <DivFromInsideLeft>
+        <DivFromInsideLeft style={{ marginTop: "5px" }}>
           ประเภทซาก :
           <div
             style={{
@@ -101,7 +119,7 @@ const Submit_Request = () => {
             <div style={{ display: "inline", width: "170px" }}>
               <select
                 name="beeftype"
-                id="beeftype"
+                disabled={!RequestInfo.name}
                 style={{
                   height: "35px",
                   width: "160px",
@@ -142,6 +160,78 @@ const Submit_Request = () => {
             </div>
           </div>
         </DivFromInsideLeft>
+        <DivFromInsideLeft style={{ marginTop: "5px" }}>
+          สถานะเบิก :
+          <div
+            style={{
+              display: "grid",
+              gridTemplateRows: "1fr 15px",
+            }}
+          >
+            <div style={{ display: "inline", width: "170px" }}>
+              <select
+                name="status"
+                id="status"
+                disabled={!RequestInfo.name || !RequestInfo.beeftype}
+                style={{
+                  height: "35px",
+                  width: "160px",
+                  border: "1px solid #AFAFAF",
+                  borderRadius: "4px ",
+                  textAlign: "center",
+                  fontSize: "14px",
+                }}
+                value={RequestInfo.status}
+                onChange={handleChange}
+              >
+                <option value="">เลือก</option>
+                {/* { RequestInfo.beeftype == "5f1000e28d55662dcc23d95e" || "5f1000ee8d55662dcc23d960" ? (
+                  <>
+                    <option value="6280fa87d3dbf7345093676e">นำตัดเเต่ง(ซาก4)</option>
+                    <option value="62821d931768cd521052118b">นำจำหน่าย</option>
+                  </>
+
+                ) :
+                RequestInfo.beeftype ===
+                    "5f338f035f7703096453abb8"  ||
+                    "5f338f0d5f7703096453abb9" ||
+                    "5f338eeb5f7703096453abb6" ||
+                    "5f338ef65f7703096453abb7"  ?
+                    (
+                      <>
+                        <option value="6281fb683dd2ff4e1495d6bd">นำตัดเเต่ง(ก้อนเนื้อ)</option>
+                        <option value="62821d931768cd521052118b">นำจำหน่าย</option>
+                      </>
+
+                    )
+                    : RequestInfo.beeftype == "5f446195ecd6732ad8108684" ||
+                      "5f4461a8ecd6732ad8108685" || "5f4461bfecd6732ad8108686" ||
+                      "5f4461d6ecd6732ad8108687" || "5f44620cecd6732ad8108688" ||
+                      "5f446224ecd6732ad8108689" || "5f44623aecd6732ad810868a" ||
+                      "5f44624fecd6732ad810868b" || "5f446262ecd6732ad810868c" ||
+                      "5f44628decd6732ad810868d" || "5f4462a4ecd6732ad810868e" ||
+                      "5f4462b6ecd6732ad810868f" || "5f4462c8ecd6732ad8108690" ||
+                      "5f4462ddecd6732ad8108691" || "5f4462eeecd6732ad8108692" ||
+                      "5f4462feecd6732ad8108693" || "5f44630fecd6732ad8108694" ||
+                      "5f446320ecd6732ad8108695" ? (
+                      <>
+                        <option value="628256c517a02a452889011e">นำตัดเเต่ง(ชิ้นเนื้อ)</option>
+                        <option value="62821d931768cd521052118b">นำแปรรูป</option>
+                        <option value="62821d931768cd521052118b">นำจำหน่าย</option>
+                      </>
+
+                    ) : ""
+                 } */}
+                 
+                <option value="6280fa87d3dbf7345093676e">นำตัดเเต่ง(ซาก4)</option>
+                <option value="6281fb683dd2ff4e1495d6bd">นำตัดเเต่ง(ก้อนเนื้อ)</option>
+                <option value="628256c517a02a452889011e">นำตัดเเต่ง(ชิ้นเนื้อ)</option>
+                <option value="62821d931768cd521052118b">นำแปรรูป</option>
+                <option value="62821d931768cd521052118b">นำจำหน่าย</option>
+              </select>
+            </div>
+          </div>
+        </DivFromInsideLeft>
         <DivFromInsideLeft>
           จำนวน :
           <div
@@ -154,6 +244,7 @@ const Submit_Request = () => {
               type="text"
               id="quantity"
               name="quantity"
+              disabled={!RequestInfo.name || !RequestInfo.beeftype}
               value={RequestInfo.quantity}
               onChange={handleChange}
             />
@@ -168,7 +259,18 @@ const Submit_Request = () => {
             paddingBottom: "10px",
           }}
         >
-          <Savebutton1 onClick={handdleSummit}>บันทึก</Savebutton1>
+          <Savebutton1 onClick={handdleSummit} style={{
+            backgroundColor: `${!RequestInfo.name ||
+              !RequestInfo.beeftype ||
+              !RequestInfo.quantity
+              ? "gray"
+              : ""
+              }`,
+          }}
+            disabled={!RequestInfo.name ||
+              !RequestInfo.beeftype ||
+              !RequestInfo.quantity}
+          >บันทึก</Savebutton1>
         </div>
       </form>
     </div>

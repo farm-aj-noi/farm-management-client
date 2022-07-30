@@ -18,12 +18,21 @@ export const ALLPRODUCT = gql`
     $producttype: String
     $productroom: String
     $freezer: String
+    $pbasket: String
+    $code: String
+    $mfgdate: String
+    $bbedate: String
   ) {
     allproduct(
       producttype: $producttype
       productroom: $productroom
       freezer: $freezer
+      pbasket: $pbasket
+      code: $code
+      mfgdate: $mfgdate
+      bbedate: $bbedate
     ) {
+      id
       barcode
       status
       producttype
@@ -36,6 +45,9 @@ export const ALLPRODUCT = gql`
       producttypeid
       productroomid
       freezerid
+      info
+      MFGdate
+      BBEdate
     }
   }
 `;
@@ -82,6 +94,9 @@ const index = () => {
   const [selectroom, setselectroom] = useState("");
   const [selectfreezer, setselectfreezer] = useState("");
   const [selectpbasket, setselectpbasket] = useState("");
+  const [inputcode, setInputcode] = useState("");
+  const [selectMFGdate, setMfgdate] = useState("");
+  const [selectBBEdate, setBBEdate] = useState("");
   const { data: type } = useQuery(QUERYTYPE);
   const { data: room } = useQuery(PRODUCTROOM);
   const { data: freezer } = useQuery(PRODUCTFREEZER, {
@@ -99,11 +114,15 @@ const index = () => {
       producttype: producttype,
       productroom: selectroom,
       freezer: selectfreezer,
+      pbasket: selectpbasket,
+      code: inputcode,
+      mfgdate: selectMFGdate,
+      bbedate: selectBBEdate,
     },
   });
-  console.log(data);
+  console.log(selectBBEdate);
   return (
-    <div>
+    <div style={{ marginTop: "100px" }}>
       <div
         style={{ display: "flex", justifyContent: "center", marginTop: "30px" }}
       >
@@ -120,7 +139,7 @@ const index = () => {
       <DivBase
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr  1100px 1fr",
+          gridTemplateColumns: "1fr  1150px 1fr",
           gridRowGap: "15px",
           gridColumnGap: "10px",
           textAlign: "start",
@@ -169,7 +188,7 @@ const index = () => {
                     border: "1px solid #AFAFAF",
                     borderRadius: "4px",
                     textAlign: "center",
-                    fontSize: "14px",
+                    fontSize: "16px",
                   }}
                   onChange={(event) => setproducttype(event.target.value)}
                 >
@@ -198,10 +217,11 @@ const index = () => {
                     width: "110px",
                     borderRadius: "4px",
                     border: "1px solid #AFAFAF",
-                    fontSize: "14px",
+                    fontSize: "16px",
                     textAlign: "center",
                     marginRight: "10px",
                   }}
+                  onChange={(event) => setInputcode(event.target.value)}
                 />
                 <label
                   for="beef"
@@ -221,7 +241,7 @@ const index = () => {
                     border: "1px solid #AFAFAF",
                     borderRadius: "4px 0px 0px 4px",
                     textAlign: "center",
-                    fontSize: "14px",
+                    fontSize: "16px",
                   }}
                   onChange={(event) => setselectroom(event.target.value)}
                 >
@@ -235,13 +255,14 @@ const index = () => {
                 </select>
                 <select
                   name="freezername"
+                  disabled={!selectroom}
                   style={{
                     height: "35px",
                     width: "50px",
                     border: "1px solid #AFAFAF",
                     borderLeft: "none",
                     textAlign: "center",
-                    fontSize: "14px",
+                    fontSize: "16px",
                   }}
                   onChange={(event) => setselectfreezer(event.target.value)}
                 >
@@ -255,6 +276,7 @@ const index = () => {
                 </select>
                 <select
                   name="basketname"
+                  disabled={!selectroom || !selectfreezer}
                   style={{
                     height: "35px",
                     width: "60px",
@@ -262,7 +284,7 @@ const index = () => {
                     borderRadius: "0px 4px 4px 0px",
                     borderLeft: "none",
                     textAlign: "center",
-                    fontSize: "14px",
+                    fontSize: "16px",
                     marginRight: "10px",
                   }}
                   onChange={(event) => setselectpbasket(event.target.value)}
@@ -270,7 +292,7 @@ const index = () => {
                   <option value="">ชั้นวาง</option>
                   {basket &&
                     basket.allpbasket.map((prod) => (
-                      <option key={prod.id} value={prod.id}>
+                      <option key={prod.id} value={prod.basketname}>
                         {prod.basketname}
                       </option>
                     ))}
@@ -288,15 +310,15 @@ const index = () => {
                 <input
                   type="date"
                   id="ex_chill"
-                  name="date"
+                  name="mfgdate"
                   style={{
                     height: "35px",
                     border: "1px solid #AFAFAF",
                     borderRadius: "4px",
-
                     textAlign: "center",
                     fontSize: "16px",
                   }}
+                  onChange={(event) => setMfgdate(event.target.value)}
                 ></input>
 
                 <label
@@ -312,7 +334,7 @@ const index = () => {
                 <input
                   type="date"
                   id="ex_chill"
-                  name="date"
+                  name="expdate"
                   style={{
                     height: "35px",
                     border: "1px solid #AFAFAF",
@@ -320,6 +342,7 @@ const index = () => {
                     fontSize: "16px",
                     textAlign: "center",
                   }}
+                  onChange={(event) => setBBEdate(event.target.value)}
                 ></input>
               </from>
             </div>
@@ -339,10 +362,10 @@ const index = () => {
             <div style={{ margin: "-3px 5px 0px 0px" }}>
               <Icon size={20} icon={list} />
             </div>
-            รายการนำเข้าซากเนื้อโคผ่าซีก
+            รายการคงคลังผลิตภัณฑ์
           </DivFromTop>
           <DivFromDown>
-            <div style={{ height: "430px", overflow: "auto" }}>
+            <div style={{ height: `${data && data.allproduct.length > 7 ? "430px" : ""}`, overflow: `${data && data.allproduct.length > 7 ? "auto" : ""}` }}>
               <Table
                 striped
                 bordered
@@ -351,7 +374,7 @@ const index = () => {
                 style={{ margin: "auto" }}
               >
                 <thead>
-                  <tr style={{ textAlign: "center" }}>
+                  <tr style={{ textAlign: "center", fontSize: "18px" }}>
                     <th>ประเภทสินค้า</th>
                     <th>รหัสสินค้า</th>
                     <th>รหัสบาร์โค้ด</th>
@@ -359,9 +382,9 @@ const index = () => {
                     <th>น้ำหนัก</th>
                     <th>วันที่ผลิต</th>
                     <th>วันหมดอายุ</th>
-                    <th>ห้อง</th>
                     <th>ตู้แช่</th>
-                    <th>ชั้นวาง</th>
+                    <th>ชั้น</th>
+                    <th>ตะกร้า</th>
                     <th>หมายเหตุ</th>
                     <th>จัดการ</th>
                   </tr>
@@ -373,18 +396,8 @@ const index = () => {
                     ))
                   ) : (
                     <tr style={{ textAlign: "center" }}>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
+                      <td colSpan="12">ไม่พบข้อมูล</td>
+
                     </tr>
                   )}
                 </tbody>

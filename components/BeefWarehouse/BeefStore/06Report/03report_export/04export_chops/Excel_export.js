@@ -21,6 +21,7 @@ const Excel_export = ({ prod }) => {
     { label: "รหัสบาร์โค้ด", key: "chop.barcode" },
     { label: "น้ำหนัก", key: "chop.weight" },
     { label: "สถานะ", key: "storestatus.nameTH" },
+    { label: "ผู้ขอเบิก", key: "exporter" },
     { label: "ผู้เบิกออก", key: "user.name" },
   ];
   return (

@@ -32,6 +32,7 @@ import { DivBase } from "../../../../../../utils/divBase";
 
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
+import { NavItem, Card } from "react-bootstrap";
 
 import Listbasket from "./listbas";
 
@@ -55,45 +56,33 @@ const list1 = ({ listroom1 }) => {
   return (
     <div
       style={{
-        display: "grid",
-        gridTemplateColumns: `200px 200px 200px 
-         200px`,
-        marginTop: "10px",
-        padding: "20px",
-        borderRadius: "4px",
-        /*  backgroundColor: "red", */
         border: "1px solid #bcbcbc",
+        padding: "15px",
+        borderRadius: "4px",
+        marginTop: "10px"
+        /*  backgroundColor: "red", */
+
       }}
     >
       <div>
-        ห้องจัดเก็บ : {}
+        ห้องจัดเก็บ : { }
         <Searchinput
           value={inforoom.roomname}
           style={{
-            marginTop: "10px",
             textAlign: "center",
+
           }}
           disabled
         ></Searchinput>
       </div>
-      <div>
-        {datashelf &&
-          datashelf.listShelf.map((prod) => (
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: `200px 200px 200px 
-                 200px`,
-                /*   marginTop: "10px",
-                marginLeft: "30px",
-                paddingBottom: "20px",  */
-              }}
-            >
-              <Listbasket key={prod.id} listbas={prod} />
-            </div>
-          ))}
-      </div>
-    </div>
+
+      {datashelf && datashelf.listShelf.length > 0 ? (datashelf.listShelf.map((prod) => (
+        <Listbasket key={prod.id} listbas={prod} />
+      ))) : (<Card style={{ marginTop: "10px", textAlign: "center", padding: "20px", backgroundColor: "#f7f7f7" }}>ไม่พบข้อมูล</Card>)
+
+      }
+
+    </div >
   );
 };
 

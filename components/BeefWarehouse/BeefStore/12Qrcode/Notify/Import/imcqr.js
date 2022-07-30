@@ -8,8 +8,8 @@ import Router from "next/router";
 
 const index = ({ notifyimc }) => {
   const [infodata, setinfodata] = useState(notifyimc);
-  console.log(infodata);
   const [testshow, setShow] = useState(false);
+  console.log(infodata)
   const handleClose = () => {
     setShow(false);
     Router.reload("beefwarehouse/beefstore/notify/notify_import");

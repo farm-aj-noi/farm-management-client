@@ -31,7 +31,7 @@ const index = () => {
   const { data } = useQuery(QUERYREQUESTEX);
 
   return (
-    <DivBase>
+    <div style={{ marginTop: "100px" }}>
       <div
         style={{
           display: "flex",
@@ -92,7 +92,7 @@ const index = () => {
             รายการร้องขอเบิก
           </DivFromTop>
           <DivFromDown>
-            <div>
+            <div style={{ height: `${data && data.listRequestEx.length > 9 ? "550px" : ""}`, overflow: "auto" }}>
               <Table
                 striped
                 bordered
@@ -101,7 +101,7 @@ const index = () => {
                 style={{ margin: "auto" }}
               >
                 <thead>
-                  <tr style={{ textAlign: "center" }}>
+                  <tr style={{ textAlign: "center", fontSize: "18px" }}>
                     <th>วันที่ขอเบิก</th>
                     <th>ชื่อผู้ขอเบิก</th>
                     <th>ประเภทซาก</th>
@@ -110,7 +110,7 @@ const index = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data &&
+                  {data && data.listRequestEx.length > 0 ? (
                     data.listRequestEx.map((prod) => (
                       <tr style={{ textAlign: "center" }}>
                         <td>
@@ -123,14 +123,17 @@ const index = () => {
                         <td></td>
                         <td>{prod.quantity}</td>
                       </tr>
-                    ))}
+                    ))) : (<tr style={{ textAlign: "center" }}>
+                      <td colSpan="5">ไม่พบข้อมูล</td>
+                    </tr>)
+                  }
                 </tbody>
               </Table>
             </div>
           </DivFromDown>
         </DivFrom>
       </DivBase>
-    </DivBase>
+    </div >
   );
 };
 

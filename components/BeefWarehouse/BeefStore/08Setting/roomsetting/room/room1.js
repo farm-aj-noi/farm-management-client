@@ -39,6 +39,8 @@ import Router from "next/router";
 import List from "./Listroom";
 import Editname from "./editname";
 
+import { ic_info_outline } from "react-icons-kit/md/ic_info_outline";
+
 export const CREATEROOMS = gql`
   mutation CREATEROOMS($roomname: String) {
     createBeefroom(roomname: $roomname) {
@@ -202,25 +204,37 @@ const room1 = () => {
       </DivFromTop>
       <DivFromDown>
         <div>
-          {dataroom &&
+          {dataroom && dataroom.allRoom.length > 0 ? (
             dataroom.allRoom.map((prod) => (
               <>
                 <div
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: `200px 200px 200px 
-               200px`,
-                    padding: "20px",
-                    border: "1px solid #bcbcbc",
-                    borderRadius: "4px",
-                    marginTop: "10px",
-                  }}
+                  style={{ margin: "auto", minWidth: "100%" }}
                 >
-                  <Editname key={prod.id} idroom={prod} />
                   <List key={prod.id} idroom={prod} />
                 </div>
               </>
-            ))}
+            ))
+          ) : (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center"
+              }}
+            >
+              <div
+                style={{
+                  margin: "auto",
+                  textAlign: "center",
+                  color: "#ff0000",
+                }}
+              >
+                <Icon size={150} icon={ic_info_outline} />
+                <br />
+                ไม่พบข้อมูล
+              </div>
+            </div>
+          )
+          }
         </div>
       </DivFromDown>
     </div>

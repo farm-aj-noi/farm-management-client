@@ -70,7 +70,7 @@ const Create_Import = () => {
     shelf: "",
     basket: "",
   });
-  /* console.log(ImportLumpsInfo.shelf); */
+ 
 
   const { data: datashelf } = useQuery(QUERYSHELF, {
     variables: {
@@ -83,9 +83,6 @@ const Create_Import = () => {
       id: ImportLumpsInfo.shelf,
     },
   });
-
-  /*  console.log(datashelf);
-  console.log(ImportLumpsInfo.beefroom); */
 
   const [createImlump, { loading, error }] = useMutation(CREATEIMPORTLUMP, {
     variables: { ...ImportLumpsInfo },
@@ -197,6 +194,7 @@ const Create_Import = () => {
                 <select
                   name="beefroom"
                   id="beefroom"
+                  disabled={!ImportLumpsInfo.barcode}
                   value={ImportLumpsInfo.beefroom}
                   onChange={handleChange}
                   style={{
@@ -205,7 +203,7 @@ const Create_Import = () => {
                     border: "1px solid #AFAFAF",
                     borderRadius: "4px 0px 0px 4px",
                     textAlign: "center",
-                    fontSize: "14px",
+                    fontSize: "16px",
                   }}
                 >
                   <option value="">ห้อง</option>
@@ -219,6 +217,7 @@ const Create_Import = () => {
                 <select
                   name="shelf"
                   id="shelf"
+                  disabled={!ImportLumpsInfo.barcode || !ImportLumpsInfo.beefroom}
                   value={ImportLumpsInfo.shelf}
                   onChange={handleChange}
                   style={{
@@ -227,7 +226,7 @@ const Create_Import = () => {
                     border: "1px solid #AFAFAF",
                     borderLeft: "none",
                     textAlign: "center",
-                    fontSize: "14px",
+                    fontSize: "16px",
                   }}
                 >
                   <option value="">ชั้น</option>
@@ -241,6 +240,7 @@ const Create_Import = () => {
                 <select
                   name="basket"
                   id="basket"
+                  disabled={!ImportLumpsInfo.barcode || !ImportLumpsInfo.beefroom || !ImportLumpsInfo.shelf}
                   value={ImportLumpsInfo.basket}
                   onChange={handleChange}
                   style={{
@@ -250,7 +250,7 @@ const Create_Import = () => {
                     borderRadius: "0px 4px 4px 0px",
                     borderLeft: "none",
                     textAlign: "center",
-                    fontSize: "14px",
+                    fontSize: "16px",
                     marginRight: "10px",
                   }}
                 >
@@ -282,13 +282,12 @@ const Create_Import = () => {
               }
               onClick={handleSubmit}
               style={{
-                backgroundColor: `${
-                  !ImportLumpsInfo.beefroom ||
+                backgroundColor: `${!ImportLumpsInfo.beefroom ||
                   !ImportLumpsInfo.barcode ||
                   !ImportLumpsInfo.shelf
-                    ? "gray"
-                    : ""
-                }`,
+                  ? "gray"
+                  : ""
+                  }`,
               }}
             >
               บันทึก

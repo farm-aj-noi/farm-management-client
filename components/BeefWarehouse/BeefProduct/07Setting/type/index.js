@@ -4,18 +4,12 @@ import {
   DivFromTop,
   DivFromDown,
   HeaderColor,
-  Searchinput,
+
 } from "../SettingFrom";
 import { DivBase } from "../../../../../utils/divBase";
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
-import { iosSearchStrong } from "react-icons-kit/ionicons/iosSearchStrong";
 
-import {
-  Savebuttoncolor,
-  Editbuttoncolor,
-  Removebuttoncolor,
-} from "../../../../../utils/buttonColor";
 
 import Nav_seting from "../Nav_setting";
 
@@ -48,7 +42,7 @@ const index = () => {
   const { data } = useQuery(QUERYTYPE);
 
   return (
-    <DivBase>
+    <div style={{ marginTop: "100px" }}>
       <div
         style={{
           display: "flex",
@@ -143,30 +137,35 @@ const index = () => {
             รายการประเภทสินค้าผลิตภัณฑ์
           </DivFromTop>
           <DivFromDown>
-            <Table striped bordered responsive hover style={{ margin: "auto" }}>
-              {" "}
-              <thead>
-                <tr style={{ textAlign: "center" }}>
-                  <th>รหสสินค้า</th>
-                  <th>ชื่อประเภทสินค้า (ไทย)</th>
-                  <th>ชื่อประเภทสินค้า (อังกฤษ)</th>
-                  <th>วันหมดอายุ (วัน)</th>
-                  <th>หน่วย</th>
-                  <th>แก้ไข</th>
-                  <th>ลบ</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data &&
-                  data.allproducttype.map((prod) => (
-                    <List key={prod.id} listtype={prod} />
-                  ))}
-              </tbody>
-            </Table>
+            <div style={{ height: `${data && data.allproducttype.length > 7 ? "400px" : ""}`, overflow: `${data && data.allproducttype.length > 7 ? "auto" : ""}` }}>
+              <Table striped bordered responsive hover style={{ margin: "auto" }}>
+                <thead>
+                  <tr style={{ textAlign: "center", fontSize: "18px" }}>
+                    <th>รหัสสินค้า</th>
+                    <th>ชื่อประเภทสินค้า (ไทย)</th>
+                    <th>ชื่อประเภทสินค้า (อังกฤษ)</th>
+                    <th>วันหมดอายุ (วัน)</th>
+                    <th>หน่วย</th>
+                    <th>แก้ไข</th>
+                    <th>ลบ</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data && data.allproducttype.length > 0 ? (
+                    data.allproducttype.map((prod) => (
+                      <List key={prod.id} listtype={prod} />
+                    ))
+                  ) : (<tr style={{ textAlign: "center" }}>
+                    <td colSpan="7">ไม่พบข้อมูล</td>
+                  </tr>)
+                  }
+                </tbody>
+              </Table>
+            </div>
           </DivFromDown>
         </DivFrom>
       </DivBase>
-    </DivBase>
+    </div>
   );
 };
 

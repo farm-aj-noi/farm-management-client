@@ -54,7 +54,7 @@ const index = () => {
   const { data: expseting } = useQuery(QUERYEXPSETING);
   const { data: date } = useQuery(QUERYDATE);
   return (
-    <DivBase>
+    <div style={{ marginTop: "100px" }}>
       <div
         style={{
           display: "flex",
@@ -135,7 +135,7 @@ const index = () => {
           </DivFromDown>
         </DivFrom>
       </DivBase>
-    </DivBase>
+    </div>
   );
 };
 

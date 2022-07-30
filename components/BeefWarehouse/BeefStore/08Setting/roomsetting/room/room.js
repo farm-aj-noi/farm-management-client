@@ -204,7 +204,7 @@ const room = () => {
         {!successCreateRoomName && (
           <>
             <div>
-              ชื่อห้องจัดเก็บ : {}
+              ชื่อห้องจัดเก็บ : { }
               <Searchinput
                 type="text"
                 id="roomname"
@@ -244,7 +244,7 @@ const room = () => {
                   marginTop: "0px",
                 }}
               >
-                ชื่อห้องจัดเก็บ : {}
+                ชื่อห้องจัดเก็บ : { }
                 <Searchinput
                   type="text"
                   id="roomname"
@@ -270,9 +270,8 @@ const room = () => {
                         display: "grid",
                         gridColumStart: "1",
                         gridColumn: `2 ${inputListroom.length !== 1 ? "" : ""}`,
-                        gridTemplateColumns: `200px 200px 200px ${
-                          inputListroom.length !== 1 ? "40px" : ""
-                        } 200px`,
+                        gridTemplateColumns: `200px 200px 200px ${inputListroom.length !== 1 ? "40px" : ""
+                          } 200px`,
                       }}
                     >
                       <div
@@ -284,7 +283,7 @@ const room = () => {
                         }}
                       >
                         {" "}
-                        ประเภทจัดเก็บ : {}
+                        ประเภทจัดเก็บ : { }
                         <select
                           name="beeftype"
                           id="beeftype"
@@ -328,14 +327,13 @@ const room = () => {
                           gridColumnStart: "2",
                         }}
                       >
-                        จำนวน : {}
+                        จำนวน : { }
                         <Searchinput
                           style={{
                             width: "150px",
                             textAlign: "center",
-                            backgroundColor: `${
-                              !inputListroom[i].beeftype ? "#ececec" : ""
-                            }`,
+                            backgroundColor: `${!inputListroom[i].beeftype ? "#ececec" : ""
+                              }`,
                           }}
                           disabled={!inputListroom[i].beeftype}
                           name="totalbeef"
@@ -380,6 +378,7 @@ const room = () => {
                       height: "38px",
                       width: " 150px",
                       marginRight: "5px",
+                      fontSize: "16px"
                     }}
                     onClick={handleAddClickroom}
                   >
@@ -389,6 +388,7 @@ const room = () => {
                     style={{
                       height: "38px",
                       width: " 50px",
+                      fontSize: "16px"
                     }}
                     onClick={handleSubmitroom}
                   >

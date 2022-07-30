@@ -33,6 +33,8 @@ import { DivBase } from "../../../../../../utils/divBase";
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
 
+import { Accordion, Card, Button } from "react-bootstrap";
+
 export const UPDATEBASKET = gql`
   mutation UPDATEBASKET($id: ID, $basketname: String) {
     updateBasket(id: $id, basketname: $basketname) {
@@ -128,53 +130,65 @@ const listallbas = ({ listallbas }) => {
     }
   };
   return (
-    <div>
-      {Editname ? (
-        <div>
-          <Searchinput
-            type="text"
-            id="basketname"
-            name="basketname"
-            value={infobasall.basketname}
-            onChange={handdleChange}
-            style={{
-              width: "156px",
-              textAlign: "center",
-              marginTop: "10px",
-              width: "140px",
-            }}
-          />
-          <Savebuttoncolor onClick={handdleSubmit}>
-            <Savebutton />
-          </Savebuttoncolor>
-        </div>
-      ) : (
-        <div>
-          <Searchinput
-            /* value={prod.shelfname} */
-            type="text"
-            id="basketname"
-            name="basketname"
-            value={infobasall.basketname}
-            disabled
-            style={{
-              width: "156px",
-              textAlign: "center",
-              marginTop: "10px",
-              width: "120px",
-            }}
-          />
-          <Editbuttoncolor onClick={() => setEditname(true)}>
-            <Editbutton />
-          </Editbuttoncolor>
-          <Removebuttoncolor
-            onClick={handdleSubmitDelete}
-            style={{ marginLeft: "5px" }}
-          >
-            ลบ
-          </Removebuttoncolor>
-        </div>
-      )}
+    <div >
+      <Card>
+        <Card.Header style={{ borderBottom: "none", borderTop: "none" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "300px 1fr 150px 150px" }}>
+            {Editname ? (
+              <div>
+                ชื่อตะกร้าจัดเก็บ : { }
+                <Searchinput
+                  type="text"
+                  id="basketname"
+                  name="basketname"
+                  value={infobasall.basketname}
+                  onChange={handdleChange}
+                  style={{
+                    width: "156px",
+                    textAlign: "center",
+                    marginTop: "10px",
+
+                  }}
+                />
+                <Savebuttoncolor onClick={handdleSubmit}>
+                  <Savebutton />
+                </Savebuttoncolor>
+              </div>
+            ) : (
+              <div>
+                ชื่อตะกร้าจัดเก็บ : { }
+                <Searchinput
+                  /* value={prod.shelfname} */
+                  type="text"
+                  id="basketname"
+                  name="basketname"
+                  value={infobasall.basketname}
+                  disabled
+                  style={{
+                    width: "156px",
+                    textAlign: "center",
+                    marginTop: "10px",
+
+                  }}
+                />
+                <Editbuttoncolor onClick={() => setEditname(true)}>
+                  <Editbutton />
+                </Editbuttoncolor>
+
+              </div>
+            )}
+            <div></div>
+            <div></div>
+            <Removebuttoncolor
+              onClick={handdleSubmitDelete}
+              style={{ marginLeft: "5px" }}
+            >
+              ลบ
+            </Removebuttoncolor>
+          </div>
+        </Card.Header>
+      </Card>
+
     </div>
   );
 };

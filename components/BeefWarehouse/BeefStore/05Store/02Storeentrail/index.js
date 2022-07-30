@@ -16,8 +16,9 @@ import List_Store from "./ListStore.js";
 import Nav_store from "../Nav_store";
 
 export const STOREENTRAIL = gql`
-  query STOREENTRAIL($beefroom: String, $expdate: String) {
-    listentrail(beefroom: $beefroom, expdate: $expdate) {
+  query STOREENTRAIL($beefroom: String, $expdate: String,$cownum: String) {
+    listentrail(beefroom: $beefroom, expdate: $expdate, cownum: $cownum) {
+      id
       namefarmer
       barcode
       cownum
@@ -33,6 +34,7 @@ export const STOREENTRAIL = gql`
       scrap
       beefroom
       Expdate
+      info
     }
   }
 `;
@@ -49,15 +51,17 @@ export const QUERYROOM = gql`
 const index = () => {
   const [selectedbeefroom, setselectbeefroom] = useState("");
   const [expdate, setexpdate] = useState("");
+  const [inputcownum, setinputcownum] = useState("");
   const { data, loading, error } = useQuery(STOREENTRAIL, {
     variables: {
       beefroom: selectedbeefroom,
       expdate: expdate,
+      cownum: inputcownum,
     },
   });
   const { data: dataroom } = useQuery(QUERYROOM);
   return (
-    <DivBase>
+    <div style={{ marginTop: "100px" }}>
       <div
         style={{
           display: "flex",
@@ -77,7 +81,7 @@ const index = () => {
       <DivBase
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 200px 1300px 1fr",
+          gridTemplateColumns: "1fr 200px 1100px 1fr",
           gridRowGap: "15px",
           gridColumnGap: "20px",
           textAlign: "start",
@@ -136,46 +140,47 @@ const index = () => {
                     fontSize: "14px",
                     textAlign: "center",
                   }}
+                  onChange={(event) => setinputcownum(event.target.value)}
                 />
                 <label
-                  for="expdate"
+                  for="beef"
                   style={{
                     textAlign: "center",
                     fontSize: "18px",
                     margin: "10px 10px",
                   }}
                 >
-                  <label
-                    for="beef"
-                    style={{
-                      textAlign: "center",
-                      fontSize: "18px",
-                      margin: "10px 10px",
-                    }}
-                  >
-                    ตำแหน่ง
-                  </label>
-                  <select
-                    name="roomname"
-                    style={{
-                      height: "35px",
-                      width: "110px",
-                      border: "1px solid #AFAFAF",
-                      borderRadius: "4px ",
-                      textAlign: "center",
-                      fontSize: "14px",
-                      marginRight: "10px",
-                    }}
-                    onChange={(event) => setselectbeefroom(event.target.value)}
-                  >
-                    <option value="">ห้อง</option>
-                    {dataroom &&
-                      dataroom.allRoom.map((prod) => (
-                        <option key={prod.id} value={prod.id}>
-                          {prod.roomname}
-                        </option>
-                      ))}
-                  </select>
+                  ตำแหน่ง
+                </label>
+                <select
+                  name="roomname"
+                  style={{
+                    height: "35px",
+                    width: "110px",
+                    border: "1px solid #AFAFAF",
+                    borderRadius: "4px ",
+                    textAlign: "center",
+                    fontSize: "14px",
+                    marginRight: "10px",
+                  }}
+                  onChange={(event) => setselectbeefroom(event.target.value)}
+                >
+                  <option value="">ห้อง</option>
+                  {dataroom &&
+                    dataroom.allRoom.map((prod) => (
+                      <option key={prod.id} value={prod.id}>
+                        {prod.roomname}
+                      </option>
+                    ))}
+                </select>
+                <label
+                  for="expdate"
+                  style={{
+                    textAlign: "center",
+                    fontSize: "18px",
+                    marginRight: "10px",
+                  }}
+                >
                   วันหมดอายุ
                 </label>
                 <input
@@ -197,21 +202,22 @@ const index = () => {
         </DivFrom>
         <DivFrom
           style={{
-            width: "100%",
-            gridRowStart: "3",
-            gridRowEnd: "3",
-            gridColumnStart: "3",
-            marginTop: "0px",
+            width: "1320px",
+            gridRowStart: "5",
+            gridRowEnd: "5",
+            gridColumnStart: "2",
+            gridColumnEnd: "4",
+            marginTop: "20px"
           }}
         >
           <DivFromTop>
             <div style={{ margin: "-3px 5px 0px 0px" }}>
               <Icon size={20} icon={list} />
             </div>
-            รายการยอดคงคลังซากโค
+            รายการยอดคงคลังซากโคส่วนอื่น ๆ
           </DivFromTop>
           <DivFromDown>
-            <div style={{ height: "380px", overflowY: "auto" }}>
+            <div style={{ height: `${data && data.listentrail.length > 7 ? "380px" : ""}`, overflow: "auto" }}>
               <Table
                 striped
                 bordered
@@ -247,23 +253,7 @@ const index = () => {
                     ))
                   ) : (
                     <tr style={{ textAlign: "center" }}>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
+                      <td colSpan="17">ไม่พบข้อมูล</td>
                     </tr>
                   )}
                 </tbody>
@@ -275,7 +265,7 @@ const index = () => {
           </DivFromDown>
         </DivFrom>
       </DivBase>
-    </DivBase>
+    </div>
   );
 };
 

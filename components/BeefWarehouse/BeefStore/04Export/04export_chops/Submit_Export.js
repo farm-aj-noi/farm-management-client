@@ -10,6 +10,8 @@ import withReactContent from "sweetalert2-react-content";
 
 import Router from "next/router";
 
+
+
 export const CREATEEXPORTCHOP = gql`
   mutation CREATEEXPORTCHOP(
     $barcode: String
@@ -55,7 +57,7 @@ const Submit_Export = () => {
         MySwal.fire({
           icon: "success",
           title: "สำเร็จ",
-          text: "ทำการนำเข้าคลังชิ้นเนื้อเสร็จสิ้น",
+          text: "ทำการเบิกออกคลังชิ้นเนื้อเสร็จสิ้น",
           confirmButtonText: (
             <span
               onClick={() =>
@@ -78,7 +80,9 @@ const Submit_Export = () => {
           icon: "error",
           title: <p>{error.graphQLErrors[0].message}</p>,
           text: "กรุณากรอกบาร์โค้ดใหม่อีกครั้ง",
-          confirmButtonText: <span>ตกลง</span>,
+          confirmButtonText: <span onClick={() =>
+            Router.reload("beefwarehouse/beefstore/export/export_chops")
+          }>ตกลง</span>,
           confirmButtonColor: "#3085d6",
         });
       }
@@ -139,6 +143,7 @@ const Submit_Export = () => {
             >
               <div style={{ display: "inline", width: "170px" }}>
                 <select
+                  disabled={!ExportchopInfo.barcode}
                   name="exporter"
                   value={ExportchopInfo.exporter}
                   onChange={handleChange}
@@ -148,7 +153,7 @@ const Submit_Export = () => {
                     border: "1px solid #AFAFAF",
                     borderRadius: "4px",
                     textAlign: "center",
-                    fontSize: "14px",
+                    fontSize: "16px",
                   }}
                 >
                   <option value="">รายชื่อ</option>
@@ -172,6 +177,7 @@ const Submit_Export = () => {
             >
               <div style={{ display: "inline", width: "170px" }}>
                 <select
+                  disabled={!ExportchopInfo.barcode || !ExportchopInfo.exporter}
                   name="storestatus"
                   value={ExportchopInfo.storestatus}
                   onChange={handleChange}
@@ -181,14 +187,12 @@ const Submit_Export = () => {
                     border: "1px solid #AFAFAF",
                     borderRadius: "4px",
                     textAlign: "center",
-                    fontSize: "14px",
+                    fontSize: "16px",
                   }}
                 >
                   <option value="">เลือกสถานะ</option>
-                  <option value="6281fb683dd2ff4e1495d6bd">
-                    นำตัดเเต่ง(ก้อนเนื้อ)
-                  </option>
                   <option value="6280fac6d3dbf7345093676f">นำจำหน่าย</option>
+                  <option value="62821d931768cd521052118b">นำแปรรูป</option>
                 </select>
               </div>
             </div>
@@ -210,13 +214,12 @@ const Submit_Export = () => {
                 !ExportchopInfo.storestatus
               }
               style={{
-                backgroundColor: `${
-                  !ExportchopInfo.barcode ||
+                backgroundColor: `${!ExportchopInfo.barcode ||
                   !ExportchopInfo.exporter ||
                   !ExportchopInfo.storestatus
-                    ? "gray"
-                    : ""
-                }`,
+                  ? "gray"
+                  : ""
+                  }`,
               }}
             >
               บันทึก

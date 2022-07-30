@@ -16,7 +16,7 @@ import Card7 from "./Card7";
 
 const index = () => {
   return (
-    <DivBase>
+    <DivBase style={{ marginTop: "100px" }}>
       <DivFrom style={{width:"1000px"}}>
         <DivFromTop>
           <div style={{ margin: "-3px 5px 0px 0px" }}>

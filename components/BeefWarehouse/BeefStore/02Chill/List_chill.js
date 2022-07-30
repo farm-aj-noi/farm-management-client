@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Barcodebuttoncolor } from "../../../../utils/buttonColor";
-import { Qrcodebutton } from "../../../../utils/button";
+
 import dayjs from "dayjs";
 import "dayjs/locale/th";
 
@@ -10,8 +9,8 @@ import gql from "graphql-tag";
 import { CHILLSEARCHLIST } from "./index";
 
 import { Savebuttoncolor } from "../../../../utils/buttonColor";
-import { Savebutton, Editbutton, Removebutton } from "../../../../utils/button";
-import { Router } from "next/router";
+import { Savebutton } from "../../../../utils/button";
+
 
 import Modalqrcode from "../12Qrcode/chill";
 
@@ -62,54 +61,59 @@ const List_chill = ({ listchill }) => {
     }
   };
   /*   console.log(ListChillInfo.id); */
+
+  const tdStyle = {
+
+    fontSize: "16px"
+  }
+
   return (
     <tr style={{ textAlign: "center" }}>
-      <td>{ListChillInfo.user.name}</td>
-      <td>
+      <td style={tdStyle}>{ListChillInfo.user.name}</td>
+      <td style={tdStyle}>
         {dayjs(ListChillInfo.chilldateStart)
           .locale("th")
           .add(543, "year")
           .format("DD/MM/YYYY")}
       </td>
-      <td>
+      <td style={tdStyle}>
         {dayjs(ListChillInfo.chilldateEnd)
           .locale("th")
           .add(543, "year")
           .format("DD/MM/YYYY")}
       </td>
-      <td>
+      <td style={tdStyle}>
         {dayjs(ListChillInfo.chilldateEnd)
           .locale("th")
           .add(543, "year")
           .format("h:mm:ss A")}
       </td>
-      <td>{ListChillInfo.halve.beeftype.nameTH}</td>
-      <td>{ListChillInfo.chillday.day} วัน</td>
-      <td>{ListChillInfo.halve.imslaughter.numcow}</td>
-      <td>{ListChillInfo.halve.beeftype.code}</td>
-      <td>{ListChillInfo.halve.barcode}</td>
-      <td>
+      <td style={tdStyle}>{ListChillInfo.halve.beeftype.nameTH}</td>
+      <td style={tdStyle}>{ListChillInfo.chillday.day} วัน</td>
+      <td style={tdStyle}>{ListChillInfo.halve.imslaughter.numcow}</td>
+      <td style={tdStyle}>{ListChillInfo.halve.beeftype.code}</td>
+      <td style={tdStyle}>{ListChillInfo.halve.barcode}</td>
+      <td style={tdStyle}>
         <Modalqrcode key={ListChillInfo.id} listchill={ListChillInfo} />
       </td>
-      <td>{ListChillInfo.halve.weightwarm} กก.</td>
-      <td>{ListChillInfo.chillroom.roomnum}</td>
-      <td>{ListChillInfo.chillstatus.nameTH}</td>
-      <td>
+      <td style={tdStyle}>{ListChillInfo.halve.weightwarm} กก.</td>
+      <td style={tdStyle}>{ListChillInfo.chillroom.roomnum}</td>
+      <td style={tdStyle}>{ListChillInfo.chillstatus.nameTH}</td>
+      <td style={tdStyle}>
         {checkdate >=
-        dayjs(ListChillInfo.chilldateEnd)
-          .locale("th")
-          .format("YYYY-MM-DDTHH:mm:ssZ[Z]") ? (
+          dayjs(ListChillInfo.chilldateEnd)
+            .locale("th")
+            .format("YYYY-MM-DDTHH:mm:ssZ[Z]") ? (
           <div>
             <Savebuttoncolor
               disabled={
                 ListChillInfo.chillstatus.id === "6284ad91fbfac22364a6e431"
               }
               style={{
-                backgroundColor: `${
-                  ListChillInfo.chillstatus.id === "6284ad91fbfac22364a6e431"
-                    ? "gray"
-                    : ""
-                }`,
+                backgroundColor: `${ListChillInfo.chillstatus.id === "6284ad91fbfac22364a6e431"
+                  ? "gray"
+                  : ""
+                  }`,
               }}
               onClick={handleSubmit}
             >

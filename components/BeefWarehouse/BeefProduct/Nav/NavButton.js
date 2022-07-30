@@ -30,6 +30,7 @@ export const NavButtonLeft = styled.button`
   vertical-align: middle;
   color: ${white};
   height: ${navbarHeight}px;
+  font-size: 18px;
 
   &:hover,
   &:active {

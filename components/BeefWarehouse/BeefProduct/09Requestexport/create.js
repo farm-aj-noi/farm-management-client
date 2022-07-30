@@ -171,7 +171,7 @@ function create() {
                         paddingBottom: "10px",
                     }}
                 >
-                    <Savebutton1 onClick={handleSubmit} disabled={!infore.producttype || !infore.name || infore.quantity} style={{ backgroundColor: `${!infore.producttype || !infore.name || infore.quantity ? "gray" : ""}`, }}>บันทึก</Savebutton1>
+                    <Savebutton1 onClick={handleSubmit} disabled={!infore.producttype || !infore.name || !infore.quantity} style={{ backgroundColor: `${!infore.producttype || !infore.name || !infore.quantity ? "gray" : ""}`, }}>บันทึก</Savebutton1>
                 </div>
             </form>
         </div>

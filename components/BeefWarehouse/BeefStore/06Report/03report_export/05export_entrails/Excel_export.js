@@ -14,7 +14,7 @@ const Excel_export = ({ prod }) => {
   const [data, setdata] = useState(prod);
   if (data !== prod) setdata(prod);
   const headers = [
-    { label: "เจ้าของซาก", key: "entrail.imslaughter.namefarmer" },
+    
     { label: "วันที่เบิกออก", key: "exportdate" },
     { label: "ทะเบียนขุน", key: "entrail.beeftype.nameTH" },
     { label: "เครื่องใน", key: "entrail.offal" },

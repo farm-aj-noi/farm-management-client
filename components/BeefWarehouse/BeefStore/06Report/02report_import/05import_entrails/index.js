@@ -29,12 +29,14 @@ export const IMPOERTENTRAILSEARCH = gql`
     $userName: String
     $startdate: String
     $enddate: String
+    $beefroom: String
   ) {
     imentrailSearch(
       namefarmer: $namefarmer
       userName: $userName
       startdate: $startdate
       enddate: $enddate
+      beefroom: $beefroom
     ) {
       importdate
       user {
@@ -57,24 +59,40 @@ export const IMPOERTENTRAILSEARCH = gql`
           namefarmer
         }
       }
+      beefroom {
+        roomname
+      }
     }
   }
 `;
+
+export const QUERYROOM = gql`
+  query Query {
+    allRoom {
+      id
+      roomname
+    }
+  }
+`;
+
 const index = () => {
+  const { data: dataroom } = useQuery(QUERYROOM);
   const [inputnamefarmer, SetInputnamefarmer] = useState("");
   const [inputusername, SetInputusername] = useState("");
   const [selectedstartdate, SetStartDateChange] = useState("");
   const [selectedenddate, SetEndDateChange] = useState("");
+  const [selectedbeefroom, setselectbeefroom] = useState("");
   const { data, loading, error } = useQuery(IMPOERTENTRAILSEARCH, {
     variables: {
       startdate: selectedstartdate,
       enddate: selectedenddate,
       namefarmer: inputnamefarmer,
       userName: inputusername,
+      beefroom: selectedbeefroom,
     },
   });
   return (
-    <DivBase>
+    <div style={{ marginTop: "100px" }}>
       <>
         <div
           style={{
@@ -95,7 +113,7 @@ const index = () => {
         <DivBase
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 270px 1100px 1fr",
+            gridTemplateColumns: "1fr 270px 1250px 1fr",
             gridRowGap: "15px",
             gridColumnGap: "20px",
             textAlign: "start",
@@ -120,7 +138,6 @@ const index = () => {
                 gridRowEnd: "3",
                 gridColumnStart: "3",
                 marginTop: "0px",
-                height: "130px",
               }}
             >
               <DivFromTop>
@@ -134,7 +151,6 @@ const index = () => {
                   style={{
                     display: "flex",
                     justifyContent: "center",
-                    marginBottom: "10px",
                   }}
                 >
                   <from style={{ fontSize: "20px" }}>
@@ -155,7 +171,7 @@ const index = () => {
                         width: "110px",
                         borderRadius: "4px",
                         border: "1px solid #AFAFAF",
-                        fontSize: "14px",
+                        fontSize: "16px",
                         textAlign: "center",
                       }}
                       onChange={(event) =>
@@ -179,12 +195,44 @@ const index = () => {
                         width: "110px",
                         borderRadius: "4px",
                         border: "1px solid #AFAFAF",
-                        fontSize: "14px",
+                        fontSize: "16px",
                         textAlign: "center",
                         marginRight: "10px",
                       }}
                       onChange={(event) => SetInputusername(event.target.value)}
                     />
+                    <label
+                      for="beef"
+                      style={{
+                        textAlign: "center",
+                        fontSize: "18px",
+                        marginRight: "10px",
+                      }}
+                    >
+                      ตำแหน่ง
+                    </label>
+                    <select
+                      name="roomname"
+                      id="roomname"
+                      style={{
+                        height: "35px",
+                        width: "110px",
+                        border: "1px solid #AFAFAF",
+                        borderRadius: "4px ",
+                        textAlign: "center",
+                        fontSize: "16px",
+                        marginRight: "10px",
+                      }}
+                      onChange={(event) => setselectbeefroom(event.target.value)}
+                    >
+                      <option value="">ห้อง</option>
+                      {dataroom &&
+                        dataroom.allRoom.map((prod) => (
+                          <option key={prod.id} value={prod.id}>
+                            {prod.roomname}
+                          </option>
+                        ))}
+                    </select>
                     <label
                       for="date"
                       style={{
@@ -253,7 +301,7 @@ const index = () => {
                 รายการที่ค้นหา
               </DivFromTop>
               <DivFromDown>
-                <div style={{ height: "250px", overflowY: "auto" }}>
+                <div style={{ height: `${data && data.imentrailSearch.length > 6 ? "380px" : ""}`, overflowY: "auto" }}>
                   <Table
                     striped
                     bordered
@@ -263,7 +311,7 @@ const index = () => {
                   >
                     {/* <LoadingSmall/> */}
                     <thead>
-                      <tr style={{ textAlign: "center" }}>
+                      <tr style={{ textAlign: "center", fontSize: "18px" }}>
                         <th>เจ้าของซาก</th>
                         <th>วันที่นำเข้า</th>
                         <th>เวลา</th>
@@ -279,39 +327,43 @@ const index = () => {
                         <th>ถุงน้ำดี</th>
                         <th>เศษซาก</th>
                         <th>รหัสบาร์โค้ด</th>
+                        <th>ห้อง</th>
                         <th>ผู้นำเข้า</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {data &&
-                        data.imentrailSearch.map((prod) => (
-                          <tr style={{ textAlign: "center" }}>
-                            <td>{prod.entrail.imslaughter.namefarmer}</td>
-                            <td>
-                              {dayjs(prod.importdate)
-                                .add(543, "year")
-                                .format("DD/MM/YYYY")}
-                            </td>
-                            <td>
-                              {dayjs(prod.importdate)
-                                .add(543, "year")
-                                .format("h:mm:ss A")}
-                            </td>
-                            <td>{prod.entrail.imslaughter.numcow}</td>
-                            <td>{prod.entrail.offal}</td>
-                            <td>{prod.entrail.toe}</td>
-                            <td>{prod.entrail.head}</td>
-                            <td>{prod.entrail.skin}</td>
-                            <td>{prod.entrail.liver}</td>
-                            <td>{prod.entrail.fat}</td>
-                            <td>{prod.entrail.onkale}</td>
-                            <td>{prod.entrail.tail}</td>
-                            <td>{prod.entrail.gallbladder}</td>
-                            <td>{prod.entrail.scrap}</td>
-                            <td>{prod.entrail.barcode}</td>
-                            <td>{prod.user.name}</td>
-                          </tr>
-                        ))}
+                      {data && data.imentrailSearch.length > 0 ? (data.imentrailSearch.map((prod) => (
+                        <tr style={{ textAlign: "center" }}>
+                          <td>{prod.entrail.imslaughter.namefarmer}</td>
+                          <td>
+                            {dayjs(prod.importdate)
+                              .add(543, "year")
+                              .format("DD/MM/YYYY")}
+                          </td>
+                          <td>
+                            {dayjs(prod.importdate)
+                              .add(543, "year")
+                              .format("h:mm:ss A")}
+                          </td>
+                          <td>{prod.entrail.imslaughter.numcow}</td>
+                          <td>{prod.entrail.offal}</td>
+                          <td>{prod.entrail.toe}</td>
+                          <td>{prod.entrail.head}</td>
+                          <td>{prod.entrail.skin}</td>
+                          <td>{prod.entrail.liver}</td>
+                          <td>{prod.entrail.fat}</td>
+                          <td>{prod.entrail.onkale}</td>
+                          <td>{prod.entrail.tail}</td>
+                          <td>{prod.entrail.gallbladder}</td>
+                          <td>{prod.entrail.scrap}</td>
+                          <td>{prod.entrail.barcode}</td>
+                          <td>{prod.beefroom.roomname}</td>
+                          <td>{prod.user.name}</td>
+                        </tr>
+                      ))) : (<tr style={{ textAlign: "center" }}>
+                        <td colSpan="17">ไม่พบข้อมูล</td>
+                      </tr>)
+                      }
                     </tbody>
                   </Table>
                 </div>
@@ -330,7 +382,7 @@ const index = () => {
           </>
         </DivBase>
       </>
-    </DivBase>
+    </div>
   );
 };
 

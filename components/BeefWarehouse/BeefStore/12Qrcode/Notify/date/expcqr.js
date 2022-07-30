@@ -6,8 +6,8 @@ import QRCode from "qrcode.react";
 import Link from "next/link";
 import Router from "next/router";
 
-const index = ({ datee }) => {
-  const [infodata, setinfodata] = useState(datee);
+const index = ({ datec }) => {
+  const [infodata, setinfodata] = useState(datec);
   const [testshow, setShow] = useState(false);
   const handleClose = () => {
     setShow(false);

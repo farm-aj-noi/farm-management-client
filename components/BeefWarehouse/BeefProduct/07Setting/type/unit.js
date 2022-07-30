@@ -1,20 +1,11 @@
 import React, { useState } from "react";
 import {
-  DivFrom,
-  DivFromTop,
-  DivFromDown,
-  HeaderColor,
   Searchinput,
 } from "../SettingFrom";
-import { DivBase } from "../../../../../utils/divBase";
-import { Icon } from "react-icons-kit";
-import { list } from "react-icons-kit/fa/list";
-import { iosSearchStrong } from "react-icons-kit/ionicons/iosSearchStrong";
+
 
 import {
   Savebuttoncolor,
-  Editbuttoncolor,
-  Removebuttoncolor,
 } from "../../../../../utils/buttonColor";
 
 import gql from "graphql-tag";
@@ -103,7 +94,7 @@ const unit = () => {
   return (
     <>
       <div>
-        หน่วยสินค้า : {}
+        หน่วยสินค้า : { }
         <Searchinput
           value={unitname.name}
           name="name"
