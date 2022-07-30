@@ -40,8 +40,8 @@ export const LISTGRADE = gql`
       weightcool
       barcode
       imslaughter {
-        pun
-      }
+      pun
+    }
       beeftype {
         code
       }
@@ -58,6 +58,7 @@ export const LISTGRADE = gql`
 
 function index() {
   const { data, loading, error } = useQuery(LISTGRADE);
+  console.log(data)
   return (
     <div>
       <DivCenter
