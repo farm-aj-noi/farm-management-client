@@ -63,7 +63,6 @@ const Listshelf = ({ Listshelfs }) => {
       id: Listshelf.id,
     },
   });
-  console.log(datashelf)
   return (
     <div
       style={{

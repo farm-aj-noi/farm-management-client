@@ -1,40 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import { ic_info_outline } from "react-icons-kit/md/ic_info_outline";
 import {
-  DivFrom,
+
   DivFromTop,
   DivFromDown,
-  HeaderColor,
-  Searchinput,
-  Addbutton,
+
 } from "../../SettingFrom";
-
-import {
-  Savebuttoncolor,
-  Editbuttoncolor,
-  Removebuttoncolor,
-} from "../../../../../../utils/buttonColor";
-
-import {
-  Savebutton,
-  Editbutton,
-  Removebutton,
-} from "../../../../../../utils/button";
-
-import { DivBase } from "../../../../../../utils/divBase";
 
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
 
-import Nav_setting from "../../Nav_setting";
-
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import {  useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
-
-import Router from "next/router";
 
 import List1 from "./list1";
 
@@ -47,59 +25,11 @@ export const QUERYROOM = gql`
   }
 `;
 
-export const QUERYSHELF = gql`
-  query QUERYSHELF($id: ID) {
-    listShelf(id: $id) {
-      shelfname
-      id
-    }
-  }
-`;
 
-export const CREATBASKET = gql`
-  mutation CREATBASKET($beefroom: String, $shelf: String, $basketname: String) {
-    createBasket(beefroom: $beefroom, shelf: $shelf, basketname: $basketname) {
-      id
-      basketname
-    }
-  }
-`;
 
-export const QUERYBASKET = gql`
-  query QUERYBASKET($id: ID) {
-    allBasket(id: $id) {
-      basketname
-      shelf {
-        shelfname
-      }
-    }
-  }
-`;
-
-export const QUERYBASKETALL = gql`
-  query Baskets {
-    Baskets {
-      id
-      basketname
-      shelf {
-        shelfname
-        id
-      }
-      beefroom {
-        roomname
-        id
-      }
-    }
-  }
-`;
 
 const basket1 = () => {
   const { data: dataroom } = useQuery(QUERYROOM);
-  const { data: shelf } = useQuery(QUERYSHELF, {
-    variables: {
-      id: dataroom,
-    },
-  });
   return (
     <>
       <div>

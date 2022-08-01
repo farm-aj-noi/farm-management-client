@@ -1,32 +1,17 @@
 import React, { useState } from "react";
 
 import {
-  DivFrom,
   DivFromTop,
   DivFromDown,
-  HeaderColor,
   Searchinput,
-  Addbutton,
 } from "../../SettingFrom";
 
 import {
   Savebuttoncolor,
-  Editbuttoncolor,
-  Removebuttoncolor,
 } from "../../../../../../utils/buttonColor";
-
-import {
-  Savebutton,
-  Editbutton,
-  Removebutton,
-} from "../../../../../../utils/button";
-
-import { DivBase } from "../../../../../../utils/divBase";
 
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
-
-import Nav_setting from "../../Nav_setting";
 
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
@@ -35,8 +20,6 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 import Router from "next/router";
-
-import List1 from "./list1";
 
 export const QUERYROOM = gql`
   query Query {
@@ -65,37 +48,8 @@ export const CREATBASKET = gql`
   }
 `;
 
-export const QUERYBASKET = gql`
-  query QUERYBASKET($id: ID) {
-    allBasket(id: $id) {
-      basketname
-      shelf {
-        shelfname
-      }
-    }
-  }
-`;
-
-export const QUERYBASKETALL = gql`
-  query Baskets {
-    Baskets {
-      id
-      basketname
-      shelf {
-        shelfname
-        id
-      }
-      beefroom {
-        roomname
-        id
-      }
-    }
-  }
-`;
-
 const basket = () => {
   const MySwal = withReactContent(Swal);
-  const { data: databasket } = useQuery(QUERYBASKETALL);
   const { data: dataroom } = useQuery(QUERYROOM);
   const [Infobasket, setInfobasket] = useState({
     basketname: "",
@@ -121,7 +75,7 @@ const basket = () => {
           confirmButtonText: (
             <span
               onClick={() =>
-                Router.reload("beefwarehouse/beefstore/setting/room")
+                Router.push("beefwarehouse/beefstore/setting/basket").then(() => Router.reload())
               }
             >
               ตกลง
@@ -167,7 +121,7 @@ const basket = () => {
           >
             {" "}
             <div>
-              ห้องจัดเก็บ : {}
+              ห้องจัดเก็บ : { }
               <select
                 name="beefroom"
                 id="beefroom"
@@ -192,7 +146,7 @@ const basket = () => {
               </select>
             </div>
             <div style={{ marginLeft: "10px" }}>
-              ชั้นจัดเก็บ : {}
+              ชั้นจัดเก็บ : { }
               <select
                 disabled={!Infobasket.beefroom}
                 name="shelf"
@@ -218,7 +172,7 @@ const basket = () => {
               </select>
             </div>
             <div style={{ marginLeft: "10px" }}>
-              ชื่อตะกร้าจัดเก็บ : {}
+              ชื่อตะกร้าจัดเก็บ : { }
               <Searchinput
                 disabled={!Infobasket.shelf}
                 type="text"

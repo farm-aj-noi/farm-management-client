@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/react-hooks";
 import React, { useState } from "react";
 import gql from "graphql-tag";
 
@@ -8,13 +8,7 @@ import withReactContent from "sweetalert2-react-content";
 import Router from "next/router";
 
 import {
-  DivFrom,
-  DivFromTop,
-  DivFromDown,
-  HeaderColor,
   Searchinput,
-  Addbutton,
-  DivBase1,
 } from "../../SettingFrom";
 import {
   Savebuttoncolor,
@@ -29,7 +23,6 @@ import {
 } from "../../../../../../utils/button";
 
 import { Icon } from "react-icons-kit";
-import { list } from "react-icons-kit/fa/list";
 
 export const UPDATECOUNT = gql`
   mutation UPDATECOUNT($id: ID, $totalbeef: String) {
@@ -65,7 +58,7 @@ const editkeep = ({ edittype }) => {
         confirmButtonText: (
           <span
             onClick={() =>
-              Router.reload("beefwarehouse/beefstore/setting/shelf")
+              Router.push("beefwarehouse/beefstore/setting/shelf").then(() => Router.reload())
             }
           >
             ตกลง
@@ -104,7 +97,7 @@ const editkeep = ({ edittype }) => {
         confirmButtonText: (
           <span
             onClick={() =>
-              Router.reload("beefwarehouse/beefstore/setting/shelf")
+              Router.push("beefwarehouse/beefstore/setting/shelf").then(() => Router.reload())
             }
           >
             ตกลง
@@ -162,7 +155,7 @@ const editkeep = ({ edittype }) => {
             style={{
               marginLeft: "5px",
             }}
-             onClick={handdleSubmitDelete}
+            onClick={handdleSubmitDelete}
           >
             <Removebutton />
           </Removebuttoncolor>

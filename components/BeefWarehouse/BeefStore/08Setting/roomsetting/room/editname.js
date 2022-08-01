@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/react-hooks";
 import React, { useState } from "react";
 import gql from "graphql-tag";
 
@@ -8,28 +8,18 @@ import withReactContent from "sweetalert2-react-content";
 import Router from "next/router";
 
 import {
-  DivFrom,
-  DivFromTop,
-  DivFromDown,
-  HeaderColor,
   Searchinput,
-  Addbutton,
-  DivBase1,
 } from "../../SettingFrom";
 import {
   Savebuttoncolor,
   Editbuttoncolor,
-  Removebuttoncolor,
 } from "../../../../../../utils/buttonColor";
 
 import {
   Savebutton,
   Editbutton,
-  Removebutton,
 } from "../../../../../../utils/button";
 
-import { Icon } from "react-icons-kit";
-import { list } from "react-icons-kit/fa/list";
 
 export const UPDATEROOMNAME = gql`
   mutation UPDATEROOMNAME($id: ID, $roomname: String) {
@@ -56,7 +46,7 @@ const editname = ({ idroom }) => {
         confirmButtonText: (
           <span
             onClick={() =>
-              Router.reload("beefwarehouse/beefstore/setting/room")
+              Router.push("beefwarehouse/beefstore/setting/room").then(() => Router.reload())
             }
           >
             ตกลง

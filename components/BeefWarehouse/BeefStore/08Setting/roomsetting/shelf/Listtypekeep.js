@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/react-hooks";
 import React, { useState } from "react";
 import gql from "graphql-tag";
 
@@ -8,34 +8,26 @@ import withReactContent from "sweetalert2-react-content";
 import Router from "next/router";
 
 import {
-  DivFrom,
-  DivFromTop,
-  DivFromDown,
-  HeaderColor,
   Searchinput,
   Addbutton,
-  DivBase1,
 } from "../../SettingFrom";
 import {
   Savebuttoncolor,
-  Editbuttoncolor,
   Removebuttoncolor,
 } from "../../../../../../utils/buttonColor";
 
 import {
-  Savebutton,
-  Editbutton,
   Removebutton,
 } from "../../../../../../utils/button";
 
-import { DivBase } from "../../../../../../utils/divBase";
 
-import { Icon } from "react-icons-kit";
-import { list } from "react-icons-kit/fa/list";
 
 import Edittotalbeef from "./editkeep";
 import { Accordion, Card, Button } from "react-bootstrap";
 import Editname from "./editname";
+
+import { Spinner } from "react-bootstrap";
+
 
 export const DELETESHELF = gql`
   mutation DELETESHELF($id: ID) {
@@ -79,7 +71,7 @@ const Listtypekeep = ({ listkeep }) => {
         confirmButtonText: (
           <span
             onClick={() =>
-              Router.reload("beefwarehouse/beefstore/setting/shelf")
+              Router.push("beefwarehouse/beefstore/setting/shelf").then(() => Router.reload())
             }
           >
             ตกลง
@@ -103,23 +95,7 @@ const Listtypekeep = ({ listkeep }) => {
   };
   const [createtypekeep] = useMutation(UPDATETYPEKEEP, {
     onCompleted: (data) => {
-      if (data) {
-        MySwal.fire({
-          icon: "success",
-          title: "สำเร็จ",
-          text: "ทำการตั้งค่าเสร็จสิ้น",
-          confirmButtonText: (
-            <span
-              onClick={() =>
-                Router.reload("beefwarehouse/beefstore/setting/shelf")
-              }
-            >
-              ตกลง
-            </span>
-          ),
-          confirmButtonColor: "#3085d6",
-        });
-      }
+
     },
   });
 
@@ -153,6 +129,27 @@ const Listtypekeep = ({ listkeep }) => {
     setInputListshelf(listshelf);
   };
 
+  const alert = () => {
+
+    MySwal.fire({
+      icon: "success",
+      title: "สำเร็จ",
+      text: "ทำการตั้งค่าเสร็จสิ้น",
+      confirmButtonText: (
+        <span
+          onClick={() =>
+            Router.push("beefwarehouse/beefstore/setting/shelf").then(() => Router.reload())
+          }
+        >
+          ตกลง
+        </span>
+      ),
+      confirmButtonColor: "#3085d6",
+    });
+  }
+
+  const [loadingCreate, setLoadingCreate] = useState(false);
+
   const handleSubmitshelf = async () => {
     try {
       for (let j = 0; j < inputListshelf.length; j++) {
@@ -163,7 +160,10 @@ const Listtypekeep = ({ listkeep }) => {
             shelf: infolistkeep.id,
           },
         });
+        setLoadingCreate(true)
       }
+      setLoadingCreate(false)
+      alert()
     } catch (error) {
       console.log(error);
     }
@@ -410,15 +410,23 @@ const Listtypekeep = ({ listkeep }) => {
                       >
                         ยกเลิก
                       </Removebuttoncolor>
-                      <Savebuttoncolor
-                        style={{
-                          height: "38px",
-                          width: " 50px",
-                        }}
-                        onClick={handleSubmitshelf}
-                      >
-                        บันทึก
-                      </Savebuttoncolor>
+                      {loadingCreate ? (<Spinner
+                        style={{ margin: "0px 12px 0px auto", float: "right" }}
+                        animation="border"
+                        variant="primary"
+                      />
+                      ) : (
+                        <Savebuttoncolor
+                          style={{
+                            height: "38px",
+                            width: " 50px",
+                          }}
+                          onClick={handleSubmitshelf}
+                        >
+                          บันทึก
+                        </Savebuttoncolor>
+                      )}
+
                     </div>
                   </div>
                 </div>

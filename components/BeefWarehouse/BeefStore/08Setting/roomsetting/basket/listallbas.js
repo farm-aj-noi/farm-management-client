@@ -8,14 +8,9 @@ import withReactContent from "sweetalert2-react-content";
 import Router from "next/router";
 
 import {
-  DivFrom,
-  DivFromTop,
-  DivFromDown,
-  HeaderColor,
   Searchinput,
-  Addbutton,
-  DivBase1,
 } from "../../SettingFrom";
+
 import {
   Savebuttoncolor,
   Editbuttoncolor,
@@ -25,15 +20,9 @@ import {
 import {
   Savebutton,
   Editbutton,
-  Removebutton,
 } from "../../../../../../utils/button";
 
-import { DivBase } from "../../../../../../utils/divBase";
-
-import { Icon } from "react-icons-kit";
-import { list } from "react-icons-kit/fa/list";
-
-import { Accordion, Card, Button } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 
 export const UPDATEBASKET = gql`
   mutation UPDATEBASKET($id: ID, $basketname: String) {
@@ -68,7 +57,7 @@ const listallbas = ({ listallbas }) => {
         confirmButtonText: (
           <span
             onClick={() =>
-              Router.reload("beefwarehouse/beefstore/setting/basket")
+              Router.push("beefwarehouse/beefstore/setting/basket").then(() => Router.reload())
             }
           >
             ตกลง
@@ -108,7 +97,7 @@ const listallbas = ({ listallbas }) => {
         confirmButtonText: (
           <span
             onClick={() =>
-              Router.reload("beefwarehouse/beefstore/setting/basket")
+              Router.push("beefwarehouse/beefstore/setting/basket").then(() => Router.reload())
             }
           >
             ตกลง

@@ -1,12 +1,6 @@
 import React, { useState } from "react";
 import {
-  DivFrom,
-  DivFromTop,
-  DivFromDown,
-  HeaderColor,
   Searchinput,
-  Addbutton,
-  DivBase1,
 } from "../../SettingFrom";
 import {
   Savebuttoncolor,
@@ -49,7 +43,7 @@ export const DELETETYPEKEEP = gql`
 const edittotalbeef = ({ editcount }) => {
   const MySwal = withReactContent(Swal);
   const [infoCount, seinfoCount] = useState(editcount);
- // console.log(infoCount);
+  // console.log(infoCount);
   const [editkeep, seteditkeep] = useState(false);
 
   const [uppdatetypekeep, { loading, error }] = useMutation(UPDATECOUNT, {
@@ -63,7 +57,7 @@ const edittotalbeef = ({ editcount }) => {
         confirmButtonText: (
           <span
             onClick={() =>
-              Router.reload("beefwarehouse/beefstore/setting/room")
+              Router.push("beefwarehouse/beefstore/setting/room").then(() => Router.reload())
             }
           >
             ตกลง
@@ -102,7 +96,7 @@ const edittotalbeef = ({ editcount }) => {
         confirmButtonText: (
           <span
             onClick={() =>
-              Router.reload("beefwarehouse/beefstore/setting/room")
+              Router.push("beefwarehouse/beefstore/setting/room").then(() => Router.reload())
             }
           >
             ตกลง

@@ -55,7 +55,7 @@ const editname = ({ listkeep1 }) => {
         confirmButtonText: (
           <span
             onClick={() =>
-              Router.reload("beefwarehouse/beefstore/setting/shelf")
+              Router.push("beefwarehouse/beefstore/setting/shelf").then(() => Router.reload())
             }
           >
             ตกลง
@@ -99,7 +99,7 @@ const editname = ({ listkeep1 }) => {
             marginTop: "0px",
           }}
         >
-          ชื่อชั้นจัดเก็บ : {}
+          ชื่อชั้นจัดเก็บ : { }
           <Searchinput
             type="text"
             id="shelfname"
@@ -127,7 +127,7 @@ const editname = ({ listkeep1 }) => {
             marginTop: "0px",
           }}
         >
-          ชื่อชั้นจัดเก็บ : {}
+          ชื่อชั้นจัดเก็บ : { }
           <Searchinput
             /* value={prod.shelfname} */
             type="text"

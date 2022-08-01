@@ -1,32 +1,22 @@
-import React, { useState, useeffect } from "react";
+import React, { useState } from "react";
 
 import {
-  DivFrom,
   DivFromTop,
   DivFromDown,
-  HeaderColor,
   Searchinput,
   Addbutton,
-  DivBase1,
 } from "../../SettingFrom";
 import {
   Savebuttoncolor,
-  Editbuttoncolor,
   Removebuttoncolor,
 } from "../../../../../../utils/buttonColor";
 
 import {
-  Savebutton,
-  Editbutton,
   Removebutton,
 } from "../../../../../../utils/button";
 
-import { DivBase } from "../../../../../../utils/divBase";
-
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
-
-import Nav_setting from "../../Nav_setting";
 
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
@@ -36,9 +26,8 @@ import withReactContent from "sweetalert2-react-content";
 
 import Router from "next/router";
 
-import List from "./Listroom";
 import { Spinner } from "react-bootstrap";
-import Editname from "./editname";
+
 
 export const CREATEROOMS = gql`
   mutation CREATEROOMS($roomname: String) {
@@ -129,8 +118,7 @@ const room = () => {
       beeftype: "",
     }, //get totalbeef & beeftype room
   ]);
-  const [test, setTest] = useState("");
-  const [testsuccess, setTestsuccess] = useState(false);
+
   const alert = () => {
     MySwal.fire({
       icon: "success",
@@ -148,7 +136,7 @@ const room = () => {
       confirmButtonColor: "#3085d6",
     });
   }
-  const [createtypekeep] = useMutation(CREATETYPEKEEP, {
+  const [createtypekeep, { error, reset }] = useMutation(CREATETYPEKEEP, {
     onCompleted: (data) => {
     },
   });
@@ -196,6 +184,19 @@ const room = () => {
       console.log(error);
     }
   };
+
+  const testallselect = () => {
+    var x = document.getElementById("beeftype");
+    console.log(x)
+    return;
+    var txt;
+    var i;
+    for (i = 0; i < x.length; i++) {
+      txt = txt + "\n" + x.options[i].text;
+    }
+
+  }
+
   return (
     <div>
       <DivFromTop>
@@ -303,6 +304,7 @@ const room = () => {
                           }}
                         >
                           <option value="">เลือก</option>
+                          <option value="ทั้งหมด">ทั้งหมด</option>
                           <option value="5f1000e28d55662dcc23d95e">
                             ซากซ้าย
                           </option>

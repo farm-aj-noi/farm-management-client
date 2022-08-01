@@ -9,32 +9,19 @@ import withReactContent from "sweetalert2-react-content";
 
 import Edittotal from "./edittotalbeef";
 import Router from "next/router";
-
+import { Spinner } from "react-bootstrap";
 import {
-  DivFrom,
-  DivFromTop,
-  DivFromDown,
-  HeaderColor,
   Searchinput,
   Addbutton,
-  DivBase1,
 } from "../../SettingFrom";
 import {
   Savebuttoncolor,
-  Editbuttoncolor,
   Removebuttoncolor,
 } from "../../../../../../utils/buttonColor";
 
 import {
-  Savebutton,
-  Editbutton,
   Removebutton,
 } from "../../../../../../utils/button";
-
-import { DivBase } from "../../../../../../utils/divBase";
-
-import { Icon } from "react-icons-kit";
-import { list } from "react-icons-kit/fa/list";
 
 import { Accordion, Card, Button } from "react-bootstrap";
 
@@ -95,7 +82,7 @@ const deleteroom = ({ idroom }) => {
         confirmButtonText: (
           <span
             onClick={() =>
-              Router.reload("beefwarehouse/beefstore/setting/room")
+              Router.push("beefwarehouse/beefstore/setting/room").then(() => Router.reload())
             }
           >
             ตกลง
@@ -129,23 +116,7 @@ const deleteroom = ({ idroom }) => {
 
   const [createtypekeep] = useMutation(UPDATETYPEKEEP, {
     onCompleted: (data) => {
-      if (data) {
-        MySwal.fire({
-          icon: "success",
-          title: "สำเร็จ",
-          text: "ทำการตั้งค่าเสร็จสิ้น",
-          confirmButtonText: (
-            <span
-              onClick={() =>
-                Router.reload("beefwarehouse/beefstore/setting/room")
-              }
-            >
-              ตกลง
-            </span>
-          ),
-          confirmButtonColor: "#3085d6",
-        });
-      }
+
     },
   });
 
@@ -172,6 +143,26 @@ const deleteroom = ({ idroom }) => {
     setInputListroom(listroom);
   };
 
+  const alert = () => {
+    MySwal.fire({
+      icon: "success",
+      title: "สำเร็จ",
+      text: "ทำการตั้งค่าเสร็จสิ้น",
+      confirmButtonText: (
+        <span
+          onClick={() =>
+            Router.push("beefwarehouse/beefstore/setting/room").then(() => Router.reload())
+          }
+        >
+          ตกลง
+        </span>
+      ),
+      confirmButtonColor: "#3085d6",
+    });
+  }
+
+  const [loadingCreate, setLoadingCreate] = useState(false);
+
   const handleSubmitroom = async () => {
     try {
       for (let i = 0; i < inputListroom.length; i++) {
@@ -182,7 +173,10 @@ const deleteroom = ({ idroom }) => {
             beefroom: roominfo.id,
           },
         });
+        setLoadingCreate(true)
       }
+      setLoadingCreate(false)
+      alert()
     } catch (error) {
       console.log(error);
     }
@@ -418,15 +412,23 @@ const deleteroom = ({ idroom }) => {
                           >
                             ยกเลิก
                           </Removebuttoncolor>
-                          <Savebuttoncolor
-                            style={{
-                              height: "38px",
-                              width: " 50px",
-                            }}
-                            onClick={handleSubmitroom}
-                          >
-                            บันทึก
-                          </Savebuttoncolor>
+                          {loadingCreate ? (
+                            <Spinner
+                              style={{ margin: "0px 12px 0px auto", float: "right" }}
+                              animation="border"
+                              variant="primary"
+                            />
+                          ) : (
+                            <Savebuttoncolor
+                              style={{
+                                height: "38px",
+                                width: " 50px",
+                              }}
+                              onClick={handleSubmitroom}
+                            >
+                              บันทึก
+                            </Savebuttoncolor>
+                          )}
                         </div>
                       </div>
                     </>
