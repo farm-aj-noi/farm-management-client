@@ -73,7 +73,7 @@ export const QUERY_INFO = gql`
       }
       treats {
         id
-        date
+        datet
         dise
         symptom
         medi
@@ -148,7 +148,7 @@ const Index = () => {
             }}
           >
             <div className="mb-3" style={{ margin: "auto" }}>
-              กรุณากรอกบาร์โค๊ด : {}
+              กรุณากรอกบาร์โค๊ด : { }
               <Searchinput
                 value={inputnumkun}
                 onChange={(event) => setInputnumkun(event.target.value)}
@@ -251,9 +251,9 @@ const Index = () => {
                     ราคา :{" "}
                     {data.Tracking.price
                       ? data.Tracking.price.toLocaleString(undefined, {
-                          minimumFractionDigits: 2,
-                          maximumFractionDigits: 2,
-                        }) + " บาท"
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      }) + " บาท"
                       : "ไม่ระบุ"}
                   </div>
                   <div>
@@ -267,9 +267,9 @@ const Index = () => {
                     วันหมดอายุ :{" "}
                     {data.Tracking.BBE
                       ? dayjs(data.Tracking.BBE)
-                          .add(543, "y")
-                          .locale("th")
-                          .format("DD MMMM YYYY")
+                        .add(543, "y")
+                        .locale("th")
+                        .format("DD MMMM YYYY")
                       : "ไม่ระบุ"}
                   </div>
                 </div>
@@ -291,10 +291,10 @@ const Index = () => {
                 {tab === 1
                   ? "ข้อมูลทั่วไปของโค"
                   : tab === 2
-                  ? "ประวัติการขุน"
-                  : tab === 3
-                  ? "ประวัติการให้ยา"
-                  : ""}
+                    ? "ประวัติการขุน"
+                    : tab === 3
+                      ? "ประวัติการให้ยา"
+                      : ""}
               </DivFromTop>
               <DivFromDown>
                 <div style={{ margin: "auto", minWidth: "100%" }}>
@@ -349,8 +349,8 @@ const Index = () => {
                       </thead>
                       <tbody>
                         {datainfo &&
-                        datainfo.Trackinginfo &&
-                        datainfo.Trackinginfo.feeds.length > 0 ? (
+                          datainfo.Trackinginfo &&
+                          datainfo.Trackinginfo.feeds.length > 0 ? (
                           datainfo.Trackinginfo.feeds.map((prod) => (
                             <tr key={prod.id} style={{ textAlign: "center" }}>
                               <td>
@@ -402,8 +402,8 @@ const Index = () => {
                       </thead>
                       <tbody>
                         {datainfo &&
-                        datainfo.Trackinginfo &&
-                        datainfo.Trackinginfo.treats.length > 0 ? (
+                          datainfo.Trackinginfo &&
+                          datainfo.Trackinginfo.treats.length > 0 ? (
                           datainfo.Trackinginfo.treats.map((prod) => (
                             <tr key={prod.id} style={{ textAlign: "center" }}>
                               <td>

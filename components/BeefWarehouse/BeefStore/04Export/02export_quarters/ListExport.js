@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { Barcodebuttoncolor } from "../../../../../utils/buttonColor";
-import { Qrcodebutton } from "../../../../../utils/button";
 import dayjs from "dayjs";
 import Modalqrcode from "../../12Qrcode/Export/exqqr";
 const ListExport = ({ exquarter }) => {

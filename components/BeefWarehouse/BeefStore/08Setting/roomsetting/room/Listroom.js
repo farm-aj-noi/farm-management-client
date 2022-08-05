@@ -36,6 +36,10 @@ import { DivBase } from "../../../../../../utils/divBase";
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
 
+import { Accordion, Card, Button } from "react-bootstrap";
+
+import Editname from "./editname";
+
 export const DELETEROOM = gql`
   mutation DELETEROOM($id: ID) {
     deleteBeefroom(id: $id) {
@@ -188,122 +192,250 @@ const deleteroom = ({ idroom }) => {
 
   return (
     <>
-      {edit ? (
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: `200px 200px 200px 200px`,
-          }}
-        >
-          <>
+      <Accordion>
+        <Card>
+          <Card.Header>
             <div
               style={{
-                width: "100%",
-                gridRowStart: "1",
-                gridRowEnd: "1",
-                gridColumnStart: "1",
+                display: "grid",
+                gridTemplateColumns: "300px 1fr 150px 150px ",
               }}
             >
-              ประเภทจัดเก็บ : {}
-              {roominfo &&
-                roominfo.typekeep.map((prod) => (
-                  <select
-                    value={prod.beeftype.id}
-                    style={{
-                      height: "38px",
-                      width: "156px",
-                      border: "1px solid #AFAFAF",
-                      borderRadius: "4px",
-                      textAlign: "center",
-                      fontSize: "14px",
-                      marginTop: "10px",
-                    }}
-                    disabled
-                  >
-                    <option>{prod.beeftype.nameTH}</option>
-                  </select>
-                ))}
+              <Editname key={roominfo.id} idroom={roominfo} />
+              <div></div>
+              <Accordion.Toggle
+                as={Button}
+                variant="link"
+                eventKey={roominfo.id}
+                style={{
+                  float: "right",
+                  margin: "0px 0",
+                  padding: "5px 8px",
+                  color: "white",
+                  background: "#3bafda",
+                }}
+              >
+                รายละเอียด
+              </Accordion.Toggle>
+              <Removebuttoncolor
+                onClick={handdleSubmitDelete}
+                style={{ marginLeft: "10px", fontSize: "16px", gridColumStart: "4" }}
+              >
+                ลบ
+              </Removebuttoncolor>
             </div>
-            <div
-              style={{
-                width: "100%",
-                gridRowStart: "1",
-                gridRowEnd: "1",
-                gridColumnStart: "2",
-              }}
-            >
-              จำนวน : {}
-              <>
-                {data &&
-                  data.TypeRoom.map((prod) => (
-                    <Edittotal key={prod.id} editcount={prod} />
-                  ))}
-              </>
-            </div>
-            <div
-              style={{
-                gridRowStart: "2",
-                gridRowEnd: "2",
-                gridColumnStart: "1",
-                marginBomtom: "100px",
-              }}
-            >
-              {inputListroom.map((x, i) => {
-                return (
+          </Card.Header>
+          <Accordion.Collapse eventKey={roominfo.id}>
+            <Card.Body>
+              {
+                edit ? (
                   <div
                     style={{
-                      marginTop: "10px",
                       display: "grid",
-                      gridColumStart: "1",
-                      gridColumn: `1 ${inputListroom.length !== 1 ? "" : ""}`,
-                      gridTemplateColumns: `200px 200px 200px ${
-                        inputListroom.length !== 1 ? "40px" : ""
-                      } 200px`,
+                      gridTemplateColumns: `200px 200px 200px 200px `,
                     }}
                   >
-                    <div
-                      style={{
-                        width: "100%",
-                        gridRowStart: "1",
-                        gridRowEnd: "1",
-                        gridColumnStart: "1",
-                      }}
-                    >
-                      {" "}
-                      ประเภทจัดเก็บ : {}
-                      <select
-                        name="beeftype"
-                        id="beeftype"
-                        value={inputListroom[i].beeftype}
-                        onChange={(e) => handleInputroom(e, i)}
+                    <>
+                      <div
                         style={{
-                          height: "38px",
-                          width: "156px",
-                          border: "1px solid #AFAFAF",
-                          borderRadius: "4px",
-                          textAlign: "center",
-                          fontSize: "14px",
+                          width: "100%",
+                          gridRowStart: "1",
+                          gridRowEnd: "1",
+                          gridColumnStart: "2",
                         }}
                       >
-                        <option value="">เลือก</option>
-                        <option value="5f1000e28d55662dcc23d95e">
-                          ซากซ้าย
-                        </option>
-                        <option value="5f1000ee8d55662dcc23d960">ซากขวา</option>
-                        <option value="5f338f035f7703096453abb8">
-                          ซากขวา-ขาหน้า
-                        </option>
-                        <option value="5f338f0d5f7703096453abb9">
-                          ซากขวา-ขาหลัง
-                        </option>
-                        <option value="5f338eeb5f7703096453abb6">
-                          ซากซ้าย-ขาหน้า
-                        </option>
-                        <option value="5f338ef65f7703096453abb7">
-                          ซากซ้าย-ขาหลัง
-                        </option>
-                      </select>
-                    </div>
+                        ประเภทจัดเก็บ : { }
+                        {roominfo &&
+                          roominfo.typekeep.map((prod) => (
+                            <select
+                              value={prod.beeftype.id}
+                              style={{
+                                height: "38px",
+                                width: "156px",
+                                border: "1px solid #AFAFAF",
+                                borderRadius: "4px",
+                                textAlign: "center",
+                                fontSize: "14px",
+                                marginTop: "10px",
+                              }}
+                              disabled
+                            >
+                              <option>{prod.beeftype.nameTH}</option>
+                            </select>
+                          ))}
+                      </div>
+                      <div
+                        style={{
+                          width: "100%",
+                          gridRowStart: "1",
+                          gridRowEnd: "1",
+                          gridColumnStart: "3",
+                        }}
+                      >
+                        จำนวน : { }
+                        <>
+                          {data &&
+                            data.TypeRoom.map((prod) => (
+                              <Edittotal key={prod.id} editcount={prod} />
+                            ))}
+                        </>
+                      </div>
+                      <div
+                        style={{
+                          gridRowStart: "2",
+                          gridRowEnd: "2",
+                          gridColumnStart: "2",
+                          marginBomtom: "100px",
+                        }}
+                      >
+                        {inputListroom.map((x, i) => {
+                          return (
+                            <div
+                              style={{
+                                marginTop: "10px",
+                                display: "grid",
+                                gridColumStart: "1",
+                                gridColumn: `1 ${inputListroom.length !== 1 ? "" : ""}`,
+                                gridTemplateColumns: `200px 200px 200px ${inputListroom.length !== 1 ? "40px" : ""
+                                  } 200px`,
+                              }}
+                            >
+                              <div
+                                style={{
+                                  width: "100%",
+                                  gridRowStart: "1",
+                                  gridRowEnd: "1",
+                                  gridColumnStart: "1",
+                                }}
+                              >
+                                {" "}
+                                ประเภทจัดเก็บ : { }
+                                <select
+                                  name="beeftype"
+                                  id="beeftype"
+                                  value={inputListroom[i].beeftype}
+                                  onChange={(e) => handleInputroom(e, i)}
+                                  style={{
+                                    height: "38px",
+                                    width: "156px",
+                                    border: "1px solid #AFAFAF",
+                                    borderRadius: "4px",
+                                    textAlign: "center",
+                                    fontSize: "14px",
+                                  }}
+                                >
+                                  <option value="">เลือก</option>
+                                  <option value="5f1000e28d55662dcc23d95e">
+                                    ซากซ้าย
+                                  </option>
+                                  <option value="5f1000ee8d55662dcc23d960">ซากขวา</option>
+                                  <option value="5f338f035f7703096453abb8">
+                                    ซากขวา-ขาหน้า
+                                  </option>
+                                  <option value="5f338f0d5f7703096453abb9">
+                                    ซากขวา-ขาหลัง
+                                  </option>
+                                  <option value="5f338eeb5f7703096453abb6">
+                                    ซากซ้าย-ขาหน้า
+                                  </option>
+                                  <option value="5f338ef65f7703096453abb7">
+                                    ซากซ้าย-ขาหลัง
+                                  </option>
+                                </select>
+                              </div>
+                              <div
+                                style={{
+                                  width: "100%",
+                                  gridRowStart: "1",
+                                  gridRowEnd: "1",
+                                  gridColumnStart: "2",
+                                }}
+                              >
+                                จำนวน : { }
+                                <Searchinput
+                                  style={{
+                                    width: "150px",
+                                    textAlign: "center",
+                                    backgroundColor: `${!inputListroom[i].beeftype ? "#ececec" : ""
+                                      }`,
+                                  }}
+                                  disabled={!inputListroom[i].beeftype}
+                                  name="totalbeef"
+                                  value={inputListroom[i].totalbeef}
+                                  onChange={(e) => handleInputroom(e, i)}
+                                ></Searchinput>
+                                {inputListroom.length !== 1 && (
+                                  <Removebuttoncolor
+                                    style={{
+                                      height: "38px",
+                                      margin: " auto auto 0",
+                                      width: " 38px",
+                                    }}
+                                    onClick={() => handleRemoveClickroom(i)}
+                                  >
+                                    <Removebutton />
+                                  </Removebuttoncolor>
+                                )}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                      <div
+                        style={{
+                          gridRowStart: "3",
+                          gridColumnStart: "2",
+                          gridColumnEnd: "4",
+                          marginTop: "20px",
+                          marginLeft: "133px"
+                        }}
+                      >
+                        <div
+                          style={{
+                            display: "flex",
+                            marginLeft: "5px",
+                          }}
+                        >
+                          <Addbutton
+                            style={{
+                              height: "38px",
+                              width: " 150px",
+                              marginRight: "5px",
+                              fontSize: "16px"
+                            }}
+                            onClick={handleAddClickroom}
+                          >
+                            เพิ่มประเภทจัดเก็บ
+                          </Addbutton>
+                          <Removebuttoncolor
+                            style={{
+                              height: "38px",
+                              width: "50px",
+                              fontSize: "16px",
+                              marginRight: "5px"
+                            }}
+                            onClick={() => setedit(false)}
+                          >
+                            ยกเลิก
+                          </Removebuttoncolor>
+                          <Savebuttoncolor
+                            style={{
+                              height: "38px",
+                              width: " 50px",
+                            }}
+                            onClick={handleSubmitroom}
+                          >
+                            บันทึก
+                          </Savebuttoncolor>
+                        </div>
+                      </div>
+                    </>
+                  </div>
+                ) : (
+                  <div style={{
+                    display: "grid",
+                    gridTemplateColumns: `200px 200px 200px 200px `,
+                  }}>
                     <div
                       style={{
                         width: "100%",
@@ -312,161 +444,74 @@ const deleteroom = ({ idroom }) => {
                         gridColumnStart: "2",
                       }}
                     >
-                      จำนวน : {}
-                      <Searchinput
+                      ประเภทจัดเก็บ : { }
+                      {roominfo &&
+                        roominfo.typekeep.map((prod) => (
+                          <select
+                            value={prod.beeftype.id}
+                            style={{
+                              height: "38px",
+                              width: "156px",
+                              border: "1px solid #AFAFAF",
+                              borderRadius: "4px",
+                              textAlign: "center",
+                              fontSize: "14px",
+                              marginTop: "10px",
+                            }}
+                            disabled
+                          >
+                            <option>{prod.beeftype.nameTH}</option>
+                          </select>
+                        ))}
+                    </div>
+                    <div
+                      style={{
+                        width: "100%",
+                        gridRowStart: "1",
+                        gridRowEnd: "1",
+                        gridColumnStart: "3",
+                      }}
+                    >
+                      จำนวน : { }
+                      <>
+                        {data &&
+                          data.TypeRoom.map((prod) => (
+                            <Edittotal key={prod.id} editcount={prod} />
+                          ))}
+                      </>
+                    </div>
+                    <div
+                      style={{
+                        width: "100%",
+                        gridRowStart: "2",
+                        gridRowEnd: "2",
+                        gridColumnStart: "3",
+                        marginTop: "10px",
+                        marginLeft: "43px",
+                      }}
+                    >
+                      <Addbutton
+                        onClick={() => setedit(true)}
                         style={{
+                          fontSize: "16px",
                           width: "150px",
-                          textAlign: "center",
-                          backgroundColor: `${
-                            !inputListroom[i].beeftype ? "#ececec" : ""
-                          }`,
+                          height: "38px",
+                          marginBottom: "4px",
                         }}
-                        disabled={!inputListroom[i].beeftype}
-                        name="totalbeef"
-                        value={inputListroom[i].totalbeef}
-                        onChange={(e) => handleInputroom(e, i)}
-                      ></Searchinput>
-                      {inputListroom.length !== 1 && (
-                        <Removebuttoncolor
-                          style={{
-                            height: "38px",
-                            margin: " auto auto 0",
-                            width: " 38px",
-                          }}
-                          onClick={() => handleRemoveClickroom(i)}
-                        >
-                          <Removebutton />
-                        </Removebuttoncolor>
-                      )}
+                      >
+                        เพิ่มประเภทจัดเก็บ
+                      </Addbutton>
+
                     </div>
                   </div>
-                );
-              })}
-            </div>
-            <div
-              style={{
-                gridRowStart: "3",
-                gridColumnStart: "2",
-                marginTop: "20px",
-                marginRight: "2px",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  marginLeft: "5px",
-                }}
-              >
-                <Addbutton
-                  style={{
-                    height: "38px",
-                    width: " 150px",
-                    marginRight: "5px",
-                  }}
-                  onClick={handleAddClickroom}
-                >
-                  เพิ่มประเภทจัดเก็บ
-                </Addbutton>
-                <Savebuttoncolor
-                  style={{
-                    height: "38px",
-                    width: " 50px",
-                  }}
-                  onClick={handleSubmitroom}
-                >
-                  บันทึก
-                </Savebuttoncolor>
-              </div>
-            </div>
-            <div>
-              <Removebuttoncolor
-                style={{
-                  marginLeft: "200px",
-                  height: "38px",
-                  width: "55px",
-                  fontSize: "20px",
-                }}
-                onClick={() => setedit(false)}
-              >
-                ยกเลิก
-              </Removebuttoncolor>
-            </div>
-          </>
-        </div>
-      ) : (
-        <>
-          <div
-            style={{
-              width: "100%",
-              gridRowStart: "1",
-              gridRowEnd: "1",
-              gridColumnStart: "2",
-            }}
-          >
-            ประเภทจัดเก็บ : {}
-            {roominfo &&
-              roominfo.typekeep.map((prod) => (
-                <select
-                  value={prod.beeftype.id}
-                  style={{
-                    height: "38px",
-                    width: "156px",
-                    border: "1px solid #AFAFAF",
-                    borderRadius: "4px",
-                    textAlign: "center",
-                    fontSize: "14px",
-                    marginTop: "10px",
-                  }}
-                  disabled
-                >
-                  <option>{prod.beeftype.nameTH}</option>
-                </select>
-              ))}
-          </div>
-          <div
-            style={{
-              width: "100%",
-              gridRowStart: "1",
-              gridRowEnd: "1",
-              gridColumnStart: "3",
-            }}
-          >
-            จำนวน : {}
-            <>
-              {data &&
-                data.TypeRoom.map((prod) => (
-                  <Edittotal key={prod.id} editcount={prod} />
-                ))}
-            </>
-          </div>
-          <div
-            style={{
-              width: "100%",
-              gridRowStart: "1",
-              gridRowEnd: "1",
-              gridColumnStart: "4",
-              marginLeft: "50px",
-            }}
-          >
-            <Addbutton
-              onClick={() => setedit(true)}
-              style={{
-                fontSize: "20px",
-                width: "140px",
-                marginBottom: "4px",
-              }}
-            >
-              เพิ่มประเภทจัดเก็บ
-            </Addbutton>
-            <Removebuttoncolor
-              onClick={handdleSubmitDelete}
-              style={{ marginLeft: "10px", fontSize: "20px", width: "50px" }}
-            >
-              ลบ
-            </Removebuttoncolor>
-          </div>
-        </>
-      )}
+                )
+              }
+            </Card.Body>
+          </Accordion.Collapse>
+        </Card>
+      </Accordion>
+
+
     </>
   );
 };

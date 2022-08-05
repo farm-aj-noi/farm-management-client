@@ -22,6 +22,7 @@ export const CREATEEXPORTLUMP = gql`
     $beeftype: String
     $userName: String
     $exporter: String
+    $exportstatus: String
   ) {
     exportlump(
       startdate: $startdate
@@ -29,6 +30,7 @@ export const CREATEEXPORTLUMP = gql`
       beeftype: $beeftype
       userName: $userName
       exporter: $exporter
+      exportstatus: $exportstatus
     ) {
       id
       exporter
@@ -63,6 +65,7 @@ const index = () => {
   const [selectedenddate, SetEndDateChange] = useState("");
   const [inputusername, SetInputusername] = useState("");
   const [inputexporter, SetinputExporter] = useState("");
+  const [exportstatus, Setexportstatus] = useState("");
   const { data, loading, error } = useQuery(CREATEEXPORTLUMP, {
     variables: {
       beeftype: selectedbeeftypelump,
@@ -70,10 +73,11 @@ const index = () => {
       enddate: selectedenddate,
       userName: inputusername,
       exporter: inputexporter,
+      exportstatus: exportstatus,
     },
   });
   return (
-    <>
+    <div style={{ marginTop: "100px" }}>
       <div
         style={{
           display: "flex",
@@ -94,7 +98,7 @@ const index = () => {
       <DivBase
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 270px 900px 1fr",
+          gridTemplateColumns: "1fr 280px 1150px 1fr",
           gridRowGap: "15px",
           gridColumnGap: "10px",
           textAlign: "start",
@@ -164,7 +168,7 @@ const index = () => {
                       border: "1px solid #AFAFAF",
                       borderRadius: "4px",
                       textAlign: "center",
-                      fontSize: "14px",
+                      fontSize: "16px",
                     }}
                     onChange={(event) =>
                       SetBeeftypeLumpChange(event.target.value)
@@ -215,7 +219,7 @@ const index = () => {
                       width: "110px",
                       borderRadius: "4px",
                       border: "1px solid #AFAFAF",
-                      fontSize: "14px",
+                      fontSize: "16px",
                       textAlign: "center",
                     }}
                     onChange={(event) => SetinputExporter(event.target.value)}
@@ -237,27 +241,45 @@ const index = () => {
                       width: "110px",
                       borderRadius: "4px",
                       border: "1px solid #AFAFAF",
-                      fontSize: "14px",
+                      fontSize: "16px",
                       textAlign: "center",
                     }}
                     onChange={(event) => SetInputusername(event.target.value)}
                   />
-                </from>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginBottom: "10px",
-                }}
-              >
-                <from style={{ fontSize: "20px" }}>
+                  <label
+                    for="status"
+                    style={{
+                      textAlign: "center",
+                      fontSize: "18px",
+                      margin: "10px 10px",
+                    }}>
+                    สถานะ
+                    <select
+                      style={{
+                        height: "35px",
+                        width: "110px",
+                        border: "1px solid #AFAFAF",
+                        borderRadius: "4px",
+                        textAlign: "center",
+                        fontSize: "16px",
+                        marginLeft: "10px"
+                      }}
+                      onChange={(event) => Setexportstatus(event.target.value)}
+                    >
+                      <option value="">เลือก</option>
+                      <option value="628256c517a02a452889011e">
+                        นำตัดเเต่ง(ชิ้นเนื้อ)
+                      </option>
+                      <option value="6280fac6d3dbf7345093676f">นำจำหน่าย</option>
+                      <option value="62821d931768cd521052118b">นำแปรรูป</option>
+                    </select>
+                  </label>
                   <label
                     for="date"
                     style={{
                       textAlign: "center",
                       fontSize: "18px",
-                      marginRight: "10px",
+                      margin: "10px 10px",
                     }}
                   >
                     วันที่เบิกออก
@@ -304,11 +326,11 @@ const index = () => {
           </DivFrom>
           <DivFrom
             style={{
-              width: "1180px",
-              gridRowStart: "5",
-              gridRowEnd: "5",
-              gridColumnStart: "2",
-              gridColumnEnd: "4",
+              width: "100%",
+              gridRowStart: "3",
+              gridRowEnd: "3",
+              gridColumnStart: "3",
+              gridColumnEnd: "3",
               marginTop: "20px",
             }}
           >
@@ -319,7 +341,7 @@ const index = () => {
               รายการเบิกออกซากเนื้อโคก้อนเนื้อ
             </DivFromTop>
             <DivFromDown>
-              <div style={{ height: "280px", overflow: "auto" }}>
+              <div style={{ height: `${data && data.exportlump.length > 6 ? "400px" : ""}`, overflow: `${data && data.exportlump.length > 6 ? "auto" : ""}` }}>
                 <Table
                   striped
                   bordered
@@ -328,7 +350,7 @@ const index = () => {
                   style={{ margin: "auto" }}
                 >
                   <thead>
-                    <tr style={{ textAlign: "center" }}>
+                    <tr style={{ textAlign: "center", fontSize: "18px" }}>
                       <th>ประเภทซาก</th>
                       <th>วันที่เบิกออก</th>
                       <th>เวลา</th>
@@ -343,10 +365,14 @@ const index = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {data &&
-                      data.exportlump.map((prod) => (
-                        <List_export key={prod.id} exlump={prod} />
-                      ))}
+                    {data && data.exportlump.length > 0 ? (data.exportlump.map((prod) => (
+                      <List_export key={prod.id} exlump={prod} />
+                    ))) : (
+                      <tr style={{ textAlign: "center" }}>
+                        <td colSpan="12">ไม่พบข้อมูล</td>
+                      </tr>
+                    )
+                    }
                   </tbody>
                 </Table>
               </div>
@@ -365,7 +391,7 @@ const index = () => {
           </DivFrom>
         </>
       </DivBase>
-    </>
+    </div >
   );
 };
 

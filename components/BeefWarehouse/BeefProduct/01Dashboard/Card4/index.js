@@ -22,7 +22,7 @@ query CARD4 {
 const index = () => {
   const { data } = useQuery(CARD4);
   return (
-    <DivAlertCard style={{ backgroundColor: "#17FF2F" }}>
+    <DivAlertCard style={{ backgroundColor: "#028410" }}>
       <div
         style={{
           display: "flex",
@@ -70,7 +70,7 @@ const index = () => {
           </a>
         </form>
       </div>
-      <Link href="">
+      <Link href="/beefwarehouse/beefproduct/notify/notify_exportrequest">
         <StyleAlertCardDown style={{ marginTop: "7px" }}>
           แสดงรายละเอียด
           <div style={{ margin: "-3px 0px 0px auto" }}>

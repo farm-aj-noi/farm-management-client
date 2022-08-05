@@ -9,7 +9,7 @@ import Shelf1 from "./shelf1";
 
 function index() {
   return (
-    <DivBase1>
+    <div style={{ marginTop: "100px" }}>
       <div
         style={{
           display: "flex",
@@ -29,7 +29,7 @@ function index() {
       <DivBase1
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 200px 1000px 1fr",
+          gridTemplateColumns: "1fr 200px 900px 1fr",
           gridRowGap: "15px",
           gridColumnGap: "20px",
           textAlign: "start",
@@ -69,7 +69,7 @@ function index() {
           <Shelf1 />
         </DivFrom>
       </DivBase1>
-    </DivBase1>
+    </div>
   );
 }
 

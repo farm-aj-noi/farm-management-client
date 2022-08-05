@@ -40,10 +40,10 @@ import {
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
 
-const editname = ({ listkeep }) => {
+const editname = ({ listkeep1 }) => {
   const MySwal = withReactContent(Swal);
   const [Editname, setEditname] = useState(false);
-  const [infolistkeep, setinfolistkeep] = useState(listkeep);
+  const [infolistkeep, setinfolistkeep] = useState(listkeep1);
   const [updateShelf] = useMutation(UPDATESHELF, {
     onCompleted: (data) => {
       setinfolistkeep(data.updateShelf);
@@ -71,8 +71,8 @@ const editname = ({ listkeep }) => {
   };
 
   const handdleSubmit = async () => {
-    if (infolistkeep === listkeep) {
-      setinfolistkeep(listkeep);
+    if (infolistkeep === listkeep1) {
+      setinfolistkeep(listkeep1);
       setEditname(false);
       return;
     }

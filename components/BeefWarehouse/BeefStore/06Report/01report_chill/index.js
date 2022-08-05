@@ -7,7 +7,6 @@ import {
   DivFromDown,
   HeaderColor,
 } from "../ReportFrom.js";
-import { DivBase } from "../../../../../utils/divBase";
 
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
@@ -26,8 +25,18 @@ export const CHILLSEARCHLIST = gql`
     $startdate: String
     $enddate: String
     $beeftype: String
+    $startdate2: String
+    $enddate2: String
+    $name: String
   ) {
-    listchill(startdate: $startdate, enddate: $enddate, beeftype: $beeftype) {
+    listchill(
+    startdate: $startdate
+    enddate: $enddate
+    beeftype: $beeftype
+    startdate2: $startdate2
+    enddate2: $enddate2
+    name: $name
+    ) {
       id
       chilldateStart
       chilldateEnd
@@ -64,15 +73,21 @@ const index = () => {
   const [selectedbeeftypeChill, SetBeeftypeChillChange] = useState("");
   const [selectedstartdate, SetStartDateChange] = useState("");
   const [selectedenddate, SetEndDateChange] = useState("");
+  const [selectedstartdate2, SetStartDateChange2] = useState("");
+  const [selectedenddate2, SetEndDateChange2] = useState("");
+  const [selectname, SetnameChange] = useState("");
   const { data, loading, error } = useQuery(CHILLSEARCHLIST, {
     variables: {
       beeftype: selectedbeeftypeChill,
       startdate: selectedstartdate,
       enddate: selectedenddate,
+      startdate2: selectedstartdate2,
+      enddate2: selectedenddate2,
+      name: selectname,
     },
   });
   return (
-    <DivBase>
+    <div style={{ marginTop: "100px" }}>
       <div
         style={{
           display: "flex",
@@ -95,7 +110,7 @@ const index = () => {
           marginTop: "30px",
           marginBottom: "30px",
           height: "130px",
-          width: "900px",
+          width: "1250px",
         }}
       >
         <DivFromTop>
@@ -109,7 +124,7 @@ const index = () => {
             style={{
               display: "flex",
               justifyContent: "center",
-              marginBottom: "10px",
+
             }}
           >
             <from style={{ fontSize: "20px" }}>
@@ -118,7 +133,7 @@ const index = () => {
                 style={{
                   textAlign: "center",
                   fontSize: "18px",
-                  marginRight: "10px",
+
                 }}
               >
                 ประเภทซาก
@@ -132,10 +147,13 @@ const index = () => {
                   border: "1px solid #AFAFAF",
                   borderRadius: "4px",
                   textAlign: "center",
-                  fontSize: "14px",
-                  marginRight: "10px",
+                  fontSize: "16px",
+                  marginLeft: "10px"
+
                 }}
-                onChange={(event) => SetBeeftypeChillChange(event.target.value)}
+                onChange={(event) =>
+                  SetBeeftypeChillChange(event.target.value)
+                }
               >
                 <option value="">ทั้งหมด</option>
                 <option value="5f1000e28d55662dcc23d95e">ซากซ้าย</option>
@@ -147,6 +165,7 @@ const index = () => {
                   textAlign: "center",
                   fontSize: "18px",
                   marginRight: "10px",
+                  marginLeft: "10px",
                 }}
               >
                 ผู้บ่มซาก
@@ -157,33 +176,80 @@ const index = () => {
                   width: "110px",
                   borderRadius: "4px",
                   border: "1px solid #AFAFAF",
-                  fontSize: "14px",
+                  fontSize: "16px",
                   textAlign: "center",
                   marginRight: "10px",
                 }}
+                onChange={(event) => SetnameChange(event.target.value)}
               />
+              <from>
+                <label
+                  for="date"
+                  style={{
+                    textAlign: "center",
+                    fontSize: "18px",
+                    marginRight: "10px",
+                  }}
+                >
+                  วันที่บ่ม
+                </label>
+                <input
+                  type="date"
+                  name="date"
+                  style={{
+                    height: "35px",
+                    border: "1px solid #AFAFAF",
+                    borderRadius: "4px",
+                    textAlign: "center",
+                    fontSize: "16px",
+                  }}
+                  onChange={(event) => SetStartDateChange(event.target.value)}
+                ></input>
+                <label
+                  for="date"
+                  style={{
+                    textAlign: "center",
+                    fontSize: "18px",
+                    margin: "10px 10px",
+                  }}
+                >
+                  ถึงวันที่
+                </label>
+                <input
+                  type="date"
+                  name="date"
+                  style={{
+                    height: "35px",
+                    border: "1px solid #AFAFAF",
+                    borderRadius: "4px",
+                    textAlign: "center",
+                    fontSize: "16px",
+                  }}
+                  onChange={(event) => SetEndDateChange(event.target.value)}
+                ></input>
+              </from>
+
               <label
                 for="date"
                 style={{
                   textAlign: "center",
                   fontSize: "18px",
-                  marginRight: "10px",
+                  margin: "10px 10px",
                 }}
               >
-                วันที่นำเข้า
+                วันที่บ่มเสร็จ
               </label>
               <input
                 type="date"
-                id="ex_chill"
                 name="date"
                 style={{
                   height: "35px",
                   border: "1px solid #AFAFAF",
                   borderRadius: "4px",
-                  color: "#AFAFAF",
                   textAlign: "center",
+                  fontSize: "16px",
                 }}
-                onChange={(event) => SetStartDateChange(event.target.value)}
+                onChange={(event) => SetStartDateChange2(event.target.value)}
               ></input>
               <label
                 for="date"
@@ -197,16 +263,15 @@ const index = () => {
               </label>
               <input
                 type="date"
-                id="ex_chill"
                 name="date"
                 style={{
                   height: "35px",
                   border: "1px solid #AFAFAF",
                   borderRadius: "4px",
-                  color: "#AFAFAF",
                   textAlign: "center",
+                  fontSize: "16px",
                 }}
-                onChange={(event) => SetEndDateChange(event.target.value)}
+                onChange={(event) => SetEndDateChange2(event.target.value)}
               ></input>
             </from>
           </div>
@@ -220,11 +285,11 @@ const index = () => {
           รายการที่ค้นหา
         </DivFromTop>
         <DivFromDown>
-          <div style={{ height: "250px", overflowY: "auto" }}>
-            <Table striped bordered responsive hover style={{ margin: "auto" }}>
+          <div style={{ height: `${data && data.listchill.length > 6 ? "380px" : ""}`, overflowY: "auto" }}>
+            <Table striped bordered responsive hover >
               {/* <LoadingSmall/> */}
               <thead>
-                <tr style={{ textAlign: "center" }}>
+                <tr style={{ textAlign: "center", fontSize: "18px" }}>
                   <th>ผู้บ่มซาก</th>
                   <th>วันที่บ่ม</th>
                   <th>วันที่บ่มเสร็จ</th>
@@ -240,38 +305,40 @@ const index = () => {
                 </tr>
               </thead>
               <tbody>
-                {data &&
-                  data.listchill.map((prod) => (
-                    <tr style={{ textAlign: "center" }}>
-                      <td>{prod.user.name}</td>
-                      <td>
-                        {dayjs(prod.chilldateStart)
-                          .locale("th")
-                          .add(543, "year")
-                          .format("DD/MM/YYYY")}
-                      </td>
-                      <td>
-                        {dayjs(prod.chilldateEnd)
-                          .locale("th")
-                          .add(543, "year")
-                          .format("DD/MM/YYYY")}
-                      </td>
-                      <td>
-                        {dayjs(prod.chilldateEnd)
-                          .locale("th")
-                          .add(543, "year")
-                          .format("h:mm:ss A")}
-                      </td>
-                      <td>{prod.halve.beeftype.nameTH}</td>
-                      <td>{prod.chillday.day} วัน</td>
-                      <td>{prod.halve.imslaughter.numcow}</td>
-                      <td>{prod.halve.beeftype.code}</td>
-                      <td>{prod.halve.barcode}</td>
-                      <td>{prod.halve.weightwarm}</td>
-                      <td>{prod.chillroom.roomnum}</td>
-                      <td>{prod.chillstatus.nameTH}</td>
-                    </tr>
-                  ))}
+                {data && data.listchill.length > 0 ? (data.listchill.map((prod) => (
+                  <tr style={{ textAlign: "center" }}>
+                    <td>{prod.user.name}</td>
+                    <td>
+                      {dayjs(prod.chilldateStart)
+                        .locale("th")
+                        .add(543, "year")
+                        .format("DD/MM/YYYY")}
+                    </td>
+                    <td>
+                      {dayjs(prod.chilldateEnd)
+                        .locale("th")
+                        .add(543, "year")
+                        .format("DD/MM/YYYY")}
+                    </td>
+                    <td>
+                      {dayjs(prod.chilldateEnd)
+                        .locale("th")
+                        .add(543, "year")
+                        .format("h:mm:ss A")}
+                    </td>
+                    <td>{prod.halve.beeftype.nameTH}</td>
+                    <td>{prod.chillday.day} วัน</td>
+                    <td>{prod.halve.imslaughter.numcow}</td>
+                    <td>{prod.halve.beeftype.code}</td>
+                    <td>{prod.halve.barcode}</td>
+                    <td>{prod.halve.weightwarm}</td>
+                    <td>{prod.chillroom.roomnum}</td>
+                    <td>{prod.chillstatus.nameTH}</td>
+                  </tr>
+                ))) : (<tr style={{ textAlign: "center" }}>
+                  <td colSpan="12">ไม่พบข้อมูล</td>
+                </tr>)
+                }
               </tbody>
             </Table>
           </div>
@@ -287,7 +354,7 @@ const index = () => {
           </div>
         </DivFromDown>
       </DivFrom>
-    </DivBase>
+    </div >
   );
 };
 

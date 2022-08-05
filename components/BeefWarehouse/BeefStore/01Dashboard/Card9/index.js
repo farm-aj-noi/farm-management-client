@@ -22,7 +22,7 @@ export const QUERY_CARD9 = gql`
 const index = () => {
   const { data: dataCard9 } = useQuery(QUERY_CARD9);
   return (
-    <DivAlertCard style={{ backgroundColor: "#17FF2F" }}>
+    <DivAlertCard style={{ backgroundColor: "#028410" }}>
       <div
         style={{
           display: "flex",

@@ -8,7 +8,7 @@ import Basket1 from "./basket1";
 
 function index() {
   return (
-    <DivBase1>
+    <div style={{ marginTop: "100px" }}>
       <div
         style={{
           display: "flex",
@@ -28,7 +28,7 @@ function index() {
       <DivBase1
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 200px 700px 1fr",
+          gridTemplateColumns: "1fr 200px 900px 1fr",
           gridRowGap: "15px",
           gridColumnGap: "20px",
           textAlign: "start",
@@ -47,7 +47,7 @@ function index() {
         </DivFrom>
         <DivFrom
           style={{
-            width: "800px",
+            width: "100%",
             gridRowStart: "2",
             gridRowEnd: "3",
             gridColumnStart: "3",
@@ -68,7 +68,7 @@ function index() {
           <Basket1 />
         </DivFrom>
       </DivBase1>
-    </DivBase1>
+    </div>
   );
 }
 

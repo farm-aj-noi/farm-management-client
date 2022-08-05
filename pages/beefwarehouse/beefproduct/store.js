@@ -7,8 +7,8 @@ const store = () => {
   return (
     <BackgroundStore>
       <Nav />
-      <Footer />
       <Store />
+      <Footer />
     </BackgroundStore>
   );
 };

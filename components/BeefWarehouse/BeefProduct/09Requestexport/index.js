@@ -6,7 +6,6 @@ import { DivBase } from "../../../../utils/divBase";
 
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
-import { iosSearchStrong } from "react-icons-kit/ionicons/iosSearchStrong";
 
 import Create from "./create";
 
@@ -33,7 +32,7 @@ query QUERYRE {
 function index() {
     const { data } = useQuery(QUERYRE);
     return (
-        <DivBase>
+        <div style={{ marginTop: "100px" }}>
             <div
                 style={{
                     display: "flex",
@@ -94,7 +93,7 @@ function index() {
                         รายการร้องขอเบิก
                     </DivFromTop>
                     <DivFromDown>
-                        <div>
+                        <div style={{ height: `${data && data.listRequestExP.length > 9 ? "500px" : ""}`, overflow: `${data && data.listRequestExP.length > 9 ? "auto" : ""}` }}>
                             <Table
                                 striped
                                 bordered
@@ -129,7 +128,7 @@ function index() {
                     </DivFromDown>
                 </DivFrom>
             </DivBase>
-        </DivBase>
+        </div>
     )
 }
 

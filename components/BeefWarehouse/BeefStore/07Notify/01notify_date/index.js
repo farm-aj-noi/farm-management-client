@@ -27,7 +27,7 @@ import Liste from "./listen";
 
 const index = () => {
   return (
-    <>
+    <div style={{ marginTop: "100px" }}>
       <div
         style={{ display: "flex", justifyContent: "center", marginTop: "30px" }}
       >
@@ -44,7 +44,7 @@ const index = () => {
       <DivBase1
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 237.5px 1050px 1fr",
+          gridTemplateColumns: "1fr 237.5px 1100px 1fr",
           gridRowGap: "15px",
           gridColumnGap: "50px",
           textAlign: "start",
@@ -148,7 +148,7 @@ const index = () => {
           </DivFromDown>
         </DivFrom>
       </DivBase1>
-    </>
+    </div>
   );
 };
 

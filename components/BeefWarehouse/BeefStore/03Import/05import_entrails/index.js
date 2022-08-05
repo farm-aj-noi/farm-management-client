@@ -30,6 +30,7 @@ export const IMPOERTENTRAILSEARCH = gql`
       enddate: $enddate
       beefroom: $beefroom
     ) {
+      id
       importdate
       user {
         name
@@ -73,7 +74,7 @@ const index = () => {
   const [selectedstartdate, SetStartDateChange] = useState("");
   const [selectedenddate, SetEndDateChange] = useState("");
   const [selectedbeefroom, setselectbeefroom] = useState("");
-  const { data, loading, error } = useQuery(IMPOERTENTRAILSEARCH, {
+  const { data } = useQuery(IMPOERTENTRAILSEARCH, {
     variables: {
       startdate: selectedstartdate,
       enddate: selectedenddate,
@@ -83,7 +84,7 @@ const index = () => {
     },
   });
   return (
-    <>
+    <div style={{ marginTop: "100px" }}>
       <div
         style={{
           display: "flex",
@@ -171,7 +172,7 @@ const index = () => {
                       width: "110px",
                       borderRadius: "4px",
                       border: "1px solid #AFAFAF",
-                      fontSize: "14px",
+                      fontSize: "16px",
                       textAlign: "center",
                     }}
                     onChange={(event) => SetInputnamefarmer(event.target.value)}
@@ -193,7 +194,7 @@ const index = () => {
                       width: "110px",
                       borderRadius: "4px",
                       border: "1px solid #AFAFAF",
-                      fontSize: "14px",
+                      fontSize: "16px",
                       textAlign: "center",
                     }}
                     onChange={(event) => SetInputusername(event.target.value)}
@@ -217,7 +218,7 @@ const index = () => {
                       border: "1px solid #AFAFAF",
                       borderRadius: "4px ",
                       textAlign: "center",
-                      fontSize: "14px",
+                      fontSize: "16px",
                       marginRight: "10px",
                     }}
                     onChange={(event) => setselectbeefroom(event.target.value)}
@@ -297,7 +298,7 @@ const index = () => {
               รายการนำเข้าซากเนื้อโคส่วนอื่น ๆ
             </DivFromTop>
             <DivFromDown>
-              <div style={{ height: "350px", overflow: "auto" }}>
+              <div style={{ height: `${data && data.imentrailSearch.length > 5 ? "350px" : ""}`, overflow: `${data && data.imentrailSearch.length > 5 ? "auto" : ""}` }}>
                 <Table
                   striped
                   bordered
@@ -306,7 +307,7 @@ const index = () => {
                   style={{ margin: "auto" }}
                 >
                   <thead>
-                    <tr style={{ textAlign: "center" }}>
+                    <tr style={{ textAlign: "center", fontSize: "18px" }}>
                       <th>เจ้าของซาก</th>
                       <th>วันที่นำเข้า</th>
                       <th>เวลา</th>
@@ -334,24 +335,8 @@ const index = () => {
                       ))
                     ) : (
                       <tr style={{ textAlign: "center" }}>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
+                        <td colSpan="18">ไม่พบข้อมูล</td>
+
                       </tr>
                     )}
                   </tbody>
@@ -364,7 +349,7 @@ const index = () => {
           </DivFrom>
         </>
       </DivBase>
-    </>
+    </div>
   );
 };
 

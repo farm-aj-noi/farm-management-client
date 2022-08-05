@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 
 import { DivBase } from "../../../../../utils/divBase";
 import { DivFrom, DivFromTop, DivFromDown, HeaderColor } from "../GraphFrom";
@@ -14,25 +14,489 @@ import Chart from "chart.js/auto";
 import Paper_Graph from "./Paper_Graph";
 import { Table } from "react-bootstrap";
 import Stat from "./statistics";
+import dayjs from "dayjs";
+
+
+const test = [
+  {
+    "day": "2022-07-27",
+    "export": 6,
+    "import": 14
+  },
+  {
+    "day": "2022-07-28",
+    "export": 2,
+    "import": 0
+  },
+  {
+    "day": "2022-07-29",
+    "export": 1,
+    "import": 0
+  },
+  {
+    "day": "2022-07-30",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-07-31",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-08-01",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-08-02",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-08-03",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-08-04",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-08-05",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-08-06",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-08-07",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-08-08",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-08-09",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-08-10",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-08-11",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-08-12",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-08-13",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-08-14",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-08-15",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-08-16",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-08-17",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-08-18",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-08-19",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-08-20",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-08-21",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-08-22",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-08-23",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-08-24",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-08-25",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-08-26",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-08-27",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-08-28",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-08-29",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-08-30",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-08-31",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-09-01",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-09-02",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-09-03",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-09-04",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-09-05",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-09-06",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-09-07",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-09-08",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-09-09",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-09-10",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-09-11",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-09-12",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-09-13",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-09-14",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-09-15",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-09-16",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-09-17",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-09-18",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-09-19",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-09-20",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-09-21",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-09-22",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-09-23",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-09-24",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-09-25",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-09-26",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-09-27",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-09-28",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-09-29",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-09-30",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-10-01",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-10-02",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-10-03",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-10-04",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-10-05",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-10-06",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-10-07",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-10-08",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-10-09",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-10-10",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-10-11",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-10-12",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-10-13",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-10-14",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-10-15",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-10-16",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-10-17",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-10-18",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-10-19",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-10-20",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-10-21",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-10-22",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-10-23",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-10-24",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-10-25",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-10-26",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-10-27",
+    "export": 0,
+    "import": 0
+  },
+  {
+    "day": "2022-10-28",
+    "export": 0,
+    "import": 0
+  }
+];
 
 const data = {
   labels: [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+ 
   ],
   datasets: [
     {
-      label: "ซากโคผ่าซีก",
+      label: "นำเข้า",
       fill: false,
       lineTension: 0.1,
       backgroundColor: "rgba(75,192,192,0.4)",
@@ -50,10 +514,10 @@ const data = {
       pointHoverBorderWidth: 2,
       pointRadius: 1,
       pointHitRadius: 10,
-      data: [65, 59, 80, 81, 56, 55, 40, 20, 11, 60, 62, 100],
+      data: [],
     },
     {
-      label: "ซากโคสี่เสี้ยว",
+      label: "นำออก",
       fill: false,
       lineTension: 0.1,
       backgroundColor: "rgb(255,0,0,0.4)",
@@ -71,75 +535,79 @@ const data = {
       pointHoverBorderWidth: 2,
       pointRadius: 1,
       pointHitRadius: 10,
-      data: [45, 67, 72, 10, 52, 51, 60, 40, 78, 89, 70, 72],
+      data: [],
     },
-    {
-      label: "ก้อนเนื้อ",
-      fill: false,
-      lineTension: 0.1,
-      backgroundColor: "#fed48a",
-      borderColor: "#ffa60b",
-      borderCapStyle: "butt",
-      borderDash: [],
-      borderDashOffset: 0.0,
-      borderJoinStyle: "miter",
-      pointBorderColor: "#ffa60b",
-      pointBackgroundColor: "#fff",
-      pointBorderWidth: 7,
-      pointHoverRadius: 5,
-      pointHoverBackgroundColor: "#ffa60b",
-      pointHoverBorderColor: "rgba(220,220,220,1)",
-      pointHoverBorderWidth: 2,
-      pointRadius: 1,
-      pointHitRadius: 10,
-      data: [25, 37, 12, 40, 22, 11, 40, 50, 28, 59, 60, 62],
-    },
-    {
-      label: "ชิ้นเนื้อ",
-      fill: false,
-      lineTension: 0.1,
-      backgroundColor: "#ad81ff",
-      borderColor: "#6a19ff",
-      borderCapStyle: "butt",
-      borderDash: [],
-      borderDashOffset: 0.0,
-      borderJoinStyle: "miter",
-      pointBorderColor: "#6a19ff",
-      pointBackgroundColor: "#fff",
-      pointBorderWidth: 7,
-      pointHoverRadius: 5,
-      pointHoverBackgroundColor: "#6a19ff",
-      pointHoverBorderColor: "rgba(220,220,220,1)",
-      pointHoverBorderWidth: 2,
-      pointRadius: 1,
-      pointHitRadius: 10,
-      data: [15, 47, 62, 33, 22, 55, 32, 21, 38, 69, 80, 92],
-    },
-    {
-      label: "ส่วนอื่น ๆ ",
-      fill: false,
-      lineTension: 0.1,
-      backgroundColor: "#6497ff",
-      borderColor: "#0b5bff",
-      borderCapStyle: "butt",
-      borderDash: [],
-      borderDashOffset: 0.0,
-      borderJoinStyle: "miter",
-      pointBorderColor: "#0b5bff",
-      pointBackgroundColor: "#fff",
-      pointBorderWidth: 7,
-      pointHoverRadius: 5,
-      pointHoverBackgroundColor: "#0b5bff",
-      pointHoverBorderColor: "rgba(220,220,220,1)",
-      pointHoverBorderWidth: 2,
-      pointRadius: 1,
-      pointHitRadius: 10,
-      data: [5, 12, 13, 11, 12, 14, 15, 20, 25, 33, 29, 35],
-    },
+  
   ],
 };
 
 const index = () => {
+
+  const [DataChart, setDataChart] = useState({ labels: [],
+    datasets: [
+    {
+      label: "นำเข้า",
+      borderColor: 'rgb(53, 162, 235)',
+      backgroundColor: 'rgba(53, 162, 235, 0.5)',
+      data: [10],
+    },
+    {
+      label: "นำออก",
+      borderColor: 'rgb(53, 162, 235)',
+      backgroundColor: 'rgba(53, 162, 235, 0.5)',
+      data: [5],
+    },
+
+
+  ],})
+
+  const initChart = (data) => {
+
+
+    let datecheckmonth = null;
+
+    let labels = [];
+    let data1 = [];
+    let data2 = []
+   
+    data.forEach(e=> {
+      if(datecheckmonth == null ||(dayjs(datecheckmonth).month() != dayjs(e.day).month()) ){
+        labels.push(dayjs(e.day).format('MMMM'));
+        data1.push(e.import ?? 0);
+        data2.push(e.export ?? 0);
+        datecheckmonth = dayjs(e.day);
+      } else {
+        data1[data1.length - 1] += e.import ?? 0;
+        data2[data2.length - 1] += e.export ?? 0;
+      }
+    });
+    
+    // let labels = [];
+    // let data1 = [];
+    // let data2 = []
+    // data.forEach(e => {
+    //   labels.push(e.day ?? '');
+    //   data2.push(e.export ?? 0);
+    //   data1.push(e.import ?? 0);
+    // });
+    let newChart =JSON.parse(JSON.stringify(DataChart))  ;
+    newChart.labels = labels;
+    newChart.datasets[0].data = data1;
+    newChart.datasets[1].data = data2;
+    setDataChart(newChart);
+    // return newChart;
+  }
+
+  
+
+  useEffect(()=>{
+  initChart(test);
+
+    // setcount(api.data.count) // api.data.count from api after update store
+  },[test])
+
+  console.log({DataChart})
+
   return (
     <>
       <div
@@ -151,7 +619,7 @@ const index = () => {
         }}
       >
         <div style={{ marginLeft: "10px" }}>
-          <Line data={data} width={400} height={200} />
+          <Line data={DataChart} width={400} height={200} />
         </div>
         <div style={{ marginLeft: "10px" }}>
           <Stat />

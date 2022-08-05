@@ -21,7 +21,7 @@ const excel = ({ prod }) => {
     { label: "น้ำหนัก (กก.)	", key: "beefproduct.weight" },
     { label: "วันที่ผลิต	", key: "beefproduct.MFG" },
     { label: "วันหมดอายุ", key: "beefproduct.BBE" },
-    { label: "ผู้ขอเบิก", key: "name" },
+    { label: "ผู้ขอเบิก", key: "exporter" },
     { label: "ผู้เบิกออก", key: "user.name" },
   ];
   return (

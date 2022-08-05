@@ -13,7 +13,7 @@ import { blue, white } from "../../../utils/colors";
 import { Logobeefgrade } from "../../../utils/image";
 import { navbarHeight } from "../../../utils/sizes";
 import { shareSquareO } from "react-icons-kit/fa/shareSquareO";
-import MyCss from "./Nav.module.css";
+
 import { Icon3, Icon2, Icon4, Icon5, Icon7 } from "../../../utils/Logograde";
 import { AuthContext } from "../../../appState/AuthProvider";
 

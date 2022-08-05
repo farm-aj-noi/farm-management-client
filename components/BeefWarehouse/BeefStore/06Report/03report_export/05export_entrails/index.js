@@ -28,12 +28,15 @@ export const EXPORTENTRAILSEARCH = gql`
     $startdate: String
     $enddate: String
     $userName: String
+    $exporter: String
   ) {
     exportentrail(
       startdate: $startdate
       enddate: $enddate
       userName: $userName
+      exporter: $exporter
     ) {
+      exporter
       user {
         name
       }
@@ -65,14 +68,17 @@ const index = () => {
   const [selectedstartdate, SetStartDateChange] = useState("");
   const [selectedenddate, SetEndDateChange] = useState("");
   const [inputusername, SetInputusername] = useState("");
+  const [inputexporter, SetinputExporter] = useState("");
   const { data, loading, error } = useQuery(EXPORTENTRAILSEARCH, {
     variables: {
       startdate: selectedstartdate,
       enddate: selectedenddate,
+      userName: inputusername,
+      exporter: inputexporter,
     },
   });
   return (
-    <DivBase>
+    <div style={{ marginTop: "100px" }}>
       <>
         <div
           style={{
@@ -93,7 +99,7 @@ const index = () => {
         <DivBase
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 270px 1150px 1fr",
+            gridTemplateColumns: "1fr 270px 1250px 1fr",
             gridRowGap: "15px",
             gridColumnGap: "20px",
             textAlign: "start",
@@ -141,34 +147,29 @@ const index = () => {
                       style={{
                         textAlign: "center",
                         fontSize: "18px",
+                        marginLeft: "10px",
                         marginRight: "10px",
                       }}
                     >
-                      ประเภทซาก
+                      ผู้ขอเบิก
                     </label>
-                    <select
-                      name="beef"
-                      id="beef"
+                    <input
                       style={{
                         height: "35px",
-                        width: "120px",
-                        border: "1px solid #AFAFAF",
+                        width: "110px",
                         borderRadius: "4px",
+                        border: "1px solid #AFAFAF",
+                        fontSize: "16px",
                         textAlign: "center",
-                        fontSize: "14px",
-                        marginRight: "10px",
                       }}
-                    >
-                      <option value="">ทั้งหมด</option>
-                      <option value="5f1000e28d55662dcc23d95e">ซากซ้าย</option>
-                      <option value="5f1000ee8d55662dcc23d960">ซากขวา</option>
-                    </select>
+                      onChange={(event) => SetinputExporter(event.target.value)}
+                    />
                     <label
                       for="beef"
                       style={{
                         textAlign: "center",
                         fontSize: "18px",
-                        marginRight: "10px",
+                        margin: "10px 10px",
                       }}
                     >
                       ผู้เบิกออก
@@ -253,7 +254,7 @@ const index = () => {
                 รายการที่ค้นหา
               </DivFromTop>
               <DivFromDown>
-                <div style={{ height: "250px", overflowY: "auto" }}>
+                <div style={{ height: `${data && data.exportentrail.length > 3 ? "380px" : ""}`, overflow: "auto" }}>
                   <Table
                     striped
                     bordered
@@ -263,8 +264,8 @@ const index = () => {
                   >
                     {/* <LoadingSmall/> */}
                     <thead>
-                      <tr style={{ textAlign: "center" }}>
-                        <th>เจ้าของซาก</th>
+                      <tr style={{ textAlign: "center", fontSize: "18px" }}>
+                       
                         <th>วันที่เบิกออก</th>
                         <th>เวลา</th>
                         <th>ทะเบียนขุน</th>
@@ -279,39 +280,42 @@ const index = () => {
                         <th>ถุงน้ำดี</th>
                         <th>เศษซาก</th>
                         <th>รหัสบาร์โค้ด</th>
+                        <th>ผู้ขอเบิก</th>
                         <th>ผู้เบิกออก</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {data &&
-                        data.exportentrail.map((prod) => (
-                          <tr style={{ textAlign: "center" }}>
-                            <td>{prod.entrail.imslaughter.namefarmer}</td>
-                            <td>
-                              {dayjs(prod.exportdate)
-                                .add(543, "year")
-                                .format("DD/MM/YYYY")}
-                            </td>
-                            <td>
-                              {dayjs(prod.exportdate)
-                                .add(543, "year")
-                                .format("h:mm:ss A")}
-                            </td>
-                            <td>{prod.entrail.imslaughter.numcow}</td>
-                            <td>{prod.entrail.offal}</td>
-                            <td>{prod.entrail.toe}</td>
-                            <td>{prod.entrail.head}</td>
-                            <td>{prod.entrail.skin}</td>
-                            <td>{prod.entrail.liver}</td>
-                            <td>{prod.entrail.fat}</td>
-                            <td>{prod.entrail.onkale}</td>
-                            <td>{prod.entrail.tail}</td>
-                            <td>{prod.entrail.gallbladder}</td>
-                            <td>{prod.entrail.scrap}</td>
-                            <td>{prod.entrail.barcode}</td>
-                            <td>{prod.user.name}</td>
-                          </tr>
-                        ))}
+                      {data && data.exportentrail.length > 0 ? (data.exportentrail.map((prod) => (
+                        <tr style={{ textAlign: "center" }}>
+                          <td>
+                            {dayjs(prod.exportdate)
+                              .add(543, "year")
+                              .format("DD/MM/YYYY")}
+                          </td>
+                          <td>
+                            {dayjs(prod.exportdate)
+                              .add(543, "year")
+                              .format("h:mm:ss A")}
+                          </td>
+                          <td>{prod.entrail.imslaughter.numcow}</td>
+                          <td>{prod.entrail.offal}</td>
+                          <td>{prod.entrail.toe}</td>
+                          <td>{prod.entrail.head}</td>
+                          <td>{prod.entrail.skin}</td>
+                          <td>{prod.entrail.liver}</td>
+                          <td>{prod.entrail.fat}</td>
+                          <td>{prod.entrail.onkale}</td>
+                          <td>{prod.entrail.tail}</td>
+                          <td>{prod.entrail.gallbladder}</td>
+                          <td>{prod.entrail.scrap}</td>
+                          <td>{prod.entrail.barcode}</td>
+                          <td>{prod.exporter}</td>
+                          <td>{prod.user.name}</td>
+                        </tr>
+                      ))) : (<tr style={{ textAlign: "center" }}>
+                        <td colSpan="17">ไม่พบข้อมูล</td>
+                      </tr>)
+                      }
                     </tbody>
                   </Table>
                 </div>
@@ -330,7 +334,7 @@ const index = () => {
           </>
         </DivBase>
       </>
-    </DivBase>
+    </div >
   );
 };
 

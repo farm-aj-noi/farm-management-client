@@ -2,16 +2,9 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import {
-  DivFrom,
-  DivFromTop,
-  DivFromDown,
-  HeaderColor,
   Searchinput,
 } from "../SettingFrom";
-import { DivBase } from "../../../../../utils/divBase";
-import { Icon } from "react-icons-kit";
-import { list } from "react-icons-kit/fa/list";
-import { iosSearchStrong } from "react-icons-kit/ionicons/iosSearchStrong";
+
 
 import {
   Savebuttoncolor,
@@ -30,8 +23,8 @@ import withReactContent from "sweetalert2-react-content";
 import Router from "next/router";
 
 const UPDATEROOM = gql`
-  mutation Mutation($id: ID, $productroomname: String) {
-    updateProductroom(id: $id, productroomname: $productroomname) {
+  mutation Mutation($id: ID, $roomname: String) {
+    updateProductroom(id: $id, roomname: $roomname) {
       id
       roomname
     }
@@ -51,6 +44,7 @@ const listroom = ({ listr }) => {
   const MySwal = withReactContent(Swal);
   const [edit, setedit] = useState(false);
   const [inforoom, setinforoom] = useState(listr);
+  console.log(inforoom)
   const [updateProductroom] = useMutation(UPDATEROOM, {
     onCompleted: (data) => {
       setedit(false);

@@ -9,13 +9,9 @@ import {
 import { DivBase } from "../../../../../utils/divBase";
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
-import { iosSearchStrong } from "react-icons-kit/ionicons/iosSearchStrong";
 
-import {
-  Savebuttoncolor,
-  Editbuttoncolor,
-  Removebuttoncolor,
-} from "../../../../../utils/buttonColor";
+
+
 
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
@@ -35,7 +31,7 @@ export const QUERYEXPDATE = gql`
 const index = () => {
   const { data } = useQuery(QUERYEXPDATE);
   return (
-    <DivBase>
+    <div style={{ marginTop: "100px" }}>
       <div
         style={{
           display: "flex",
@@ -95,7 +91,7 @@ const index = () => {
           </DivFromDown>
         </DivFrom>
       </DivBase>
-    </DivBase>
+    </div>
   );
 };
 

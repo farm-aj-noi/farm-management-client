@@ -21,22 +21,17 @@ import MyCss from "./Nav.module.css";
 import { AuthContext } from "../../../../appState/AuthProvider";
 
 import {
-  Icon1,
   Icon2,
   Icon3,
-  Icon4,
   Icon5,
-  Icon6,
-  Icon7,
-  Icon8,
   Icon9,
   Icon10,
   Icon11,
   Icon12,
   Icon13,
   Icon14,
-  Icon15,
-  Icon16
+  Icon16,
+  Icon17
 } from "../../../../utils/naviconbeefstore";
 
 const Nav1 = () => {
@@ -57,17 +52,18 @@ const Nav1 = () => {
         }}
         collapseOnSelect
         expand="lg"
+        fixed="top"
       >
         <Navbar.Brand style={{ padding: "0" }}>
           <Link href="/beefwarehouse">
             <a style={{ color: "white" }}>
-              <p style={{ padding: "0 10px", display: "inline" }}>หน้าแรก</p>
+              <p style={{ padding: "0 10px", display: "inline", fontSize: "20px" }}>หน้าแรก</p>
             </a>
           </Link>
           <Link href="/beefwarehouse/beefproduct">
             <a style={{ color: "white" }}>
               <Logobeefstore height="30px" weight="30px" />
-              <p style={{ padding: "0 10px", display: "inline" }}>
+              <p style={{ padding: "0 10px", display: "inline", fontSize: "20px" }}>
                 ระบบคลังผลิตภัณฑ์
               </p>
             </a>
@@ -76,7 +72,7 @@ const Nav1 = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
-            <Link href="/beefwarehouse/beefproduct/imports">
+            <Link href="/beefwarehouse/beefproduct/createproduct">
               <NavButtonLeft>
                 {" "}
                 <Icon16 height="30px" weight="30px" /> แปรรูปสินค้า
@@ -137,6 +133,11 @@ const Nav1 = () => {
                 <Icon14 height="30px" weight="30px" /> บันทึกการขนส่ง
               </NavButtonLeft>
             </Link>
+            <Link href="/beefwarehouse/beefproduct/trace">
+              <NavButtonLeft>
+                <Icon17 height="30px" weight="30px" /> ตรวจสอบสินค้า
+              </NavButtonLeft>
+            </Link>
             <Link href="/beefwarehouse/beefproduct/graph">
               <NavButtonLeft>
                 <Icon13 height="40px" weight="37px" /> รายละเอียดข้อมูลสถิติ
@@ -151,11 +152,11 @@ const Nav1 = () => {
           <Nav>
             {user && (
               <>
-                <a style={{ margin: "auto 5px", textAlign: "left" }}>
+                <a style={{ margin: "auto 5px", textAlign: "left", fontSize: "18px" }}>
                   สวัสดี {user.name}
                 </a>
 
-                <NavButtonSigninComplete onClick={signout}>
+                <NavButtonSigninComplete onClick={signout} style={{ fontSize: "18px" }}>
                   <Icon
                     style={{ verticalAlign: "text-bottom" }}
                     icon={shareSquareO}

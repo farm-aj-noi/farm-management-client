@@ -14,6 +14,7 @@ import icon13 from "../images/beefwarehouse/Icon12.png";
 import icon14 from "../images/beefwarehouse/Icon13.png";
 import icon15 from "../images/beefwarehouse/Icon14.png";
 import icon16 from "../images/beefwarehouse/Icon15.png";
+import icon17 from "../images/beefwarehouse/Icon16.png";
 
 export const Icon1 = (prop) => {
   return (
@@ -229,6 +230,20 @@ export const Icon16 = (prop) => {
   return (
     <img
       src={icon16}
+      width={prop.weight}
+      height={prop.height}
+      style={{
+        display: "inline",
+        marginRight: "5px",
+      }}
+    />
+  )
+}
+
+export const Icon17 = (prop) => {
+  return (
+    <img
+      src={icon17}
       width={prop.weight}
       height={prop.height}
       style={{

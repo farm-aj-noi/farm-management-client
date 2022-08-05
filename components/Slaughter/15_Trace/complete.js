@@ -310,7 +310,7 @@ const Index = () => {
                                           ? dayjs(prod.createdAt)
                                               .add(543, "y")
                                               .locale("th")
-                                              .format("HH : MM น.")
+                                              .format("HH : mm น.")
                                           : "ไม่ระบุ"}
                                       </td>
                                       <td>-</td>
@@ -333,7 +333,7 @@ const Index = () => {
                                               ? dayjs(prod.date)
                                                   .add(543, "y")
                                                   .locale("th")
-                                                  .format("HH : MM น.")
+                                                  .format("HH : mm น.")
                                               : "ไม่ระบุ"}
                                           </td>
                                           <td>{prod.name}</td>
@@ -424,7 +424,7 @@ const Index = () => {
                                           ? dayjs(prod.createdAt)
                                               .add(543, "y")
                                               .locale("th")
-                                              .format("HH : MM น.")
+                                              .format("HH : mm น.")
                                           : "ไม่ระบุ"}
                                       </td>
                                       <td>-</td>
@@ -447,7 +447,7 @@ const Index = () => {
                                               ? dayjs(prod.date)
                                                   .add(543, "y")
                                                   .locale("th")
-                                                  .format("HH : MM น.")
+                                                  .format("HH : mm น.")
                                               : "ไม่ระบุ"}
                                           </td>
                                           <td>{prod.name}</td>
@@ -538,7 +538,7 @@ const Index = () => {
                                           ? dayjs(prod.createdAt)
                                               .add(543, "y")
                                               .locale("th")
-                                              .format("HH : MM น.")
+                                              .format("HH : mm น.")
                                           : "ไม่ระบุ"}
                                       </td>
                                       <td>-</td>
@@ -561,7 +561,7 @@ const Index = () => {
                                               ? dayjs(prod.date)
                                                   .add(543, "y")
                                                   .locale("th")
-                                                  .format("HH : MM น.")
+                                                  .format("HH : mm น.")
                                               : "ไม่ระบุ"}
                                           </td>
                                           <td>{prod.name}</td>
@@ -651,7 +651,7 @@ const Index = () => {
                                         ? dayjs(prod.createdAt)
                                             .add(543, "y")
                                             .locale("th")
-                                            .format("HH : MM น.")
+                                            .format("HH : mm น.")
                                         : "ไม่ระบุ"}
                                     </td>
                                     <td>-</td>
@@ -674,7 +674,7 @@ const Index = () => {
                                             ? dayjs(prod.date)
                                                 .add(543, "y")
                                                 .locale("th")
-                                                .format("HH : MM น.")
+                                                .format("HH : mm น.")
                                             : "ไม่ระบุ"}
                                         </td>
                                         <td>{prod.name}</td>

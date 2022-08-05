@@ -29,14 +29,17 @@ export const EXPORTCHOPSEARCH = gql`
     $enddate: String
     $beeftype: String
     $userName: String
+    $exporter: String
   ) {
     exportchop(
       startdate: $startdate
       enddate: $enddate
       beeftype: $beeftype
       userName: $userName
+      exporter: $exporter
     ) {
       id
+      exporter
       exportdate
       user {
         name
@@ -67,16 +70,18 @@ const index = () => {
   const [selectedstartdate, SetStartDateChange] = useState("");
   const [selectedenddate, SetEndDateChange] = useState("");
   const [inputusername, SetInputusername] = useState("");
+  const [inputexporter, SetinputExporter] = useState("");
   const { data, loading, error } = useQuery(EXPORTCHOPSEARCH, {
     variables: {
       beeftype: selectedbeeftypechop,
       startdate: selectedstartdate,
       enddate: selectedenddate,
       userName: inputusername,
+      exporter: inputexporter,
     },
   });
   return (
-    <DivBase>
+    <div style={{ marginTop: "100px" }}>
       <>
         <div
           style={{
@@ -97,7 +102,7 @@ const index = () => {
         <DivBase
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 270px 1000px 1fr",
+            gridTemplateColumns: "1fr 270px 1150px 1fr",
             gridRowGap: "15px",
             gridColumnGap: "20px",
             textAlign: "start",
@@ -122,7 +127,7 @@ const index = () => {
                 gridRowEnd: "3",
                 gridColumnStart: "3",
                 marginTop: "0px",
-                height: "130px",
+
               }}
             >
               <DivFromTop>
@@ -136,7 +141,7 @@ const index = () => {
                   style={{
                     display: "flex",
                     justifyContent: "center",
-                    marginBottom: "10px",
+
                   }}
                 >
                   <from style={{ fontSize: "20px" }}>
@@ -159,39 +164,60 @@ const index = () => {
                         border: "1px solid #AFAFAF",
                         borderRadius: "4px",
                         textAlign: "center",
-                        fontSize: "14px",
-                        marginRight: "10px",
+                        fontSize: "16px",
                       }}
                       onChange={(event) =>
                         SetBeeftypeChopChange(event.target.value)
                       }
                     >
-                       <option value="">ทั้งหมด</option>
-                    <option value="5f446195ecd6732ad8108684">เนื้อสันคอ</option>
-                    <option value="5f4461a8ecd6732ad8108685">ที-โบน</option>
-                    <option value="5f4461bfecd6732ad8108686">เนื้อสันนอก</option>
-                    <option value="5f4461d6ecd6732ad8108687">ที-โบน สเต็ก</option>
-                    <option value="5f44620cecd6732ad8108688">ริบอาย</option>
-                    <option value="5f446224ecd6732ad8108689">ใบบัวสเต็ก</option>
-                    <option value="5f44623aecd6732ad810868a">เนื้อสันใน</option>
-                    <option value="5f44624fecd6732ad810868b">สันสะโพก</option>
-                    <option value="5f446262ecd6732ad810868c">เสือร้องไห้</option>
-                    <option value="5f44628decd6732ad810868d">เนื้อซี่โครง</option>
-                    <option value="5f4462a4ecd6732ad810868e">พับใน</option>
-                    <option value="5f4462b6ecd6732ad810868f">ตะพาบ</option>
-                    <option value="5f4462c8ecd6732ad8108690">ลูกมะพร้าว</option>
-                    <option value="5f4462ddecd6732ad8108691">ปลาบู่ทอง</option>
-                    <option value="5f4462eeecd6732ad8108692">ใบพาย</option>
-                    <option value="5f4462feecd6732ad8108693">หางตะเข้</option>
-                    <option value="5f44630fecd6732ad8108694">น่อง</option>
-                    <option value="5f446320ecd6732ad8108695">พับนอก</option>
+                      <option value="">ทั้งหมด</option>
+                      <option value="5f446195ecd6732ad8108684">เนื้อสันคอ</option>
+                      <option value="5f4461a8ecd6732ad8108685">ที-โบน</option>
+                      <option value="5f4461bfecd6732ad8108686">เนื้อสันนอก</option>
+                      <option value="5f4461d6ecd6732ad8108687">ที-โบน สเต็ก</option>
+                      <option value="5f44620cecd6732ad8108688">ริบอาย</option>
+                      <option value="5f446224ecd6732ad8108689">ใบบัวสเต็ก</option>
+                      <option value="5f44623aecd6732ad810868a">เนื้อสันใน</option>
+                      <option value="5f44624fecd6732ad810868b">สันสะโพก</option>
+                      <option value="5f446262ecd6732ad810868c">เสือร้องไห้</option>
+                      <option value="5f44628decd6732ad810868d">เนื้อซี่โครง</option>
+                      <option value="5f4462a4ecd6732ad810868e">พับใน</option>
+                      <option value="5f4462b6ecd6732ad810868f">ตะพาบ</option>
+                      <option value="5f4462c8ecd6732ad8108690">ลูกมะพร้าว</option>
+                      <option value="5f4462ddecd6732ad8108691">ปลาบู่ทอง</option>
+                      <option value="5f4462eeecd6732ad8108692">ใบพาย</option>
+                      <option value="5f4462feecd6732ad8108693">หางตะเข้</option>
+                      <option value="5f44630fecd6732ad8108694">น่อง</option>
+                      <option value="5f446320ecd6732ad8108695">พับนอก</option>
                     </select>
                     <label
                       for="beef"
                       style={{
                         textAlign: "center",
                         fontSize: "18px",
+                        marginLeft: "10px",
                         marginRight: "10px",
+                      }}
+                    >
+                      ผู้ขอเบิก
+                    </label>
+                    <input
+                      style={{
+                        height: "35px",
+                        width: "110px",
+                        borderRadius: "4px",
+                        border: "1px solid #AFAFAF",
+                        fontSize: "16px",
+                        textAlign: "center",
+                      }}
+                      onChange={(event) => SetinputExporter(event.target.value)}
+                    />
+                    <label
+                      for="beef"
+                      style={{
+                        textAlign: "center",
+                        fontSize: "18px",
+                        margin: "10px 10px",
                       }}
                     >
                       ผู้เบิกออก
@@ -202,7 +228,7 @@ const index = () => {
                         width: "110px",
                         borderRadius: "4px",
                         border: "1px solid #AFAFAF",
-                        fontSize: "14px",
+                        fontSize: "16px",
                         textAlign: "center",
                         marginRight: "10px",
                       }}
@@ -276,7 +302,7 @@ const index = () => {
                 รายการที่ค้นหา
               </DivFromTop>
               <DivFromDown>
-                <div style={{ height: "250px", overflowY: "auto" }}>
+                <div style={{ height: `${data && data.exportchop.length > 6 ? "380px" : ""}`, overflow: "auto" }}>
                   <Table
                     striped
                     bordered
@@ -286,7 +312,7 @@ const index = () => {
                   >
                     {/* <LoadingSmall/> */}
                     <thead>
-                      <tr style={{ textAlign: "center" }}>
+                      <tr style={{ textAlign: "center", fontSize: "18px" }}>
                         <th>ประเภทซาก</th>
                         <th>วันที่เบิกออก</th>
                         <th>เวลา</th>
@@ -300,29 +326,31 @@ const index = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {data &&
-                        data.exportchop.map((prod) => (
-                          <tr style={{ textAlign: "center" }}>
-                            <td>{prod.chop.beeftype.nameTH}</td>
-                            <td>
-                              {dayjs(prod.exportdate)
-                                .add(543, "year")
-                                .format("DD/MM/YYYY")}
-                            </td>
-                            <td>
-                              {dayjs(prod.exportdate)
-                                .add(543, "year")
-                                .format("h:mm:ss A")}
-                            </td>
-                            <td>{prod.chop.imslaughter.numcow}</td>
-                            <td>{prod.chop.beeftype.code}</td>
-                            <td>{prod.chop.barcode}</td>
-                            <td>{prod.chop.weight}</td>
-                            <td>{prod.storestatus.nameTH}</td>
-                            <td>-</td>
-                            <td>{prod.user.name}</td>
-                          </tr>
-                        ))}
+                      {data && data.exportchop.length > 0 ? (data.exportchop.map((prod) => (
+                        <tr style={{ textAlign: "center" }}>
+                          <td>{prod.chop.beeftype.nameTH}</td>
+                          <td>
+                            {dayjs(prod.exportdate)
+                              .add(543, "year")
+                              .format("DD/MM/YYYY")}
+                          </td>
+                          <td>
+                            {dayjs(prod.exportdate)
+                              .add(543, "year")
+                              .format("h:mm:ss A")}
+                          </td>
+                          <td>{prod.chop.imslaughter.numcow}</td>
+                          <td>{prod.chop.beeftype.code}</td>
+                          <td>{prod.chop.barcode}</td>
+                          <td>{prod.chop.weight}</td>
+                          <td>{prod.storestatus.nameTH}</td>
+                          <td>{prod.exporter}</td>
+                          <td>{prod.user.name}</td>
+                        </tr>
+                      ))) : (<tr style={{ textAlign: "center" }}>
+                        <td colSpan="12">ไม่พบข้อมูล</td>
+                      </tr>)
+                      }
                     </tbody>
                   </Table>
                 </div>
@@ -341,7 +369,7 @@ const index = () => {
           </>
         </DivBase>
       </>
-    </DivBase>
+    </div >
   );
 };
 

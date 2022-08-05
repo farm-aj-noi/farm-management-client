@@ -36,7 +36,6 @@ const create = () => {
         freezername: "",
         productroom: ""
     });
-    console.log(infofreezer);
     const [createFreezer] = useMutation(CREATEFREEZER, {
         variables: {
             freezername: infofreezer.freezername,

@@ -72,16 +72,18 @@ const index = () => {
   const [selectedstartdate, SetStartDateChange] = useState("");
   const [selectedenddate, SetEndDateChange] = useState("");
   const [inputusername, SetInputusername] = useState("");
+  const [inputexporter, SetinputExporter] = useState("");
   const { data, loading, error } = useQuery(EXPORTQUARTERSEARCH, {
     variables: {
       beeftype: selectedbeeftypequarter,
       startdate: selectedstartdate,
       enddate: selectedenddate,
       userName: inputusername,
+      exporter: inputexporter,
     },
   });
   return (
-    <DivBase>
+    <div style={{ marginTop: "100px" }}>
       <>
         <div
           style={{
@@ -102,7 +104,7 @@ const index = () => {
         <DivBase
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 270px 1000px 1fr",
+            gridTemplateColumns: "1fr 270px 1150px 1fr",
             gridRowGap: "15px",
             gridColumnGap: "20px",
             textAlign: "start",
@@ -127,7 +129,6 @@ const index = () => {
                 gridRowEnd: "3",
                 gridColumnStart: "3",
                 marginTop: "0px",
-                height: "130px",
               }}
             >
               <DivFromTop>
@@ -141,7 +142,6 @@ const index = () => {
                   style={{
                     display: "flex",
                     justifyContent: "center",
-                    marginBottom: "10px",
                   }}
                 >
                   <from style={{ fontSize: "20px" }}>
@@ -152,9 +152,6 @@ const index = () => {
                         fontSize: "18px",
                         marginRight: "10px",
                       }}
-                      onChange={(event) =>
-                        SetBeeftypeQuarterChange(event.target.value)
-                      }
                     >
                       ประเภทซาก
                     </label>
@@ -167,13 +164,26 @@ const index = () => {
                         border: "1px solid #AFAFAF",
                         borderRadius: "4px",
                         textAlign: "center",
-                        fontSize: "14px",
+                        fontSize: "16px",
                         marginRight: "10px",
                       }}
+                      onChange={(event) =>
+                        SetBeeftypeQuarterChange(event.target.value)
+                      }
                     >
                       <option value="">ทั้งหมด</option>
-                      <option value="5f1000e28d55662dcc23d95e">ซากซ้าย</option>
-                      <option value="5f1000ee8d55662dcc23d960">ซากขวา</option>
+                      <option value="5f338f035f7703096453abb8">
+                        ซากขวา-ขาหน้า
+                      </option>
+                      <option value="5f338f0d5f7703096453abb9">
+                        ซากขวา-ขาหลัง
+                      </option>
+                      <option value="5f338eeb5f7703096453abb6">
+                        ซากซ้าย-ขาหน้า
+                      </option>
+                      <option value="5f338ef65f7703096453abb7">
+                        ซากซ้าย-ขาหลัง
+                      </option>
                     </select>
                     <label
                       for="beef"
@@ -181,6 +191,27 @@ const index = () => {
                         textAlign: "center",
                         fontSize: "18px",
                         marginRight: "10px",
+                      }}
+                    >
+                      ผู้ขอเบิก
+                    </label>
+                    <input
+                      style={{
+                        height: "35px",
+                        width: "110px",
+                        borderRadius: "4px",
+                        border: "1px solid #AFAFAF",
+                        fontSize: "16px",
+                        textAlign: "center",
+                      }}
+                      onChange={(event) => SetinputExporter(event.target.value)}
+                    />
+                    <label
+                      for="beef"
+                      style={{
+                        textAlign: "center",
+                        fontSize: "18px",
+                        margin: "10px 10px",
                       }}
                     >
                       ผู้เบิกออก
@@ -191,7 +222,7 @@ const index = () => {
                         width: "110px",
                         borderRadius: "4px",
                         border: "1px solid #AFAFAF",
-                        fontSize: "14px",
+                        fontSize: "16px",
                         textAlign: "center",
                         marginRight: "10px",
                       }}
@@ -265,7 +296,7 @@ const index = () => {
                 รายการที่ค้นหา
               </DivFromTop>
               <DivFromDown>
-                <div style={{ height: "250px", overflowY: "auto" }}>
+                <div style={{ height: `${data && data.exportquart.length > 6 ? "380px" : ""}`, overflow: `${data && data.exportquart.length > 6 ? "auto" : ""}` }}>
                   <Table
                     striped
                     bordered
@@ -275,7 +306,7 @@ const index = () => {
                   >
                     {/* <LoadingSmall/> */}
                     <thead>
-                      <tr style={{ textAlign: "center" }}>
+                      <tr style={{ textAlign: "center", fontSize: "18px" }}>
                         <th>ประเภทซาก</th>
                         <th>วันที่เบิกออก</th>
                         <th>เวลา</th>
@@ -289,29 +320,31 @@ const index = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {data &&
-                        data.exportquart.map((prod) => (
-                          <tr style={{ textAlign: "center" }}>
-                            <td>{prod.quarter.beeftype.nameTH}</td>
-                            <td>
-                              {dayjs(prod.exportdate)
-                                .add(543, "year")
-                                .format("DD/MM/YYYY")}
-                            </td>
-                            <td>
-                              {dayjs(prod.exportdate)
-                                .add(543, "year")
-                                .format("h:mm:ss A")}
-                            </td>
-                            <td>{prod.quarter.imslaughter.numcow}</td>
-                            <td>{prod.quarter.beeftype.code}</td>
-                            <td>{prod.quarter.barcode}</td>
-                            <td>{prod.quarter.weight}</td>
-                            <td>{prod.storestatus.nameTH}</td>
-                            <td>{prod.exporter}</td>
-                            <td>{prod.user.name}</td>
-                          </tr>
-                        ))}
+                      {data && data.exportquart.length > 0 ? (data.exportquart.map((prod) => (
+                        <tr style={{ textAlign: "center" }}>
+                          <td>{prod.quarter.beeftype.nameTH}</td>
+                          <td>
+                            {dayjs(prod.exportdate)
+                              .add(543, "year")
+                              .format("DD/MM/YYYY")}
+                          </td>
+                          <td>
+                            {dayjs(prod.exportdate)
+                              .add(543, "year")
+                              .format("h:mm:ss A")}
+                          </td>
+                          <td>{prod.quarter.imslaughter.numcow}</td>
+                          <td>{prod.quarter.beeftype.code}</td>
+                          <td>{prod.quarter.barcode}</td>
+                          <td>{prod.quarter.weight}</td>
+                          <td>{prod.storestatus.nameTH}</td>
+                          <td>{prod.exporter}</td>
+                          <td>{prod.user.name}</td>
+                        </tr>
+                      ))) : (<tr style={{ textAlign: "center" }}>
+                        <td colSpan="12">ไม่พบข้อมูล</td>
+                      </tr>)
+                      }
                     </tbody>
                   </Table>
                 </div>
@@ -330,7 +363,7 @@ const index = () => {
           </>
         </DivBase>
       </>
-    </DivBase>
+    </div>
   );
 };
 

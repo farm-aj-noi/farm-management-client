@@ -1,15 +1,68 @@
 import React, { useState } from "react";
-
 import {
-  Barcodebuttoncolor,
   Editbuttoncolor,
+  Savebuttoncolor
 } from "../../../../../utils/buttonColor";
-import { Qrcodebutton, Editbutton } from "../../../../../utils/button";
+import { Editbutton, Savebutton } from "../../../../../utils/button";
 import dayjs from "dayjs";
 import Modalqrcode from "../../12Qrcode/storeen";
+
+import { useMutation } from "@apollo/react-hooks";
+import gql from "graphql-tag";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import Router from "next/router";
+import { Searchinput } from "../StoreFrom"
+const UPDATEINFOE = gql`
+mutation UPDATEINFOE($id: ID, $info: String) {
+  updateInfoE(id: $id, info: $info) {
+    id
+  }
+}
+`
 const ListStore = ({ Listentrail }) => {
+  const MySwal = withReactContent(Swal);
   const [ListEntrailData, SetListStoreData] = useState(Listentrail);
-  console.log(ListEntrailData);
+  const [success, setsuccess] = useState(false);
+  const [updateInfoE] = useMutation(UPDATEINFOE, {
+    onCompleted: (data) => {
+      setsuccess(false);
+      MySwal.fire({
+        icon: "success",
+        title: "สำเร็จ",
+        text: "ทำการแก้ไขข้อมูลเสร็จสิ้น",
+        confirmButtonText: (
+          <span
+            onClick={() =>
+              Router.reload("beefwarehouse/beefstore/Allstore/storeentrail")
+            }
+          >
+            ตกลง
+          </span>
+        ),
+        confirmButtonColor: "#3085d6",
+      });
+    }
+  })
+  const handleChange = (e) => {
+    SetListStoreData({
+      ...ListEntrailData,
+      [e.target.name]: e.target.value,
+    })
+  }
+
+  const handleSubmit = async () => {
+    try {
+      await updateInfoE({
+        variables: {
+          ...ListEntrailData
+        }
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <tr style={{ textAlign: "center" }}>
       <td>{ListEntrailData.cownum}</td>
@@ -31,11 +84,25 @@ const ListStore = ({ Listentrail }) => {
         {dayjs(ListEntrailData.Expdate).add(543, "year").format("DD/MM/YYYY")}
       </td>
       <td>{ListEntrailData.beefroom}</td>
-      <td>-</td>
+      {success ? (
+        <td >
+          <input name="info"
+            value={ListEntrailData.info}
+            onChange={handleChange}
+            style={{ textAlign: "center" }}>
+          </input>
+        </td>
+      ) : (<td>
+        {ListEntrailData.info ? ListEntrailData.info : "-"}</td>)
+      }
       <td>
-        <Editbuttoncolor>
-          <Editbutton />
-        </Editbuttoncolor>
+        {success ? (
+          <Savebuttoncolor onClick={handleSubmit}><Savebutton /></Savebuttoncolor>
+        ) : (
+          <Editbuttoncolor onClick={() => setsuccess(true)}>
+            <Editbutton />
+          </Editbuttoncolor>
+        )}
       </td>
     </tr>
   );
