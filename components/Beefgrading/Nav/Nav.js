@@ -158,7 +158,7 @@ const Nav1 = () => {
           ประวัติการตัดเกรด
           </ButtonSignUp>
           </Link>
-          <Link href="/beefwarehouse/beefproduct/notify/notify_date">
+          <Link href="/beefgrading/setting/setting">
           <ButtonSignUp
             style={{
               display: "flex",
