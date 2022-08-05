@@ -125,6 +125,7 @@ function index() {
             <div style={{ height: "450px", overflowY: "auto" }}>
               <Table responsive striped bordered hover>
                 <thead>
+                  
                   <tr style={{ textAlign: "center", fontSize: "18px" }}>
                     <th rowspan="2">รหัสซากโค</th>
                     <th rowspan="2">บาร์โค้ด</th>
