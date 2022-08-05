@@ -192,8 +192,8 @@ const Product = () => {
     data.append("upload_preset", "next-test");
 
     const res = await fetch(
-      "https://api.cloudinary.com/v1_1/djnasfo5s/image/upload",
-      {
+/*       "https://api.cloudinary.com/v1_1/djnasfo5s/image/upload",
+ */      {
         method: "post",
         body: data,
       }
