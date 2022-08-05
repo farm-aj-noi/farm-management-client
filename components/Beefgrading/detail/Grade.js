@@ -310,25 +310,25 @@ const Product = () => {
               marginRight: "5px",
             }}
           >
-            <Logobeefgrade height="70px" weight="70px" />
+        <Logobeefgrade height="70px" weight="70px" />
           </div>
           ระบบการตัดเกรด
         </DivCenter>
         <DivCenter style={{ marginTop: "20px" }}>
           <div
-            style={{
-              width: "1200px",
-              height: "650px",
+            /* style={{
+              width: "auto",
+              height: "auto",
               backgroundColor: "white",
               borderRadius: "5px",
               borderTop: "none",
               borderRadius: "5px",
               boxShadow:
                 " 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 0px 10px 0 rgba(0, 0, 0, 0.1)",
-            }}
+            }} */
           >
             <h1
-              style={{
+              /* style={{
                 height: "47px",
                 color: "white",
                 fontSize: "24px",
@@ -339,14 +339,14 @@ const Product = () => {
                 display: "flex",
                 alignItems: "center",
                 fontWeight: "-moz-initial",
-              }}
+              }} */
             >
-              <Icon
+              {/* <Icon
                 style={{ verticalAlign: "text-bottom", marginRight: "10px" }}
                 icon={u1F356}
                 size={30}
               />
-              ระบบการตัดเกรด
+              ระบบการตัดเกรด */}
             </h1>
 
             <DivBase

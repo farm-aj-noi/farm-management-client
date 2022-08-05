@@ -4,6 +4,7 @@ import { Icon } from "react-icons-kit";
 import { paste } from "react-icons-kit/icomoon/paste";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
+import logo from "./defultcow.jpg";
 import { useRouter } from "next/router";
 import {print} from 'react-icons-kit/fa/print'
 import { iosSearchStrong } from "react-icons-kit/ionicons/iosSearchStrong";
@@ -112,7 +113,10 @@ const Summarize = () => {
       setSumdata(res.Cowgrade);
     },
   });
-
+  const [image, setImage] = useState({ preview: "", raw: "" });
+  const [prod, setProd] = useState({
+    imagecow: "",
+  });
   console.log(sumData);
 
     return (
@@ -188,7 +192,7 @@ const Summarize = () => {
               <></>
 
               
-          <div>               
+      {/*     <div>               
             <DivFrom
                 style={{
                   width: "270px",
@@ -208,7 +212,7 @@ const Summarize = () => {
                 </DivFromTop>
 
                 
-                <DivFromDown
+          <DivFromDown
             style={{
               display: "grid",
               gridTemplateColumns: "0.3fr",
@@ -277,7 +281,7 @@ const Summarize = () => {
             </DivFromDown>
             </DivFrom>
             
-            </div>  
+            </div>   */}
            
               
               {/* <Footer/> */}
@@ -288,14 +292,14 @@ const Summarize = () => {
             </DivBase>
             <DivFrom
                 style={{
-                  width: "270px",
-                  height: "min-content",
+                  width: "500px",
+                  height: "500px",
                   margin: "20px",
                   marginTop: "30px",
                   marginRight: "2px",
                 }}
               >
-                <DivFromTop>
+                <DivFromTop >
                   <div
                     style={{ margin: "-3px 5px 0px 0px", fontSize: "20px" }}
                   ></div>
@@ -305,7 +309,7 @@ const Summarize = () => {
                 </DivFromTop>
 
                 
-                <DivFromDown
+          <DivFromDown
             style={{
               display: "grid",
               gridTemplateColumns: "0.3fr",
@@ -327,11 +331,11 @@ const Summarize = () => {
                   <div >
                     <div >
                         <a >
-                        <Divimg style={{width:"240px"}}>
+                        <Divimg style={{width:"0px"}}>
                           <img style={{
 
                             margin: "auto", objectFit: "cover", width: "100%", height: "100%", display: "relarive", padding: "4px", borderRadius: "30px"
-                          }} alt="Image" /* src={cowdetailData.imagecow || logo} */ />
+                          }} alt="Image" /* src={cowdetailData.imagecow || logo} */src={image.preview || logo} />
                         </Divimg >
                         </a>
                     </div>
@@ -342,7 +346,7 @@ const Summarize = () => {
             </div>
             </DivFromDown>
             </DivFrom>
-
+{/* 
             <div style={{
                   width: "270px",
                   height: "min-content",
@@ -361,7 +365,7 @@ const Summarize = () => {
                     style={{ backgroundColor: `${!onEdite ? "#ececec" : 'white'}` }}
                   />
                 </div>
-              </div>
+              </div> */}
 
           </div>
           
