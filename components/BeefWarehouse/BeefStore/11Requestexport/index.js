@@ -7,6 +7,8 @@ import { DivBase } from "../../../../utils/divBase";
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
 import { iosSearchStrong } from "react-icons-kit/ionicons/iosSearchStrong";
+import { paste } from 'react-icons-kit/icomoon/paste'
+
 
 import Submit_request from "./Submit_Request";
 
@@ -68,7 +70,7 @@ const index = () => {
         >
           <DivFromTop>
             <div style={{ margin: "-3px 5px 0px 0px" }}>
-              <Icon size={20} icon={list} />
+              <Icon size={20} icon={paste} />
             </div>
             ดำเนินรายการร้องขอเบิก
           </DivFromTop>

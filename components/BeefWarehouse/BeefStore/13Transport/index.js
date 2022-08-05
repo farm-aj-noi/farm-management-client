@@ -23,7 +23,13 @@ registerLocale("th", th);
 
 import Datestyle from "../helps/datepicker.module.css"
 
-import { Savebutton, Editbutton } from "../../../../utils/button";
+import { fileText } from 'react-icons-kit/icomoon/fileText'
+
+import { ic_assignment_turned_in } from 'react-icons-kit/md/ic_assignment_turned_in'
+
+
+
+
 import { Spinner } from "react-bootstrap";
 
 import { useQuery, useMutation } from "@apollo/react-hooks";
@@ -225,7 +231,7 @@ const Index = () => {
                     <DivFrom style={{ marginBottom: "15px" }}>
                         <DivFromTop>
                             <div style={{ margin: "-3px 5px 0px 0px" }}>
-                                <Icon size={20} icon={list} />
+                                <Icon size={20} icon={fileText} />
                             </div>
                             ข้อมูลโค
                         </DivFromTop>
@@ -301,7 +307,7 @@ const Index = () => {
                     <DivFrom style={{ marginBottom: "15px" }}>
                         <DivFromTop>
                             <div style={{ margin: "-3px 5px 0px 0px" }}>
-                                <Icon size={20} icon={list} />
+                                <Icon size={20} icon={ic_assignment_turned_in} />
                             </div>
                             บันทึกการขนส่ง
                         </DivFromTop>
@@ -458,7 +464,7 @@ const Index = () => {
                                     hover
                                     style={{ margin: "auto" }}
                                 >
-                                    
+
                                     <thead>
                                         <tr style={{ textAlign: "center", fontSize: "18px" }}>
                                             <th>วันที่่</th>

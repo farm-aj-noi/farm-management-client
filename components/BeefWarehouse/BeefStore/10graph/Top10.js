@@ -19,7 +19,7 @@ query Top10beef {
 
 const Top10 = () => {
     const { data: top10 } = useQuery(TOP10BEEF);
-    console.log(top10);
+    // console.log(top10);
     const data = {
         labels: [top10 && top10.top10beef.length >= 1 ? (top10.top10beef[0].nameth) : (''),
         top10 && top10.top10beef.length >= 2 ? (top10.top10beef[1].nameth) : (''),
@@ -46,21 +46,29 @@ const Top10 = () => {
                 top10 && top10.top10beef.length >= 9 ? (top10.top10beef[8].count) : (''),
                 top10 && top10.top10beef.length >= 10 ? (top10.top10beef[9].count) : ('')],
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.5)',
-                    'rgba(54, 162, 235, 0.5)',
-                    'rgba(255, 206, 86, 0.5)',
-                    'rgba(75, 192, 192, 0.5)',
-                    'rgba(153, 102, 255, 0.5)',
-                    'rgba(255, 159, 64, 0.5)',
+                    'rgba(255, 99, 132, 0.8)',
+                    'rgba(54, 162, 235, 0.8)',
+                    'rgba(255, 206, 86, 0.8)',
+                    'rgba(75, 192, 192, 0.8)',
+                    'rgba(153, 102, 255, 0.8)',
+                    'rgba(255, 159, 64, 0.8)',
                 ],
-                borderWidth: 1,
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                ],
             },
         ],
     };
 
     return (
         <div style={{ display: "flex", justifyContent: "center" }}>
-            <div style={{ width: "70%" }}><Doughnut data={data} /></div>
+            <div style={{ width: "70%" }}>
+                <Doughnut data={data} /></div>
             <Table
                 striped
                 bordered
@@ -121,12 +129,13 @@ const Top10 = () => {
                         <td>{top10 && top10.top10beef && top10.top10beef.length >= 9 ? top10.top10beef[8].count : "-"}</td>
                     </tr>
                     <tr style={{ textAlign: "center" }}>
-                        <td>10</td>
-                        <td>{top10 && top10.top10beef && top10.top10beef.length >= 10 ? top10.top10beef[9].nameth : "-"}</td>
-                        <td>{top10 && top10.top10beef && top10.top10beef.length >= 10 ? top10.top10beef[9].count : "-"}</td>
+                        <td style={{ height: "35px", }}>10</td>
+                        <td style={{ height: "35px", }}>{top10 && top10.top10beef && top10.top10beef.length >= 10 ? top10.top10beef[9].nameth : "-"}</td>
+                        <td style={{ height: "35px", }}>{top10 && top10.top10beef && top10.top10beef.length >= 10 ? top10.top10beef[9].count : "-"}</td>
                     </tr>
                 </tbody>
             </Table>
+
         </div>
     )
 }

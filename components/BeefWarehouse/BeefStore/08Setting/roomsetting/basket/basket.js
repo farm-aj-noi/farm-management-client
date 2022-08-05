@@ -11,7 +11,7 @@ import {
 } from "../../../../../../utils/buttonColor";
 
 import { Icon } from "react-icons-kit";
-import { list } from "react-icons-kit/fa/list";
+import { cog } from 'react-icons-kit/entypo/cog'
 
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
@@ -20,6 +20,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 import Router from "next/router";
+
 
 export const QUERYROOM = gql`
   query Query {
@@ -102,13 +103,12 @@ const basket = () => {
       console.log(error);
     }
   };
-
   return (
     <>
       <div>
         <DivFromTop>
-          <div style={{ margin: "-3px 5px 0px 0px" }}>
-            <Icon size={20} icon={list} />
+          <div style={{ margin: "-3px 5px 0px -5px" }}>
+            <Icon size={20} icon={cog} />
           </div>
           บันทึกตั้งค่าตะกร้าจัดเก็บ
         </DivFromTop>

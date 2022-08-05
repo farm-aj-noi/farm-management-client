@@ -18,6 +18,8 @@ import { DivBase } from "../../../../../utils/divBase";
 
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
+import { cog } from 'react-icons-kit/entypo/cog'
+
 import { iosSearchStrong } from "react-icons-kit/ionicons/iosSearchStrong";
 
 import Nav_setting from "../Nav_setting";
@@ -243,8 +245,8 @@ const index = () => {
           }}
         >
           <DivFromTop>
-            <div style={{ margin: "-3px 5px 0px 0px" }}>
-              <Icon size={20} icon={list} />
+            <div style={{ margin: "-3px 5px 0px -5px" }}>
+              <Icon size={20} icon={cog} />
             </div>
             บันทึกตั้งค่าระยะเวลาบ่ม
           </DivFromTop>
@@ -285,8 +287,8 @@ const index = () => {
           }}
         >
           <DivFromTop>
-            <div style={{ margin: "-3px 5px 0px 0px" }}>
-              <Icon size={20} icon={list} />
+            <div style={{ margin: "-3px 5px 0px -5px" }}>
+              <Icon size={20} icon={cog} />
             </div>
             บันทึกตั้งค่าห้องบ่ม
           </DivFromTop>

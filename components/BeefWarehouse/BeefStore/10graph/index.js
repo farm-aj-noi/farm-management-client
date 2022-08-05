@@ -1,5 +1,4 @@
 import React from "react";
-import { Table } from "react-bootstrap";
 import {
   DivFrom,
   DivFromTop,
@@ -10,27 +9,16 @@ import {
 
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
+import { statsDots } from 'react-icons-kit/icomoon/statsDots'
+import { pieChart } from 'react-icons-kit/icomoon/pieChart'
 
-import Graphimport from "./graphimport";
+
+
 import Graphexport from "./graphexport";
 import Top10beef from "./Top10"
-import { useQuery } from "@apollo/react-hooks";
-import gql from "graphql-tag";
-
-const TOP10BEEF = gql`
-query Top10beef {
-  top10beef {
-    nameth
-    nameen
-    count
-  }
-}
-`
-
+import Stat from "./graphexport/statistics";
 
 export const index = () => {
-  const { data } = useQuery(TOP10BEEF);
-  console.log(data)
   return (
     <div style={{ marginTop: "100px" }}>
       <div
@@ -51,10 +39,10 @@ export const index = () => {
         </HeaderColor>
       </div>
       <DivBase1>
-        <DivFrom >
+        <DivFrom>
           <DivFromTop>
             <div style={{ margin: "-3px 5px 0px 0px" }}>
-              <Icon size={20} icon={list} />
+              <Icon size={20} icon={pieChart} />
             </div>
             10 อันดับรายการยอดนิยมเบิกออกซากโค (ประจำเดือน)
           </DivFromTop>
@@ -65,12 +53,12 @@ export const index = () => {
         <DivFrom style={{ marginTop: "20px" }}>
           <DivFromTop>
             <div style={{ margin: "-3px 5px 0px 0px" }}>
-              <Icon size={20} icon={list} />
+              <Icon size={20} icon={statsDots} />
             </div>
-            ราลละเอียดข้อมูลสถิตินำเข้า
+            ราลละเอียดข้อมูลสถิติกราฟนำเข้า - เบิกออก
           </DivFromTop>
           <DivFromDown>
-            <Graphimport />
+            <Graphexport />
           </DivFromDown>
         </DivFrom>
         <DivFrom style={{ marginTop: "20px" }}>
@@ -78,13 +66,12 @@ export const index = () => {
             <div style={{ margin: "-3px 5px 0px 0px" }}>
               <Icon size={20} icon={list} />
             </div>
-            ราลละเอียดข้อมูลสถิติเบิกออก
+            ราลละเอียดข้อมูลสถิตินำเข้า - เบิกออก
           </DivFromTop>
           <DivFromDown>
-            <Graphexport />
+            <Stat />
           </DivFromDown>
         </DivFrom>
-
       </DivBase1>
     </div>
   );

@@ -110,11 +110,20 @@ function create() {
                             value={infore.name}
                             name="name"
                             onChange={handleChange}
-                            style={{ textAlign: "center" }}
+                            style={{
+                                borderColor: `${!infore.name ? "red" : ""}`,
+                                height: "35px",
+                                textAlign: "center"
+                            }}
                         />
+                        {!infore.name ? (
+                            <label style={{ color: "red" }}>กรุณากรอกชื่อ</label>
+                        ) : (
+                            ""
+                        )}
                     </div>
                 </DivFromInsideLeft>
-                <DivFromInsideLeft>
+                <DivFromInsideLeft style={{ marginTop: "5px" }}>
                     ประเภทสินค้า :
                     <div
                         style={{

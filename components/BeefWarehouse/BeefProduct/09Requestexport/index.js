@@ -6,6 +6,7 @@ import { DivBase } from "../../../../utils/divBase";
 
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
+import { paste } from 'react-icons-kit/icomoon/paste'
 
 import Create from "./create";
 
@@ -13,6 +14,7 @@ import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
 import dayjs from "dayjs";
+
 
 const QUERYRE = gql`
 query QUERYRE {
@@ -69,7 +71,7 @@ function index() {
                 >
                     <DivFromTop>
                         <div style={{ margin: "-3px 5px 0px 0px" }}>
-                            <Icon size={20} icon={list} />
+                            <Icon size={20} icon={paste} />
                         </div>
                         ดำเนินรายการร้องขอเบิก
                     </DivFromTop>

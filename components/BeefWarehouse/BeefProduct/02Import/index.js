@@ -14,6 +14,7 @@ import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
 
 import Listim from "./listimproduct";
+import { enter } from 'react-icons-kit/icomoon/enter'
 
 export const IMPRODUCTSEARCH = gql`
   query ImproductSearch(
@@ -170,8 +171,8 @@ const index = () => {
           }}
         >
           <DivFromTop>
-            <div style={{ margin: "-3px 5px 0px 0px" }}>
-              <Icon size={20} icon={list} />
+            <div style={{ margin: "-1px 5px 0px -5px" }}>
+              <Icon size={20} icon={enter} />
             </div>
             ดำเนินการนำเข้าผลิตภัณฑ์
           </DivFromTop>

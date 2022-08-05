@@ -9,9 +9,7 @@ import {
 import { DivBase } from "../../../../../utils/divBase";
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
-
-
-
+import { cog } from 'react-icons-kit/entypo/cog'
 
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
@@ -78,8 +76,8 @@ const index = () => {
           }}
         >
           <DivFromTop>
-            <div style={{ margin: "-3px 5px 0px 0px" }}>
-              <Icon size={20} icon={list} />
+            <div style={{ margin: "-3px 5px 0px -5px" }}>
+              <Icon size={20} icon={cog} />
             </div>
             ตั้งค่าแจ้งเตือนก่อนวันหมดอายุ
           </DivFromTop>

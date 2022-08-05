@@ -14,6 +14,7 @@ import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
 import List_chill from "./List_chill";
+import { Iconchill } from "./ChillFrom"
 
 export const CHILLSEARCHLIST = gql`
   query CHILLSEARCHLIST(
@@ -81,7 +82,7 @@ const index = () => {
       name: selectname,
     },
   });
-/*   console.log(data); */
+  /*   console.log(data); */
   return (
     <div style={{ marginTop: "100px" }}>
       <div
@@ -121,8 +122,8 @@ const index = () => {
             }}
           >
             <DivFromTop>
-              <div style={{ margin: "-3px 5px 0px 0px" }}>
-                <Icon size={20} icon={list} />
+              <div style={{ margin: "-3px 0px -7px -11px" }}>
+                <Iconchill height="30px" weight="30px" />
               </div>
               ดำเนินการบ่มซากเนื้อโค
             </DivFromTop>

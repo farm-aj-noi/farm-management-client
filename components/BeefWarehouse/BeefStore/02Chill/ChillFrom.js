@@ -1,5 +1,6 @@
 import styled from "styled-components";
-
+import iconchill from "../../../../images/beefwarehouse/Icon18.png"
+import Image from "next/image";
 import { FromDiv } from "../../../../utils/from";
 import {
   lightBlue,
@@ -8,6 +9,16 @@ import {
   lightGreen,
   green,
 } from "../../../../utils/colors";
+
+export const Iconchill = (prop) => {
+  return (
+    <Image
+      src={iconchill}
+      width={prop.weight}
+      height={prop.height}
+    />
+  )
+}
 
 export const ButtonSummit1 = styled.button`
   text-align: center;

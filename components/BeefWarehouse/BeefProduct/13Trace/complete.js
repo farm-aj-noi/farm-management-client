@@ -7,7 +7,8 @@ import { Table, Accordion, Card, Button } from "react-bootstrap";
 
 import { ic_info_outline } from "react-icons-kit/md/ic_info_outline";
 import { list } from "react-icons-kit/fa/list";
-
+import { fileText } from 'react-icons-kit/icomoon/fileText'
+import { ic_assignment_turned_in } from 'react-icons-kit/md/ic_assignment_turned_in'
 
 import dayjs from "dayjs";
 import "dayjs/locale/th";
@@ -93,7 +94,7 @@ const complete = () => {
                 }}>
                     <DivFromTop>
                         <div style={{ margin: "-3px 5px 0px 0px" }}>
-                            <Icon size={20} icon={list} />
+                            <Icon size={20} icon={ic_assignment_turned_in} />
                         </div>
                         ติดตามสินค้า{" "}
                     </DivFromTop>
@@ -130,7 +131,7 @@ const complete = () => {
                         }}>
                             <DivFromTop>
                                 <div style={{ margin: "-3px 5px 0px 0px" }}>
-                                    <Icon size={20} icon={list} />
+                                    <Icon size={20} icon={fileText} />
                                 </div>
                                 รายละเอียดสินค้าผลิตภัณฑ์
                             </DivFromTop>

@@ -15,10 +15,7 @@ import { useQuery } from "@apollo/react-hooks";
 
 import List_import from "./List_import";
 
-
-
-
-
+import { enter } from 'react-icons-kit/icomoon/enter'
 
 export const IMPORTHALVESEARCH = gql`
   query IMPORTHALVESEARCH(
@@ -128,8 +125,8 @@ const index = () => {
             }}
           >
             <DivFromTop>
-              <div style={{ margin: "-3px 5px 0px 0px" }}>
-                <Icon size={20} icon={list} />
+              <div style={{ margin: "-1px 5px 0px -5px" }}>
+                <Icon size={20} icon={enter} />
               </div>
               ดำเนินการนำเข้าซากเนื้อโคผ่าซีก
             </DivFromTop>
