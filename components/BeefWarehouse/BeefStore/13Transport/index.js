@@ -456,7 +456,7 @@ const Index = () => {
                                 gridRowGap: "5px",
                             }}
                         >
-                            <div>
+                            <div style={{ height: "200px", overflowY: "auto" }}>
                                 <Table
                                     striped
                                     bordered
