@@ -236,15 +236,15 @@ const Index = () => {
                   }}
                 >
                   <div>บาร์โค๊ด : {data.Tracking.barcode}</div>
-                  <div>ประเภทเนื้อ : {data.Tracking.beeftype}</div>
-                  <div>เกรด : {data.Tracking.grade}</div>
+                  <div>ประเภทเนื้อ : {data.Tracking.beeftype ? data.Tracking.beeftype : "ไม่ระบุ"}</div>
+                  <div>เกรด : {data.Tracking.grade ? data.Tracking.grade : "ไม่ระบุ"}</div>
                   <div></div>
                   <div>
                     ปริมาณสินค้า :{" "}
-                    {data.Tracking.weight.toLocaleString(undefined, {
+                    {data.Tracking.weight ? data.Tracking.weight.toLocaleString(undefined, {
                       minimumFractionDigits: 2,
                       maximumFractionDigits: 2,
-                    })}{" "}
+                    }) : "ไม่ระบุ"}{" "}
                     กก.
                   </div>
                   <div>
@@ -316,10 +316,11 @@ const Index = () => {
                       {/* <div>อายุ : {data.Tracking.age}</div> */}
                       <div>
                         น้ำหนัก :{" "}
-                        {data.Tracking.weightcow.toLocaleString(undefined, {
+                        {data.Tracking.weightcow ?
+                        data.Tracking.weightcow.toLocaleString(undefined, {
                           minimumFractionDigits: 2,
                           maximumFractionDigits: 2,
-                        }) + " กก."}
+                        }):"ไม่ระบุ" + " กก."}
                       </div>
                     </div>
                   ) : tab === 2 ? (
