@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import { Icon } from "react-icons-kit";
 import { printer } from "react-icons-kit/ikons/printer";
@@ -8,6 +8,7 @@ import { ButtonExcel } from "../NavFrom";
 import { AuthContext } from "../../../../../appState/AuthProvider";
 
 import dayjs from "dayjs";
+import "dayjs/locale/th";
 
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
@@ -68,7 +69,8 @@ const paper = ({ prod }) => {
           dataRow.push(
             dayjs(row.beefproduct.BBE)
               .add(543, "y")
-              .locale("th".format("DD MMMM YYYY"))
+              .locale("th")
+              .format("DD MMMM YYYY")
           );
         } else if (column === "beefproduct.producttype.nameTH") {
           dataRow.push(row.beefproduct.producttype.nameTH);
