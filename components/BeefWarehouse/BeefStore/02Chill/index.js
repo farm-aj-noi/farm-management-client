@@ -24,6 +24,7 @@ export const CHILLSEARCHLIST = gql`
   $startdate2: String
   $enddate2: String
   $name: String
+  $chillstatus: String
 ) {
   listchill(
     startdate: $startdate
@@ -32,6 +33,7 @@ export const CHILLSEARCHLIST = gql`
     startdate2: $startdate2
     enddate2: $enddate2
     name: $name
+    chillstatus: $chillstatus
   ) {
     id
     chilldateStart
@@ -72,6 +74,7 @@ const index = () => {
   const [selectedstartdate2, SetStartDateChange2] = useState("");
   const [selectedenddate2, SetEndDateChange2] = useState("");
   const [selectname, SetnameChange] = useState("");
+  const [selectchillstatus, SetchillStatus] = useState("");
   const { data, loading, error } = useQuery(CHILLSEARCHLIST, {
     variables: {
       beeftype: selectedbeeftypeChill,
@@ -80,6 +83,7 @@ const index = () => {
       startdate2: selectedstartdate2,
       enddate2: selectedenddate2,
       name: selectname,
+      chillstatus: selectchillstatus,
     },
   });
   /*   console.log(data); */
@@ -105,7 +109,7 @@ const index = () => {
       <DivBase
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 270px 1250px 1fr",
+          gridTemplateColumns: "1fr 270px 1350px 1fr",
           gridRowGap: "15px",
           gridColumnGap: "10px",
           textAlign: "start",
@@ -297,6 +301,37 @@ const index = () => {
                     }}
                     onChange={(event) => SetEndDateChange2(event.target.value)}
                   ></input>
+                  <label
+                    for="beef"
+                    style={{
+                      textAlign: "center",
+                      fontSize: "18px",
+                      marginLeft: "10px",
+                    }}
+                  >
+                    สถานะบ่ม
+                  </label>
+                  <select
+                    name="beef"
+                    id="beef"
+                    style={{
+                      height: "35px",
+                      width: "120px",
+                      border: "1px solid #AFAFAF",
+                      borderRadius: "4px",
+                      textAlign: "center",
+                      fontSize: "16px",
+                      marginLeft: "10px"
+
+                    }}
+                    onChange={(event) =>
+                      SetchillStatus(event.target.value)
+                    }
+                  >
+                    <option value="">ทั้งหมด</option>
+                    <option value="6284ad73fbfac22364a6e430">กำลังบ่ม</option>
+                    <option value="6284ad91fbfac22364a6e431">บ่มเสร็จสิ้น</option>
+                  </select>
                 </from>
               </div>
             </DivFromDown>

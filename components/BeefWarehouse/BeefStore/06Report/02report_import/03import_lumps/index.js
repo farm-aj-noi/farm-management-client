@@ -32,6 +32,7 @@ export const IMPORTLUMPSEARCH = gql`
     $userName: String
     $beefroom: String
     $shelf: String
+    $basket: String
   ) {
     imlumpSearch(
       startdate: $startdate
@@ -41,6 +42,7 @@ export const IMPORTLUMPSEARCH = gql`
       userName: $userName
       beefroom: $beefroom
       shelf: $shelf
+      basket: $basket
     ) {
       importdate
       user {
@@ -130,6 +132,7 @@ const index = () => {
       userName: inputusername,
       beefroom: selectedbeefroom,
       shelf: selectedshelf,
+      basket: selectedbasket,
     },
   });
   return (
@@ -370,11 +373,12 @@ const index = () => {
                         fontSize: "16px",
                         marginRight: "10px",
                       }}
+                      onChange={(event) => setselectbasket(event.target.value)}
                     >
                       <option value="">ตะกร้า</option>
                       {basketdata &&
                         basketdata.allBasket.map((prod) => (
-                          <option key={prod.id} value={prod.id}>
+                          <option key={prod.id} value={prod.basketname}>
                             {prod.basketname}
                           </option>
                         ))}

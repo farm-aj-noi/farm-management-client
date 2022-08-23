@@ -32,6 +32,7 @@ export const IMPORTCHOPSEARCH = gql`
     $beeftype: String
     $beefroom: String
     $shelf: String
+    $basket: String
   ) {
     imchopSearch(
       startdate: $startdate
@@ -41,6 +42,7 @@ export const IMPORTCHOPSEARCH = gql`
       userName: $userName
       beefroom: $beefroom
       shelf: $shelf
+      basket: $basket
     ) {
       id
       importdate
@@ -129,6 +131,7 @@ const index = () => {
       userName: inputusername,
       beefroom: selectedbeefroom,
       shelf: selectedshelf,
+      basket: selectedbasket
     },
   });
   return (
@@ -264,7 +267,7 @@ const index = () => {
                       style={{
                         textAlign: "center",
                         fontSize: "18px",
-                       
+
                         marginRight: "10px",
                       }}
                     >
@@ -370,13 +373,14 @@ const index = () => {
                         borderLeft: "none",
                         textAlign: "center",
                         fontSize: "16px",
-                        
+
                       }}
+                      onChange={(event) => setselectbasket(event.target.value)}
                     >
                       <option value="">ตะกร้า</option>
                       {basketdata &&
                         basketdata.allBasket.map((prod) => (
-                          <option key={prod.id} value={prod.id}>
+                          <option key={prod.id} value={prod.basketname}>
                             {prod.basketname}
                           </option>
                         ))}
