@@ -10,9 +10,11 @@ import {
 
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
+import { statsDots } from 'react-icons-kit/icomoon/statsDots'
+import { pieChart } from 'react-icons-kit/icomoon/pieChart'
 
-import Graphimport from "./graphimport";
 import Graphexport from "./graphexport";
+
 
 import Top10Product from "./Top10"
 
@@ -40,7 +42,7 @@ export const index = () => {
         <DivFrom>
           <DivFromTop>
             <div style={{ margin: "-3px 5px 0px 0px" }}>
-              <Icon size={20} icon={list} />
+              <Icon size={20} icon={pieChart} />
             </div>
             10 อันดับรายการยอดนิยมเบิกออกจำหน่าย (ประจำเดือน)
           </DivFromTop>
@@ -51,20 +53,9 @@ export const index = () => {
         <DivFrom style={{ marginTop: "20px" }}>
           <DivFromTop>
             <div style={{ margin: "-3px 5px 0px 0px" }}>
-              <Icon size={20} icon={list} />
+              <Icon size={20} icon={statsDots} />
             </div>
-            ราลละเอียดข้อมูลสถิตินำเข้า
-          </DivFromTop>
-          <DivFromDown>
-            <Graphimport />
-          </DivFromDown>
-        </DivFrom>
-        <DivFrom style={{ marginTop: "20px" }}>
-          <DivFromTop>
-            <div style={{ margin: "-3px 5px 0px 0px" }}>
-              <Icon size={20} icon={list} />
-            </div>
-            ราลละเอียดข้อมูลสถิติเบิกออก
+            ราลละเอียดข้อมูลสถิติกราฟนำเข้า - เบิกออก
           </DivFromTop>
           <DivFromDown>
             <Graphexport />

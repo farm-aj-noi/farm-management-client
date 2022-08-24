@@ -18,7 +18,7 @@ const Excel_chill = ({ prod }) => {
     { label: "วันที่บ่ม", key: "chilldateStart" },
     { label: "วันที่บ่มเสร็จ", key: "chilldateEnd" },
     { label: "ประเภทซาก", key: "halve.imslaughter.numcow" },
-    { label: "จำนวนวันที่บ่ม	", key: "chillday" },
+    { label: "จำนวนวันที่บ่ม	", key: "chillday.day" },
     { label: "ทะเบียนขุน	", key: "halve.imslaughter.numcow" },
     { label: "รหัสซาก", key: "halve.beeftype.code" },
     { label: "รหัสบาร์โค้ด", key: "halve.barcode" },

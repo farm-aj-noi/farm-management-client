@@ -1,32 +1,22 @@
-import React, { useState, useeffect } from "react";
+import React, { useState } from "react";
 
 import {
-  DivFrom,
   DivFromTop,
   DivFromDown,
-  HeaderColor,
   Searchinput,
   Addbutton,
-  DivBase1,
 } from "../../SettingFrom";
 import {
   Savebuttoncolor,
-  Editbuttoncolor,
   Removebuttoncolor,
 } from "../../../../../../utils/buttonColor";
 
 import {
-  Savebutton,
-  Editbutton,
   Removebutton,
 } from "../../../../../../utils/button";
 
-import { DivBase } from "../../../../../../utils/divBase";
-
 import { Icon } from "react-icons-kit";
-import { list } from "react-icons-kit/fa/list";
-
-import Nav_setting from "../../Nav_setting";
+import { cog } from 'react-icons-kit/entypo/cog'
 
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
@@ -36,8 +26,8 @@ import withReactContent from "sweetalert2-react-content";
 
 import Router from "next/router";
 
-import List from "./Listroom";
-import Editname from "./editname";
+import { Spinner } from "react-bootstrap";
+
 
 export const CREATEROOMS = gql`
   mutation CREATEROOMS($roomname: String) {
@@ -129,25 +119,25 @@ const room = () => {
     }, //get totalbeef & beeftype room
   ]);
 
-  const [createtypekeep] = useMutation(CREATETYPEKEEP, {
+  const alert = () => {
+    MySwal.fire({
+      icon: "success",
+      title: "สำเร็จ",
+      text: "ทำการตั้งค่าเสร็จสิ้น",
+      confirmButtonText: (
+        <span
+          onClick={() =>
+            Router.push("beefwarehouse/beefstore/setting/room").then(() => Router.reload())
+          }
+        >
+          ตกลง
+        </span >
+      ),
+      confirmButtonColor: "#3085d6",
+    });
+  }
+  const [createtypekeep, { error, reset }] = useMutation(CREATETYPEKEEP, {
     onCompleted: (data) => {
-      if (data) {
-        MySwal.fire({
-          icon: "success",
-          title: "สำเร็จ",
-          text: "ทำการตั้งค่าเสร็จสิ้น",
-          confirmButtonText: (
-            <span
-              onClick={() =>
-                Router.reload("beefwarehouse/beefstore/setting/room")
-              }
-            >
-              ตกลง
-            </span>
-          ),
-          confirmButtonColor: "#3085d6",
-        });
-      }
     },
   });
 
@@ -174,6 +164,8 @@ const room = () => {
     setInputListroom(listroom);
   };
 
+  const [loadingCreate, setLoadingCreate] = useState(false);
+
   const handleSubmitroom = async () => {
     try {
       for (let i = 0; i < inputListroom.length; i++) {
@@ -184,19 +176,32 @@ const room = () => {
             beefroom: idroom,
           },
         });
+        setLoadingCreate(true)
       }
+      setLoadingCreate(false)
+      alert()
     } catch (error) {
       console.log(error);
     }
   };
 
-  const [edit, setedit] = useState(false);
+  const testallselect = () => {
+    var x = document.getElementById("beeftype");
+    console.log(x)
+    return;
+    var txt;
+    var i;
+    for (i = 0; i < x.length; i++) {
+      txt = txt + "\n" + x.options[i].text;
+    }
+
+  }
 
   return (
     <div>
       <DivFromTop>
-        <div style={{ margin: "-3px 5px 0px 0px" }}>
-          <Icon size={20} icon={list} />
+        <div style={{ margin: "-3px 5px 0px -5px" }}>
+          <Icon size={20} icon={cog} />
         </div>
         บันทึกตั้งค่าห้องจัดเก็บ
       </DivFromTop>
@@ -299,6 +304,7 @@ const room = () => {
                           }}
                         >
                           <option value="">เลือก</option>
+                          <option value="ทั้งหมด">ทั้งหมด</option>
                           <option value="5f1000e28d55662dcc23d95e">
                             ซากซ้าย
                           </option>
@@ -384,23 +390,34 @@ const room = () => {
                   >
                     เพิ่มประเภทจัดเก็บ
                   </Addbutton>
-                  <Savebuttoncolor
-                    style={{
-                      height: "38px",
-                      width: " 50px",
-                      fontSize: "16px"
-                    }}
-                    onClick={handleSubmitroom}
-                  >
-                    บันทึก
-                  </Savebuttoncolor>
+                  {loadingCreate ? (
+                    <Spinner
+                      style={{ margin: "0px 12px 0px auto", float: "right" }}
+                      animation="border"
+                      variant="primary"
+                    />
+                  ) : (
+                    <Savebuttoncolor
+                      style={{
+                        height: "38px",
+                        width: " 50px",
+                        fontSize: "16px"
+                      }}
+                      onClick={handleSubmitroom}
+                    >
+                      บันทึก
+                    </Savebuttoncolor>
+                  )}
+
                 </div>
               </div>
             </>
           </div>
         )}
       </DivFromDown>
+
     </div>
+
   );
 };
 

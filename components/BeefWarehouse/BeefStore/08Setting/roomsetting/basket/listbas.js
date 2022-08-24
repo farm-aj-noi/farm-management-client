@@ -52,7 +52,6 @@ const listbas = ({ listbas }) => {
       id: infobasket.id,
     },
   });
-  console.log(databasket);
   return (
     <>
       <div style={{

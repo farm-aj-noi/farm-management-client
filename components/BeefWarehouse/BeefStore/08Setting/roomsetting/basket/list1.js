@@ -1,38 +1,12 @@
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import {  useQuery } from "@apollo/react-hooks";
 import React, { useState } from "react";
 import gql from "graphql-tag";
 
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
-
-import Router from "next/router";
-
 import {
-  DivFrom,
-  DivFromTop,
-  DivFromDown,
-  HeaderColor,
   Searchinput,
-  Addbutton,
-  DivBase1,
 } from "../../SettingFrom";
-import {
-  Savebuttoncolor,
-  Editbuttoncolor,
-  Removebuttoncolor,
-} from "../../../../../../utils/buttonColor";
 
-import {
-  Savebutton,
-  Editbutton,
-  Removebutton,
-} from "../../../../../../utils/button";
-
-import { DivBase } from "../../../../../../utils/divBase";
-
-import { Icon } from "react-icons-kit";
-import { list } from "react-icons-kit/fa/list";
-import { NavItem, Card } from "react-bootstrap";
+import {  Card } from "react-bootstrap";
 
 import Listbasket from "./listbas";
 
@@ -52,7 +26,6 @@ const list1 = ({ listroom1 }) => {
       id: inforoom.id,
     },
   });
-  console.log(inforoom);
   return (
     <div
       style={{

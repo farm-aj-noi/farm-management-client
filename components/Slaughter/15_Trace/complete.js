@@ -109,6 +109,17 @@ export const QUERY = gql`
           note
         }
       }
+      entrails {
+      id
+      barcode
+      createdAt
+      transports {
+        date
+        name
+        place
+        note
+      }
+    }
     }
   }
 `;
@@ -129,7 +140,7 @@ const Index = () => {
       numkun: router.query.trackingId,
     },
   });
-
+  console.log(data)
   // console.log(router.query.trackingId);
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
@@ -168,7 +179,7 @@ const Index = () => {
             }}
           >
             <div className="mb-3" style={{ margin: "auto" }}>
-              กรุณากรอกเลขใบแจ้งขุน : {}
+              กรุณากรอกเลขใบแจ้งขุน : { }
               <Searchinput
                 value={inputnumkun}
                 onChange={(event) => setInputnumkun(event.target.value)}
@@ -300,17 +311,17 @@ const Index = () => {
                                       <td>
                                         {prod.createdAt
                                           ? dayjs(prod.createdAt)
-                                              .add(543, "y")
-                                              .locale("th")
-                                              .format("DD MMMM YYYY")
+                                            .add(543, "y")
+                                            .locale("th")
+                                            .format("DD MMMM YYYY")
                                           : "ไม่ระบุ"}
                                       </td>
                                       <td>
                                         {prod.createdAt
                                           ? dayjs(prod.createdAt)
-                                              .add(543, "y")
-                                              .locale("th")
-                                              .format("HH : mm น.")
+                                            .add(543, "y")
+                                            .locale("th")
+                                            .format("HH : mm น.")
                                           : "ไม่ระบุ"}
                                       </td>
                                       <td>-</td>
@@ -323,17 +334,17 @@ const Index = () => {
                                           <td>
                                             {prod.date
                                               ? dayjs(prod.date)
-                                                  .add(543, "y")
-                                                  .locale("th")
-                                                  .format("DD MMMM YYYY")
+                                                .add(543, "y")
+                                                .locale("th")
+                                                .format("DD MMMM YYYY")
                                               : "ไม่ระบุ"}
                                           </td>
                                           <td>
                                             {prod.date
                                               ? dayjs(prod.date)
-                                                  .add(543, "y")
-                                                  .locale("th")
-                                                  .format("HH : mm น.")
+                                                .add(543, "y")
+                                                .locale("th")
+                                                .format("HH : mm น.")
                                               : "ไม่ระบุ"}
                                           </td>
                                           <td>{prod.name}</td>
@@ -414,17 +425,17 @@ const Index = () => {
                                       <td>
                                         {prod.createdAt
                                           ? dayjs(prod.createdAt)
-                                              .add(543, "y")
-                                              .locale("th")
-                                              .format("DD MMMM YYYY")
+                                            .add(543, "y")
+                                            .locale("th")
+                                            .format("DD MMMM YYYY")
                                           : "ไม่ระบุ"}
                                       </td>
                                       <td>
                                         {prod.createdAt
                                           ? dayjs(prod.createdAt)
-                                              .add(543, "y")
-                                              .locale("th")
-                                              .format("HH : mm น.")
+                                            .add(543, "y")
+                                            .locale("th")
+                                            .format("HH : mm น.")
                                           : "ไม่ระบุ"}
                                       </td>
                                       <td>-</td>
@@ -437,17 +448,17 @@ const Index = () => {
                                           <td>
                                             {prod.date
                                               ? dayjs(prod.date)
-                                                  .add(543, "y")
-                                                  .locale("th")
-                                                  .format("DD MMMM YYYY")
+                                                .add(543, "y")
+                                                .locale("th")
+                                                .format("DD MMMM YYYY")
                                               : "ไม่ระบุ"}
                                           </td>
                                           <td>
                                             {prod.date
                                               ? dayjs(prod.date)
-                                                  .add(543, "y")
-                                                  .locale("th")
-                                                  .format("HH : mm น.")
+                                                .add(543, "y")
+                                                .locale("th")
+                                                .format("HH : mm น.")
                                               : "ไม่ระบุ"}
                                           </td>
                                           <td>{prod.name}</td>
@@ -528,17 +539,17 @@ const Index = () => {
                                       <td>
                                         {prod.createdAt
                                           ? dayjs(prod.createdAt)
-                                              .add(543, "y")
-                                              .locale("th")
-                                              .format("DD MMMM YYYY")
+                                            .add(543, "y")
+                                            .locale("th")
+                                            .format("DD MMMM YYYY")
                                           : "ไม่ระบุ"}
                                       </td>
                                       <td>
                                         {prod.createdAt
                                           ? dayjs(prod.createdAt)
-                                              .add(543, "y")
-                                              .locale("th")
-                                              .format("HH : mm น.")
+                                            .add(543, "y")
+                                            .locale("th")
+                                            .format("HH : mm น.")
                                           : "ไม่ระบุ"}
                                       </td>
                                       <td>-</td>
@@ -551,17 +562,17 @@ const Index = () => {
                                           <td>
                                             {prod.date
                                               ? dayjs(prod.date)
-                                                  .add(543, "y")
-                                                  .locale("th")
-                                                  .format("DD MMMM YYYY")
+                                                .add(543, "y")
+                                                .locale("th")
+                                                .format("DD MMMM YYYY")
                                               : "ไม่ระบุ"}
                                           </td>
                                           <td>
                                             {prod.date
                                               ? dayjs(prod.date)
-                                                  .add(543, "y")
-                                                  .locale("th")
-                                                  .format("HH : mm น.")
+                                                .add(543, "y")
+                                                .locale("th")
+                                                .format("HH : mm น.")
                                               : "ไม่ระบุ"}
                                           </td>
                                           <td>{prod.name}</td>
@@ -641,17 +652,17 @@ const Index = () => {
                                     <td>
                                       {prod.createdAt
                                         ? dayjs(prod.createdAt)
-                                            .add(543, "y")
-                                            .locale("th")
-                                            .format("DD MMMM YYYY")
+                                          .add(543, "y")
+                                          .locale("th")
+                                          .format("DD MMMM YYYY")
                                         : "ไม่ระบุ"}
                                     </td>
                                     <td>
                                       {prod.createdAt
                                         ? dayjs(prod.createdAt)
-                                            .add(543, "y")
-                                            .locale("th")
-                                            .format("HH : mm น.")
+                                          .add(543, "y")
+                                          .locale("th")
+                                          .format("HH : mm น.")
                                         : "ไม่ระบุ"}
                                     </td>
                                     <td>-</td>
@@ -664,17 +675,17 @@ const Index = () => {
                                         <td>
                                           {prod.date
                                             ? dayjs(prod.date)
-                                                .add(543, "y")
-                                                .locale("th")
-                                                .format("DD MMMM YYYY")
+                                              .add(543, "y")
+                                              .locale("th")
+                                              .format("DD MMMM YYYY")
                                             : "ไม่ระบุ"}
                                         </td>
                                         <td>
                                           {prod.date
                                             ? dayjs(prod.date)
-                                                .add(543, "y")
-                                                .locale("th")
-                                                .format("HH : mm น.")
+                                              .add(543, "y")
+                                              .locale("th")
+                                              .format("HH : mm น.")
                                             : "ไม่ระบุ"}
                                         </td>
                                         <td>{prod.name}</td>
@@ -688,6 +699,113 @@ const Index = () => {
                           </Accordion.Collapse>
                         </Card>
                       ))}
+                    {data &&
+                      data.trace &&
+                      data.trace.entrails ? (
+                      <Card>
+                        <Card.Header>
+                          <div
+                            style={{
+                              display: "grid",
+                              gridTemplateColumns: "1fr 1fr 1fr 1fr",
+                              // width:"950px",
+                              // margin:"auto"
+                            }}
+                          >
+                            <div style={{ margin: "auto 0" }}>
+                              บาร์โค๊ด : {data.trace.entrails.barcode}
+                            </div>
+                            <div style={{ margin: "auto 0" }}>
+                              ชื่อเนื้อ : ชิ้นส่วนอื่น ๆ
+                            </div>
+                            <div />
+                            <Accordion.Toggle
+                              as={Button}
+                              variant="link"
+                              eventKey={data.trace.entrails.id}
+                              style={{
+                                float: "right",
+                                margin: "0px 0",
+                                padding: "5px 8px",
+                                color: "white",
+                                background: "#3bafda",
+                              }}
+                            >
+                              รายละเอียด
+                            </Accordion.Toggle>
+                          </div>
+                        </Card.Header>
+                        <Accordion.Collapse eventKey={data.trace.entrails.id}>
+                          <Card.Body>
+                            <Table
+                              striped
+                              bordered
+                              responsive
+                              hover
+                              style={{ margin: "auto" }}
+                            >
+                              <thead>
+                                <tr style={{ textAlign: "center" }}>
+                                  <th>วันที่่</th>
+                                  <th>เวลา</th>
+                                  <th>ผู้รับ/ส่ง</th>
+                                  <th>สถานที่</th>
+                                  <th>หมายเหตุ</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr style={{ textAlign: "center" }}>
+                                  <td>
+                                    {data.trace.entrails.createdAt
+                                      ? dayjs(data.trace.entrails.createdAt)
+                                        .add(543, "y")
+                                        .locale("th")
+                                        .format("DD MMMM YYYY")
+                                      : "ไม่ระบุ"}
+                                  </td>
+                                  <td>
+                                    {data.trace.entrails.createdAt
+                                      ? dayjs(data.trace.entrails.createdAt)
+                                        .add(543, "y")
+                                        .locale("th")
+                                        .format("HH : mm น.")
+                                      : "ไม่ระบุ"}
+                                  </td>
+                                  <td>-</td>
+                                  <td>สหกรณ์</td>
+                                  <td>-</td>
+                                </tr>
+                                {data.trace.entrails.transports &&
+                                  data.trace.entrails.transports.map((prod) => (
+                                    <tr style={{ textAlign: "center" }}>
+                                      <td>
+                                        {prod.date
+                                          ? dayjs(prod.date)
+                                            .add(543, "y")
+                                            .locale("th")
+                                            .format("DD MMMM YYYY")
+                                          : "ไม่ระบุ"}
+                                      </td>
+                                      <td>
+                                        {prod.date
+                                          ? dayjs(prod.date)
+                                            .add(543, "y")
+                                            .locale("th")
+                                            .format("HH : mm น.")
+                                          : "ไม่ระบุ"}
+                                      </td>
+                                      <td>{prod.name}</td>
+                                      <td>{prod.place}</td>
+                                      <td>{prod.note}</td>
+                                    </tr>
+                                  ))}
+                              </tbody>
+                            </Table>
+                          </Card.Body>
+                        </Accordion.Collapse>
+                      </Card>
+                    ) : ("")
+                    }
                   </Accordion>
                 </div>
               </DivFromDown>

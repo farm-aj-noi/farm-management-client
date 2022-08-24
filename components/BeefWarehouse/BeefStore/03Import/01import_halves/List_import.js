@@ -5,7 +5,7 @@ import Modalqrcode from "../../12Qrcode/Import/imhqr";
 
 function List_import({ imhalve }) {
   const [imhalveData, SetImhalveData] = useState(imhalve);
-  console.log(imhalveData.id);
+  // console.log(imhalveData.id);
 
   return (
     <tr style={{ textAlign: "center", fontSize: "16px" }}>

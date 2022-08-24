@@ -31,6 +31,10 @@ import { useQuery, useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { DivBase } from "../../../../utils/divBase";
 
+import { fileText } from 'react-icons-kit/icomoon/fileText'
+
+import { ic_assignment_turned_in } from 'react-icons-kit/md/ic_assignment_turned_in'
+
 
 
 export const QUERY = gql`
@@ -226,7 +230,7 @@ const Index = () => {
                     <DivFrom style={{ marginBottom: "15px" }}>
                         <DivFromTop>
                             <div style={{ margin: "-3px 5px 0px 0px" }}>
-                                <Icon size={20} icon={list} />
+                                <Icon size={20} icon={fileText} />
                             </div>
                             ข้อมูลผลิตภัณฑ์แปรรูป
                         </DivFromTop>
@@ -306,7 +310,7 @@ const Index = () => {
                     <DivFrom style={{ marginBottom: "15px" }}>
                         <DivFromTop>
                             <div style={{ margin: "-3px 5px 0px 0px" }}>
-                                <Icon size={20} icon={list} />
+                                <Icon size={20} icon={ic_assignment_turned_in} />
                             </div>
                             บันทึกการขนส่ง
                         </DivFromTop>

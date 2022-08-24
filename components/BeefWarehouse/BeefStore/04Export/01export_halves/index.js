@@ -14,6 +14,8 @@ import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
 import List_export from "./ListExport";
+import { exit } from 'react-icons-kit/icomoon/exit'
+
 
 export const EXPORTHALVESSEARCH = gql`
   query EXPORTHALVESSEARCH(
@@ -120,8 +122,8 @@ const index = () => {
             }}
           >
             <DivFromTop>
-              <div style={{ margin: "-3px 5px 0px 0px" }}>
-                <Icon size={20} icon={list} />
+              <div style={{ margin: "-1px 5px 0px -5px" }}>
+                <Icon size={20} icon={exit} />
               </div>
               ดำเนินการเบิกออกซากเนื้อโคผ่าซีก
             </DivFromTop>

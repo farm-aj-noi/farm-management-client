@@ -5,6 +5,8 @@ import Sidemenu from "../Nav_notify";
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
 
+import Paper from "./paper"
+
 import {
   DivFrom,
   DivFromTop,

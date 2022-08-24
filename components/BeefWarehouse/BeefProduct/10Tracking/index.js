@@ -27,6 +27,9 @@ import { Editbuttoncolor } from "../../../../utils/buttonColor";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
+import { fileText } from 'react-icons-kit/icomoon/fileText'
+import { ic_assignment_turned_in } from 'react-icons-kit/md/ic_assignment_turned_in'
+
 export const QUERY = gql`
 query QUERY($barcode: String) {
   ProductTracking(barcode: $barcode) {
@@ -114,7 +117,7 @@ const index = () => {
                             }}>
                             <DivFromTop>
                                 <div style={{ margin: "-3px 5px 0px 0px" }}>
-                                    <Icon size={20} icon={list} />
+                                    <Icon size={20} icon={fileText} />
                                 </div>
                                 รายละเอียดสินค้าผลิตภัณฑ์
                             </DivFromTop>
@@ -191,7 +194,7 @@ const index = () => {
                         <div style={{ margin: "-3px 5px 0px 0px" }}>
                             <Icon size={20} icon={list} />
                         </div>
-                        รายละเอียดข้อมูลก้อนเนื้อที่นำมาแปรรูป{" "}
+                        รายการข้อมูลก้อนเนื้อที่นำมาแปรรูป{" "}
                     </DivFromTop>
                     <DivFromDown>
                         <div style={{ height: `${data && data.ProductTracking.lump.length > 2 ? "170px" : ""}`, overflow: `${data && data.ProductTracking.lump.length > 2 ? "auto" : ""}` }}>
@@ -248,7 +251,7 @@ const index = () => {
                         <div style={{ margin: "-3px 5px 0px 0px" }}>
                             <Icon size={20} icon={list} />
                         </div>
-                        รายละเอียดข้อมูลชิ้นเนื้อที่นำมาแปรรูป{" "}
+                        รายการข้อมูลชิ้นเนื้อที่นำมาแปรรูป{" "}
                     </DivFromTop>
                     <DivFromDown>
                         <div style={{ height: `${data && data.ProductTracking.chop.length > 2 ? "170px" : ""}`, overflow: `${data && data.ProductTracking.chop.length > 2 ? "auto" : ""}` }}>

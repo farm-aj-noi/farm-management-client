@@ -16,6 +16,7 @@ import List from "./listfreezer"
 import { Table } from "react-bootstrap";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
+import { cog } from 'react-icons-kit/entypo/cog'
 
 export const QUERYFREEZER = gql`
 query QUERYFREEZER {
@@ -81,8 +82,8 @@ const index = () => {
         >
           {" "}
           <DivFromTop>
-            <div style={{ margin: "-3px 5px 0px 0px" }}>
-              <Icon size={20} icon={list} />
+            <div style={{ margin: "-3px 5px 0px -5px" }}>
+              <Icon size={20} icon={cog} />
             </div>
             ตั้งค่าชั้นจัดเก็บ
           </DivFromTop>

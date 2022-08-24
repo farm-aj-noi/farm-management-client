@@ -12,6 +12,7 @@ import {
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
 import { Form, Row, Col, Tab, Nav } from "react-bootstrap";
+import { menu3 } from 'react-icons-kit/icomoon/menu3'
 
 const Nav_notify = (Sidenumber) => {
   return (
@@ -27,7 +28,7 @@ const Nav_notify = (Sidenumber) => {
       >
         <DivFromTop>
           <div style={{ margin: "-3px 5px 0px 0px" }}>
-            <Icon size={20} icon={list} />
+            <Icon size={25} icon={menu3} />
           </div>
           ประเภทการแจ้งเตือน
         </DivFromTop>

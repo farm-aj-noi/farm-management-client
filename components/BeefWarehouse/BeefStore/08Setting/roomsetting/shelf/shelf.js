@@ -14,7 +14,7 @@ import {
 import { Removebutton } from "../../../../../../utils/button";
 
 import { Icon } from "react-icons-kit";
-import { list } from "react-icons-kit/fa/list";
+import { cog } from 'react-icons-kit/entypo/cog'
 
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
@@ -24,7 +24,7 @@ import withReactContent from "sweetalert2-react-content";
 
 import Router from "next/router";
 
-import Listshelf from "./Listshelf";
+import { Spinner } from "react-bootstrap";
 
 export const QUERYROOM = gql`
   query Query {
@@ -86,7 +86,6 @@ const shelf = () => {
       }
     },
   });
-  /*   console.log(Infoshelf.beefroom); */
   const hanndleChangeShelfname = (e) => {
     SetInfoshelf({
       ...Infoshelf,
@@ -103,27 +102,11 @@ const shelf = () => {
     }
   };
 
-  const [successkeeproom, setSuccesskeeproom] = useState(false);
+
   const [createtypekeep] = useMutation(CREATETYPEKEEP, {
     onCompleted: (data) => {
       if (data) {
-        //
-        setSuccesskeeproom(true);
-        MySwal.fire({
-          icon: "success",
-          title: "สำเร็จ",
-          text: "ทำการตั้งค่าเสร็จสิ้น",
-          confirmButtonText: (
-            <span
-              onClick={() =>
-                Router.reload("beefwarehouse/beefstore/setting/room")
-              }
-            >
-              ตกลง
-            </span>
-          ),
-          confirmButtonColor: "#3085d6",
-        });
+
       }
     },
   });
@@ -158,6 +141,27 @@ const shelf = () => {
     setInputListshelf(listshelf);
   };
 
+  const [loadingCreate, setLoadingCreate] = useState(false);
+
+  const alert = () => {
+
+    MySwal.fire({
+      icon: "success",
+      title: "สำเร็จ",
+      text: "ทำการตั้งค่าเสร็จสิ้น",
+      confirmButtonText: (
+        <span
+          onClick={() =>
+            Router.push("beefwarehouse/beefstore/setting/shelf").then(() => Router.reload())
+          }
+        >
+          ตกลง
+        </span>
+      ),
+      confirmButtonColor: "#3085d6",
+    });
+  }
+
   const handleSubmitshelf = async () => {
     try {
       for (let j = 0; j < inputListshelf.length; j++) {
@@ -168,7 +172,10 @@ const shelf = () => {
             shelf: idshelf,
           },
         });
+        setLoadingCreate(true)
       }
+      setLoadingCreate(false)
+      alert()
     } catch (error) {
       console.log(error);
     }
@@ -176,8 +183,8 @@ const shelf = () => {
   return (
     <div>
       <DivFromTop>
-        <div style={{ margin: "-3px 5px 0px 0px" }}>
-          <Icon size={20} icon={list} />
+        <div style={{ margin: "-3px 5px 0px -5px" }}>
+          <Icon size={20} icon={cog} />
         </div>
         บันทึกตั้งค่าชั้นจัดเก็บ
       </DivFromTop>
@@ -468,26 +475,34 @@ const shelf = () => {
                   }}
                 >
                   <Addbutton
-                  style={{
-                    height: "38px",
-                    width: " 150px",
-                    marginRight: "5px",
-                    fontSize: "16px"
-                  }}
-                  onClick={handleAddClickshelf}
-                >
-                    เพิ่มประเภทจัดเก็บ
-                  </Addbutton>
-                  <Savebuttoncolor
                     style={{
                       height: "38px",
-                      width: " 50px",
+                      width: " 150px",
+                      marginRight: "5px",
                       fontSize: "16px"
                     }}
-                    onClick={handleSubmitshelf}
+                    onClick={handleAddClickshelf}
                   >
-                    บันทึก
-                  </Savebuttoncolor></div>
+                    เพิ่มประเภทจัดเก็บ
+                  </Addbutton>
+                  {loadingCreate ? (
+                    <Spinner
+                      style={{ margin: "0px 12px 0px auto", float: "right" }}
+                      animation="border"
+                      variant="primary"
+                    />) : (
+                    <Savebuttoncolor
+                      style={{
+                        height: "38px",
+                        width: " 50px",
+                        fontSize: "16px"
+                      }}
+                      onClick={handleSubmitshelf}
+                    >
+                      บันทึก
+                    </Savebuttoncolor>
+                  )}
+                </div>
 
               </div>
             </div>
