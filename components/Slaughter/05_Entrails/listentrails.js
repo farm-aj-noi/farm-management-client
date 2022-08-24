@@ -154,7 +154,7 @@ const Imslaughter = ({ imslaughter }) => {
     idEntrail: !!imslaughter.entrails ? imslaughter.entrails.id : "none",
     barcode: !!imslaughter.entrails ? imslaughter.entrails.barcode : null,
   });
-  // console.log(entrailData.id);
+  console.log(entrailData.id);
 
   const [inputData, setinputData] = useState({
     offal: !!entrailData.offal ? entrailData.offal : null,
@@ -593,7 +593,20 @@ const Imslaughter = ({ imslaughter }) => {
         )}
       </td>
       <td>
-        <Barcodebutton barcode={entrailData}/>
+        {entrailData.offal &&
+          entrailData.toe &&
+          entrailData.head &&
+          entrailData.skin &&
+          entrailData.liver &&
+          entrailData.fat &&
+          entrailData.onkale &&
+          entrailData.tail &&
+          entrailData.gallbladder &&
+          entrailData.scrap ? (
+            <Barcodebutton barcode={entrailData} />
+        ) : (
+          "-"
+        )}
       </td>
       <td>
         {loading ? (
@@ -612,17 +625,17 @@ const Imslaughter = ({ imslaughter }) => {
           <Savebuttoncolor
             style={{
               backgroundColor: `${!inputData.offal ||
-                  !inputData.toe ||
-                  !inputData.head ||
-                  !inputData.skin ||
-                  !inputData.liver ||
-                  !inputData.fat ||
-                  !inputData.onkale ||
-                  !inputData.tail ||
-                  !inputData.gallbladder ||
-                  !inputData.scrap
-                  ? "gray"
-                  : ""
+                !inputData.toe ||
+                !inputData.head ||
+                !inputData.skin ||
+                !inputData.liver ||
+                !inputData.fat ||
+                !inputData.onkale ||
+                !inputData.tail ||
+                !inputData.gallbladder ||
+                !inputData.scrap
+                ? "gray"
+                : ""
                 }`,
             }}
             onClick={handleSubmitFirst}
@@ -663,17 +676,17 @@ const Imslaughter = ({ imslaughter }) => {
             <Savebuttoncolor
               style={{
                 backgroundColor: `${!inputData.offal ||
-                    !inputData.toe ||
-                    !inputData.head ||
-                    !inputData.skin ||
-                    !inputData.liver ||
-                    !inputData.fat ||
-                    !inputData.onkale ||
-                    !inputData.tail ||
-                    !inputData.gallbladder ||
-                    !inputData.scrap
-                    ? "gray"
-                    : ""
+                  !inputData.toe ||
+                  !inputData.head ||
+                  !inputData.skin ||
+                  !inputData.liver ||
+                  !inputData.fat ||
+                  !inputData.onkale ||
+                  !inputData.tail ||
+                  !inputData.gallbladder ||
+                  !inputData.scrap
+                  ? "gray"
+                  : ""
                   }`,
               }}
               onClick={handleSubmitUpdate}
