@@ -233,7 +233,7 @@ class Mydoc extends React.Component {
             {prod.barcode}
           </label>
           <label style={{ marginBottom: 0, textAlign: "right", height: 15 }}>
-            {prod.barcode.slice(11)}
+            {prod.barcode ? (prod.barcode.slice(11)) : ("-")}
           </label>
         </div>
       </div>

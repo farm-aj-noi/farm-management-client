@@ -602,11 +602,12 @@ const Imslaughter = ({ imslaughter }) => {
           entrailData.onkale &&
           entrailData.tail &&
           entrailData.gallbladder &&
-          entrailData.scrap ? (
+          entrailData.scrap
+          ? (
             <Barcodebutton barcode={entrailData} />
-        ) : (
-          "-"
-        )}
+          ) : (
+            "-"
+          )}
       </td>
       <td>
         {loading ? (
