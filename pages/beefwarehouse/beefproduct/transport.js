@@ -1,16 +1,16 @@
 import React from "react";
 import Nav from "../../../components/BeefWarehouse/BeefProduct/Nav/Nav";
-import { BackgroundStore } from "../../../utils/background";
+import { BackgroundProduct } from "../../../utils/background";
 import Transport from "../../../components/BeefWarehouse/BeefProduct/12Transport"
 import Footer from "../../../components/BeefWarehouse/Footer";
 
 const transport = () => {
     return (
-        <BackgroundStore>
+        <BackgroundProduct>
             <Nav />
             <Transport />
             <Footer />
-        </BackgroundStore>
+        </BackgroundProduct>
     )
 }
 

@@ -17,6 +17,8 @@ export const DivFromTop = styled.div`
   border-radius: 10px 10px 0 0;
   padding: 0.2rem 15px;
   color: ${white};
+  font-weight:600;
+  letter-spacing: 1px;
   font-size: 20px;
 `;
 
@@ -49,9 +51,9 @@ export const StyleAlertCardDown = styled.div`
   color: #0d76ff;
   display: inline-flex;
   cursor: pointer;
-
+  font-size:16px;
   &:hover {
-    background: ${lightBlue};
+    background: #d1d7dd;
     color: ${white};
   }
 `;

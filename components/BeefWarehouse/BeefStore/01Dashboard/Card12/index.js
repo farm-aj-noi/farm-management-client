@@ -42,7 +42,13 @@ const index = () => {
               color: "#ffffff",
             }}
           ></a>
-          <a style={{ color: "#ffffff", textAlign: "center" }}>
+          <a style={{
+            color: "#ffffff",
+            textAlign: "center",
+            fontWeight: 600,
+            letterSpacing: "1px",
+            fontSize: "14px",
+          }}>
             10 อันดับรายการ
             <br />
             ยอดนิยมเบิกออก

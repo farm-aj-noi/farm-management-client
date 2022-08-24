@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Link from "next/link";
 
 import { white, blue } from "../../utils/colors";
-import { LogoFarmAll, LogoSluagther ,Logoregister ,Logobeefstore, Logobeefgrade } from "../../utils/image";
+import { LogoFarmAll, LogoSluagther, Logoregister, Logobeefstore, Logobeefgrade } from "../../utils/image";
 import { LinkSt } from "./LinkOtherPage";
 
 import { AuthContext } from "../../appState/AuthProvider";
@@ -45,7 +45,7 @@ const Home = () => {
               fontSize: "x-large",
             }}
           >
-                {/* <Link href="/registercow">
+            {/* <Link href="/registercow">
               <LinkSt>
                 <Logoregister height="150px" weight="150px" />
                 ลงทะเบียนโคเข้าขุน
@@ -89,8 +89,8 @@ const Home = () => {
             </Link>
 
             <Link href="/beefwarehouse">
-              <LinkSt>
-                <Logobeefstore height="150px" weight="150px" />
+              <LinkSt style={{ paddingTop: "5px" }}>
+                <Logobeefstore height="160px" weight="155px" />
                 ระบบคลัง
               </LinkSt>
             </Link>

@@ -95,14 +95,15 @@ const index = () => {
             style={{
               fontSize: "50px",
               height: "62px",
+              fontWeight: 600,
             }}
           >
             {halve && quarter && lump && chop && entrail
               ? halve.CardImh.length +
-                quarter.CardImq.length +
-                lump.CardIml.length +
-                chop.CardImc.length +
-                entrail.CardIme.length
+              quarter.CardImq.length +
+              lump.CardIml.length +
+              chop.CardImc.length +
+              entrail.CardIme.length
               : "0"}
           </div>
           <a
@@ -110,7 +111,12 @@ const index = () => {
               color: "#ffffff",
             }}
           ></a>
-          <a style={{ color: "#ffffff", textAlign: "center" }}>
+          <a style={{
+            color: "#ffffff", textAlign: "center",
+            fontWeight: 600,
+            letterSpacing: "1px",
+            fontSize: "14px",
+          }}>
             ยอดรายการ (วัน)
             <br />
             นำเข้าซากเนื้อโค

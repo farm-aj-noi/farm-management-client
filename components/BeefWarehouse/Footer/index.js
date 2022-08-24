@@ -14,7 +14,7 @@ const index = () => {
       }}
     >
       <div style={{ display: "flex", marginLeft: "20px", marginTop: "25px" }}>
-        <h1 style={{ fontSize: "20px", margin: "0" }}>
+        <h1 style={{ fontSize: "20px", margin: "0", fontWeight: 600, letterSpacing: "1px" }}>
           Copyright 2022 |Dev Team| Contact
         </h1>
         <h1
@@ -24,13 +24,14 @@ const index = () => {
             right: "10px",
             marginTop: "15px",
             marginRight: "15px",
+            fontWeight: 600, letterSpacing: "1px"
           }}
         >
           Meat & Beef Product Warehouse System
         </h1>
       </div>
       <div style={{ display: "flex", marginLeft: "20px", marginTop: "5px" }}>
-        <p style={{ fontSize: "16px", margin: "0" }}>
+        <p style={{ fontSize: "16px", margin: "0", fontWeight: 600, letterSpacing: "1px" }}>
           By computer engineering University Of Phayao
         </p>
       </div>

@@ -226,14 +226,7 @@ const index = () => {
       }
     });
 
-    // let labels = [];
-    // let data1 = [];
-    // let data2 = []
-    // data.forEach(e => {
-    //   labels.push(e.day ?? '');
-    //   data2.push(e.export ?? 0);
-    //   data1.push(e.import ?? 0);
-    // });
+   
 
 
     let newChart = JSON.parse(JSON.stringify(DataChart));
@@ -244,25 +237,38 @@ const index = () => {
     return newChart;
   }
 
-  const initChartday = (data) => {
-    // console.log(data)
-    // let datecheckmonth = null;
+
+  const initChartyear = (data) => {
+    let datecheckyear = null;
     let labels = [];
     let data1 = [];
     let data2 = [];
+    data.forEach(e => {
+      if (datecheckyear == null || (dayjs(datecheckyear).year() != dayjs(e.day).year())) {
+        labels.push(dayjs(e.day).locale("th").add(543, "year").format('YYYY'));
+        data1.push(e.import ?? 0);
+        data2.push(e.export ?? 0);
+        datecheckyear = dayjs(e.day);
 
-    // data.forEach(e => {
-    //   if (datecheckmonth == null || (dayjs(datecheckmonth).month() != dayjs(e.day).month())) {
-    //     labels.push(dayjs(e.day).format('MMMM'));
-    //     data1.push(e.import ?? 0);
-    //     data2.push(e.export ?? 0);
-    //     datecheckmonth = dayjs(e.day);
-    //   } else {
-    //     data1[data1.length - 1] += e.import ?? 0;
-    //     data2[data2.length - 1] += e.export ?? 0;
-    //   }
-    // });
+      } else {
+        data1[data1.length - 1] += e.import ?? 0;
+        data2[data2.length - 1] += e.export ?? 0;
+      }
+    });
+    let newChart = JSON.parse(JSON.stringify(DataChart));
+    newChart.labels = labels;
+    newChart.datasets[0].data = data1;
+    newChart.datasets[1].data = data2;
+    setDataChart(newChart);
+    return newChart;
+  }
 
+
+  const initChartday = (data) => {
+
+    let labels = [];
+    let data1 = [];
+    let data2 = [];
 
     data.forEach(e => {
       labels.push(e.day ?? '');
@@ -286,6 +292,16 @@ const index = () => {
     if (selectgraph == 1) {
       if (datagraph) {
         initChartday(datagraph.productGraph);
+      }
+    }
+    else if (selectgraph == 2) {
+      if (datagraph) {
+        initChart(datagraph.productGraph);
+      }
+    }
+    else if (selectgraph == 3) {
+      if (datagraph) {
+        initChartyear(datagraph.productGraph);
       }
     }
     else {
@@ -328,6 +344,7 @@ const index = () => {
               <option value="">เลือก</option>
               <option value="1">รายวัน</option>
               <option value="2">รายเดือน</option>
+              <option value="3">รายปี</option>
             </select>
             <label
               for="date"

@@ -1,11 +1,12 @@
 import React from 'react'
-import { Line, PolarArea, Doughnut } from "react-chartjs-2";
+import { Line, PolarArea, Doughnut, Bar } from "react-chartjs-2";
 import { CategoryScale } from "chart.js";
 Chart.register(CategoryScale);
 import Chart from "chart.js/auto";
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { Table } from 'react-bootstrap';
+import PaperTop10 from "./Paper_Top10"
 
 const TOP10BEEF = gql`
 query Top10beef {
@@ -34,7 +35,7 @@ const Top10 = () => {
         ],
         datasets: [
             {
-                label: '# of Votes',
+                label: "10 อันดับยอดนิยมเบิกออก",
                 data: [top10 && top10.top10beef.length >= 1 ? (top10.top10beef[0].count) : (''),
                 top10 && top10.top10beef.length >= 2 ? (top10.top10beef[1].count) : (''),
                 top10 && top10.top10beef.length >= 3 ? (top10.top10beef[2].count) : (''),
@@ -67,8 +68,13 @@ const Top10 = () => {
 
     return (
         <div style={{ display: "flex", justifyContent: "center" }}>
-            <div style={{ width: "70%" }}>
-                <Doughnut data={data} /></div>
+            <div style={{ width: "200%", marginRight: "10px" }}>
+                <Bar data={data} />
+                <div style={{ display: "flex", justifyContent: "center", marginTop: "30px" }}>
+                    <PaperTop10>พิมพ์รายการ</PaperTop10>
+                </div>
+
+            </div>
             <Table
                 striped
                 bordered

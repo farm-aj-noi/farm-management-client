@@ -5,11 +5,11 @@ import Nav from "../../components/Nav/Nav";
 import Footer from "../../components/BeefWarehouse/Footer";
 const index = () => {
   return (
-    <BackgroundStore>
+    <div>
       <Nav />
       <HomeStore />
       <Footer />
-    </BackgroundStore>
+    </div>
   );
 };
 

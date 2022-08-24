@@ -20,27 +20,28 @@ const Home = () => {
         marginTop: 20,
       }}
     >
-      <Logobeefstore height="300px" weight="300px" />
+      <Logobeefstore height="400px" weight="400px" />
       <div
         style={{
           backgroundColor: `${white}`,
           width: "fit-content",
           margin: "auto",
           marginTop: 5,
-          marginBottom: 150,
-          fontSize: "x-large",
+          marginBottom: "40px",
+          fontSize: "50px",
           padding: "0 40px 0 40px",
+          borderRadius: "10px",
+          fontWeight: "bold",
         }}
       >
         ระบบคลังชิ้นเนื้อและคลังผลิตภัณฑ์ : Meat & Beef Product Warehouse System
       </div>
-
       <div>
         <Link href="/beefwarehouse/beefstore">
-          <ButtonStore>คลังชิ้นเนื้อ</ButtonStore>
+          <ButtonStore>คลังชิ้นเนื้อ / <h style={{ fontSize: "36px" }}>Beef Warehouse</h></ButtonStore>
         </Link>
         <Link href="/beefwarehouse/beefproduct">
-          <ButtonProduct>คลังผลิตภัณฑ์</ButtonProduct>
+          <ButtonProduct>คลังผลิตภัณฑ์ / <h style={{ fontSize: "36px" }}>Product Warehouse</h></ButtonProduct>
         </Link>
       </div>
     </div>

@@ -101,6 +101,7 @@ const index = () => {
             width: "fit-content",
             height: "fit-content",
             padding: "5px 30px",
+            boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
           }}
         >
           บ่มซากเนื้อโค
@@ -123,15 +124,16 @@ const index = () => {
               gridRowStart: "2",
               gridRowEnd: "5",
               gridColumnStart: "2",
+              boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
             }}
           >
-            <DivFromTop>
+            <DivFromTop /* style={{ border: "3px solid #FFFFFF", }} */>
               <div style={{ margin: "-3px 0px -7px -11px" }}>
                 <Iconchill height="30px" weight="30px" />
               </div>
               ดำเนินการบ่มซากเนื้อโค
             </DivFromTop>
-            <DivFromDown style={{ backgroundColore: "red" }}>
+            <DivFromDown >
               <Submit_Chill />
             </DivFromDown>
           </DivFrom>
@@ -142,9 +144,10 @@ const index = () => {
               gridRowEnd: "3",
               gridColumnStart: "3",
               marginTop: "0px",
+              boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
             }}
           >
-            <DivFromTop>
+            <DivFromTop /* style={{ border: "3px solid #FFFFFF", }} */>
               <div style={{ margin: "-4px 5px 0px 0px" }}>
                 <Icon size={20} icon={iosSearchStrong} />
               </div>
@@ -344,9 +347,10 @@ const index = () => {
               gridColumnStart: "3",
               gridColumnEnd: "3",
               marginTop: "20px",
+              boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
             }}
           >
-            <DivFromTop>
+            <DivFromTop /* style={{ border: "3px solid #FFFFFF", }} */>
               <div style={{ margin: "-3px 5px 0px 0px" }}>
                 <Icon size={20} icon={list} />
               </div>

@@ -11,6 +11,7 @@ export const NavButtonSigninComplete = styled.button`
   flex: 0 0 auto;
   height: ${navbarHeight}px;
   border: 0cm;
+  border-radius:5px;
   /* text-align: center; */
   vertical-align: middle;
   padding: 0px 10px;
@@ -30,8 +31,10 @@ export const NavButtonLeft = styled.button`
   vertical-align: middle;
   color: ${white};
   height: ${navbarHeight}px;
-  font-size: 18px;
-
+  font-size: 16px;
+  font-weight:600;
+  border-radius:5px;
+  letter-spacing: 1px;
   &:hover,
   &:active {
     background-color: ${lightBlue};
@@ -45,7 +48,9 @@ export const NavDropdownItem = styled.a`
   padding-top: 10px;
     padding-bottom: 10px;
   clear: both;
-  font-weight: 400;
+  font-weight:600;
+  border-radius:5px;
+  letter-spacing: 1px;
   color: ${white};
   text-align: inherit;
   white-space: nowrap;

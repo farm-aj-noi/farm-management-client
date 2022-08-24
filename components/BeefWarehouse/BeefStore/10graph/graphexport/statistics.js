@@ -4,7 +4,7 @@ import { Table } from "react-bootstrap";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
-import { Line, PolarArea, Doughnut } from "react-chartjs-2";
+import { Line, PolarArea, Doughnut, Bar } from "react-chartjs-2";
 import { CategoryScale } from "chart.js";
 Chart.register(CategoryScale);
 import Chart from "chart.js/auto";
@@ -131,7 +131,7 @@ const statistics = () => {
     labels: ["ซากโคผ่าซีก", "ซากโคสี่เสี้ยว", "ก้อนเนื้อ", "ชิ้นเนื้อ", "ส่วนอื่น ๆ"],
     datasets: [
       {
-        label: '# of Votes',
+        label: 'สถิติการนำเข้า',
         data: [imdatahalve && imdatahalve.imhalveSearch.length,
         imdataquarter && imdataquarter.imquartSearch.length,
         imdatalump && imdatalump.imlumpSearch.length,
@@ -159,7 +159,7 @@ const statistics = () => {
     labels: ["ซากโคผ่าซีก", "ซากโคสี่เสี้ยว", "ก้อนเนื้อ", "ชิ้นเนื้อ", "ส่วนอื่น ๆ"],
     datasets: [
       {
-        label: '# of Votes',
+        label: 'สถิติการเบิกออก',
         data: [datahalve && datahalve.exporthalve.length,
         dataquarter && dataquarter.exportquart.length,
         datalump && datalump.exportlump.length,
@@ -199,13 +199,13 @@ const statistics = () => {
         </div>
         <div style={{
           display: "grid",
-          gridTemplateColumns: "1fr 350px 350px 1fr",
+          gridTemplateColumns: "1fr 400px 400px 1fr",
           marginTop: "10px",
           gap: "100px"
         }}>
           <div></div>
           <div>
-            <Doughnut data={data}
+            <Bar data={data} height={250}
             />
             <Table striped bordered responsive hover style={{ marginTop: "20px" }}>
               <thead>
@@ -279,7 +279,7 @@ const statistics = () => {
             </Table>
           </div>
           <div>
-            <Doughnut data={data1} />
+            <Bar data={data1} height={250} />
             <Table striped bordered responsive hover style={{ marginTop: "20px" }}>
               <thead>
                 <tr style={{ textAlign: "center" }}>
