@@ -104,9 +104,8 @@ const Index = () => {
       prevDate.setFullYear(prevDate.getFullYear() + 543)
     );
     // console.log("year", newDate.getFullYear());
-    dateRef.current.input.value = `${newDate.getDate()} ${
-      months[newDate.getMonth()]
-    } ${newDate.getFullYear()}`;
+    dateRef.current.input.value = `${newDate.getDate()} ${months[newDate.getMonth()]
+      } ${newDate.getFullYear()}`;
   };
 
   // component did mount
@@ -164,12 +163,12 @@ const Index = () => {
           >
             {/* ใส่ card */}
             <div className="mb-3" style={{ margin: "auto" }}>
-              ค้นหาตามใบแจ้งขุน : {}
+              ค้นหาตามใบแจ้งขุน : { }
               <Searchinput
                 style={{ marginRight: 10 }}
                 onChange={(event) => setInputnumkun(event.target.value)}
               />
-              วันที่ : {}
+              วันที่ : { }
               <DatePicker
                 className={Datestyle.datepicker}
                 selected={date}
@@ -182,7 +181,7 @@ const Index = () => {
                 showYearDropdown
                 dropdownMode="select"
               />{" "}
-              สถานะ : {}
+              สถานะ : { }
               <select
                 onChange={(event) => SetStatusChange(event.target.value)}
                 style={{
@@ -231,6 +230,7 @@ const Index = () => {
                     <th>ถุงน้ำดี</th>
                     <th>เศษซาก</th>
                     <th>สถานะ</th>
+                    <th>บาร์โค้ด</th>
                     <th>จัดการ</th>
                   </tr>
                 </thead>
