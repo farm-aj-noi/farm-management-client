@@ -54,7 +54,7 @@ export const StyleAlertCardDown = styled.div`
   cursor: pointer;
 
   &:hover {
-    background: ${lightBlue};
+    background: #d1d7dd;
     color: ${white};
   }
 `;
