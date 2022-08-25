@@ -17,7 +17,7 @@ const Home = () => {
         margin: "auto",
         width: "100%",
         textAlign: "center",
-        marginTop: 20,
+        marginTop: 100,
       }}
     >
       <Logobeefstore height="400px" weight="400px" />

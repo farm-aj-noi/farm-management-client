@@ -220,7 +220,7 @@ const index = () => {
                                                 <td>{prod.weight}</td>
                                                 <td>
                                                     <a href={"http://localhost:3000/slaughter/tracking/" + prod.barcode}
-                                                        target="popup">
+                                                        target="_blank">
                                                         <Editbuttoncolor>
                                                             <Icon size={30} icon={iosSearchStrong} />
                                                         </Editbuttoncolor>
@@ -277,7 +277,7 @@ const index = () => {
                                                 <td>{prod.weight}</td>
                                                 <td>
                                                     <a href={"http://localhost:3000/slaughter/tracking/" + prod.barcode}
-                                                        target="popup">
+                                                        target="_blank">
                                                         <Editbuttoncolor>
                                                             <Icon size={30} icon={iosSearchStrong} />
                                                         </Editbuttoncolor>

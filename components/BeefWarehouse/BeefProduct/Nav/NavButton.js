@@ -49,7 +49,6 @@ export const NavDropdownItem = styled.a`
     padding-bottom: 10px;
   clear: both;
   font-weight:600;
-  border-radius:5px;
   letter-spacing: 1px;
   color: ${white};
   text-align: inherit;

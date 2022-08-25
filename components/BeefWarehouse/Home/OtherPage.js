@@ -10,7 +10,6 @@ export const ButtonStore = styled.button`
   background-color: #c90d0d;
   margin-right: 50px;
   font-weight: bold;
-  
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   &:hover,
   &:focus {
@@ -28,7 +27,6 @@ export const ButtonProduct = styled.button`
   font-size: 48px;
   font-weight: bold;
   background-color: #5cc2b1;
-
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   &:hover,
   &:focus {

@@ -57,7 +57,7 @@ const index = ({ liststore }) => {
               href={
                 "http://localhost:3000/slaughter/tracking/" + infodata.barcode
               }
-              target="popup"
+              target="_blank"
               style={{
                 fontSize: "10px",
                 backgroundColor: "#f3f3f3",

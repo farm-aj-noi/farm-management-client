@@ -8,6 +8,7 @@ export const DivFrom = styled.div`
   position: relative;
   display: block;
   height: fit-content;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 `;
 
 export const DivFromTop = styled.div`
@@ -17,7 +18,9 @@ export const DivFromTop = styled.div`
   border-radius: 10px 10px 0 0;
   padding: 0.2rem 15px;
   color: ${white};
-  font-size: 20px;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing:1px;
 `;
 
 export const DivFromDown = styled.div`
@@ -110,6 +113,7 @@ export const HeaderColor = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 `;
 export const ButtonPDF = styled.button`
   margin: 10px;
