@@ -1,7 +1,23 @@
 import React, { useState } from "react";
 
 import { Table } from "react-bootstrap";
-import { DivFrom, DivFromTop, DivFromDown, HeaderColor } from "../StoreFrom.js";
+import {
+  DivFrom,
+  DivFromTop,
+  DivFromDown,
+  HeaderColor,
+  DivContainar,
+  DivSearch,
+  DivFromSearch,
+  Formfilter,
+  SelectType,
+  Inputfilter,
+  Formfilter1,
+  FormfilterRoom,
+  SelectRoom,
+  DivGrid,
+  DivData,
+} from "../StoreFrom.js";
 import { DivBase } from "../../../../../utils/divBase";
 
 import { Icon } from "react-icons-kit";
@@ -62,158 +78,63 @@ const index = () => {
   const { data: dataroom } = useQuery(QUERYROOM);
   return (
     <div style={{ marginTop: "100px" }}>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        <HeaderColor
-          style={{
-            width: "fit-content",
-            height: "fit-content",
-            padding: "5px 30px",
-          }}
-        >
-          คงคลังชิ้นส่วนอื่น ๆ
-        </HeaderColor>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <HeaderColor>คงคลังชิ้นส่วนอื่น ๆ</HeaderColor>
       </div>
-      <DivBase
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 200px 1100px 1fr",
-          gridRowGap: "15px",
-          gridColumnGap: "20px",
-          textAlign: "start",
-        }}
-      >
-        <DivFrom
-          style={{
-            width: "100%",
-            marginTop: "0",
-            gridRowStart: "2",
-            gridRowEnd: "5",
-            gridColumnStart: "2",
-          }}
-        >
-          <Nav_store Sidenumber={2} />
-        </DivFrom>
-        <DivFrom
-          style={{
-            width: "100%",
-            gridRowStart: "2",
-            gridRowEnd: "2",
-            gridColumnStart: "3",
-          }}
-        >
+      <DivContainar>
+        <div><Nav_store Sidenumber={2} /></div>
+        <DivGrid>
           <DivFromTop>
-            <div style={{ margin: "-3px 5px 0px 0px" }}>
-              <Icon size={20} icon={iosSearchStrong} />
-            </div>
+            <Icon size={20} icon={iosSearchStrong} style={{ margin: "-3px 5px 0px 0px" }} />
             ค้นหารายการ
           </DivFromTop>
           <DivFromDown>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              <from style={{ fontSize: "20px" }}>
-                <label
-                  for="beef"
-                  style={{
-                    textAlign: "center",
-                    fontSize: "18px",
-                    marginLeft: "10px",
-                    marginRight: "10px",
-                  }}
-                >
+            <DivSearch>
+              <DivFromSearch>
+                <Formfilter>
                   ทะเบียนขุน
-                </label>
-                <input
-                  style={{
-                    height: "35px",
-                    width: "110px",
-                    borderRadius: "4px",
-                    border: "1px solid #AFAFAF",
-                    fontSize: "14px",
-                    textAlign: "center",
-                  }}
-                  onChange={(event) => setinputcownum(event.target.value)}
-                />
-                <label
-                  for="beef"
-                  style={{
-                    textAlign: "center",
-                    fontSize: "18px",
-                    margin: "10px 10px",
-                  }}
-                >
+                  <Inputfilter
+                    name="numcow"
+                    id="numcow"
+                    onChange={(event) => setinputcownum(event.target.value)}
+                  />
+                </Formfilter>
+              </DivFromSearch>
+              <DivFromSearch>
+                <Formfilter>
                   ตำแหน่ง
-                </label>
-                <select
-                  name="roomname"
-                  style={{
-                    height: "35px",
-                    width: "110px",
-                    border: "1px solid #AFAFAF",
-                    borderRadius: "4px ",
-                    textAlign: "center",
-                    fontSize: "14px",
-                    marginRight: "10px",
-                  }}
-                  onChange={(event) => setselectbeefroom(event.target.value)}
-                >
-                  <option value="">ห้อง</option>
-                  {dataroom &&
-                    dataroom.allRoom.map((prod) => (
-                      <option key={prod.id} value={prod.id}>
-                        {prod.roomname}
-                      </option>
-                    ))}
-                </select>
-                <label
-                  for="expdate"
-                  style={{
-                    textAlign: "center",
-                    fontSize: "18px",
-                    marginRight: "10px",
-                  }}
-                >
+                  <SelectType
+                    name="roomname"
+                    id="roomname"
+                    onChange={(event) => setselectbeefroom(event.target.value)}
+                  >
+                    <option value="">ห้อง</option>
+                    {dataroom &&
+                      dataroom.allRoom.map((prod) => (
+                        <option key={prod.id} value={prod.id}>
+                          {prod.roomname}
+                        </option>
+                      ))}
+                  </SelectType>
+                </Formfilter>
+              </DivFromSearch>
+              <DivFromSearch>
+                <Formfilter>
                   วันหมดอายุ
-                </label>
-                <input
-                  type="date"
-                  name="expdate"
-                  id="date"
-                  style={{
-                    height: "35px",
-                    border: "1px solid #AFAFAF",
-                    borderRadius: "4px ",
-                    textAlign: "center",
-                    fontSize: "16px",
-                  }}
-                  onChange={(event) => setexpdate(event.target.value)}
-                ></input>
-              </from>
-            </div>
+                  <Inputfilter
+                    type="date"
+                    name="date"
+                    id="date"
+                    onChange={(event) => setexpdate(event.target.value)}
+                  />
+                </Formfilter>
+              </DivFromSearch>
+            </DivSearch>
           </DivFromDown>
-        </DivFrom>
-        <DivFrom
-          style={{
-            width: "1320px",
-            gridRowStart: "5",
-            gridRowEnd: "5",
-            gridColumnStart: "2",
-            gridColumnEnd: "4",
-            marginTop: "20px"
-          }}
-        >
+        </DivGrid>
+        <DivData>
           <DivFromTop>
-            <div style={{ margin: "-3px 5px 0px 0px" }}>
-              <Icon size={20} icon={list} />
-            </div>
+            <Icon size={20} icon={list} style={{ margin: "-3px 5px 0px 0px" }} />
             รายการยอดคงคลังซากโคส่วนอื่น ๆ
           </DivFromTop>
           <DivFromDown>
@@ -263,8 +184,8 @@ const index = () => {
               จำนวนรายการ {data ? data.listentrail.length : "0"} รายการ
             </div>
           </DivFromDown>
-        </DivFrom>
-      </DivBase>
+        </DivData>
+      </DivContainar>
     </div>
   );
 };

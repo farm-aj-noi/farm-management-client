@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 
-import { DivFromInsideLeft, Searchinput, Savebutton1 } from "./ChillFrom";
+import {
+  DivFromInsideLeft,
+  Searchinput,
+  Savebutton1,
+  InputSubmit,
+  SelectSubmit,
+  FormSubmit
+} from "./ChillFrom";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -117,13 +124,8 @@ const Submit_Chill = () => {
         <form onSubmit={handleSubmit}>
           <DivFromInsideLeft>
             บาร์โค้ด :
-            <div
-              style={{
-                display: "grid",
-                gridTemplateRows: "1fr 15px",
-              }}
-            >
-              <Searchinput
+            <FormSubmit>
+              <InputSubmit
                 type="text"
                 id="barcode"
                 name="barcode"
@@ -139,41 +141,27 @@ const Submit_Chill = () => {
               ) : (
                 ""
               )}
-            </div>
+            </FormSubmit>
           </DivFromInsideLeft>
           <DivFromInsideLeft style={{ marginTop: "5px" }}>
             ระยะเวลาบ่ม :
-            <div
-              style={{
-                display: "grid",
-                gridTemplateRows: "1fr 15px",
-              }}
-            >
-              <div style={{ display: "inline", width: "170px" }}>
-                <select
-                  style={{
-                    height: "35px",
-                    width: "160px",
-                    border: "1px solid #AFAFAF",
-                    borderRadius: "4px",
-                    textAlign: "center",
-                    fontSize: "16px",
-                  }}
-                  disabled={!ImportChillInfo.barcode}
-                  name="chillday"
-                  value={ImportChillInfo.chillday}
-                  onChange={handleChange}
-                >
-                  <option value="">ระยะเวลาบ่ม</option>
-                  {data &&
-                    data.listChillday.map((prod) => (
-                      <option key={prod.id} value={prod.id}>
-                        {prod.day}
-                      </option>
-                    ))}
-                </select>
-              </div>
-            </div>
+            <FormSubmit>
+              <SelectSubmit
+                disabled={!ImportChillInfo.barcode}
+                id="chillday"
+                name="chillday"
+                value={ImportChillInfo.chillday}
+                onChange={handleChange}
+              >
+                <option value="">ระยะเวลาบ่ม</option>
+                {data &&
+                  data.listChillday.map((prod) => (
+                    <option key={prod.id} value={prod.id}>
+                      {prod.day}
+                    </option>
+                  ))}
+              </SelectSubmit>
+            </FormSubmit>
           </DivFromInsideLeft>
           <DivFromInsideLeft>
             ห้องบ่ม :
@@ -183,30 +171,21 @@ const Submit_Chill = () => {
                 gridTemplateRows: "1fr 15px",
               }}
             >
-              <div style={{ display: "inline", width: "170px" }}>
-                <select
-                  style={{
-                    height: "35px",
-                    width: "160px",
-                    border: "1px solid #AFAFAF",
-                    borderRadius: "4px",
-                    textAlign: "center",
-                    fontSize: "16px",
-                  }}
-                  disabled={!ImportChillInfo.chillday || !ImportChillInfo.barcode}
-                  name="chillroom"
-                  value={ImportChillInfo.chillroom}
-                  onChange={handleChange}
-                >
-                  <option value="">ห้องบ่ม</option>
-                  {chillroom &&
-                    chillroom.listChillroom.map((prod) => (
-                      <option key={prod.id} value={prod.id}>
-                        {prod.roomnum}
-                      </option>
-                    ))}
-                </select>
-              </div>
+              <SelectSubmit
+                disabled={!ImportChillInfo.chillday || !ImportChillInfo.barcode}
+                id="chillroom"
+                name="chillroom"
+                value={ImportChillInfo.chillroom}
+                onChange={handleChange}
+              >
+                <option value="">ห้องบ่ม</option>
+                {chillroom &&
+                  chillroom.listChillroom.map((prod) => (
+                    <option key={prod.id} value={prod.id}>
+                      {prod.roomnum}
+                    </option>
+                  ))}
+              </SelectSubmit>
             </div>
           </DivFromInsideLeft>
           <div
@@ -214,7 +193,6 @@ const Submit_Chill = () => {
               display: "inline-block",
               justifySelf: "right",
               float: "right",
-              paddingRight: "10px",
               paddingBottom: "10px",
             }}
           >

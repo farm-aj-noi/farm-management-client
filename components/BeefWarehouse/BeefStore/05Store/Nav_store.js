@@ -25,7 +25,6 @@ const Nav_report = (Sidenumber) => {
           gridRowStart: "2",
           gridRowEnd: "5",
           gridColumnStart: "2",
-          height: "170px",
         }}
       >
         <DivFromTop>

@@ -1,7 +1,23 @@
 import React, { useState } from "react";
 
 import { Table } from "react-bootstrap";
-import { DivFrom, DivFromTop, DivFromDown, HeaderColor } from "../StoreFrom.js";
+import {
+  DivFrom,
+  DivFromTop,
+  DivFromDown,
+  HeaderColor,
+  DivContainar,
+  DivSearch,
+  DivFromSearch,
+  Formfilter,
+  SelectType,
+  Inputfilter,
+  Formfilter1,
+  FormfilterRoom,
+  SelectRoom,
+  DivGrid,
+  DivData,
+} from "../StoreFrom.js";
 import { DivBase } from "../../../../../utils/divBase";
 
 import { Icon } from "react-icons-kit";
@@ -124,86 +140,24 @@ const index = () => {
   /*   console.log(selectedbeeftype); */
   return (
     <div style={{ marginTop: "100px" }}>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        <HeaderColor
-          style={{
-            width: "fit-content",
-            height: "fit-content",
-            padding: "5px 30px",
-          }}
-        >
-          คงคลังซากเนื้อโค
-        </HeaderColor>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <HeaderColor>คงคลังซากเนื้อโค</HeaderColor>
       </div>
-      <DivBase
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 200px 1100px 1fr",
-          gridColumnGap: "20px",
-          textAlign: "start",
-        }}
-      >
-        <>
-          <DivFrom
-            style={{
-              width: "100%",
-              gridRowStart: "2",
-              gridRowEnd: "5",
-              gridColumnStart: "2",
-            }}
-          >
-            <Nav_store Sidenumber={1} />
-          </DivFrom>
-          <DivFrom
-            style={{
-              width: "100%",
-              gridRowStart: "2",
-              gridRowEnd: "3",
-              gridColumnStart: "3",
-              marginTop: "0px",
-            }}
-          >
-            <DivFromTop>
-              <div style={{ margin: "-3px 5px 0px 0px" }}>
-                <Icon size={20} icon={iosSearchStrong} />
-              </div>
-              ค้นหารายการ
-            </DivFromTop>
-            <DivFromDown>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
-                <from style={{ fontSize: "20px" }}>
-                  <label
-                    for="beef"
-                    style={{
-                      textAlign: "center",
-                      fontSize: "18px",
-                      marginRight: "10px",
-                    }}
-                  >
-                    ซาก
-                  </label>
-                  <select
+      <DivContainar>
+        <div><Nav_store Sidenumber={1} /></div>
+        <DivGrid>
+          <DivFromTop>
+            <Icon size={20} icon={iosSearchStrong} style={{ margin: "-3px 5px 0px 0px" }} />
+            ค้นหารายการ
+          </DivFromTop>
+          <DivFromDown>
+            <DivSearch>
+              <DivFromSearch>
+                <Formfilter>
+                  ซากโค
+                  <SelectType
                     name="type"
                     id="type"
-                    style={{
-                      height: "35px",
-                      width: "120px",
-                      border: "1px solid #AFAFAF",
-                      borderRadius: "4px",
-                      textAlign: "center",
-                      fontSize: "16px",
-                      marginRight: "10px",
-                    }}
                     onChange={(event) => SettypeChange(event.target.value)}
                   >
                     <option value="">ทั้งหมด</option>
@@ -211,29 +165,16 @@ const index = () => {
                     <option value="ซากโคสี่เสี้ยว">ซากโคสี่เสี้ยว</option>
                     <option value="ก้อนเนื้อ">ก้อนเนื้อ</option>
                     <option value="ชิ้นเนื้อ">ชิ้นเนื้อ</option>
-                  </select>
-                  <label
-                    for="beef"
-                    style={{
-                      textAlign: "center",
-                      fontSize: "18px",
-                      marginRight: "10px",
-                    }}
-                  >
-                    ประเภทซาก
-                  </label>
-                  <select
+                  </SelectType>
+                </Formfilter>
+              </DivFromSearch>
+              <DivFromSearch>
+                <Formfilter>
+                  ประเภทซากโค
+                  <SelectType
                     name="beeftype"
                     id="beeftype"
                     disabled={!selecttype}
-                    style={{
-                      height: "35px",
-                      width: "120px",
-                      border: "1px solid #AFAFAF",
-                      borderRadius: "4px",
-                      textAlign: "center",
-                      fontSize: "16px",
-                    }}
                     onChange={(event) => SetBeeftypeChange(event.target.value)}
                   >
                     {selecttype == "ซากโคผ่าซีก" ? (
@@ -351,160 +292,99 @@ const index = () => {
                     ) : (
                       <option value="">ทั้งหมด</option>
                     )}
-                  </select>
-
-                  <label
-                    for="beef"
-                    style={{
-                      textAlign: "center",
-                      fontSize: "18px",
-                      marginLeft: "10px",
-                      marginRight: "10px",
-                    }}
-                  >
-                    ทะเบียนขุน
-                  </label>
-                  <input
-                    style={{
-                      height: "35px",
-                      width: "110px",
-                      borderRadius: "4px",
-                      border: "1px solid #AFAFAF",
-                      fontSize: "16px",
-                      textAlign: "center",
-                    }}
+                  </SelectType>
+                </Formfilter>
+              </DivFromSearch>
+              <DivFromSearch>
+                <Formfilter>
+                  ทะเบียนขุน
+                  <Inputfilter
+                    name="numcow"
+                    id="numcow"
                     onChange={(event) => setnumcow(event.target.value)}
                   />
-                </from>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
-                <from style={{ fontSize: "20px" }}>
-                  <label
-                    for="beef"
-                    style={{
-                      textAlign: "center",
-                      fontSize: "18px",
-                      margin: "10px 10px",
-                    }}
-                  >
-                    ตำแหน่ง
-                  </label>
-                  <select
-                    name="roomname"
-                    id="roomname"
-                    style={{
-                      height: "35px",
-                      width: "50px",
-                      border: "1px solid #AFAFAF",
-                      borderRadius: "4px 0px 0px 4px",
-                      textAlign: "center",
-                      fontSize: "16px",
-                    }}
-                    onChange={(event) => setselectbeefroom(event.target.value)}
-                  >
-                    <option value="">ห้อง</option>
-                    {dataroom &&
-                      dataroom.allRoom.map((prod) => (
-                        <option key={prod.id} value={prod.id}>
-                          {prod.roomname}
-                        </option>
-                      ))}
-                  </select>
-                  <select
-                    name="shelfname"
-                    id="shelfname"
-                    disabled={!selectedbeefroom}
-                    style={{
-                      height: "35px",
-                      width: "50px",
-                      border: "1px solid #AFAFAF",
-                      borderLeft: "none",
-                      textAlign: "center",
-                      fontSize: "16px",
-                    }}
-                    onChange={(event) => setselectshelf(event.target.value)}
-                  >
-                    <option value="">ชั้น</option>
-                    {datashelf &&
-                      datashelf.listShelf.map((prod) => (
-                        <option key={prod.id} value={prod.id}>
-                          {prod.shelfname}
-                        </option>
-                      ))}
-                  </select>
-                  <select
-                    name="basket"
-                    id="basket"
-                    disabled={!selectedbeefroom || !selectedshelf}
-                    style={{
-                      height: "35px",
-                      width: "60px",
-                      border: "1px solid #AFAFAF",
-                      borderRadius: "0px 4px 4px 0px",
-                      borderLeft: "none",
-                      textAlign: "center",
-                      fontSize: "16px",
+                </Formfilter>
+              </DivFromSearch>
+              <DivFromSearch>
+                <Formfilter1>
+                  ตำแหน่ง
+                  <FormfilterRoom>
+                    <SelectRoom
+                      name="roomname"
+                      id="roomname"
+                      style={{
+                        marginRight: "0px",
+                        borderRadius: "4px 0px 0px 4px",
+                      }}
+                      onChange={(event) => setselectbeefroom(event.target.value)}
+                    >
+                      <option value="">ห้อง</option>
+                      {dataroom &&
+                        dataroom.allRoom.map((prod) => (
+                          <option key={prod.id} value={prod.id}>
+                            {prod.roomname}
+                          </option>
+                        ))}
+                    </SelectRoom>
+                    <SelectRoom
+                      name="shelfname"
+                      id="shelfname"
+                      disabled={!selectedbeefroom}
+                      style={{
+                        borderRadius: "0px",
+                        borderLeft: "none",
+                        borderRight: "none",
+                        margin: "0px",
+                      }}
+                      onChange={(event) => setselectshelf(event.target.value)}
+                    >
+                      <option value="">ชั้น</option>
+                      {datashelf &&
+                        datashelf.listShelf.map((prod) => (
+                          <option key={prod.id} value={prod.id}>
+                            {prod.shelfname}
+                          </option>
+                        ))}
+                    </SelectRoom>
+                    <SelectRoom
+                      name="basket"
+                      id="basket"
+                      disabled={!selectedbeefroom || !selectedshelf}
+                      style={{
 
-                    }}
-                    onChange={(event) => setselectbasket(event.target.value)}
-                  >
-                    <option value="">ตะกร้า</option>
-                    {basketdata &&
-                      basketdata.allBasket.map((prod) => (
-                        <option key={prod.id} value={prod.basketname}>
-                          {prod.basketname}
-                        </option>
-                      ))}
-                  </select>
-                  <label
-                    for="expdate"
-                    style={{
-                      textAlign: "center",
-                      fontSize: "18px",
-                      margin: "10px 10px",
-                    }}
-                  >
-                    วันหมดอายุ
-                  </label>
-                  <input
+                        borderRadius: "0px 4px 4px 0px",
+                        marginLeft: "0px"
+                      }}
+                      onChange={(event) => setselectbasket(event.target.value)}
+                    >
+                      <option value="">ตะกร้า</option>
+                      {basketdata &&
+                        basketdata.allBasket.map((prod) => (
+                          <option key={prod.id} value={prod.basketname}>
+                            {prod.basketname}
+                          </option>
+                        ))}
+                    </SelectRoom>
+                  </FormfilterRoom>
+                </Formfilter1>
+              </DivFromSearch>
+              <DivFromSearch>
+                <Formfilter>
+                  วันหมดอายุ
+                  <Inputfilter
                     type="date"
-                    name="expdate"
+                    name="date"
                     id="date"
-                    style={{
-                      height: "35px",
-                      border: "1px solid #AFAFAF",
-                      borderRadius: "4px ",
-                      textAlign: "center",
-                      fontSize: "16px",
-                    }}
                     onChange={(event) => setexpdate(event.target.value)}
-                  ></input>
-                  <label
-                    for="beef"
-                    style={{
-                      textAlign: "center",
-                      fontSize: "18px",
-                      margin: "10px 10px",
-                    }}
-                  >
-                    เกรด
-                  </label>
-                  <select
-                    name="room"
-                    id="room"
-                    style={{
-                      height: "35px",
-                      width: "70px",
-                      border: "1px solid #AFAFAF",
-                      borderRadius: "4px",
-                      textAlign: "center",
-                      fontSize: "16px",
-                    }}
+                  />
+                </Formfilter>
+              </DivFromSearch>
+              <DivFromSearch>
+                <Formfilter>
+                  เกรด
+                  <SelectType
+                    name="grade"
+                    id="grade"
                     onChange={(event) => setInputgrade(event.target.value)}
                   >
                     <option value="">ทั้งหมด</option>
@@ -515,86 +395,75 @@ const index = () => {
                     <option value="4">4</option>
                     <option value="4.5">4.5</option>
                     <option value="5">5</option>
-                  </select>
-                </from>
-              </div>
-            </DivFromDown>
-          </DivFrom>
-          <DivFrom
-            style={{
-              width: "1320px",
-              gridRowStart: "5",
-              gridRowEnd: "5",
-              gridColumnStart: "2",
-              gridColumnEnd: "4",
-              marginTop: "20px"
-            }}
-          >
-            <DivFromTop>
-              <div style={{ margin: "-3px 5px 0px 0px" }}>
-                <Icon size={20} icon={list} />
-              </div>
-              รายการยอดคงคลังซากเนื้อโค
-            </DivFromTop>
-            <DivFromDown>
-              <div style={{ height: `${data && data.liststore.length > 5 ? "320px" : ""}`, overflow: "auto" }}>
-                <Table
-                  striped
-                  bordered
-                  responsive
-                  hover
-                  style={{ margin: "auto" }}
-                >
-                  <thead>
-                    <tr style={{ textAlign: "center", fontSize: "18px" }}>
-                      <th>ประเภทซาก</th>
-                      <th>ทะเบียนขุน</th>
-                      <th>รหัสซาก</th>
-                      <th>รหัสบาร์โค้ด</th>
-                      <th>คิวอาร์โค้ด</th>
-                      <th>น้ำหนักอุ่น (กก.)</th>
-                      <th>น้ำหนักเย็น (กก.)</th>
-                      <th>วันหมดอายุ</th>
-                      <th>เกรด</th>
-                      <th>ห้อง</th>
-                      <th>ชั้น</th>
-                      <th>ตะกร้า</th>
-                      <th>สถานะ</th>
-                      <th>หมายเหตุ</th>
-                      <th>จัดการ</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {data && data.liststore.length > 0 ? (
-                      data.liststore.map((prod) => (
-                        <List_Store key={prod.id} Liststore={prod} />
-                      ))
-                    ) : (
-                      <tr style={{ textAlign: "center" }}>
-                        <td colSpan="15">ไม่พบข้อมูล</td>
-                      </tr>
-                    )}
-                  </tbody>
-                </Table>
-              </div>
-              <div
-                style={{ float: "right", textAlign: "right", marginTop: "5px" }}
+                  </SelectType>
+                </Formfilter>
+              </DivFromSearch>
+            </DivSearch>
+          </DivFromDown>
+        </DivGrid>
+        <DivData>
+          <DivFromTop>
+            <Icon size={20} icon={list} style={{ margin: "-3px 5px 0px 0px" }} />
+            รายการยอดคงคลังซากเนื้อโค
+          </DivFromTop>
+          <DivFromDown>
+            <div style={{ height: `${data && data.liststore.length > 5 ? "420px" : ""}`, overflow: "auto" }}>
+              <Table
+                striped
+                bordered
+                responsive
+                hover
+                style={{ margin: "auto" }}
               >
-                จำนวนรายการ {data ? data.liststore.length : "0"} รายการ
-                <br />
-                น้ำหนักอุ่น{" "}
-                {data && data.liststore.length > 0
-                  ? data.liststore.reduce((sum, nex) => sum + nex.weightwarm, 0)
-                  : "0"}{" "}
-                กิโลกรัม / น้ำหนักเย็น{" "}
-                {data &&
-                  data.liststore.reduce((sum, nex) => sum + nex.weight, 0)}{" "}
-                กิโลกรัม
-              </div>
-            </DivFromDown>
-          </DivFrom>
-        </>
-      </DivBase>
+                <thead>
+                  <tr style={{ textAlign: "center", fontSize: "18px" }}>
+                    <th>ประเภทซาก</th>
+                    <th>ทะเบียนขุน</th>
+                    <th>รหัสซาก</th>
+                    <th>รหัสบาร์โค้ด</th>
+                    <th>คิวอาร์โค้ด</th>
+                    <th>น้ำหนักอุ่น (กก.)</th>
+                    <th>น้ำหนักเย็น (กก.)</th>
+                    <th>วันหมดอายุ</th>
+                    <th>เกรด</th>
+                    <th>ห้อง</th>
+                    <th>ชั้น</th>
+                    <th>ตะกร้า</th>
+                    <th>สถานะ</th>
+                    <th>หมายเหตุ</th>
+                    <th>จัดการ</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data && data.liststore.length > 0 ? (
+                    data.liststore.map((prod) => (
+                      <List_Store key={prod.id} Liststore={prod} />
+                    ))
+                  ) : (
+                    <tr style={{ textAlign: "center" }}>
+                      <td colSpan="15">ไม่พบข้อมูล</td>
+                    </tr>
+                  )}
+                </tbody>
+              </Table>
+            </div>
+            <div
+              style={{ float: "right", textAlign: "right", marginTop: "5px" }}
+            >
+              จำนวนรายการ {data ? data.liststore.length : "0"} รายการ
+              <br />
+              น้ำหนักอุ่น{" "}
+              {data && data.liststore.length > 0
+                ? data.liststore.reduce((sum, nex) => sum + nex.weightwarm, 0)
+                : "0"}{" "}
+              กิโลกรัม / น้ำหนักเย็น{" "}
+              {data &&
+                data.liststore.reduce((sum, nex) => sum + nex.weight, 0)}{" "}
+              กิโลกรัม
+            </div>
+          </DivFromDown>
+        </DivData>
+      </DivContainar>
     </div>
   );
 };
