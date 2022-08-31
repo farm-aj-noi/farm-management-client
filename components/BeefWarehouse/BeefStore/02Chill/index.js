@@ -221,7 +221,7 @@ const index = () => {
             รายการบ่มซากเนื้อโค
           </DivFromTop>
           <DivFromDown>
-            <div style={{ height: `${data && data.listchill.length > 6 ? "320px" : ""}`, overflow: "auto" }}>
+            <div style={{ height: `${data && data.listchill.length > 6 ? "420px" : ""}`, overflow: "auto" }}>
               <Table
                 striped
                 bordered
@@ -260,7 +260,7 @@ const index = () => {
                 </tbody>
               </Table>
             </div>
-            <div style={{ float: "right", textAlign: "right" }}>
+            <div style={{ float: "right", textAlign: "right", marginTop: "5px" }}>
               จำนวนรายการ {data ? data.listchill.length : "0"} รายการ
               <br />
               น้ำหนักอุ่น{" "}

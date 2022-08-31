@@ -122,6 +122,7 @@ padding-left:100px;
 padding-right: 100px;
 margin-top: 0;
 display: grid;
+/* grid-template-rows: 125px; */
 grid-template-columns: 270px 1fr;
 /* grid-gap: 2rem; */
 width: 100%;
@@ -140,6 +141,9 @@ grid-column-gap: 2rem;
     padding-right: 30px;
     padding-bottom: 130px;
 }
+@media screen and (min-width:1300px) {
+grid-template-rows: 17%;
+}
 `
 export const HeaderColor = styled.div`
   text-align: center;
@@ -154,7 +158,7 @@ export const HeaderColor = styled.div`
   padding:5px 30px;
   letter-spacing: 1px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 `;
 export const DivSearch = styled.div`
 display: flex;
@@ -200,7 +204,6 @@ height: fit-content;
     margin:0;   
 }
 @media screen and (max-width:1300px) and (min-width:700px){
-    
     grid-row-start: 1 ;
     grid-column-start: 2 ;
     margin:0;   
@@ -210,11 +213,9 @@ height: fit-content;
 export const DivData = styled.div`
 grid-row-start: 2;
 grid-column-start: 2;
-
 border-radius: 7px;
 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 height: fit-content;
-
 @media screen and (max-width:700px) {
     display:grid;
     grid-template-columns: 1fr;

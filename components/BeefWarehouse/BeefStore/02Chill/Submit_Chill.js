@@ -122,8 +122,8 @@ const Submit_Chill = () => {
     <>
       <div>
         <form onSubmit={handleSubmit}>
-          <DivFromInsideLeft>
-            บาร์โค้ด :
+          <DivFromInsideLeft>                                         
+            บาร์โค้ด :                                      
             <FormSubmit>
               <InputSubmit
                 type="text"

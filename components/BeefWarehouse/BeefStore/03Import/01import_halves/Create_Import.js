@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 
-import { DivFromInsideLeft, Searchinput, Savebutton1 } from "../ImportFrom";
+import {
+  DivFromInsideLeft,
+  Searchinput,
+  Savebutton1,
+  InputSubmit,
+  SelectSubmit,
+  FormSubmit
+} from "../ImportFrom";
 
 import gql from "graphql-tag";
 import { useMutation, useQuery } from "@apollo/react-hooks";
@@ -126,13 +133,10 @@ const Create_Import = () => {
         <form>
           <DivFromInsideLeft>
             บาร์โค้ด :
-            <div
-              style={{
-                display: "grid",
-                gridTemplateRows: "1fr 15px",
-              }}
-            >
-              <Searchinput
+            <FormSubmit>
+              <InputSubmit
+                type="text"
+                id="barcode"
                 name="barcode"
                 value={ImporthalvesInfo.barcode}
                 onChange={handleChange}
@@ -145,49 +149,33 @@ const Create_Import = () => {
               {!ImporthalvesInfo.barcode && (
                 <label style={{ color: "red" }}>กรุณากรอกบาร์โค้ด</label>
               )}
-            </div>
+            </FormSubmit>
           </DivFromInsideLeft>
           <DivFromInsideLeft style={{ marginTop: "5px" }}>
             ตำแหน่ง :
-            <div
-              style={{
-                display: "grid",
-                gridTemplateRows: "1fr 15px",
-              }}
-            >
-              <div style={{ display: "inline", width: "170px" }}>
-                <select
-                  name="beefroom"
-                  id="beefroom"
-                  onChange={handleChange}
-                  disabled={!ImporthalvesInfo.barcode}
-                  style={{
-                    height: "35px",
-                    width: "160px",
-                    border: "1px solid #AFAFAF",
-                    borderRadius: "4px",
-                    textAlign: "center",
-                    fontSize: "16px",
-                  }}
-                >
-                  <option value="">ห้อง</option>
-                  {dataroom &&
-                    dataroom.allRoom.map((prod) => (
-                      <option key={prod.id} value={prod.id}>
-                        {prod.roomname}
-                      </option>
-                    ))}
-                  {/*  <option value="62875e0171c2560f802d9f89">A1</option> */}
-                </select>
-              </div>
-            </div>
+            <FormSubmit>
+              <SelectSubmit
+                name="beefroom"
+                id="beefroom"
+                onChange={handleChange}
+                disabled={!ImporthalvesInfo.barcode}
+              >
+                <option value="">ห้อง</option>
+                {dataroom &&
+                  dataroom.allRoom.map((prod) => (
+                    <option key={prod.id} value={prod.id}>
+                      {prod.roomname}
+                    </option>
+                  ))}
+                {/*  <option value="62875e0171c2560f802d9f89">A1</option> */}
+              </SelectSubmit>                         
+            </FormSubmit>
           </DivFromInsideLeft>
           <div
             style={{
               display: "inline-block",
               justifySelf: "right",
-              float: "right",
-              paddingRight: "10px",
+              float: "right",    
               paddingBottom: "10px",
             }}
           >
