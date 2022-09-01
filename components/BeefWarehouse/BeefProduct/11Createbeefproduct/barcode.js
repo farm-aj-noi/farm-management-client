@@ -140,6 +140,7 @@ class Mydoc extends React.Component {
                         style={{
                             display: "inline-grid",
                             gridTemplateColumns: "1fr 1fr",
+                            paddingLeft: "3px" ,
                         }}
                     >
                         <div>
@@ -223,7 +224,7 @@ class Mydoc extends React.Component {
                             width: "100%",
                             textAlign: "center",
                             paddingTop: "2px",
-                            marginLeft: "2px"
+                            marginLeft: "3px"
                         }}
                     >
                         <Barcode

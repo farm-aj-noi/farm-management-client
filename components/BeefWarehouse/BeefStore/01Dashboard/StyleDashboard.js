@@ -71,3 +71,38 @@ export const DivAlertCardDown = () => {
     </Link>
   );
 };
+//////////////////////////////////////////////////////
+export const DivContainar = styled.div`
+padding-left:300px;
+padding-right: 300px;
+margin-top: 0;
+display: grid;
+/* grid-template-rows: 125px; */
+grid-template-columns: 1fr;
+/* grid-gap: 2rem; */
+width: 100%;
+grid-column-gap: 2rem;
+
+@media screen and (max-width:700px) {
+  grid-template-columns: 1fr;
+  grid-gap: 2rem; 
+  padding-left:30px;
+  padding-right: 30px;
+  padding-bottom: 130px;
+}
+@media screen and (max-width:1300px) and (min-width:700px) {
+  grid-gap: 2rem; 
+  padding-left:30px;
+  padding-right: 30px;
+  padding-bottom: 130px;
+}
+@media screen and (min-width:1300px) {
+grid-template-rows: 17%;
+}
+`
+
+export const DivDashBoard = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 20px;
+`
