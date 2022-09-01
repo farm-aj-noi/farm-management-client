@@ -121,44 +121,44 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
     if (
       router.pathname === "/beefwarehouse" ||
       router.pathname === "/beefwarehouse/beefstore" ||
-      router.pathname === "beefwarhouse/beefstore/chill" ||
-      router.pathname === "beefwarhouse/beefstore/import/import_halves" ||
-      router.pathname === "beefwarhouse/beefstore/import/import_quarters" ||
-      router.pathname === "beefwarhouse/beefstore/import/import_lumps" ||
-      router.pathname === "beefwarhouse/beefstore/import/import_chops" ||
-      router.pathname === "beefwarhouse/beefstore/import/import_entrails" ||
-      router.pathname === "beefwarhouse/beefstore/export/export_halves" ||
-      router.pathname === "beefwarhouse/beefstore/export/export_quarters" ||
-      router.pathname === "beefwarhouse/beefstore/export/export_lumps" ||
-      router.pathname === "beefwarhouse/beefstore/export/export_chops" ||
-      router.pathname === "beefwarhouse/beefstore/export/export_entrails" ||
-      router.pathname === "beefwarhouse/beefstore/Allstore/store" ||
-      router.pathname === "beefwarhouse/beefstore/Allstore/storeentrail" ||
-      router.pathname === "beefwarehouse/beefstore/report/report_chill" ||
-      router.pathname === "beefwarehouse/beefstore/report/import/report_halves" ||
-      router.pathname === "beefwarehouse/beefstore/report/import/report_quarters" ||
-      router.pathname === "beefwarehouse/beefstore/report/import/report_lumps" ||
-      router.pathname === "beefwarehouse/beefstore/report/import/report_chops" ||
-      router.pathname === "beefwarehouse/beefstore/report/import/report_entrails" ||
-      router.pathname === "beefwarehouse/beefstore/report/export/report_halves" ||
-      router.pathname === "beefwarehouse/beefstore/report/export/report_quarters" ||
-      router.pathname === "beefwarehouse/beefstore/report/export/report_lumps" ||
-      router.pathname === "beefwarehouse/beefstore/report/export/report_chops" ||
-      router.pathname === "beefwarehouse/beefstore/report/export/report_entrails" ||
-      router.pathname === "beefwarehouse/beefstore/report/store/report_store" ||
-      router.pathname === "beefwarehouse/beefstore/report/store/report_storeentrail" ||
-      router.partname === "beefwarehouse/beefstore/requestexport" ||
-      router.partname === "beefwarehouse/beefstore/notify/notify_date" ||
-      router.partname === "beefwarehouse/beefstore/notify/notify_exportrequest" ||
-      router.partname === "beefwarehouse/beefstore/notify/notify_import" ||
-      router.partname === "beefwarehouse/beefstore/notify/notify_export" ||
-      router.partname === "beefwarehouse/beefstore/transport" ||
-      router.partname === "beefwarehouse/beefstore/graph" ||
-      router.partname === "beefwarehouse/beefstore/setting/room" ||
-      router.partname === "beefwarehouse/beefstore/setting/sheif" ||
-      router.partname === "beefwarehouse/beefstore/setting/basket" ||
-      router.partname === "beefwarehouse/beefstore/setting/chillroom" ||
-      router.partname === "beefwarehouse/beefstore/setting/date"
+      router.pathname === "/beefwarehouse/beefstore/chill" ||
+      router.pathname === "/beefwarehouse/beefstore/import/import_halves" ||
+      router.pathname === "/beefwarehouse/beefstore/import/import_quarters" ||
+      router.pathname === "/beefwarehouse/beefstore/import/import_lumps" ||
+      router.pathname === "/beefwarehouse/beefstore/import/import_chops" ||
+      router.pathname === "/beefwarehouse/beefstore/import/import_entrails" ||
+      router.pathname === "/beefwarehouse/beefstore/export/export_halves" ||
+      router.pathname === "/beefwarehouse/beefstore/export/export_quarters" ||
+      router.pathname === "/beefwarehouse/beefstore/export/export_lumps" ||
+      router.pathname === "/beefwarehouse/beefstore/export/export_chops" ||
+      router.pathname === "/beefwarehouse/beefstore/export/export_entrails" ||
+      router.pathname === "/beefwarehouse/beefstore/Allstore/store" ||
+      router.pathname === "/beefwarehouse/beefstore/Allstore/storeentrail" ||
+      router.pathname === "/beefwarehouse/beefstore/report/report_chill" ||
+      router.pathname === "/beefwarehouse/beefstore/report/import/report_halves" ||
+      router.pathname === "/beefwarehouse/beefstore/report/import/report_quarters" ||
+      router.pathname === "/beefwarehouse/beefstore/report/import/report_lumps" ||
+      router.pathname === "/beefwarehouse/beefstore/report/import/report_chops" ||
+      router.pathname === "/beefwarehouse/beefstore/report/import/report_entrails" ||
+      router.pathname === "/beefwarehouse/beefstore/report/export/report_halves" ||
+      router.pathname === "/beefwarehouse/beefstore/report/export/report_quarters" ||
+      router.pathname === "/beefwarehouse/beefstore/report/export/report_lumps" ||
+      router.pathname === "/beefwarehouse/beefstore/report/export/report_chops" ||
+      router.pathname === "/beefwarehouse/beefstore/report/export/report_entrails" ||
+      router.pathname === "/beefwarehouse/beefstore/report/store/report_store" ||
+      router.pathname === "/beefwarehouse/beefstore/report/store/report_storeentrail" ||
+      router.partname === "/beefwarehouse/beefstore/requestexport" ||
+      router.partname === "/beefwarehouse/beefstore/notify/notify_date" ||
+      router.partname === "/beefwarehouse/beefstore/notify/notify_exportrequest" ||
+      router.partname === "/beefwarehouse/beefstore/notify/notify_import" ||
+      router.partname === "/beefwarehouse/beefstore/notify/notify_export" ||
+      router.partname === "/beefwarehouse/beefstore/transport" ||
+      router.partname === "/beefwarehouse/beefstore/graph" ||
+      router.partname === "/beefwarehouse/beefstore/setting/room" ||
+      router.partname === "/beefwarehouse/beefstore/setting/sheif" ||
+      router.partname === "/beefwarehouse/beefstore/setting/basket" ||
+      router.partname === "/beefwarehouse/beefstore/setting/chillroom" ||
+      router.partname === "/beefwarehouse/beefstore/setting/date"
     ) {
       ctx.res.writeHead(302, { Location: "/signin" });
       ctx.res.end();
@@ -167,8 +167,30 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
   // Route Beefproduct
   if (!token) {
     if (
-      router.pathname === "/beefwarehouse/beefproduct"
-
+      router.pathname === "/beefwarehouse/beefproduct" ||
+      router.pathname === "/beefwarehouse/beefproduct/createproduct" ||
+      router.pathname === "/beefwarehouse/beefproduct/imports" ||
+      router.pathname === "/beefwarehouse/beefproduct/exports" ||
+      router.pathname === "/beefwarehouse/beefproduct/store" ||
+      router.pathname === "/beefwarehouse/beefproduct/report/report_import" ||
+      router.pathname === "/beefwarehouse/beefproduct/report/report_export" ||
+      router.pathname === "/beefwarehouse/beefproduct/report/report_store" ||
+      router.pathname === "/beefwarehouse/beefproduct/requestexport" ||
+      router.pathname === "/beefwarehouse/beefproduct/notify/notify_date" ||
+      router.pathname === "/beefwarehouse/beefproduct/notify/notify_exportrequest" ||
+      router.pathname === "/beefwarehouse/beefproduct/notify/notify_import" ||
+      router.pathname === "/beefwarehouse/beefproduct/notify/notify_export" ||
+      router.pathname === "/beefwarehouse/beefproduct/notify/notify_export" ||
+      router.pathname === "/beefwarehouse/beefproduct/tracking/[trackingId]" ||
+      router.pathname === "/beefwarehouse/beefproduct/transport" ||
+      router.pathname === "/beefwarehouse/beefproduct/trace" ||
+      router.pathname === "/beefwarehouse/beefproduct/trace/[trackingId]" ||
+      router.pathname === "/beefwarehouse/beefproductgraph" ||
+      router.pathname === "/beefwarehouse/beefproduct/setting" ||
+      router.pathname === "/beefwarehouse/beefproduct/setting/date" ||
+      router.pathname === "/beefwarehouse/beefproduct/setting/room" ||
+      router.pathname === "/beefwarehouse/beefproduct/setting/freezer" ||
+      router.pathname === "/beefwarehouse/beefproduct/setting/shelf"
     ) {
       ctx.res.writeHead(302, { Location: "/signin" });
       ctx.res.end();

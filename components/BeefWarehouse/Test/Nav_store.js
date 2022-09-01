@@ -23,13 +23,11 @@ const Nav_report = (Sidenumber) => {
           gridRowStart: "2",
           gridRowEnd: "5",
           gridColumnStart: "2",
-          height: "170px",
+          
         }}
       >
-        <DivFromTop>
-          <div style={{ margin: "-3px 5px 0px 0px" }}>
-            <Icon size={20} icon={list} />
-          </div>
+        <DivFromTop>         
+            <Icon size={25} icon={list} style={{ margin: "-3px 5px 0px 0px" }}/>         
           ประเภทคงคลัง
         </DivFromTop>
         <DivFromDown>

@@ -103,7 +103,7 @@ const index = () => {
       <DivBase
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 270px 1150px 1fr",
+          gridTemplateColumns: "1fr 270px 1300px 1fr",
           gridRowGap: "15px",
           gridColumnGap: "10px",
           textAlign: "start",

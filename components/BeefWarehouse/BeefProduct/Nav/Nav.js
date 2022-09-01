@@ -57,13 +57,13 @@ const Nav1 = () => {
         <Navbar.Brand style={{ padding: "0" }}>
           <Link href="/beefwarehouse">
             <a style={{ color: "white" }}>
-              <p style={{ padding: "0 10px", display: "inline", fontSize: "20px" }}>หน้าแรก</p>
+              <p style={{ padding: "0 10px", display: "inline", fontSize: "18px", fontWeight: 600, letterSpacing: "1px " }}>หน้าแรก</p>
             </a>
           </Link>
           <Link href="/beefwarehouse/beefproduct">
-            <a style={{ color: "white" }}>
+            <a style={{ color: "white", paddingLeft: "18px" }}>
               <Logobeefstore height="30px" weight="30px" />
-              <p style={{ padding: "0 10px", display: "inline", fontSize: "20px" }}>
+              <p style={{ padding: "0 5px", display: "inline", fontSize: "18px", fontWeight: 600, letterSpacing: "1px " }}>
                 ระบบคลังผลิตภัณฑ์
               </p>
             </a>
@@ -100,7 +100,7 @@ const Nav1 = () => {
             <DropdownButton
               drop="down"
               title={
-                <span>
+                <span style={{ fontSize: "16px", fontWeight: 600 }}>
                   <Icon3 height="30px" weight="30px" />
                   ออกรายงาน
                 </span>
@@ -152,11 +152,11 @@ const Nav1 = () => {
           <Nav>
             {user && (
               <>
-                <a style={{ margin: "auto 5px", textAlign: "left", fontSize: "18px" }}>
+                <a style={{ margin: "auto 5px", textAlign: "left", fontSize: "16px", fontWeight: 600, letterSpacing: "1px" }}>
                   สวัสดี {user.name}
                 </a>
 
-                <NavButtonSigninComplete onClick={signout} style={{ fontSize: "18px" }}>
+                <NavButtonSigninComplete onClick={signout} style={{ fontSize: "16px", fontWeight: 600, letterSpacing: "1px" }}>
                   <Icon
                     style={{ verticalAlign: "text-bottom" }}
                     icon={shareSquareO}

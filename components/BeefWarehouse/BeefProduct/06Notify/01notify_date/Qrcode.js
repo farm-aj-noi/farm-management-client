@@ -54,7 +54,7 @@ function Qrcode({ notifydate }) {
               href={
                 "http://localhost:3000/beefwarehouse/beefproduct/tracking/" + infodata.beefproduct.barcode
               }
-              target="popup"
+              target="_blank"
               style={{
                 fontSize: "10px",
                 backgroundColor: "#f3f3f3",
