@@ -94,14 +94,15 @@ const index = () => {
             style={{
               fontSize: "50px",
               height: "62px",
+              fontWeight: 600,
             }}
           >
             {expc && exph && expl && expq && expen
               ? expc.Card8c.length +
-                exph.Card8h.length +
-                expl.Card8l.length +
-                expq.Card8q.length +
-                expen.Card8e.length
+              exph.Card8h.length +
+              expl.Card8l.length +
+              expq.Card8q.length +
+              expen.Card8e.length
               : "0"}
           </div>
           <a
@@ -109,7 +110,13 @@ const index = () => {
               color: "#ffffff",
             }}
           ></a>
-          <a style={{ color: "#ffffff", textAlign: "center" }}>
+          <a style={{
+            color: "#ffffff",
+            textAlign: "center",
+            fontWeight: 600,
+            letterSpacing: "1px",
+            fontSize: "14px",
+          }}>
             จำนวนรายการ
             <br />
             วันใกล้หมดอายุ

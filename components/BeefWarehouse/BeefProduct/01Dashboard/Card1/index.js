@@ -42,6 +42,8 @@ const index = () => {
           color: "#AC4B75",
           borderRadius: "2px",
           height: "32px",
+          fontWeight: 600,
+          letterSpacing: "1px",
         }}
       >
         ยินดีต้อนรับสู่ระบบคลังผลิตภัณฑ์
@@ -61,8 +63,10 @@ const index = () => {
         <div
           style={{
             textAlign: "right",
-            fontSize: "20px",
+            fontSize: "18px",
             padding: "15px 10px 0 0",
+            fontWeight: 600,
+            letterSpacing: "1px",
           }}
         >
           {date}

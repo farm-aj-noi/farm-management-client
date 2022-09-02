@@ -28,9 +28,10 @@ import {
 
 import { blue, white } from "../../../../utils/colors";
 import {
-  NavButtonSigninComplete,
   NavButtonLeft,
   NavDropdownItem,
+  NavDropdownItem1,
+  NavButtonSigninComplete
 } from "./NavButton";
 
 import MyCss from "./Nav.module.css";
@@ -58,14 +59,14 @@ const Nav1 = () => {
       >
         <Navbar.Brand style={{ padding: "0" }}>
           <Link href="/beefwarehouse">
-            <a style={{ color: "white" }}>
-              <p style={{ padding: "0 10px", display: "inline", fontSize: "20px" }}>หน้าแรก</p>
+            <a style={{ color: "white", paddingRight: "18px" }}>
+              <p style={{ padding: "0 10px", display: "inline", fontSize: "22px", fontWeight: 600, letterSpacing: "1px" }}>หน้าแรก</p>
             </a>
           </Link>
           <Link href="/beefwarehouse/beefstore">
             <a style={{ color: "white" }}>
               <Logobeefstore height="30px" weight="30px" />
-              <p style={{ padding: "0 10px", display: "inline", fontSize: "20px" }}>
+              <p style={{ padding: "0 5px", display: "inline", fontSize: "22px", fontWeight: 600, letterSpacing: "1px " }}>
                 ระบบคลังชิ้นเนื้อ
               </p>
             </a>
@@ -75,7 +76,7 @@ const Nav1 = () => {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
             <Link href="/beefwarehouse/beefstore/chill">
-              <NavButtonLeft >
+              <NavButtonLeft>
                 <Icon7 height="30px" weight="30px" />
                 บ่มซากเนื้อโค
               </NavButtonLeft>
@@ -83,7 +84,7 @@ const Nav1 = () => {
             <DropdownButton
               drop="down"
               title={
-                <span style={{ fontSize: "18px" }}>
+                <span style={{ fontSize: "18px", fontWeight: 600 }}>
                   <Icon12 height="30px" weight="30px" />
                   การนำเข้า
                 </span>
@@ -109,7 +110,7 @@ const Nav1 = () => {
             <DropdownButton
               drop="down"
               title={
-                <span style={{ fontSize: "18px" }}>
+                <span style={{ fontSize: "18px", fontWeight: 600 }}>
                   <Icon11 height="30px" weight="30px" />
                   การเบิกออก
                 </span>
@@ -133,7 +134,7 @@ const Nav1 = () => {
               </Link>
             </DropdownButton>
             <Link href="/beefwarehouse/beefstore/Allstore/store">
-              <NavButtonLeft>
+              <NavButtonLeft style={{ fontWeight: 600, borderRadius: "5px" }}>
                 <Icon9 height="30px" weight="30px" />
                 คงคลัง
               </NavButtonLeft>
@@ -142,7 +143,7 @@ const Nav1 = () => {
             <DropdownButton
               drop="down"
               title={
-                <span style={{ fontSize: "18px" }}>
+                <span style={{ fontSize: "18px", fontWeight: 600 }}>
                   <Icon3 height="30px" weight="30px" />
                   ออกรายงาน
                 </span>
@@ -191,11 +192,28 @@ const Nav1 = () => {
           <Nav>
             {user && (
               <>
-                <a style={{ margin: "auto 5px", textAlign: "left", fontSize: "18px" }}>
+                {/* <DropdownButton drop="down"
+                  title={
+                    <span style={{ fontSize: "18px", fontWeight: 600 }}>
+                      สวัสดี {user.name}
+                    </span>
+                  }
+                  bsPrefix={MyCss.nstdropright}
+                 >
+                  <NavDropdownItem1 onClick={signout}>
+                    <Icon
+                      style={{ verticalAlign: "text-bottom" }}
+                      icon={shareSquareO}
+                      size={25}
+                    />
+                    ออกจากระบบ
+                  </NavDropdownItem1>
+                </DropdownButton> */}
+                <a style={{ margin: "auto 5px", textAlign: "left", fontSize: "18px", fontWeight: 600,letterSpacing: "1px" }}>
                   สวัสดี {user.name}
                 </a>
 
-                <NavButtonSigninComplete onClick={signout} style={{ fontSize: "18px" }}>
+                <NavButtonSigninComplete onClick={signout} style={{ fontSize: "18px", fontWeight: 600, letterSpacing: "1px" }}>
                   <Icon
                     style={{ verticalAlign: "text-bottom" }}
                     icon={shareSquareO}

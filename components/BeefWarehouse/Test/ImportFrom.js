@@ -50,19 +50,24 @@ export const DivFrom = styled.div`
 `;
 
 export const DivFromTop = styled.div`
-  display: flex;
   background: ${lightBlue};
   height: fit-content;
   border-radius: 10px 10px 0 0;
   padding: 0.2rem 15px;
   color: ${white};
-  font-size: 20px
+  font-size:18px;
+  font-weight:600;
+  letter-spacing: 1px;
 `;
 
 export const DivFromDown = styled.div`
   height: fit-content;
-  border-radius: 10px 10px 0 0;
+  border-radius: 0px 0px 10px 10px;
   padding: 15px 15px 15px 15px;
+  background-color:white;
+  display:grid;
+  grid-template-columns: 1fr;
+  width:100%;
 `;
 
 export const Searchinput = styled.input`

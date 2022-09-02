@@ -15,7 +15,7 @@ import { Icon } from "react-icons-kit";
 import { check } from "react-icons-kit/fa/check";
 import { close } from "react-icons-kit/fa/close";
 
-import {QUERY_CARD} from '../../../pages/slaughter/entrails'
+import { QUERY_CARD } from '../../../pages/slaughter/entrails'
 
 import { Wightinput } from "./EntrailsFrom";
 // import LoadingPage from "../../../helps/LoadingPage";
@@ -154,7 +154,7 @@ const Imslaughter = ({ imslaughter }) => {
     idEntrail: !!imslaughter.entrails ? imslaughter.entrails.id : "none",
     barcode: !!imslaughter.entrails ? imslaughter.entrails.barcode : null,
   });
-  // console.log(entrailData.id);
+  console.log(entrailData.id);
 
   const [inputData, setinputData] = useState({
     offal: !!entrailData.offal ? entrailData.offal : null,
@@ -578,21 +578,37 @@ const Imslaughter = ({ imslaughter }) => {
 
       <td>
         {entrailData.offal &&
-        entrailData.toe &&
-        entrailData.head &&
-        entrailData.skin &&
-        entrailData.liver &&
-        entrailData.fat &&
-        entrailData.onkale &&
-        entrailData.tail &&
-        entrailData.gallbladder &&
-        entrailData.scrap ? (
+          entrailData.toe &&
+          entrailData.head &&
+          entrailData.skin &&
+          entrailData.liver &&
+          entrailData.fat &&
+          entrailData.onkale &&
+          entrailData.tail &&
+          entrailData.gallbladder &&
+          entrailData.scrap ? (
           <Icon size={20} icon={check} style={{ color: "green" }} />
         ) : (
           <Icon size={20} icon={close} style={{ color: "red" }} />
         )}
       </td>
-
+      <td>
+        {entrailData.offal &&
+          entrailData.toe &&
+          entrailData.head &&
+          entrailData.skin &&
+          entrailData.liver &&
+          entrailData.fat &&
+          entrailData.onkale &&
+          entrailData.tail &&
+          entrailData.gallbladder &&
+          entrailData.scrap
+          ? (
+            <Barcodebutton barcode={entrailData} />
+          ) : (
+            "-"
+          )}
+      </td>
       <td>
         {loading ? (
           <Spinner animation="border" variant="primary" />
@@ -609,8 +625,7 @@ const Imslaughter = ({ imslaughter }) => {
           !edit ? (
           <Savebuttoncolor
             style={{
-              backgroundColor: `${
-                !inputData.offal ||
+              backgroundColor: `${!inputData.offal ||
                 !inputData.toe ||
                 !inputData.head ||
                 !inputData.skin ||
@@ -620,9 +635,9 @@ const Imslaughter = ({ imslaughter }) => {
                 !inputData.tail ||
                 !inputData.gallbladder ||
                 !inputData.scrap
-                  ? "gray"
-                  : ""
-              }`,
+                ? "gray"
+                : ""
+                }`,
             }}
             onClick={handleSubmitFirst}
             disabled={
@@ -661,8 +676,7 @@ const Imslaughter = ({ imslaughter }) => {
           <div>
             <Savebuttoncolor
               style={{
-                backgroundColor: `${
-                  !inputData.offal ||
+                backgroundColor: `${!inputData.offal ||
                   !inputData.toe ||
                   !inputData.head ||
                   !inputData.skin ||
@@ -672,9 +686,9 @@ const Imslaughter = ({ imslaughter }) => {
                   !inputData.tail ||
                   !inputData.gallbladder ||
                   !inputData.scrap
-                    ? "gray"
-                    : ""
-                }`,
+                  ? "gray"
+                  : ""
+                  }`,
               }}
               onClick={handleSubmitUpdate}
               disabled={
@@ -695,6 +709,7 @@ const Imslaughter = ({ imslaughter }) => {
           </div>
         )}
       </td>
+
     </tr>
   );
 };

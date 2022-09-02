@@ -7,6 +7,8 @@
   color: #ffffff;
   height: 45px;
   width: 100%;
+  letter-spacing: 1px;
+  border-radius: 5px;
     text-align: left;
 }
 

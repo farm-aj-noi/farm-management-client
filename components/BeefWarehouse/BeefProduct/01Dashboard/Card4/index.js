@@ -54,6 +54,7 @@ const index = () => {
             style={{
               fontSize: "50px",
               height: "62px",
+              fontWeight:600,
             }}
           >
             {data ? data.Card9product.length : "0"}
@@ -63,7 +64,12 @@ const index = () => {
               color: "#ffffff",
             }}
           ></a>
-          <a style={{ color: "#ffffff", textAlign: "center" }}>
+          <a style={{
+            color: "#ffffff", textAlign: "center",
+            fontWeight: 600,
+            letterSpacing: "1px",
+            fontSize: "14px",
+          }}>
             จำนวนรายการ (วัน)
             <br />
             คำร้องขอเบิกผลิตภัณฑ์

@@ -8,6 +8,7 @@ export const DivFrom = styled.div`
   display: block;
   width: 1300px;
   height: auto;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 `;
 
 export const DivFromTop = styled.div`
@@ -17,6 +18,8 @@ export const DivFromTop = styled.div`
   border-radius: 10px 10px 0 0;
   padding: 0.2rem 15px;
   color: ${white};
+  font-weight:600;
+  letter-spacing: 1px;
   font-size: 20px;
 `;
 
@@ -49,9 +52,9 @@ export const StyleAlertCardDown = styled.div`
   color: #0d76ff;
   display: inline-flex;
   cursor: pointer;
-
+  font-size:16px;
   &:hover {
-    background: ${lightBlue};
+    background: #d1d7dd;
     color: ${white};
   }
 `;

@@ -59,6 +59,7 @@ const index = () => {
             style={{
               fontSize: "50px",
               height: "62px",
+              fontWeight: 600,
             }}
           >
             {storedata ? storedata.liststore.length : "0"}
@@ -68,7 +69,12 @@ const index = () => {
               color: "#ffffff",
             }}
           ></a>
-          <a style={{ color: "#ffffff", textAlign: "center" }}>
+          <a style={{
+            color: "#ffffff", textAlign: "center",
+            fontWeight: 600,
+            letterSpacing: "1px",
+            fontSize: "14px",
+          }}>
             ยอดคงคลัง
             <br />
             ซากเนื้อโค (บนล่าง)

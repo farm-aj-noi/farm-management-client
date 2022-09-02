@@ -128,9 +128,9 @@ class Mydoc extends React.Component {
                     style={{
                         display: "inline-grid",
                         gridTemplateColumns: "1fr",
-                        padding: "2px 5px",
                         // borderBottom: "1px dashed black",
                         marginTop: "-16px",
+                        marginBottom: "-16px",
                         fontSize: "15px",
                         gridColumnGap: "3px",
                         fontWeight: "bolder",
@@ -140,6 +140,7 @@ class Mydoc extends React.Component {
                         style={{
                             display: "inline-grid",
                             gridTemplateColumns: "1fr 1fr",
+                            paddingLeft: "3px" ,
                         }}
                     >
                         <div>
@@ -206,14 +207,15 @@ class Mydoc extends React.Component {
                 <div
                     style={{
                         display: "inline-grid",
-                        padding: "5px 2px 0px 5px",
+                        /* padding: "5px 2px 0px 5px", */
                         margin: "auto",
                         color: "black",
-                        gridTemplateColumns: "1fr 0.25fr",
-                        // gridColumnGap: "18px",
+                        gridTemplateColumns: "1fr 0.35fr",
+                        gridColumnGap: "5px",
                         borderTop: "1px dashed black",
                         width: "100%",
                         fontWeight: "bolder",
+
                     }}
                 >
                     <div
@@ -221,12 +223,14 @@ class Mydoc extends React.Component {
                             margin: "auto",
                             width: "100%",
                             textAlign: "center",
+                            paddingTop: "2px",
+                            marginLeft: "3px"
                         }}
                     >
                         <Barcode
                             value={prod.barcode}
                             height={70}
-                            width={1.6}
+                            width={1.65} //1.6
                             margin={0}
                             fontSize={0}
                         />
@@ -234,7 +238,7 @@ class Mydoc extends React.Component {
 
                     <div style={{ margin: "auto" }}>
                         <QRCode
-                            size={65}
+                            size={68}
                             value={"http://localhost:3000//beefwarehouse/beefproduct/tracking" + prod.barcode}
                             style={{ marginBottom: 0 }}
                         />

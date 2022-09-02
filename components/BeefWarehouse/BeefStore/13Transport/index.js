@@ -539,7 +539,7 @@ const Index = () => {
                                     <a href={
                                         "http://localhost:3000/slaughter/trace/" + data.Tracking.numkun
                                     }
-                                        target="popup"><Gobutton1>ติดตามข้อมูลสินค้า</Gobutton1></a>
+                                        target="_blank"><Gobutton1>ติดตามข้อมูลสินค้า</Gobutton1></a>
 
                                     : ""}
                             </div>

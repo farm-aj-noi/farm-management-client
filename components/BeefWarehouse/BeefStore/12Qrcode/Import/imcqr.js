@@ -59,7 +59,7 @@ const index = ({ listchop }) => {
                 "http://localhost:3000/slaughter/tracking/" +
                 infodata.chop.barcode
               }
-              target="popup"
+              target="_blank"
               style={{
                 fontSize: "10px",
                 backgroundColor: "#f3f3f3",
