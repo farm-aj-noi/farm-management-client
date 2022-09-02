@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import { FromDiv } from "../../../utils/from";
-import { lightBlue, white, blue,lightGreen,green } from "../../../utils/colors";
+import { lightBlue, white, blue, lightGreen, green } from "../../../utils/colors";
 
 export const DivFrom = styled.div`
   ${FromDiv}
@@ -64,7 +64,7 @@ margin: 0 auto;
 background: #f5f5f5c4;
 border: 1px solid #80808014;
   `;
-  export const IMG = styled.image`
+export const IMG = styled.image`
   object-fit: cover;
     max-width: 100%;
     position: absolute;
@@ -131,3 +131,31 @@ export const Gobutton = styled.button`
     background-color: ${green};
   }
 `;
+
+export const Submitbutton = styled.button`
+font-weight: 400;
+color: ${white};
+background-color: ${lightGreen};
+text-align: center;
+border: 1px solid transparent;
+border-radius: 0.25rem;
+font-size: 20px;
+line-height: 1.5;
+&:hover {
+    background-color: ${green};
+  }
+`;
+
+export const Backbutton = styled.button`
+font-weight: 400;
+color: ${white};
+text-align: center;
+border: 1px solid transparent;
+border-radius: 0.25rem;
+font-size: 20px;
+line-height: 1.5;
+background-color: #c90d0d;
+&:hover {
+    background-color: #a00b0b;
+  }
+`

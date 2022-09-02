@@ -6,10 +6,10 @@ import { useQuery, useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import logo from "./defultcow.jpg";
 import { useRouter } from "next/router";
-import {print} from 'react-icons-kit/fa/print'
+import { print } from 'react-icons-kit/fa/print'
 import { iosSearchStrong } from "react-icons-kit/ionicons/iosSearchStrong";
 import { DivCenter, TableForm, TableHead } from "../Styleclass/Table";
-import {u1F356} from 'react-icons-kit/noto_emoji_regular/u1F356'
+import { u1F356 } from 'react-icons-kit/noto_emoji_regular/u1F356'
 import { Icon3, Icon2, Icon4, Icon5, Icon7 } from "../../../utils/Logograde";
 import Link from "next/link";
 import { DivBase } from "../../../utils/divBase";
@@ -38,7 +38,8 @@ import {
   Uploads,
   Searchinput,
   Searchbutton,
-  Gobutton,
+  Submitbutton,
+  Backbutton
 } from "./GetinFrom";
 import { Spinner } from "react-bootstrap";
 // import Footer from "../../Footer/index";
@@ -119,9 +120,10 @@ const Summarize = () => {
   });
   console.log(sumData);
 
-    return (
-      <>
+  return (
+    <>
       <div>
+        {/* header */}
         <DivCenter
           style={{
             fontSize: "36px",
@@ -131,251 +133,196 @@ const Summarize = () => {
             paddingTop: "30px",
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              marginRight: "5px",
-            }}
-          >
-            <Icon2 height="70px" weight="70px" />
-          </div>
+          <Icon2 height="70px" weight="70px" />
           สรุปเกรดเนื้อโค
         </DivCenter>
-        <DivCenter style={{ marginTop: "20px" }}>
-          <div
-            style={{
-              width: "1200px",
-              height: "650px",
-              backgroundColor: "white",
-              borderRadius: "5px",
-              borderTop: "none",
-              borderRadius: "5px",
-              boxShadow:
-                " 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 0px 10px 0 rgba(0, 0, 0, 0.1)",
-            }}
-          >
-            <h1
-              style={{
-                height: "47px",
-                color: "white",
-                fontSize: "24px",
-                backgroundColor: "#3BAFDA",
-                borderRadius: "5px 5px 0px 0px",
-                padding: "7px 5px 5px 15px",
-                margin: "0px",
-                display: "flex",
-                alignItems: "center",
-                fontWeight: "-moz-initial",
-              }}
-            >
+
+
+        {/* header */}
+
+        {/* detail */}
+        <DivBase>
+          <DivFrom style={{ width: "1200px" }}>
+            <DivFromTop style={{
+              height: "47px",
+              color: "white",
+              fontSize: "24px",
+              fontWeight: "-moz-initial",
+            }}>
               <Icon
                 style={{ verticalAlign: "text-bottom", marginRight: "10px" }}
                 icon={u1F356}
                 size={30}
               />
               สรุปเกรดเนื้อโค
-            </h1>
-
-            <DivBase
-              style={{
-                margin: "auto",
+            </DivFromTop>
+            <DivFromDown>
+              <div style={{
                 display: "grid",
-                gridTemplateColumns: " 0.4fr 1fr ",
-                gridRowGap: "5px",
-                width: " max-content",
-                left: "50%",
-                transform: "translateX(-50%)",
-              }}
-            >
-              <></>
-
-              
-      {/*     <div>               
-            <DivFrom
-                style={{
-                  width: "270px",
-                  height: "min-content",
-                  margin: "20px",
-                  marginTop: "0",
-                  marginRight: "2px",
-                }}
-              >
-                <DivFromTop>
-                  <div
-                    style={{ margin: "-3px 5px 0px 0px", fontSize: "20px" }}
-                  ></div>
-                  <div style={{ margin: "-1px 5px 0px 0px", fontSize: "20px" }}>
-                    เกรดจากระบบ
-                  </div>
-                </DivFromTop>
-
-                
-          <DivFromDown
-            style={{
-              display: "grid",
-              gridTemplateColumns: "0.3fr",
-              height: "200px",
-      
-              // gridRowGap: "5px",
-              // paddingBottom: "20px",
-            }}
-          >
-            
-            <div
-              className="mb-3"
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr ",
-              }}
-            >
-
-            </div>
-
-            </DivFromDown>
-            </DivFrom>
-
-            
-            
-            <DivFrom
-                style={{
-                  width: "270px",
-                  height: "min-content",
-                  margin: "20px",
-                  marginTop: "0",
-                  marginRight: "2px",
-                }}
-              >
-                <DivFromTop>
-                  <div
-                    style={{ margin: "-3px 5px 0px 0px", fontSize: "20px" }}
-                  ></div>
-                  <div style={{ margin: "-1px 5px 0px 0px", fontSize: "20px" }}>
-                  เกรดจากผู้เชี่ยวชาญ
-                  </div>
-                </DivFromTop>
-
-                
-                <DivFromDown
-            style={{
-              display: "grid",
-              gridTemplateColumns: "0.3fr",
-              height: "200px",
-      
-              // gridRowGap: "5px",
-              // paddingBottom: "20px",
-            }}
-          >
-            
-            <div
-              className="mb-3"
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr ",
-              }}
-            >
-              
-            </div>
-
-            </DivFromDown>
-            </DivFrom>
-            
-            </div>   */}
-           
-              
-              {/* <Footer/> */}
-
-              {/* <Footer/> */}
-              
-              
-            </DivBase>
-            <DivFrom
-                style={{
-                  width: "500px",
-                  height: "500px",
-                  margin: "20px",
-                  marginTop: "30px",
-                  marginRight: "2px",
-                }}
-              >
-                <DivFromTop >
-                  <div
-                    style={{ margin: "-3px 5px 0px 0px", fontSize: "20px" }}
-                  ></div>
-                  <div style={{ margin: "-1px 5px 0px 0px", fontSize: "20px" }}>
+                gridTemplateColumns: "500px 1fr",
+                gridGap: "15px",
+              }}>
+                <div style={{ boxShadow: "0px 0px 2px grey", borderRadius: "9px" }}>
+                  <DivFromTop style={{ fontSize: "20px" }}>
                     รูปตัวอย่างเนื้อโค
-                  </div>
-                </DivFromTop>
+                  </DivFromTop>
+                  <DivFromDown style={{
+                    display: "flex",
+                    justifyContent: "center",
+                  }}>
+                    <div style={{
+                      width: "450px",
+                      height: "450px",
+                      backgroundColor: "red",
+                    }}>
+                      {/* image beef */}
+                    </div>
+                  </DivFromDown>
+                </div>
+                <div style={{
+                  boxShadow: "0px 0px 2px grey",
+                  borderRadius: "9px",
+                }}>
+                  <div style={{
+                    display: "grid",
+                    gridTemplateColumns: "260px 1fr",
+                    gridGap: "30px",
+                    padding: "10px",
+                  }}>
+                    <div style={{ fontSize: "18px" }}>
+                      <h1 style={{ fontSize: "28px", margin: "0" }}>
+                        พนักงานตัดเกรด
+                      </h1>
+                      <div>
+                        ชื่อ-นามสกุล { }
+                        <input
+                          style={{
+                            margin: "5px",
+                            marginLeft: "0px",
+                            border: "1px solid #AFAFAF",
+                            borderRadius: "4px",
+                            textAlign: "center",
+                            width: "250px",
+                            padding: "3px"
+                          }}
+                          value="นายปิยณัฐ พัฒน์ทวีกิจ"
+                          disabled />
+                      </div>
+                      <div style={{ marginTop: "10px", fontSize: "18px" }}>
+                        <h1 style={{ fontSize: "28px", margin: "0" }}>
+                          ชื่อผู้เชี่ยวชาญ
+                        </h1>
+                        <div>
+                          1.ชื่อ-นามสกุล { }
+                          <input
+                            style={{
+                              margin: "5px",
+                              marginLeft: "0px",
+                              border: "1px solid #AFAFAF",
+                              borderRadius: "4px",
+                              width: "250px",
+                              padding: "3px"
+                            }}
+                          />
+                        </div>
+                        <div>
+                          2.ชื่อ-นามสกุล { }
+                          <input
+                            style={{
+                              margin: "5px",
+                              marginLeft: "0px",
+                              border: "1px solid #AFAFAF",
+                              borderRadius: "4px",
+                              width: "250px",
+                              padding: "5px"
+                            }}
+                          />
+                        </div>
+                        <div>
+                          3.ชื่อ-นามสกุล { }
+                          <input
+                            style={{
+                              margin: "5px",
+                              marginLeft: "0px",
+                              border: "1px solid #AFAFAF",
+                              borderRadius: "4px",
+                              width: "250px",
+                              padding: "5px"
+                            }}
+                          />
+                        </div>
+                        <div>
+                          4.ชื่อ-นามสกุล { }
+                          <input
+                            style={{
+                              margin: "5px",
+                              marginLeft: "0px",
+                              border: "1px solid #AFAFAF",
+                              borderRadius: "4px",
+                              width: "250px",
+                              padding: "5px"
+                            }}
+                          />
+                        </div>
+                        <div>
+                          5.ชื่อ-นามสกุล { }
+                          <input
+                            style={{
+                              margin: "5px",
+                              marginLeft: "0px",
+                              border: "1px solid #AFAFAF",
+                              borderRadius: "4px",
+                              width: "250px",
+                              padding: "5px"
+                            }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <div style={{ boxShadow: "0px 0px 2px grey", borderRadius: "9px", height: "fit-content" }}>
+                        <DivFromTop style={{ fontSize: "20px" }}>เกรดจากระบบ</DivFromTop>
+                        <DivFromDown style={{ textAlign: "center", fontSize: "70px", padding: "0", fontWeight: "bold", color: "green" }}>
+                          3.5
+                        </DivFromDown>
+                      </div>
+                      <div style={{ boxShadow: "0px 0px 2px grey", borderRadius: "9px", height: "fit-content", marginTop: "30px" }}>
+                        <DivFromTop style={{ fontSize: "20px" }}>เกรดจากผู้เชี่ยวชาญ</DivFromTop>
+                        <DivFromDown style={{ textAlign: "center", fontSize: "70px", padding: "0", fontWeight: "bold" }}>
+                          -
+                        </DivFromDown>
+                      </div>
+                      <div style={{ fontSize: "18px", marginTop: "30px" }}>
+                        <h1 style={{ fontSize: "20px", margin: "0" }}>
+                          กรอกเกรดที่ต้องการ : { }
+                        </h1>
+                        <input
+                          style={{
+                            margin: "5px",
+                            marginLeft: "0px",
+                            border: "1px solid #AFAFAF",
+                            borderRadius: "4px",
+                            textAlign: "center",
 
-                
-          <DivFromDown
-            style={{
-              display: "grid",
-              gridTemplateColumns: "0.3fr",
-      
-              // gridRowGap: "5px",
-              // paddingBottom: "20px",
-            }}
-          >
-            
-            <div
-              className="mb-3"
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr ",
-              }}
-            >
-              <div >
-                <div >
-                  <div >
-                    <div >
-                        <a >
-                        <Divimg style={{width:"0px"}}>
-                          <img style={{
-
-                            margin: "auto", objectFit: "cover", width: "100%", height: "100%", display: "relarive", padding: "4px", borderRadius: "30px"
-                          }} alt="Image" /* src={cowdetailData.imagecow || logo} */src={image.preview || logo} />
-                        </Divimg >
-                        </a>
+                            padding: "3px"
+                          }}
+                        />
+                        <Submitbutton style={{ margin: "10px 10px", width: "70px" }}>บันทึก</Submitbutton>
+                        <Backbutton style={{ width: "70px" }}>ย้อนกลับ</Backbutton>
+                      </div>
                     </div>
                   </div>
                 </div>
-
               </div>
-            </div>
             </DivFromDown>
-            </DivFrom>
-{/* 
-            <div style={{
-                  width: "270px",
-                  height: "min-content",
-                  margin: "20px",
-                  marginTop: "30px",
-                  marginRight: "2px",
-                  fontSize: "18px",
-                }}>
-                ลงชื่อผู้เชี่ยวชาญตัดเกรด : { }
-                <div style={{ display: "grid", gridTemplateRows: "1fr 15px" }}>
-                  
-                  <Searchinput
-                    name="numkun"
-                    maxLength="8"
-                    enable={!onEdite}
-                    style={{ backgroundColor: `${!onEdite ? "#ececec" : 'white'}` }}
-                  />
-                </div>
-              </div> */}
-
-          </div>
-          
-        </DivCenter>
-        
-      </div>
+          </DivFrom>
+        </DivBase>
+        {/* detail */}
+      </div >
     </>
   );
-      
-    }
+
+}
 
 
 export default Summarize;
