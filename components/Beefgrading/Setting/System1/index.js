@@ -1,7 +1,7 @@
 import React from "react";
 
 import { DivAlertCard, StyleAlertCardDown } from "../StyleDashboard";
-import { Icon5 } from "../../../../utils/Logograde";
+import { Icon5,Icon8 } from "../../../../utils/Logograde";
 
 import Icon from "react-icons-kit";
 import { fileText } from "react-icons-kit/fa/fileText";
@@ -32,7 +32,7 @@ const index = () => {
             paddingRight: "5px",
           }}
         >
-          <Icon5 height="100px" weight="130px" />
+          <Icon8 height="100px" weight="130px" />
         </div>
         <form
           style={{

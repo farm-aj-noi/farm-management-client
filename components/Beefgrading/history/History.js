@@ -144,9 +144,9 @@ function History() {
                   <Table responsive striped bordered hover>
                     <thead>
                       <tr style={{ textAlign: "center", fontSize: "22px" }}>
-                        <th rowspan="2">ลำดับ</th>
+                        
                         <th rowspan="2">รหัสซากโค</th>
-                        <th colspan="2">บาร์โค้ด</th>
+                        <th rowspan="2">บาร์โค้ด</th>
                         <th colspan="2">น้ำหนักซาก Kg.</th>
                         <th rowspan="2">วันที่เข้าบ่ม</th>
                         <th rowspan="2">วันที่ตัดเกรด</th>
@@ -154,28 +154,28 @@ function History() {
                         <th colspan="2">เกรด</th>
                         <th rowspan="2">สายพันธุ์</th>
                         <th colspan="2">การสรุปเกรด</th>
+                        <th rowspan="2">รายละเอียด</th>
     
                       </tr>
                       <tr style={{ textAlign: "center", fontSize: "18px" }}>
-                        <th>ซากซ้าย</th>
-                        <th>ซากขวา</th>
+                    
                         <th>ซากอุ่น</th>
                         <th>ซากเย็น</th>
                         <th>จากระบบ</th>
                         <th>จากผู้เชี่ยวชาญ</th>
                         <th>สถานะ</th>
-                        <th>สรุปเกรด</th>
+                        <th>ออกรายงาน</th>
+                        
                       </tr>
                       
                     </thead>
                     <tbody style={{ borderTop: "none" }}>
                       <tr style={{ textAlign: "center", fontSize: "18px" }}>
-                        <td>1</td>
-                        <td>0001</td>
-                        <td>0001-1</td>
-                        <td>0001-2</td>
-                        <td>406</td>
-                        <td>322</td>
+                        
+                        <td>a1</td>
+                        <td>202207270A10000</td>
+                        <td>180</td>
+                        <td>173</td>
                         <td>12/07/2022</td>
                         <td>21/07/2022</td>
                         <td>01</td> 
@@ -186,7 +186,43 @@ function History() {
                         <td>
                           <Link href="/beefgrading/grading">
                           <ButtonSubmit style={{ fontSize: "16px"}}>
-                            สรุปเกรด
+                            พิมพ์
+                          </ButtonSubmit>
+                          </Link>
+                        </td> 
+                        <td>
+                          <Link href="/beefgrading/grading">
+                          <ButtonSubmit style={{ fontSize: "16px"}}>
+                            เเสดงรายละเอียด
+                          </ButtonSubmit>
+                          </Link>
+                        </td> 
+                      </tr>
+                    </tbody>
+                    <tbody style={{ borderTop: "none" }}>
+                      <tr style={{ textAlign: "center", fontSize: "18px" }}>
+                        <td>a2</td>
+                        <td>202207270A20001</td>
+                        <td>180</td>
+                        <td>173</td>
+                        <td>12/07/2022</td>
+                        <td>21/07/2022</td>
+                        <td>01</td> 
+                        <td>3.5</td>  
+                        <td >3.5</td>
+                        <td>เเองกัส</td>
+                        <td>สรุปเเล้ว</td>
+                        <td>
+                          <Link href="/beefgrading/grading">
+                          <ButtonSubmit style={{ fontSize: "16px"}}>
+                            พิมพ์
+                          </ButtonSubmit>
+                          </Link>
+                        </td> 
+                        <td>
+                          <Link href="/beefgrading/grading">
+                          <ButtonSubmit style={{ fontSize: "16px"}}>
+                            เเสดงรายละเอียด
                           </ButtonSubmit>
                           </Link>
                         </td> 

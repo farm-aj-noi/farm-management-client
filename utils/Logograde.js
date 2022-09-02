@@ -5,8 +5,10 @@ import icon2 from "../images/beefgrading/2.png";
 import icon3 from "../images/beefgrading/3.png";
 import icon4 from "../images/beefgrading/4.png";
 import icon5 from "../images/beefgrading/5.png";
-import icon7 from "../images/beefgrading/6.png";
 import icon6 from "../images/beefgrading/grade.png";
+import icon7 from "../images/beefgrading/6.png";
+import icon8 from "../images/beefgrading/7.png";
+import icon9 from "../images/beefgrading/8.png";
 import Logo_Nav1 from "../images/beefgrading/logo-Nav.png";
 import Image from "next/image";
 

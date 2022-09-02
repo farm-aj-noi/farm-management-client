@@ -1,7 +1,7 @@
 import React from "react";
 
 import { DivAlertCard, StyleAlertCardDown } from "../StyleDashboard";
-import { Icon5 } from "../../../../utils/Logograde";
+import { Icon9 } from "../../../../utils/Logograde";
 
 import Icon from "react-icons-kit";
 import { fileText } from "react-icons-kit/fa/fileText";
@@ -34,7 +34,7 @@ const index = () => {
           }}
         >
         <Link href="/beefwarehouse/beefproduct/store">
-        <Icon5 height="100px" weight="130px" />
+        <Icon9 height="100px" weight="130px" />
         </Link>
           
         </div>
@@ -60,7 +60,7 @@ const index = () => {
             }}
           ></a>
           <a style={{ color: "#ffffff", textAlign: "center", fontSize: "20px" }}>
-            การตั้งค่าสหกรณ์
+            การตั้งค่าทั่วไป
           
           </a>
         </form>
