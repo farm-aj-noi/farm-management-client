@@ -5,13 +5,13 @@ import Nav from "../../components/BeefWarehouse/Nav/Nav";
 import Footer from "../../components/BeefWarehouse/Footer";
 const index = () => {
   return (
-   /*  <BackgroundFarmAll> */
-      <BackgroundStoreAll>
+    <BackgroundFarmAll>
+      {/* <BackgroundStoreAll> */}
         <Nav />
         <HomeStore />
         <Footer />
-      </BackgroundStoreAll>
-   /*  </BackgroundFarmAll> */
+      {/* </BackgroundStoreAll> */}
+     </BackgroundFarmAll> 
   );
 };
 
