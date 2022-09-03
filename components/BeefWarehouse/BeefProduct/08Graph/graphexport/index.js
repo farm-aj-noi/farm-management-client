@@ -22,135 +22,9 @@ query QUERYDATAGRAPH($startdate: String, $enddate: String) {
 }
 `;
 
-
-
-const data = {
-  labels: [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ],
-  datasets: [
-    {
-      label: "ซากโคผ่าซีก",
-      fill: false,
-      lineTension: 0.1,
-      backgroundColor: "rgba(75,192,192,0.4)",
-      borderColor: "rgba(75,192,192,1)",
-      borderCapStyle: "butt",
-      borderDash: [],
-      borderDashOffset: 0.0,
-      borderJoinStyle: "miter",
-      pointBorderColor: "rgba(75,192,192,1)",
-      pointBackgroundColor: "#fff",
-      pointBorderWidth: 7,
-      pointHoverRadius: 5,
-      pointHoverBackgroundColor: "rgba(75,192,192,1)",
-      pointHoverBorderColor: "rgba(220,220,220,1)",
-      pointHoverBorderWidth: 2,
-      pointRadius: 1,
-      pointHitRadius: 10,
-      data: [65, 59, 80, 81, 56, 55, 40, 20, 11, 60, 62, 100],
-    },
-    {
-      label: "ซากโคสี่เสี้ยว",
-      fill: false,
-      lineTension: 0.1,
-      backgroundColor: "rgb(255,0,0,0.4)",
-      borderColor: "rgb(255,0,0)",
-      borderCapStyle: "butt",
-      borderDash: [],
-      borderDashOffset: 0.0,
-      borderJoinStyle: "miter",
-      pointBorderColor: "	rgb(255,0,0)",
-      pointBackgroundColor: "#fff",
-      pointBorderWidth: 7,
-      pointHoverRadius: 5,
-      pointHoverBackgroundColor: "rgb(255,0,0)",
-      pointHoverBorderColor: "rgba(220,220,220,1)",
-      pointHoverBorderWidth: 2,
-      pointRadius: 1,
-      pointHitRadius: 10,
-      data: [45, 67, 72, 10, 52, 51, 60, 40, 78, 89, 70, 72],
-    },
-    {
-      label: "ก้อนเนื้อ",
-      fill: false,
-      lineTension: 0.1,
-      backgroundColor: "#fed48a",
-      borderColor: "#ffa60b",
-      borderCapStyle: "butt",
-      borderDash: [],
-      borderDashOffset: 0.0,
-      borderJoinStyle: "miter",
-      pointBorderColor: "#ffa60b",
-      pointBackgroundColor: "#fff",
-      pointBorderWidth: 7,
-      pointHoverRadius: 5,
-      pointHoverBackgroundColor: "#ffa60b",
-      pointHoverBorderColor: "rgba(220,220,220,1)",
-      pointHoverBorderWidth: 2,
-      pointRadius: 1,
-      pointHitRadius: 10,
-      data: [25, 37, 12, 40, 22, 11, 40, 50, 28, 59, 60, 62],
-    },
-    {
-      label: "ชิ้นเนื้อ",
-      fill: false,
-      lineTension: 0.1,
-      backgroundColor: "#ad81ff",
-      borderColor: "#6a19ff",
-      borderCapStyle: "butt",
-      borderDash: [],
-      borderDashOffset: 0.0,
-      borderJoinStyle: "miter",
-      pointBorderColor: "#6a19ff",
-      pointBackgroundColor: "#fff",
-      pointBorderWidth: 7,
-      pointHoverRadius: 5,
-      pointHoverBackgroundColor: "#6a19ff",
-      pointHoverBorderColor: "rgba(220,220,220,1)",
-      pointHoverBorderWidth: 2,
-      pointRadius: 1,
-      pointHitRadius: 10,
-      data: [15, 47, 62, 33, 22, 55, 32, 21, 38, 69, 80, 92],
-    },
-    {
-      label: "ส่วนอื่น ๆ ",
-      fill: false,
-      lineTension: 0.1,
-      backgroundColor: "#6497ff",
-      borderColor: "#0b5bff",
-      borderCapStyle: "butt",
-      borderDash: [],
-      borderDashOffset: 0.0,
-      borderJoinStyle: "miter",
-      pointBorderColor: "#0b5bff",
-      pointBackgroundColor: "#fff",
-      pointBorderWidth: 7,
-      pointHoverRadius: 5,
-      pointHoverBackgroundColor: "#0b5bff",
-      pointHoverBorderColor: "rgba(220,220,220,1)",
-      pointHoverBorderWidth: 2,
-      pointRadius: 1,
-      pointHitRadius: 10,
-      data: [5, 12, 13, 11, 12, 14, 15, 20, 25, 33, 29, 35],
-    },
-  ],
-};
-
 const index = () => {
-  const [startdate, setStartdate] = useState("");
-  const [enddate, setEnddate] = useState("");
+  const [startdate, setStartdate] = useState(dayjs().startOf('year').format('YYYY-MM-DD'));
+  const [enddate, setEnddate] = useState(dayjs().endOf('year').format('YYYY-MM-DD'));
 
   const { data: datagraph } = useQuery(QUERYDATAGRAPH, {
     variables: {
@@ -226,7 +100,7 @@ const index = () => {
       }
     });
 
-   
+
 
 
     let newChart = JSON.parse(JSON.stringify(DataChart));

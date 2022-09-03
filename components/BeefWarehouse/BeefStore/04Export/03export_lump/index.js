@@ -7,7 +7,7 @@ import { DivBase } from "../../../../../utils/divBase";
 import { Icon } from "react-icons-kit";
 import { list } from "react-icons-kit/fa/list";
 import { iosSearchStrong } from "react-icons-kit/ionicons/iosSearchStrong";
-import {exit} from 'react-icons-kit/icomoon/exit'
+import { exit } from 'react-icons-kit/icomoon/exit'
 
 
 import Submit_Export from "./Submit_Export";
@@ -119,7 +119,7 @@ const index = () => {
             }}
           >
             <DivFromTop>
-            <div style={{ margin: "-1px 5px 0px -5px" }}>
+              <div style={{ margin: "-1px 5px 0px -5px" }}>
                 <Icon size={20} icon={exit} />
               </div>
               ดำเนินการเบิกออกซากเนื้อโคก้อนเนื้อ
@@ -386,7 +386,7 @@ const index = () => {
                   data.exportlump.reduce(
                     (sum, nex) => sum + nex.lump.weight,
                     0
-                  )}{" "}
+                  ).toFixed(2)}{" "}
                 กิโลกรัม
               </div>
             </DivFromDown>

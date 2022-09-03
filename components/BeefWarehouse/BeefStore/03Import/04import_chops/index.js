@@ -105,7 +105,7 @@ const index = () => {
   const [selectedbeefroom, setselectbeefroom] = useState("");
   const [selectedshelf, setselectshelf] = useState("");
   const [selectedbasket, setselectbasket] = useState("");
-  console.log(selectedbasket)
+
   const { data: datashelf } = useQuery(QUERYSHELF, {
     variables: {
       id: selectedbeefroom,
@@ -128,6 +128,7 @@ const index = () => {
       basket: selectedbasket
     },
   });
+
   return (
     <div style={{ marginTop: "100px" }}>
       <div
@@ -487,7 +488,8 @@ const index = () => {
                   data.imchopSearch.reduce(
                     (sum, nex) => sum + nex.chop.weight,
                     0
-                  )}{" "}
+                  ).toFixed(2)
+                }{" "}
                 กิโลกรัม
               </div>
             </DivFromDown>

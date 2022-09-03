@@ -45,23 +45,38 @@ const Top10 = () => {
                 top10 && top10.top10product.length >= 9 ? (top10.top10product[8].count) : (''),
                 top10 && top10.top10product.length >= 10 ? (top10.top10product[9].count) : ('')],
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.5)',
-                    'rgba(54, 162, 235, 0.5)',
-                    'rgba(255, 206, 86, 0.5)',
-                    'rgba(75, 192, 192, 0.5)',
-                    'rgba(153, 102, 255, 0.5)',
-                    'rgba(255, 159, 64, 0.5)',
+                    '#f6e49f',
+                    '#fdd17e',
+                    '#f7aa5a',
+                    '#ed8b68',
+                    '#f48791',
+                    '#f495b9',
+                    '#e5b9d2',
+                    '#8c8bc0',
+                    '#96c8e3',
+                    '#9fd8da',
                 ],
-                borderWidth: 1,
+                borderColor: [
+                    '#ecd43b',
+                    '#f2b22f',
+                    '#f27428',
+                    '#ee571b',
+                    '#ef453e',
+                    '#ec5485',
+                    '#ba5c9d',
+                    '#935da2',
+                    '#5689c7',
+                    '#25bbb7',
+                ],
             },
         ],
     };
 
     return (
         <div style={{ display: "flex", justifyContent: "center" }}>
-            <div style={{ width: "200%", marginRight: "10px" }}>
-                <Bar data={data} />
-                <div style={{ display: "flex", justifyContent: "center", marginTop: "30px" }}>
+            <div style={{ width: "70%", marginRight: "10px" }}>
+                <Doughnut data={data} />
+                <div style={{ display: "flex", justifyContent: "center", marginTop: "0" }}>
                     <PaperTop10>พิมพ์รายการ</PaperTop10>
                 </div>
             </div>

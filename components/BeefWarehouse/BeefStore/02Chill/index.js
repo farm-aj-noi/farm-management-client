@@ -344,7 +344,7 @@ const index = () => {
               gridRowEnd: "3",
               gridColumnStart: "3",
               gridColumnEnd: "3",
-              marginTop: "20px",             
+              marginTop: "20px",
             }}
           >
             <DivFromTop /* style={{ border: "3px solid #FFFFFF", }} */>
@@ -401,7 +401,7 @@ const index = () => {
                   ? data.listchill.reduce(
                     (sum, nex) => sum + nex.halve.weightwarm,
                     0
-                  )
+                  ).toFixed(2)
                   : "0"}{" "}
                 กิโลกรัม
               </div>
