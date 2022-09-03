@@ -191,7 +191,7 @@ const ListStore = ({ Liststore }) => {
           .add(543, "year")
           .format("DD/MM/YYYY")}
       </td>
-      <td>{ListStoreData.grade}</td>
+      <td>{ListStoreData.grade ? ListStoreData.grade : "-"}</td>
       <td>{ListStoreData.beefroom ? ListStoreData.beefroom : "-"}</td>
       <td>{ListStoreData.shelf ? ListStoreData.shelf : "-"}</td>
       <td>{ListStoreData.basket ? ListStoreData.basket : "-"}</td>

@@ -130,7 +130,7 @@ const Imslaughter = ({ imslaughter }) => {
   return (
     <tr style={{ textAlign: "center" }}>
       <td>{halveData.numkun}</td>
-      <td>{halveData.numkun}</td>
+      <td>{halveData.numcow}</td>
       <td>{halveData.pun}</td>
       <td>{halveData.weight}</td>
       <td>
