@@ -385,7 +385,7 @@ const index = () => {
                   data.imquartSearch.reduce(
                     (sum, nex) => sum + nex.quarter.weight,
                     0
-                  )}{" "}
+                  ).toFixed(2)}{" "}
                 กิโลกรัม
               </div>
             </DivFromDown>

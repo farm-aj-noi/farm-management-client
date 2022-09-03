@@ -487,7 +487,7 @@ const index = () => {
                   data.imlumpSearch.reduce(
                     (sum, nex) => sum + nex.lump.weight,
                     0
-                  )}{" "}
+                  ).toFixed(2)}{" "}
                 กิโลกรัม
               </div>
             </DivFromDown>

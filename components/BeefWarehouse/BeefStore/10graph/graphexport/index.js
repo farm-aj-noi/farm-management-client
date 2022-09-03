@@ -23,16 +23,16 @@ query QUERYDATAGRAPH($startdate: String, $enddate: String) {
 `;
 
 const index = () => {
-  const [startdate, setStartdate] = useState("");
-  const [enddate, setEnddate] = useState("");
-
+  const [startdate, setStartdate] = useState(dayjs().startOf('year').format('YYYY-MM-DD'));
+  const [enddate, setEnddate] = useState(dayjs().endOf('year').format('YYYY-MM-DD'));
+  console.log(startdate)
   const { data: datagraph } = useQuery(QUERYDATAGRAPH, {
     variables: {
       startdate: startdate,
       enddate: enddate,
     }
   })
-
+  console.log(datagraph)
   const [DataChart, setDataChart] = useState({
     labels: [],
     datasets: [
@@ -188,7 +188,6 @@ const index = () => {
         initChart(datagraph.beefGraph);
       }
     }
-    // console.log(selectgraph)
     // setcount(api.data.count) // api.data.count from api after update store
   }, [datagraph])
   // console.log({ DataChart })

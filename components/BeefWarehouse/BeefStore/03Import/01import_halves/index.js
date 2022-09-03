@@ -376,13 +376,13 @@ const index = () => {
                   data.imhalveSearch.reduce(
                     (sum, nex) => sum + nex.halve.weightwarm,
                     0
-                  )}{" "}
+                  ).toFixed(2)}{" "}
                 กิโลกรัม / น้ำหนักเย็น{" "}
                 {data &&
                   data.imhalveSearch.reduce(
                     (sum, nex) => sum + nex.halve.weightcool,
                     0
-                  )}{" "}
+                  ).toFixed(2)}{" "}
                 กิโลกรัม
               </div>
             </DivFromDown>
