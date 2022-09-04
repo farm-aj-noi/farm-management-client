@@ -94,7 +94,7 @@ const index = () => {
             padding: "5px 30px",
           }}
         >
-          เบิกออกซากเนื้อโคก้อนเนื้อ
+          นำออกซากเนื้อโคก้อนเนื้อ
         </HeaderColor>
       </div>
       <DivBase
@@ -122,7 +122,7 @@ const index = () => {
               <div style={{ margin: "-1px 5px 0px -5px" }}>
                 <Icon size={20} icon={exit} />
               </div>
-              ดำเนินการเบิกออกซากเนื้อโคก้อนเนื้อ
+              ดำเนินนำเบิกออกซากเนื้อโคก้อนเนื้อ
             </DivFromTop>
             <DivFromDown>
               <Submit_Export />
