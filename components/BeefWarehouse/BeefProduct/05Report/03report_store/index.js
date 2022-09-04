@@ -369,7 +369,7 @@ const index = () => {
             <div style={{ margin: "-3px 5px 0px 0px" }}>
               <Icon size={20} icon={list} />
             </div>
-            รายการนำเข้าซากเนื้อโคผ่าซีก
+            รายการคงคลังผลิตภัณฑ์
           </DivFromTop>
           <DivFromDown>
             <div style={{ height: `${data && data.allproduct.length > 7 ? "380px" : ""}`, overflow: `${data && data.allproduct.length > 7 ? "auto" : ""}` }}>

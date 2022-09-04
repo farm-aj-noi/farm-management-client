@@ -109,7 +109,8 @@ const index = () => {
                     <th>วันที่ผลิต</th>
                     <th>วันหมดอายุ</th>
                     <th>ตู้แช่ </th>
-                    <th>ชั้นวาง</th>
+                    <th>ชั้น</th>
+                    <th>ตะกร้า</th>
                     <th>ผู้นำเข้า</th>
                   </tr>
                 </thead>
@@ -149,11 +150,12 @@ const index = () => {
                         <td>{prod.productroom.roomname}</td>
                         <td>{prod.freezer.freezername}</td>
                         <td>{prod.pbasket}</td>
+                        <td>{prod.user.name}</td>
                       </tr>
                     ))
                   ) : (
                     <tr style={{ textAlign: "center" }}>
-                      <td colSpan="12">ไม่พบข้อมูล</td>
+                      <td colSpan="13">ไม่พบข้อมูล</td>
                     </tr>
                   )}
                 </tbody>

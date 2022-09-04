@@ -222,7 +222,7 @@ const index = () => {
                     marginRight: "10px",
                   }}
                 >
-                  วันที่นำเข้า
+                  วันที่นำออก
                 </label>
                 <input
                   type="date"
