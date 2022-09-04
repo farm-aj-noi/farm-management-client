@@ -254,7 +254,7 @@ const index = () => {
               <div style={{ margin: "-3px 5px 0px 0px" }}>
                 <Icon size={20} icon={list} />
               </div>
-              รายการเบิกออก
+              รายการนำออกซากเนื้อโคชิ้นส่วนอื่น ๆ
             </DivFromTop>
             <DivFromDown>
               <div style={{ height: `${data && data.exportentrail.length > 3 ? "300px" : ""}`, overflow: "auto" }}>
