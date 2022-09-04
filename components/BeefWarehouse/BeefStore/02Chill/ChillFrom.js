@@ -142,7 +142,7 @@ grid-column-gap: 2rem;
     padding-bottom: 130px;
 }
 @media screen and (min-width:1300px) {
-grid-template-rows: 17%;
+grid-template-rows: 20%;
 }
 `
 export const HeaderColor = styled.div`

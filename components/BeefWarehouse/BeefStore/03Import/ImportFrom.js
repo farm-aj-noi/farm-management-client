@@ -184,9 +184,6 @@ grid-column-gap: 2rem;
 @media screen and (min-width:1300px) {
 grid-template-rows: 20%;
 }
-@media screen and (min-width:1650px) {
-grid-template-rows: 17%;
-}
 `
 export const HeaderColor = styled.div`
   text-align: center;

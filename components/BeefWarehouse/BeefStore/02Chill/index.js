@@ -209,13 +209,12 @@ const index = () => {
                     <option value="">ทั้งหมด</option>
                     <option value="6284ad73fbfac22364a6e430">กำลังบ่ม</option>
                     <option value="6284ad91fbfac22364a6e431">บ่มเสร็จสิ้น</option>
-<<<<<<< HEAD
-                  </SelectType>
-                </Formfilter>
-              </DivFromSearch>
-            </DivSearch>
-          </DivFromDown>
-        </DivGrid>
+                  </SelectType >
+                </Formfilter >
+              </DivFromSearch >
+            </DivSearch >
+          </DivFromDown >
+        </DivGrid >
         <DivData>
           <DivFromTop /* style={{ border: "3px solid #FFFFFF", }} */>
             <Icon size={20} icon={list} style={{ margin: "-3px 5px 0px 0px" }} />
@@ -261,7 +260,7 @@ const index = () => {
                 </tbody>
               </Table>
             </div>
-            <div style={{ float: "right", textAlign: "right", marginTop: "5px" }}>
+            <div style={{ float: "right", textAlign: "right" }}>
               จำนวนรายการ {data ? data.listchill.length : "0"} รายการ
               <br />
               น้ำหนักอุ่น{" "}
@@ -269,93 +268,14 @@ const index = () => {
                 ? data.listchill.reduce(
                   (sum, nex) => sum + nex.halve.weightwarm,
                   0
-                )
+                ).toFixed(2)
                 : "0"}{" "}
               กิโลกรัม
             </div>
           </DivFromDown>
         </DivData>
-      </DivContainar>
-=======
-                  </select>
-                </from>
-              </div>
-            </DivFromDown>
-          </DivFrom>
-          <DivFrom
-            style={{
-              width: "100%",
-              gridRowStart: "3",
-              gridRowEnd: "3",
-              gridColumnStart: "3",
-              gridColumnEnd: "3",
-              marginTop: "20px",
-            }}
-          >
-            <DivFromTop /* style={{ border: "3px solid #FFFFFF", }} */>
-              <div style={{ margin: "-3px 5px 0px 0px" }}>
-                <Icon size={20} icon={list} />
-              </div>
-              รายการบ่มซากเนื้อโค
-            </DivFromTop>
-            <DivFromDown>
-              <div style={{ height: `${data && data.listchill.length > 7 ? "420px" : ""}`, overflow: `${data && data.listchill.length > 7 ? "auto" : ""}` }}>
-                <Table
-                  striped
-                  bordered
-                  responsive
-                  hover
-                  style={{ margin: "auto" }}
-                >
-                  <thead>
-                    <tr style={{ textAlign: "center", fontSize: "18px" }}>
-                      <th>ผู้บ่มซาก</th>
-                      <th>วันที่บ่ม</th>
-                      <th>วันที่บ่มเสร็จ</th>
-                      <th>เวลา</th>
-                      <th>ประเภทซาก</th>
-                      <th>จำนวนวันที่บ่ม</th>
-                      <th>ทะเบียนขุน</th>
-                      <th>รหัสซาก</th>
-                      <th>รหัสบาร์โค้ด</th>
-                      <th>คิวอาร์โค้ด</th>
-                      <th>น้ำหนักอุ่น</th>
-                      <th>ห้องบ่ม</th>
-                      <th>สถานะ</th>
-                      <th>อัพเดตสถานะ</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {data && data.listchill.length > 0 ? (
-                      data.listchill.map((prod) => (
-                        <List_chill key={prod.id} listchill={prod} />
-                      ))
-                    ) : (
-                      <tr style={{ textAlign: "center" }}>
-                        <td colSpan="14">ไม่พบข้อมูล</td>
-                      </tr>
-                    )}
-                  </tbody>
-                </Table>
-              </div>
-              <div style={{ float: "right", textAlign: "right" }}>
-                จำนวนรายการ {data ? data.listchill.length : "0"} รายการ
-                <br />
-                น้ำหนักอุ่น{" "}
-                {data && data.listchill.length > 0
-                  ? data.listchill.reduce(
-                    (sum, nex) => sum + nex.halve.weightwarm,
-                    0
-                  ).toFixed(2)
-                  : "0"}{" "}
-                กิโลกรัม
-              </div>
-            </DivFromDown>
-          </DivFrom>
-        </>
-      </DivBase>
->>>>>>> 6ca7838950252fed95406031c129c6b59da28185
-    </div>
+      </DivContainar >
+    </div >
   );
 };
 
