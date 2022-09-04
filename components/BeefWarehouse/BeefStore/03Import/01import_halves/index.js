@@ -254,6 +254,7 @@ const index = () => {
               </Table>
             </div>
 
+<<<<<<< HEAD
             <div style={{ float: "right", textAlign: "right" }}>
               จำนวนรายการ {data ? data.imhalveSearch.length : "0"} รายการ
               <br />
@@ -275,6 +276,30 @@ const index = () => {
         </DivData>
       </DivContainar>
     </div >
+=======
+              <div style={{ float: "right", textAlign: "right" }}>
+                จำนวนรายการ {data ? data.imhalveSearch.length : "0"} รายการ
+                <br />
+                น้ำหนักอุ่น{" "}
+                {data &&
+                  data.imhalveSearch.reduce(
+                    (sum, nex) => sum + nex.halve.weightwarm,
+                    0
+                  ).toFixed(2)}{" "}
+                กิโลกรัม / น้ำหนักเย็น{" "}
+                {data &&
+                  data.imhalveSearch.reduce(
+                    (sum, nex) => sum + nex.halve.weightcool,
+                    0
+                  ).toFixed(2)}{" "}
+                กิโลกรัม
+              </div>
+            </DivFromDown>
+          </DivFrom>
+        </>
+      </DivBase>
+    </div>
+>>>>>>> 6ca7838950252fed95406031c129c6b59da28185
   );
 };
 

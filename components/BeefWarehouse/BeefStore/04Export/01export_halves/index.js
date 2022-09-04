@@ -368,13 +368,13 @@ const index = () => {
                   data.exporthalve.reduce(
                     (sum, nex) => sum + nex.halve.weightwarm,
                     0
-                  )}{" "}
+                  ).toFixed(2)}{" "}
                 กิโลกรัม / น้ำหนักเย็น{" "}
                 {data &&
                   data.exporthalve.reduce(
                     (sum, nex) => sum + nex.halve.weightcool,
                     0
-                  )}{" "}
+                  ).toFixed(2)}{" "}
                 กิโลกรัม
               </div>
             </DivFromDown>

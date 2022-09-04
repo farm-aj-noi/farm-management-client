@@ -408,7 +408,7 @@ const index = () => {
               <br />
               น้ำหนัก{" "}
               {data &&
-                data.allproduct.reduce((sum, nex) => sum + nex.weight, 0)}{" "}
+                data.allproduct.reduce((sum, nex) => sum + nex.weight, 0).toFixed(2)}{" "}
               กิโลกรัม
             </div>
           </DivFromDown>

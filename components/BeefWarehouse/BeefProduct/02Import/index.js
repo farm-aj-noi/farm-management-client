@@ -444,7 +444,7 @@ const index = () => {
                 data.improductSearch.reduce(
                   (sum, nex) => sum + nex.beefproduct.weight,
                   0
-                )}{" "}
+                ).toFixed(2)}{" "}
               กิโลกรัม
             </div>
           </DivFromDown>
