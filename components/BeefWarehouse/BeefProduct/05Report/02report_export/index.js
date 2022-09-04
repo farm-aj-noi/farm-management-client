@@ -101,7 +101,7 @@ const index = () => {
             padding: "5px 30px",
           }}
         >
-          ออกรายงานเบิกออก
+          ออกรายงานนำออก
         </HeaderColor>
       </div>
       <DivBase
