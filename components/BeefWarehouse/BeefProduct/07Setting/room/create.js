@@ -94,7 +94,7 @@ const create = () => {
   return (
     <>
       <div>
-        ชื่อห้องจัดเก็บ : { }
+        ตู้แช่จัดเก็บ : { }
         <Searchinput
           value={inforoom.roomname}
           onChange={handleChange}
