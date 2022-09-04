@@ -43,7 +43,7 @@ const Nav_export = (Sidenumber) => {
                       <Nav.Link eventKey="1">
                         <Link href="/beefwarehouse/beefstore/report/export/report_halves">
                           <div style={{ width: "100%" }}>
-                            ออกรายงานเบิกออกซากโคผ่าซีก
+                            ออกรายงานนำออกซากโคผ่าซีก
                           </div>
                         </Link>
                       </Nav.Link>
@@ -53,7 +53,7 @@ const Nav_export = (Sidenumber) => {
                       <Nav.Link eventKey="2">
                         <Link href="/beefwarehouse/beefstore/report/export/report_quarters">
                           <div style={{ width: "100%" }}>
-                            ออกรายงานเบิกออกซากโคสี่เสี้ยว
+                            ออกรายงานนำออกซากโคสี่เสี้ยว
                           </div>
                         </Link>
                       </Nav.Link>
@@ -63,7 +63,7 @@ const Nav_export = (Sidenumber) => {
                       <Nav.Link eventKey="3">
                         <Link href="/beefwarehouse/beefstore/report/export/report_lumps">
                           <div style={{ width: "100%" }}>
-                            ออกรายงานเบิกออกซากโคก้อนเนื้อ
+                            ออกรายงานนำออกซากโคก้อนเนื้อ
                           </div>
                         </Link>
                       </Nav.Link>
@@ -73,7 +73,7 @@ const Nav_export = (Sidenumber) => {
                       <Nav.Link eventKey="4">
                         <Link href="/beefwarehouse/beefstore/report/export/report_chops">
                           <div style={{ width: "100%" }}>
-                            ออกรายงานเบิกออกซากโคชิ้นเนื้อ
+                            ออกรายงานนำออกซากโคชิ้นเนื้อ
                           </div>
                         </Link>
                       </Nav.Link>
@@ -83,7 +83,7 @@ const Nav_export = (Sidenumber) => {
                       <Nav.Link eventKey="5">
                         <Link href="/beefwarehouse/beefstore/report/export/report_entrails">
                           <div style={{ width: "100%" }}>
-                            ออกรายงานเบิกออกซากโคส่วนอื่น ๆ
+                            ออกรายงานนำออกซากโคส่วนอื่น ๆ
                           </div>
                         </Link>
                       </Nav.Link>

@@ -87,7 +87,7 @@ const Nav1 = () => {
             <Link href="/beefwarehouse/beefproduct/exports">
               <NavButtonLeft>
                 {" "}
-                <Icon11 height="30px" weight="30px" /> การเบิกออก
+                <Icon11 height="30px" weight="30px" /> การนำออก
               </NavButtonLeft>
             </Link>
             <Link href="/beefwarehouse/beefproduct/store">
@@ -111,7 +111,7 @@ const Nav1 = () => {
                 <NavDropdownItem>ออกรายงานการนำเข้า</NavDropdownItem>
               </Link>
               <Link href="/beefwarehouse/beefproduct/report/report_export">
-                <NavDropdownItem>ออกรายงานเบิกออก</NavDropdownItem>
+                <NavDropdownItem>ออกรายงานนำออก</NavDropdownItem>
               </Link>
               <Link href="/beefwarehouse/beefproduct/report/report_store">
                 <NavDropdownItem>ออกรายงานคงคลัง</NavDropdownItem>
