@@ -54,7 +54,7 @@ const chopday = () => {
         <div style={{ margin: "-3px 5px 0px 0px" }}>
           <Icon size={20} icon={list} />
         </div>
-        รายการเบิกออกชิ้นเนื้อ (วัน)
+        รายการนำออกชิ้นเนื้อ (วัน)
       </DivFromTop>{" "}
       <DivFromDown>
         <div

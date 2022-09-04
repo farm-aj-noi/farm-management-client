@@ -124,7 +124,7 @@ const create = () => {
 
     return (
         <> <div>
-            ห้องจัดเก็บ : { }
+            ตู้แช่เก็บ : { }
             <select
                 value={infopbasket.productroom}
                 name="productroom"
@@ -146,7 +146,7 @@ const create = () => {
                         </option>
                     ))}
             </select> { }
-            ตู้แช่ : { }
+            ชั้นจัดเก็บ : { }
             <select
                 value={infopbasket.freezer}
                 name="freezer"
@@ -168,7 +168,7 @@ const create = () => {
                 ))}
 
             </select> { }
-            ชื่อชั้นวาง : { }
+            ชื่อตะกร้าจัดเก็บ : { }
             <Searchinput
                 value={infopbasket.basketname}
                 name="basketname"

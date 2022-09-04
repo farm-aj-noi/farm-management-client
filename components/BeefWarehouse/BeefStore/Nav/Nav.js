@@ -112,25 +112,25 @@ const Nav1 = () => {
               title={
                 <span style={{ fontSize: "18px", fontWeight: 600 }}>
                   <Icon11 height="30px" weight="30px" />
-                  การเบิกออก
+                  การนำออก
                 </span>
               }
               bsPrefix={MyCss.nstdropleft}
             >
               <Link href="/beefwarehouse/beefstore/export/export_halves">
-                <NavDropdownItem>เบิกออกซากเนื้อโคผ่าซีก</NavDropdownItem>
+                <NavDropdownItem>นำออกซากเนื้อโคผ่าซีก</NavDropdownItem>
               </Link>
               <Link href="/beefwarehouse/beefstore/export/export_quarters">
-                <NavDropdownItem>เบิกออกซากเนื้อโคสี่เสี้ยว</NavDropdownItem>
+                <NavDropdownItem>นำออกซากเนื้อโคสี่เสี้ยว</NavDropdownItem>
               </Link>
               <Link href="/beefwarehouse/beefstore/export/export_lumps">
-                <NavDropdownItem>เบิกออกซากเนื้อโคก้อนเนื้อ</NavDropdownItem>
+                <NavDropdownItem>นำออกซากเนื้อโคก้อนเนื้อ</NavDropdownItem>
               </Link>
               <Link href="/beefwarehouse/beefstore/export/export_chops">
-                <NavDropdownItem>เบิกออกซากเนื้อโคชื้นเนื้อ</NavDropdownItem>
+                <NavDropdownItem>นำออกซากเนื้อโคชื้นเนื้อ</NavDropdownItem>
               </Link>
               <Link href="/beefwarehouse/beefstore/export/export_entrails">
-                <NavDropdownItem>เบิกออกซากเนื้อโคส่วนอื่น ๆ </NavDropdownItem>
+                <NavDropdownItem>นำออกซากเนื้อโคส่วนอื่น ๆ </NavDropdownItem>
               </Link>
             </DropdownButton>
             <Link href="/beefwarehouse/beefstore/Allstore/store">
@@ -157,7 +157,7 @@ const Nav1 = () => {
                 <NavDropdownItem>ออกรายงานการนำเข้า</NavDropdownItem>
               </Link>
               <Link href="/beefwarehouse/beefstore/report/export/report_halves">
-                <NavDropdownItem>ออกรายงานเบิกออก</NavDropdownItem>
+                <NavDropdownItem>ออกรายงานนำออก</NavDropdownItem>
               </Link>
               <Link href="/beefwarehouse/beefstore/report/store/report_store">
                 <NavDropdownItem>ออกรายงานคงคลัง</NavDropdownItem>
@@ -209,7 +209,7 @@ const Nav1 = () => {
                     ออกจากระบบ
                   </NavDropdownItem1>
                 </DropdownButton> */}
-                <a style={{ margin: "auto 5px", textAlign: "left", fontSize: "18px", fontWeight: 600,letterSpacing: "1px" }}>
+                <a style={{ margin: "auto 5px", textAlign: "left", fontSize: "18px", fontWeight: 600, letterSpacing: "1px" }}>
                   สวัสดี {user.name}
                 </a>
 

@@ -105,7 +105,7 @@ const create = () => {
     return (
         <>
             <div>
-                ห้องจัดเก็บ : { }
+                ตู้แช่จัดเก็บ : { }
                 <select
                     name="productroom"
                     value={infofreezer.productroom}
@@ -127,7 +127,7 @@ const create = () => {
                             </option>
                         ))}
                 </select> { }
-                ชื่อตู้แช่ : { }
+                ชื่อชั้นจัดเก็บ : { }
                 <Searchinput
                     value={infofreezer.freezername}
                     disabled={!infofreezer.productroom}

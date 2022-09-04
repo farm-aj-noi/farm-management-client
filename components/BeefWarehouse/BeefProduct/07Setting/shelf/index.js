@@ -57,7 +57,7 @@ const index = () => {
       <DivBase
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 200px 750px 1fr",
+          gridTemplateColumns: "1fr 200px 850px 1fr",
           gridRowGap: "15px",
           gridColumnGap: "20px",
           textAlign: "start",

@@ -159,7 +159,7 @@ const paper = ({ prod }) => {
           alignment: "center",
         },
         {
-          text: "รายงานเบิกออกผลิตภัณฑ์\n\n",
+          text: "รายงานนำออกผลิตภัณฑ์\n\n",
           style: "header",
           alignment: "center",
         },

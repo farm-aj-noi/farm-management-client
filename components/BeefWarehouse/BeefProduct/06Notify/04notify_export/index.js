@@ -86,7 +86,7 @@ const index = () => {
             <div style={{ margin: "-3px 5px 0px 0px" }}>
               <Icon size={20} icon={list} />
             </div>
-            รายการเบิกออกผลิตภัณฑ์ (วัน)
+            รายการนำออกผลิตภัณฑ์ (วัน)
           </DivFromTop>
           <DivFromDown>
             <div style={{ height: `${data && data.cardExP.length > 9 ? "500px" : ""}`, overflow: `${data && data.cardExP.length > 9 ? "auto" : ""}` }}>

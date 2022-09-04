@@ -54,7 +54,7 @@ const halveday = () => {
         <div style={{ margin: "-3px 5px 0px 0px" }}>
           <Icon size={20} icon={list} />
         </div>
-        รายการเบิกออกซากโคผ่าซีก (วัน)
+        รายการนำออกซากโคผ่าซีก (วัน)
       </DivFromTop>{" "}
       <DivFromDown>
         <div

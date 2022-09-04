@@ -96,7 +96,7 @@ const index = () => {
             padding: "5px 30px",
           }}
         >
-          เบิกออกผลิตภัณฑ์
+          นำออกผลิตภัณฑ์
         </HeaderColor>
       </div>
       <DivBase
@@ -121,7 +121,7 @@ const index = () => {
             <div style={{ margin: "-1px 5px 0px -5px" }}>
               <Icon size={20} icon={exit} />
             </div>
-            ดำเนินการเบิกออกผลิตภัณฑ์
+            ดำเนินการนำออกผลิตภัณฑ์
           </DivFromTop>
           <DivFromDown>
             <Create />
@@ -292,7 +292,7 @@ const index = () => {
             <div style={{ margin: "-3px 5px 0px 0px" }}>
               <Icon size={20} icon={list} />
             </div>
-            รายการเบิกออกผลิตภัณฑ์
+            รายการนำออกผลิตภัณฑ์
           </DivFromTop>
           <DivFromDown>
             <div style={{ height: `${data && data.exproductSearch.length > 7 ? "430px" : ""}`, overflow: `${data && data.exproductSearch.length > 7 ? "auto" : ""}` }} >

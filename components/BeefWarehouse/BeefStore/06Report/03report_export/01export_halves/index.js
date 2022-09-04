@@ -98,7 +98,7 @@ const index = () => {
               padding: "5px 30px",
             }}
           >
-            ออกรายงานเบิกออกซากโคผ่าซีก
+            ออกรายงานนำออกซากโคผ่าซีก
           </HeaderColor>
         </div>
         <DivBase
