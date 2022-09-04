@@ -157,7 +157,7 @@ const Nav1 = () => {
                 <NavDropdownItem>ออกรายงานการนำเข้า</NavDropdownItem>
               </Link>
               <Link href="/beefwarehouse/beefstore/report/export/report_halves">
-                <NavDropdownItem>ออกรายงานเบิกออก</NavDropdownItem>
+                <NavDropdownItem>ออกรายงานนำออก</NavDropdownItem>
               </Link>
               <Link href="/beefwarehouse/beefstore/report/store/report_store">
                 <NavDropdownItem>ออกรายงานคงคลัง</NavDropdownItem>

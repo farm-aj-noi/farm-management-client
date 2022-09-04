@@ -171,12 +171,12 @@ const Paper_export = ({ prod }) => {
           alignment: "center",
         },
         {
-          text: "รายงานเบิกออกซากโคส่วนอื่น ๆ\n\n",
+          text: "รายงานนำออกซากโคส่วนอื่น ๆ\n\n",
           style: "header",
           alignment: "center",
         },
         table(data, [
-         
+
           "exportdate",
           "entrail.imslaughter.numcow",
           "entrail.offal",
