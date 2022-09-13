@@ -94,6 +94,38 @@ const deleteroom = ({ idroom }) => {
     refeetchQueries: [{ query: QUERYROOMS }],
   });
 
+  const DeleteAlert = () => {
+    Swal.fire({
+      title: 'ต้องการลบข้อมูล?',
+      text: "ยืนยันการลบข้อมูลประเภทห้องจัดเก็บ!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'ตกลง',
+      cancelButtonText: 'ยกเลิก'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handdleSubmitDelete();
+        MySwal.fire({
+          icon: "success",
+          title: "สำเร็จ",
+          text: "ทำการลบข้อมูลสิ้น",
+          confirmButtonText: (
+            <span
+              onClick={() =>
+                Router.push("beefwarehouse/beefstore/setting/room").then(() => Router.reload())
+              }
+            >
+              ตกลง
+            </span>
+          ),
+          confirmButtonColor: "#3085d6",
+        });
+      }
+    })
+  }
+
   const handdleSubmitDelete = async () => {
     try {
       await deleteBeefroom({

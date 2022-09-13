@@ -304,7 +304,6 @@ const room = () => {
                           }}
                         >
                           <option value="">เลือก</option>
-                          <option value="ทั้งหมด">ทั้งหมด</option>
                           <option value="5f1000e28d55662dcc23d95e">
                             ซากซ้าย
                           </option>
