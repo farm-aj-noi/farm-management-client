@@ -75,34 +75,51 @@ const Home = () => {
                 ลงทะเบียนโคเข้าขุน
               </LinkSt>
             </Link> */}
-            <Link href="/registercow">
-              <LinkSt>
-                <Logoregister height="150px" weight="150px" />
-                ลงทะเบียนโคเข้าขุน
-              </LinkSt>
-            </Link>
-            <Link href="/slaughter">
-              <LinkSt>
-                <LogoSluagther height="150px" weight="150px" />
-                ระบบเชือด
-              </LinkSt>
-            </Link>
-
-            <Link href="/beefwarehouse">
-              <LinkSt style={{ paddingTop: "5px" }}>
-                <Logobeefstore height="160px" weight="155px" />
-                ระบบคลัง
-              </LinkSt>
-            </Link>
-
-            <Link href="/beefgrading">
-              <LinkSt>
-                <Logobeefgrade height="150px" weight="150px" />
-                ระบบตัดเกรดชิ้นเนื้อ
-              </LinkSt>
-            </Link>
-
-
+            {user.role.nameEN === "admin" && (
+              <>
+                <Link href="/registercow">
+                  <LinkSt>
+                    <Logoregister height="150px" weight="150px" />
+                    ลงทะเบียนโคเข้าขุน
+                  </LinkSt>
+                </Link>
+                <Link href="/slaughter">
+                  <LinkSt>
+                    <LogoSluagther height="150px" weight="150px" />
+                    ระบบเชือด
+                  </LinkSt>
+                </Link>
+                <Link href="/beefwarehouse">
+                  <LinkSt style={{ paddingTop: "5px" }}>
+                    <Logobeefstore height="160px" weight="155px" />
+                    ระบบคลัง
+                  </LinkSt>
+                </Link>
+                <Link href="/beefgrading">
+                  <LinkSt>
+                    <Logobeefgrade height="150px" weight="150px" />
+                    ระบบตัดเกรดชิ้นเนื้อ
+                  </LinkSt>
+                </Link>
+              </>
+            )}
+            {(user.role.nameEN === "beefstore_man") && (
+              <Link href="/beefwarehouse/beefstore">
+                <LinkSt style={{ paddingTop: "5px" }}>
+                  <Logobeefstore height="160px" weight="155px" />
+                  ระบบคลัง
+                </LinkSt>
+              </Link>
+            )}
+            {(
+              user.role.nameEN === "productstore_man") && (
+                <Link href="/beefwarehouse/beefproduct">
+                  <LinkSt style={{ paddingTop: "5px" }}>
+                    <Logobeefstore height="160px" weight="155px" />
+                    ระบบคลัง
+                  </LinkSt>
+                </Link>
+              )}
           </div>
         )}
 

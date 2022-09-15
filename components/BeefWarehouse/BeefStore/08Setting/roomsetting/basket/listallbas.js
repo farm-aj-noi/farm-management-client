@@ -90,7 +90,7 @@ const listallbas = ({ listallbas }) => {
   };
   const [deleteBasket] = useMutation(DELETEBASKET, {
     onCompleted: (data) => {
-      MySwal.fire({
+      /* MySwal.fire({
         icon: "success",
         title: "สำเร็จ",
         text: "ทำการลบข้อมูลสิ้น",
@@ -104,9 +104,42 @@ const listallbas = ({ listallbas }) => {
           </span>
         ),
         confirmButtonColor: "#3085d6",
-      });
+      }); */
     },
   });
+
+  const DeleteAlert = () => {
+    Swal.fire({
+      title: 'ต้องการลบข้อมูล?',
+      text: "ยืนยันการลบข้อมูลประเภทตะกร้าจัดเก็บ!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'ตกลง',
+      cancelButtonText: 'ยกเลิก'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handdleSubmitDelete();
+        MySwal.fire({
+          icon: "success",
+          title: "สำเร็จ",
+          text: "ทำการลบข้อมูลสิ้น",
+          confirmButtonText: (
+            <span
+              onClick={() =>
+                Router.push("beefwarehouse/beefstore/setting/basket").then(() => Router.reload())
+              }
+            >
+              ตกลง
+            </span>
+          ),
+          confirmButtonColor: "#3085d6",
+        });
+      }
+    })
+  }
+
   const handdleSubmitDelete = async () => {
     try {
       await deleteBasket({
@@ -169,7 +202,7 @@ const listallbas = ({ listallbas }) => {
             <div></div>
             <div></div>
             <Removebuttoncolor
-              onClick={handdleSubmitDelete}
+              onClick={DeleteAlert}
               style={{ marginLeft: "5px" }}
             >
               ลบ

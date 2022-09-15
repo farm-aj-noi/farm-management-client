@@ -55,11 +55,13 @@ const Nav1 = () => {
         fixed="top"
       >
         <Navbar.Brand style={{ padding: "0" }}>
-          <Link href="/beefwarehouse">
-            <a style={{ color: "white" }}>
-              <p style={{ padding: "0 10px", display: "inline", fontSize: "18px", fontWeight: 600, letterSpacing: "1px " }}>หน้าแรก</p>
-            </a>
-          </Link>
+          {(user.role.nameEN === "admin") && (
+            <Link href="/beefwarehouse">
+              <a style={{ color: "white" }}>
+                <p style={{ padding: "0 10px", display: "inline", fontSize: "18px", fontWeight: 600, letterSpacing: "1px " }}>หน้าแรก</p>
+              </a>
+            </Link>
+          )}
           <Link href="/beefwarehouse/beefproduct">
             <a style={{ color: "white", paddingLeft: "18px" }}>
               <Logobeefstore height="30px" weight="30px" />

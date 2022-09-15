@@ -7,6 +7,7 @@ import { useMutation, useQuery } from "@apollo/react-hooks";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { IMPOERTENTRAILSEARCH } from "./index"
 
 import Router from "next/router";
 
@@ -98,6 +99,11 @@ const Create_Import = () => {
           });
         }
       },
+      refetchQueries: [
+        {
+          query: IMPOERTENTRAILSEARCH
+        }
+      ]
     }
   );
 

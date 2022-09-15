@@ -28,7 +28,7 @@ const listChillroom = ({ listchillroom }) => {
   const [infochillroom, setinfochillroom] = useState(listchillroom);
   const [deleteChillroom] = useMutation(DELETECHILLROOM, {
     onCompleted: (data) => {
-      if (data) {
+      /* if (data) {
         MySwal.fire({
           icon: "success",
           title: "สำเร็จ",
@@ -44,9 +44,41 @@ const listChillroom = ({ listchillroom }) => {
           ),
           confirmButtonColor: "#3085d6",
         });
-      }
+      } */
     },
   });
+
+  const DeleteAlert = () => {
+    Swal.fire({
+      title: 'ต้องการลบข้อมูล?',
+      text: "ยืนยันการลบข้อมูลห้องบ่ม!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'ตกลง',
+      cancelButtonText: 'ยกเลิก'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handdleSubmitDelete();
+        MySwal.fire({
+          icon: "success",
+          title: "สำเร็จ",
+          text: "ทำการลบข้อมูลสิ้น",
+          confirmButtonText: (
+            <span
+              onClick={() =>
+                Router.push("beefwarehouse/beefstore/setting/chillroom").then(() => Router.reload())
+              }
+            >
+              ตกลง
+            </span>
+          ),
+          confirmButtonColor: "#3085d6",
+        });
+      }
+    })
+  }
 
   const handdleSubmitDelete = async () => {
     try {
@@ -64,7 +96,7 @@ const listChillroom = ({ listchillroom }) => {
       <tr style={{ textAlign: "center" }}>
         <td> {infochillroom.roomnum}</td>
         <td>
-          <Removebuttoncolor onClick={handdleSubmitDelete}>
+          <Removebuttoncolor onClick={DeleteAlert}>
             <Removebutton />
           </Removebuttoncolor>
         </td>

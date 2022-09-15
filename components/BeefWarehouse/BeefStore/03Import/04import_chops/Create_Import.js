@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 import Router from "next/router";
+import { IMPORTCHOPSEARCH } from "./index"
 
 export const CREATEIMPORTCHOP = gql`
   mutation CREATEIMPORTCHOP(
@@ -129,6 +130,11 @@ const Create_Import = () => {
         });
       }
     },
+    refetchQueries: [
+      {
+        query: IMPORTCHOPSEARCH
+      }
+    ]
   });
 
   const handleChange = (e) => {

@@ -75,7 +75,7 @@ const deleteroom = ({ idroom }) => {
   /*   console.log(data); */
   const [deleteBeefroom] = useMutation(DELETEROOM, {
     onCompleted: (data) => {
-      MySwal.fire({
+     /*  MySwal.fire({
         icon: "success",
         title: "สำเร็จ",
         text: "ทำการลบข้อมูลสิ้น",
@@ -89,7 +89,7 @@ const deleteroom = ({ idroom }) => {
           </span>
         ),
         confirmButtonColor: "#3085d6",
-      });
+      }); */
     },
     refeetchQueries: [{ query: QUERYROOMS }],
   });
@@ -244,7 +244,7 @@ const deleteroom = ({ idroom }) => {
                 รายละเอียด
               </Accordion.Toggle>
               <Removebuttoncolor
-                onClick={handdleSubmitDelete}
+                onClick={DeleteAlert}
                 style={{ marginLeft: "10px", fontSize: "16px", gridColumStart: "4" }}
               >
                 ลบ
