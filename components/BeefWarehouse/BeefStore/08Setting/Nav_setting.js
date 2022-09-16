@@ -16,14 +16,7 @@ import { menu3 } from 'react-icons-kit/icomoon/menu3'
 const Nav_setting = (Sidenumber) => {
   return (
     <>
-      <DivFrom
-        style={{
-          width: "100%",
-          marginTop: "0",
-          gridRowStart: "2",
-          gridRowEnd: "5",
-          gridColumnStart: "2",
-        }}
+      <div
       >
         <DivFromTop>
           <div style={{ margin: "-3px 5px 0px 0px" }}>
@@ -82,7 +75,7 @@ const Nav_setting = (Sidenumber) => {
             </Tab.Container>
           </div>
         </DivFromDown>
-      </DivFrom>
+      </div>
     </>
   );
 };

@@ -12,7 +12,7 @@ import { menu3 } from 'react-icons-kit/icomoon/menu3'
 const Nav_report = (Sidenumber) => {
   return (
     <>
-      <DivFrom
+      <div
         style={{
           width: "100%",
           marginTop: "0",
@@ -28,7 +28,7 @@ const Nav_report = (Sidenumber) => {
           </div>
           ประเภทออกรายงานคงคลัง
         </DivFromTop>
-        <DivFromDown>
+        <div>
           <div style={{ margin: "auto", minWidth: "100%" }}>
             <Tab.Container id="left-tabs-example" defaultActiveKey={Sidenumber}>
               <Row>
@@ -58,8 +58,8 @@ const Nav_report = (Sidenumber) => {
               </Row>
             </Tab.Container>
           </div>
-        </DivFromDown>
-      </DivFrom>
+        </div>
+      </div>
     </>
   );
 };
