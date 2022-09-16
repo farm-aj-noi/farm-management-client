@@ -28,24 +28,6 @@ export const ButtonSubmit = styled.button`
     background: #16ac86;
   }
 `;
-<<<<<<< HEAD
-
-=======
-export const HeaderColor = styled.div`
-  text-align: center;
-  background: #da4453;
-  border: none;
-  border-radius: 4px;
-  font-size: 30px;
-  color: #ffffff;
-  font-weight: bold;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  letter-spacing: 1px;
-/*   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
-`;
->>>>>>> f8cf2bb04cff75740d5a588f99a1209e77a4bdb6
 
 export const DivFrom = styled.div`
   ${FromDiv}
@@ -199,7 +181,7 @@ export const HeaderColor = styled.div`
   height: fit-content;
   padding:5px 30px;
   letter-spacing: 1px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+ /*  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
   margin-bottom: 30px;
 `;
 export const DivSearch = styled.div`

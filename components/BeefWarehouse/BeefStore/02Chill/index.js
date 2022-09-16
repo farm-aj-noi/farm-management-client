@@ -107,7 +107,7 @@ const index = () => {
   return (
     <div style={{ marginTop: "100px" }}>
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <HeaderColor>บ่มซากเนื้อโค</HeaderColor>
+        <HeaderColor style={{}}>บ่มซากเนื้อโค</HeaderColor>
       </div>
       <DivContainar>
         <div style={{ gridRowStart: "1", gridColumnStart: "1" }}>
@@ -118,9 +118,7 @@ const index = () => {
             ดำเนินการบ่มซากเนื้อโค
           </DivFromTop>
           <DivFromDown>
-            <div>
-              <Submit_Chill />
-            </div>
+            <Submit_Chill />
           </DivFromDown>
         </div>
         <DivGrid>
