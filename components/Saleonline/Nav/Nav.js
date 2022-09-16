@@ -99,11 +99,7 @@ const Nav1 = () => {
                                     <Link href="/saleonline/checkcancelorder"><NavDropdown.Item href="/saleonline/checkcancelorder" bsPrefix={MyCss.dropdownmenu}>คำร้องยกเลิกสินค้า</NavDropdown.Item></Link>
                                     <Link href="/saleonline/checkreturnorder"><NavDropdown.Item href="/saleonline/checkreturnorder" bsPrefix={MyCss.dropdownmenu}>คำร้องขอคืนสินค้า</NavDropdown.Item></Link>
                                 </NavDropdown>
-                                <NavDropdown title="รายการร้องขอเบิก" id="basic-nav-dropdown" bsPrefix={MyCss.nstdropleft} >
-                                    <Link href="/saleonline/request/requeststore"><NavDropdown.Item href="/saleonline/request/requeststore" bsPrefix={MyCss.dropdownmenu} >ร้องขอเบิกคลังชิ้นเนื้อ</NavDropdown.Item></Link>
-                                    <Link href="/saleonline/request/requestproduct"><NavDropdown.Item href="/saleonline/request/requestproduct" bsPrefix={MyCss.dropdownmenu} >ร้องขอเบิกคลังผลิตภัณฑ์</NavDropdown.Item></Link>
-                                    {/* <Link href="/checkreturnorder"><NavDropdown.Item href="/checkreturnorder" style={{ fontSize: '20px' }}>คำร้องขอคืนสินค้า</NavDropdown.Item></Link> */}
-                                </NavDropdown>
+                                <Link href="/saleonline/requeststore"><Nav.Link href="/saleonline/requeststore" bsPrefix={MyCss.nstdropleft}>รายการร้องขอเบิก</Nav.Link></Link>
                                 <NavDropdown title="รายการคงคลัง" id="basic-nav-dropdown" bsPrefix={MyCss.nstdropleft} >
                                     <Link href="/saleonline/list/liststore"><NavDropdown.Item href="/saleonline/list/liststore" bsPrefix={MyCss.dropdownmenu} >รายการคงคลังชิ้นเนื้อ</NavDropdown.Item></Link>
                                     <Link href="/saleonline/list/listproduct"><NavDropdown.Item href="/saleonline/list/listproduct" bsPrefix={MyCss.dropdownmenu} >รายการคงคลังผลิตภัณฑ์</NavDropdown.Item></Link>

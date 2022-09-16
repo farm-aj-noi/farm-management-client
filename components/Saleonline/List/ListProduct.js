@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card, Table } from "react-bootstrap"
-import { DivFromDown } from "./StoreFrom"
+
 function ListProduct() {
   return (
     <div>
@@ -21,9 +21,9 @@ function ListProduct() {
           border: 'none',
           fontSize: '16px',
           fontWeight: '600'
-        }}>รายการสินค้าคงคลัง (ผลิตภัณฑ์)
+        }}>รายการสินค้าคงคลังผลิตภัณฑ์
         </Card.Header>
-        <Card.Body style={{ border: "1px solid gray", borderTop: "none", borderRadius: "0px 0px 4px 4px" }}>
+        <Card.Body style={{ boxShadow: "0px 0px 2px grey" }}>
           <form>
             <div>
               <Table
@@ -42,6 +42,7 @@ function ListProduct() {
                     <th>วันที่ผลิต</th>
                     <th>วันหมดอายุ</th>
                     <th>หมายเหตุ</th>
+                    <th>ดำเนินการขาย</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -51,7 +52,7 @@ function ListProduct() {
                     ))
                   ) : ( */}
                   <tr style={{ textAlign: "center" }}>
-                    <td colSpan="7">ไม่พบข้อมูล</td>
+                    <td colSpan="8">ไม่พบข้อมูล</td>
                   </tr>
                   {/*  )} */}
                 </tbody>
