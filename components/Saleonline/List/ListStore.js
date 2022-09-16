@@ -1,16 +1,19 @@
 import React from 'react'
 import { Card, Table } from "react-bootstrap"
+import { Icon9 } from "../../../utils/naviconbeefstore"
 
 function ListStore() {
   return (
     <div>
+      <div style={{ display: "flex", justifyContent: "center", padding: "20px", fontSize: "48px", fontWeight: "600" }}>
+        <Icon9 height="80px" weight="80px" /> รายการสินค้าคงคลังชิ้นเนื้อ
+      </div>
       <Card style={{
         width: 'auto',
         margin: 'auto',
         background: 'white',
         border: 'none',
         maxWidth: '1000px',
-        paddingTop: "50px",
       }}>
         <Card.Header style={{
           padding: '10px',

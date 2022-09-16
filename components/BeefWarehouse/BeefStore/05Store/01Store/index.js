@@ -144,7 +144,7 @@ const index = () => {
         <HeaderColor>คงคลังซากเนื้อโค</HeaderColor>
       </div>
       <DivContainar>
-        <div><Nav_store Sidenumber={1} /></div>
+        <div style={{ boxShadow: "0px 0px 4px grey", borderRadius: "10px" }}><Nav_store Sidenumber={1} /></div>
         <DivGrid>
           <DivFromTop>
             <Icon size={20} icon={iosSearchStrong} style={{ margin: "-3px 5px 0px 0px" }} />

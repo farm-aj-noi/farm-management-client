@@ -1,20 +1,22 @@
 import React from 'react'
 import { Card, Table } from "react-bootstrap"
+import { Icon9 } from "../../../utils/naviconbeefstore"
 
 function ListProduct() {
   return (
     <div>
+      <div style={{ display: "flex", justifyContent: "center", padding: "20px", fontSize: "48px", fontWeight: "600" }}>
+        <Icon9 height="80px" weight="80px" /> รายการสินค้าคงคลังผลิตภัณฑ์
+      </div>
       <Card style={{
         width: 'auto',
         margin: 'auto',
         background: 'white',
         border: 'none',
         maxWidth: '1000px',
-        paddingTop: "50px",
       }}>
         <Card.Header style={{
           padding: '10px',
-          fontSize: '24px',
           fontFamily: 'Arial',
           background: 'rgb(0 49 113)',
           color: 'white',

@@ -219,7 +219,7 @@ export const DivGrid = styled.div`
 grid-row-start: 1 ;
 grid-column-start: 2 ;
 border-radius: 10px;
-box-shadow: 0px 0px 2px grey;
+box-shadow: 0px 0px 4px grey;
 height: fit-content;
 @media screen and (max-width:1300px) { 
     display:grid;
@@ -234,7 +234,7 @@ export const DivData = styled.div`
 grid-row-start: 2 ;
 grid-column-start: 2 ;
 border-radius: 10px;
-box-shadow: 0px 0px 2px grey;
+box-shadow: 0px 0px 4px grey;
 height: fit-content;
 
 @media screen and (max-width:1300px) {
