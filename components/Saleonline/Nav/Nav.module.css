@@ -1,0 +1,91 @@
+.nstdropleft {
+ /*  text-transform: none; */
+  border-radius: 4px;
+  background: #003171;
+  position: relative;
+  display:block;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 0.5rem;
+  letter-spacing: 0.3px;
+  width: 100%;
+  /* border-radius: 5px; */
+  text-align: left;
+  
+}
+
+.nstdropleft:hover {
+  background: #3bafda;
+  color: white;
+  text-decoration: none;
+}
+
+.nstdropleft:active {
+  background: #3bafda;
+  color: white;
+  text-decoration: none;
+}
+
+.dropdownmenu{
+  background-color: #003171;
+  display:block;
+  color: white;
+  font-size: 18px;
+  position: relative;
+  padding: 0.5rem 0.5rem;
+  width: 100%;
+}
+.dropdownmenu:hover{
+  text-decoration: none;
+  color: white;
+  background: #3bafda;
+}
+
+
+.nstdropright {
+  /*  text-transform: none; */
+  border-radius: 4px;
+  background: #003171;
+  position: relative;
+  display:block;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 0.5rem;
+  letter-spacing: 0.3px;
+  width: 100%;
+  border: none;
+ 
+  /* border-radius: 5px; */
+  text-transform: none;
+  text-align: right;
+}
+.nstdropright:hover {
+  background: #3bafda;
+  color: white;
+  text-decoration: none;
+}
+
+.nstdropright:active {
+  background: #3bafda;
+  color: white;
+  text-decoration: none;
+}
+
+.dropdownmenuright{
+  background-color: #003171;
+  display:block;
+  color: white;
+  font-size: 18px;
+  position: relative;
+  right: 50px;
+  padding: 0.5rem 0.5rem;
+  padding-right: 4rem;
+  width: 110%;
+  text-align: right;
+}
+.dropdownmenuright:hover{
+  text-decoration: none;
+  color: white;
+  background: #3bafda;
+}
+

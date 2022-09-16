@@ -103,7 +103,7 @@ const Home = () => {
                 </Link>
                 <Link href="/saleonline">
                   <LinkSt>
-                    <LogoSale height="150px" weight="150px" />
+                    <LogoSale height="165x" weight="200px" />
                     ระบบการขายออนไลน์
                   </LinkSt>
                 </Link>

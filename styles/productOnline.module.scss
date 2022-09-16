@@ -1,0 +1,26 @@
+.card-body-container {
+    width: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 15px 0px;
+    margin: 0 10px;
+    &::-webkit-scrollbar {
+        width: 2px;
+        height: 5px;
+      }
+      
+      /* Track */
+      &::-webkit-scrollbar-track {
+        background: #f1f1f1; 
+      }
+       
+      /* Handle */
+      &::-webkit-scrollbar-thumb {
+        background: rgb(0, 49, 113); 
+      }
+      
+      /* Handle on hover */
+      &::-webkit-scrollbar-thumb:hover {
+        background: rgb(0, 76, 175); 
+      }
+}
