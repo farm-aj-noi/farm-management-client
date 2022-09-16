@@ -101,7 +101,7 @@ const index = () => {
             padding: "5px 30px",
           }}
         >
-          ออกรายงานเบิกออก
+          ออกรายงานนำออก
         </HeaderColor>
       </div>
       <DivBase
@@ -222,7 +222,7 @@ const index = () => {
                     marginRight: "10px",
                   }}
                 >
-                  วันที่นำเข้า
+                  วันที่นำออก
                 </label>
                 <input
                   type="date"

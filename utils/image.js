@@ -5,6 +5,7 @@ import Logoregis from "../images/logo/logo-register.png"
 import Logotest from "../images/logo/logo-test.jpg"
 import LogoStore from "../images/logo/logo-store.png"
 import LogoGrade from "../images/logo/logo-grade.png"
+import LogoSaleOnline from "../images/logo/logo-sale.png"
 
 export const LogoFarmAll = (prop) => {
   return (
@@ -21,9 +22,9 @@ export const LogoSluagther = (prop) => {
   return (
     <img
       src={LogoSt}
-      width={prop.weight}   
+      width={prop.weight}
       height={prop.height}
-      style={{ display: "inline", marginRight: "auto"}}
+      style={{ display: "inline", marginRight: "auto" }}
     />
   );
 };
@@ -33,7 +34,7 @@ export const Logoregister = (prop) => {
       src={Logoregis}
       width={prop.weight}
       height={prop.height}
-      style={{ display: "inline", marginRight: "auto"}}
+      style={{ display: "inline", marginRight: "auto" }}
     />
   );
 };
@@ -43,7 +44,7 @@ export const Logotest2 = (prop) => {
       src={Logotest}
       width={prop.weight}
       height={prop.height}
-      style={{ display: "inline", marginRight: "auto"}}
+      style={{ display: "inline", marginRight: "auto" }}
     />
   );
 };
@@ -53,7 +54,7 @@ export const Logobeefstore = (prop) => {
       src={LogoStore}
       width={prop.weight}
       height={prop.height}
-      style={{ display: "inline", marginRight: "auto"}}
+      style={{ display: "inline", marginRight: "auto" }}
     />
   );
 };
@@ -63,7 +64,18 @@ export const Logobeefgrade = (prop) => {
       src={LogoGrade}
       width={prop.weight}
       height={prop.height}
-      style={{ display: "inline", marginRight: "auto"}}
+      style={{ display: "inline", marginRight: "auto" }}
     />
   );
 };
+
+export const LogoSale = (prop) => {
+  return (
+    <img
+      src={LogoSaleOnline}
+      width={prop.weight}
+      height={prop.height}
+      style={{ display: "inline", marginRight: "auto" }}
+    />
+  )
+}

@@ -24,7 +24,7 @@ const deletereq = ({ listreq }) => {
   const [infoListreq, setInforeq] = useState(listreq);
   const [deleteRequest] = useMutation(DELETEREQ, {
     onCompleted: (data) => {
-      MySwal.fire({
+      /* MySwal.fire({
         icon: "success",
         title: "สำเร็จ",
         text: "ทำการลบข้อมูลสิ้น",
@@ -38,9 +38,42 @@ const deletereq = ({ listreq }) => {
           </span>
         ),
         confirmButtonColor: "#3085d6",
-      });
+      }); */
     },
   });
+
+  const DeleteAlert = () => {
+    Swal.fire({
+      title: 'ต้องการลบข้อมูล?',
+      text: "ยืนยันการลบข้อมูลคำร้องขอเบิก!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'ตกลง',
+      cancelButtonText: 'ยกเลิก'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handdleSubmitDelete();
+        MySwal.fire({
+          icon: "success",
+          title: "สำเร็จ",
+          text: "ทำการลบข้อมูลสิ้น",
+          confirmButtonText: (
+            <span
+              onClick={() =>
+                Router.push("beefwarehouse/beefstore/notify/notify_exportrequest").then(() => Router.reload())
+              }
+            >
+              ตกลง
+            </span>
+          ),
+          confirmButtonColor: "#3085d6",
+        });
+      }
+    })
+  }
+
   const handdleSubmitDelete = async () => {
     try {
       await deleteRequest({
@@ -55,7 +88,7 @@ const deletereq = ({ listreq }) => {
 
   return (
     <>
-      <Removebuttoncolor onClick={handdleSubmitDelete}>
+      <Removebuttoncolor onClick={DeleteAlert}>
         <Removebutton />
       </Removebuttoncolor>
     </>

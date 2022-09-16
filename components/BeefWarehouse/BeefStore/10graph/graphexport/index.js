@@ -23,16 +23,16 @@ query QUERYDATAGRAPH($startdate: String, $enddate: String) {
 `;
 
 const index = () => {
-  const [startdate, setStartdate] = useState(dayjs().startOf('year').format('YYYY-MM-DD'));
-  const [enddate, setEnddate] = useState(dayjs().endOf('year').format('YYYY-MM-DD'));
-  console.log(startdate)
+  const [startdate, setStartdate] = useState(/* dayjs().startOf('year').format('YYYY-MM-DD') */); // dayjs().startOf('year').format('YYYY-MM-DD') 
+  const [enddate, setEnddate] = useState(/* dayjs().endOf('year').format('YYYY-MM-DD') */);
+  // console.log(startdate)
   const { data: datagraph } = useQuery(QUERYDATAGRAPH, {
     variables: {
-      startdate: startdate,
-      enddate: enddate,
+      startdate: startdate ? startdate : dayjs().startOf('year').format('YYYY-MM-DD'),
+      enddate: enddate ? enddate : dayjs().endOf('year').format('YYYY-MM-DD'),
     }
   })
-  console.log(datagraph)
+  console.log(startdate)
   const [DataChart, setDataChart] = useState({
     labels: [],
     datasets: [
@@ -150,7 +150,7 @@ const index = () => {
     let data1 = [];
     let data2 = [];
     data.forEach(e => {
-      labels.push(e.day ?? '');
+      labels.push(dayjs(e.day).locale("th").add(543, "year").format('DD-MM-YYYY') ?? '');
       data2.push(e.export ?? 0);
       data1.push(e.import ?? 0);
     });
@@ -173,12 +173,12 @@ const index = () => {
         initChartday(datagraph.beefGraph);
       }
     }
-    else if (selectgraph == 2) {
+    if (selectgraph == 2) {
       if (datagraph) {
         initChart(datagraph.beefGraph);
       }
     }
-    else if (selectgraph == 3) {
+    if (selectgraph == 3) {
       if (datagraph) {
         initChartyear(datagraph.beefGraph);
       }

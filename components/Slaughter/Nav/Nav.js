@@ -57,21 +57,21 @@ const Nav1 = () => {
               user.role.nameEN === "slaughter" ||
               user.role.nameEN === "accounter" ||
               user.role.nameEN === "admin") && (
-              <>
-                <Link href="/slaughter/alert">
-                  <NavButtonLeft>แจ้งเตือน</NavButtonLeft>
-                </Link>
-              </>
-            )}
+                <>
+                  <Link href="/slaughter/alert">
+                    <NavButtonLeft>แจ้งเตือน</NavButtonLeft>
+                  </Link>
+                </>
+              )}
 
             {(user.role.nameEN === "booster" ||
               user.role.nameEN === "admin") && (
-              <>
-                {/* <Link href="/slaughter/importcow">
+                <>
+                  {/* <Link href="/slaughter/importcow">
                   <NavButtonLeft>ลงทะเบียนโคเข้าขุน</NavButtonLeft>
                 </Link> */}
 
-                {/* <DropdownButton
+                  {/* <DropdownButton
                   drop="down"
                   title={`บันทึกข้อมูลการเลี้ยงโค`}
                   bsPrefix={MyCss.nstdropleft}
@@ -84,31 +84,31 @@ const Nav1 = () => {
                   </Link>
                 </DropdownButton> */}
 
-                {/* <Link href="/slaughter/toslaughter">
+                  {/* <Link href="/slaughter/toslaughter">
                   <NavButtonLeft>ส่งโคเข้าเชือด</NavButtonLeft>
                 </Link> */}
 
-                <Link href="/slaughter/getin">
-                  <NavButtonLeft>รับโคเข้าเชือด</NavButtonLeft>
-                </Link>
-                <Link href="/slaughter/listslaughter">
-                  <NavButtonLeft>รายการเชือด</NavButtonLeft>
-                </Link>
+                  <Link href="/slaughter/getin">
+                    <NavButtonLeft>รับโคเข้าเชือด</NavButtonLeft>
+                  </Link>
+                  <Link href="/slaughter/listslaughter">
+                    <NavButtonLeft>รายการเชือด</NavButtonLeft>
+                  </Link>
 
-                <DropdownButton
-                  drop="down"
-                  title={`เชือดโค`}
-                  bsPrefix={MyCss.nstdropleft}
-                >
-                  <Link href="/slaughter/slaughter">
-                    <NavDropdownItem>ซากโค</NavDropdownItem>
-                  </Link>
-                  <Link href="/slaughter/entrails">
-                    <NavDropdownItem>เครื่องใน</NavDropdownItem>
-                  </Link>
-                </DropdownButton>
-              </>
-            )}
+                  <DropdownButton
+                    drop="down"
+                    title={`เชือดโค`}
+                    bsPrefix={MyCss.nstdropleft}
+                  >
+                    <Link href="/slaughter/slaughter">
+                      <NavDropdownItem>ซากโค</NavDropdownItem>
+                    </Link>
+                    <Link href="/slaughter/entrails">
+                      <NavDropdownItem>เครื่องใน</NavDropdownItem>
+                    </Link>
+                  </DropdownButton>
+                </>
+              )}
 
             {(user.role.nameEN === "grade" || user.role.nameEN === "admin") && (
               <>
@@ -120,8 +120,8 @@ const Nav1 = () => {
 
             {(user.role.nameEN === "storer" ||
               user.role.nameEN === "admin") && (
-              <>
-                {/* <DropdownButton
+                <>
+                  {/* <DropdownButton
                   drop="down"
                   title={`ส่งตัดแต่ง`}
                   bsPrefix={MyCss.nstdropleft}
@@ -137,64 +137,66 @@ const Nav1 = () => {
                   </Link>
                 </DropdownButton>
               </> */}
-              </>
-            )}
+                </>
+              )}
 
             {(user.role.nameEN === "slaughter" ||
               user.role.nameEN === "admin") && (
-              <>
-                <DropdownButton
-                  drop="down"
-                  title={`รายการตัดแต่ง`}
-                  bsPrefix={MyCss.nstdropleft}
-                >
-                  <Link href="/slaughter/listcuttwo">
-                    <NavDropdownItem>ซากโคผ่าซีก</NavDropdownItem>
-                  </Link>
-                  <Link href="/slaughter/listcutfour">
-                    <NavDropdownItem>ซากโคผ่าสี่เสี้ยว</NavDropdownItem>
-                  </Link>
-                  <Link href="/slaughter/listcutother">
-                    <NavDropdownItem>ก้อนเนื้อ</NavDropdownItem>
-                  </Link>
-                </DropdownButton>
+                <>
+                  <DropdownButton
+                    drop="down"
+                    title={`รายการตัดแต่ง`}
+                    bsPrefix={MyCss.nstdropleft}
+                  >
+                    <Link href="/slaughter/listcuttwo">
+                      <NavDropdownItem>ซากโคผ่าซีก</NavDropdownItem>
+                    </Link>
+                    <Link href="/slaughter/listcutfour">
+                      <NavDropdownItem>ซากโคผ่าสี่เสี้ยว</NavDropdownItem>
+                    </Link>
+                    <Link href="/slaughter/listcutother">
+                      <NavDropdownItem>ก้อนเนื้อ</NavDropdownItem>
+                    </Link>
+                  </DropdownButton>
 
-                <DropdownButton
-                  drop="down"
-                  title={`ตัดแต่งเนื้อ`}
-                  bsPrefix={MyCss.nstdropleft}
-                  className={MyCss.dropdownmenu}
-                >
-                  <Link href="/slaughter/cuttwo">
-                    <NavDropdownItem>ซากโคผ่าซีก</NavDropdownItem>
-                  </Link>
-                  <Link href="/slaughter/cutfour">
-                    <NavDropdownItem>ซากโคผ่าสี่เสี้ยว</NavDropdownItem>
-                  </Link>
-                  <Link href="/slaughter/cutother">
-                    <NavDropdownItem>ก้อนเนื้อ</NavDropdownItem>
-                  </Link>
-                </DropdownButton>
-              </>
-            )}
+                  <DropdownButton
+                    drop="down"
+                    title={`ตัดแต่งเนื้อ`}
+                    bsPrefix={MyCss.nstdropleft}
+                    className={MyCss.dropdownmenu}
+                  >
+                    <Link href="/slaughter/cuttwo">
+                      <NavDropdownItem>ซากโคผ่าซีก</NavDropdownItem>
+                    </Link>
+                    <Link href="/slaughter/cutfour">
+                      <NavDropdownItem>ซากโคผ่าสี่เสี้ยว</NavDropdownItem>
+                    </Link>
+                    <Link href="/slaughter/cutother">
+                      <NavDropdownItem>ก้อนเนื้อ</NavDropdownItem>
+                    </Link>
+                  </DropdownButton>
+                </>
+              )}
 
             {(user.role.nameEN === "accounter" ||
               user.role.nameEN === "admin") && (
-              <>
-                <Link href="/slaughter/buy">
-                  <NavButtonLeft>จัดการราคาชื้อ</NavButtonLeft>
-                </Link>
-              </>
-            )}
+                <>
+                  <Link href="/slaughter/buy">
+                    <NavButtonLeft>จัดการราคาชื้อ</NavButtonLeft>
+                  </Link>
+                </>
+              )}
 
             {(user.role.nameEN === "transporter" ||
-              user.role.nameEN === "admin") && (
-              <>
-                <Link href="/slaughter/transport">
-                  <NavButtonLeft>บันทึกการขนส่ง</NavButtonLeft>
-                </Link>
-              </>
-            )}
+              user.role.nameEN === "admin" ||
+              user.role.nameEN == "beefstore_man"
+            ) && (
+                <>
+                  <Link href="/slaughter/transport">
+                    <NavButtonLeft>บันทึกการขนส่ง</NavButtonLeft>
+                  </Link>
+                </>
+              )}
 
             <Link href="/slaughter/tracking">
               <NavButtonLeft>ตรวจสอบสินค้าย้อนกลับ</NavButtonLeft>

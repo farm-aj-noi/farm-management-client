@@ -55,7 +55,7 @@ const entrailday = () => {
         <div style={{ margin: "-3px 5px 0px 0px" }}>
           <Icon size={20} icon={list} />
         </div>
-        รายการเบิกออกซากโคส่วนอื่น ๆ (วัน)
+        รายการนำออกซากโคส่วนอื่น ๆ (วัน)
       </DivFromTop>{" "}
       <DivFromDown>
         <div

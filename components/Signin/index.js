@@ -44,7 +44,7 @@ const Signin = () => {
   const [userInfo, setUserInfo] = useState({
     email: "",
     password: "",
-    passsport:"",
+    passsport: "",
   });
   const { setAuthUser } = useContext(AuthContext);
   const [email, setEmail] = useState(false);
@@ -184,13 +184,12 @@ const Signin = () => {
             value={userInfo.email}
             onChange={handleChange}
             style={{
-              border: `${
-                userInfo.email.trim().length < 3
-                  ? "1px solid gray"
-                  : error
+              border: `${userInfo.email.trim().length < 3
+                ? "1px solid gray"
+                : error
                   ? "1px solid red"
                   : "1px solid green"
-              }`,
+                }`,
               borderRadius: ".25rem",
             }}
           />
@@ -203,13 +202,12 @@ const Signin = () => {
             value={userInfo.password}
             onChange={handleChange}
             style={{
-              border: `${
-                userInfo.password.trim().length < 1
-                  ? "1px solid gray"
-                  : error || userInfo.password.trim().length < 6
+              border: `${userInfo.password.trim().length < 1
+                ? "1px solid gray"
+                : error || userInfo.password.trim().length < 6
                   ? "1px solid red"
                   : "1px solid green"
-              }`,
+                }`,
               borderRadius: ".25rem",
             }}
           />
@@ -249,15 +247,14 @@ const Signin = () => {
             variant="primary"
             style={{
               width: "100%",
-              cursor: `${
-                loading ||
+              cursor: `${loading ||
                 (!userInfo.email && !userInfo.password) ||
                 !userInfo.email ||
                 !userInfo.password ||
                 userInfo.password.trim().length < 6
-                  ? "not-allowed"
-                  : "pointer"
-              }`,
+                ? "not-allowed"
+                : "pointer"
+                }`,
             }}
             type="submit"
             disabled={
@@ -268,7 +265,7 @@ const Signin = () => {
               userInfo.password.trim().length < 6
             }
 
-            // onClick={handleShow}
+          // onClick={handleShow}
           >
             เข้าสู่ระบบ
           </Button>

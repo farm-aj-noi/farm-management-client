@@ -97,7 +97,7 @@ const index = () => {
             padding: "5px 30px",
           }}
         >
-          เบิกออกซากเนื้อโคผ่าซีก
+          นำออกซากเนื้อโคผ่าซีก
         </HeaderColor>
       </div>
       <DivBase
@@ -125,7 +125,7 @@ const index = () => {
               <div style={{ margin: "-1px 5px 0px -5px" }}>
                 <Icon size={20} icon={exit} />
               </div>
-              ดำเนินการเบิกออกซากเนื้อโคผ่าซีก
+              ดำเนินการนำออกซากเนื้อโคผ่าซีก
             </DivFromTop>
             <DivFromDown>
               <Submit_Export />
@@ -214,7 +214,7 @@ const index = () => {
                       marginRight: "10px",
                     }}
                   >
-                    ผู้เบิกออก
+                    ผู้เเบิกออก
                   </label>
                   <input
                     style={{
@@ -319,7 +319,7 @@ const index = () => {
               <div style={{ margin: "-3px 5px 0px 0px" }}>
                 <Icon size={20} icon={list} />
               </div>
-              รายการเบิกออกซากเนื้อโคผ่าซีก
+              รายการนำออกซากเนื้อโคผ่าซีก
             </DivFromTop>
             <DivFromDown>
               <div style={{ height: `${data && data.exporthalve.length > 6 ? "400px" : ""}`, overflow: `${data && data.exporthalve.length > 6 ? "auto" : ""}` }}>

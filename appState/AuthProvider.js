@@ -7,7 +7,7 @@ export const AuthContext = createContext()
 const AuthProvider = ({ children, userData }) => {
   const [user, setUser] = useState(userData)
 
-  // console.log(user)
+  //  console.log(user)
 
   useEffect(() => {
     const syncLogout = e => {

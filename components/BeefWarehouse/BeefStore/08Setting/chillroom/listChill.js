@@ -27,7 +27,7 @@ const listChill = ({ listchill }) => {
   const [chilldayInfo, setChilldayInfo] = useState(listchill);
   const [deleteChillday] = useMutation(DELETECHILLDAY, {
     onCompleted: (data) => {
-      if (data) {
+      /* if (data) {
         MySwal.fire({
           icon: "success",
           title: "สำเร็จ",
@@ -43,9 +43,41 @@ const listChill = ({ listchill }) => {
           ),
           confirmButtonColor: "#3085d6",
         });
-      }
+      } */
     },
   });
+
+  const DeleteAlert = () => {
+    Swal.fire({
+      title: 'ต้องการลบข้อมูล?',
+      text: "ยืนยันการลบข้อมูลระยะเวลาบ่ม!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'ตกลง',
+      cancelButtonText: 'ยกเลิก'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handdleSubmitDelete();
+        MySwal.fire({
+          icon: "success",
+          title: "สำเร็จ",
+          text: "ทำการลบข้อมูลสิ้น",
+          confirmButtonText: (
+            <span
+              onClick={() =>
+                Router.push("beefwarehouse/beefstore/setting/chillroom").then(() => Router.reload())
+              }
+            >
+              ตกลง
+            </span>
+          ),
+          confirmButtonColor: "#3085d6",
+        });
+      }
+    })
+  }
 
   const handdleSubmitDelete = async () => {
     try {
@@ -64,7 +96,7 @@ const listChill = ({ listchill }) => {
         <td>{chilldayInfo.day} วัน</td>
 
         <td>
-          <Removebuttoncolor onClick={handdleSubmitDelete}>
+          <Removebuttoncolor onClick={DeleteAlert}>
             <Removebutton />
           </Removebuttoncolor>
         </td>
