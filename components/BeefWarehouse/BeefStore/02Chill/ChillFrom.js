@@ -32,13 +32,31 @@ export const ButtonSummit1 = styled.button`
   }
 `;
 
+
+
+export const HeaderColor = styled.div`
+  text-align: center;
+  background: #da4453;
+  border: none;
+  border-radius: 4px;
+  font-size: 30px;
+  color: #ffffff;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: 1px;
+ /*  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+`;
+
+
 export const DivFrom = styled.div`
   ${FromDiv}
   position: relative;
   display: block;
   width: 1200px;
   height: auto;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+ /*  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
 `;
 
 export const DivFromTop = styled.div`
@@ -145,21 +163,6 @@ grid-column-gap: 2rem;
 grid-template-rows: 20%;
 }
 `
-export const HeaderColor = styled.div`
-  text-align: center;
-  background: #da4453;
-  border: none;
-  border-radius: 4px;
-  font-size: 30px;
-  color: #ffffff;
-  font-weight: bold;
-  width: fit-content;
-  height: fit-content;
-  padding:5px 30px;
-  letter-spacing: 1px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  margin-bottom: 40px;
-`;
 export const DivSearch = styled.div`
 display: flex;
 justify-content: center;
