@@ -217,8 +217,8 @@ justify-content: center;
 export const DivGrid = styled.div`
 grid-row-start: 1 ;
 grid-column-start: 2 ;
-border-radius: 7px;
-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+border-radius: 10px;
+box-shadow: 0px 0px 2px grey;
 height: fit-content;
 @media screen and (max-width:1300px) { 
     display:grid;
@@ -232,8 +232,8 @@ height: fit-content;
 export const DivData = styled.div`
 grid-row-start: 2 ;
 grid-column-start: 2 ;
-border-radius: 7px;
-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+border-radius: 10px;
+box-shadow: 0px 0px 2px grey;
 height: fit-content;
 
 @media screen and (max-width:1300px) {

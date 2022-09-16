@@ -163,7 +163,7 @@ padding-right: 100px;
 margin-top: 0;
 display: grid;
 /* grid-template-rows: 125px; */
-grid-template-columns: 270px 1fr;
+grid-template-columns: 250px 1fr;
 /* grid-gap: 2rem; */
 width: 100%;
 grid-column-gap: 2rem;
@@ -232,8 +232,8 @@ justify-content: center;
 export const DivGrid = styled.div`
 grid-row-start: 1 ;
 grid-column-start: 2 ;
-border-radius: 7px;
-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+border-radius: 10px;
+box-shadow: 0px 0px 2px grey;
 height: fit-content;
 @media screen and (max-width:700px) { 
     display:grid;
@@ -252,8 +252,8 @@ height: fit-content;
 export const DivData = styled.div`
 grid-row-start: 2;
 grid-column-start: 2;
-border-radius: 7px;
-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+border-radius: 10px;
+box-shadow: 0px 0px 2px grey;
 height: fit-content;
 @media screen and (max-width:700px) {
     display:grid;

@@ -115,17 +115,19 @@ const index = () => {
       </div>
       <DivContainar>
         <div style={{ gridRowStart: "1", gridColumnStart: "1" }}>
-          <DivFromTop>
-            <div style={{ margin: "-3px 0px -7px -11px" }}>
-              <Icon size={20} icon={enter} />
-            </div>
-            ดำเนินการนำเข้าซากเนื้อโคผ่าซีก
-          </DivFromTop>
-          <DivFromDown>
-            <div>
-              <Create_Import />
-            </div>
-          </DivFromDown>
+          <div style={{ boxShadow: "0px 0px 2px grey", borderRadius: "10px" }}>
+            <DivFromTop>
+              <div style={{ margin: "-3px 5px -7px -11px" }}>
+                <Icon size={20} icon={enter} />
+              </div>
+              ดำเนินการนำเข้าซากเนื้อโคผ่าซีก
+            </DivFromTop>
+            <DivFromDown>
+              <div>
+                <Create_Import />
+              </div>
+            </DivFromDown>
+          </div>
         </div>
         <DivGrid>
           <DivFromTop>

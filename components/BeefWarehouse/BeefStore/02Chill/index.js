@@ -110,16 +110,18 @@ const index = () => {
         <HeaderColor style={{}}>บ่มซากเนื้อโค</HeaderColor>
       </div>
       <DivContainar>
-        <div style={{ gridRowStart: "1", gridColumnStart: "1" }}>
-          <DivFromTop>
-            <div style={{ margin: "-3px 0px -7px -11px" }}>
-              <Iconchill height="30px" weight="30px" />
-            </div>
-            ดำเนินการบ่มซากเนื้อโค
-          </DivFromTop>
-          <DivFromDown>
-            <Submit_Chill />
-          </DivFromDown>
+        <div style={{ gridRowStart: "1", gridColumnStart: "1", }}>
+          <div style={{ boxShadow: "0px 0px 2px grey", borderRadius: "10px" }}>
+            <DivFromTop>
+              <div style={{ margin: "-3px 0px -7px -11px" }}>
+                <Iconchill height="30px" weight="30px" />
+              </div>
+              ดำเนินการบ่มซากเนื้อโค
+            </DivFromTop>
+            <DivFromDown>
+              <Submit_Chill />
+            </DivFromDown>
+          </div>
         </div>
         <DivGrid>
           <DivFromTop>
