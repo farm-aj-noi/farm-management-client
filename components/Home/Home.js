@@ -90,8 +90,8 @@ const Home = () => {
                   </LinkSt>
                 </Link>
                 <Link href="/beefwarehouse">
-                  <LinkSt style={{ paddingTop: "5px" }}>
-                    <Logobeefstore height="160px" weight="155px" />
+                  <LinkSt>
+                    <Logobeefstore height="150px" weight="150px" />
                     ระบบคลัง
                   </LinkSt>
                 </Link>
