@@ -26,7 +26,7 @@ const Home = () => {
             backgroundColor: `${white}`,
             width: "fit-content",
             margin: "auto",
-            marginTop: 5,
+            marginTop: 20,
             marginBottom: 5,
             fontSize: "x-large",
             padding: "0 40px 0 40px",
@@ -37,12 +37,13 @@ const Home = () => {
         {user && (
           <div
             style={{
-              backgroundColor: `${blue}`,
-              width: "100%",
+              backgroundColor:  `${blue}`,
+              width: "fit-content",
               margin: "auto",
-              marginTop: 25,
+              marginTop: 70,
               marginBottom: 5,
               fontSize: "x-large",
+              borderRadius: "50px",
             }}
           >
             {/* <Link href="/registercow">
@@ -78,7 +79,7 @@ const Home = () => {
             {user.role.nameEN === "admin" && (
               <>
                 <Link href="/registercow">
-                  <LinkSt>
+                  <LinkSt style={{ borderRadius: "50px 0px 0px 50px" }}>
                     <Logoregister height="150px" weight="150px" />
                     ลงทะเบียนโคเข้าขุน
                   </LinkSt>
@@ -102,7 +103,7 @@ const Home = () => {
                   </LinkSt>
                 </Link>
                 <Link href="/saleonline">
-                  <LinkSt>
+                  <LinkSt style={{ borderRadius: "0px 50px 50px 0px" }}>
                     <LogoSale height="150px" weight="150px" />
                     ระบบการขายออนไลน์
                   </LinkSt>

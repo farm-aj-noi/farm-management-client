@@ -55,7 +55,7 @@ const Nav1 = () => {
                     )}
                     <Link href="/saleonline">
                         <Navbar.Brand style={astyle}>
-                            <LogoSale height="40x" weight="50px" />
+                            <div style={{ paddingRight: "5px" }}><LogoSale height="40x" weight="40px" /></div>
                             {/*  <img src={LogoSale} style={{
                             height: '40px',
                             width: '50px'
