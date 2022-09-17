@@ -1,8 +1,12 @@
 import React from 'react'
-
+import UserProduct from '../../components/Saleonline/UserProduct'
+import Nav from "../../components/Saleonline/Nav/Nav"
 const UserProductOnlinePage = () => {
     return (
-        <div>listproduct</div>
+        <div>
+            <Nav />
+            <UserProduct />
+        </div>
     )
 }
 
