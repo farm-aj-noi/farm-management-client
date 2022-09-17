@@ -6,7 +6,7 @@ import { InputGroup, FormControl, Button, Card, Carousel } from 'react-bootstrap
 /* import ProductItem from './ProductItem'; */
 import { useRouter } from "next/router";
 import { FaSearch } from 'react-icons/fa';
-import customCss from "../../styles/productOnline.module.scss";
+import customCss from "./productOnline.module.scss";
 
 export default function ProductOnlines() {
     return (
