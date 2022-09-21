@@ -40,7 +40,7 @@ const Paper_request = ({ prod }) => {
   const buildTableBody = (data, columns) => {
     var body = [];
 
-    body.push(["วันที่ขอเบิก", "ชื่อผู้ขอเบิก", "ประเภทซาก", "จำนวน"]);
+    body.push(["วันที่ขอเบิก", "ประเภทซาก", "รหัสซาก", "เกรด"]);
     console.log(data);
 
     data.forEach(function (row) {
@@ -54,7 +54,12 @@ const Paper_request = ({ prod }) => {
           );
         } else if (column === "beeftype.nameTH") {
           dataRow.push(row.beeftype.nameTH);
-        } else {
+        } else if (column === "beeftype.code") {
+          dataRow.push(row.beeftype.code);
+        } else if (column == "grade") {
+          dataRow.push(row.grade ? row.grade : "-");
+        }
+        else {
           /* console.log(row[column]) */
           // console.log(column);
           // console.log(
@@ -120,7 +125,7 @@ const Paper_request = ({ prod }) => {
           style: "header",
           alignment: "center",
         },
-        table(data, ["requestdate", "name", "beeftype.nameTH", "quantity"]),
+        table(data, ["requestdate", "beeftype.nameTH", "beeftype.code", "grade"]),
       ],
 
       footer: function (currentPage, pageCount) {

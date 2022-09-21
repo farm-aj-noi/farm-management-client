@@ -2,7 +2,27 @@ import React from 'react'
 import { Card, Table } from "react-bootstrap"
 import { Icon9 } from "../../../utils/naviconbeefstore"
 
-function ListStore() {
+import { useQuery } from "@apollo/react-hooks";
+import gql from "graphql-tag";
+
+import dayjs from 'dayjs';
+
+const QUERYLISTFORSALE = gql`
+query StoreSale {
+  storeSale {
+    id
+    beeftype
+    code
+    barcode
+    weightwarm
+    weight
+    Expdate
+    info
+  }
+}
+`
+function ListProduct() {
+  const { data } = useQuery(QUERYLISTFORSALE);
   return (
     <div>
       <div style={{ display: "flex", justifyContent: "center", padding: "20px", fontSize: "48px", fontWeight: "600" }}>
@@ -17,7 +37,6 @@ function ListStore() {
       }}>
         <Card.Header style={{
           padding: '10px',
-          fontSize: '24px',
           fontFamily: 'Arial',
           background: 'rgb(0 49 113)',
           color: 'white',
@@ -28,7 +47,7 @@ function ListStore() {
         </Card.Header>
         <Card.Body style={{ boxShadow: "0px 0px 2px grey" }}>
           <form>
-            <div>
+            <div style={{ height: `${data && data.storeSale.length > 13 ? "650px" : ""}`, overflow: "auto" }}>
               <Table
                 striped
                 bordered
@@ -45,18 +64,34 @@ function ListStore() {
                     <th>น้ำหนักเย็น (กก.)</th>
                     <th>วันหมดอายุ</th>
                     <th>หมายเหตุ</th>
-                    <th>ดำเนินการขาย</th>
                   </tr>
                 </thead>
                 <tbody>
+                  {data && data.storeSale.length > 0 ?
+                    (
+                      data.storeSale.map((prod) => (
+                        <tr style={{ textAlign: "center" }}>
+                          <td>{prod.beeftype}</td>
+                          <td>{prod.code}</td>
+                          <td>{prod.barcode}</td>
+                          <td>{prod.weightwarm ? prod.weightwarm : "-"}</td>
+                          <td>{prod.weight ? prod.weight : "-"}</td>
+                          <td>{prod.Expdate ? dayjs(prod.Expdate).add(543, "year").format("DD/MM/YYYY") : "-"}</td>
+                          <td>{prod.info ? prod.info : "-"}</td>
+                        </tr>
+                      ))
+
+                    ) : (
+                      <tr style={{ textAlign: "center" }}>
+                        <td colSpan="8">ไม่พบข้อมูล</td>
+                      </tr>
+                    )}
                   {/* {data && data.liststore.length > 0 ? (
                     data.liststore.map((prod) => (
                       <List_Store key={prod.id} Liststore={prod} />
                     ))
                   ) : ( */}
-                  <tr style={{ textAlign: "center" }}>
-                    <td colSpan="8">ไม่พบข้อมูล</td>
-                  </tr>
+
                   {/*  )} */}
                 </tbody>
               </Table>
@@ -64,8 +99,8 @@ function ListStore() {
           </form>
         </Card.Body>
       </Card>
-    </div>
+    </div >
   )
 }
 
-export default ListStore
+export default ListProduct

@@ -28,6 +28,9 @@ function Listrequest({ listrequest }) {
     console.log(inforequest)
     const MySwal = withReactContent(Swal);
     const [deleteRequest] = useMutation(DELETEREQUEST, {
+        onCompleted: {
+
+        },
         refetchQueries: [
             {
                 query: QUERYREQUESTEX,
@@ -87,8 +90,8 @@ function Listrequest({ listrequest }) {
                 </td>
                 <td>{inforequest.beeftype.nameTH}</td>
                 <td>{inforequest.beeftype.code}</td>
-                <td>grade</td>
-                <td>{inforequest.quantity}</td>
+                <td>{inforequest.grade ? (inforequest.grade) : ("-")}</td>
+                {/*  <td>{inforequest.quantity}</td> */}
                 <td>{inforequest.status.id === "63299201e09fd895642f3cab" ?
                     (
                         <Icon

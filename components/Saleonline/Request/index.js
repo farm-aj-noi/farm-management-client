@@ -22,8 +22,8 @@ query QUERYLISTREQUEST {
       code
       nameTH
     }
+    grade
     requestdate
-    quantity
     status {
       id
       nameTH
@@ -39,8 +39,7 @@ query QUERYLISTREQUESTP {
     producttype {
     code
     nameTH
-    }
-    quantity
+    } 
     name
     requestdate
     status {
@@ -111,7 +110,7 @@ function RequestStore() {
               รายการร้องขอเบิกคลังชิ้นเนื้อ
             </Card.Header>
             <Card.Body >
-              <div style={{ height: `${data && data.listRequestEx.length > 4 ? "267px" : ""}`, overflow: "auto" }}>
+              <div style={{ height: `${data && data.listRequestEx.length > 4 ? "250px" : ""}`, overflow: "auto" }}>
                 <Table
                   striped
                   bordered
@@ -123,9 +122,8 @@ function RequestStore() {
                     <tr style={{ textAlign: "center", fontSize: "18px" }}>
                       <th>วันที่ร้องขอเบิก</th>
                       <th>ประเภทซาก</th>
-                      <th>รหัสสินค้า</th>
+                      <th>รหัสซาก</th>
                       <th>เกรด</th>
-                      <th>จำนวน</th>
                       <th>สถานะดำเนินการ</th>
                       <th>ยกเลิกรายการ</th>
                     </tr>
@@ -186,10 +184,10 @@ function RequestStore() {
               border: 'none',
               fontWeight: '600'
             }}>
-              รายการร้องขอเบิกคลังชิ้นเนื้อ
+              รายการร้องขอเบิกคลังผลิตภัณฑ์
             </Card.Header>
             <Card.Body >
-              <div>
+              <div style={{ height: `${dataP && dataP.listRequestExP.length > 4 ? "250px" : ""}`, overflow: "auto" }}>
                 <Table
                   striped
                   bordered
@@ -202,7 +200,6 @@ function RequestStore() {
                       <th>วันที่ร้องขอเบิก</th>
                       <th>ประเภทสินค้า</th>
                       <th>รหัสสินค้า</th>
-                      <th>จำนวน</th>
                       <th>สถานะดำเนินการ</th>
                       <th>ยกเลิกรายการ</th>
                     </tr>

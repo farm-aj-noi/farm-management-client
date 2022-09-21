@@ -12,6 +12,7 @@ import withReactContent from "sweetalert2-react-content";
 import { check } from "react-icons-kit/fa/check";
 import { close } from "react-icons-kit/fa/close";
 import { Icon } from "react-icons-kit";
+import { QUERYLISTREQUESTP } from "./index"
 
 const DELETEREQUESTEXPORT = gql`
 mutation DELETEREQUESTEXPORT($id: ID) {
@@ -24,7 +25,16 @@ mutation DELETEREQUESTEXPORT($id: ID) {
 function ListrequestP({ listrequestp }) {
     const MySwal = withReactContent(Swal);
     const [infolistrequestp, SetinfoRequestP] = useState(listrequestp)
-    const [deleteRequestP] = useMutation(DELETEREQUESTEXPORT)
+    const [deleteRequestP] = useMutation(DELETEREQUESTEXPORT, {
+        onCompleted: {
+
+        },
+         refetchQueries: [
+             {
+                 query: QUERYLISTREQUESTP,
+             }
+         ],
+    })
     const DeleteAlert = () => {
         Swal.fire({
             title: 'ต้องการลบข้อมูล?',
@@ -76,7 +86,7 @@ function ListrequestP({ listrequestp }) {
                 </td>
                 <td>{infolistrequestp.producttype.nameTH}</td>
                 <td>{infolistrequestp.producttype.code}</td>
-                <td>{infolistrequestp.quantity}</td>
+                {/* <td>{infolistrequestp.quantity}</td> */}
                 <td>{infolistrequestp.status.id === "63299201e09fd895642f3cab" ?
                     (
                         <Icon

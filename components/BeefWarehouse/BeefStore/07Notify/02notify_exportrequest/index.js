@@ -32,7 +32,7 @@ export const QUERYREQUESTEX = gql`
       nameTH
     }
     requestdate
-    quantity
+    grade
     status {
       id
       nameTH
@@ -101,7 +101,6 @@ const index = () => {
                     <th>ประเภทซาก</th>
                     <th>รหัสซาก</th>
                     <th>เกรด</th>
-                    <th>จำนวน</th>
                     <th>ดำเนินการ</th>
                   </tr>
                 </thead>

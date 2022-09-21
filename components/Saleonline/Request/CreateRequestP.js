@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import Router from "next/router";
 import { AuthContext } from '../../../appState/AuthProvider';
+import { QUERYLISTREQUESTP } from "./index"
 
 const QUERYPRODUCTTYPE = gql`
 query QUERYPRODUCTTYPE {
@@ -25,14 +26,13 @@ query QUERYPRODUCTTYPE {
 `
 
 const CREATEREQUESTEXPORTP = gql`
-mutation CREATEREQUESTEXPORTP($name: String, $producttype: String, $quantity: String, $status: String) {
-  createRequestExportP(name: $name, producttype: $producttype, quantity: $quantity, status: $status) {
+mutation CREATEREQUESTEXPORTP($name: String, $producttype: String, $status: String) {
+  createRequestExportP(name: $name, producttype: $producttype, status: $status) {
     id
     name
   }
 }
 `;
-
 
 function CreateRequestP() {
     const MySwal = withReactContent(Swal);
@@ -40,7 +40,6 @@ function CreateRequestP() {
     const [formrequestP, SetformRequsetP] = useState({
         name: user.name,
         producttype: "",
-        quantity: "",
         status: "6280fac6d3dbf7345093676f",
     })
     const { data } = useQuery(QUERYPRODUCTTYPE);
@@ -52,7 +51,6 @@ function CreateRequestP() {
             if (data) {
                 SetformRequsetP({
                     producttype: "",
-                    quantity: "",
                 });
                 MySwal.fire({
                     icon: "success",
@@ -67,8 +65,12 @@ function CreateRequestP() {
                 });
             }
         },
+        refetchQueries: [
+            {
+                query: QUERYLISTREQUESTP,
+            }
+        ],
     })
-
     const handleChange = (e) => {
         SetformRequsetP({
             ...formrequestP,
@@ -91,29 +93,19 @@ function CreateRequestP() {
                 <Form.Label>ประเภทสินค้า :</Form.Label>
                 <Form.Control as="select" name="producttype"
                     value={formrequestP.producttype}
-                    onChange={handleChange} >
+                    onChange={handleChange}
+                >
                     <option>เลือก</option>
                     {data && data.allproducttype.map((prod) => (
                         <option key={prod.id} value={prod.id}>{prod.nameTH}</option>
                     ))}
                 </Form.Control>
             </Form.Group>
-            <Form.Group>
-                <Form.Label>จำนวน :</Form.Label>
-                <Form.Control
-                    type="text"
-                    name="quantity"
-                    placeholder="จำนวน"
-                    value={formrequestP.quantity}
-                    onChange={handleChange}
-                    disabled={!formrequestP.producttype}
-                />
-            </Form.Group>
             <Button variant="success" style={{
                 justifySelf: "right",
                 float: "right",
             }}
-                disabled={!formrequestP.producttype || !formrequestP.quantity}
+                disabled={!formrequestP.producttype}
                 onClick={handleSubmit}
             >
                 บันทึก

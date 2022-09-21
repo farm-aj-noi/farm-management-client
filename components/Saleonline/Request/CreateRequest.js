@@ -11,8 +11,8 @@ import { QUERYREQUESTEX } from "../../BeefWarehouse/BeefStore/07Notify/02notify_
 
 
 const CREATEREQUESTEXPORT = gql`
-mutation CREATEREQUESTEXPORT($name: String, $beeftype: String, $status: String, $quantity: String) {
-  createRequestExport(name: $name, beeftype: $beeftype, status: $status, quantity: $quantity) {
+mutation CREATEREQUESTEXPORT($name: String, $beeftype: String, $grade: String, $status: String) {
+  createRequestExport(name: $name, beeftype: $beeftype, grade: $grade, status: $status) {
     id
   }
 }
@@ -24,8 +24,8 @@ const CreateRequest = () => {
     const [formrequest, SetformRequset] = useState({
         name: user.name,
         beeftype: "",
-        quantity: "",
         status: "6280fac6d3dbf7345093676f",
+        grade: "",
     })
     const [createRequestExport] = useMutation(CREATEREQUESTEXPORT, {
         variables: { ...formrequest },
@@ -33,7 +33,7 @@ const CreateRequest = () => {
             if (data) {
                 SetformRequset({
                     beeftype: "",
-                    quantity: "",
+                    grade: "",
                 });
                 MySwal.fire({
                     icon: "success",
@@ -77,7 +77,8 @@ const CreateRequest = () => {
                 <Form.Label>ประเภทซาก :</Form.Label>
                 <Form.Control as="select" name="beeftype"
                     value={formrequest.beeftype}
-                    onChange={handleChange} >
+                    onChange={handleChange}
+                >
                     <option value="">เลือก</option>
                     <option value="5f1000e28d55662dcc23d95e">ซากซ้าย</option>
                     <option value="5f1000ee8d55662dcc23d960">ซากขวา</option>
@@ -106,20 +107,29 @@ const CreateRequest = () => {
                 </Form.Control>
             </Form.Group>
             <Form.Group>
-                <Form.Label>จำนวน :</Form.Label>
-                <Form.Control
-                    type="text"
-                    name="quantity"
-                    placeholder="จำนวน"
-                    value={formrequest.quantity}
+                <Form.Label>เกรด :</Form.Label>
+                <Form.Control as="select" name="grade"
+                    value={formrequest.grade}
                     onChange={handleChange}
-                    disabled={!formrequest.beeftype} />
+                    disabled={!formrequest.beeftype}
+                >
+                    <option value="">เลือก</option>
+                    <option value="1">1</option>
+                    <option value="1.5">1.5</option>
+                    <option value="2">2</option>
+                    <option value="2.5">2.5</option>
+                    <option value="3">3</option>
+                    <option value="3.5">3.5</option>
+                    <option value="4">4</option>
+                    <option value="4.5">4.5</option>
+                    <option value="5">5</option>
+                </Form.Control>
             </Form.Group>
             <Button variant="success" style={{
                 justifySelf: "right",
                 float: "right",
             }}
-                disabled={!formrequest.beeftype || !formrequest.quantity}
+                disabled={!formrequest.beeftype || !formrequest.grade}
                 onClick={handdleSummit}
             >
                 บันทึก

@@ -26,14 +26,14 @@ const QUERYTYPE = gql`
   }
 `;
 
-const CREATERE = gql`
-mutation Mutation($name: String, $producttype: String, $quantity: String, $status: String) {
-  createRequestExportP(name: $name, producttype: $producttype, quantity: $quantity, status: $status) {
+const CREATEREQUESTPRODUCT = gql`
+mutation CreateRequestProduct($name: String, $typemeat: String, $beeftype: String) {
+    CREATEREQUESTPRODUCT(name: $name, typemeat: $typemeat, beeftype: $beeftype) {
     id
-    name
   }
 }
-`;
+
+`
 
 
 function create() {
@@ -43,40 +43,8 @@ function create() {
         producttype: "",
         quantity: "",
     });
-    const { data } = useQuery(QUERYTYPE);
-    const [createRequestExportP] = useMutation(CREATERE, {
-        variables: {
-            name: infore.name,
-            producttype: infore.producttype,
-            quantity: infore.quantity,
-            status: "6280fac6d3dbf7345093676f",
 
-        },
-        onCompleted: (data) => {
-            if (data) {
-                setinfore({
-                    name: "",
-                    producttype: "",
-                    quantity: "",
-                });
-                MySwal.fire({
-                    icon: "success",
-                    title: "สำเร็จ",
-                    text: "ทำการบึนทึกข้อมูลสิ้น",
-                    confirmButtonText: (
-                        <span
-                            onClick={() =>
-                                Router.reload("beefwarehouse/beefproduct/requestexport")
-                            }
-                        >
-                            ตกลง
-                        </span>
-                    ),
-                    confirmButtonColor: "#3085d6",
-                });
-            }
-        }
-    });
+
 
     const handleChange = (e) => {
         setinfore({
@@ -98,29 +66,33 @@ function create() {
     return (
         <div>
             <form>
-                <DivFromInsideLeft>
-                    ชื่อผู้ขอเบิก :
+                <DivFromInsideLeft style={{ marginTop: "5px" }}>
+                    ประเภทสินค้า :
                     <div
                         style={{
                             display: "grid",
                             gridTemplateRows: "1fr 15px",
                         }}
                     >
-                        <Searchinput
-                            value={infore.name}
-                            name="name"
-                            onChange={handleChange}
-                            style={{
-                                borderColor: `${!infore.name ? "red" : ""}`,
-                                height: "35px",
-                                textAlign: "center"
-                            }}
-                        />
-                        {!infore.name ? (
-                            <label style={{ color: "red" }}>กรุณากรอกชื่อ</label>
-                        ) : (
-                            ""
-                        )}
+                        <div style={{ display: "inline", width: "170px" }}>
+                            <select
+                                value={infore.producttype}
+                                name="producttype"
+                               /*  onChange={handleChange}
+                                disabled={!infore.name} */
+                                style={{
+                                    height: "35px",
+                                    width: "160px",
+                                    border: "1px solid #AFAFAF",
+                                    borderRadius: "4px ",
+                                    textAlign: "center",
+                                    fontSize: "14px",
+                                }}
+                            >
+                                <option value="">เลือก</option>
+                                
+                            </select>
+                        </div>
                     </div>
                 </DivFromInsideLeft>
                 <DivFromInsideLeft style={{ marginTop: "5px" }}>
@@ -135,8 +107,8 @@ function create() {
                             <select
                                 value={infore.producttype}
                                 name="producttype"
-                                onChange={handleChange}
-                                disabled={!infore.name}
+                                /* onChange={handleChange}
+                                disabled={!infore.name} */
                                 style={{
                                     height: "35px",
                                     width: "160px",
@@ -147,28 +119,9 @@ function create() {
                                 }}
                             >
                                 <option value="">เลือก</option>
-                                {data && data.allproducttype.map((prod) => (
-                                    <option key={prod.id} value={prod.id}>{prod.nameTH}</option>
-                                ))}
+                                
                             </select>
                         </div>
-                    </div>
-                </DivFromInsideLeft>
-                <DivFromInsideLeft>
-                    จำนวน :
-                    <div
-                        style={{
-                            display: "grid",
-                            gridTemplateRows: "1fr 15px",
-                        }}
-                    >
-                        <Searchinput
-                            value={infore.quantity}
-                            name="quantity"
-                            onChange={handleChange}
-                            disabled={!infore.producttype || !infore.name}
-                            style={{ textAlign: "center", backgroundColor: `${!infore.producttype || !infore.name ? "#ececec" : ""}`, }}
-                        />
                     </div>
                 </DivFromInsideLeft>
                 <div
@@ -180,7 +133,7 @@ function create() {
                         paddingBottom: "10px",
                     }}
                 >
-                    <Savebutton1 onClick={handleSubmit} disabled={!infore.producttype || !infore.name || !infore.quantity} style={{ backgroundColor: `${!infore.producttype || !infore.name || !infore.quantity ? "gray" : ""}`, }}>บันทึก</Savebutton1>
+                    <Savebutton1 /* onClick={handleSubmit} disabled={!infore.producttype || !infore.name || !infore.quantity} style={{ backgroundColor: `${!infore.producttype || !infore.name || !infore.quantity ? "gray" : ""}`, }} */>บันทึก</Savebutton1>
                 </div>
             </form>
         </div>

@@ -4,7 +4,7 @@ import gql from "graphql-tag";
 import dayjs from 'dayjs';
 import { Savebuttoncolor } from "../../../../../utils/buttonColor";
 import { Savebutton } from "../../../../../utils/button";
-import { QUERYLISTREQUEST } from "../../../../Saleonline/Request/index"
+import { QUERYREQUESTEX } from "./index"
 
 const UPDATESTATUS = gql`
 mutation UPDATESTATUS($id: ID) {
@@ -18,9 +18,11 @@ mutation UPDATESTATUS($id: ID) {
 function listrequest({ listre }) {
   const [infore, Setinfore] = useState(listre);
   const [updateRequestB] = useMutation(UPDATESTATUS, {
+    onCompleted: (data) => {
+    },
     refetchQueries: [
       {
-        query: QUERYLISTREQUEST,
+        query: QUERYREQUESTEX,
       },
     ],
   })
@@ -44,10 +46,9 @@ function listrequest({ listre }) {
         </td>
         <td>{infore.beeftype.nameTH}</td>
         <td>{infore.beeftype.code}</td>
-        <td>grade</td>
-        <td>{infore.quantity}</td>
+        <td>{infore.grade ? (infore.grade) : ("-")}</td>
         <td>
-          {infore.status.id === "63299201e09fd895642f3cab" ? ("-") : (
+          {infore.status.id === "63299201e09fd895642f3cab" ? ("เสร็จสิ้น") : (
             <Savebuttoncolor onClick={handleSubmit}>
               <Savebutton />
             </Savebuttoncolor>
