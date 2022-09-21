@@ -6,8 +6,11 @@ import gql from "graphql-tag";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import Router from "next/router";
-import Request from "./CreateRequest"
+import Request from "./CreateRequest";
 import Listrequest from './Listrequest';
+import RequsetP from "./CreateRequestP";
+import ListrequestP from './ListrequestP';
+
 
 
 export const QUERYLISTREQUEST = gql`
@@ -16,6 +19,7 @@ query QUERYLISTREQUEST {
     id
     name
     beeftype {
+      code
       nameTH
     }
     requestdate
@@ -28,9 +32,29 @@ query QUERYLISTREQUEST {
 }
 `
 
+export const QUERYLISTREQUESTP = gql`
+query QUERYLISTREQUESTP {
+  listRequestExP {
+    id
+    producttype {
+    code
+    nameTH
+    }
+    quantity
+    name
+    requestdate
+    status {
+      id
+      nameTH
+    }
+  }
+}
+`
+
 function RequestStore() {
   const MySwal = withReactContent(Swal);
   const { data } = useQuery(QUERYLISTREQUEST);
+  const { data: dataP } = useQuery(QUERYLISTREQUESTP);
   return (
     <div>
       <div style={{ display: "flex", justifyContent: "center", padding: "20px", fontSize: "48px", fontWeight: "600" }}>
@@ -99,6 +123,7 @@ function RequestStore() {
                     <tr style={{ textAlign: "center", fontSize: "18px" }}>
                       <th>วันที่ร้องขอเบิก</th>
                       <th>ประเภทซาก</th>
+                      <th>รหัสสินค้า</th>
                       <th>เกรด</th>
                       <th>จำนวน</th>
                       <th>สถานะดำเนินการ</th>
@@ -111,8 +136,8 @@ function RequestStore() {
                         <Listrequest key={prod.id} listrequest={prod} />
                       ))
                     ) : (
-                      <tr>
-                        <td></td>
+                      <tr style={{ textAlign: "center" }}>
+                        <td colSpan="7">ไม่พบข้อมูล</td>
                       </tr>
                     )}
                   </tbody>
@@ -140,35 +165,9 @@ function RequestStore() {
               ดำเนินการร้องขอเบิกคลังผลิตภัณฑ์
             </Card.Header>
             <Card.Body>
-              <Form.Group>
-                <Form.Label>ประเภทสินค้า :</Form.Label>
-                <Form.Control as="select" name="beeftype"
-                /* onChange={handleChange} */ >
-                  <option>เลือก</option>
-                  <option>เนื้อสันใน</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                </Form.Control>
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>จำนวน :</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="count"
-                  placeholder="จำนวน"
-               /*  value={productData.product_name}
-                onChange={handleChange} */ />
-              </Form.Group>
-              <Button variant="success" style={{
-                justifySelf: "right",
-                float: "right",
-              }}>
-                บันทึก
-              </Button>
+              <RequsetP />
             </Card.Body>
           </Card>
-
         </div>
         <div
           style={{
@@ -204,27 +203,20 @@ function RequestStore() {
                       <th>ประเภทสินค้า</th>
                       <th>รหัสสินค้า</th>
                       <th>จำนวน</th>
+                      <th>สถานะดำเนินการ</th>
                       <th>ยกเลิกรายการ</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {/* {data && data.liststore.length > 0 ? (
-                    data.liststore.map((prod) => (
-                      <List_Store key={prod.id} Liststore={prod} />
-                    ))
-                  ) : ( */}
-                    <tr style={{ textAlign: "center" }}>
-                      <td colSpan="8">ไม่พบข้อมูล</td>
-                    </tr>
-                    <tr style={{ textAlign: "center" }}>
-                      <td colSpan="8">ไม่พบข้อมูล</td>
-                    </tr>
-                    <tr style={{ textAlign: "center" }}>
-                      <td colSpan="8">ไม่พบข้อมูล</td>
-                    </tr>
-                    <tr style={{ textAlign: "center" }}>
-                      <td colSpan="8">ไม่พบข้อมูล</td>
-                    </tr>
+                    {dataP && dataP.listRequestExP.length > 0 ? (
+                      dataP.listRequestExP.map((prod) => (
+                        <ListrequestP key={prod.id} listrequestp={prod} />
+                      ))
+                    ) : (
+                      <tr style={{ textAlign: "center" }}>
+                        <td colSpan="8">ไม่พบข้อมูล</td>
+                      </tr>
+                    )}
                     {/*  )} */}
                   </tbody>
                 </Table>
@@ -233,7 +225,7 @@ function RequestStore() {
           </Card>
         </div>
       </div>
-    </div>
+    </div >
 
   )
 }

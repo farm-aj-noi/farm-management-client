@@ -16,8 +16,8 @@ import gql from "graphql-tag";
 import dayjs from "dayjs";
 
 import { Removebuttoncolor } from "../../../../../utils/buttonColor";
-
 import { Removebutton } from "../../../../../utils/button";
+import Listrequest from "./listrequest"
 
 import Deltereq from "./deletereq";
 import Paper_request from "./paper_request";
@@ -25,14 +25,19 @@ import Paper_request from "./paper_request";
 export const QUERYREQUESTEX = gql`
   query QUERYREQUESTEX {
     listRequestEx {
-      id
-      name
-      quantity
-      requestdate
-      beeftype {
-        nameTH
-      }
+    id
+    name
+    beeftype {
+      code
+      nameTH
     }
+    requestdate
+    quantity
+    status {
+      id
+      nameTH
+    }
+  }
   }
 `;
 
@@ -92,33 +97,21 @@ const index = () => {
               >
                 <thead>
                   <tr style={{ textAlign: "center", fontSize: "18px" }}>
-                    <th>วันที่ขอเบิก</th>
-                    <th>ชื่อผู้ขอเบิก</th>
+                    <th>วันที่ร้องขอเบิก</th>
                     <th>ประเภทซาก</th>
+                    <th>รหัสซาก</th>
                     <th>เกรด</th>
                     <th>จำนวน</th>
-                    <th>ลบ</th>
+                    <th>ดำเนินการ</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {data && data.listRequestEx.length > 0 ? (data.listRequestEx.map((prod) => (
-                    <tr style={{ textAlign: "center" }}>
-                      <td>
-                        {dayjs(prod.requestdate)
-                          .add(543, "year")
-                          .format("DD/MM/YYYY")}
-                      </td>
-                      <td>{prod.name}</td>
-                      <td>{prod.beeftype.nameTH}</td>
-                      <td></td>
-                      <td>{prod.quantity}</td>
-                      <td>
-                        <Deltereq key={prod.id} listreq={prod} />
-                      </td>
-                    </tr>
-                  ))) : (<tr style={{ textAlign: "center" }}>
-                    <td colSpan="6">ไม่พบข้อมูล</td>
-                  </tr>)
+                  {data && data.listRequestEx.length > 0 ? (
+                    data.listRequestEx.map((prod) => (
+                      <Listrequest key={prod.id} listre={prod} />
+                    ))) : (<tr style={{ textAlign: "center" }}>
+                      <td colSpan="6">ไม่พบข้อมูล</td>
+                    </tr>)
                   }
                 </tbody>
               </Table>

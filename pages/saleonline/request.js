@@ -1,6 +1,6 @@
 import React from 'react'
 import Nav from "../../components/Saleonline/Nav/Nav"
-import RequestStore from '../../components/Saleonline/Request/RequestStore'
+import RequestStore from '../../components/Saleonline/Request'
 function requeststore() {
     return (
         <div>

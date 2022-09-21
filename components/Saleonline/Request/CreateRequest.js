@@ -7,6 +7,8 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import Router from "next/router";
 import { AuthContext } from '../../../appState/AuthProvider';
+import { QUERYREQUESTEX } from "../../BeefWarehouse/BeefStore/07Notify/02notify_exportrequest"
+
 
 const CREATEREQUESTEXPORT = gql`
 mutation CREATEREQUESTEXPORT($name: String, $beeftype: String, $status: String, $quantity: String) {
@@ -23,7 +25,7 @@ const CreateRequest = () => {
         name: user.name,
         beeftype: "",
         quantity: "",
-        status: "62821d931768cd521052118b",
+        status: "6280fac6d3dbf7345093676f",
     })
     const [createRequestExport] = useMutation(CREATEREQUESTEXPORT, {
         variables: { ...formrequest },
@@ -46,6 +48,11 @@ const CreateRequest = () => {
                 });
             }
         },
+        refetchQueries: [
+            {
+                query: QUERYREQUESTEX,
+            }
+        ],
     })
 
     const handleChange = (e) => {
@@ -105,7 +112,8 @@ const CreateRequest = () => {
                     name="quantity"
                     placeholder="จำนวน"
                     value={formrequest.quantity}
-                    onChange={handleChange} />
+                    onChange={handleChange}
+                    disabled={!formrequest.beeftype} />
             </Form.Group>
             <Button variant="success" style={{
                 justifySelf: "right",

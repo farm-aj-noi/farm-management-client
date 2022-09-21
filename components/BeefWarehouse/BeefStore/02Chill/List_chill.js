@@ -28,10 +28,10 @@ export const UPDATECHILLSTATUS = gql`
 
 const List_chill = ({ listchill }) => {
   const checkdate = dayjs().locale("th").format("YYYY-MM-DDTHH:mm:ssZ[Z]");
-  console.log(checkdate);
+  // console.log(checkdate);
 
   const [ListChillInfo, SetListChillInfo] = useState(listchill);
-  console.log(ListChillInfo.chilldateEnd);
+  // console.log(ListChillInfo.chilldateEnd);
   /*  console.log(ListChillInfo.chillstatus); */
   const [updateChillday, { error }] = useMutation(UPDATECHILLSTATUS, {
     onCompleted: (data) => {

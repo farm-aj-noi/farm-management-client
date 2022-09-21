@@ -12,29 +12,19 @@ import withReactContent from "sweetalert2-react-content";
 import { check } from "react-icons-kit/fa/check";
 import { close } from "react-icons-kit/fa/close";
 import { Icon } from "react-icons-kit";
-import { QUERYREQUESTEX } from "../../BeefWarehouse/BeefStore/07Notify/02notify_exportrequest"
 
-const DELETEREQUEST = gql`
- mutation DELETEREQ($id: ID) {
-    deleteRequest(id: $id) {
-      id
-      name
-    }
+const DELETEREQUESTEXPORT = gql`
+mutation DELETEREQUESTEXPORT($id: ID) {
+  deleteRequestP(id: $id) {
+    id
   }
-`
+}
+`;
 
-function Listrequest({ listrequest }) {
-    const [inforequest, Setinforequest] = useState(listrequest);
-    console.log(inforequest)
+function ListrequestP({ listrequestp }) {
     const MySwal = withReactContent(Swal);
-    const [deleteRequest] = useMutation(DELETEREQUEST, {
-        refetchQueries: [
-            {
-                query: QUERYREQUESTEX,
-            }
-        ],
-    });
-
+    const [infolistrequestp, SetinfoRequestP] = useState(listrequestp)
+    const [deleteRequestP] = useMutation(DELETEREQUESTEXPORT)
     const DeleteAlert = () => {
         Swal.fire({
             title: 'ต้องการลบข้อมูล?',
@@ -66,12 +56,11 @@ function Listrequest({ listrequest }) {
             }
         })
     }
-
     const handdleSubmitDelete = async () => {
         try {
-            await deleteRequest({
+            await deleteRequestP({
                 variables: {
-                    id: inforequest.id,
+                    id: infolistrequestp.id,
                 },
             });
         } catch (error) {
@@ -81,15 +70,14 @@ function Listrequest({ listrequest }) {
     return (
         <>
             <tr style={{ textAlign: "center" }}>
-                <td>{dayjs(inforequest.requestdate)
+                <td>{dayjs(infolistrequestp.requestdate)
                     .add(543, "year")
                     .format("DD/MM/YYYY")}
                 </td>
-                <td>{inforequest.beeftype.nameTH}</td>
-                <td>{inforequest.beeftype.code}</td>
-                <td>grade</td>
-                <td>{inforequest.quantity}</td>
-                <td>{inforequest.status.id === "63299201e09fd895642f3cab" ?
+                <td>{infolistrequestp.producttype.nameTH}</td>
+                <td>{infolistrequestp.producttype.code}</td>
+                <td>{infolistrequestp.quantity}</td>
+                <td>{infolistrequestp.status.id === "63299201e09fd895642f3cab" ?
                     (
                         <Icon
                             size={20}
@@ -104,7 +92,7 @@ function Listrequest({ listrequest }) {
                         />
                     )}</td>
                 <td>
-                    {inforequest.status.id === "63299201e09fd895642f3cab" ? ("-") : (
+                    {infolistrequestp.status.id === "63299201e09fd895642f3cab" ? ("-") : (
                         <Removebuttoncolor onClick={DeleteAlert}>
                             <Removebutton />
                         </Removebuttoncolor>
@@ -116,4 +104,4 @@ function Listrequest({ listrequest }) {
     )
 }
 
-export default Listrequest
+export default ListrequestP
