@@ -169,11 +169,11 @@ const Nav1 = () => {
                   <NavDropdownItem>ออกรายงานคงคลัง</NavDropdownItem>
                 </Link>
               </DropdownButton>
-              <Link href="/beefwarehouse/beefstore/requestexport">
+             {/*  <Link href="/beefwarehouse/beefstore/requestexport">
                 <NavButtonLeft>
                   <Icon2 height="30px" weight="30px" /> ร้องขอเบิก
                 </NavButtonLeft>
-              </Link>
+              </Link> */}
               <Link href="/beefwarehouse/beefstore/notify/notify_date">
                 <NavButtonLeft>
                   <Icon10 height="30px" weight="30px" /> การแจ้งเตือน

@@ -2,16 +2,25 @@ import React, { useState } from 'react'
 import { DivFrom, HeaderColor, DivFromTop, DivFromDown } from "./SettingFrom";
 import logo from './defultcow.jpg';
 import gql from 'graphql-tag';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 
-const CREATEREPORTSETTING = gql`
-mutation CREATEREPORTSETTING($logo: String, $address: String) {
-  createReportSet(logo: $logo, address: $address) {
+const UPDATEREPORTSETTING = gql`
+mutation Mutation($logo: String, $address: String) {
+  updateLogo(logo: $logo, address: $address) {
     logo
     address
   }
 }
 `
+const QUERYREPORTSETTTING = gql`
+query QUERYREPORTSETTTING {
+  reportlogo {
+    logo
+    address
+  }
+}
+`
+
 function reportsetting() {
     const [file, setFile] = useState(null);
     const [image, setImage] = useState({ preview: "", raw: "" });
@@ -51,7 +60,8 @@ function reportsetting() {
             canvas.width = width;
             canvas.height = height;
             canvas.getContext('2d').drawImage(image, 0, 0, width, height);
-            var dataUrl = canvas.toDataURL('image/jpeg');
+            var dataUrl = canvas.toDataURL('image/png');
+            /* var dataUrl1 = canvas.toDataURL('image/png'); */
             return dataURItoBlob(dataUrl);
         };
         return new Promise(function (ok, no) {
@@ -121,10 +131,23 @@ function reportsetting() {
         setFile(files[0]);
     };
 
+    const { data } = useQuery(QUERYREPORTSETTTING);
+    // console.log(data)
+
     const [inputaddress, SetinputAddress] = useState({
         address: ""
     })
-    const [createReportSet, error] = useMutation(CREATEREPORTSETTING, {
+    const [edit, Setedit] = useState(false)
+
+    const Setreport = () => {
+        Setedit(false),
+            setImage({
+                variables: {
+                    preview: ""
+                }
+            })
+    }
+    const [updateLogo, error] = useMutation(UPDATEREPORTSETTING, {
         onCompleted: (data) => {
             console.log("ผ่านละเหี้ย")
         }
@@ -141,7 +164,7 @@ function reportsetting() {
         try {
             const url = await uploadFile();
             if (url) {
-                await createReportSet({
+                await updateLogo({
                     variables: {
                         logo: url,
                         address: inputaddress.address,
@@ -153,6 +176,8 @@ function reportsetting() {
         }
 
     }
+
+
     return (
         <div style={{ marginTop: "100px" }}>
             <div
@@ -178,7 +203,7 @@ function reportsetting() {
                 <DivFromDown>
                     <div style={{
                         display: "grid",
-                        gridTemplateColumns: "300px 500px ",
+                        gridTemplateColumns: "300px 450px ",
                         padding: "30px",
                         gridColumnGap: "50px",
                     }}>
@@ -195,23 +220,45 @@ function reportsetting() {
                                     display: "flex",
                                     justifyContent: "center",
                                 }}>
-                                    <div style={{
-                                        height: "250px",
-                                        width: "250px",
-                                        overFlow: "hidden",
-                                        background: "f5f5f5c4",
-                                        border: "1px solid #80808014"
-                                    }}>
-                                        <a>
-                                            <div style={{ display: "flex", justifyContent: "center" }}>
-                                                <img style={{ /* objectFit: 'cover', */ width: '100%', /* position: 'inherit', */ }} alt="Image" src={image.preview || logo} />
-                                            </div>
-                                        </a>
+                                    {edit ? (
+                                        <div style={{
+                                            height: "250px",
+                                            width: "250px",
+                                            overFlow: "hidden",
+                                            background: "f5f5f5c4",
+                                            border: "1px solid #80808014"
+                                        }}>
+                                            <a>
+                                                <div style={{ display: "flex", justifyContent: "center" }}>
+                                                    <img style={{ /* objectFit: 'cover', */ width: '100%', /* position: 'inherit', */ }} alt="Image" src={image.preview || data && data.reportlogo[0].logo} />
+                                                </div>
+                                            </a>
+                                        </div>
+                                    ) : (
+                                        <div style={{
+                                            height: "250px",
+                                            width: "250px",
+                                            overFlow: "hidden",
+                                            background: "f5f5f5c4",
+                                            border: "1px solid #80808014"
+                                        }}>
+                                            <a>
+                                                <div style={{ display: "flex", justifyContent: "center" }}>
+                                                    <img style={{ /* objectFit: 'cover', */ width: '100%', /* position: 'inherit', */ }} alt="Image" src={data && data.reportlogo[0].logo} />
+                                                </div>
+                                            </a>
+                                        </div>
+                                    )}
+
+                                </div>
+                                {edit ? (
+                                    <div style={{ padding: "15px", paddingBottom: "0" }}>
+                                        <input type="file" name='file' id="fie" onChange={selectFile} />
                                     </div>
-                                </div>
-                                <div style={{ padding: "15px", paddingBottom: "0" }}>
-                                    <input type="file" name='file' id="fie" onChange={selectFile} />
-                                </div>
+                                ) : (
+                                    ""
+                                )}
+
                             </DivFromDown>
                         </DivFrom>
                         <div style={{
@@ -221,24 +268,50 @@ function reportsetting() {
                             <p style={{
                                 fontSize: "28px",
                                 fontWeight: 600,
+                                margin: 0,
                             }}
                             >ที่อยู่สหกรณ์
                             </p>
-                            <textarea style={{
-                                width: "100%",
-                                height: "100px",
-                                fontSize: "24px",
-                                padding: "10px"
-                            }}
-                                id="address"
-                                name="address"
-                                value={inputaddress.address}
-                                onChange={handleChage}
-                            />
-                            <button style={{ float: "right" }} onClick={handleSubmit}>
-                                บันทึก
-                            </button>
+                            {edit ? (
+                                <textarea style={{
+                                    width: "100%",
+                                    resize: "none",
+                                    border: "1px solid #80808014",
+                                    borderRadius: "4px",
+                                    /*  padding: "5px", */
+                                    fontSize: "18px"
+                                }}
+                                    /*  placeholder={data && data.reportlogo[0].address} */
+                                    id="address"
+                                    name="address"
+                                    value={inputaddress.address || data && data.reportlogo[0].address}
+                                    onChange={handleChage}
+                                >
+                                </textarea>
+                            ) : (
+                                <>
+                                    <p style={{ fontSize: "18px" }}>{data && data.reportlogo[0].address}</p>
+                                </>
+                            )}
+                            {edit ? (
+                                <>
+                                    <button style={{ float: "right" }} onClick={handleSubmit} >
+                                        บันทึก
+                                    </button>
+                                    <button onClick={Setreport} style={{ float: "right", marginRight: "10px" }}>
+                                        ยกเลิก
+                                    </button>
+                                </>
+
+                            ) : (
+                                <button onClick={() => Setedit(true)} style={{ float: "right" }}>
+                                    แก้ไข
+                                </button>
+
+                            )}
+
                         </div>
+                        <p></p>
                     </div>
                 </DivFromDown>
             </DivFrom>
