@@ -20,6 +20,10 @@ query QUERYLISTREQUEST {
     }
     requestdate
     quantity
+    status {
+      id
+      nameTH
+    }
   }
 }
 `

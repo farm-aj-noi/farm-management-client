@@ -80,7 +80,7 @@ function Listrequest({ listrequest }) {
                 <td>{inforequest.beeftype.nameTH}</td>
                 <td>grade</td>
                 <td>{inforequest.quantity}</td>
-                <td></td>
+                <td>{inforequest.status.nameTH}</td>
                 <td>
                     <Removebuttoncolor onClick={DeleteAlert}>
                         <Removebutton />
