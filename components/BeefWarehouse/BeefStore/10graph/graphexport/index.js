@@ -32,7 +32,7 @@ const index = () => {
       enddate: enddate ? enddate : dayjs().endOf('year').format('YYYY-MM-DD'),
     }
   })
-  console.log(startdate)
+  /* console.log(startdate) */
   const [DataChart, setDataChart] = useState({
     labels: [],
     datasets: [
@@ -164,6 +164,7 @@ const index = () => {
     return newChart;
   }
 
+
   const [selectgraph, setSelectgraph] = useState("");
   // console.log(selectgraph);
 
@@ -173,12 +174,12 @@ const index = () => {
         initChartday(datagraph.beefGraph);
       }
     }
-    if (selectgraph == 2) {
+    else if (selectgraph == 2) {
       if (datagraph) {
         initChart(datagraph.beefGraph);
       }
     }
-    if (selectgraph == 3) {
+    else if (selectgraph == 3) {
       if (datagraph) {
         initChartyear(datagraph.beefGraph);
       }
@@ -188,6 +189,7 @@ const index = () => {
         initChart(datagraph.beefGraph);
       }
     }
+    console.log(selectgraph)
     // setcount(api.data.count) // api.data.count from api after update store
   }, [datagraph])
   // console.log({ DataChart })
@@ -274,7 +276,7 @@ const index = () => {
 
           </form>
           <Line data={DataChart} height={100} />
-          <div
+          {/* <div
             style={{
               display: "flex",
               justifyContent: "center",
@@ -282,7 +284,7 @@ const index = () => {
             }}
           >
             <Paper_Graph />
-          </div>
+          </div> */}
         </div>
       </div>
     </>

@@ -4,11 +4,21 @@ import { Table } from "react-bootstrap";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
+import { Icon } from "react-icons-kit";
+import { list } from "react-icons-kit/fa/list";
+
 import { Line, PolarArea, Doughnut, Bar } from "react-chartjs-2";
 import { CategoryScale } from "chart.js";
 Chart.register(CategoryScale);
 import Chart from "chart.js/auto";
 
+import {
+  DivFrom,
+  DivFromTop,
+  DivFromDown,
+  HeaderColor,
+  DivBase1,
+} from "../GraphFrom";
 
 export const EXPORTHALVESSEARCH = gql`
   query EXPORTHALVESSEARCH {
@@ -327,98 +337,121 @@ const statistics = () => {
     ],
   }
   return (
-    <div>
-      <div>
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "0.5fr 300px 300px 300px 0.5fr",
-          marginTop: "10px",
-          gridGap: "40px"
-        }}>
-          <div></div>
-          <div>
-            <div style={{ textAlign: "center", fontSize: "24px", fontWeight: "bold" }}>สถิติการนำเข้า</div>
-            <Bar data={data} height={250}
-            />
-            <Table striped bordered responsive hover style={{ marginTop: "20px" }}>
-              <thead>
-                <tr style={{ textAlign: "center" }}>
-                  <th>ประเภท</th>
-                  <th>จำนวน</th>
-                  <th>น้ำหนักอุ่น / เย็น (กก.)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr style={{ textAlign: "center" }}>
-                  <td>ซากโคผ่าซีก</td>
-                  <td>{imdatahalve ? imdatahalve.imhalveSearch.length : "0"}</td>
-                  <td>
-                    {imdatahalve &&
-                      imdatahalve.imhalveSearch.reduce(
-                        (sum, nex) => sum + nex.halve.weightwarm,
-                        0
-                      ).toFixed(2)}{" "}
-                    /{" "}
-                    {allweightimport[0].toFixed(2)}
-                  </td>
-                </tr>
-
-                <tr style={{ textAlign: "center" }}>
-                  <td>ซากโคสี่เสี้ยว</td>
-                  <td>{imdataquarter ? imdataquarter.imquartSearch.length : "0"}</td>
-                  <td>
-                    0.00 /{" "}
-                    {allweightimport[1].toFixed(2)}
-                  </td>
-                </tr>
-                <tr style={{ textAlign: "center" }}>
-                  <td>ก้อนเนื้อ</td>
-                  <td>{imdatalump ? imdatalump.imlumpSearch.length : "0"}</td>
-                  <td>
-                    0.00 /{" "}
-                    {allweightimport[2].toFixed(2)}
-                  </td>
-                </tr>
-                <tr style={{ textAlign: "center" }}>
-                  <td>ชิ้นเนื้อ</td>
-                  <td>{imdatachop ? imdatachop.imchopSearch.length : "0"}</td>
-                  <td>
-                    0.00 /{" "}
-                    {allweightimport[3].toFixed(2)}
-                  </td>
-                </tr>
-                <tr style={{ textAlign: "center" }}>
-                  <td>ส่วนอื่น ๆ</td>
-                  <td>{imdataen ? imdataen.imentrailSearch.length : "0"}</td>
-                  <td>-</td>
-                </tr>
-                <tr style={{ textAlign: "center", }}>
-                  <td style={{ fontWeight: "bold" }}>รวม</td>
-                  <td>
-                    {allimport.reduce(
-                      (sum, nex) => sum + nex,
-                      0
-                    )}
-                  </td>
-                  <td>
-                    {imdatahalve &&
-                      imdatahalve.imhalveSearch.reduce(
-                        (sum, nex) => sum + nex.halve.weightwarm,
-                        0
-                      ).toFixed(2)} /{" "}
-                    {allweightimport.reduce(
-                      (sum, nex) => sum + nex,
-                      0
-                    )}
-                  </td>
-                </tr>
-              </tbody>
-            </Table>
+    <>
+      <DivFrom style={{ marginTop: "20px" }}>
+        <DivFromTop>
+          <div style={{ margin: "-3px 5px 0px 0px" }}>
+            <Icon size={20} icon={list} />
           </div>
+          ราลละเอียดข้อมูลสถิตินำเข้า
+        </DivFromTop>
+        <DivFromDown>
           <div>
-            <div style={{ textAlign: "center", fontSize: "24px", fontWeight: "bold" }}>สถิติการนำออก</div>
-            <Bar data={data1} height={250} />
-            <Table striped bordered responsive hover style={{ marginTop: "20px" }}>
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: "0.5fr 650px 350px 0.5fr",
+              marginTop: "10px",
+              gridGap: "40px"
+            }}>
+              <div></div>
+              <div><Bar data={data} height={170} /></div>
+              <div>
+                <Table striped bordered responsive hover style={{ marginTop: "20px" }}>
+                  <thead>
+                    <tr style={{ textAlign: "center" }}>
+                      <th>ประเภท</th>
+                      <th>จำนวน</th>
+                      <th>น้ำหนักอุ่น / เย็น (กก.)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr style={{ textAlign: "center" }}>
+                      <td>ซากโคผ่าซีก</td>
+                      <td>{imdatahalve ? imdatahalve.imhalveSearch.length : "0"}</td>
+                      <td>
+                        {imdatahalve &&
+                          imdatahalve.imhalveSearch.reduce(
+                            (sum, nex) => sum + nex.halve.weightwarm,
+                            0
+                          ).toFixed(2)}{" "}
+                        /{" "}
+                        {allweightimport[0].toFixed(2)}
+                      </td>
+                    </tr>
+
+                    <tr style={{ textAlign: "center" }}>
+                      <td>ซากโคสี่เสี้ยว</td>
+                      <td>{imdataquarter ? imdataquarter.imquartSearch.length : "0"}</td>
+                      <td>
+                        0.00 /{" "}
+                        {allweightimport[1].toFixed(2)}
+                      </td>
+                    </tr>
+                    <tr style={{ textAlign: "center" }}>
+                      <td>ก้อนเนื้อ</td>
+                      <td>{imdatalump ? imdatalump.imlumpSearch.length : "0"}</td>
+                      <td>
+                        0.00 /{" "}
+                        {allweightimport[2].toFixed(2)}
+                      </td>
+                    </tr>
+                    <tr style={{ textAlign: "center" }}>
+                      <td>ชิ้นเนื้อ</td>
+                      <td>{imdatachop ? imdatachop.imchopSearch.length : "0"}</td>
+                      <td>
+                        0.00 /{" "}
+                        {allweightimport[3].toFixed(2)}
+                      </td>
+                    </tr>
+                    <tr style={{ textAlign: "center" }}>
+                      <td>ส่วนอื่น ๆ</td>
+                      <td>{imdataen ? imdataen.imentrailSearch.length : "0"}</td>
+                      <td>-</td>
+                    </tr>
+                    <tr style={{ textAlign: "center", }}>
+                      <td style={{ fontWeight: "bold" }}>รวม</td>
+                      <td>
+                        {allimport.reduce(
+                          (sum, nex) => sum + nex,
+                          0
+                        )}
+                      </td>
+                      <td>
+                        {imdatahalve &&
+                          imdatahalve.imhalveSearch.reduce(
+                            (sum, nex) => sum + nex.halve.weightwarm,
+                            0
+                          ).toFixed(2)} /{" "}
+                        {allweightimport.reduce(
+                          (sum, nex) => sum + nex,
+                          0
+                        )}
+                      </td>
+                    </tr>
+                  </tbody>
+                </Table>
+              </div>
+            </div>
+          </div>
+        </DivFromDown>
+      </DivFrom >
+      <DivFrom style={{ marginTop: "20px" }}>
+        <DivFromTop>
+          <div style={{ margin: "-3px 5px 0px 0px" }}>
+            <Icon size={20} icon={list} />
+          </div>
+          รายละเอียดข้อมูลสถิตินำออก
+        </DivFromTop>
+        <DivFromDown>
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "0.5fr 650px 350px 0.5fr",
+            marginTop: "10px",
+            gridGap: "40px"
+          }}>
+            <div></div>
+            <div><Bar data={data1} height={170} /></div>
+            <div><Table striped bordered responsive hover style={{ marginTop: "20px" }}>
               <thead>
                 <tr style={{ textAlign: "center" }}>
                   <th>ประเภท</th>
@@ -496,11 +529,27 @@ const statistics = () => {
                 </tr>
               </tbody>
             </Table>
+            </div>
           </div>
-          <div>
-            <div style={{ textAlign: "center", fontSize: "24px", fontWeight: "bold" }}>สถิติยอดคงคลัง</div>
-            <Bar data={data2} height={250} />
-            <Table striped bordered responsive hover style={{ marginTop: "20px" }}>
+        </DivFromDown>
+      </DivFrom>
+      <DivFrom style={{ marginTop: "20px" }}>
+        <DivFromTop>
+          <div style={{ margin: "-3px 5px 0px 0px" }}>
+            <Icon size={20} icon={list} />
+          </div>
+          รายละเอียดข้อมูลสถิติคงคลัง
+        </DivFromTop>
+        <DivFromDown>
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "0.5fr 650px 350px 0.5fr",
+            marginTop: "10px",
+            gridGap: "40px"
+          }}>
+            <div></div>
+            <div><Bar data={data2} height={170} /></div>
+            <div><Table striped bordered responsive hover style={{ marginTop: "20px" }}>
               <thead>
                 <tr style={{ textAlign: "center" }}>
                   <th>ประเภท</th>
@@ -566,11 +615,11 @@ const statistics = () => {
                   </td>
                 </tr>
               </tbody>
-            </Table>
+            </Table></div>
           </div>
-        </div>
-      </div>
-    </div >
+        </DivFromDown>
+      </DivFrom>
+    </>
   );
 };
 

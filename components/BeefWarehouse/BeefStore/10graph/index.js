@@ -61,17 +61,7 @@ export const index = () => {
             <Graphexport />
           </DivFromDown>
         </DivFrom>
-        <DivFrom style={{ marginTop: "20px" }}>
-          <DivFromTop>
-            <div style={{ margin: "-3px 5px 0px 0px" }}>
-              <Icon size={20} icon={list} />
-            </div>
-            ราลละเอียดข้อมูลสถิตินำเข้า - เบิกออก - คงคลัง
-          </DivFromTop>
-          <DivFromDown>
             <Stat />
-          </DivFromDown>
-        </DivFrom>
       </DivBase1>
     </div>
   );
