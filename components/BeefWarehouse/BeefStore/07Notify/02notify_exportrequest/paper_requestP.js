@@ -29,7 +29,7 @@ pdfMake.fonts = {
   },
 };
 
-const Paper_request = ({ prod }) => {
+const Paper_requestP = ({ prod }) => {
   const [data, setdata] = useState(prod);
   const { user } = useContext(AuthContext);
 
@@ -40,7 +40,7 @@ const Paper_request = ({ prod }) => {
   const buildTableBody = (data, columns) => {
     var body = [];
 
-    body.push(["วันที่ขอเบิก", "ซากโค", "ประเภทซาก", "รหัสซาก", "เกรด"]);
+    body.push(["วันที่ขอเบิก", "ซากโค", "ประเภทซาก", "รหัสซาก"]);
     console.log(data);
 
     data.forEach(function (row) {
@@ -56,9 +56,7 @@ const Paper_request = ({ prod }) => {
           dataRow.push(row.beeftype.nameTH);
         } else if (column === "beeftype.code") {
           dataRow.push(row.beeftype.code);
-        } else if (column === "grade") {
-          dataRow.push(row.grade ? row.grade : "-");
-        } else if (column === "typemeat") {
+        }  else if (column === "typemeat") {
           dataRow.push(row.typemeat ? row.typemeat : "-");
         }
         else {
@@ -82,7 +80,7 @@ const Paper_request = ({ prod }) => {
       table: {
         headerRows: 1,
         // alignment: 'center'
-        widths: ["star", "star", "star", "star", "star"],
+        widths: ["star", "star", "star", "star"],
 
         body: buildTableBody(data, columns),
       },
@@ -127,7 +125,7 @@ const Paper_request = ({ prod }) => {
           style: "header",
           alignment: "center",
         },
-        table(data, ["requestdate", "typemeat", "beeftype.nameTH", "beeftype.code", "grade"]),
+        table(data, ["requestdate", "typemeat", "beeftype.nameTH", "beeftype.code"]),
       ],
 
       footer: function (currentPage, pageCount) {
@@ -199,4 +197,4 @@ const Paper_request = ({ prod }) => {
   );
 };
 
-export default Paper_request;
+export default Paper_requestP;

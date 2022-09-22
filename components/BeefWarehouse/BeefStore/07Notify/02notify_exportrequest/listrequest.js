@@ -44,6 +44,7 @@ function listrequest({ listre }) {
           .add(543, "year")
           .format("DD/MM/YYYY")}
         </td>
+        <td>{infore.typemeat ? infore.typemeat : "-"}</td>
         <td>{infore.beeftype.nameTH}</td>
         <td>{infore.beeftype.code}</td>
         <td>{infore.grade ? (infore.grade) : ("-")}</td>

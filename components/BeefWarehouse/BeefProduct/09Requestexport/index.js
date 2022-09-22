@@ -14,19 +14,24 @@ import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
 import dayjs from "dayjs";
-
+import ListRequest from "./listRequest";
+import ListRequestP from "../../BeefStore/07Notify/02notify_exportrequest/listRequestP";
 
 const QUERYRE = gql`
 query QUERYRE {
-  listRequestExP {
+  listRequestProduct {
     id
-    producttype {
-    code
-    nameTH
-    }
-    quantity
     name
+    typemeat
+    beeftype {
+      nameTH
+      code
+    }
     requestdate
+    status {
+      id
+      nameTH
+    }
   }
 }
 `;
@@ -95,7 +100,7 @@ function index() {
                         รายการร้องขอเบิก
                     </DivFromTop>
                     <DivFromDown>
-                        <div style={{ height: `${data && data.listRequestExP.length > 9 ? "500px" : ""}`, overflow: `${data && data.listRequestExP.length > 9 ? "auto" : ""}` }}>
+                        <div>
                             <Table
                                 striped
                                 bordered
@@ -105,24 +110,26 @@ function index() {
                             >
                                 <thead>
                                     <tr style={{ textAlign: "center" }}>
-                                        <th>วันที่ขอเบิก</th>
-                                        <th>ชื่อผู้ขอเบิก</th>
-                                        <th>ประเภทสินค้า</th>
-                                        <th>รหัสสินค้า</th>
-                                        <th>จำนวน</th>
+                                        <th>วันที่ร้องขอเบิก</th>
+                                        <th>ซากโค</th>
+                                        <th>ประเภทซาก</th>
+                                        <th>รหัสซาก</th>
+                                        <th>สถานะดำเนินการ</th>
+                                        <th>ยกเลิกรายการ</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {data && data.listRequestExP.map((prod) => (
-                                        <tr style={{ textAlign: "center" }}>
-                                            <td>{dayjs(prod.requestdate)
-                                                .add(543, "year")
-                                                .format("DD/MM/YYYY")}</td>
-                                            <td>{prod.name}</td>
-                                            <td>{prod.producttype.nameTH}</td>
-                                            <td>{prod.producttype.code}</td>
-                                            <td>{prod.quantity}</td>
-                                        </tr>
+                                    {data && data.listRequestProduct.map((prod) => (
+                                        <ListRequest key={prod.id} list={prod} />
+                                        /*   <tr style={{ textAlign: "center" }}>
+                                               <td>{dayjs(prod.requestdate)
+                                                   .add(543, "year")
+                                                   .format("DD/MM/YYYY")}</td>
+                                               <td>{prod.name}</td>
+                                               <td>{prod.producttype.nameTH}</td>
+                                               <td>{prod.producttype.code}</td>
+                                               <td>{prod.quantity}</td>
+                                           </tr> */
                                     ))}
                                 </tbody>
                             </Table>

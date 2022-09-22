@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import { DivFromInsideLeft, Searchinput, Savebutton1 } from "./RequestFrom";
 
@@ -7,28 +7,13 @@ import gql from "graphql-tag";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-
+import { AuthContext } from '../../../../appState/AuthProvider';
 import Router from "next/router";
 
-const QUERYTYPE = gql`
-  query QUERYTYPE {
-    allproducttype {
-      id
-      code
-      nameTH
-      nameEN
-      BBE
-      unit {
-        name
-        id
-      }
-    }
-  }
-`;
 
 const CREATEREQUESTPRODUCT = gql`
-mutation CreateRequestProduct($name: String, $typemeat: String, $beeftype: String) {
-    CREATEREQUESTPRODUCT(name: $name, typemeat: $typemeat, beeftype: $beeftype) {
+mutation CREATEREQUESTPRODUCT($name: String, $typemeat: String, $beeftype: String) {
+    createRequestProduct(name: $name, typemeat: $typemeat, beeftype: $beeftype) {
     id
   }
 }
@@ -38,12 +23,36 @@ mutation CreateRequestProduct($name: String, $typemeat: String, $beeftype: Strin
 
 function create() {
     const MySwal = withReactContent(Swal);
+    const { user, signout } = useContext(AuthContext);
     const [infore, setinfore] = useState({
-        name: "",
-        producttype: "",
-        quantity: "",
+        name: user.name,
+        typemeat: "",
+        beeftype: "",
     });
-
+    const [createRequestProduct] = useMutation(CREATEREQUESTPRODUCT, {
+        variables: {
+            ...infore
+        },
+        onCompleted: (data) => {
+            if (data) {
+                setinfore({
+                    typemeat: "",
+                    beeftype: "",
+                });
+                MySwal.fire({
+                    icon: "success",
+                    title: "สำเร็จ",
+                    text: "ทำการร้องขอเบิกเสร็จสิ้น",
+                    confirmButtonText: (
+                        <span onClick={() => Router.reload("beefwarehouse/beefproduct/requestexport")}>
+                            ตกลง
+                        </span>
+                    ),
+                    confirmButtonColor: "#3085d6",
+                });
+            }
+        }
+    })
 
 
     const handleChange = (e) => {
@@ -56,7 +65,7 @@ function create() {
     const handleSubmit = async (e) => {
         try {
             e.preventDefault();
-            await createRequestExportP();
+            await createRequestProduct();
         } catch (error) {
             console.log(error);
         }
@@ -67,7 +76,7 @@ function create() {
         <div>
             <form>
                 <DivFromInsideLeft style={{ marginTop: "5px" }}>
-                    ประเภทสินค้า :
+                    ซากโค :
                     <div
                         style={{
                             display: "grid",
@@ -76,10 +85,9 @@ function create() {
                     >
                         <div style={{ display: "inline", width: "170px" }}>
                             <select
-                                value={infore.producttype}
-                                name="producttype"
-                               /*  onChange={handleChange}
-                                disabled={!infore.name} */
+                                value={infore.typemeat}
+                                name="typemeat"
+                                onChange={handleChange}
                                 style={{
                                     height: "35px",
                                     width: "160px",
@@ -90,13 +98,14 @@ function create() {
                                 }}
                             >
                                 <option value="">เลือก</option>
-                                
+                                <option value="ก้อนเนื้อ">ก้อนเนื้อ</option>
+                                <option value="ชิ้นเนื้อ">ชิ้นเนื้อ</option>
                             </select>
                         </div>
                     </div>
                 </DivFromInsideLeft>
                 <DivFromInsideLeft style={{ marginTop: "5px" }}>
-                    ประเภทสินค้า :
+                    ประเภทซาก :
                     <div
                         style={{
                             display: "grid",
@@ -105,10 +114,10 @@ function create() {
                     >
                         <div style={{ display: "inline", width: "170px" }}>
                             <select
-                                value={infore.producttype}
-                                name="producttype"
-                                /* onChange={handleChange}
-                                disabled={!infore.name} */
+                                value={infore.beeftype}
+                                name="beeftype"
+                                onChange={handleChange}
+                                disabled={!infore.typemeat}
                                 style={{
                                     height: "35px",
                                     width: "160px",
@@ -119,7 +128,24 @@ function create() {
                                 }}
                             >
                                 <option value="">เลือก</option>
-                                
+                                <option value="5f446195ecd6732ad8108684">เนื้อสันคอ</option>
+                                <option value="5f4461a8ecd6732ad8108685">ที-โบน</option>
+                                <option value="5f4461bfecd6732ad8108686">เนื้อสันนอก</option>
+                                <option value="5f4461d6ecd6732ad8108687">ที-โบน สเต็ก</option>
+                                <option value="5f44620cecd6732ad8108688">ริบอาย</option>
+                                <option value="5f446224ecd6732ad8108689">ใบบัวสเต็ก</option>
+                                <option value="5f44623aecd6732ad810868a">เนื้อสันใน</option>
+                                <option value="5f44624fecd6732ad810868b">สันสะโพก</option>
+                                <option value="5f446262ecd6732ad810868c">เสือร้องไห้</option>
+                                <option value="5f44628decd6732ad810868d">เนื้อซี่โครง</option>
+                                <option value="5f4462a4ecd6732ad810868e">พับใน</option>
+                                <option value="5f4462b6ecd6732ad810868f">ตะพาบ</option>
+                                <option value="5f4462c8ecd6732ad8108690">ลูกมะพร้าว</option>
+                                <option value="5f4462ddecd6732ad8108691">ปลาบู่ทอง</option>
+                                <option value="5f4462eeecd6732ad8108692">ใบพาย</option>
+                                <option value="5f4462feecd6732ad8108693">หางตะเข้</option>
+                                <option value="5f44630fecd6732ad8108694">น่อง</option>
+                                <option value="5f446320ecd6732ad8108695">พับนอก</option>
                             </select>
                         </div>
                     </div>
@@ -133,7 +159,8 @@ function create() {
                         paddingBottom: "10px",
                     }}
                 >
-                    <Savebutton1 /* onClick={handleSubmit} disabled={!infore.producttype || !infore.name || !infore.quantity} style={{ backgroundColor: `${!infore.producttype || !infore.name || !infore.quantity ? "gray" : ""}`, }} */>บันทึก</Savebutton1>
+                    <Savebutton1 onClick={handleSubmit} disabled={!infore.beeftype || !infore.typemeat}
+                        style={{ backgroundColor: `${!infore.beeftype || !infore.typemeat ? "gray" : ""}`, }}>บันทึก</Savebutton1>
                 </div>
             </form>
         </div>

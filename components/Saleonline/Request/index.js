@@ -16,6 +16,7 @@ import ListrequestP from './ListrequestP';
 export const QUERYLISTREQUEST = gql`
 query QUERYLISTREQUEST {
   listRequestEx {
+    typemeat
     id
     name
     beeftype {
@@ -121,6 +122,7 @@ function RequestStore() {
                   <thead>
                     <tr style={{ textAlign: "center", fontSize: "18px" }}>
                       <th>วันที่ร้องขอเบิก</th>
+                      <th>ซากโค</th>
                       <th>ประเภทซาก</th>
                       <th>รหัสซาก</th>
                       <th>เกรด</th>

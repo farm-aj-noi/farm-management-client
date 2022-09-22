@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 
 import { AuthContext } from "../../../../../appState/AuthProvider";
 
@@ -45,40 +45,26 @@ const Paper_chill = ({ prod }) => {
   const [data, setdata] = useState(prod);
   const { user } = useContext(AuthContext);
   const { data: reportlogo1 } = useQuery(QUERYREPORTSETTTING);
-  /*   console.log(reportlogo); */
-
-
-
-
-  /*   const getBase64FromUrl = async (url) => {
-      const data = await fetch(url);
-      const blob = await data.blob();
-      return new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(blob);
-        reader.onloadend = () => {
-          const base64data = reader.result;
-          resolve(base64data);
-        }
-      }
-      );
-    }
-    const test = getBase64FromUrl(reportlogo1 && reportlogo1.reportlogo[0].logo) */
-
-  const toDataURL = url => fetch(url)
-    .then(response => response.blob())
-    .then(blob => new Promise((resolve, reject) => {
-      const reader = new FileReader()
-      reader.onloadend = () => resolve(reader.result)
-      reader.onerror = reject
-      reader.readAsDataURL(blob)
-    }))
 
 
 
 
 
+  /*  const getBase64FromUrl = async (url) => {
 
+     const data = await fetch(url);
+     const blob = await data.blob();
+     return new Promise((resolve) => {
+       const reader = new FileReader();
+       reader.readAsDataURL(blob);
+       reader.onloadend = () => {
+         const base64data = reader.result;
+         resolve(base64data);
+       }
+     }
+     );
+   }
+   
   /*   getBase64FromUrl(test).then(console.log) */
   /* const test = getBase64FromUrl(reportlogo1 && reportlogo1.reportlogo[0].address)
   console.log(test) */
@@ -208,13 +194,12 @@ const Paper_chill = ({ prod }) => {
             },
           ],
         },
-        /* {
-          image: '',
-          width: 100,
-          height: 100,
-          alignment: "center",
-
-        }, */
+        /*  {
+           image: ,
+           width: 100,
+           height: 100,
+           alignment: "center",
+         }, */
         {
           text: `${reportlogo1 && reportlogo1.reportlogo[0].address}`,
           alignment: "center",
@@ -247,7 +232,7 @@ const Paper_chill = ({ prod }) => {
               columns: [
                 {
                   style: "confirm",
-                  text: `ผู้พิมพ์รายงาน\n..........................................................\n(.......................................................... ) \nตำแหน่ง ${user.name} `,
+                  text: `ผู้พิมพ์รายงาน\n..........................................................\n(..........................................................) \nตำแหน่ง ${user.name} `,
                 },
                 {
                   style: "confirm",
