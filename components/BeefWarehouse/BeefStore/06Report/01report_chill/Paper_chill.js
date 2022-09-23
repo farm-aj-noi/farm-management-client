@@ -47,27 +47,31 @@ const Paper_chill = ({ prod }) => {
   const { data: reportlogo1 } = useQuery(QUERYREPORTSETTTING);
 
 
+  /* 
+    const getBase64FromUrl = async (url) => {
+  
+      const data = await fetch(url);
+      const blob = await data.blob();
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(blob);
+        reader.onloadend = () => {
+          const base64data = reader.result;
+          resolve(base64data);
+        }
+      }
+      );
+    }
+  
+    const test = async () => {
+      const result = await getBase64FromUrl(reportlogo1 && reportlogo1.reportlogo[0].logo);
+      console.log(result)
+      return result
+    } */
 
-
-
-  /*  const getBase64FromUrl = async (url) => {
-
-     const data = await fetch(url);
-     const blob = await data.blob();
-     return new Promise((resolve) => {
-       const reader = new FileReader();
-       reader.readAsDataURL(blob);
-       reader.onloadend = () => {
-         const base64data = reader.result;
-         resolve(base64data);
-       }
-     }
-     );
-   }
-   
   /*   getBase64FromUrl(test).then(console.log) */
   /* const test = getBase64FromUrl(reportlogo1 && reportlogo1.reportlogo[0].address)
-  console.log(test) */
+  console.log(test)
 
 
 
@@ -178,12 +182,20 @@ const Paper_chill = ({ prod }) => {
         {
           columns: [
             {
+              image: `${reportlogo1 && reportlogo1.reportlogo[0].logo}`,
+              width: 50,
+              height: 50,
+              style: "printer"
+            },
+            {
               // auto-sized columns have their widths based on their content
-              width: "*",
-              text: `ผู้พิมพ์ ${user.name}`,
+              width: 150,
+              text: `${reportlogo1 && reportlogo1.reportlogo[0].address}`,
+              /* text: `ผู้พิมพ์ ${user.name}`, */
               style: "printer",
             },
             {
+              // auto-sized columns have their widths based on their content
               width: "*",
               text: `${dayjs()
                 .add(543, "y")
@@ -193,21 +205,36 @@ const Paper_chill = ({ prod }) => {
               style: "date",
             },
           ],
+          columnGap: 10
         },
+        /* {
+          columns: [
+            {
+
+            },
+            {
+              // auto-sized columns have their widths based on their content
+              width: "*",
+              text: `${dayjs()
+                .add(543, "y")
+                .locale("th")
+                .format("วันที่พิมพ์ วันdddd ที่ DD เดือนMMMM พ.ศ.YYYY")
+                }`,
+              style: "date",
+            },
+          ]
+        }, */
         /*  {
-           image: ,
+           image: `${reportlogo1 && reportlogo1.reportlogo[0].logo}`,
            width: 100,
            height: 100,
            alignment: "center",
          }, */
         {
-          text: `${reportlogo1 && reportlogo1.reportlogo[0].address}`,
-          alignment: "center",
-        },
-        {
           text: "รายงานบ่มซาก\n\n",
           style: "header",
           alignment: "center",
+          margin: 0,
         },
         table(data, [
           "user.name",

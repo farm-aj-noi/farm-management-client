@@ -129,6 +129,19 @@ const Submit_Export = () => {
             </div>
           </DivFromInsideLeft>
           <DivFromInsideLeft style={{ marginTop: "5px" }}>
+            สถานะเบิก :
+            <div
+              style={{
+                display: "grid",
+                gridTemplateRows: "1fr 15px",
+              }}
+            >
+              <div style={{ display: "inline", width: "170px" }}>
+                <Searchinput type="text" disabled value="นำจำหน่าย" style={{ textAlign: "center" }} />
+              </div>
+            </div>
+          </DivFromInsideLeft>
+          <DivFromInsideLeft>
             ผู้ขอเบิก :
             <div
               style={{
@@ -152,26 +165,9 @@ const Submit_Export = () => {
                   }}
                 >
                   <option value="">รายชื่อ</option>
-                  {requestdata &&
-                    requestdata.listRequestEx.map((prod) => (
-                      <option key={prod.id} value={prod.id}>
-                        {prod.name}
-                      </option>
-                    ))}
+                  {/* <option value="admin">Admin</option>  */}
+                  <option value="seller">Seller</option>
                 </select>
-              </div>
-            </div>
-          </DivFromInsideLeft>
-          <DivFromInsideLeft>
-            สถานะเบิก :
-            <div
-              style={{
-                display: "grid",
-                gridTemplateRows: "1fr 15px",
-              }}
-            >
-              <div style={{ display: "inline", width: "170px" }}>
-                <Searchinput type="text" disabled value="นำจำหน่าย" style={{ textAlign: "center" }} />
               </div>
             </div>
           </DivFromInsideLeft>

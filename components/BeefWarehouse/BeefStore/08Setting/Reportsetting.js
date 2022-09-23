@@ -77,6 +77,35 @@ function reportsetting() {
         });
     }
 
+    const convertBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+            const fileReader = new FileReader();
+            fileReader.readAsDataURL(file);
+
+            fileReader.onload = () => {
+                resolve(fileReader.result);
+            };
+
+            fileReader.onerror = (error) => {
+                reject(error);
+            };
+        });
+    };
+
+    /* const getBase64FromUrl = async (url) => {
+        const data = await fetch(url);
+        const blob = await data.blob();
+        return new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(blob);
+            reader.onloadend = () => {
+                const base64data = reader.result;
+                resolve(base64data);
+            }
+        });
+    } */
+
+
     const uploadFile = async () => {
         const data = new FormData();
         var file_upload
@@ -90,7 +119,7 @@ function reportsetting() {
         }).catch(function (err) {
             console.error(err);
         });
-        data.append("file", file_upload);
+        /* data.append("file", file_upload);
         data.append("upload_preset", "next-test");
         const res = await fetch(
             "https://api.cloudinary.com/v1_1/djnasfo5s/image/upload",
@@ -99,25 +128,17 @@ function reportsetting() {
                 body: data
             }
         );
-        const result = await res.json();
-        //   console.log(result)
+        const result = await res.json(); */
+        const result = await convertBase64(file);
+        console.log(result)
+        return result
+
 
         return result.secure_url;
     };
     //base 64
-    /*   const getBase64FromUrl = async (url) => {
-          const data = await fetch(url);
-          const blob = await data.blob();
-          return new Promise((resolve) => {
-              const reader = new FileReader();
-              reader.readAsDataURL(blob);
-              reader.onloadend = () => {
-                  const base64data = reader.result;
-                  resolve(base64data);
-              }
-          });
-      }
-      getBase64FromUrl('https://res.cloudinary.com/djnasfo5s/image/upload/v1663390245/next-test/nblzl3bdev00rzi18u9w.jpg').then(console.log) */
+
+
 
     const selectFile = e => {
         const files = e.target.files;
@@ -203,7 +224,7 @@ function reportsetting() {
                 <DivFromDown>
                     <div style={{
                         display: "grid",
-                        gridTemplateColumns: "300px 450px ",
+                        gridTemplateColumns: "300px 420px ",
                         padding: "30px",
                         gridColumnGap: "50px",
                     }}>
@@ -309,9 +330,7 @@ function reportsetting() {
                                 </button>
 
                             )}
-
                         </div>
-                        <p></p>
                     </div>
                 </DivFromDown>
             </DivFrom>

@@ -153,7 +153,7 @@ const index = () => {
                   justifyContent: "center",
                 }}
               >
-                <from style={{ fontSize: "20px" }}>
+                <div style={{ fontSize: "20px" }}>
                   <label
                     for="beef"
                     style={{
@@ -301,7 +301,7 @@ const index = () => {
                     }}
                     onChange={(event) => SetEndDateChange(event.target.value)}
                   ></input>
-                </from>
+                </div>
               </div>
             </DivFromDown>
           </DivFrom>

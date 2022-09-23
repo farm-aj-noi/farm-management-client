@@ -22,18 +22,10 @@ export const CREATEEXPORTHALVE = gql`
   }
 `;
 
-export const LISTREQUEST = gql`
-  query LISTREQUEST {
-    listRequestEx {
-      id
-      name
-    }
-  }
-`;
+
 
 const Submit_Export = () => {
   const MySwal = withReactContent(Swal);
-  const { data: requestdata } = useQuery(LISTREQUEST);
   const [ExporthalvesInfo, setExporthalvesInfo] = useState({
     barcode: "",
     storestatus: "",
@@ -165,73 +157,49 @@ const Submit_Export = () => {
               </div>
             </div>
           </DivFromInsideLeft>
-          {ExporthalvesInfo.storestatus === "6280fac6d3dbf7345093676f" ? (
-            <DivFromInsideLeft>
-              ผู้ขอเบิก :
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateRows: "1fr 15px",
-                }}
-              >
-                <div style={{ display: "inline", width: "170px" }}>
-                  <select
-                    name="exporter"
-                    value={ExporthalvesInfo.exporter}
-                    onChange={handleChange}
-                    disabled={!ExporthalvesInfo.barcode}
-                    style={{
-                      height: "35px",
-                      width: "160px",
-                      border: "1px solid #AFAFAF",
-                      borderRadius: "4px",
-                      textAlign: "center",
-                      fontSize: "16px",
-                    }}
-                  >
-                    <option value="">รายชื่อ</option>
-                    <option value="admin">Admin</option>
-                    <option value="seller">Seller</option>
-                  </select>
-                </div>
-              </div>
-            </DivFromInsideLeft>
-          ) : (
-            ExporthalvesInfo.storestatus === "6280fa87d3dbf7345093676e" ? (
-              <DivFromInsideLeft>
-                ผู้ขอเบิก :
-                <div
+          <DivFromInsideLeft>
+            ผู้ขอเบิก :
+            <div
+              style={{
+                display: "grid",
+                gridTemplateRows: "1fr 15px",
+              }}
+            >
+              <div style={{ display: "inline", width: "170px" }}>
+                <select
+                  name="exporter"
+                  value={ExporthalvesInfo.exporter}
+                  onChange={handleChange}
+                  disabled={!ExporthalvesInfo.storestatus}
                   style={{
-                    display: "grid",
-                    gridTemplateRows: "1fr 15px",
+                    height: "35px",
+                    width: "160px",
+                    border: "1px solid #AFAFAF",
+                    borderRadius: "4px",
+                    textAlign: "center",
+                    fontSize: "16px",
                   }}
                 >
-                  <div style={{ display: "inline", width: "170px" }}>
-                    <select
-                      name="exporter"
-                      value={ExporthalvesInfo.exporter}
-                      onChange={handleChange}
-                      disabled={!ExporthalvesInfo.barcode}
-                      style={{
-                        height: "35px",
-                        width: "160px",
-                        border: "1px solid #AFAFAF",
-                        borderRadius: "4px",
-                        textAlign: "center",
-                        fontSize: "16px",
-                      }}
-                    >
-                      <option value="">รายชื่อ</option>
-                      <option value="admin">Admin</option>
-                      <option value="Slaughter">Slaughter</option>
-                    </select>
-                  </div>
-                </div>
-              </DivFromInsideLeft>
-            ) : (
-              ""
-            )
-          )}
+                  <option value="">รายชื่อ</option>
+                  {ExporthalvesInfo.storestatus === "6280fac6d3dbf7345093676f" ? (
+                    <>
+                      {/* <option value="admin">Admin</option> */}
+                      <option value="seller">Seller</option>
+                    </>
+                  ) : (
+                    ExporthalvesInfo.storestatus === "6280fa87d3dbf7345093676e" ? (
+                      <>
+                        {/* <option value="admin">Admin</option> */}
+                        <option value="Slaughter">Slaughter</option>
+                      </>
+                    ) : (
+                      ""
+                    )
+                  )}
+                </select>
+              </div>
+            </div>
+          </DivFromInsideLeft>
           <div
             style={{
               display: "inline-block",

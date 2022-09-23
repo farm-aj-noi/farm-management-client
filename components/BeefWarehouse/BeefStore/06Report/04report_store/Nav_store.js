@@ -28,7 +28,7 @@ const Nav_report = (Sidenumber) => {
           </div>
           ประเภทออกรายงานคงคลัง
         </DivFromTop>
-        <div>
+        <DivFromDown>
           <div style={{ margin: "auto", minWidth: "100%" }}>
             <Tab.Container id="left-tabs-example" defaultActiveKey={Sidenumber}>
               <Row>
@@ -58,7 +58,7 @@ const Nav_report = (Sidenumber) => {
               </Row>
             </Tab.Container>
           </div>
-        </div>
+        </DivFromDown>
       </div>
     </>
   );
