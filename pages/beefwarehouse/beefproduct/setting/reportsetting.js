@@ -1,5 +1,5 @@
 import React from 'react'
-import Nav from "../../../../components/BeefWarehouse/Beefproduct/Nav/Nav";
+import Nav from "../../../../components/BeefWarehouse/BeefProduct/Nav/Nav";
 import Footer from "../../../../components/BeefWarehouse/Footer";
 import Reportsetting from '../../../../components/BeefWarehouse/BeefStore/08Setting/Reportsetting';
 function reportsetting() {
