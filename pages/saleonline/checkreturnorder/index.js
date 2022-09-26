@@ -1,11 +1,11 @@
 import React from 'react'
-import CheckReturnOrder from '../../../components/Saleonline/CheckReturnOrder'
+import CheckReturnOrder1 from "../../../components/Saleonline/CheckReturnOrder"
 import Nav from "../../../components/Saleonline/Nav/Nav"
 const CheckRetrunOrderPage = () => {
     return (
         <div>
             <Nav />
-            <CheckReturnOrder />
+            <CheckReturnOrder1 />
         </div>
     )
 }
