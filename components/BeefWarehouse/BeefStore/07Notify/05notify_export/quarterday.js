@@ -54,7 +54,7 @@ const quarterday = () => {
         <div style={{ margin: "-3px 5px 0px 0px" }}>
           <Icon size={20} icon={list} />
         </div>
-        รายการเบิกออกซากโคสี่เสี้ยว (วัน)
+        รายการนำออกซากโคสี่เสี้ยว (วัน)
       </DivFromTop>{" "}
       <DivFromDown>
         <div

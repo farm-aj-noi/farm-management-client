@@ -147,7 +147,7 @@ const Paper_export = ({ prod }) => {
           alignment: "center",
         },
         {
-          text: "รายงานเบิกออกซากโคชิ้นเนื้อ\n\n",
+          text: "รายงานนำออกซากโคชิ้นเนื้อ\n\n",
           style: "header",
           alignment: "center",
         },

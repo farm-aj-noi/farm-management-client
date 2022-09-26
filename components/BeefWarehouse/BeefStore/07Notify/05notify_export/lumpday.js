@@ -53,7 +53,7 @@ const lumpday = () => {
         <div style={{ margin: "-3px 5px 0px 0px" }}>
           <Icon size={20} icon={list} />
         </div>
-        รายการเบิกออกก้อนเนื้อ (วัน)
+        รายการนำออกก้อนเนื้อ (วัน)
       </DivFromTop>{" "}
       <DivFromDown>
         <div

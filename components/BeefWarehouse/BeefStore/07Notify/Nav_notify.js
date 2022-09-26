@@ -54,7 +54,7 @@ const Nav_notify = (Sidenumber) => {
                       </Nav.Link>
                     </Nav.Item>
 
-                    
+
                     <Nav.Item style={{ marginBottom: "5px" }}>
                       <Nav.Link eventKey="4">
                         <Link href="/beefwarehouse/beefstore/notify/notify_import">
@@ -66,7 +66,7 @@ const Nav_notify = (Sidenumber) => {
                     <Nav.Item style={{ marginBottom: "5px" }}>
                       <Nav.Link eventKey="5">
                         <Link href="/beefwarehouse/beefstore/notify/notify_export">
-                          <div style={{ width: "100%" }}> การเบิกออก</div>
+                          <div style={{ width: "100%" }}> การนำออก</div>
                         </Link>
                       </Nav.Link>
                     </Nav.Item>
