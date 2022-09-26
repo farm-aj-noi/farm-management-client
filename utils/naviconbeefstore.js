@@ -1,7 +1,7 @@
 import icon1 from "../images/beefwarehouse/Icon1.png";
 import icon2 from "../images/beefwarehouse/Icon2.png";
 import icon3 from "../images/beefwarehouse/Icon3.png";
-/* import icon4 from "../images/beefwarehouse/Icon4.png"; */
+import icon4 from "../images/beefwarehouse/Icon4.png";
 import icon5 from "../images/beefwarehouse/Icon5.png";
 import icon6 from "../images/beefwarehouse/Icon6.png";
 import icon7 from "../images/beefwarehouse/Icon7.png";
