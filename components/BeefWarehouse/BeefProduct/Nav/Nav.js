@@ -164,9 +164,9 @@ const Nav1 = () => {
                     }
                     bsPrefix={MyCss.nstdropleft}
                   >
-                    <Link href="/beefwarehouse/beefproduct/setting/reportsetting">
+                   {/*  <Link href="/beefwarehouse/beefproduct/setting/reportsetting">
                       <NavDropdownItem>ตั้งค่าออกรายงาน</NavDropdownItem>
-                    </Link>
+                    </Link> */}
                   </DropdownButton>
                   <NavButtonSigninComplete onClick={signout} style={{ fontSize: "16px", fontWeight: 600, letterSpacing: "1px" }}>
                     <Icon
