@@ -5,7 +5,7 @@ import bgFarmtest from "../images/backgrounds/123unnamsed.jpg";
 import bgstore from "../images/backgrounds/backgroundstore.jpg";
 import bggrade from "../images/backgrounds/backgroundgrade.jpg";
 import bgproduct from "../images/backgrounds/backgroundproduct.jpg";
-import bgstoreall from "../images/backgrounds/backgroundstoreall.png"
+import bgstoreall from "../images/backgrounds/backgroundStoreall.png"
 
 export const BackgroundEmpty = styled.div`
   background-color: #ffffff; /*ดึงรูป*/
