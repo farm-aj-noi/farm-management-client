@@ -104,7 +104,7 @@ const create = () => {
   }
   return (
     <div>
-      <from>
+      <div>
         <DivFromInsideLeft>
           บาร์โค้ด :
           <div
@@ -167,7 +167,7 @@ const create = () => {
             disabled={!createexproduct.barcode || !createexproduct.exporter}
           >บันทึก</Savebutton1>
         </div>
-      </from>
+      </div>
     </div>
   );
 };

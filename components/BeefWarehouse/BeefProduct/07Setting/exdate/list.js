@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {
- 
+
   Searchinput,
 } from "../SettingFrom";
 import {
@@ -13,6 +13,11 @@ import { Editbutton, Savebutton } from "../../../../../utils/button";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
+import Router from "next/router";
+
 const UPDATEEXPDATE = gql`
   mutation UPDATEEXPDATE($id: ID, $day: Int) {
     updateExpdatesetting2(id: $id, day: $day) {
@@ -23,11 +28,27 @@ const UPDATEEXPDATE = gql`
 `;
 
 const list = ({ listexpdate }) => {
+  const MySwal = withReactContent(Swal);
   const [infoexpdate, setexpdate] = useState(listexpdate);
   const [edit, setedit] = useState(false);
   const [updateExpdatesetting2] = useMutation(UPDATEEXPDATE, {
     onCompleted: (data) => {
-      setedit(false);
+      if (data) {
+        setedit(false);
+        MySwal.fire({
+          icon: "success",
+          title: "สำเร็จ",
+          text: "ทำการแก้ไขข้อมูลสิ้น",
+          confirmButtonText: (
+            <span
+              onClick={() => Router.reload("beefwarehouse/beefproduct/setting/date")}
+            >
+              ตกลง
+            </span>
+          ),
+          confirmButtonColor: "#3085d6",
+        });
+      }
     },
   });
 
@@ -59,7 +80,7 @@ const list = ({ listexpdate }) => {
   return (
     <>
       <div>
-        ตั้งค่าแจ้งเตือน : {}
+        ตั้งค่าแจ้งเตือน : { }
         {edit ? (
           <Searchinput
             value={infoexpdate.day}

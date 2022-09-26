@@ -21,7 +21,7 @@ const liststore = ({ listall }) => {
   const MySwal = withReactContent(Swal);
   const [success, setsuccess] = useState(false);
   const [infoall, setinfoall] = useState(listall);
-  console.log(infoall)
+  // console.log(infoall)
   const [updateInfoP] = useMutation(UPDATEINFOPRODUCT, {
     onCompleted: (data) => {
       setsuccess(false);
@@ -32,7 +32,7 @@ const liststore = ({ listall }) => {
         confirmButtonText: (
           <span
             onClick={() =>
-              Router.reload("beefwarehouse/beefstore/Allstore/store")
+              Router.reload("beefwarehouse/beefproduct/Allstore/store")
             }
           >
             ตกลง
@@ -61,7 +61,7 @@ const liststore = ({ listall }) => {
       console.log(error)
     }
   }
-console.log(infoall.MFGdate)
+// console.log(infoall.MFGdate)
   return (
     <tr style={{ textAlign: "center" }}>
       <td>{infoall.producttype}</td>

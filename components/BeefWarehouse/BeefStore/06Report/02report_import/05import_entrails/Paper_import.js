@@ -68,10 +68,10 @@ const Paper_import = ({ prod }) => {
       "ห้อง",
       "ผู้นำเข้า",
     ]);
-    console.log(data);
+    // console.log(data);
 
     data.forEach(function (row) {
-      console.log(row);
+      // console.log(row);
       var dataRow = [];
 
       columns.forEach(function (column) {

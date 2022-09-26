@@ -23,7 +23,7 @@ export const CARD6 = gql`
 
 const index = () => {
   const { data: storedata } = useQuery(CARD6);
-  console.log(storedata);
+  // console.log(storedata);
   return (
     <DivAlertCard style={{ backgroundColor: "#BB0FBB" }}>
       <div

@@ -184,9 +184,8 @@ const index = () => {
                   justifyContent: "center",
                 }}
               >
-                <from style={{ fontSize: "20px" }}>
+                <div style={{ fontSize: "20px" }}>
                   <label
-                    for="beef"
                     style={{
                       textAlign: "center",
                       fontSize: "18px",
@@ -216,7 +215,6 @@ const index = () => {
                     <option value="ชิ้นเนื้อ">ชิ้นเนื้อ</option>
                   </select>
                   <label
-                    for="beef"
                     style={{
                       textAlign: "center",
                       fontSize: "18px",
@@ -357,7 +355,6 @@ const index = () => {
                   </select>
 
                   <label
-                    for="beef"
                     style={{
                       textAlign: "center",
                       fontSize: "18px",
@@ -378,7 +375,7 @@ const index = () => {
                     }}
                     onChange={(event) => setnumcow(event.target.value)}
                   />
-                </from>
+                </div>
               </div>
               <div
                 style={{
@@ -386,9 +383,8 @@ const index = () => {
                   justifyContent: "center",
                 }}
               >
-                <from style={{ fontSize: "20px" }}>
+                <div style={{ fontSize: "20px" }}>
                   <label
-                    for="beef"
                     style={{
                       textAlign: "center",
                       fontSize: "18px",
@@ -465,7 +461,6 @@ const index = () => {
                       ))}
                   </select>
                   <label
-                    for="expdate"
                     style={{
                       textAlign: "center",
                       fontSize: "18px",
@@ -488,7 +483,6 @@ const index = () => {
                     onChange={(event) => setexpdate(event.target.value)}
                   ></input>
                   <label
-                    for="beef"
                     style={{
                       textAlign: "center",
                       fontSize: "18px",
@@ -519,7 +513,7 @@ const index = () => {
                     <option value="4.5">4.5</option>
                     <option value="5">5</option>
                   </select>
-                </from>
+                </div>
               </div>
             </DivFromDown>
           </DivFrom>
@@ -591,19 +585,7 @@ const index = () => {
                       ))
                     ) : (
                       <tr style={{ textAlign: "center" }}>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
+                       <td colSpan="13">ไม่พบข้อมูล</td>
                       </tr>
                     )}
                   </tbody>

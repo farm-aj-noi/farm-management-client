@@ -69,10 +69,10 @@ const Paper_export = ({ prod }) => {
       "รหัสบาร์โค้ด",
       "ผู้เบิกออก",
     ]);
-    console.log(data);
+    // console.log(data);
 
     data.forEach(function (row) {
-      console.log(row);
+      // console.log(row);
       var dataRow = [];
 
       columns.forEach(function (column) {

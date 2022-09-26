@@ -63,10 +63,10 @@ const paper = ({ prod }) => {
       "ตะกร้า",
       "ผู้นำเข้า",
     ]);
-    console.log(data);
+   /*  console.log(data); */
 
     data.forEach(function (row) {
-      console.log(row);
+      /* console.log(row); */
       var dataRow = [];
 
       columns.forEach(function (column) {

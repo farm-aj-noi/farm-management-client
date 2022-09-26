@@ -32,7 +32,7 @@ query QUERYFREEZER {
 
 const index = () => {
   const { data } = useQuery(QUERYFREEZER);
-  console.log(data)
+/*   console.log(data) */
   return (
     <div style={{ marginTop: "100px" }}>
       <div

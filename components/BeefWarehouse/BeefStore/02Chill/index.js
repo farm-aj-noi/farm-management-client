@@ -159,9 +159,8 @@ const index = () => {
 
                 }}
               >
-                <from style={{ fontSize: "20px" }}>
+                <div style={{ fontSize: "20px" }}>
                   <label
-                    for="beef"
                     style={{
                       textAlign: "center",
                       fontSize: "18px",
@@ -192,7 +191,6 @@ const index = () => {
                     <option value="5f1000ee8d55662dcc23d960">ซากขวา</option>
                   </select>
                   <label
-                    for="beef"
                     style={{
                       textAlign: "center",
                       fontSize: "18px",
@@ -215,7 +213,6 @@ const index = () => {
                     onChange={(event) => SetnameChange(event.target.value)}
                   />
                   <label
-                    for="date"
                     style={{
                       textAlign: "center",
                       fontSize: "18px",
@@ -237,7 +234,6 @@ const index = () => {
                     onChange={(event) => SetStartDateChange(event.target.value)}
                   ></input>
                   <label
-                    for="date"
                     style={{
                       textAlign: "center",
                       fontSize: "18px",
@@ -259,7 +255,6 @@ const index = () => {
                     onChange={(event) => SetEndDateChange(event.target.value)}
                   ></input>
                   <label
-                    for="date"
                     style={{
                       textAlign: "center",
                       fontSize: "18px",
@@ -281,7 +276,6 @@ const index = () => {
                     onChange={(event) => SetStartDateChange2(event.target.value)}
                   ></input>
                   <label
-                    for="date"
                     style={{
                       textAlign: "center",
                       fontSize: "18px",
@@ -303,7 +297,6 @@ const index = () => {
                     onChange={(event) => SetEndDateChange2(event.target.value)}
                   ></input>
                   <label
-                    for="beef"
                     style={{
                       textAlign: "center",
                       fontSize: "18px",
@@ -333,7 +326,7 @@ const index = () => {
                     <option value="6284ad73fbfac22364a6e430">กำลังบ่ม</option>
                     <option value="6284ad91fbfac22364a6e431">บ่มเสร็จสิ้น</option>
                   </select>
-                </from>
+                </div>
               </div>
             </DivFromDown>
           </DivFrom>

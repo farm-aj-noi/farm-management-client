@@ -132,7 +132,6 @@ const index = () => {
           >
             <div style={{ fontSize: "20px" }}>
               <label
-                for="beef"
                 style={{
                   textAlign: "center",
                   fontSize: "18px",
@@ -162,7 +161,6 @@ const index = () => {
                 <option value="5f1000ee8d55662dcc23d960">ซากขวา</option>
               </select>
               <label
-                for="beef"
                 style={{
                   textAlign: "center",
                   fontSize: "18px",
@@ -186,7 +184,6 @@ const index = () => {
               />
               <>
                 <label
-                  for="date"
                   style={{
                     textAlign: "center",
                     fontSize: "18px",
@@ -208,7 +205,6 @@ const index = () => {
                   onChange={(event) => SetStartDateChange(event.target.value)}
                 ></input>
                 <label
-                  for="date"
                   style={{
                     textAlign: "center",
                     fontSize: "18px",
@@ -231,7 +227,6 @@ const index = () => {
                 ></input>
               </>
               <label
-                for="date"
                 style={{
                   textAlign: "center",
                   fontSize: "18px",
@@ -253,7 +248,6 @@ const index = () => {
                 onChange={(event) => SetStartDateChange2(event.target.value)}
               ></input>
               <label
-                for="date"
                 style={{
                   textAlign: "center",
                   fontSize: "18px",
@@ -275,7 +269,6 @@ const index = () => {
                 onChange={(event) => SetEndDateChange2(event.target.value)}
               ></input>
               <label
-                for="beef"
                 style={{
                   textAlign: "center",
                   fontSize: "18px",
@@ -319,7 +312,6 @@ const index = () => {
         <DivFromDown>
           <div style={{ height: `${data && data.listchill.length > 6 ? "380px" : ""}`, overflowY: "auto" }}>
             <Table striped bordered responsive hover >
-              {/* <LoadingSmall/> */}
               <thead>
                 <tr style={{ textAlign: "center", fontSize: "18px" }}>
                   <th>ผู้บ่มซาก</th>

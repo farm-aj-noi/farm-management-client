@@ -95,7 +95,7 @@ const index = () => {
   const [inputnumcow, setnumcow] = useState("");
   const [expdate, setexpdate] = useState("");
   const [selectedgrade, setInputgrade] = useState("");
-  console.log(expdate)
+  // console.log(expdate)
   const { data: datashelf } = useQuery(QUERYSHELF, {
     variables: {
       id: selectedbeefroom,
@@ -120,8 +120,7 @@ const index = () => {
 
     },
   });
-  console.log(selecttype)
-  /*   console.log(selectedbeeftype); */
+  // console.log(selecttype)
   return (
     <div style={{ marginTop: "100px" }}>
       <div
@@ -181,9 +180,8 @@ const index = () => {
                   justifyContent: "center",
                 }}
               >
-                <from style={{ fontSize: "20px" }}>
+                <div style={{ fontSize: "20px" }}>
                   <label
-                    for="beef"
                     style={{
                       textAlign: "center",
                       fontSize: "18px",
@@ -213,7 +211,6 @@ const index = () => {
                     <option value="ชิ้นเนื้อ">ชิ้นเนื้อ</option>
                   </select>
                   <label
-                    for="beef"
                     style={{
                       textAlign: "center",
                       fontSize: "18px",
@@ -354,7 +351,6 @@ const index = () => {
                   </select>
 
                   <label
-                    for="beef"
                     style={{
                       textAlign: "center",
                       fontSize: "18px",
@@ -375,7 +371,7 @@ const index = () => {
                     }}
                     onChange={(event) => setnumcow(event.target.value)}
                   />
-                </from>
+                </div>
               </div>
               <div
                 style={{
@@ -385,7 +381,6 @@ const index = () => {
               >
                 <from style={{ fontSize: "20px" }}>
                   <label
-                    for="beef"
                     style={{
                       textAlign: "center",
                       fontSize: "18px",
@@ -462,7 +457,6 @@ const index = () => {
                       ))}
                   </select>
                   <label
-                    for="expdate"
                     style={{
                       textAlign: "center",
                       fontSize: "18px",
@@ -485,7 +479,6 @@ const index = () => {
                     onChange={(event) => setexpdate(event.target.value)}
                   ></input>
                   <label
-                    for="beef"
                     style={{
                       textAlign: "center",
                       fontSize: "18px",

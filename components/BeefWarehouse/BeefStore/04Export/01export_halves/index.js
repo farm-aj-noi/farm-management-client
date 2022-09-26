@@ -155,7 +155,6 @@ const index = () => {
               >
                 <div style={{ fontSize: "20px" }}>
                   <label
-                    for="beef"
                     style={{
                       textAlign: "center",
                       fontSize: "18px",
@@ -184,7 +183,6 @@ const index = () => {
                     <option value="5f1000ee8d55662dcc23d960">ซากขวา</option>
                   </select>
                   <label
-                    for="beef"
                     style={{
                       textAlign: "center",
                       fontSize: "18px",
@@ -206,7 +204,6 @@ const index = () => {
                     onChange={(event) => SetinputExporter(event.target.value)}
                   />
                   <label
-                    for="beef"
                     style={{
                       textAlign: "center",
                       fontSize: "18px",
@@ -228,7 +225,6 @@ const index = () => {
                     onChange={(event) => SetInputusername(event.target.value)}
                   />
                   <label
-                    for="status"
                     style={{
                       textAlign: "center",
                       fontSize: "18px",
@@ -255,7 +251,6 @@ const index = () => {
                     </select>
                   </label>
                   <label
-                    for="date"
                     style={{
                       textAlign: "center",
                       fontSize: "18px",
@@ -279,7 +274,6 @@ const index = () => {
                     onChange={(event) => SetStartDateChange(event.target.value)}
                   ></input>
                   <label
-                    for="date"
                     style={{
                       textAlign: "center",
                       fontSize: "18px",

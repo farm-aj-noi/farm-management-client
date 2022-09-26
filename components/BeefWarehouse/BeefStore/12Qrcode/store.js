@@ -8,7 +8,7 @@ import Router from "next/router";
 
 const index = ({ liststore }) => {
   const [infodata, setinfodata] = useState(liststore);
-  console.log(infodata);
+  // console.log(infodata);
   const [testshow, setShow] = useState(false);
   const handleClose = () => {
     setShow(false);

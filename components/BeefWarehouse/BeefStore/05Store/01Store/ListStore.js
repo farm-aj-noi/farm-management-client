@@ -171,7 +171,7 @@ const ListStore = ({ Liststore }) => {
       console.log(error)
     }
   }
-  console.log(ListStoreData.beefname)
+  // console.log(ListStoreData.beefname)
 
   return (
     <tr style={{ textAlign: "center" }}>

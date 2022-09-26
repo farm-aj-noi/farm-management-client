@@ -68,10 +68,10 @@ const Paper_store = ({ prod }) => {
       "วันหมดอายุ",
       "ห้อง",
     ]);
-    console.log(data);
+    // console.log(data);
 
     data.forEach(function (row) {
-      console.log(row);
+      // console.log(row);
       var dataRow = [];
 
       columns.forEach(function (column) {

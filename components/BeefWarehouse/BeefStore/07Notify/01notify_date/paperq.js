@@ -53,10 +53,10 @@ const paperq = ({ prod }) => {
     var body = [];
 
     body.push(["ประเภทซาก", "รหัสซาก", "รหัสบาร์โค้ด", "ห้อง", "วันหมดอายุ"]);
-    console.log(data);
+    // console.log(data);
 
     data.forEach(function (row) {
-      console.log(row);
+      // console.log(row);
       var dataRow = [];
 
       columns.forEach(function (column) {

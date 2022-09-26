@@ -527,7 +527,7 @@ const Index = () => {
                                             ))
                                         ) : (
                                             <tr style={{ textAlign: "center" }}>
-                                                <td colspan="5">ไม่พบข้อมูล</td>
+                                                <td colSpan="5">ไม่พบข้อมูล</td>
                                             </tr>
                                         )}
                                     </tbody>

@@ -62,7 +62,7 @@ const paperc = ({ prod }) => {
       "ตะกร้า",
       "วันหมดอายุ",
     ]);
-    console.log(data);
+    // console.log(data);
 
     data.forEach(function (row) {
       console.log(row);
