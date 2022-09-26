@@ -1,7 +1,7 @@
 import React from "react";
 import Nav from "../../components/Beefgrading/Nav/Nav";
-import Index from "../../components/beefgrading/history/index";
-const index = () => {
+import Index from "../../components/Beefgrading/list/test";
+const test = () => {
   return (
     <div>
       <Nav/>
@@ -10,4 +10,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default test;

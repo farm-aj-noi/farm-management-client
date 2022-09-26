@@ -10,7 +10,7 @@ import { print } from 'react-icons-kit/fa/print'
 import { iosSearchStrong } from "react-icons-kit/ionicons/iosSearchStrong";
 import { DivCenter, TableForm, TableHead } from "../Styleclass/Table";
 import { u1F356 } from 'react-icons-kit/noto_emoji_regular/u1F356'
-import { Icon3, Icon2, Icon4, Icon5, Icon7 } from "../../../utils/Logograde";
+import { Icon3, Icon2, Icon4, Icon5, Icon7,Beeflogo } from "../../../utils/Logograde";
 import Link from "next/link";
 import { DivBase } from "../../../utils/divBase";
 import {
@@ -175,7 +175,7 @@ const Summarize = () => {
                       height: "450px",
                       backgroundColor: "red",
                     }}>
-                      {/* image beef */}
+                      {/* image beef */} <Beeflogo height="450x" weight="450px" />
                     </div>
                   </DivFromDown>
                 </div>

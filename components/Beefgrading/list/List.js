@@ -22,21 +22,24 @@ const ListGrade = ({ ListGrade }) => {
       <td>{ListGradeData.barcode}</td>
       <td>{ListGradeData.weightwarm}</td>
       <td>{ListGradeData.weightcool ? ListGradeData.weightcool : "-"}</td>
+      <td>{dayjs(ListGradeData.chill.chilldateStart).format("DD-MM-YYYY")}</td>
+      <td>{dayjs(ListGradeData.chill.chilldateEnd).format("DD-MM-YYYY")}</td>
+      {ListGradeData && ListGradeData.chill.map((prod) => (
       <td>
-        {dayjs(ListGradeData.chill[0].chilldateStart).format("DD-MM-YYYY")}
+      {ListGradeData.chill[0].chillroom.roomnum
+        ? ListGradeData.chill[0].chillroom.roomnum
+        : "-"}
       </td>
-      <td>{dayjs(ListGradeData.chill[0].chilldateEnd).format("DD-MM-YYYY")}</td>
-      <td>
-        {ListGradeData.chill[0].chillroom.roomnum
-          ? ListGradeData.chill[0].chillroom.roomnum
-          : "-"}
-      </td>
-
+      ))} 
+    
       <td>{ListGradeData.imslaughter.pun}</td>
       <td>
         <Link href="grade/[gradeId]" as={`grade/${ListGradeData.id}`}>
           <ButtonSubmit>รอการตัดเกรด</ButtonSubmit>
         </Link>
+        {/* <Link  href="/beefgrading/test">
+          <ButtonSubmit>test</ButtonSubmit>
+        </Link> */}
       </td>
     </tr>
   );

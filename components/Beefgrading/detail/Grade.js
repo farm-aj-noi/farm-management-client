@@ -315,40 +315,7 @@ const Product = () => {
           ระบบการตัดเกรด
         </DivCenter>
         <DivCenter style={{ marginTop: "20px" }}>
-          <div
-            /* style={{
-              width: "auto",
-              height: "auto",
-              backgroundColor: "white",
-              borderRadius: "5px",
-              borderTop: "none",
-              borderRadius: "5px",
-              boxShadow:
-                " 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 0px 10px 0 rgba(0, 0, 0, 0.1)",
-            }} */
-          >
-            <h1
-              /* style={{
-                height: "47px",
-                color: "white",
-                fontSize: "24px",
-                backgroundColor: "#3BAFDA",
-                borderRadius: "5px 5px 0px 0px",
-                padding: "7px 5px 5px 15px",
-                margin: "0px",
-                display: "flex",
-                alignItems: "center",
-                fontWeight: "-moz-initial",
-              }} */
-            >
-              {/* <Icon
-                style={{ verticalAlign: "text-bottom", marginRight: "10px" }}
-                icon={u1F356}
-                size={30}
-              />
-              ระบบการตัดเกรด */}
-            </h1>
-
+          <div>
             <DivBase
               style={{
                 margin: "auto",
@@ -382,8 +349,6 @@ const Product = () => {
                   style={{
                     display: "grid",
                     gridTemplateColumns: "0.3fr",
-                    // gridRowGap: "5px",
-                    // paddingBottom: "20px",
                   }}
                 >
                   <div
@@ -609,9 +574,7 @@ const Product = () => {
                                     maxLength="20"
                                     disabled
                                     style={{ backgroundColor: "#ececec" }}
-                                    // disabled={!onEdite}
-                                    // style={{ backgroundColor: `${!onEdite ? "#ececec" : 'white'}` }}
-                                    // onChange={handleChange}
+                                    
                                   />
                                 </div>
                               </div>
@@ -657,21 +620,7 @@ const Product = () => {
                             </>
                           ))}
 
-                        {/* <div>
-                เพศโค : { }
-                <div style={{ display: "grid", gridTemplateRows: "1fr 15px" }}>
-                  <Searchinput
-                    name="weightbirht"
-                    value={cowdetailData.sex}
-                    maxLength="20"
-                    disabled
-                    style={{ backgroundColor: "#ececec" }}
-                    // disabled={!onEdite}
-                    // style={{ backgroundColor: `${!onEdite ? "#ececec" : 'white'}` }}
-                    // onChange={handleChange}
-                  />
-                </div>
-              </div> */}
+              
 
                         <div
                           className="mb-3"
