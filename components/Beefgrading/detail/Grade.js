@@ -1,5 +1,15 @@
 import * as tf from "@tensorflow/tfjs";
 import { useEffect, useState, useRef } from "react";
+import gql from "graphql-tag";
+import { useQuery } from "@apollo/react-hooks";
+
+const CREATEGRADE = gql`
+  mutation CreateGrade($pic: String, $halve: String) {
+    createGrade(pic: $pic, halve: $halve) {
+      id
+    }
+  }
+`;
 
 export default function Home() {
   const TARGET_CLASSES = {
@@ -31,24 +41,24 @@ export default function Home() {
       setImage(URL.createObjectURL(i));
     }
   };
-  // const uploadFile = async () => {
-  //   const data = new FormData();
-  //   data.append("file", file);
-  //   data.append("upload_preset", "graphql-basic");
+  const uploadFile = async () => {
+    const data = new FormData();
+    data.append("file", isImage);
+    data.append("upload_preset", "graphql-basic");
 
-  //   const res = await fetch(
-  //     "https://api.cloudinary.com/v1_1/da7loumgx/image/upload",
-  //     {
-  //       method: "post",
-  //       body: data,
-  //     }
-  //   );
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/da7loumgx/image/upload",
+      {
+        method: "post",
+        body: data,
+      }
+    );
 
-  //   const result = await res.json();
-  //   console.log(result);
+    const result = await res.json();
+    console.log(result);
 
-  //   return result.secure_url;
-  // };
+    return result.secure_url;
+  };
 
   const handleClick = async (event) => {
     let test2 = document.getElementById("test2223");
@@ -96,6 +106,7 @@ export default function Home() {
       <img id="test2223" src={isImage} />
 
       <div id="prediction-list"></div>
+      <img src="http://localhost:3000/165b88e5-f461-43a1-8662-1b48c676ac19" />
     </div>
   );
 }
