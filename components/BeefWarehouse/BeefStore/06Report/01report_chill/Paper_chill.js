@@ -46,35 +46,6 @@ const Paper_chill = ({ prod }) => {
   const { user } = useContext(AuthContext);
   const { data: reportlogo1 } = useQuery(QUERYREPORTSETTTING);
 
-
-  /* 
-    const getBase64FromUrl = async (url) => {
-  
-      const data = await fetch(url);
-      const blob = await data.blob();
-      return new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(blob);
-        reader.onloadend = () => {
-          const base64data = reader.result;
-          resolve(base64data);
-        }
-      }
-      );
-    }
-  
-    const test = async () => {
-      const result = await getBase64FromUrl(reportlogo1 && reportlogo1.reportlogo[0].logo);
-      console.log(result)
-      return result
-    } */
-
-  /*   getBase64FromUrl(test).then(console.log) */
-  /* const test = getBase64FromUrl(reportlogo1 && reportlogo1.reportlogo[0].address)
-  console.log(test)
-
-
-
   if (data !== prod) setdata(prod);
   /* console.log(data)
    console.log(prod)  */

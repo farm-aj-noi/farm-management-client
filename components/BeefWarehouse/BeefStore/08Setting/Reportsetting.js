@@ -292,7 +292,7 @@ function reportsetting() {
                                 </div>
                                 {edit ? (
                                     <div style={{ padding: "15px", paddingBottom: "0" }}>
-                                        <input type="file" name='file'  onChange={selectFile} /> 
+                                        <input type="file" name='file' onChange={selectFile} />
                                     </div>
                                 ) : (
                                     ""

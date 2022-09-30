@@ -90,6 +90,7 @@ const index = () => {
       chillstatus: selectchillstatus,
     },
   });
+  console.log(data)
   return (
     <div style={{ marginTop: "100px" }}>
       <div

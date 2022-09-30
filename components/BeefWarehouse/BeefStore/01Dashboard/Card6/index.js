@@ -25,7 +25,7 @@ const index = () => {
   const { data: storedata } = useQuery(CARD6);
   // console.log(storedata);
   return (
-    <DivAlertCard style={{ backgroundColor: "#BB0FBB" }}>
+    <DivAlertCard style={{ backgroundColor: "#bb0fbb" }}>
       <div
         style={{
           display: "flex",

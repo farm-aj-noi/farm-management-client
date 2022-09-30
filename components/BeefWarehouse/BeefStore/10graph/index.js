@@ -55,7 +55,7 @@ export const index = () => {
             <div style={{ margin: "-3px 5px 0px 0px" }}>
               <Icon size={20} icon={statsDots} />
             </div>
-            ราลละเอียดข้อมูลสถิติกราฟนำเข้า - เบิกออก
+            รายละเอียดข้อมูลสถิติกราฟนำเข้า - เบิกออก
           </DivFromTop>
           <DivFromDown>
             <Graphexport />
