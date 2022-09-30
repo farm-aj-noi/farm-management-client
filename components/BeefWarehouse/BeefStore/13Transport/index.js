@@ -224,10 +224,10 @@ const Index = () => {
                             padding: "5px 30px",
                         }}
                     >
-                        การแจ้งเตือน
+                        บันทึกการขนส่ง
                     </HeaderColor>
                 </div>
-                <DivBase>x
+                <DivBase>
                     <DivFrom style={{ marginBottom: "15px" }}>
                         <DivFromTop>
                             <div style={{ margin: "-3px 5px 0px 0px" }}>
