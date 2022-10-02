@@ -2,23 +2,13 @@ import React from "react";
 import { Table } from "react-bootstrap";
 import { Icon } from "react-icons-kit";
 import { paste } from "react-icons-kit/icomoon/paste";
-import { print } from 'react-icons-kit/fa/print'
 import { iosSearchStrong } from "react-icons-kit/ionicons/iosSearchStrong";
-import { DivCenter, TableForm, TableHead } from "../Styleclass/Table";
-import {image} from 'react-icons-kit/fa/image'
+import { DivCenter } from "../Styleclass/Table";
 import { Icon2 } from "../../../utils/Logograde";
-import Link from "next/link";
 import ListSum from "./SumList";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
-import {
-  ButtonQrcodeColor,
-  ButtonHeaderColor,
-  ButtonSearchColor,
-  ButtonRecordColor,
-  ButtonSubmit,
-  ButtonImagecolor
-} from "../Styleclass/Button";
+import { ButtonSearchColor } from "../Styleclass/Button";
 
 const thstyle = {
   border: "1px solid #dddddd",
@@ -36,8 +26,8 @@ const tdstyle = {
 
 export const LISTSUM = gql`
   query LISTSUM {
-    listhalvegrade {
-      id
+    historyGrade {
+    id
     weightwarm
     weightcool
     barcode
@@ -53,6 +43,9 @@ export const LISTSUM = gql`
       }
       chilldateStart
       chilldateEnd
+    }
+    grade {
+      SystemGrade
     }
   }
   }
@@ -180,15 +173,13 @@ function Sum() {
                         <th rowspan="2">วันที่ตัดเกรด</th>
                         <th rowspan="2">ห้องบ่ม</th>
                         <th rowspan="2">สายพันธุ์</th>
-                        <th colspan="2">เกรด</th> 
+                        <th rowspan="2">เกรดจากระบบ</th> 
                         <th colspan="2">การสรุปเกรด</th>
     
                       </tr>
                       <tr style={{ textAlign: "center", fontSize: "18px" }}>
                         <th>ซากอุ่น</th>
                         <th>ซากเย็น</th>
-                        <th>จากระบบ</th>
-                        <th>จากผู้เชี่ยวชาญ</th>
                         <th>สถานะ</th>
                         <th>สรุปเกรด</th>
                       </tr>
@@ -196,7 +187,7 @@ function Sum() {
                     </thead>
                     <tbody>
                     {data &&
-                      data.listhalvegrade.map((prod) => (
+                      data.historyGrade.map((prod) => (
                         <ListSum key={prod.id} ListSum = {prod} />
                       ))}
                   </tbody>

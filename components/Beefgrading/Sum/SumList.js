@@ -2,20 +2,13 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import dayjs from "dayjs";
 import Link from "next/link";
-import {
-  ButtonQrcodeColor,
-  ButtonHeaderColor,
-  ButtonSearchColor,
-  ButtonRecordColor,
-  ButtonSubmit,
-  ButtonImagecolor,
-} from "../Styleclass/Button";
+import { ButtonSubmit } from "../Styleclass/Button";
 
 const ListSum = ({ ListSum }) => {
   const router = useRouter();
   const [prod, setProd] = useState(ListSum);
   const [ListSumData, SetListSumData] = useState(ListSum);
-  
+  console.log(ListSumData.id)
   return (
     <tr style={{ textAlign: "center" }}>
       <td>{ListSumData.beeftype.code}</td>
@@ -29,14 +22,14 @@ const ListSum = ({ ListSum }) => {
           <td>{prod.chillroom.roomnum ? prod.chillroom.roomnum : "-"}</td>
         ))}
       <td>{ListSumData.imslaughter.pun}</td>
-      <td>{ListSumData.gradecom ? ListSumData.gradecom : "-"}</td>
-      <td>{ListSumData.gradehuman ? ListSumData.gradehuman : "-"}</td>
-      <td>{ListSumData.grading ? ListSumData.grading : "-"}</td>
+      {ListSumData &&
+        ListSumData.grade.map((prod) => (
+          <td>{prod.SystemGrade ? prod.SystemGrade : "-"}</td>
+        ))}
+      <td>รอสรุปเกรด</td>
       <td>
         <Link
-          href="summarize/[sumId]"
-          as={`summarize/${ListSumData.id}`}
-        >
+          href="summarize/[sumId]" as={`summarize/${ListSumData.id}`}>
           <ButtonSubmit>สรุปเกรด</ButtonSubmit>
         </Link>
       </td>

@@ -2,14 +2,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import dayjs from "dayjs";
 import Link from "next/link";
-import {
-  ButtonQrcodeColor,
-  ButtonHeaderColor,
-  ButtonSearchColor,
-  ButtonRecordColor,
-  ButtonSubmit,
-  ButtonImagecolor,
-} from "../Styleclass/Button";
+import { ButtonSubmit } from "../Styleclass/Button";
 
 const ListGrade = ({ ListGrade }) => {
   const router = useRouter();

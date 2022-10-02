@@ -2,22 +2,11 @@ import React from "react";
 import { Table } from "react-bootstrap";
 import { Icon } from "react-icons-kit";
 import { paste } from "react-icons-kit/icomoon/paste";
-import { DivCenter, TableForm, TableHead } from "../Styleclass/Table";
+import { DivCenter } from "../Styleclass/Table";
 import { Icon3 } from "../../../utils/Logograde";
-import Link from "next/link";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import ListGrade from "./List";
-
-import {
-  ButtonQrcodeColor,
-  ButtonHeaderColor,
-  ButtonSearchColor,
-  ButtonRecordColor,
-  ButtonSubmit,
-  ButtonImagecolor,
-} from "../Styleclass/Button";
-
 const thstyle = {
   border: "1px solid #dddddd",
   textAlign: "center",
