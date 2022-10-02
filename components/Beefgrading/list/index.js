@@ -132,10 +132,10 @@ function index() {
                 </thead>
 
                 <tbody>
-                  {/* {data &&
+                  {data &&
                     data.listhalvegrade.map((prod) => (
                       <ListGrade key={prod.id} ListGrade={prod} />
-                    ))} */}
+                    ))}
                 </tbody>
               </Table>
             </div>
