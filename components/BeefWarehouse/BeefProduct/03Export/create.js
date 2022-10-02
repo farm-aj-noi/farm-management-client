@@ -114,7 +114,14 @@ const create = () => {
             }}
           >
             <Searchinput name="barcode" value={createexproduct.barcode}
-              onChange={handleChange} />
+              onChange={handleChange}
+              style={{
+                borderColor: `${!createexproduct.barcode ? "red" : ""}`,
+                height: "35px"
+              }} />
+            {!createexproduct.barcode && (
+              <label style={{ color: "red" }}>กรุณากรอกบาร์โค้ด</label>
+            )}
           </div>
         </DivFromInsideLeft>
         <DivFromInsideLeft style={{ marginTop: "5px" }}>
@@ -141,9 +148,10 @@ const create = () => {
                 disabled={!createexproduct.barcode}
               >
                 <option value="">รายชื่อผู้ขอเบิก</option>
-                {data && data.listRequestExP.map((prod) => (
+                <option value="seller">Seller</option>
+               {/*  {data && data.listRequestExP.map((prod) => (
                   <option key={prod.id} value={prod.id}>{prod.name}</option>
-                ))}
+                ))} */}
               </select>
             </div>
           </div>
