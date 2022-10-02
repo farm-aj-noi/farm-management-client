@@ -123,8 +123,8 @@ const index = () => {
               <Table striped bordered responsive hover style={{ margin: "auto" }}>
                 <thead>
                   <tr style={{ textAlign: "center", fontSize: "18px" }}>
-                    <th>ชื่อตู้แช่</th>
-                    <th>ชื่อห้องจัดเก็บ</th>
+                    <th>ชื่อชั้นจัดเก็บ</th>
+                    <th>ชื่อตู้แช่จัดเก็บ</th>
                     <th>แก้ไข</th>
                     <th>ลบ</th>
                   </tr>
