@@ -7,7 +7,7 @@ import Router from "next/router";
 
 const Qrcode = ({ listim }) => {
   const [infodata, setinfodata] = useState(listim);
-  console.log(infodata);
+  // console.log(infodata);
   const [testshow, setShow] = useState(false);
   const handleClose = () => {
     setShow(false);

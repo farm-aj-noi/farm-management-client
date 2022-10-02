@@ -38,7 +38,7 @@ const EXPH = gql`
 
 const listhalve = () => {
   const { data } = useQuery(EXPH);
-  console.log(data);
+  // console.log(data);
   return (
     <>
       <div style={{ height: `${data && data.Card8h.length > 10 ? "550px" : ""}`, overflow: "auto" }}>

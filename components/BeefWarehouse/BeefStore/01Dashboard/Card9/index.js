@@ -19,8 +19,17 @@ export const QUERY_CARD9 = gql`
     }
   }
 `;
+
+const CARDRE = gql`
+query CardProcess {
+  CardProcess {
+    id
+  }
+}
+`
 const index = () => {
   const { data: dataCard9 } = useQuery(QUERY_CARD9);
+  const { data: data1 } = useQuery(CARDRE);
   return (
     <DivAlertCard style={{ backgroundColor: "#028410" }}>
       <div
@@ -57,7 +66,7 @@ const index = () => {
               fontWeight: 600,
             }}
           >
-            {dataCard9 ? dataCard9.Card9.length : "0"}
+            {dataCard9 && data1 ? dataCard9.Card9.length + data1.CardProcess.length : "0"}
           </div>
           <a
             style={{

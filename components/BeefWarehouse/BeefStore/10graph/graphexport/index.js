@@ -23,16 +23,16 @@ query QUERYDATAGRAPH($startdate: String, $enddate: String) {
 `;
 
 const index = () => {
-  const [startdate, setStartdate] = useState(dayjs().startOf('year').format('YYYY-MM-DD'));
-  const [enddate, setEnddate] = useState(dayjs().endOf('year').format('YYYY-MM-DD'));
-  console.log(startdate)
+  const [startdate, setStartdate] = useState(/* dayjs().startOf('year').format('YYYY-MM-DD') */); // dayjs().startOf('year').format('YYYY-MM-DD') 
+  const [enddate, setEnddate] = useState(/* dayjs().endOf('year').format('YYYY-MM-DD') */);
+  // console.log(startdate)
   const { data: datagraph } = useQuery(QUERYDATAGRAPH, {
     variables: {
-      startdate: startdate,
-      enddate: enddate,
+      startdate: startdate ? startdate : dayjs().startOf('year').format('YYYY-MM-DD'),
+      enddate: enddate ? enddate : dayjs().endOf('year').format('YYYY-MM-DD'),
     }
   })
-  console.log(datagraph)
+  /* console.log(startdate) */
   const [DataChart, setDataChart] = useState({
     labels: [],
     datasets: [
@@ -150,7 +150,7 @@ const index = () => {
     let data1 = [];
     let data2 = [];
     data.forEach(e => {
-      labels.push(e.day ?? '');
+      labels.push(dayjs(e.day).locale("th").add(543, "year").format('DD-MM-YYYY') ?? '');
       data2.push(e.export ?? 0);
       data1.push(e.import ?? 0);
     });
@@ -163,6 +163,7 @@ const index = () => {
     setDataChart(newChart);
     return newChart;
   }
+
 
   const [selectgraph, setSelectgraph] = useState("");
   // console.log(selectgraph);
@@ -188,6 +189,7 @@ const index = () => {
         initChart(datagraph.beefGraph);
       }
     }
+    console.log(selectgraph)
     // setcount(api.data.count) // api.data.count from api after update store
   }, [datagraph])
   // console.log({ DataChart })
@@ -274,7 +276,7 @@ const index = () => {
 
           </form>
           <Line data={DataChart} height={100} />
-          <div
+          {/* <div
             style={{
               display: "flex",
               justifyContent: "center",
@@ -282,7 +284,7 @@ const index = () => {
             }}
           >
             <Paper_Graph />
-          </div>
+          </div> */}
         </div>
       </div>
     </>

@@ -12,7 +12,7 @@ import { menu3 } from 'react-icons-kit/icomoon/menu3'
 const Nav_report = (Sidenumber) => {
   return (
     <>
-      <DivFrom
+      <div
         style={{
           width: "100%",
           marginTop: "0",
@@ -59,7 +59,7 @@ const Nav_report = (Sidenumber) => {
             </Tab.Container>
           </div>
         </DivFromDown>
-      </DivFrom>
+      </div>
     </>
   );
 };

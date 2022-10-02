@@ -175,9 +175,8 @@ const index = () => {
                 justifyContent: "center",
               }}
             >
-              <from style={{ fontSize: "20px" }}>
+              <div style={{ fontSize: "20px" }}>
                 <label
-                  for="producttype"
                   style={{
                     textAlign: "center",
                     fontSize: "18px",
@@ -208,7 +207,6 @@ const index = () => {
                     ))}
                 </select>
                 <label
-                  for="beef"
                   style={{
                     textAlign: "center",
                     fontSize: "18px",
@@ -231,7 +229,6 @@ const index = () => {
                   onChange={(event) => setInputcode(event.target.value)}
                 />
                 <label
-                  for="beef"
                   style={{
                     textAlign: "center",
                     fontSize: "18px",
@@ -305,7 +302,6 @@ const index = () => {
                     ))}
                 </select>
                 <label
-                  for="date"
                   style={{
                     textAlign: "center",
                     fontSize: "18px",
@@ -329,7 +325,6 @@ const index = () => {
                 ></input>
 
                 <label
-                  for="date"
                   style={{
                     textAlign: "center",
                     fontSize: "18px",
@@ -351,7 +346,7 @@ const index = () => {
                   }}
                   onChange={(event) => setBBEdate(event.target.value)}
                 ></input>
-              </from>
+              </div>
             </div>
           </DivFromDown>
         </DivFrom>
@@ -369,7 +364,7 @@ const index = () => {
             <div style={{ margin: "-3px 5px 0px 0px" }}>
               <Icon size={20} icon={list} />
             </div>
-            รายการนำเข้าซากเนื้อโคผ่าซีก
+            รายการคงคลังผลิตภัณฑ์
           </DivFromTop>
           <DivFromDown>
             <div style={{ height: `${data && data.allproduct.length > 7 ? "380px" : ""}`, overflow: `${data && data.allproduct.length > 7 ? "auto" : ""}` }}>

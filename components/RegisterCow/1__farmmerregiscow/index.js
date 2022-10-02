@@ -147,6 +147,8 @@ const Index = () => {
     setFile(files[0]);
   };
   console.log(file)
+
+  
   //calendar
   const dateRef = useRef();
   const [date, setDate] = useState(new Date());
@@ -495,7 +497,7 @@ console.log(prod.imagecow)
                   <div >
                     <br />
                     <div >
-                      <Uploads >
+                      <Uploads>
                         <a >
                           <div >
                             <img style={{objectFit:'cover',width: '90%', position:'inherit',}} alt="Image" src={image.preview||logo} />

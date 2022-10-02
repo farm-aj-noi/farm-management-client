@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 import Router from "next/router";
+import { IMPORTQUARTERSEARCH } from "./index"
 
 export const CREATEIMPORTQUARTER = gql`
   mutation CREATEIMPORTQUARTER(
@@ -102,6 +103,11 @@ const Create_Import = () => {
           });
         }
       },
+      refetchQueries: [
+        {
+          query: IMPORTQUARTERSEARCH
+        }
+      ]
     }
   );
 

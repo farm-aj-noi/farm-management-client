@@ -10,6 +10,8 @@ import withReactContent from "sweetalert2-react-content";
 
 import Router from "next/router";
 
+import { IMPORTHALVESEARCH } from "./index"
+
 export const CREATEIMPORTHALVE = gql`
   mutation CREATEIMPORTHALVE(
     $barcode: String!
@@ -101,8 +103,13 @@ const Create_Import = () => {
         });
       }
     },
+    refetchQueries: [
+      {
+        query: IMPORTHALVESEARCH
+      }
+    ]
   });
-  console.log(ImporthalvesInfo.barcode);
+  /*  console.log(ImporthalvesInfo.barcode); */
 
   const handleChange = (e) => {
     setImporthalvesInfo({

@@ -23,13 +23,13 @@ query QUERYDATAGRAPH($startdate: String, $enddate: String) {
 `;
 
 const index = () => {
-  const [startdate, setStartdate] = useState(dayjs().startOf('year').format('YYYY-MM-DD'));
-  const [enddate, setEnddate] = useState(dayjs().endOf('year').format('YYYY-MM-DD'));
+  const [startdate, setStartdate] = useState();
+  const [enddate, setEnddate] = useState();
 
   const { data: datagraph } = useQuery(QUERYDATAGRAPH, {
     variables: {
-      startdate: startdate,
-      enddate: enddate,
+      startdate: startdate ? startdate : dayjs().startOf('year').format('YYYY-MM-DD'),
+      enddate: enddate ? enddate : dayjs().endOf('year').format('YYYY-MM-DD'),
     }
   })
 

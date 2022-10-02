@@ -9,7 +9,7 @@ import Router from "next/router";
 
 const storeen = ({ listen }) => {
   const [infodata, setinfodata] = useState(listen);
-  console.log(infodata);
+  // console.log(infodata);
   const [testshow, setShow] = useState(false);
   const handleClose = () => {
     setShow(false);

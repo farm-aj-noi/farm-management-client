@@ -19,8 +19,12 @@ query CARD4 {
   }
 }
 `;
+
+
+
 const index = () => {
   const { data } = useQuery(CARD4);
+
   return (
     <DivAlertCard style={{ backgroundColor: "#028410" }}>
       <div
@@ -54,7 +58,7 @@ const index = () => {
             style={{
               fontSize: "50px",
               height: "62px",
-              fontWeight:600,
+              fontWeight: 600,
             }}
           >
             {data ? data.Card9product.length : "0"}

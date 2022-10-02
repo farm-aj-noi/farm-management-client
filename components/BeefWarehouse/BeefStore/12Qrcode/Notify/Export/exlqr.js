@@ -8,7 +8,7 @@ import Router from "next/router";
 
 const index = ({ notifylump }) => {
   const [infodata, setinfodata] = useState(notifylump);
-  console.log(infodata);
+  // console.log(infodata);
   const [testshow, setShow] = useState(false);
   const handleClose = () => {
     Router.reload("/beefwarehouse/beefstore/notify/notify_export");

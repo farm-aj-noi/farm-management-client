@@ -15,10 +15,10 @@ import "../global style/style.css";
 import "react-day-picker/lib/style.css";
 import "react-datepicker/dist/react-datepicker.css";
 
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Router from "next/router";
 import LoadingPage from "../helps/LoadingPage";
-
+import { AuthContext } from "../appState/AuthProvider"
 //import Footer from "../components/Footer/index";
 // import { ThemeProvider } from "styled-components";
 
@@ -114,9 +114,13 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
   const token = cookies && cookies.jwt;
   console.log(token);
 
+
   // Route Protection
 
   // Route Beefstore
+  /*  if (user.role.nameEN === "admin") {
+     console.log(test);
+   } */
   if (!token) {
     if (
       router.pathname === "/beefwarehouse" ||
@@ -147,18 +151,19 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
       router.pathname === "/beefwarehouse/beefstore/report/export/report_entrails" ||
       router.pathname === "/beefwarehouse/beefstore/report/store/report_store" ||
       router.pathname === "/beefwarehouse/beefstore/report/store/report_storeentrail" ||
-      router.partname === "/beefwarehouse/beefstore/requestexport" ||
-      router.partname === "/beefwarehouse/beefstore/notify/notify_date" ||
-      router.partname === "/beefwarehouse/beefstore/notify/notify_exportrequest" ||
-      router.partname === "/beefwarehouse/beefstore/notify/notify_import" ||
-      router.partname === "/beefwarehouse/beefstore/notify/notify_export" ||
-      router.partname === "/beefwarehouse/beefstore/transport" ||
-      router.partname === "/beefwarehouse/beefstore/graph" ||
-      router.partname === "/beefwarehouse/beefstore/setting/room" ||
-      router.partname === "/beefwarehouse/beefstore/setting/sheif" ||
-      router.partname === "/beefwarehouse/beefstore/setting/basket" ||
-      router.partname === "/beefwarehouse/beefstore/setting/chillroom" ||
-      router.partname === "/beefwarehouse/beefstore/setting/date"
+      router.pathname === "/beefwarehouse/beefstore/requestexport" ||
+      router.pathname === "/beefwarehouse/beefstore/notify/notify_date" ||
+      router.pathname === "/beefwarehouse/beefstore/notify/notify_exportrequest" ||
+      router.pathname === "/beefwarehouse/beefstore/notify/notify_import" ||
+      router.pathname === "/beefwarehouse/beefstore/notify/notify_export" ||
+      router.pathname === "/beefwarehouse/beefstore/transport" ||
+      router.pathname === "/beefwarehouse/beefstore/graph" ||
+      router.pathname === "/beefwarehouse/beefstore/setting/room" ||
+      router.pathname === "/beefwarehouse/beefstore/setting/sheif" ||
+      router.pathname === "/beefwarehouse/beefstore/setting/basket" ||
+      router.pathname === "/beefwarehouse/beefstore/setting/chillroom" ||
+      router.pathname === "/beefwarehouse/beefstore/setting/date" ||
+      router.pathname === "/beefwarehouse/beefstore/setting/reportsetting"
     ) {
       ctx.res.writeHead(302, { Location: "/signin" });
       ctx.res.end();
@@ -190,14 +195,35 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
       router.pathname === "/beefwarehouse/beefproduct/setting/date" ||
       router.pathname === "/beefwarehouse/beefproduct/setting/room" ||
       router.pathname === "/beefwarehouse/beefproduct/setting/freezer" ||
-      router.pathname === "/beefwarehouse/beefproduct/setting/shelf"
+      router.pathname === "/beefwarehouse/beefproduct/setting/shelf" ||
+      router.pathname === "/beefwarehouse/beefproduct/setting/reportsetting"
     ) {
       ctx.res.writeHead(302, { Location: "/signin" });
       ctx.res.end();
     }
   }
 
-
+  //sale
+  if (!token) {
+    if (
+      router.pathname === "/saleonline" ||
+      router.pathname === "/saleonline/listproduct" ||
+      router.pathname === "/saleonline/manageproductonline" ||
+      router.pathname === "/saleonline/checkorders" ||
+      router.pathname === "/saleonline/checkcancelorder" ||
+      router.pathname === "/saleonline/checkreturnorder" ||
+      router.pathname === "/saleonline/request" ||
+      router.pathname === "/saleonline/list/liststore" ||
+      router.pathname === "/saleonline/list/listproduct" ||
+      router.pathname === "/saleonline/transport" ||
+      router.pathname === "/saleonline/report" ||
+      router.pathname === "/saleonline/report/ReportCancelOrder" ||
+      router.pathname === "/saleonline/report/ReportReturnOrder"
+    ) {
+      ctx.res.writeHead(302, { Location: "/signin" });
+      ctx.res.end();
+    }
+  }
 
 
   if (!token) {
@@ -468,7 +494,75 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
       router.pathname === "/registercow/listfarmmer" ||
       router.pathname === "/registercow/listtreatfarm" ||
       router.pathname === "/registercow/listsluagerfarm" ||
-      router.pathname === "/registercow/listfarmmerweitting"
+      router.pathname === "/registercow/listfarmmerweitting" ||
+      /////////////////////////////////////////////////////////
+      router.pathname === "/beefwarehouse" ||
+      router.pathname === "/beefwarehouse/beefstore" ||
+      router.pathname === "/beefwarehouse/beefstore/chill" ||
+      router.pathname === "/beefwarehouse/beefstore/import/import_halves" ||
+      router.pathname === "/beefwarehouse/beefstore/import/import_quarters" ||
+      router.pathname === "/beefwarehouse/beefstore/import/import_lumps" ||
+      router.pathname === "/beefwarehouse/beefstore/import/import_chops" ||
+      router.pathname === "/beefwarehouse/beefstore/import/import_entrails" ||
+      router.pathname === "/beefwarehouse/beefstore/export/export_halves" ||
+      router.pathname === "/beefwarehouse/beefstore/export/export_quarters" ||
+      router.pathname === "/beefwarehouse/beefstore/export/export_lumps" ||
+      router.pathname === "/beefwarehouse/beefstore/export/export_chops" ||
+      router.pathname === "/beefwarehouse/beefstore/export/export_entrails" ||
+      router.pathname === "/beefwarehouse/beefstore/Allstore/store" ||
+      router.pathname === "/beefwarehouse/beefstore/Allstore/storeentrail" ||
+      router.pathname === "/beefwarehouse/beefstore/report/report_chill" ||
+      router.pathname === "/beefwarehouse/beefstore/report/import/report_halves" ||
+      router.pathname === "/beefwarehouse/beefstore/report/import/report_quarters" ||
+      router.pathname === "/beefwarehouse/beefstore/report/import/report_lumps" ||
+      router.pathname === "/beefwarehouse/beefstore/report/import/report_chops" ||
+      router.pathname === "/beefwarehouse/beefstore/report/import/report_entrails" ||
+      router.pathname === "/beefwarehouse/beefstore/report/export/report_halves" ||
+      router.pathname === "/beefwarehouse/beefstore/report/export/report_quarters" ||
+      router.pathname === "/beefwarehouse/beefstore/report/export/report_lumps" ||
+      router.pathname === "/beefwarehouse/beefstore/report/export/report_chops" ||
+      router.pathname === "/beefwarehouse/beefstore/report/export/report_entrails" ||
+      router.pathname === "/beefwarehouse/beefstore/report/store/report_store" ||
+      router.pathname === "/beefwarehouse/beefstore/report/store/report_storeentrail" ||
+      router.pathname === "/beefwarehouse/beefstore/requestexport" ||
+      router.pathname === "/beefwarehouse/beefstore/notify/notify_date" ||
+      router.pathname === "/beefwarehouse/beefstore/notify/notify_exportrequest" ||
+      router.pathname === "/beefwarehouse/beefstore/notify/notify_import" ||
+      router.pathname === "/beefwarehouse/beefstore/notify/notify_export" ||
+      router.pathname === "/beefwarehouse/beefstore/transport" ||
+      router.pathname === "/beefwarehouse/beefstore/graph" ||
+      router.pathname === "/beefwarehouse/beefstore/setting/room" ||
+      router.pathname === "/beefwarehouse/beefstore/setting/sheif" ||
+      router.pathname === "/beefwarehouse/beefstore/setting/basket" ||
+      router.pathname === "/beefwarehouse/beefstore/setting/chillroom" ||
+      router.pathname === "/beefwarehouse/beefstore/setting/date" ||
+      router.pathname === "/beefwarehouse/beefstore/setting/reportsetting" ||
+      /////////////////////////////////////////////////////////
+      router.pathname === "/beefwarehouse/beefproduct" ||
+      router.pathname === "/beefwarehouse/beefproduct/createproduct" ||
+      router.pathname === "/beefwarehouse/beefproduct/imports" ||
+      router.pathname === "/beefwarehouse/beefproduct/exports" ||
+      router.pathname === "/beefwarehouse/beefproduct/store" ||
+      router.pathname === "/beefwarehouse/beefproduct/report/report_import" ||
+      router.pathname === "/beefwarehouse/beefproduct/report/report_export" ||
+      router.pathname === "/beefwarehouse/beefproduct/report/report_store" ||
+      router.pathname === "/beefwarehouse/beefproduct/requestexport" ||
+      router.pathname === "/beefwarehouse/beefproduct/notify/notify_date" ||
+      router.pathname === "/beefwarehouse/beefproduct/notify/notify_exportrequest" ||
+      router.pathname === "/beefwarehouse/beefproduct/notify/notify_import" ||
+      router.pathname === "/beefwarehouse/beefproduct/notify/notify_export" ||
+      router.pathname === "/beefwarehouse/beefproduct/notify/notify_export" ||
+      router.pathname === "/beefwarehouse/beefproduct/tracking/[trackingId]" ||
+      router.pathname === "/beefwarehouse/beefproduct/transport" ||
+      router.pathname === "/beefwarehouse/beefproduct/trace" ||
+      router.pathname === "/beefwarehouse/beefproduct/trace/[trackingId]" ||
+      router.pathname === "/beefwarehouse/beefproductgraph" ||
+      router.pathname === "/beefwarehouse/beefproduct/setting" ||
+      router.pathname === "/beefwarehouse/beefproduct/setting/date" ||
+      router.pathname === "/beefwarehouse/beefproduct/setting/room" ||
+      router.pathname === "/beefwarehouse/beefproduct/setting/freezer" ||
+      router.pathname === "/beefwarehouse/beefproduct/setting/shelf" ||
+      router.pathname === "/beefwarehouse/beefproduct/setting/reportsetting"
     ) {
       ctx.res.writeHead(302, { Location: "/signin" });
       ctx.res.end();

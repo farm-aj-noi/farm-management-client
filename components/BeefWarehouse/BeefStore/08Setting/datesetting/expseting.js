@@ -65,13 +65,29 @@ const UPDATEEXPSETING = gql`
 `;
 
 const expseting = ({ listexpseting }) => {
+  const MySwal = withReactContent(Swal);
   const [infoexpseting, setinfoexpseting] = useState(listexpseting);
   //console.log(infoexpseting);
   const [Editexp, setEditexp] = useState(false);
   const [updateExpdatesetting] = useMutation(UPDATEEXPSETING, {
     onCompleted: (data) => {
-      setinfoexpseting(data.updateExpdatesetting);
-      setEditexp(false);
+      if (data) {
+        setinfoexpseting(data.updateExpdatesetting);
+        setEditexp(false);
+        MySwal.fire({
+          icon: "success",
+          title: "สำเร็จ",
+          text: "ทำการแก้ไขข้อมูลสิ้น",
+          confirmButtonText: (
+            <span
+              onClick={() => Router.reload("beefwarehouse/beefstore/setting/date")}
+            >
+              ตกลง
+            </span>
+          ),
+          confirmButtonColor: "#3085d6",
+        });
+      }
     },
   });
 
@@ -124,7 +140,7 @@ const expseting = ({ listexpseting }) => {
       <>
         <div style={{ marginLeft: "38px", marginTop: "10px" }}>
           <DivFromInsideLeft>
-            ซากเนื้อโคผ่าซีก : {}
+            ซากเนื้อโคผ่าซีก : { }
             {Editexp ? (
               <Searchinput
                 name="dayH"
@@ -143,7 +159,7 @@ const expseting = ({ listexpseting }) => {
             วัน
           </DivFromInsideLeft>
           <DivFromInsideLeft style={{ marginTop: "10px" }}>
-            ซากเนื้อโคสี่เสี้ยว : {}
+            ซากเนื้อโคสี่เสี้ยว : { }
             {Editexp ? (
               <Searchinput
                 name="dayQ"
@@ -162,7 +178,7 @@ const expseting = ({ listexpseting }) => {
             วัน
           </DivFromInsideLeft>
           <DivFromInsideLeft style={{ marginTop: "10px" }}>
-            ซากเนื้อโคก้อนเนื้อ : {}
+            ซากเนื้อโคก้อนเนื้อ : { }
             {Editexp ? (
               <Searchinput
                 name="dayL"
@@ -181,7 +197,7 @@ const expseting = ({ listexpseting }) => {
             วัน
           </DivFromInsideLeft>
           <DivFromInsideLeft style={{ marginTop: "10px" }}>
-            ซากเนื้อโคชิ้นเนื้อ : {}
+            ซากเนื้อโคชิ้นเนื้อ : { }
             {Editexp ? (
               <Searchinput
                 name="dayC"
@@ -200,7 +216,7 @@ const expseting = ({ listexpseting }) => {
             วัน
           </DivFromInsideLeft>
           <DivFromInsideLeft style={{ marginTop: "10px" }}>
-            ซากเนื้อโคส่วนอื่น ๆ : {}
+            ซากเนื้อโคส่วนอื่น ๆ : { }
             {Editexp ? (
               <Searchinput
                 name="dayE"

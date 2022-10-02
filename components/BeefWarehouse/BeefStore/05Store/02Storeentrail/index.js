@@ -119,9 +119,8 @@ const index = () => {
                 justifyContent: "center",
               }}
             >
-              <from style={{ fontSize: "20px" }}>
+              <div style={{ fontSize: "20px" }}>
                 <label
-                  for="beef"
                   style={{
                     textAlign: "center",
                     fontSize: "18px",
@@ -143,7 +142,6 @@ const index = () => {
                   onChange={(event) => setinputcownum(event.target.value)}
                 />
                 <label
-                  for="beef"
                   style={{
                     textAlign: "center",
                     fontSize: "18px",
@@ -174,7 +172,6 @@ const index = () => {
                     ))}
                 </select>
                 <label
-                  for="expdate"
                   style={{
                     textAlign: "center",
                     fontSize: "18px",
@@ -196,7 +193,7 @@ const index = () => {
                   }}
                   onChange={(event) => setexpdate(event.target.value)}
                 ></input>
-              </from>
+              </div>
             </div>
           </DivFromDown>
         </DivFrom>

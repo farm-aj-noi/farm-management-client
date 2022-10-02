@@ -75,15 +75,15 @@ const Top10 = () => {
     };
 
     return (
-        <div style={{ display: "flex", justifyContent: "center" }}>
-            <div style={{ width: "70%", marginRight: "10px" }}>
-                <Doughnut data={data} />
-                <div style={{ display: "flex", justifyContent: "center", marginTop: "30px" }}>
-                    <PaperTop10>พิมพ์รายการ</PaperTop10>
-                </div>
-
-            </div>
-            <Table
+        <div style={{
+            display: "grid",
+            gridTemplateColumns: "0.5fr 750px 250px 0.5fr",
+            marginTop: "10px",
+            gridGap: "40px"
+        }}>
+            <div></div>
+            <div><Bar data={data} height={220} /></div>
+            <div> <Table
                 striped
                 bordered
                 responsive
@@ -148,8 +148,7 @@ const Top10 = () => {
                         <td style={{ height: "35px", }}>{top10 && top10.top10beef && top10.top10beef.length >= 10 ? top10.top10beef[9].count : "-"}</td>
                     </tr>
                 </tbody>
-            </Table>
-
+            </Table></div>
         </div>
     )
 }

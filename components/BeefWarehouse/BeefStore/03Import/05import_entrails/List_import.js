@@ -4,7 +4,7 @@ import Modalqrcode from "../../12Qrcode/Import/imeqr";
 
 const List_import = ({ imentrail }) => {
   const [imentrailData, SetImentrailData] = useState(imentrail);
-  console.log(imentrailData);
+  // console.log(imentrailData);
   return (
     <tr style={{ textAlign: "center" }}>
       <td>{imentrailData.entrail.imslaughter.namefarmer}</td>

@@ -9,6 +9,7 @@ import { useMutation, useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
 import Router from "next/router";
+import { IMPORTLUMPSEARCH } from "./index"
 
 export const CREATEIMPORTLUMP = gql`
   mutation CREATEIMPORTLUMP(
@@ -70,7 +71,7 @@ const Create_Import = () => {
     shelf: "",
     basket: "",
   });
- 
+
 
   const { data: datashelf } = useQuery(QUERYSHELF, {
     variables: {
@@ -136,6 +137,11 @@ const Create_Import = () => {
         });
       }
     },
+    refetchQueries: [
+      {
+        query: IMPORTLUMPSEARCH
+      }
+    ]
   });
 
   const handleChange = (e) => {

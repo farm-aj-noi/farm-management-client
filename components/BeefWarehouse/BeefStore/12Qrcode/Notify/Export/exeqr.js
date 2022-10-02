@@ -8,7 +8,7 @@ import Router from "next/router";
 
 const index = ({ notifyentrail }) => {
   const [infodata, setinfodata] = useState(notifyentrail);
-  console.log(infodata);
+  // console.log(infodata);
   const [testshow, setShow] = useState(false);
   const handleClose = () => {
     setShow(false);

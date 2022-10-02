@@ -55,11 +55,13 @@ const Nav1 = () => {
         fixed="top"
       >
         <Navbar.Brand style={{ padding: "0" }}>
-          <Link href="/beefwarehouse">
-            <a style={{ color: "white" }}>
-              <p style={{ padding: "0 10px", display: "inline", fontSize: "18px", fontWeight: 600, letterSpacing: "1px " }}>หน้าแรก</p>
-            </a>
-          </Link>
+          {(user.role.nameEN === "admin") && (
+            <Link href="/beefwarehouse">
+              <a style={{ color: "white" }}>
+                <p style={{ padding: "0 10px", display: "inline", fontSize: "18px", fontWeight: 600, letterSpacing: "1px " }}>หน้าแรก</p>
+              </a>
+            </Link>
+          )}
           <Link href="/beefwarehouse/beefproduct">
             <a style={{ color: "white", paddingLeft: "18px" }}>
               <Logobeefstore height="30px" weight="30px" />
@@ -151,20 +153,46 @@ const Nav1 = () => {
           </Nav>
           <Nav>
             {user && (
-              <>
-                <a style={{ margin: "auto 5px", textAlign: "left", fontSize: "16px", fontWeight: 600, letterSpacing: "1px" }}>
-                  สวัสดี {user.name}
-                </a>
+              user.role.nameEN === "admin" ? (
+                <>
+                  <DropdownButton
+                    drop="down"
+                    title={
+                      <span style={{ fontSize: "18px", fontWeight: 600 }}>
+                        สวัสดี {user.name}
+                      </span>
+                    }
+                    bsPrefix={MyCss.nstdropleft}
+                  >
+                   {/*  <Link href="/beefwarehouse/beefproduct/setting/reportsetting">
+                      <NavDropdownItem>ตั้งค่าออกรายงาน</NavDropdownItem>
+                    </Link> */}
+                  </DropdownButton>
+                  <NavButtonSigninComplete onClick={signout} style={{ fontSize: "16px", fontWeight: 600, letterSpacing: "1px" }}>
+                    <Icon
+                      style={{ verticalAlign: "text-bottom" }}
+                      icon={shareSquareO}
+                      size={25}
+                    />{" "}
+                    ออกจากระบบ
+                  </NavButtonSigninComplete>
+                </>
+              ) : (
+                <>
+                  <a style={{ margin: "auto 5px", textAlign: "left", fontSize: "16px", fontWeight: 600, letterSpacing: "1px" }}>
+                    สวัสดี {user.name}
+                  </a>
+                  <NavButtonSigninComplete onClick={signout} style={{ fontSize: "16px", fontWeight: 600, letterSpacing: "1px" }}>
+                    <Icon
+                      style={{ verticalAlign: "text-bottom" }}
+                      icon={shareSquareO}
+                      size={25}
+                    />{" "}
+                    ออกจากระบบ
+                  </NavButtonSigninComplete>
+                </>
+              )
 
-                <NavButtonSigninComplete onClick={signout} style={{ fontSize: "16px", fontWeight: 600, letterSpacing: "1px" }}>
-                  <Icon
-                    style={{ verticalAlign: "text-bottom" }}
-                    icon={shareSquareO}
-                    size={25}
-                  />{" "}
-                  ออกจากระบบ
-                </NavButtonSigninComplete>
-              </>
             )}
           </Nav>
         </Navbar.Collapse>

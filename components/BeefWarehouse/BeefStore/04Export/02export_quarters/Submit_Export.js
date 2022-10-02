@@ -24,17 +24,8 @@ export const CREATEEXPORTQUARTER = gql`
   }
 `;
 
-export const LISTREQUEST = gql`
-  query LISTREQUEST {
-    listRequestEx {
-      id
-      name
-    }
-  }
-`;
 const Submit_Export = () => {
   const MySwal = withReactContent(Swal);
-  const { data: requestdata } = useQuery(LISTREQUEST);
   const [ExportquarterInfo, setExportquarterInfo] = useState({
     barcode: "",
     storestatus: "",
@@ -130,40 +121,6 @@ const Submit_Export = () => {
             </div>
           </DivFromInsideLeft>
           <DivFromInsideLeft style={{ marginTop: "5px" }}>
-            ผู้ขอเบิก :
-            <div
-              style={{
-                display: "grid",
-                gridTemplateRows: "1fr 15px",
-              }}
-            >
-              <div style={{ display: "inline", width: "170px" }}>
-                <select
-                  disabled={!ExportquarterInfo.barcode}
-                  name="exporter"
-                  value={ExportquarterInfo.exporter}
-                  onChange={handleChange}
-                  style={{
-                    height: "35px",
-                    width: "160px",
-                    border: "1px solid #AFAFAF",
-                    borderRadius: "4px",
-                    textAlign: "center",
-                    fontSize: "16px",
-                  }}
-                >
-                  <option value="">รายชื่อ</option>
-                  {requestdata &&
-                    requestdata.listRequestEx.map((prod) => (
-                      <option key={prod.id} value={prod.id}>
-                        {prod.name}
-                      </option>
-                    ))}
-                </select>
-              </div>
-            </div>
-          </DivFromInsideLeft>
-          <DivFromInsideLeft>
             สถานะเบิก :
             <div
               style={{
@@ -173,7 +130,7 @@ const Submit_Export = () => {
             >
               <div style={{ display: "inline", width: "170px" }}>
                 <select
-                  disabled={!ExportquarterInfo.barcode || !ExportquarterInfo.exporter}
+                  disabled={!ExportquarterInfo.barcode}
                   name="storestatus"
                   value={ExportquarterInfo.storestatus}
                   onChange={handleChange}
@@ -191,6 +148,48 @@ const Submit_Export = () => {
                     นำตัดเเต่ง(ก้อนเนื้อ)
                   </option>
                   <option value="6280fac6d3dbf7345093676f">นำจำหน่าย</option>
+                </select>
+              </div>
+            </div>
+          </DivFromInsideLeft>
+
+          <DivFromInsideLeft>
+            ผู้ขอเบิก :
+            <div
+              style={{
+                display: "grid",
+                gridTemplateRows: "1fr 15px",
+              }}
+            >
+              <div style={{ display: "inline", width: "170px" }}>
+                <select
+                  name="exporter"
+                  value={ExportquarterInfo.exporter}
+                  onChange={handleChange}
+                  disabled={!ExportquarterInfo.storestatus}
+                  style={{
+                    height: "35px",
+                    width: "160px",
+                    border: "1px solid #AFAFAF",
+                    borderRadius: "4px",
+                    textAlign: "center",
+                    fontSize: "16px",
+                  }}
+                >
+                  <option value="">รายชื่อ</option>
+                  {ExportquarterInfo.storestatus === "6280fac6d3dbf7345093676f" ? (
+                    <>
+                      {/* <option value="admin">Admin</option> */}
+                      <option value="seller">Seller</option>
+                    </>
+                  ) : (
+                    ExportquarterInfo.storestatus === "6281fb683dd2ff4e1495d6bd" ? (
+                      <>
+                        {/* <option value="admin">Admin</option> */}
+                        <option value="Slaughter">Slaughter</option>
+                      </>
+                    ) : ("")
+                  )}
                 </select>
               </div>
             </div>

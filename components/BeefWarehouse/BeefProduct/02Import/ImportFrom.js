@@ -45,7 +45,7 @@ export const HeaderColor = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+/*   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
 `;
 
 export const DivFrom = styled.div`
@@ -54,7 +54,8 @@ export const DivFrom = styled.div`
   display: block;
   width: 1200px;
   height: auto;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0px 0px 4px grey;
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
 `;
 
 export const DivFromTop = styled.div`

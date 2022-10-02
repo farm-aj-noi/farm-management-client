@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { AuthContext } from "../../../../appState/AuthProvider";
 
 import { Navbar, Nav, DropdownButton, NavDropdown } from "react-bootstrap";
 
@@ -35,10 +36,10 @@ import {
 } from "./NavButton";
 
 import MyCss from "./Nav.module.css";
-import { AuthContext } from "../../../../appState/AuthProvider";
 
 const Nav1 = () => {
   const { user, signout } = useContext(AuthContext);
+  // console.log(user)
   return (
     <>
       <Head>
@@ -58,11 +59,13 @@ const Nav1 = () => {
         fixed="top"
       >
         <Navbar.Brand style={{ padding: "0" }}>
-          <Link href="/beefwarehouse">
-            <a style={{ color: "white", paddingRight: "18px" }}>
-              <p style={{ padding: "0 10px", display: "inline", fontSize: "22px", fontWeight: 600, letterSpacing: "1px" }}>หน้าแรก</p>
-            </a>
-          </Link>
+          {(user.role.nameEN === "admin") && (
+            <Link href="/beefwarehouse">
+              <a style={{ color: "white" }}>
+                <p style={{ padding: "0 10px", display: "inline", fontSize: "18px", fontWeight: 600, letterSpacing: "1px " }}>หน้าแรก</p>
+              </a>
+            </Link>
+          )}
           <Link href="/beefwarehouse/beefstore">
             <a style={{ color: "white" }}>
               <Logobeefstore height="30px" weight="30px" />
@@ -71,161 +74,174 @@ const Nav1 = () => {
               </p>
             </a>
           </Link>
+
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
-            <Link href="/beefwarehouse/beefstore/chill">
-              <NavButtonLeft>
-                <Icon7 height="30px" weight="30px" />
-                บ่มซากเนื้อโค
-              </NavButtonLeft>
-            </Link>
-            <DropdownButton
-              drop="down"
-              title={
-                <span style={{ fontSize: "18px", fontWeight: 600 }}>
-                  <Icon12 height="30px" weight="30px" />
-                  การนำเข้า
-                </span>
-              }
-              bsPrefix={MyCss.nstdropleft}
-            >
-              <Link href="/beefwarehouse/beefstore/import/import_halves">
-                <NavDropdownItem>นำเข้าซากเนื้อโคผ่าซีก</NavDropdownItem>
-              </Link>
-              <Link href="/beefwarehouse/beefstore/import/import_quarters">
-                <NavDropdownItem>นำเข้าซากเนื้อโคสี่เสี้ยว</NavDropdownItem>
-              </Link>
-              <Link href="/beefwarehouse/beefstore/import/import_lumps">
-                <NavDropdownItem>นำเข้าซากเนื้อโคก้อนเนื้อ</NavDropdownItem>
-              </Link>
-              <Link href="/beefwarehouse/beefstore/import/import_chops">
-                <NavDropdownItem>นำเข้าซากเนื้อโคชื้นเนื้อ</NavDropdownItem>
-              </Link>
-              <Link href="/beefwarehouse/beefstore/import/import_entrails">
-                <NavDropdownItem>นำเข้าซากเนื้อโคส่วนอื่น ๆ </NavDropdownItem>
-              </Link>
-            </DropdownButton>
-            <DropdownButton
-              drop="down"
-              title={
-                <span style={{ fontSize: "18px", fontWeight: 600 }}>
-                  <Icon11 height="30px" weight="30px" />
-                  การนำออก
-                </span>
-              }
-              bsPrefix={MyCss.nstdropleft}
-            >
-              <Link href="/beefwarehouse/beefstore/export/export_halves">
-                <NavDropdownItem>นำออกซากเนื้อโคผ่าซีก</NavDropdownItem>
-              </Link>
-              <Link href="/beefwarehouse/beefstore/export/export_quarters">
-                <NavDropdownItem>นำออกซากเนื้อโคสี่เสี้ยว</NavDropdownItem>
-              </Link>
-              <Link href="/beefwarehouse/beefstore/export/export_lumps">
-                <NavDropdownItem>นำออกซากเนื้อโคก้อนเนื้อ</NavDropdownItem>
-              </Link>
-              <Link href="/beefwarehouse/beefstore/export/export_chops">
-                <NavDropdownItem>นำออกซากเนื้อโคชื้นเนื้อ</NavDropdownItem>
-              </Link>
-              <Link href="/beefwarehouse/beefstore/export/export_entrails">
-                <NavDropdownItem>นำออกซากเนื้อโคส่วนอื่น ๆ </NavDropdownItem>
-              </Link>
-            </DropdownButton>
-            <Link href="/beefwarehouse/beefstore/Allstore/store">
-              <NavButtonLeft style={{ fontWeight: 600, borderRadius: "5px" }}>
-                <Icon9 height="30px" weight="30px" />
-                คงคลัง
-              </NavButtonLeft>
-            </Link>
 
-            <DropdownButton
-              drop="down"
-              title={
-                <span style={{ fontSize: "18px", fontWeight: 600 }}>
-                  <Icon3 height="30px" weight="30px" />
-                  ออกรายงาน
-                </span>
-              }
-              bsPrefix={MyCss.nstdropleft}
-            >
-              <Link href="/beefwarehouse/beefstore/report/report_chill">
-                <NavDropdownItem>ออกรายงานการบ่มซาก</NavDropdownItem>
+            <>
+              <Link href="/beefwarehouse/beefstore/chill">
+                <NavButtonLeft>
+                  <Icon7 height="30px" weight="30px" />
+                  บ่มซากเนื้อโค
+                </NavButtonLeft>
               </Link>
-              <Link href="/beefwarehouse/beefstore/report/import/report_halves">
-                <NavDropdownItem>ออกรายงานการนำเข้า</NavDropdownItem>
+              <DropdownButton
+                drop="down"
+                title={
+                  <span style={{ fontSize: "18px", fontWeight: 600 }}>
+                    <Icon12 height="30px" weight="30px" />
+                    การนำเข้า
+                  </span>
+                }
+                bsPrefix={MyCss.nstdropleft}
+              >
+                <Link href="/beefwarehouse/beefstore/import/import_halves">
+                  <NavDropdownItem>นำเข้าซากเนื้อโคผ่าซีก</NavDropdownItem>
+                </Link>
+                <Link href="/beefwarehouse/beefstore/import/import_quarters">
+                  <NavDropdownItem>นำเข้าซากเนื้อโคสี่เสี้ยว</NavDropdownItem>
+                </Link>
+                <Link href="/beefwarehouse/beefstore/import/import_lumps">
+                  <NavDropdownItem>นำเข้าซากเนื้อโคก้อนเนื้อ</NavDropdownItem>
+                </Link>
+                <Link href="/beefwarehouse/beefstore/import/import_chops">
+                  <NavDropdownItem>นำเข้าซากเนื้อโคชื้นเนื้อ</NavDropdownItem>
+                </Link>
+                <Link href="/beefwarehouse/beefstore/import/import_entrails">
+                  <NavDropdownItem>นำเข้าซากเนื้อโคส่วนอื่น ๆ </NavDropdownItem>
+                </Link>
+              </DropdownButton>
+              <DropdownButton
+                drop="down"
+                title={
+                  <span style={{ fontSize: "18px", fontWeight: 600 }}>
+                    <Icon11 height="30px" weight="30px" />
+                    การนำออก
+                  </span>
+                }
+                bsPrefix={MyCss.nstdropleft}
+              >
+                <Link href="/beefwarehouse/beefstore/export/export_halves">
+                  <NavDropdownItem>นำออกซากเนื้อโคผ่าซีก</NavDropdownItem>
+                </Link>
+                <Link href="/beefwarehouse/beefstore/export/export_quarters">
+                  <NavDropdownItem>นำออกซากเนื้อโคสี่เสี้ยว</NavDropdownItem>
+                </Link>
+                <Link href="/beefwarehouse/beefstore/export/export_lumps">
+                  <NavDropdownItem>นำออกซากเนื้อโคก้อนเนื้อ</NavDropdownItem>
+                </Link>
+                <Link href="/beefwarehouse/beefstore/export/export_chops">
+                  <NavDropdownItem>นำออกซากเนื้อโคชื้นเนื้อ</NavDropdownItem>
+                </Link>
+                <Link href="/beefwarehouse/beefstore/export/export_entrails">
+                  <NavDropdownItem>นำออกซากเนื้อโคส่วนอื่น ๆ </NavDropdownItem>
+                </Link>
+              </DropdownButton>
+              <Link href="/beefwarehouse/beefstore/Allstore/store">
+                <NavButtonLeft style={{ fontWeight: 600, borderRadius: "5px" }}>
+                  <Icon9 height="30px" weight="30px" />
+                  คงคลัง
+                </NavButtonLeft>
               </Link>
-              <Link href="/beefwarehouse/beefstore/report/export/report_halves">
-                <NavDropdownItem>ออกรายงานนำออก</NavDropdownItem>
+
+              <DropdownButton
+                drop="down"
+                title={
+                  <span style={{ fontSize: "18px", fontWeight: 600 }}>
+                    <Icon3 height="30px" weight="30px" />
+                    ออกรายงาน
+                  </span>
+                }
+                bsPrefix={MyCss.nstdropleft}
+              >
+                <Link href="/beefwarehouse/beefstore/report/report_chill">
+                  <NavDropdownItem>ออกรายงานการบ่มซาก</NavDropdownItem>
+                </Link>
+                <Link href="/beefwarehouse/beefstore/report/import/report_halves">
+                  <NavDropdownItem>ออกรายงานการนำเข้า</NavDropdownItem>
+                </Link>
+                <Link href="/beefwarehouse/beefstore/report/export/report_halves">
+                  <NavDropdownItem>ออกรายงานนำออก</NavDropdownItem>
+                </Link>
+                <Link href="/beefwarehouse/beefstore/report/store/report_store">
+                  <NavDropdownItem>ออกรายงานคงคลัง</NavDropdownItem>
+                </Link>
+              </DropdownButton>
+              {/*  <Link href="/beefwarehouse/beefstore/requestexport">
+                <NavButtonLeft>
+                  <Icon2 height="30px" weight="30px" /> ร้องขอเบิก
+                </NavButtonLeft>
+              </Link> */}
+              <Link href="/beefwarehouse/beefstore/notify/notify_date">
+                <NavButtonLeft>
+                  <Icon10 height="30px" weight="30px" /> การแจ้งเตือน
+                </NavButtonLeft>
               </Link>
-              <Link href="/beefwarehouse/beefstore/report/store/report_store">
-                <NavDropdownItem>ออกรายงานคงคลัง</NavDropdownItem>
+              <Link href="/beefwarehouse/beefstore/transport">
+                <NavButtonLeft>
+                  <Icon14 height="30px" weight="30px" /> บันทึกการขนส่ง
+                </NavButtonLeft>
               </Link>
-            </DropdownButton>
-            <Link href="/beefwarehouse/beefstore/requestexport">
-              <NavButtonLeft>
-                <Icon2 height="30px" weight="30px" /> ร้องขอเบิก
-              </NavButtonLeft>
-            </Link>
-            <Link href="/beefwarehouse/beefstore/notify/notify_date">
-              <NavButtonLeft>
-                <Icon10 height="30px" weight="30px" /> การแจ้งเตือน
-              </NavButtonLeft>
-            </Link>
-            <Link href="/beefwarehouse/beefstore/transport">
-              <NavButtonLeft>
-                <Icon14 height="30px" weight="30px" /> บันทึกการขนส่ง
-              </NavButtonLeft>
-            </Link>
-            <Link href="/beefwarehouse/beefstore/graph">
-              <NavButtonLeft>
-                <Icon13 height="40px" weight="37px" /> รายละเอียดข้อมูลสถิติ
-              </NavButtonLeft>
-            </Link>
-            <Link href="/beefwarehouse/beefstore/setting/room">
-              <NavButtonLeft>
-                <Icon5 height="30px" weight="30px" /> การตั้งค่า
-              </NavButtonLeft>
-            </Link>
+              <Link href="/beefwarehouse/beefstore/graph">
+                <NavButtonLeft>
+                  <Icon13 height="40px" weight="37px" /> รายละเอียดข้อมูลสถิติ
+                </NavButtonLeft>
+              </Link>
+              <Link href="/beefwarehouse/beefstore/setting/room">
+                <NavButtonLeft>
+                  <Icon5 height="30px" weight="30px" /> การตั้งค่า
+                </NavButtonLeft>
+              </Link>
+            </>
           </Nav>
           <Nav>
             {user && (
-              <>
-                {/* <DropdownButton drop="down"
-                  title={
-                    <span style={{ fontSize: "18px", fontWeight: 600 }}>
-                      สวัสดี {user.name}
-                    </span>
-                  }
-                  bsPrefix={MyCss.nstdropright}
-                 >
-                  <NavDropdownItem1 onClick={signout}>
+              user.role.nameEN === "admin"  ? (
+                <>
+                  <DropdownButton
+                    drop="down"
+                    title={
+                      <span style={{ fontSize: "18px", fontWeight: 600 }}>
+                        สวัสดี {user.name}
+                      </span>
+                    }
+                    bsPrefix={MyCss.nstdropleft}
+                  >
+                    <Link href="/beefwarehouse/beefstore/setting/reportsetting">
+                      <NavDropdownItem>ตั้งค่าออกรายงาน</NavDropdownItem>
+                    </Link>
+                  </DropdownButton>
+                  <NavButtonSigninComplete onClick={signout} style={{ fontSize: "16px", fontWeight: 600, letterSpacing: "1px" }}>
                     <Icon
                       style={{ verticalAlign: "text-bottom" }}
                       icon={shareSquareO}
                       size={25}
-                    />
+                    />{" "}
                     ออกจากระบบ
-                  </NavDropdownItem1>
-                </DropdownButton> */}
-                <a style={{ margin: "auto 5px", textAlign: "left", fontSize: "18px", fontWeight: 600, letterSpacing: "1px" }}>
-                  สวัสดี {user.name}
-                </a>
+                  </NavButtonSigninComplete>
+                </>
+              ) : (
+                <>
+                  <a style={{ margin: "auto 5px", textAlign: "left", fontSize: "16px", fontWeight: 600, letterSpacing: "1px" }}>
+                    สวัสดี {user.name}
+                  </a>
+                  <NavButtonSigninComplete onClick={signout} style={{ fontSize: "16px", fontWeight: 600, letterSpacing: "1px" }}>
+                    <Icon
+                      style={{ verticalAlign: "text-bottom" }}
+                      icon={shareSquareO}
+                      size={25}
+                    />{" "}
+                    ออกจากระบบ
+                  </NavButtonSigninComplete>
+                </>
+              )
 
-                <NavButtonSigninComplete onClick={signout} style={{ fontSize: "18px", fontWeight: 600, letterSpacing: "1px" }}>
-                  <Icon
-                    style={{ verticalAlign: "text-bottom" }}
-                    icon={shareSquareO}
-                    size={25}
-                  />{" "}
-                  ออกจากระบบ
-                </NavButtonSigninComplete>
-              </>
             )}
           </Nav>
-        </Navbar.Collapse>
-      </Navbar>
+        </Navbar.Collapse >
+      </Navbar >
     </>
   );
 };

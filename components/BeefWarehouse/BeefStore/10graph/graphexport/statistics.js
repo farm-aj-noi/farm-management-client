@@ -4,11 +4,21 @@ import { Table } from "react-bootstrap";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
+import { Icon } from "react-icons-kit";
+import { list } from "react-icons-kit/fa/list";
+
 import { Line, PolarArea, Doughnut, Bar } from "react-chartjs-2";
 import { CategoryScale } from "chart.js";
 Chart.register(CategoryScale);
 import Chart from "chart.js/auto";
-import storeen from "../../12Qrcode/storeen";
+
+import {
+  DivFrom,
+  DivFromTop,
+  DivFromDown,
+  HeaderColor,
+  DivBase1,
+} from "../GraphFrom";
 
 export const EXPORTHALVESSEARCH = gql`
   query EXPORTHALVESSEARCH {
@@ -168,16 +178,99 @@ const statistics = () => {
   const { data: stocken } = useQuery(STOREENTRAIL);
   // console.log(stock)
 
+  const allimport = [imdatahalve && imdatahalve.imhalveSearch.length,
+  imdataquarter && imdataquarter.imquartSearch.length,
+  imdatalump && imdatalump.imlumpSearch.length,
+  imdatachop && imdatachop.imchopSearch.length,
+  imdataen && imdataen.imentrailSearch.length
+  ];
+
+  const allexport = [datahalve && datahalve.exporthalve.length,
+  dataquarter && dataquarter.exportquart.length,
+  datalump && datalump.exportlump.length,
+  datachop && datachop.exportchop.length,
+  dataen && dataen.exportentrail.length
+  ];
+
+  const allweightimport = [parseFloat(imdatahalve &&
+    imdatahalve.imhalveSearch.reduce(
+      (sum, nex) => sum + nex.halve.weightcool,
+      0
+    ).toFixed(2)),
+  parseFloat(imdataquarter &&
+    imdataquarter.imquartSearch.reduce(
+      (sum, nex) => sum + nex.quarter.weight,
+      0
+    ).toFixed(2)),
+  parseFloat(imdatalump &&
+    imdatalump.imlumpSearch.reduce(
+      (sum, nex) => sum + nex.lump.weight,
+      0
+    ).toFixed(2)),
+  parseFloat(imdatachop &&
+    imdatachop.imchopSearch.reduce(
+      (sum, nex) => sum + nex.chop.weight,
+      0
+    ).toFixed(2)),
+  ];
+
+  const allweightexport = [
+    parseFloat(datahalve &&
+      datahalve.exporthalve.reduce(
+        (sum, nex) => sum + nex.halve.weightcool,
+        0
+      ).toFixed(2)),
+    parseFloat(dataquarter &&
+      dataquarter.exportquart.reduce(
+        (sum, nex) => sum + nex.quarter.weight,
+        0
+      ).toFixed(2)),
+    parseFloat(datalump &&
+      datalump.exportlump.reduce(
+        (sum, nex) => sum + nex.lump.weight,
+        0
+      ).toFixed(2)),
+    parseFloat(datachop &&
+      datachop.exportchop.reduce(
+        (sum, nex) => sum + nex.chop.weight,
+        0
+      ).toFixed(2)),
+  ];
+
+  const store = [
+    stock && stock.stockgraph[0].imhalves.length,
+    stock && stock.stockgraph[0].imquarters.length,
+    stock && stock.stockgraph[0].imlumps.length,
+    stock && stock.stockgraph[0].imchops.length,
+    stocken && stocken.listentrail.length
+  ];
+
+  const allweightstore = [
+    parseFloat(stock && stock.stockgraph[0].imhalves.reduce(
+      (sum, nex) => sum + nex.halve.weightcool,
+      0
+    ).toFixed(2)),
+    parseFloat(stock && stock.stockgraph[0].imquarters.reduce(
+      (sum, nex) => sum + nex.quarter.weight,
+      0
+    ).toFixed(2)),
+    parseFloat(stock && stock.stockgraph[0].imlumps.reduce(
+      (sum, nex) => sum + nex.lump.weight,
+      0
+    ).toFixed(2)),
+    parseFloat(stock && stock.stockgraph[0].imchops.reduce(
+      (sum, nex) => sum + nex.chop.weight,
+      0
+    ).toFixed(2)),
+  ];
+
+
   const data = {
     labels: ["ผ่าซีก", "สี่เสี้ยว", "ก้อนเนื้อ", "ชิ้นเนื้อ", "ส่วนอื่น ๆ"],
     datasets: [
       {
         label: 'สถิติการนำเข้า',
-        data: [imdatahalve && imdatahalve.imhalveSearch.length,
-        imdataquarter && imdataquarter.imquartSearch.length,
-        imdatalump && imdatalump.imlumpSearch.length,
-        imdatachop && imdatachop.imchopSearch.length,
-        imdataen && imdataen.imentrailSearch.length,],
+        data: [allimport[0], allimport[1], allimport[2], allimport[3], allimport[4]],
         backgroundColor: [
           'rgba(255, 99, 132, 0.8)',
           'rgba(54, 162, 235, 0.8)',
@@ -201,11 +294,7 @@ const statistics = () => {
     datasets: [
       {
         label: 'สถิติการเบิกออก',
-        data: [datahalve && datahalve.exporthalve.length,
-        dataquarter && dataquarter.exportquart.length,
-        datalump && datalump.exportlump.length,
-        datachop && datachop.exportchop.length,
-        dataen && dataen.exportentrail.length,],
+        data: [allexport[0], allexport[1], allexport[2], allexport[3], allexport[4]],
         backgroundColor: [
           'rgba(255, 99, 132, 0.8)',
           'rgba(54, 162, 235, 0.8)',
@@ -229,11 +318,7 @@ const statistics = () => {
     datasets: [
       {
         label: 'สถิติยอดคงคลัง',
-        data: [stock && stock.stockgraph[0].imhalves.length,
-        stock && stock.stockgraph[0].imquarters.length,
-        stock && stock.stockgraph[0].imlumps.length,
-        stock && stock.stockgraph[0].imchops.length,
-        stocken ? stocken.listentrail.length : "0",],
+        data: [store[0], store[1], store[2], store[3], store[4]],
         backgroundColor: [
           'rgba(255, 99, 132, 0.8)',
           'rgba(54, 162, 235, 0.8)',
@@ -252,94 +337,121 @@ const statistics = () => {
     ],
   }
   return (
-    <div>
-      <div>
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "0.5fr 300px 300px 300px 0.5fr",
-          marginTop: "10px",
-          gridGap: "40px"
-        }}>
-          <div></div>
-          <div>
-            <div style={{ textAlign: "center", fontSize: "24px", fontWeight: "bold" }}>สถิติการนำเข้า</div>
-            <Bar data={data} height={250}
-            />
-            <Table striped bordered responsive hover style={{ marginTop: "20px" }}>
-              <thead>
-                <tr style={{ textAlign: "center" }}>
-                  <th>ประเภท</th>
-                  <th>จำนวน</th>
-                  <th>น้ำหนักอุ่น / เย็น (กก.)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr style={{ textAlign: "center" }}>
-                  <td>ซากโคผ่าซีก</td>
-                  <td>{imdatahalve ? imdatahalve.imhalveSearch.length : "0"}</td>
-                  <td>
-                    {imdatahalve &&
-                      imdatahalve.imhalveSearch.reduce(
-                        (sum, nex) => sum + nex.halve.weightwarm,
-                        0
-                      ).toFixed(2)}{" "}
-                    /{" "}
-                    {datahalve &&
-                      datahalve.exporthalve.reduce(
-                        (sum, nex) => sum + nex.halve.weightcool,
-                        0
-                      ).toFixed(2)}
-                  </td>
-                </tr>
-
-                <tr style={{ textAlign: "center" }}>
-                  <td>ซากโคสี่เสี้ยว</td>
-                  <td>{imdataquarter ? imdataquarter.imquartSearch.length : "0"}</td>
-                  <td>
-                    0.00 /{" "}
-                    {imdataquarter &&
-                      imdataquarter.imquartSearch.reduce(
-                        (sum, nex) => sum + nex.quarter.weight,
-                        0
-                      ).toFixed(2)}
-                  </td>
-                </tr>
-                <tr style={{ textAlign: "center" }}>
-                  <td>ก้อนเนื้อ</td>
-                  <td>{imdatalump ? imdatalump.imlumpSearch.length : "0"}</td>
-                  <td>
-                    0.00 /{" "}
-                    {imdatalump &&
-                      imdatalump.imlumpSearch.reduce(
-                        (sum, nex) => sum + nex.lump.weight,
-                        0
-                      ).toFixed(2)}
-                  </td>
-                </tr>
-                <tr style={{ textAlign: "center" }}>
-                  <td>ชิ้นเนื้อ</td>
-                  <td>{imdatachop ? imdatachop.imchopSearch.length : "0"}</td>
-                  <td>
-                    0.00 /{" "}
-                    {imdatachop &&
-                      imdatachop.imchopSearch.reduce(
-                        (sum, nex) => sum + nex.chop.weight,
-                        0
-                      ).toFixed(2)}
-                  </td>
-                </tr>
-                <tr style={{ textAlign: "center" }}>
-                  <td>ส่วนอื่น ๆ</td>
-                  <td>{imdataen ? imdataen.imentrailSearch.length : "0"}</td>
-                  <td>-</td>
-                </tr>
-              </tbody>
-            </Table>
+    <>
+      <DivFrom style={{ marginTop: "20px" }}>
+        <DivFromTop>
+          <div style={{ margin: "-3px 5px 0px 0px" }}>
+            <Icon size={20} icon={list} />
           </div>
+          ราลละเอียดข้อมูลสถิตินำเข้า
+        </DivFromTop>
+        <DivFromDown>
           <div>
-            <div style={{ textAlign: "center", fontSize: "24px", fontWeight: "bold" }}>สถิติการนำออก</div>
-            <Bar data={data1} height={250} />
-            <Table striped bordered responsive hover style={{ marginTop: "20px" }}>
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: "0.5fr 650px 350px 0.5fr",
+              marginTop: "10px",
+              gridGap: "40px"
+            }}>
+              <div></div>
+              <div><Bar data={data} height={170} /></div>
+              <div>
+                <Table striped bordered responsive hover style={{ marginTop: "20px" }}>
+                  <thead>
+                    <tr style={{ textAlign: "center" }}>
+                      <th>ประเภท</th>
+                      <th>จำนวน</th>
+                      <th>น้ำหนักอุ่น / เย็น (กก.)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr style={{ textAlign: "center" }}>
+                      <td>ซากโคผ่าซีก</td>
+                      <td>{imdatahalve ? imdatahalve.imhalveSearch.length : "0"}</td>
+                      <td>
+                        {imdatahalve &&
+                          imdatahalve.imhalveSearch.reduce(
+                            (sum, nex) => sum + nex.halve.weightwarm,
+                            0
+                          ).toFixed(2)}{" "}
+                        /{" "}
+                        {allweightimport[0].toFixed(2)}
+                      </td>
+                    </tr>
+
+                    <tr style={{ textAlign: "center" }}>
+                      <td>ซากโคสี่เสี้ยว</td>
+                      <td>{imdataquarter ? imdataquarter.imquartSearch.length : "0"}</td>
+                      <td>
+                        0.00 /{" "}
+                        {allweightimport[1].toFixed(2)}
+                      </td>
+                    </tr>
+                    <tr style={{ textAlign: "center" }}>
+                      <td>ก้อนเนื้อ</td>
+                      <td>{imdatalump ? imdatalump.imlumpSearch.length : "0"}</td>
+                      <td>
+                        0.00 /{" "}
+                        {allweightimport[2].toFixed(2)}
+                      </td>
+                    </tr>
+                    <tr style={{ textAlign: "center" }}>
+                      <td>ชิ้นเนื้อ</td>
+                      <td>{imdatachop ? imdatachop.imchopSearch.length : "0"}</td>
+                      <td>
+                        0.00 /{" "}
+                        {allweightimport[3].toFixed(2)}
+                      </td>
+                    </tr>
+                    <tr style={{ textAlign: "center" }}>
+                      <td>ส่วนอื่น ๆ</td>
+                      <td>{imdataen ? imdataen.imentrailSearch.length : "0"}</td>
+                      <td>-</td>
+                    </tr>
+                    <tr style={{ textAlign: "center", }}>
+                      <td style={{ fontWeight: "bold" }}>รวม</td>
+                      <td>
+                        {allimport.reduce(
+                          (sum, nex) => sum + nex,
+                          0
+                        )}
+                      </td>
+                      <td>
+                        {imdatahalve &&
+                          imdatahalve.imhalveSearch.reduce(
+                            (sum, nex) => sum + nex.halve.weightwarm,
+                            0
+                          ).toFixed(2)} /{" "}
+                        {allweightimport.reduce(
+                          (sum, nex) => sum + nex,
+                          0
+                        )}
+                      </td>
+                    </tr>
+                  </tbody>
+                </Table>
+              </div>
+            </div>
+          </div>
+        </DivFromDown>
+      </DivFrom >
+      <DivFrom style={{ marginTop: "20px" }}>
+        <DivFromTop>
+          <div style={{ margin: "-3px 5px 0px 0px" }}>
+            <Icon size={20} icon={list} />
+          </div>
+          รายละเอียดข้อมูลสถิตินำออก
+        </DivFromTop>
+        <DivFromDown>
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "0.5fr 650px 350px 0.5fr",
+            marginTop: "10px",
+            gridGap: "40px"
+          }}>
+            <div></div>
+            <div><Bar data={data1} height={170} /></div>
+            <div><Table striped bordered responsive hover style={{ marginTop: "20px" }}>
               <thead>
                 <tr style={{ textAlign: "center" }}>
                   <th>ประเภท</th>
@@ -358,11 +470,12 @@ const statistics = () => {
                         0
                       ).toFixed(2)}{" "}
                     /{" "}
-                    {datahalve &&
+                    {/* {datahalve &&
                       datahalve.exporthalve.reduce(
                         (sum, nex) => sum + nex.halve.weightcool,
                         0
-                      )}
+                      )} */}
+                    {allweightexport[0].toFixed(2)}
                   </td>
                 </tr>
 
@@ -371,11 +484,7 @@ const statistics = () => {
                   <td>{dataquarter ? dataquarter.exportquart.length : "0"}</td>
                   <td>
                     0.00 /{" "}
-                    {dataquarter &&
-                      dataquarter.exportquart.reduce(
-                        (sum, nex) => sum + nex.quarter.weight,
-                        0
-                      ).toFixed(2)}
+                    {allweightexport[1].toFixed(2)}
                   </td>
                 </tr>
                 <tr style={{ textAlign: "center" }}>
@@ -383,11 +492,7 @@ const statistics = () => {
                   <td>{datalump ? datalump.exportlump.length : "0"}</td>
                   <td>
                     0.00 /{" "}
-                    {datalump &&
-                      datalump.exportlump.reduce(
-                        (sum, nex) => sum + nex.lump.weight,
-                        0
-                      ).toFixed(2)}
+                    {allweightexport[2].toFixed(2)}
                   </td>
                 </tr>
                 <tr style={{ textAlign: "center" }}>
@@ -395,11 +500,7 @@ const statistics = () => {
                   <td>{datachop ? datachop.exportchop.length : "0"}</td>
                   <td>
                     0.00 /{" "}
-                    {datachop &&
-                      datachop.exportchop.reduce(
-                        (sum, nex) => sum + nex.chop.weight,
-                        0
-                      ).toFixed(2)}
+                    {allweightexport[3].toFixed(2)}
                   </td>
                 </tr>
                 <tr style={{ textAlign: "center" }}>
@@ -407,13 +508,48 @@ const statistics = () => {
                   <td>{dataen ? dataen.exportentrail.length : "0"}</td>
                   <td>-</td>
                 </tr>
+                <tr style={{ textAlign: "center", }}>
+                  <td style={{ fontWeight: "bold" }}>รวม</td>
+                  <td>
+                    {allexport.reduce(
+                      (sum, nex) => sum + nex,
+                      0
+                    )}
+                  </td>
+                  <td>
+                    {datahalve &&
+                      datahalve.exporthalve.reduce(
+                        (sum, nex) => sum + nex.halve.weightwarm,
+                        0
+                      ).toFixed(2)} /{" "}
+                    {allweightexport.reduce(
+                      (sum, nex) => sum + nex,
+                    )}
+                  </td>
+                </tr>
               </tbody>
             </Table>
+            </div>
           </div>
-          <div>
-            <div style={{ textAlign: "center", fontSize: "24px", fontWeight: "bold" }}>สถิติยอดคงคลัง</div>
-            <Bar data={data2} height={250} />
-            <Table striped bordered responsive hover style={{ marginTop: "20px" }}>
+        </DivFromDown>
+      </DivFrom>
+      <DivFrom style={{ marginTop: "20px" }}>
+        <DivFromTop>
+          <div style={{ margin: "-3px 5px 0px 0px" }}>
+            <Icon size={20} icon={list} />
+          </div>
+          รายละเอียดข้อมูลสถิติคงคลัง
+        </DivFromTop>
+        <DivFromDown>
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "0.5fr 650px 350px 0.5fr",
+            marginTop: "10px",
+            gridGap: "40px"
+          }}>
+            <div></div>
+            <div><Bar data={data2} height={170} /></div>
+            <div><Table striped bordered responsive hover style={{ marginTop: "20px" }}>
               <thead>
                 <tr style={{ textAlign: "center" }}>
                   <th>ประเภท</th>
@@ -431,34 +567,25 @@ const statistics = () => {
                         (sum, nex) => sum + nex.halve.weightwarm, 0
                       ).toFixed(2)}{" "}
                         /{" "}
-                        {prod.imhalves.reduce(
-                          (sum, nex) => sum + nex.halve.weightcool,
-                          0
-                        ).toFixed(2)}
+                        {allweightstore[0].toFixed(2)}
                       </td>
                     </tr>
                     <tr style={{ textAlign: "center" }}>
                       <td>ซากโคสี่เสี้ยว</td>
                       <td>{prod.imquarters.length}</td>
-                      <td> 0.00 /{" "}{prod.imquarters.reduce(
-                        (sum, nex) => sum + nex.quarter.weight, 0
-                      ).toFixed(2)}
+                      <td> 0.00 /{" "}{allweightstore[1].toFixed(2)}
                       </td>
                     </tr>
                     <tr style={{ textAlign: "center" }}>
                       <td>ก้อนเนื้อ</td>
                       <td>{prod.imlumps.length}</td>
-                      <td> 0.00 /{" "}{prod.imlumps.reduce(
-                        (sum, nex) => sum + nex.lump.weight, 0
-                      ).toFixed(2)}
+                      <td> 0.00 /{" "}{allweightstore[2].toFixed(2)}
                       </td>
                     </tr>
                     <tr style={{ textAlign: "center" }}>
                       <td>ชิ้นเนื้อ</td>
                       <td>{prod.imchops.length}</td>
-                      <td> 0.00 /{" "}{prod.imchops.reduce(
-                        (sum, nex) => sum + nex.chop.weight, 0
-                      ).toFixed(2)}
+                      <td> 0.00 /{" "}{allweightstore[3].toFixed(2)}
                       </td>
                     </tr>
                   </>
@@ -469,12 +596,30 @@ const statistics = () => {
                     {stocken ? stocken.listentrail.length : "0"}</td>
                   <td>-</td>
                 </tr>
+                <tr style={{ textAlign: "center", }}>
+                  <td style={{ fontWeight: "bold" }}>รวม</td>
+                  <td>
+                    {store.reduce(
+                      (sum, nex) => sum + nex,
+                      0
+                    )}
+                  </td>
+                  <td>
+                    {stock && stock.stockgraph[0].imhalves.reduce(
+                      (sum, nex) => sum + nex.halve.weightwarm,
+                      0
+                    ).toFixed(2)} /{" "}
+                    {allweightstore.reduce(
+                      (sum, nex) => sum + nex,
+                    )}
+                  </td>
+                </tr>
               </tbody>
-            </Table>
+            </Table></div>
           </div>
-        </div>
-      </div>
-    </div >
+        </DivFromDown>
+      </DivFrom>
+    </>
   );
 };
 

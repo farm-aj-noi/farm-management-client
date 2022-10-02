@@ -42,7 +42,7 @@ const EXPL = gql`
 
 const listlump = () => {
   const { data } = useQuery(EXPL);
-  console.log(data);
+  // console.log(data);
   return (
     <>
       <div style={{ height: `${data && data.Card8l.length > 10 ? "550px" : ""}`, overflow: "auto" }}>
