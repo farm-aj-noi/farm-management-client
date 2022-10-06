@@ -55,8 +55,12 @@ const Nav1 = () => {
         fixed="top"
       >
         <Navbar.Brand style={{ padding: "0" }}>
+<<<<<<< HEAD
           {user &&
             user.role.nameEN === "admin" ? (
+=======
+          {user && (user.role.nameEN === "admin") && (
+>>>>>>> 058e6a588a0b4de8e2493799ac5ef154adde3b8a
             <Link href="/beefwarehouse">
               <a style={{ color: "white" }}>
                 <p style={{ padding: "0 10px", display: "inline", fontSize: "18px", fontWeight: 600, letterSpacing: "1px " }}>หน้าแรก</p>
@@ -75,6 +79,19 @@ const Nav1 = () => {
               </a>
             </Link>
           )}
+<<<<<<< HEAD
+=======
+          {user && (
+            <Link href="/beefwarehouse/beefproduct">
+              <a style={{ color: "white", paddingLeft: "18px" }}>
+                <Logobeefstore height="30px" weight="30px" />
+                <p style={{ padding: "0 5px", display: "inline", fontSize: "18px", fontWeight: 600, letterSpacing: "1px " }}>
+                  ระบบคลังผลิตภัณฑ์
+                </p>
+              </a>
+            </Link>
+          )}
+>>>>>>> 058e6a588a0b4de8e2493799ac5ef154adde3b8a
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -127,11 +144,14 @@ const Nav1 = () => {
                     <NavDropdownItem>ออกรายงานคงคลัง</NavDropdownItem>
                   </Link>
                 </DropdownButton>
+<<<<<<< HEAD
                 <Link href="/beefwarehouse/beefproduct/graph">
                   <NavButtonLeft>
                     <Icon13 height="40px" weight="37px" /> รายละเอียดข้อมูลสถิติ
                   </NavButtonLeft>
                 </Link>
+=======
+>>>>>>> 058e6a588a0b4de8e2493799ac5ef154adde3b8a
                 <Link href="/beefwarehouse/beefproduct/requestexport">
                   <NavButtonLeft>
                     <Icon2 height="30px" weight="30px" /> ร้องขอเบิก
@@ -153,6 +173,14 @@ const Nav1 = () => {
                     <Icon17 height="30px" weight="30px" /> ตรวจสอบสินค้า
                   </NavButtonLeft>
                 </Link>
+<<<<<<< HEAD
+=======
+                <Link href="/beefwarehouse/beefproduct/graph">
+                  <NavButtonLeft>
+                    <Icon13 height="40px" weight="37px" /> รายละเอียดข้อมูลสถิติ
+                  </NavButtonLeft>
+                </Link>
+>>>>>>> 058e6a588a0b4de8e2493799ac5ef154adde3b8a
                 <Link href="/beefwarehouse/beefproduct/setting/">
                   <NavButtonLeft>
                     <Icon5 height="30px" weight="30px" /> การตั้งค่า
@@ -160,6 +188,7 @@ const Nav1 = () => {
                 </Link>
               </>
             ) : (
+<<<<<<< HEAD
               <p style={{
                 margin: "0",
                 fontSize: "16px",
@@ -168,6 +197,11 @@ const Nav1 = () => {
                 padding: "5px"
               }}>ตรวจสอบข้อมูลสินค้าผลิตภัณฑ์</p>
             )}
+=======
+              <p style={{ margin: 0, padding: "5px", fontSize: "16px", fontWeight: 600, letterSpacing: "1px" }}>ตรวจสอบสินค้าย้อนกลับ</p>
+            )}
+
+>>>>>>> 058e6a588a0b4de8e2493799ac5ef154adde3b8a
           </Nav>
           <Nav>
             {user && (

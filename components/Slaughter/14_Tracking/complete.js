@@ -36,7 +36,13 @@ import ListImport from "./listImport";
 
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
+<<<<<<< HEAD
 import { AuthContext } from "../../../appState/AuthProvider"
+=======
+
+import { AuthContext } from "../../../appState/AuthProvider"
+
+>>>>>>> 058e6a588a0b4de8e2493799ac5ef154adde3b8a
 export const QUERY = gql`
   query QUERY($barcode: String) {
     Tracking(barcode: $barcode) {
@@ -86,6 +92,7 @@ export const QUERY_INFO = gql`
 `;
 
 const Index = () => {
+  const { user } = useContext(AuthContext)
   const router = useRouter();
   // console.log(router.query.trackingId);
   const [edit, setEdit] = useState(false);
@@ -131,6 +138,7 @@ const Index = () => {
           // width:"950px",
           // margin:"auto"
         }}
+<<<<<<< HEAD
       >
         {user && (
           <DivFrom
@@ -169,6 +177,44 @@ const Index = () => {
           </DivFrom>
         )}
 
+=======
+      >{user && (
+        <DivFrom
+          style={{ gridColumnStart: "2", gridColumnEnd: "4", width: "100%" }}
+        >
+          <DivFromTop>
+            <div style={{ margin: "-3px 5px 0px 0px" }}>
+              <Icon size={20} icon={list} />
+            </div>
+            ตรวจสอบสินค้าย้อนกลับ{" "}
+          </DivFromTop>
+          <DivFromDown
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr",
+              gridRowGap: "5px",
+            }}
+          >
+            <div className="mb-3" style={{ margin: "auto" }}>
+              กรุณากรอกบาร์โค๊ด : { }
+              <Searchinput
+                value={inputnumkun}
+                onChange={(event) => setInputnumkun(event.target.value)}
+                style={{
+                  marginRight: 10,
+                }}
+                autoFocus
+                onFocus={(e) => e.currentTarget.select()}
+                onKeyDown={handleKeyDown}
+              />
+              <Link href="[trackingId]" as={`${inputnumkun}`}>
+                <Gobutton onClick={() => refetch()}>ค้นหา</Gobutton>
+              </Link>
+            </div>
+          </DivFromDown>
+        </DivFrom>
+      )}
+>>>>>>> 058e6a588a0b4de8e2493799ac5ef154adde3b8a
         {data && data.Tracking.barcode ? (
           <>
             <DivFrom
