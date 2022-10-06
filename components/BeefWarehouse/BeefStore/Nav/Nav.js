@@ -81,12 +81,6 @@ const Nav1 = () => {
           <Nav className="mr-auto">
 
             <>
-              <Link href="/beefwarehouse/beefstore/chill">
-                <NavButtonLeft>
-                  <Icon7 height="30px" weight="30px" />
-                  บ่มซากเนื้อโค
-                </NavButtonLeft>
-              </Link>
               <DropdownButton
                 drop="down"
                 title={
@@ -113,6 +107,12 @@ const Nav1 = () => {
                   <NavDropdownItem>นำเข้าซากเนื้อโคส่วนอื่น ๆ </NavDropdownItem>
                 </Link>
               </DropdownButton>
+              <Link href="/beefwarehouse/beefstore/chill">
+                <NavButtonLeft>
+                  <Icon7 height="30px" weight="30px" />
+                  บ่มซากเนื้อโค
+                </NavButtonLeft>
+              </Link>
               <DropdownButton
                 drop="down"
                 title={
@@ -169,6 +169,11 @@ const Nav1 = () => {
                   <NavDropdownItem>ออกรายงานคงคลัง</NavDropdownItem>
                 </Link>
               </DropdownButton>
+              <Link href="/beefwarehouse/beefstore/graph">
+                <NavButtonLeft>
+                  <Icon13 height="40px" weight="37px" /> รายละเอียดข้อมูลสถิติ
+                </NavButtonLeft>
+              </Link>
               {/*  <Link href="/beefwarehouse/beefstore/requestexport">
                 <NavButtonLeft>
                   <Icon2 height="30px" weight="30px" /> ร้องขอเบิก
@@ -184,11 +189,6 @@ const Nav1 = () => {
                   <Icon14 height="30px" weight="30px" /> บันทึกการขนส่ง
                 </NavButtonLeft>
               </Link>
-              <Link href="/beefwarehouse/beefstore/graph">
-                <NavButtonLeft>
-                  <Icon13 height="40px" weight="37px" /> รายละเอียดข้อมูลสถิติ
-                </NavButtonLeft>
-              </Link>
               <Link href="/beefwarehouse/beefstore/setting/room">
                 <NavButtonLeft>
                   <Icon5 height="30px" weight="30px" /> การตั้งค่า
@@ -198,7 +198,7 @@ const Nav1 = () => {
           </Nav>
           <Nav>
             {user && (
-              user.role.nameEN === "admin"  ? (
+              user.role.nameEN === "admin" ? (
                 <>
                   <DropdownButton
                     drop="down"

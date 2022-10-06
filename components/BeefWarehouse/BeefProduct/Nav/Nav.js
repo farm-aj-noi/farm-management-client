@@ -119,6 +119,11 @@ const Nav1 = () => {
                 <NavDropdownItem>ออกรายงานคงคลัง</NavDropdownItem>
               </Link>
             </DropdownButton>
+            <Link href="/beefwarehouse/beefproduct/graph">
+              <NavButtonLeft>
+                <Icon13 height="40px" weight="37px" /> รายละเอียดข้อมูลสถิติ
+              </NavButtonLeft>
+            </Link>
             <Link href="/beefwarehouse/beefproduct/requestexport">
               <NavButtonLeft>
                 <Icon2 height="30px" weight="30px" /> ร้องขอเบิก
@@ -138,11 +143,6 @@ const Nav1 = () => {
             <Link href="/beefwarehouse/beefproduct/trace">
               <NavButtonLeft>
                 <Icon17 height="30px" weight="30px" /> ตรวจสอบสินค้า
-              </NavButtonLeft>
-            </Link>
-            <Link href="/beefwarehouse/beefproduct/graph">
-              <NavButtonLeft>
-                <Icon13 height="40px" weight="37px" /> รายละเอียดข้อมูลสถิติ
               </NavButtonLeft>
             </Link>
             <Link href="/beefwarehouse/beefproduct/setting/">
