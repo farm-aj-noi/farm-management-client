@@ -55,18 +55,11 @@ const Nav1 = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
-<<<<<<< HEAD
             {user &&
               (user.role.nameEN === "booster" ||
                 user.role.nameEN === "slaughter" ||
                 user.role.nameEN === "accounter" ||
                 user.role.nameEN === "admin") && (
-=======
-            {user && (user.role.nameEN === "booster" ||
-              user.role.nameEN === "slaughter" ||
-              user.role.nameEN === "accounter" ||
-              user.role.nameEN === "admin") && (
->>>>>>> 058e6a588a0b4de8e2493799ac5ef154adde3b8a
                 <>
                   <Link href="/slaughter/alert">
                     <NavButtonLeft>แจ้งเตือน</NavButtonLeft>
@@ -74,14 +67,9 @@ const Nav1 = () => {
                 </>
               )}
 
-<<<<<<< HEAD
             {user &&
               (user.role.nameEN === "booster" ||
                 user.role.nameEN === "admin") && (
-=======
-            {user && (user.role.nameEN === "booster" ||
-              user.role.nameEN === "admin") && (
->>>>>>> 058e6a588a0b4de8e2493799ac5ef154adde3b8a
                 <>
                   {/* <Link href="/slaughter/importcow">
                   <NavButtonLeft>ลงทะเบียนโคเข้าขุน</NavButtonLeft>
@@ -126,7 +114,6 @@ const Nav1 = () => {
                 </>
               )}
 
-<<<<<<< HEAD
             {user &&
               (user.role.nameEN === "grade" || user.role.nameEN === "admin") && (
                 <>
@@ -139,18 +126,6 @@ const Nav1 = () => {
             {user &&
               (user.role.nameEN === "storer" ||
                 user.role.nameEN === "admin") && (
-=======
-            {user && (user.role.nameEN === "grade" || user.role.nameEN === "admin") && (
-              <>
-                <Link href="/slaughter/grade">
-                  <NavButtonLeft>ตัดเกรด</NavButtonLeft>
-                </Link>
-              </>
-            )}
-
-            {user && (user.role.nameEN === "storer" ||
-              user.role.nameEN === "admin") && (
->>>>>>> 058e6a588a0b4de8e2493799ac5ef154adde3b8a
                 <>
                   {/* <DropdownButton
                   drop="down"
