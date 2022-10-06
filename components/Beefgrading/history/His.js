@@ -19,7 +19,7 @@ import {
   Gobutton,
   DivFromHis,
 } from "./GetinFrom";
-import { Editbuttoncolor } from "../../../utils/buttonColor";
+import { Editbuttoncolor, Savebuttoncolor } from "../../../utils/buttonColor";
 import { Spinner } from "react-bootstrap";
 import dayjs from "dayjs";
 import { registerLocale } from "react-datepicker";
@@ -28,7 +28,7 @@ registerLocale("th", th);
 
 const UPDATEGRADE = gql`
   mutation UPDATEGRADE($id: ID, $expertGrade: String) {
-    updateGrade(id: $id, ExpertGrade: $expertGrade) {
+    updateGrading(id: $id, ExpertGrade: $expertGrade) {
       id
     }
   }
@@ -55,6 +55,7 @@ const QUERYHISINFO = gql`
         chilldateEnd
       }
       grade {
+        id
         pic
         SystemGrade
         ExpertGrade
@@ -89,16 +90,25 @@ export default function Home() {
       id: route.query.hisId,
     },
   });
-  const [editgrade, seteditgrade] = useState("");
-  const [updateGrading] = useMutation(UPDATEEXPERT, {
+  const [editgrade, seteditgrade] = useState({
+    grade: ""
+  });
+  console.log(editgrade);
+  const [updateGrading] = useMutation(UPDATEGRADE, {
     onCompleted: (data) => {
       if (data) {
         setedit(false);
       }
     },
+    refetchQueries: [
+      {
+        query: QUERYHISINFO,
+        variables: { id: route.query.hisId }
+      }
+    ]
     /* refetchQueries: [
       {
-        query: QUERYGRADE,
+        query: QUERYHISINFO,
         variables: { id: route.query.sumId },
       },
     ], */
@@ -112,12 +122,12 @@ export default function Home() {
 
   const handleSubmit = async () => {
     const idgrade = data && data.Cowgrade[0].grade[0].id;
-    console.log(idgrade);
+    // console.log(idgrade);
     try {
       await updateGrading({
         variables: {
           id: idgrade,
-          expertGrade: editgrade,
+          expertGrade: editgrade.grade,
         },
       });
     } catch (error) {
@@ -201,7 +211,7 @@ export default function Home() {
                   data.Cowgrade.map((prod) => (
                     <>
                       <div>
-                        รหัสซากโค : {}
+                        รหัสซากโค : { }
                         <div
                           style={{
                             display: "grid",
@@ -217,7 +227,7 @@ export default function Home() {
                         </div>
                       </div>
                       <div>
-                        บาร์โค้ด : {}
+                        บาร์โค้ด : { }
                         <div
                           style={{
                             display: "grid",
@@ -233,7 +243,7 @@ export default function Home() {
                         </div>
                       </div>
                       <div>
-                        น้ำหนักซากอุ่น : {}
+                        น้ำหนักซากอุ่น : { }
                         <div
                           style={{
                             display: "grid",
@@ -249,7 +259,7 @@ export default function Home() {
                         </div>
                       </div>
                       <div>
-                        น้ำหนักซากเย็น : {}
+                        น้ำหนักซากเย็น : { }
                         <div
                           style={{
                             display: "grid",
@@ -265,7 +275,7 @@ export default function Home() {
                         </div>
                       </div>
                       <div>
-                        วันที่เข้าบ่ม : {}
+                        วันที่เข้าบ่ม : { }
                         <div
                           style={{
                             display: "grid",
@@ -283,7 +293,7 @@ export default function Home() {
                         </div>
                       </div>
                       <div>
-                        วันที่ตัดเกรด : {}
+                        วันที่ตัดเกรด : { }
                         <div
                           style={{
                             display: "grid",
@@ -302,7 +312,7 @@ export default function Home() {
                       </div>
 
                       <div>
-                        ห้องบ่ม : {}
+                        ห้องบ่ม : { }
                         <div
                           style={{
                             display: "grid",
@@ -318,7 +328,7 @@ export default function Home() {
                         </div>
                       </div>
                       <div>
-                        สายพันธุ์ : {}
+                        สายพันธุ์ : { }
                         <div
                           style={{
                             display: "grid",
@@ -355,7 +365,7 @@ export default function Home() {
                   data.Cowgrade.map((prod) => (
                     <>
                       <div>
-                        ชื่อพนักงานคัดเกรด : {}
+                        ชื่อพนักงานคัดเกรด : { }
                         <div
                           style={{
                             display: "grid",
@@ -371,7 +381,7 @@ export default function Home() {
                         </div>
                       </div>
                       <div>
-                        ชื่อผู้เชี่ยวชาญคนที่ 1 : {}
+                        ชื่อผู้เชี่ยวชาญคนที่ 1 : { }
                         <div
                           style={{
                             display: "grid",
@@ -387,7 +397,7 @@ export default function Home() {
                         </div>
                       </div>
                       <div>
-                        ชื่อผู้เชี่ยวชาญคนที่ 2 : {}
+                        ชื่อผู้เชี่ยวชาญคนที่ 2 : { }
                         <div
                           style={{
                             display: "grid",
@@ -403,7 +413,7 @@ export default function Home() {
                         </div>
                       </div>
                       <div>
-                        ชื่อผู้เชี่ยวชาญคนที่ 3 : {}
+                        ชื่อผู้เชี่ยวชาญคนที่ 3 : { }
                         <div
                           style={{
                             display: "grid",
@@ -419,7 +429,7 @@ export default function Home() {
                         </div>
                       </div>
                       <div>
-                        ชื่อผู้เชี่ยวชาญคนที่ 4 : {}
+                        ชื่อผู้เชี่ยวชาญคนที่ 4 : { }
                         <div
                           style={{
                             display: "grid",
@@ -435,7 +445,7 @@ export default function Home() {
                         </div>
                       </div>
                       <div>
-                        ชื่อผู้เชี่ยวชาญคนที่ 5 : {}
+                        ชื่อผู้เชี่ยวชาญคนที่ 5 : { }
                         <div
                           style={{
                             display: "grid",
@@ -504,31 +514,57 @@ export default function Home() {
                 <div
                   style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}
                 >
-                  <div
-                    style={{
-                      textAlign: "center",
-                      fontSize: "70px",
-                      padding: "0",
-                      fontWeight: "bold",
-                      color: "green",
-                    }}
-                  >
-                    {data &&
-                      data.Cowgrade.map((prod) => (
-                        <div className="mb-3">{prod.grade[0].ExpertGrade}</div>
-                      ))}
-                  </div>
-                  <div style={{ marginTop: "30px", marginLeft: "30px" }}>
-                    (edit ? (save):(
-                    <Editbuttoncolor
+                  {edit ? (
+                    <Searchinput
+                      name="grade"
                       style={{
-                        height: "40px",
-                        width: "135px",
+                        textAlign: "center",
+                        height: "50px",
+                        marginTop: "20px",
+                        fontSize: "40px"
+                      }}
+                      value={editgrade.grade}
+                      onChange={handleChange}
+                    />
+                  ) : (
+                    <div
+                      style={{
+                        textAlign: "center",
+                        fontSize: "70px",
+                        padding: "0",
+                        fontWeight: "bold",
+                        color: "green",
                       }}
                     >
-                      เเก้ไขเกรด
-                    </Editbuttoncolor>
-                    ))
+                      {data &&
+                        data.Cowgrade.map((prod) => (
+                          <div className="mb-3">{prod.grade[0].ExpertGrade}</div>
+                        ))}
+                    </div>
+                  )}
+
+                  <div style={{ marginTop: "30px", marginLeft: "30px" }}>
+                    {edit ? (
+                      <Savebuttoncolor
+                        style={{
+                          height: "40px",
+                          width: "135px",
+                        }}
+                        onClick={handleSubmit}
+                      >
+                        บันทึก
+                      </Savebuttoncolor>
+                    ) : (
+                      <Editbuttoncolor
+                        style={{
+                          height: "40px",
+                          width: "135px",
+                        }}
+                        onClick={() => setedit(true)}
+                      >
+                        เเก้ไขเกรด
+                      </Editbuttoncolor>
+                    )}
                   </div>
                 </div>
                 <div></div>
