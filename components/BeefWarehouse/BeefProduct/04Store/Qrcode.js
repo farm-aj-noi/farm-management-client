@@ -52,7 +52,7 @@ const Qrcode = ({ alllist }) => {
           >
             <a
               href={
-                "https://farm-organization.herokuapp.com/beefwarehouse/beefproduct/tracking/" + infodata.barcode
+                "http://localhost:3000/beefwarehouse/beefproduct/tracking/" + infodata.barcode
               }
               target="_blank"
               style={{

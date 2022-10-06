@@ -56,7 +56,7 @@ const index = ({ listquarter }) => {
           >
             <a
               href={
-                "https://farm-organization.herokuapp.com/slaughter/tracking/" +
+                "http://localhost:3000/slaughter/tracking/" +
                 infodata.quarter.barcode
               }
               target="_blank"

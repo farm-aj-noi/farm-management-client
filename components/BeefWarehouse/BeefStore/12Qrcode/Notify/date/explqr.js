@@ -55,7 +55,7 @@ const index = ({ datel }) => {
           >
             <a
               href={
-                "https://farm-organization.herokuapp.com/slaughter/tracking/" +
+                "http://localhost:3000/slaughter/tracking/" +
                 infodata.lump.barcode
               }
               target="_blank"

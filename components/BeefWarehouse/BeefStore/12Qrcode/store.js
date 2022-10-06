@@ -55,7 +55,7 @@ const index = ({ liststore }) => {
           >
             <a
               href={
-                "https://farm-organization.herokuapp.com/slaughter/tracking/" + infodata.barcode
+                "http://localhost:3000/slaughter/tracking/" + infodata.barcode
               }
               target="_blank"
               style={{

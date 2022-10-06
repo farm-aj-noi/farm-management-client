@@ -56,7 +56,7 @@ const index = ({ listhalve }) => {
           >
             <a
               href={
-                "https://farm-organization.herokuapp.com/slaughter/tracking/" +
+                "http://localhost:3000/slaughter/tracking/" +
                 infodata.halve.barcode
               }
               target="_blank"
