@@ -20,7 +20,7 @@ import th from "date-fns/locale/th";
 import { AuthContext } from "../../../appState/AuthProvider";
 import { isEqualType } from "graphql";
 registerLocale("th", th);
-
+import Link from "next/link";
 const thstyle = {
   border: "1px solid #dddddd",
   textAlign: "center",
@@ -35,24 +35,24 @@ const tdstyle = {
   fontSize: "14px",
 };
 
-const CREATEGRADE = gql`
-  mutation CREATNAME(
-    $ExpertName1: String
-    $ExpertName2: String
-    $ExpertName3: String
-    $ExpertName4: String
-    $ExpertName5: String
-    $halve: String
-    $ExpertGrade: String
+const UPDATEEXPERT = gql`
+  mutation UPDATEEXPERT(
+    $id: ID
+    $expertName1: String
+    $expertName2: String
+    $expertName3: String
+    $expertName4: String
+    $expertName5: String
+    $expertGrade: String
   ) {
-    createName(
-      ExpertName1: $ExpertName1
-      ExpertName2: $ExpertName2
-      ExpertName3: $ExpertName3
-      ExpertName4: $ExpertName4
-      ExpertName5: $ExpertName5
-      halve: $halve
-      ExpertGrade: $ExpertGrade
+    updateGrading(
+      id: $id
+      ExpertName1: $expertName1
+      ExpertName2: $expertName2
+      ExpertName3: $expertName3
+      ExpertName4: $expertName4
+      ExpertName5: $expertName5
+      ExpertGrade: $expertGrade
     ) {
       id
     }
@@ -71,12 +71,19 @@ const QUERY_INFO = gql`
   }
 `;
 
-const QUERYTEST = gql`
-  query Cowgrade($id: ID!) {
+const QUERYGRADE = gql`
+  query QUERYGRADE($id: ID!) {
     Cowgrade(id: $id) {
       grade {
+        id
         pic
         SystemGrade
+        ExpertGrade
+        ExpertName1
+        ExpertName2
+        ExpertName3
+        ExpertName4
+        ExpertName5
       }
       id
     }
@@ -86,12 +93,59 @@ const QUERYTEST = gql`
 const Summarize = () => {
   const route = useRouter();
   const { data: HistoryGradedata } = useQuery(QUERY_INFO);
-  const { data } = useQuery(QUERYTEST, {
+  const { data } = useQuery(QUERYGRADE, {
     variables: {
       id: route.query.sumId,
     },
   });
-  console.log(data);
+  // console.log(data);
+  const [infoExpert, setInfoExpert] = useState({
+    ExpertName1: "",
+    ExpertName2: "",
+    ExpertName3: "",
+    ExpertName4: "",
+    ExpertName5: "",
+    ExpertGrade: "",
+  });
+  // console.log(infoExpert);
+  const [updateGrading] = useMutation(UPDATEEXPERT, {
+    onCompleted: (data) => {},
+    refetchQueries: [
+      {
+        query: QUERYGRADE,
+        variables: { id: route.query.sumId },
+      },
+    ],
+  });
+
+  const handleChange = (e) => {
+    setInfoExpert({
+      ...infoExpert,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async () => {
+    const idgrade = data && data.Cowgrade[0].grade[0].id;
+    console.log(idgrade);
+    try {
+      await updateGrading({
+        variables: {
+          id: idgrade,
+          /*   ...infoExpert, */
+          expertName1: infoExpert.ExpertName1,
+          expertName2: infoExpert.ExpertName2,
+          expertName3: infoExpert.ExpertName3,
+          expertName4: infoExpert.ExpertName4,
+          expertName5: infoExpert.ExpertName5,
+          expertGrade: infoExpert.ExpertGrade,
+        },
+      });
+      console.log("ผ่านละควาย");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   // console.log(HistoryGradedata);
   /* const [HistoryGradedata, setHistoryGradedata] = useState(false) */
   // const { data, loading, error } = useQuery(QUERY_INFO, {
@@ -102,11 +156,11 @@ const Summarize = () => {
   // });
   /* id: route.query.sumId, */
 
-  const [image, setImage] = useState({ preview: "", raw: "" });
+  /* const [image, setImage] = useState({ preview: "", raw: "" });
   const [prod, setProd] = useState({
     imagecow: "",
   });
-
+ */
   const { user, signout } = useContext(AuthContext);
   return (
     <>
@@ -174,7 +228,7 @@ const Summarize = () => {
                               padding: "4px",
                               borderRadius: "30px",
                               height: "480px",
-                              width: "480px"
+                              width: "480px",
                             }}
                             alt="Image"
                             src={prod.grade[0].pic}
@@ -237,71 +291,111 @@ const Summarize = () => {
                         <h1 style={{ fontSize: "28px", margin: "0" }}>
                           ชื่อผู้เชี่ยวชาญ
                         </h1>
-                        <div>
-                          1.ชื่อ-นามสกุล {}
-                          <input
-                            style={{
-                              margin: "5px",
-                              marginLeft: "0px",
-                              border: "1px solid #AFAFAF",
-                              borderRadius: "4px",
-                              width: "250px",
-                              padding: "3px",
-                            }}
-                          />
-                        </div>
-                        <div>
-                          2.ชื่อ-นามสกุล {}
-                          <input
-                            style={{
-                              margin: "5px",
-                              marginLeft: "0px",
-                              border: "1px solid #AFAFAF",
-                              borderRadius: "4px",
-                              width: "250px",
-                              padding: "5px",
-                            }}
-                          />
-                        </div>
-                        <div>
-                          3.ชื่อ-นามสกุล {}
-                          <input
-                            style={{
-                              margin: "5px",
-                              marginLeft: "0px",
-                              border: "1px solid #AFAFAF",
-                              borderRadius: "4px",
-                              width: "250px",
-                              padding: "5px",
-                            }}
-                          />
-                        </div>
-                        <div>
-                          4.ชื่อ-นามสกุล {}
-                          <input
-                            style={{
-                              margin: "5px",
-                              marginLeft: "0px",
-                              border: "1px solid #AFAFAF",
-                              borderRadius: "4px",
-                              width: "250px",
-                              padding: "5px",
-                            }}
-                          />
-                        </div>
-                        <div>
-                          5.ชื่อ-นามสกุล {}
-                          <input
-                            style={{
-                              margin: "5px",
-                              marginLeft: "0px",
-                              border: "1px solid #AFAFAF",
-                              borderRadius: "4px",
-                              width: "250px",
-                              padding: "5px",
-                            }}
-                          />
-                        </div>
+                        {data &&
+                          data.Cowgrade.map((prod) => (
+                            <>
+                              <div>
+                                1.ชื่อ-นามสกุล {}
+                                {prod.grade[0].ExpertName1 ? (
+                                  <p>{prod.grade[0].ExpertName1}</p>
+                                ) : (
+                                  <input
+                                    style={{
+                                      margin: "5px",
+                                      marginLeft: "0px",
+                                      border: "1px solid #AFAFAF",
+                                      borderRadius: "4px",
+                                      width: "250px",
+                                      padding: "3px",
+                                    }}
+                                    name="ExpertName1"
+                                    value={infoExpert.ExpertName1}
+                                    onChange={handleChange}
+                                  />
+                                )}
+                              </div>
+                              <div>
+                                2.ชื่อ-นามสกุล {}
+                                {prod.grade[0].ExpertName2 ? (
+                                  <p>{prod.grade[0].ExpertName2}</p>
+                                ) : (
+                                  <input
+                                    style={{
+                                      margin: "5px",
+                                      marginLeft: "0px",
+                                      border: "1px solid #AFAFAF",
+                                      borderRadius: "4px",
+                                      width: "250px",
+                                      padding: "3px",
+                                    }}
+                                    name="ExpertName2"
+                                    value={infoExpert.ExpertName2}
+                                    onChange={handleChange}
+                                  />
+                                )}
+                              </div>
+                              <div>
+                                3.ชื่อ-นามสกุล {}
+                                {prod.grade[0].ExpertName3 ? (
+                                  <p>{prod.grade[0].ExpertName3}</p>
+                                ) : (
+                                  <input
+                                    style={{
+                                      margin: "5px",
+                                      marginLeft: "0px",
+                                      border: "1px solid #AFAFAF",
+                                      borderRadius: "4px",
+                                      width: "250px",
+                                      padding: "3px",
+                                    }}
+                                    name="ExpertName3"
+                                    value={infoExpert.ExpertName3}
+                                    onChange={handleChange}
+                                  />
+                                )}
+                              </div>
+                              <div>
+                                4.ชื่อ-นามสกุล {}
+                                {prod.grade[0].ExpertName4 ? (
+                                  <p>{prod.grade[0].ExpertName4}</p>
+                                ) : (
+                                  <input
+                                    style={{
+                                      margin: "5px",
+                                      marginLeft: "0px",
+                                      border: "1px solid #AFAFAF",
+                                      borderRadius: "4px",
+                                      width: "250px",
+                                      padding: "3px",
+                                    }}
+                                    name="ExpertName4"
+                                    value={infoExpert.ExpertName4}
+                                    onChange={handleChange}
+                                  />
+                                )}
+                              </div>
+                              <div>
+                                5.ชื่อ-นามสกุล {}
+                                {prod.grade[0].ExpertName5 ? (
+                                  <p>{prod.grade[0].ExpertName5}</p>
+                                ) : (
+                                  <input
+                                    style={{
+                                      margin: "5px",
+                                      marginLeft: "0px",
+                                      border: "1px solid #AFAFAF",
+                                      borderRadius: "4px",
+                                      width: "250px",
+                                      padding: "3px",
+                                    }}
+                                    name="ExpertName5"
+                                    value={infoExpert.ExpertName5}
+                                    onChange={handleChange}
+                                  />
+                                )}
+                              </div>
+                            </>
+                          ))}
                       </div>
                     </div>
                     <div>
@@ -332,33 +426,10 @@ const Summarize = () => {
                               </div>
                             ))}
                         </DivFromDown>
-                      </div>
-                      <div
-                        style={{
-                          boxShadow: "0px 0px 2px grey",
-                          borderRadius: "9px",
-                          height: "fit-content",
-                          marginTop: "30px",
-                        }}
-                      >
-                        <DivFromTop style={{ fontSize: "20px", }}>
-                          เกรดจากผู้เชี่ยวชาญ
-                        </DivFromTop>
-                        <DivFromDown
-                          style={{
-                            textAlign: "center",
-                            fontSize: "70px",
-                            padding: "0",
-                            fontWeight: "bold",
-                            color: "green",
-                          }}
-                        >
-                        -
-                        </DivFromDown>
-                      </div>
+                      </div>           
                       <div style={{ fontSize: "18px", marginTop: "30px" }}>
                         <h1 style={{ fontSize: "20px", margin: "0" }}>
-                          กรอกเกรดที่ต้องการ : {}
+                          ช่องกรอกเกรดจากผู้เชี่ยวชาญ : {}
                         </h1>
                         <input
                           style={{
@@ -367,18 +438,23 @@ const Summarize = () => {
                             border: "1px solid #AFAFAF",
                             borderRadius: "4px",
                             textAlign: "center",
-
                             padding: "3px",
                           }}
+                          name="ExpertGrade"
+                          value={infoExpert.ExpertGrade}
+                          onChange={handleChange}
                         />
                         <Submitbutton
                           style={{ margin: "10px 10px", width: "70px" }}
+                          onClick={handleSubmit}
                         >
                           บันทึก
                         </Submitbutton>
-                        <Backbutton style={{ width: "70px" }}>
-                          ย้อนกลับ
-                        </Backbutton>
+                        <Link href="/beefgrading/indexsum">
+                          <Backbutton style={{ width: "70px" }}>
+                            ย้อนกลับ
+                          </Backbutton>
+                        </Link>
                       </div>
                     </div>
                   </div>

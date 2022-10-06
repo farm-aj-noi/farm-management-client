@@ -36,7 +36,7 @@ const tdstyle = {
 
 export const LISTHISTORY = gql`
   query LISTHISTORY {
-    listhalvegrade {
+    finalGrade {
       id
       weightwarm
       weightcool
@@ -54,6 +54,10 @@ export const LISTHISTORY = gql`
         chilldateStart
         chilldateEnd
       }
+      grade {
+      SystemGrade
+      ExpertGrade
+    }
     }
   }
 `;
@@ -180,8 +184,8 @@ function History() {
                         <th rowspan="2">วันที่เข้าบ่ม</th>
                         <th rowspan="2">วันที่ตัดเกรด</th>
                         <th rowspan="2">ห้องบ่ม</th>
-                        <th colspan="2">เกรด</th>
                         <th rowspan="2">สายพันธุ์</th>
+                        <th colspan="2">เกรด</th>
                         <th colspan="2">การสรุปเกรด</th>
                         <th rowspan="2">รายละเอียด</th>
     
@@ -200,7 +204,7 @@ function History() {
                     </thead>
                 <tbody>
                   {data &&
-                    data.listhalvegrade.map((prod) => (
+                    data.finalGrade.map((prod) => (
                       <ListHistory key={prod.id} ListHistory={prod} />
                     ))}
                 </tbody>

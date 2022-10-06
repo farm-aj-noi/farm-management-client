@@ -24,15 +24,12 @@ const ListGrade = ({ ListGrade }) => {
         : "-"}
       </td>
       ))} 
-    
       <td>{ListGradeData.imslaughter.pun}</td>
+      <td>รอตัดเกรด</td>
       <td>
         <Link href="grade/[gradeId]" as={`grade/${ListGradeData.id}`}>
-          <ButtonSubmit>รอการตัดเกรด</ButtonSubmit>
+          <ButtonSubmit>ตัดเกรด</ButtonSubmit>
         </Link>
-        {/* <Link  href="/beefgrading/test">
-          <ButtonSubmit>test</ButtonSubmit>
-        </Link> */}
       </td>
     </tr>
   );

@@ -29,8 +29,8 @@ export const LISTGRADE = gql`
       weightcool
       barcode
       imslaughter {
-      pun
-    }
+        pun
+      }
       beeftype {
         code
       }
@@ -47,7 +47,7 @@ export const LISTGRADE = gql`
 
 function index() {
   const { data, loading, error } = useQuery(LISTGRADE);
-  console.log(data)
+  console.log(data);
   return (
     <div>
       <DivCenter
@@ -114,7 +114,6 @@ function index() {
             <div style={{ height: "450px", overflowY: "auto" }}>
               <Table responsive striped bordered hover>
                 <thead>
-                  
                   <tr style={{ textAlign: "center", fontSize: "18px" }}>
                     <th rowspan="2">รหัสซากโค</th>
                     <th rowspan="2">บาร์โค้ด</th>
@@ -124,6 +123,7 @@ function index() {
                     <th rowspan="2">ห้องบ่ม</th>
                     <th rowspan="2">สายพันธุ์</th>
                     <th rowspan="2">สถานะการตัดเกรด</th>
+                    <th rowspan="2">ตัดเกรด</th>
                   </tr>
                   <tr style={{ textAlign: "center", fontSize: "18px" }}>
                     <th>ซากอุ่น</th>
@@ -132,10 +132,15 @@ function index() {
                 </thead>
 
                 <tbody>
-                  {data &&
+                  {data && data.listhalvegrade.length > 0 ? (
                     data.listhalvegrade.map((prod) => (
                       <ListGrade key={prod.id} ListGrade={prod} />
-                    ))}
+                    ))
+                  ) : (
+                    <tr style={{ textAlign: "center" }}>
+                      <td colSpan="10">ไม่พบข้อมูลซากโค</td>
+                    </tr>
+                  )}
                 </tbody>
               </Table>
             </div>

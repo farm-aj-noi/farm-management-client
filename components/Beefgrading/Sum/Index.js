@@ -46,6 +46,7 @@ export const LISTSUM = gql`
     }
     grade {
       SystemGrade
+      ExpertGrade
     }
   }
   }
@@ -186,11 +187,17 @@ function Sum() {
                       
                     </thead>
                     <tbody>
-                    {data &&
-                      data.historyGrade.map((prod) => (
-                        <ListSum key={prod.id} ListSum = {prod} />
-                      ))}
-                  </tbody>
+                    {data && data.historyGrade.length > 0 ? (
+                    data.historyGrade.map((prod) => (
+                      <ListSum key={prod.id} ListSum={prod} />
+                    ))
+                    ) : (
+                    <tr style={{ textAlign: "center" }}>
+                      <td colSpan="10">ไม่พบรายการสรุปเกรด</td>
+                    </tr>
+                    )}
+                    </tbody>
+                    
                   </Table>
                 </div>
               </DivCenter>
