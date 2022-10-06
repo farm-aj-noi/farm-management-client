@@ -55,101 +55,119 @@ const Nav1 = () => {
         fixed="top"
       >
         <Navbar.Brand style={{ padding: "0" }}>
-          {(user.role.nameEN === "admin") && (
+          {user &&
+            user.role.nameEN === "admin" ? (
             <Link href="/beefwarehouse">
               <a style={{ color: "white" }}>
                 <p style={{ padding: "0 10px", display: "inline", fontSize: "18px", fontWeight: 600, letterSpacing: "1px " }}>หน้าแรก</p>
               </a>
             </Link>
+          ) :
+            ("")
+          }
+          {user && (
+            <Link href="/beefwarehouse/beefproduct">
+              <a style={{ color: "white", paddingLeft: "18px" }}>
+                <Logobeefstore height="30px" weight="30px" />
+                <p style={{ padding: "0 5px", display: "inline", fontSize: "18px", fontWeight: 600, letterSpacing: "1px " }}>
+                  ระบบคลังผลิตภัณฑ์
+                </p>
+              </a>
+            </Link>
           )}
-          <Link href="/beefwarehouse/beefproduct">
-            <a style={{ color: "white", paddingLeft: "18px" }}>
-              <Logobeefstore height="30px" weight="30px" />
-              <p style={{ padding: "0 5px", display: "inline", fontSize: "18px", fontWeight: 600, letterSpacing: "1px " }}>
-                ระบบคลังผลิตภัณฑ์
-              </p>
-            </a>
-          </Link>
         </Navbar.Brand>
+
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
-            <Link href="/beefwarehouse/beefproduct/createproduct">
-              <NavButtonLeft>
-                {" "}
-                <Icon16 height="30px" weight="30px" /> แปรรูปสินค้า
-              </NavButtonLeft>
-            </Link>
-            <Link href="/beefwarehouse/beefproduct/imports">
-              <NavButtonLeft>
-                {" "}
-                <Icon12 height="30px" weight="30px" /> การนำเข้า
-              </NavButtonLeft>
-            </Link>
-            <Link href="/beefwarehouse/beefproduct/exports">
-              <NavButtonLeft>
-                {" "}
-                <Icon11 height="30px" weight="30px" /> การนำออก
-              </NavButtonLeft>
-            </Link>
-            <Link href="/beefwarehouse/beefproduct/store">
-              <NavButtonLeft>
-                {" "}
-                <Icon9 height="30px" weight="30px" />
-                คงคลัง
-              </NavButtonLeft>
-            </Link>
-            <DropdownButton
-              drop="down"
-              title={
-                <span style={{ fontSize: "16px", fontWeight: 600 }}>
-                  <Icon3 height="30px" weight="30px" />
-                  ออกรายงาน
-                </span>
-              }
-              bsPrefix={MyCss.nstdropleft}
-            >
-              <Link href="/beefwarehouse/beefproduct/report/report_import">
-                <NavDropdownItem>ออกรายงานการนำเข้า</NavDropdownItem>
-              </Link>
-              <Link href="/beefwarehouse/beefproduct/report/report_export">
-                <NavDropdownItem>ออกรายงานนำออก</NavDropdownItem>
-              </Link>
-              <Link href="/beefwarehouse/beefproduct/report/report_store">
-                <NavDropdownItem>ออกรายงานคงคลัง</NavDropdownItem>
-              </Link>
-            </DropdownButton>
-            <Link href="/beefwarehouse/beefproduct/graph">
-              <NavButtonLeft>
-                <Icon13 height="40px" weight="37px" /> รายละเอียดข้อมูลสถิติ
-              </NavButtonLeft>
-            </Link>
-            <Link href="/beefwarehouse/beefproduct/requestexport">
-              <NavButtonLeft>
-                <Icon2 height="30px" weight="30px" /> ร้องขอเบิก
-              </NavButtonLeft>
-            </Link>
-            <Link href="/beefwarehouse/beefproduct/notify/notify_date">
-              <NavButtonLeft>
-                <Icon10 height="30px" weight="30px" />
-                การแจ้งเตือน
-              </NavButtonLeft>
-            </Link>
-            <Link href="/beefwarehouse/beefproduct/transport">
-              <NavButtonLeft>
-                <Icon14 height="30px" weight="30px" /> บันทึกการขนส่ง
-              </NavButtonLeft>
-            </Link>
-            <Link href="/beefwarehouse/beefproduct/trace">
-              <NavButtonLeft>
-                <Icon17 height="30px" weight="30px" /> ตรวจสอบสินค้า
-              </NavButtonLeft>
-            </Link>
-            <Link href="/beefwarehouse/beefproduct/setting/">
-              <NavButtonLeft>
-                <Icon5 height="30px" weight="30px" /> การตั้งค่า
-              </NavButtonLeft>
-            </Link>
+            {user ? (
+              <>
+                <Link href="/beefwarehouse/beefproduct/createproduct">
+                  <NavButtonLeft>
+                    {" "}
+                    <Icon16 height="30px" weight="30px" /> แปรรูปสินค้า
+                  </NavButtonLeft>
+                </Link>
+                <Link href="/beefwarehouse/beefproduct/imports">
+                  <NavButtonLeft>
+                    {" "}
+                    <Icon12 height="30px" weight="30px" /> การนำเข้า
+                  </NavButtonLeft>
+                </Link>
+                <Link href="/beefwarehouse/beefproduct/exports">
+                  <NavButtonLeft>
+                    {" "}
+                    <Icon11 height="30px" weight="30px" /> การนำออก
+                  </NavButtonLeft>
+                </Link>
+                <Link href="/beefwarehouse/beefproduct/store">
+                  <NavButtonLeft>
+                    {" "}
+                    <Icon9 height="30px" weight="30px" />
+                    คงคลัง
+                  </NavButtonLeft>
+                </Link>
+                <DropdownButton
+                  drop="down"
+                  title={
+                    <span style={{ fontSize: "16px", fontWeight: 600 }}>
+                      <Icon3 height="30px" weight="30px" />
+                      ออกรายงาน
+                    </span>
+                  }
+                  bsPrefix={MyCss.nstdropleft}
+                >
+                  <Link href="/beefwarehouse/beefproduct/report/report_import">
+                    <NavDropdownItem>ออกรายงานการนำเข้า</NavDropdownItem>
+                  </Link>
+                  <Link href="/beefwarehouse/beefproduct/report/report_export">
+                    <NavDropdownItem>ออกรายงานนำออก</NavDropdownItem>
+                  </Link>
+                  <Link href="/beefwarehouse/beefproduct/report/report_store">
+                    <NavDropdownItem>ออกรายงานคงคลัง</NavDropdownItem>
+                  </Link>
+                </DropdownButton>
+                <Link href="/beefwarehouse/beefproduct/graph">
+                  <NavButtonLeft>
+                    <Icon13 height="40px" weight="37px" /> รายละเอียดข้อมูลสถิติ
+                  </NavButtonLeft>
+                </Link>
+                <Link href="/beefwarehouse/beefproduct/requestexport">
+                  <NavButtonLeft>
+                    <Icon2 height="30px" weight="30px" /> ร้องขอเบิก
+                  </NavButtonLeft>
+                </Link>
+                <Link href="/beefwarehouse/beefproduct/notify/notify_date">
+                  <NavButtonLeft>
+                    <Icon10 height="30px" weight="30px" />
+                    การแจ้งเตือน
+                  </NavButtonLeft>
+                </Link>
+                <Link href="/beefwarehouse/beefproduct/transport">
+                  <NavButtonLeft>
+                    <Icon14 height="30px" weight="30px" /> บันทึกการขนส่ง
+                  </NavButtonLeft>
+                </Link>
+                <Link href="/beefwarehouse/beefproduct/trace">
+                  <NavButtonLeft>
+                    <Icon17 height="30px" weight="30px" /> ตรวจสอบสินค้า
+                  </NavButtonLeft>
+                </Link>
+                <Link href="/beefwarehouse/beefproduct/setting/">
+                  <NavButtonLeft>
+                    <Icon5 height="30px" weight="30px" /> การตั้งค่า
+                  </NavButtonLeft>
+                </Link>
+              </>
+            ) : (
+              <p style={{
+                margin: "0",
+                fontSize: "16px",
+                fontWeight: 600,
+                letterSpacing: "1px",
+                padding: "5px"
+              }}>ตรวจสอบข้อมูลสินค้าผลิตภัณฑ์</p>
+            )}
           </Nav>
           <Nav>
             {user && (
