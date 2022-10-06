@@ -42,18 +42,20 @@ const Nav1 = () => {
         collapseOnSelect
         expand="lg"
       >
-        <Navbar.Brand style={{ padding: "0" }}>
-          <Link href="/slaughter">
-            <a style={{ color: "white" }}>
-              <LogoSluagther height="30px" weight="30px" />
-              <p style={{ padding: "0 10px", display: "inline" }}>ระบบเชือด</p>
-            </a>
-          </Link>
-        </Navbar.Brand>
+        {user && (
+          <Navbar.Brand style={{ padding: "0" }}>
+            <Link href="/slaughter">
+              <a style={{ color: "white" }}>
+                <LogoSluagther height="30px" weight="30px" />
+                <p style={{ padding: "0 10px", display: "inline" }}>ระบบเชือด</p>
+              </a>
+            </Link>
+          </Navbar.Brand>
+        )}
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
-            {(user.role.nameEN === "booster" ||
+            {user && (user.role.nameEN === "booster" ||
               user.role.nameEN === "slaughter" ||
               user.role.nameEN === "accounter" ||
               user.role.nameEN === "admin") && (
@@ -64,7 +66,7 @@ const Nav1 = () => {
                 </>
               )}
 
-            {(user.role.nameEN === "booster" ||
+            {user && (user.role.nameEN === "booster" ||
               user.role.nameEN === "admin") && (
                 <>
                   {/* <Link href="/slaughter/importcow">
@@ -110,7 +112,7 @@ const Nav1 = () => {
                 </>
               )}
 
-            {(user.role.nameEN === "grade" || user.role.nameEN === "admin") && (
+            {user && (user.role.nameEN === "grade" || user.role.nameEN === "admin") && (
               <>
                 <Link href="/slaughter/grade">
                   <NavButtonLeft>ตัดเกรด</NavButtonLeft>
@@ -118,7 +120,7 @@ const Nav1 = () => {
               </>
             )}
 
-            {(user.role.nameEN === "storer" ||
+            {user && (user.role.nameEN === "storer" ||
               user.role.nameEN === "admin") && (
                 <>
                   {/* <DropdownButton
@@ -140,7 +142,7 @@ const Nav1 = () => {
                 </>
               )}
 
-            {(user.role.nameEN === "slaughter" ||
+            {user && (user.role.nameEN === "slaughter" ||
               user.role.nameEN === "admin") && (
                 <>
                   <DropdownButton
@@ -178,7 +180,7 @@ const Nav1 = () => {
                 </>
               )}
 
-            {(user.role.nameEN === "accounter" ||
+            {user && (user.role.nameEN === "accounter" ||
               user.role.nameEN === "admin") && (
                 <>
                   <Link href="/slaughter/buy">
@@ -187,7 +189,7 @@ const Nav1 = () => {
                 </>
               )}
 
-            {(user.role.nameEN === "transporter" ||
+            {user && (user.role.nameEN === "transporter" ||
               user.role.nameEN === "admin" ||
               user.role.nameEN == "beefstore_man"
             ) && (
@@ -198,11 +200,14 @@ const Nav1 = () => {
                 </>
               )}
 
-            <Link href="/slaughter/tracking">
-              <NavButtonLeft>ตรวจสอบสินค้าย้อนกลับ</NavButtonLeft>
-            </Link>
-
-            {user.role.nameEN === "admin" && (
+            {user ? (
+              <Link href="/slaughter/tracking">
+                <NavButtonLeft>ตรวจสอบสินค้าย้อนกลับ</NavButtonLeft>
+              </Link>
+            ) : (
+              <p style={{ margin: 0, padding: "5px" }}>ตรวจสอบสินค้าย้อนกลับ</p>
+            )}
+            {user && user.role.nameEN === "admin" && (
               <>
                 <Link href="/slaughter/trace">
                   <NavButtonLeft>ติดตามสินค้า</NavButtonLeft>

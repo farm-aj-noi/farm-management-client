@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import styled from "styled-components";
@@ -36,6 +36,8 @@ import ListImport from "./listImport";
 
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
+
+import { AuthContext } from "../../../appState/AuthProvider"
 
 export const QUERY = gql`
   query QUERY($barcode: String) {
@@ -86,6 +88,7 @@ export const QUERY_INFO = gql`
 `;
 
 const Index = () => {
+  const { user } = useContext(AuthContext)
   const router = useRouter();
   // console.log(router.query.trackingId);
   const [edit, setEdit] = useState(false);
@@ -130,7 +133,7 @@ const Index = () => {
           // width:"950px",
           // margin:"auto"
         }}
-      >
+      >{user && (
         <DivFrom
           style={{ gridColumnStart: "2", gridColumnEnd: "4", width: "100%" }}
         >
@@ -165,6 +168,7 @@ const Index = () => {
             </div>
           </DivFromDown>
         </DivFrom>
+      )}
         {data && data.Tracking.barcode ? (
           <>
             <DivFrom
@@ -317,10 +321,10 @@ const Index = () => {
                       <div>
                         น้ำหนัก :{" "}
                         {data.Tracking.weightcow ?
-                        data.Tracking.weightcow.toLocaleString(undefined, {
-                          minimumFractionDigits: 2,
-                          maximumFractionDigits: 2,
-                        }):"ไม่ระบุ" + " กก."}
+                          data.Tracking.weightcow.toLocaleString(undefined, {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                          }) : "ไม่ระบุ" + " กก."}
                       </div>
                     </div>
                   ) : tab === 2 ? (

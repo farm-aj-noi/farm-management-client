@@ -151,7 +151,13 @@ const index = () => {
                     </>
                 ) : (
                     <>
-                        <DivFrom style={{ gridColumnStart: "3", gridColumnEnd: "3" }}>
+                        <DivFrom style={{
+                            marginTop: "0px",
+                            width: "100%",
+                            gridRowStart: "1",
+                            gridRowEnd: "1",
+                            gridColumnStart: "2",
+                        }}>
                             <DivFromTop>
                                 <div style={{ margin: "-3px 5px 0px 0px" }}>
                                     <Icon size={20} icon={list} />

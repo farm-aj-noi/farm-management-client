@@ -59,7 +59,7 @@ const Nav1 = () => {
         fixed="top"
       >
         <Navbar.Brand style={{ padding: "0" }}>
-          {(user.role.nameEN === "admin") && (
+          {user && (user.role.nameEN === "admin") && (
             <Link href="/beefwarehouse">
               <a style={{ color: "white" }}>
                 <p style={{ padding: "0 10px", display: "inline", fontSize: "18px", fontWeight: 600, letterSpacing: "1px " }}>หน้าแรก</p>
@@ -198,7 +198,7 @@ const Nav1 = () => {
           </Nav>
           <Nav>
             {user && (
-              user.role.nameEN === "admin"  ? (
+              user.role.nameEN === "admin" ? (
                 <>
                   <DropdownButton
                     drop="down"

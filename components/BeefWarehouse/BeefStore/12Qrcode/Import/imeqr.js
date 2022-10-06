@@ -41,7 +41,7 @@ const index = ({ listentrail }) => {
             <QRCode
               size={100}
               value={
-                "http://localhost:3000/slaughter/tracking/" +
+                "https://farm-organization.herokuapp.com/slaughter/tracking/" +
                 infodata.entrail.barcode
               }
             />
@@ -56,7 +56,7 @@ const index = ({ listentrail }) => {
           >
             <a
               href={
-                "http://localhost:3000/slaughter/tracking/" +
+                "https://farm-organization.herokuapp.com/slaughter/tracking/" +
                 infodata.entrail.barcode
               }
               target="_blank"
@@ -69,8 +69,7 @@ const index = ({ listentrail }) => {
                 textDecoration: "underline",
               }}
             >
-              http://localhost:3000/slaughter/tracking/
-              {infodata.entrail.barcode}
+              LinkURL คลิ๊ก
             </a>
           </div>
         </Modal.Body>
