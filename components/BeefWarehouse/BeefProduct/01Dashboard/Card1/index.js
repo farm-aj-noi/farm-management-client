@@ -67,6 +67,7 @@ const index = () => {
             padding: "15px 10px 0 0",
             fontWeight: 600,
             letterSpacing: "1px",
+            marginLeft: "5px"
           }}
         >
           {date}
