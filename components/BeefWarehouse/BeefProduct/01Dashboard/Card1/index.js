@@ -30,7 +30,7 @@ const index = () => {
     };
   }, []);
   return (
-    <DivAlertCard style={{ backgroundColor: "#0DE9BD" }}>
+    <DivAlertCard style={{ backgroundColor: "#6db909" }}>
       <div
         style={{
           position: "absolute",
@@ -67,6 +67,7 @@ const index = () => {
             padding: "15px 10px 0 0",
             fontWeight: 600,
             letterSpacing: "1px",
+            marginLeft: "5px"
           }}
         >
           {date}
