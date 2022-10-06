@@ -27,185 +27,181 @@ const tdstyle = {
 export const LISTSUM = gql`
   query LISTSUM {
     historyGrade {
-    id
-    weightwarm
-    weightcool
-    barcode
-    imslaughter {
-      pun
-    }
-    beeftype {
-      code
-    }
-    chill {
-      chillroom {
-        roomnum
+      id
+      weightwarm
+      weightcool
+      barcode
+      imslaughter {
+        pun
       }
-      chilldateStart
-      chilldateEnd
+      beeftype {
+        code
+      }
+      chill {
+        chillroom {
+          roomnum
+        }
+        chilldateStart
+        chilldateEnd
+      }
+      grade {
+        SystemGrade
+        ExpertGrade
+      }
     }
-    grade {
-      SystemGrade
-      ExpertGrade
-    }
-  }
   }
 `;
 
 function Sum() {
-  const { data, loading, error } = useQuery(LISTSUM);       
-    return (
-        <div>
-          <DivCenter style={{ fontSize: "36px", paddingTop: "30px" }}>
-          <Icon2 height="70px" weight="70px" />
+  const { data, loading, error } = useQuery(LISTSUM);
+  return (
+    <div>
+      <DivCenter style={{ fontSize: "36px", paddingTop: "30px" }}>
+        <Icon2 height="70px" weight="70px" />
+        สรุปเกรดเนื้อโค
+      </DivCenter>
+
+      <DivCenter>
+        <from
+          style={{
+            marginTop: "10px",
+            fontSize: "20px",
+          }}
+        >
+          <label
+            for="date"
+            style={{
+              textAlign: "center",
+              fontSize: "18px",
+              marginRight: "10px",
+            }}
+          >
+            วันที่ตัดเกรด
+          </label>
+          <input
+            type="date"
+            id="ex_chill"
+            name="date"
+            style={{
+              height: "35px",
+              border: "1px solid #AFAFAF",
+              borderRadius: "4px",
+              color: "#AFAFAF",
+              textAlign: "center",
+            }}
+          ></input>
+          <label
+            for="date"
+            style={{
+              textAlign: "center",
+              fontSize: "18px",
+              margin: "10px 10px",
+            }}
+          >
+            ถึงวันที่
+          </label>
+          <input
+            type="date"
+            id="ex_chill"
+            name="date"
+            style={{
+              height: "35px",
+              border: "1px solid #AFAFAF",
+              borderRadius: "4px",
+              color: "#AFAFAF",
+              textAlign: "center",
+            }}
+          ></input>
+          <ButtonSearchColor>
+            <Icon
+              style={{ verticalAlign: "text-bottom", marginRight: "5px" }}
+              icon={iosSearchStrong}
+              size={20}
+            />
+            ค้นหา
+          </ButtonSearchColor>
+        </from>
+      </DivCenter>
+
+      <DivCenter style={{ marginTop: "20px" }}>
+        <div
+          style={{
+            width: "auto",
+            height: "auto",
+            padding: "10px",
+            backgroundColor: "white",
+            borderRadius: "5px",
+            borderTop: "none",
+            borderRadius: "5px",
+            boxShadow:
+              " 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 0px 10px 0 rgba(0, 0, 0, 0.1)",
+          }}
+        >
+          <h1
+            style={{
+              height: "47px",
+              color: "white",
+              fontSize: "24px",
+              backgroundColor: "#3BAFDA",
+              borderRadius: "5px 5px 0px 0px",
+              padding: "7px 5px 5px 15px",
+              margin: "0px",
+              display: "flex",
+              alignItems: "center",
+              fontWeight: "-moz-initial",
+            }}
+          >
+            <Icon
+              style={{ verticalAlign: "text-bottom", marginRight: "10px" }}
+              icon={paste}
+              size={25}
+            />
             สรุปเกรดเนื้อโค
-          </DivCenter>
-          
-          <DivCenter>
-            <from
-              style={{
-                marginTop: "10px",
-                fontSize: "20px",
-              }}
-            >
-              <label
-                for="date"
-                style={{
-                  textAlign: "center",
-                  fontSize: "18px",
-                  marginRight: "10px",
-                }}
-              >
-                วันที่ตัดเกรด
-              </label>
-              <input
-                type="date"
-                id="ex_chill"
-                name="date"
-                style={{
-                  height: "35px",
-                  border: "1px solid #AFAFAF",
-                  borderRadius: "4px",
-                  color: "#AFAFAF",
-                  textAlign: "center",
-                }}
-              ></input>
-              <label
-                for="date"
-                style={{
-                  textAlign: "center",
-                  fontSize: "18px",
-                  margin: "10px 10px",
-                }}
-              >
-                ถึงวันที่
-              </label>
-              <input
-                type="date"
-                id="ex_chill"
-                name="date"
-                style={{
-                  height: "35px",
-                  border: "1px solid #AFAFAF",
-                  borderRadius: "4px",
-                  color: "#AFAFAF",
-                  textAlign: "center",
-                }}
-              ></input>
-              <ButtonSearchColor>
-                <Icon
-                  style={{ verticalAlign: "text-bottom", marginRight: "5px" }}
-                  icon={iosSearchStrong}
-                  size={20}
-                />
-                ค้นหา
-              </ButtonSearchColor>
-            </from>
-          </DivCenter>
-    
-          <DivCenter style={{ marginTop: "20px" }}>
-            <div
-              style={{
-                width: "auto",
-                height: "auto",
-                padding: "10px",
-                backgroundColor: "white",
-                borderRadius: "5px",
-                borderTop: "none",
-                borderRadius: "5px",
-                boxShadow:
-                  " 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 0px 10px 0 rgba(0, 0, 0, 0.1)",
-              }}
-            >
-              <h1
-                style={{
-                  height: "47px",
-                  color: "white",
-                  fontSize: "24px",
-                  backgroundColor: "#3BAFDA",
-                  borderRadius: "5px 5px 0px 0px",
-                  padding: "7px 5px 5px 15px",
-                  margin: "0px",
-                  display: "flex",
-                  alignItems: "center",
-                  fontWeight: "-moz-initial",
-                }}
-              >
-                <Icon
-                  style={{ verticalAlign: "text-bottom", marginRight: "10px" }}
-                  icon={paste}
-                  size={25}
-                />
-               สรุปเกรดเนื้อโค
-              </h1>
-              <DivCenter
-                style={{
-                  marginTop: "20px",
-                }}
-              >
-                <div style={{ height: "450px", overflowY: "auto" }}>
-                  <Table responsive striped bordered hover>
-                    <thead>
-                      <tr style={{ textAlign: "center", fontSize: "22px" }}>
-                        <th rowspan="2">รหัสซากโค</th>
-                        <th rowspan="2">บาร์โค้ด</th>
-                        <th colspan="2">น้ำหนักซาก Kg.</th>
-                        <th rowspan="2">วันที่เข้าบ่ม</th>
-                        <th rowspan="2">วันที่ตัดเกรด</th>
-                        <th rowspan="2">ห้องบ่ม</th>
-                        <th rowspan="2">สายพันธุ์</th>
-                        <th rowspan="2">เกรดจากระบบ</th> 
-                        <th colspan="2">การสรุปเกรด</th>
-    
-                      </tr>
-                      <tr style={{ textAlign: "center", fontSize: "18px" }}>
-                        <th>ซากอุ่น</th>
-                        <th>ซากเย็น</th>
-                        <th>สถานะ</th>
-                        <th>สรุปเกรด</th>
-                      </tr>
-                      
-                    </thead>
-                    <tbody>
-                    {data && data.historyGrade.length > 0 ? (
+          </h1>
+          <DivCenter
+            style={{
+              marginTop: "20px",
+            }}
+          >
+            <div style={{ height: "450px", overflowY: "auto" }}>
+              <Table responsive striped bordered hover>
+                <thead>
+                  <tr style={{ textAlign: "center", fontSize: "22px" }}>
+                    <th rowspan="2">รหัสซากโค</th>
+                    <th rowspan="2">บาร์โค้ด</th>
+                    <th colspan="2">น้ำหนักซาก Kg.</th>
+                    <th rowspan="2">วันที่เข้าบ่ม</th>
+                    <th rowspan="2">วันที่ตัดเกรด</th>
+                    <th rowspan="2">ห้องบ่ม</th>
+                    <th rowspan="2">สายพันธุ์</th>
+                    <th rowspan="2">เกรดจากระบบ</th>
+                    <th colspan="2">การสรุปเกรด</th>
+                  </tr>
+                  <tr style={{ textAlign: "center", fontSize: "18px" }}>
+                    <th>ซากอุ่น</th>
+                    <th>ซากเย็น</th>
+                    <th>สถานะ</th>
+                    <th>สรุปเกรด</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data && data.historyGrade.length > 0 ? (
                     data.historyGrade.map((prod) => (
                       <ListSum key={prod.id} ListSum={prod} />
                     ))
-                    ) : (
+                  ) : (
                     <tr style={{ textAlign: "center" }}>
                       <td colSpan="10">ไม่พบรายการสรุปเกรด</td>
                     </tr>
-                    )}
-                    </tbody>
-                    
-                  </Table>
-                </div>
-              </DivCenter>
+                  )}
+                </tbody>
+              </Table>
             </div>
           </DivCenter>
         </div>
-      );
-    }
-
+      </DivCenter>
+    </div>
+  );
+}
 
 export default Sum;

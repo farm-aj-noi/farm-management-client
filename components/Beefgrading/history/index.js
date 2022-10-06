@@ -186,7 +186,7 @@ function History() {
                         <th rowspan="2">ห้องบ่ม</th>
                         <th rowspan="2">สายพันธุ์</th>
                         <th colspan="2">เกรด</th>
-                        <th colspan="2">การสรุปเกรด</th>
+                        <th rowspan="2">สถานะ</th>
                         <th rowspan="2">รายละเอียด</th>
     
                       </tr>
@@ -196,9 +196,7 @@ function History() {
                         <th>ซากเย็น</th>
                         <th>จากระบบ</th>
                         <th>จากผู้เชี่ยวชาญ</th>
-                        <th>สถานะ</th>
-                        <th>ออกรายงาน</th>
-                        
+   
                       </tr>
                       
                     </thead>

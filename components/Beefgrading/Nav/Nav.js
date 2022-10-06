@@ -14,7 +14,14 @@ import { Logobeefgrade } from "../../../utils/image";
 import { navbarHeight } from "../../../utils/sizes";
 import { shareSquareO } from "react-icons-kit/fa/shareSquareO";
 
-import { Icon3, Icon2, Icon4, Icon5, Icon7 } from "../../../utils/Logograde";
+import {
+  Icon3,
+  Icon2,
+  Icon4,
+  Icon5,
+  Icon7,
+  Icon10,
+} from "../../../utils/Logograde";
 import { AuthContext } from "../../../appState/AuthProvider";
 
 import { useQuery } from "@apollo/react-hooks";
@@ -43,144 +50,161 @@ const Nav1 = () => {
         expand="lg"
       >
         <Link href="/.">
-        <ButtonSignUp
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            paddingTop: "9px",
-            }}
-          >
-          <div
+          <ButtonSignUp
             style={{
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              marginRight: "5px",
-              }}
-          >
-            <Icon7 height="30px" weight="30px" />
-            </div>
-            หน้าเเรก
-          </ButtonSignUp>
-          </Link>
-        <Link href="/beefgrading">
-        <ButtonSignUp
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            paddingTop: "9px",
+              paddingTop: "9px",
             }}
           >
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              marginRight: "5px",
-              }}
-          >
-            <Logobeefgrade height="30px" weight="30px" />
-            </div>
-            ระบบการตัดเกรดเนื้อโค
-          </ButtonSignUp>
-          </Link>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="mr-auto">
-            <Link href="/beefgrading/list">
-            <ButtonSignUp
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                paddingTop: "9px",
-                }}
-              >
             <div
               style={{
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 marginRight: "5px",
+              }}
+            >
+              <Icon7 height="30px" weight="30px" />
+            </div>
+            หน้าเเรก
+          </ButtonSignUp>
+        </Link>
+        <Link href="/beefgrading">
+          <ButtonSignUp
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              paddingTop: "9px",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                marginRight: "5px",
+              }}
+            >
+              <Logobeefgrade height="30px" weight="30px" />
+            </div>
+            ระบบการตัดเกรดเนื้อโค
+          </ButtonSignUp>
+        </Link>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="mr-auto">
+            <Link href="/beefgrading/list">
+              <ButtonSignUp
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  paddingTop: "9px",
                 }}
               >
-            <Icon3 height="30px" weight="30px" />
-            </div>
-              รายการซากโค
-          </ButtonSignUp>
-          </Link>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginRight: "5px",
+                  }}
+                >
+                  <Icon3 height="30px" weight="30px" />
+                </div>
+                รายการซากโค
+              </ButtonSignUp>
+            </Link>
 
-          <Link href="/beefgrading/indexsum">
-          <ButtonSignUp 
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              paddingTop: "9px",
-            }}
-          >
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              marginRight: "5px",
-              }}
-            >
-          <Icon2 height="30px" weight="30px" />
-            สรุปเกรดเนื้อโค
-          </div>
-          </ButtonSignUp>
-          </Link>
+            <Link href="/beefgrading/indexsum">
+              <ButtonSignUp
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  paddingTop: "9px",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginRight: "5px",
+                  }}
+                >
+                  <Icon2 height="30px" weight="30px" />
+                  สรุปเกรดเนื้อโค
+                </div>
+              </ButtonSignUp>
+            </Link>
 
-          <Link href="/beefgrading/history">
-          <ButtonSignUp
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              paddingTop: "9px",
-              
-            }}
-          >
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              marginRight: "5px",
-              }}
-            >
-          </div>
-          <Icon4 height="30px" weight="30px" />
-          ประวัติการตัดเกรด
-          </ButtonSignUp>
-          </Link>
-          <Link href="/beefgrading/setting/setting">
-          <ButtonSignUp
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              paddingTop: "9px",
-              
-            }}
-          >
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              marginRight: "5px",
-            }}
-          >
-          </div>
-          <Icon5 height="30px" weight="30px" />
-          การตั้งค่า
-          </ButtonSignUp>
-          </Link>
+            <Link href="/beefgrading/history">
+              <ButtonSignUp
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  paddingTop: "9px",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginRight: "5px",
+                  }}
+                ></div>
+                <Icon4 height="30px" weight="30px" />
+                ประวัติการตัดเกรด
+              </ButtonSignUp>
+            </Link>
+            <Link href="/beefgrading/report">
+              <ButtonSignUp
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  paddingTop: "9px",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginRight: "5px",
+                  }}
+                ></div>
+                <Icon10 height="30px" weight="30px" />
+                ออกรายงาน
+              </ButtonSignUp>
+            </Link>
+            <Link href="/beefgrading/setting/setting">
+              <ButtonSignUp
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  paddingTop: "9px",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginRight: "5px",
+                  }}
+                ></div>
+                <Icon5 height="30px" weight="30px" />
+                การตั้งค่า
+              </ButtonSignUp>
+            </Link>
           </Nav>
           <Nav>
             {user && (

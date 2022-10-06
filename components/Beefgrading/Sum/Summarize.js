@@ -98,7 +98,7 @@ const Summarize = () => {
       id: route.query.sumId,
     },
   });
-  // console.log(data);
+  console.log(data);
   const [infoExpert, setInfoExpert] = useState({
     ExpertName1: "",
     ExpertName2: "",
@@ -141,26 +141,11 @@ const Summarize = () => {
           expertGrade: infoExpert.ExpertGrade,
         },
       });
-      console.log("ผ่านละควาย");
+
     } catch (error) {
       console.log(error);
     }
   };
-  // console.log(HistoryGradedata);
-  /* const [HistoryGradedata, setHistoryGradedata] = useState(false) */
-  // const { data, loading, error } = useQuery(QUERY_INFO, {
-  //   variables: {
-  //     id: route.query.sumId,
-  //   },
-  //   onCompleted(res) {},
-  // });
-  /* id: route.query.sumId, */
-
-  /* const [image, setImage] = useState({ preview: "", raw: "" });
-  const [prod, setProd] = useState({
-    imagecow: "",
-  });
- */
   const { user, signout } = useContext(AuthContext);
   return (
     <>
@@ -232,8 +217,6 @@ const Summarize = () => {
                             }}
                             alt="Image"
                             src={prod.grade[0].pic}
-                            /* height="224"
-                            width="224" */
                           />
                         ))}
                     </div>

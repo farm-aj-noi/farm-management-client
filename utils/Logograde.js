@@ -9,7 +9,7 @@ import icon6 from "../images/beefgrading/grade.png";
 import icon7 from "../images/beefgrading/6.png";
 import icon8 from "../images/beefgrading/7.png";
 import icon9 from "../images/beefgrading/8.png";
-import Beef from "../images/beefgrading/9.png"
+import icon10 from "../images/beefgrading/9.png";
 import Logo_Nav1 from "../images/beefgrading/logo-Nav.png";
 import Image from "next/image";
 
@@ -172,13 +172,3 @@ export const Logo_Nav = (prop) => {
   );
 };
 
-export const Beeflogo = (prop) => {
-  return (
-    <img
-      src={Beef}
-      width={prop.weight}   
-      height={prop.height}
-      style={{ display: "inline", marginRight: "auto"}}
-    />
-  );
-};

@@ -119,7 +119,6 @@ export default function Home() {
 
   
   const [isModelLoading, setModel] = useState();
-  const [gradeData, setGradedata] = useState("");
   const [loadingCreate, setLoadingCreate] = useState(false);
   const [isImage, setImage] = useState("");
   const [isImage1, setImage1] = useState({ preview: "", raw: "" });

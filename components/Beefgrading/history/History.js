@@ -45,13 +45,8 @@ const ListHistory = ({ ListHistory }) => {
         ))}
         <td>สรุปเกรดเสร็จสิ้น</td>
         <td>
-        <Link href="grade/[gradeId]" as={`grade/${ListHistoryData.id}`}>
-          <ButtonSubmit>ออกรายงาน</ButtonSubmit>
-        </Link>
-        </td>
-        <td>
-        <Link href="grade/[gradeId]" as={`grade/${ListHistoryData.id}`}>
-          <ButtonSubmit>รายระเอียด</ButtonSubmit>
+        <Link href="his/[hisId]" as={`his/${ListHistoryData.id}`}>
+          <ButtonSubmit>รายละเอียด</ButtonSubmit>
         </Link>
         </td>
     </tr>
