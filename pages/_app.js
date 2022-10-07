@@ -186,7 +186,7 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
       router.pathname === "/beefwarehouse/beefproduct/notify/notify_import" ||
       router.pathname === "/beefwarehouse/beefproduct/notify/notify_export" ||
       router.pathname === "/beefwarehouse/beefproduct/notify/notify_export" ||
-      router.pathname === "/beefwarehouse/beefproduct/tracking/[trackingId]" ||
+      /* router.pathname === "/beefwarehouse/beefproduct/tracking/[trackingId]" || */
       router.pathname === "/beefwarehouse/beefproduct/transport" ||
       router.pathname === "/beefwarehouse/beefproduct/trace" ||
       router.pathname === "/beefwarehouse/beefproduct/trace/[trackingId]" ||
@@ -299,7 +299,7 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
       router.pathname === "/slaughter/sentlump" ||
       router.pathname === "/slaughter/transport" ||
       router.pathname === "/slaughter/tracking" ||
-      router.pathname === "/slaughter/tracking/[trackingId]" ||
+      /* router.pathname === "/slaughter/tracking/[trackingId]" || */
       router.pathname === "/slaughter/trace" ||
       router.pathname === "/slaughter/trace/[trackingId]" ||
       router.pathname === "/slaughter/report" ||
@@ -456,7 +456,7 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
       router.pathname === "/slaughter/sentlump" ||
       router.pathname === "/slaughter/transport" ||
       router.pathname === "/slaughter/tracking" ||
-      router.pathname === "/slaughter/tracking/[trackingId]" ||
+      /* router.pathname === "/slaughter/tracking/[trackingId]" || */
       router.pathname === "/slaughter/trace" ||
       router.pathname === "/slaughter/trace/[trackingId]" ||
       router.pathname === "/slaughter/report" ||
@@ -552,7 +552,7 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
       router.pathname === "/beefwarehouse/beefproduct/notify/notify_import" ||
       router.pathname === "/beefwarehouse/beefproduct/notify/notify_export" ||
       router.pathname === "/beefwarehouse/beefproduct/notify/notify_export" ||
-      router.pathname === "/beefwarehouse/beefproduct/tracking/[trackingId]" ||
+      /* router.pathname === "/beefwarehouse/beefproduct/tracking/[trackingId]" || */
       router.pathname === "/beefwarehouse/beefproduct/transport" ||
       router.pathname === "/beefwarehouse/beefproduct/trace" ||
       router.pathname === "/beefwarehouse/beefproduct/trace/[trackingId]" ||

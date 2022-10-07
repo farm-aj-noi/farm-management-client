@@ -21,7 +21,7 @@ const Qrcode = ({ notifyex }) => {
       <Modal
         show={testshow}
         onHide={handleClose}
-        size="md"
+        size="sm"
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
@@ -38,7 +38,7 @@ const Qrcode = ({ notifyex }) => {
             <QRcode
               size={100}
               value={
-                "http://localhost:3000/beefwarehouse/beefproduct/tracking/" + infodata.beefproduct.barcode
+                "https://farm-organization.herokuapp.com/beefwarehouse/beefproduct/tracking/" + infodata.beefproduct.barcode
               }
             />
           </div>
@@ -56,15 +56,14 @@ const Qrcode = ({ notifyex }) => {
               }
               target="_blank"
               style={{
-                fontSize: "10px",
-                backgroundColor: "#f3f3f3",
+                fontSize: "16px",
                 padding: "5px",
                 color: "#3775e9",
                 cursor: "pointer",
                 textDecoration: "underline",
               }}
             >
-              http://localhost:3000/beefwarehouse/beefproduct/tracking/{infodata.beefproduct.barcode}
+              LinkURL คลิ๊ก
             </a>
           </div>
         </Modal.Body>

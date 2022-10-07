@@ -114,9 +114,9 @@ function reportsetting() {
         }).catch(function (err) {
             console.error(err);
         });
-        /* data.append("file", file_upload);
+        data.append("file", file_upload);
         data.append("upload_preset", "next-test");
-        const res = await fetch(
+       /*  const res = await fetch(
             "https://api.cloudinary.com/v1_1/djnasfo5s/image/upload",
             {
                 method: "post",
@@ -162,6 +162,7 @@ function reportsetting() {
                     preview: ""
                 }
             })
+       /*  Router.reload(); */
     }
 
     const Alert = () => {
@@ -199,6 +200,7 @@ function reportsetting() {
         })
     }
 
+
     const handleSubmit = async () => {
         try {
             const url = await uploadFile();
@@ -210,6 +212,14 @@ function reportsetting() {
                     }
                 })
             }
+            /* else {
+                await updateLogo({
+                    variables: {
+                        logo: data && data.reportlogo[0].logo,
+                        address: inputaddress.address,
+                    }
+                })
+            } */
             Alert();
         } catch (error) {
             console.log(error)
@@ -269,7 +279,7 @@ function reportsetting() {
                                         }}>
                                             <a>
                                                 <div style={{ display: "flex", justifyContent: "center" }}>
-                                                    <img style={{ /* objectFit: 'cover', */ width: '100%', /* position: 'inherit', */ }} alt="Image" src={image.preview || data && data.reportlogo[0].logo} />
+                                                    <img /* style={{ objectFit: 'cover', width: '100%', position: 'inherit', }} */ width="250" height="250" alt="Image" src={image.preview || data && data.reportlogo[0].logo} />
                                                 </div>
                                             </a>
                                         </div>
@@ -283,7 +293,7 @@ function reportsetting() {
                                         }}>
                                             <a>
                                                 <div style={{ display: "flex", justifyContent: "center" }}>
-                                                    <img style={{ /* objectFit: 'cover', */ width: '100%', /* position: 'inherit', */ }} alt="Image" src={data && data.reportlogo[0].logo} />
+                                                    <img /* style={{ objectFit: 'cover', width: '100%', position: 'inherit', }} */ width="250" height="250" alt="Image" src={data && data.reportlogo[0].logo} />
                                                 </div>
                                             </a>
                                         </div>
@@ -333,7 +343,22 @@ function reportsetting() {
                             )}
                             {edit ? (
                                 <>
-                                    <Savebuttoncolor style={{ float: "right", padding: "5px 15px 5px 15px", fontSize: "18px", fontWeight: "bold", letterSpacing: "0.5px" }} onClick={handleSubmit} >
+                                    {/* {!file && (
+                                        <label style={{ color: "red" }}>กรุณาเลือกรูปภาพโลโก้</label>
+                                    )} */}
+                                    <Savebuttoncolor style={{
+                                        float: "right",
+                                        padding: "5px 15px 5px 15px",
+                                        fontSize: "18px",
+                                        fontWeight: "bold",
+                                        letterSpacing: "0.5px",
+                                        backgroundColor: `${!file
+                                            ? "gray"
+                                            : ""
+                                            }`,
+                                    }} onClick={handleSubmit}
+                                        disabled={!file}
+                                    >
                                         บันทึก
                                     </Savebuttoncolor>
                                     <Removebuttoncolor onClick={Setreport} style={{ float: "right", marginRight: "10px", padding: "5px 15px 5px 15px", fontSize: "18px", fontWeight: "bold", letterSpacing: "0.5px" }}>

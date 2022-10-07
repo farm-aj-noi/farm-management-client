@@ -239,7 +239,7 @@ class Mydoc extends React.Component {
                     <div style={{ margin: "auto" }}>
                         <QRCode
                             size={68}
-                            value={"http://localhost:3000//beefwarehouse/beefproduct/tracking" + prod.barcode}
+                            value={"https://farm-organization.herokuapp.com/beefwarehouse/beefproduct/tracking/" + prod.barcode}
                             style={{ marginBottom: 0 }}
                         />
                     </div>

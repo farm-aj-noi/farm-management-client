@@ -41,7 +41,7 @@ const index = ({ liststore }) => {
             <QRCode
               size={100}
               value={
-                "http://localhost:3000/slaughter/tracking/" + infodata.barcode
+                "https://farm-organization.herokuapp.com/slaughter/tracking/" + infodata.barcode
               }
             />
           </div>
@@ -59,15 +59,14 @@ const index = ({ liststore }) => {
               }
               target="_blank"
               style={{
-                fontSize: "10px",
-                backgroundColor: "#f3f3f3",
+                fontSize: "16px",
                 padding: "5px",
                 color: "#3775e9",
                 cursor: "pointer",
                 textDecoration: "underline",
               }}
             >
-              http://localhost:3000/slaughter/tracking/{infodata.barcode}
+              LinkURL คลิ๊ก
             </a>
           </div>
         </Modal.Body>

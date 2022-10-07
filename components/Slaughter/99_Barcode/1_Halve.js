@@ -255,7 +255,7 @@ class Mydoc extends React.Component {
               <QRCode
                 size={65}
                 value={
-                  "http://localhost:3000/slaughter/tracking/" + prod.barcode
+                  "https://farm-organization.herokuapp.com/slaughter/tracking/" + prod.barcode
                 }
                 style={{ marginBottom: 0 }}
               />
