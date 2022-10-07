@@ -37,13 +37,11 @@ const Home = () => {
         {user && (
           <div
             style={{
-              backgroundColor:  `${blue}`,
-              width: "fit-content",
+              backgroundColor: `${blue}`,
               margin: "auto",
               marginTop: 70,
               marginBottom: 5,
               fontSize: "x-large",
-              borderRadius: "50px",
             }}
           >
             {/* <Link href="/registercow">
@@ -79,7 +77,7 @@ const Home = () => {
             {user.role.nameEN === "admin" && (
               <>
                 <Link href="/registercow">
-                  <LinkSt style={{ borderRadius: "50px 0px 0px 50px" }}>
+                  <LinkSt>
                     <Logoregister height="150px" weight="150px" />
                     ลงทะเบียนโคเข้าขุน
                   </LinkSt>
@@ -103,7 +101,7 @@ const Home = () => {
                   </LinkSt>
                 </Link>
                 <Link href="/saleonline">
-                  <LinkSt style={{ borderRadius: "0px 50px 50px 0px" }}>
+                  <LinkSt>
                     <LogoSale height="150px" weight="150px" />
                     ระบบการขายออนไลน์
                   </LinkSt>

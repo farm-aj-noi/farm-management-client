@@ -19,7 +19,6 @@ import { useState, useContext } from "react";
 import Router from "next/router";
 import LoadingPage from "../helps/LoadingPage";
 import { AuthContext } from "../appState/AuthProvider"
-
 //import Footer from "../components/Footer/index";
 // import { ThemeProvider } from "styled-components";
 
@@ -204,11 +203,6 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
     }
   }
 
-<<<<<<< HEAD
-  //Route SaleOnline
-  if (!token) {
-    if (router.pathname === "/saleonline") {
-=======
   //sale
   if (!token) {
     if (
@@ -226,15 +220,11 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
       router.pathname === "/saleonline/report/ReportCancelOrder" ||
       router.pathname === "/saleonline/report/ReportReturnOrder"
     ) {
->>>>>>> dev65
       ctx.res.writeHead(302, { Location: "/signin" });
       ctx.res.end();
     }
   }
-<<<<<<< HEAD
-=======
 
->>>>>>> dev65
 
   if (!token) {
     if (router.pathname === "/cart") {
@@ -546,10 +536,7 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
       router.pathname === "/beefwarehouse/beefstore/setting/basket" ||
       router.pathname === "/beefwarehouse/beefstore/setting/chillroom" ||
       router.pathname === "/beefwarehouse/beefstore/setting/date" ||
-<<<<<<< HEAD
-=======
       router.pathname === "/beefwarehouse/beefstore/setting/reportsetting" ||
->>>>>>> dev65
       /////////////////////////////////////////////////////////
       router.pathname === "/beefwarehouse/beefproduct" ||
       router.pathname === "/beefwarehouse/beefproduct/createproduct" ||
