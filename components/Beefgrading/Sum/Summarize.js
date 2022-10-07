@@ -21,6 +21,7 @@ import { AuthContext } from "../../../appState/AuthProvider";
 import { isEqualType } from "graphql";
 registerLocale("th", th);
 import Link from "next/link";
+
 const thstyle = {
   border: "1px solid #dddddd",
   textAlign: "center",

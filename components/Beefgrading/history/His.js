@@ -284,7 +284,7 @@ export default function Home() {
                         >
                           <Searchinput
                             name="chillstart"
-                            value={dayjs(prod.chill.chilldateStart).format(
+                            value={dayjs(prod.chill[0].chilldateStart).format(
                               "DD-MM-YYYY"
                             )}
                             maxLength="2"
@@ -302,7 +302,7 @@ export default function Home() {
                         >
                           <Searchinput
                             name="chilldateEnd"
-                            value={dayjs(prod.chill.chilldateEnd).format(
+                            value={dayjs(prod.chill[0].chilldateEnd).format(
                               "DD-MM-YYYY"
                             )}
                             maxLength="20"
@@ -484,7 +484,7 @@ export default function Home() {
                   เกรดจากระบบ
                 </div>
               </DivFromTop>
-              <DivFromDown>
+              <DivFromDown style={{padding:"0px"}}>
                 <div
                   style={{
                     textAlign: "center",
@@ -510,7 +510,7 @@ export default function Home() {
                   เกรดจากผู้เชี่ยวชาญ
                 </div>
               </DivFromTop>
-              <DivFromDown>
+              <DivFromDown style={{padding:"0px"}}>
                 <div
                   style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}
                 >
@@ -543,7 +543,7 @@ export default function Home() {
                     </div>
                   )}
 
-                  <div style={{ marginTop: "30px", marginLeft: "30px" }}>
+                  <div style={{ marginTop: "30px", marginLeft: "10px", marginRight:"10px" }}>
                     {edit ? (
                       <Savebuttoncolor
                         style={{
@@ -571,7 +571,7 @@ export default function Home() {
               </DivFromDown>
             </div>
           </DivFromHis>
-          <div style={{ marginTop: "5px", marginLeft: "505px" }}>
+          <div style={{ marginTop: "10px", marginLeft: "505px" }}>
             <Link href="/beefgrading/history">
               <ButtonBack style={{ height: "40px", width: "150px" }}>
                 ย้อนกลับ

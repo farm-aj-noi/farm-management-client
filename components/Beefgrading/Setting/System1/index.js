@@ -1,7 +1,7 @@
 import React from "react";
 
 import { DivAlertCard, StyleAlertCardDown } from "../StyleDashboard";
-import { Icon5,Icon8 } from "../../../../utils/Logograde";
+import { Icon5, Icon8 } from "../../../../utils/Logograde";
 
 import Icon from "react-icons-kit";
 import { fileText } from "react-icons-kit/fa/fileText";
@@ -12,7 +12,6 @@ import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
 const index = () => {
-
   return (
     <DivAlertCard style={{ backgroundColor: "#006EBC" }}>
       <div
@@ -48,21 +47,23 @@ const index = () => {
               height: "62px",
             }}
           >
-           {/*  {dataproduct ? dataproduct.allproduct.length : "0"} */}
+            {/*  {dataproduct ? dataproduct.allproduct.length : "0"} */}
           </div>
           <a
             style={{
               color: "#ffffff",
             }}
           ></a>
-          <a style={{ color: "#ffffff", textAlign: "center", fontSize: "20px" }}>
+          <a
+            style={{ color: "#ffffff", textAlign: "center", fontSize: "20px" }}
+          >
             การตั้งค่าระบบ
           </a>
         </form>
       </div>
-      <Link href="/beefwarehouse/beefproduct/store">
+      <Link href="/beefgrading/setting/setSystem1">
         <StyleAlertCardDown style={{ marginTop: "7px" }}>
-          แสดงรายละเอียด
+          แสดงรายละเอียดตั้งค่า
           <div style={{ margin: "-3px 0px 0px auto" }}>
             <Icon size={20} icon={fileText} />
           </div>

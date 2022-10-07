@@ -11,9 +11,7 @@ import Link from "next/link";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
-
 const index = () => {
-
   return (
     <DivAlertCard style={{ backgroundColor: "#1C2951" }}>
       <div
@@ -33,10 +31,9 @@ const index = () => {
             paddingRight: "5px",
           }}
         >
-        <Link href="/beefwarehouse/beefproduct/store">
-        <Icon9 height="100px" weight="130px" />
-        </Link>
-          
+          <Link href="/beefwarehouse/beefproduct/store">
+            <Icon9 height="100px" weight="130px" />
+          </Link>
         </div>
         <form
           style={{
@@ -52,20 +49,21 @@ const index = () => {
               height: "62px",
             }}
           >
-           {/*  {dataproduct ? dataproduct.allproduct.length : "0"} */}
+            {/*  {dataproduct ? dataproduct.allproduct.length : "0"} */}
           </div>
           <a
             style={{
               color: "#ffffff",
             }}
           ></a>
-          <a style={{ color: "#ffffff", textAlign: "center", fontSize: "20px" }}>
+          <a
+            style={{ color: "#ffffff", textAlign: "center", fontSize: "20px" }}
+          >
             การตั้งค่าทั่วไป
-          
           </a>
         </form>
       </div>
-      <Link href="/beefwarehouse/beefproduct/store">
+      <Link href="/beefgrading/setting/setSystem2">
         <StyleAlertCardDown style={{ marginTop: "7px" }}>
           แสดงรายละเอียด
           <div style={{ margin: "-3px 0px 0px auto" }}>

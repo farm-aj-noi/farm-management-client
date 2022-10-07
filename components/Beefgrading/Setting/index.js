@@ -3,7 +3,7 @@ import { Icon } from "react-icons-kit";
 import { DivCenter, TableForm, TableHead } from "../Styleclass/Table";
 import { Icon5 } from "../../../utils/Logograde";
 import Link from "next/link";
-import { DivAlertCard, StyleAlertCardDown } from "./StyleDashboard";
+import { StyleEdit, StyleAlertCardDown } from "./StyleDashboard";
 import React from "react";
 
 import { DivBase } from "../../../utils/divBase";
@@ -39,7 +39,7 @@ function Index() {
         การตั้งค่า
       </DivCenter>
 
-      <DivBase style={{ marginTop: "100px" }}>
+      <DivBase style={{ marginTop: "0px" }}>
       <DivFrom style={{width:"650px"}}>
         <DivFromTop>
           <div style={{ margin: "-3px 5px 0px 0px" }}>

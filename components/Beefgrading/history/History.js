@@ -15,7 +15,7 @@ const ListHistory = ({ ListHistory }) => {
   const router = useRouter();
   const [prod, setProd] = useState(ListHistory);
   const [ListHistoryData, SetListHistoryData] = useState(ListHistory);
-  console.log(ListHistoryData);
+  // console.log(ListHistoryData);
   return (
     <tr style={{ textAlign: "center" }}>
       <td>{ListHistoryData.beeftype.code}</td>
@@ -23,9 +23,9 @@ const ListHistory = ({ ListHistory }) => {
       <td>{ListHistoryData.weightwarm}</td>
       <td>{ListHistoryData.weightcool ? ListHistoryData.weightcool : "-"}</td>
       <td>
-        {dayjs(ListHistoryData.chill.chilldateStart).format("DD-MM-YYYY")}
+        {dayjs(ListHistoryData.chill[0].chilldateStart).format("DD-MM-YYYY")}
       </td>
-      <td>{dayjs(ListHistoryData.chill.chilldateEnd).format("DD-MM-YYYY")}</td>
+      <td>{dayjs(ListHistoryData.chill[0].chilldateEnd).format("DD-MM-YYYY")}</td>
       {ListHistoryData &&
         ListHistoryData.chill.map((prod) => (
           <td>

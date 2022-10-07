@@ -56,6 +56,74 @@ export const StyleAlertCardDown = styled.div`
   }
 `;
 
+export const StyleEdit = styled.div`
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 580;
+  textAlign: 'center',
+  width: 40px;
+  height: 40px;
+  padding: 10px 20px;
+  background-color: ${({ bg }) => bg || "#FF5722"};
+  color: ${({ color }) => color || "#fff"};
+
+&:hover {
+  opacity: 0.9;
+  transform: scale(0.98);
+  background: #e00202;
+  color: #fff;
+}
+`;
+
+export const StyleSave= styled.div`
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 580;
+  textAlign: 'center',
+  width: 40px;
+  height: 40px;
+  padding: 10px 20px;
+  background-color: ${({ bg }) => bg || "#02e036"};
+  color: ${({ color }) => color || "#fff"};
+
+&:hover {
+  opacity: 0.9;
+  transform: scale(0.98);
+  background: #05ffb0;
+  color: #fff;
+}
+`;
+
+export const StyleCancle = styled.div`
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 580;
+  textAlign: 'center',
+  width: 40px;
+  height: 40px;
+  padding: 10px 20px;
+  background-color: ${({ bg }) => bg || "#e00202"};
+  color: ${({ color }) => color || "#fff"};
+
+&:hover {
+  opacity: 0.9;
+  transform: scale(0.98);
+  background: #FF5722;
+  color: #fff;
+}
+`;
+
+
+
 export const DivAlertCardDown = () => {
   return (
     <Link href="/slaughter/getin">

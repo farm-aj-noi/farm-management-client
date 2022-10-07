@@ -16,7 +16,7 @@ const thstyle = {
   padding: "10px",
   fontSize: "18px",
 };
-
+4
 const tdstyle = {
   border: "1px solid #dddddd",
   textAlign: "center",
@@ -61,68 +61,7 @@ function Sum() {
         สรุปเกรดเนื้อโค
       </DivCenter>
 
-      <DivCenter>
-        <from
-          style={{
-            marginTop: "10px",
-            fontSize: "20px",
-          }}
-        >
-          <label
-            for="date"
-            style={{
-              textAlign: "center",
-              fontSize: "18px",
-              marginRight: "10px",
-            }}
-          >
-            วันที่ตัดเกรด
-          </label>
-          <input
-            type="date"
-            id="ex_chill"
-            name="date"
-            style={{
-              height: "35px",
-              border: "1px solid #AFAFAF",
-              borderRadius: "4px",
-              color: "#AFAFAF",
-              textAlign: "center",
-            }}
-          ></input>
-          <label
-            for="date"
-            style={{
-              textAlign: "center",
-              fontSize: "18px",
-              margin: "10px 10px",
-            }}
-          >
-            ถึงวันที่
-          </label>
-          <input
-            type="date"
-            id="ex_chill"
-            name="date"
-            style={{
-              height: "35px",
-              border: "1px solid #AFAFAF",
-              borderRadius: "4px",
-              color: "#AFAFAF",
-              textAlign: "center",
-            }}
-          ></input>
-          <ButtonSearchColor>
-            <Icon
-              style={{ verticalAlign: "text-bottom", marginRight: "5px" }}
-              icon={iosSearchStrong}
-              size={20}
-            />
-            ค้นหา
-          </ButtonSearchColor>
-        </from>
-      </DivCenter>
-
+      
       <DivCenter style={{ marginTop: "20px" }}>
         <div
           style={{

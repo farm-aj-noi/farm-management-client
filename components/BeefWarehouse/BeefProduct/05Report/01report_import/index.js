@@ -449,7 +449,7 @@ const index = () => {
             </div>
             <div style={{ display: "flex", justifyContent: "center" }}>
               {data && data.improductSearch.length > 0 ? (
-                <>
+                <> 
                   <Paper prod={data.improductSearch} />
                   <Excel prod={data.improductSearch} />
                 </>

@@ -184,7 +184,7 @@ const Nav1 = () => {
                 ออกรายงาน
               </ButtonSignUp>
             </Link>
-            <Link href="/beefgrading/setting/setting">
+            <Link href="/beefgrading/setting">
               <ButtonSignUp
                 style={{
                   display: "flex",

@@ -15,8 +15,8 @@ const ListSum = ({ ListSum }) => {
       <td>{ListSumData.barcode}</td>
       <td>{ListSumData.weightwarm}</td>
       <td>{ListSumData.weightcool ? ListSumData.weightcool : "-"}</td>
-      <td>{dayjs(ListSumData.chill.chilldateStart).format("DD-MM-YYYY")}</td>
-      <td>{dayjs(ListSumData.chill.chilldateEnd).format("DD-MM-YYYY")}</td>
+      <td>{dayjs(ListSumData.chill[0].chilldateStart).format("DD-MM-YYYY")}</td>
+      <td>{dayjs(ListSumData.chill[0].chilldateEnd).format("DD-MM-YYYY")}</td>
       {ListSumData &&
         ListSumData.chill.map((prod) => (
           <td>{prod.chillroom.roomnum ? prod.chillroom.roomnum : "-"}</td>
