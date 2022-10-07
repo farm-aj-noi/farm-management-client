@@ -61,7 +61,7 @@ const liststore = ({ listall }) => {
       console.log(error)
     }
   }
-// console.log(infoall.MFGdate)
+  // console.log(infoall.MFGdate)
   return (
     <tr style={{ textAlign: "center" }}>
       <td>{infoall.producttype}</td>

@@ -383,8 +383,10 @@ const index = () => {
               </div>
             </DivFromDown>
           </DivFrom>
+         
         </>
       </DivBase>
+
     </div>
   );
 };

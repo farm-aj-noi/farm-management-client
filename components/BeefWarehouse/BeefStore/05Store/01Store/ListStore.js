@@ -192,7 +192,10 @@ const ListStore = ({ Liststore }) => {
           .format("DD/MM/YYYY")}
       </td>
       <td>{ListStoreData.grade ? ListStoreData.grade : "-"}</td>
-      <td>{ListStoreData.beefroom ? ListStoreData.beefroom : "-"}</td>
+      <td>{ListStoreData.status === "กำลังบ่ม" ? ("-") : (
+        ListStoreData.beefroom ? ListStoreData.beefroom : "-"
+      )}
+      </td>
       <td>{ListStoreData.shelf ? ListStoreData.shelf : "-"}</td>
       <td>{ListStoreData.basket ? ListStoreData.basket : "-"}</td>
       <td>{ListStoreData.status}</td>
