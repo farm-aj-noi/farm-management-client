@@ -22,17 +22,21 @@ import Deletereq from "./deleterequest";
 import Paper from "./paper";
 
 import dayjs from "dayjs";
+import ListrequestP from "./listrequestP";
 
 export const QUERYREQUESTEXPORT = gql`
 query QUERYREQUESTEXPORT {
   listRequestExP {
     id
-    producttype {
-      nameTH
-      code
-    }
-    quantity
     name
+    producttype {
+      code
+      nameTH
+    }
+    status {
+      id
+      nameTH
+    }
     requestdate
   }
 }
@@ -86,31 +90,18 @@ const index = () => {
                 <thead>
                   <tr style={{ textAlign: "center", fontSize: "18px" }}>
                     <th>วันที่ขอเบิก</th>
-                    <th>ชื่อผู้ขอเบิก</th>
                     <th>ประเภทสินค้า</th>
                     <th>รหัสสินค้า</th>
-                    <th>จำนวน</th>
-                    <th>ลบ</th>
+                    <th>ดำเนินรายการ</th>
                   </tr>
                 </thead>
                 <tbody>
                   {data && data.listRequestExP.length > 0 ? (
                     data.listRequestExP.map((prod) => (
-                      <tr style={{ textAlign: "center" }}>
-                        <td>{dayjs(prod.requestdate)
-                          .add(543, "year")
-                          .format("DD/MM/YYYY")}</td>
-                        <td>{prod.name}</td>
-                        <td>{prod.producttype.nameTH}</td>
-                        <td>{prod.producttype.code}</td>
-                        <td>{prod.quantity}</td>
-                        <td>
-                          <Deletereq key={prod.id} listre={prod} />
-                        </td>
-                      </tr>
+                      <ListrequestP key={prod.id} listrqP={prod} />
                     ))) : (
                     <tr style={{ textAlign: "center" }}>
-                      <td colSpan="6">ไม่พบข้อมูล</td>
+                      <td colSpan="4">ไม่พบข้อมูล</td>
                     </tr>
                   )
                   }

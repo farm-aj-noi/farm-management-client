@@ -8,7 +8,7 @@ import Router from "next/router";
 
 const index = ({ listlump }) => {
   const [infodata, setinfodata] = useState(listlump);
-  console.log(infodata);
+  // console.log(infodata);
   const [testshow, setShow] = useState(false);
   const handleClose = () => {
     Router.reload("beefwarehouse/beefstore/export/export_lumps");
@@ -40,7 +40,7 @@ const index = ({ listlump }) => {
             <QRCode
               size={100}
               value={
-                "http://localhost:3000/slaughter/tracking/" +
+                "https://farm-organization.herokuapp.com/slaughter/tracking/" +
                 infodata.lump.barcode
               }
             />
@@ -60,15 +60,14 @@ const index = ({ listlump }) => {
               }
               target="_blank"
               style={{
-                fontSize: "10px",
-                backgroundColor: "#f3f3f3",
+                fontSize: "16px",
                 padding: "5px",
                 color: "#3775e9",
                 cursor: "pointer",
                 textDecoration: "underline",
               }}
             >
-              http://localhost:3000/slaughter/tracking/{infodata.lump.barcode}
+              LinkURL คลิ๊ก
             </a>
           </div>
         </Modal.Body>

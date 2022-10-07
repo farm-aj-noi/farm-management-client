@@ -130,7 +130,7 @@ const index = () => {
     const [successtype, setsuccesstype] = useState(false);
     const { data: type } = useQuery(QUERYTYPE)
     const [idcreate, setidcreate] = useState("")
-    console.log(idcreate)
+    /* console.log(idcreate) */
 
     const [createpro, setcreatepro] = useState({
         weight: "",
@@ -145,7 +145,7 @@ const index = () => {
             id: idcreate,
         }
     })
-    console.log(data)
+  /*   console.log(data) */
     const [UpdateBeefProduct] = useMutation(UPDATETYPEPRODUCT, {
         onCompleted: (data) => {
             settypebeef({
@@ -443,13 +443,13 @@ const index = () => {
 
                                                         ))) : (
                                                         <tr style={{ textAlign: "center" }}>
-                                                            <td colspan="6">ไม่พบข้อมูล</td>
+                                                            <td colSpan="6">ไม่พบข้อมูล</td>
                                                         </tr>
                                                     )
                                                 ))
                                             ) : (
                                                 <tr style={{ textAlign: "center" }}>
-                                                    <td colspan="6">กรุณาเลือกประเภทสินค้า</td>
+                                                    <td colSpan="6">กรุณาเลือกประเภทสินค้า</td>
                                                 </tr>
                                             )}
                                         </tbody>
@@ -492,13 +492,13 @@ const index = () => {
 
                                                         ))) : (
                                                         <tr style={{ textAlign: "center" }}>
-                                                            <td colspan="6">ไม่พบข้อมูล</td>
+                                                            <td colSpan="6">ไม่พบข้อมูล</td>
                                                         </tr>
                                                     )
                                                 ))
                                             ) : (
                                                 <tr style={{ textAlign: "center" }}>
-                                                    <td colspan="6">กรุณาเลือกประเภทสินค้า</td>
+                                                    <td colSpan="6">กรุณาเลือกประเภทสินค้า</td>
                                                 </tr>
                                             )}
                                         </tbody>

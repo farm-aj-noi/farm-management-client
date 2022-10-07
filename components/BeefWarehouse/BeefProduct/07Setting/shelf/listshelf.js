@@ -89,9 +89,41 @@ const listshelf = ({ listpbasket }) => {
         }
     };
 
+    const DeleteAlert = () => {
+        Swal.fire({
+            title: 'ต้องการลบข้อมูล?',
+            text: "ยืนยันการลบข้อมูลประเภทตะกร้าจัดเก็บ!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'ตกลง',
+            cancelButtonText: 'ยกเลิก'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                handdleSubmitDelete();
+                MySwal.fire({
+                    icon: "success",
+                    title: "สำเร็จ",
+                    text: "ทำการลบข้อมูลสิ้น",
+                    confirmButtonText: (
+                        <span
+                            onClick={() =>
+                                Router.push("beefwarehouse/beefproduct/setting/shelf").then(() => Router.reload())
+                            }
+                        >
+                            ตกลง
+                        </span>
+                    ),
+                    confirmButtonColor: "#3085d6",
+                });
+            }
+        })
+    }
+
     const [deletePbasket] = useMutation(DELETEPBASKET, {
         onCompleted: (data) => {
-            MySwal.fire({
+           /*  MySwal.fire({
                 icon: "success",
                 title: "สำเร็จ",
                 text: "ทำการลบข้อมูลสิ้น",
@@ -105,7 +137,7 @@ const listshelf = ({ listpbasket }) => {
                     </span>
                 ),
                 confirmButtonColor: "#3085d6",
-            });
+            }); */
         }
     })
 
@@ -149,7 +181,7 @@ const listshelf = ({ listpbasket }) => {
                 )}
             </td>
             <td>
-                <Removebuttoncolor onClick={handdleSubmitDelete}>
+                <Removebuttoncolor onClick={DeleteAlert}>
                     <Removebutton />
                 </Removebuttoncolor>
             </td>

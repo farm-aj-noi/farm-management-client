@@ -7,7 +7,7 @@ import Router from "next/router";
 
 const Qrcode = ({ listim }) => {
   const [infodata, setinfodata] = useState(listim);
-  console.log(infodata);
+  // console.log(infodata);
   const [testshow, setShow] = useState(false);
   const handleClose = () => {
     setShow(false);
@@ -22,7 +22,7 @@ const Qrcode = ({ listim }) => {
       <Modal
         show={testshow}
         onHide={handleClose}
-        size="md"
+        size="sm"
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
@@ -39,7 +39,7 @@ const Qrcode = ({ listim }) => {
             <QRcode
               size={100}
               value={
-                "http://localhost:3000/beefwarehouse/beefproduct/tracking/" + infodata.beefproduct.barcode
+                "https://farm-organization.herokuapp.com/beefwarehouse/beefproduct/tracking/" + infodata.beefproduct.barcode
               }
             />
           </div>
@@ -57,15 +57,14 @@ const Qrcode = ({ listim }) => {
               }
               target="_blank"
               style={{
-                fontSize: "10px",
-                backgroundColor: "#f3f3f3",
+                fontSize: "16px",
                 padding: "5px",
                 color: "#3775e9",
                 cursor: "pointer",
                 textDecoration: "underline",
               }}
             >
-              http://localhost:3000/beefwarehouse/beefproduct/tracking/ {infodata.beefproduct.barcode}
+              LinkURL คลิ๊ก
             </a>
           </div>
         </Modal.Body>

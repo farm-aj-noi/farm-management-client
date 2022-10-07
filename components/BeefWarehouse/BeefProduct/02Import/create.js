@@ -144,7 +144,7 @@ const create = () => {
   }
   return (
     <div>
-      <from>
+      <div>
         <DivFromInsideLeft>
           บาร์โค้ด :
           <div
@@ -153,7 +153,18 @@ const create = () => {
               gridTemplateRows: "1fr 15px",
             }}
           >
-            <Searchinput name="barcode" value={createimproduct.barcode} onChange={handleChange} />
+            <Searchinput
+              name="barcode"
+              value={createimproduct.barcode}
+              onChange={handleChange}
+              style={{
+                borderColor: `${!createimproduct.barcode ? "red" : ""}`,
+                height: "35px"
+              }}
+            />
+            {!createimproduct.barcode && (
+              <label style={{ color: "red" }}>กรุณากรอกบาร์โค้ด</label>
+            )}
           </div>
         </DivFromInsideLeft>
         <DivFromInsideLeft style={{ marginTop: "5px" }}>
@@ -245,7 +256,7 @@ const create = () => {
                 }`,
             }}>บันทึก</Savebutton1>
         </div>
-      </from>
+      </div>
     </div>
   );
 };

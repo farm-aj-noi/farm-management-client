@@ -44,7 +44,7 @@ const listroom = ({ listr }) => {
   const MySwal = withReactContent(Swal);
   const [edit, setedit] = useState(false);
   const [inforoom, setinforoom] = useState(listr);
-  console.log(inforoom)
+  /* console.log(inforoom) */
   const [updateProductroom] = useMutation(UPDATEROOM, {
     onCompleted: (data) => {
       setedit(false);
@@ -90,23 +90,55 @@ const listroom = ({ listr }) => {
     }
   };
 
+  const DeleteAlert = () => {
+    Swal.fire({
+      title: 'ต้องการลบข้อมูล?',
+      text: "ยืนยันการลบข้อมูลประเภทตู้แช่จัดเก็บ!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'ตกลง',
+      cancelButtonText: 'ยกเลิก'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handdleSubmitDelete();
+        MySwal.fire({
+          icon: "success",
+          title: "สำเร็จ",
+          text: "ทำการลบข้อมูลสิ้น",
+          confirmButtonText: (
+            <span
+              onClick={() =>
+                Router.push("beefwarehouse/beefproduct/setting/room").then(() => Router.reload())
+              }
+            >
+              ตกลง
+            </span>
+          ),
+          confirmButtonColor: "#3085d6",
+        });
+      }
+    })
+  }
+
   const [deleteProductroom] = useMutation(DELETEROOM, {
     onCompleted: (data) => {
-      MySwal.fire({
-        icon: "success",
-        title: "สำเร็จ",
-        text: "ทำการลบข้อมูลสิ้น",
-        confirmButtonText: (
-          <span
-            onClick={() =>
-              Router.reload("beefwarehouse/beefproduct/setting/room")
-            }
-          >
-            ตกลง
-          </span>
-        ),
-        confirmButtonColor: "#3085d6",
-      });
+      /*   MySwal.fire({
+          icon: "success",
+          title: "สำเร็จ",
+          text: "ทำการลบข้อมูลสิ้น",
+          confirmButtonText: (
+            <span
+              onClick={() =>
+                Router.reload("beefwarehouse/beefproduct/setting/room")
+              }
+            >
+              ตกลง
+            </span>
+          ),
+          confirmButtonColor: "#3085d6",
+        }); */
     },
   });
   const handdleSubmitDelete = async () => {
@@ -146,7 +178,7 @@ const listroom = ({ listr }) => {
         )}
       </td>
       <td>
-        <Removebuttoncolor onClick={handdleSubmitDelete}>
+        <Removebuttoncolor onClick={DeleteAlert}>
           <Removebutton />
         </Removebuttoncolor>
       </td>

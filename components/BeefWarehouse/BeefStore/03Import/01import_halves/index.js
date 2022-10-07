@@ -126,6 +126,7 @@ const index = () => {
               <div>
                 <Create_Import />
               </div>
+<<<<<<< HEAD
             </DivFromDown>
           </div>
         </div>
@@ -143,10 +144,46 @@ const index = () => {
                     name="beeftype"
                     id="beeftype"
                     onChange={(event) => SetBeeftypeHalveChange(event.target.value)}
+=======
+              ค้นหารายการ
+            </DivFromTop>
+            <DivFromDown>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                <div style={{ fontSize: "20px" }}>
+                  <label
+                    style={{
+                      textAlign: "center",
+                      fontSize: "18px",
+                      marginRight: "10px",
+                    }}
+                  >
+                    ประเภทซาก
+                  </label>
+                  <select
+                    name="beef"
+                    id="beef"
+                    style={{
+                      height: "35px",
+                      width: "120px",
+                      border: "1px solid #AFAFAF",
+                      borderRadius: "4px",
+                      textAlign: "center",
+                      fontSize: "16px",
+                    }}
+                    onChange={(event) =>
+                      SetBeeftypeHalveChange(event.target.value)
+                    }
+>>>>>>> dev65
                   >
                     <option value="">ทั้งหมด</option>
                     <option value="5f1000e28d55662dcc23d95e">ซากซ้าย</option>
                     <option value="5f1000ee8d55662dcc23d960">ซากขวา</option>
+<<<<<<< HEAD
                   </SelectType>
                 </Formfilter>
               </DivFromSearch>
@@ -174,6 +211,61 @@ const index = () => {
                 <Formfilter>
                   ตำแหน่ง
                   <SelectType
+=======
+                  </select>
+                  <label
+                    style={{
+                      textAlign: "center",
+                      fontSize: "18px",
+                      marginLeft: "10px",
+                      marginRight: "10px",
+                    }}
+                  >
+                    เจ้าของซาก
+                  </label>
+                  <input
+                    style={{
+                      height: "35px",
+                      width: "110px",
+                      borderRadius: "4px",
+                      border: "1px solid #AFAFAF",
+                      fontSize: "16px",
+                      textAlign: "center",
+                    }}
+                    onChange={(event) => SetInputnamefarmer(event.target.value)}
+                  />
+                  <label
+                    style={{
+                      textAlign: "center",
+                      fontSize: "18px",
+                      marginLeft: "10px",
+                      marginRight: "10px",
+                    }}
+                  >
+                    ผู้นำเข้า
+                  </label>
+                  <input
+                    style={{
+                      height: "35px",
+                      width: "110px",
+                      borderRadius: "4px",
+                      border: "1px solid #AFAFAF",
+                      fontSize: "16px",
+                      textAlign: "center",
+                    }}
+                    onChange={(event) => SetInputusername(event.target.value)}
+                  />
+                  <label
+                    style={{
+                      textAlign: "center",
+                      fontSize: "18px",
+                      margin: "10px 10px",
+                    }}
+                  >
+                    ตำแหน่ง
+                  </label>
+                  <select
+>>>>>>> dev65
                     name="roomname"
                     id="roomname"
                     onChange={(event) => setselectbeefroom(event.target.value)}
@@ -185,6 +277,7 @@ const index = () => {
                           {prod.roomname}
                         </option>
                       ))}
+<<<<<<< HEAD
                   </SelectType>
                 </Formfilter>
               </DivFromSearch>
@@ -192,10 +285,25 @@ const index = () => {
                 <Formfilter>
                   วันที่นำเข้า
                   <Inputfilter
+=======
+                  </select>
+                  <label
+                    style={{
+                      textAlign: "center",
+                      fontSize: "18px",
+                      marginRight: "10px",
+                      marginLeft: "10px"
+                    }}
+                  >
+                    วันที่นำเข้า
+                  </label>
+                  <input
+>>>>>>> dev65
                     type="date"
                     name="importdate"
                     id="importdate"
                     onChange={(event) => SetStartDateChange(event.target.value)}
+<<<<<<< HEAD
                   />
                 </Formfilter>
               </DivFromSearch>
@@ -203,10 +311,24 @@ const index = () => {
                 <Formfilter>
                   ถึงวันที่
                   <Inputfilter
+=======
+                  ></input>
+                  <label
+                    style={{
+                      textAlign: "center",
+                      fontSize: "18px",
+                      margin: "10px 10px",
+                    }}
+                  >
+                    ถึงวันที่
+                  </label>
+                  <input
+>>>>>>> dev65
                     type="date"
                     name="enddate"
                     id="enddate"
                     onChange={(event) => SetEndDateChange(event.target.value)}
+<<<<<<< HEAD
                   />
                 </Formfilter>
               </DivFromSearch>
@@ -278,6 +400,93 @@ const index = () => {
         </DivData >
       </DivContainar >
     </div >
+=======
+                  ></input>
+                </div>
+              </div>
+            </DivFromDown>
+          </DivFrom>
+          <DivFrom
+            style={{
+              width: "100%",
+              gridRowStart: "3",
+              gridRowEnd: "3",
+              gridColumnStart: "3",
+              gridColumnEnd: "3",
+              marginTop: "20px",
+            }}
+          >
+            <DivFromTop>
+              <div style={{ margin: "-3px 5px 0px 0px" }}>
+                <Icon size={20} icon={list} />
+              </div>
+              รายการนำเข้าซากเนื้อโคผ่าซีก
+            </DivFromTop>
+            <DivFromDown>
+              <div style={{ height: `${data && data.imhalveSearch.length > 6 ? "400px" : ""}`, overflow: `${data && data.imhalveSearch.length > 6 ? "auto" : ""}` }}>
+                <Table
+                  striped
+                  bordered
+                  responsive
+                  hover
+                  style={{ margin: "auto" }}
+                >
+                  <thead>
+                    <tr style={{ textAlign: "center", fontSize: "18px" }}>
+                      <th >เจ้าของซาก</th>
+                      <th >ประเภทซาก</th>
+                      <th >วันที่นำเข้า</th>
+                      <th >เวลา</th>
+                      <th >ทะเบียนขุน</th>
+                      <th >รหัสซาก</th>
+                      <th >รหัสบาร์โค้ด</th>
+                      <th >คิวอาร์โค้ด</th>
+                      <th >น้ำหนักอุ่น (กก.)</th>
+                      <th >น้ำหนักเย็น (กก.)</th>
+                      <th >ห้อง</th>
+                      <th>สถานะ</th>
+                      <th>ผู้นำเข้า</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {data && data.imhalveSearch.length > 0 ? (
+                      data.imhalveSearch.map((prod) => (
+                        <List_import key={prod.id} imhalve={prod} />
+                      ))
+                    ) : (
+                      <tr style={{ textAlign: "center" }}>
+                        <td colSpan="13">ไม่พบข้อมูล</td>
+                      </tr>
+                    )}
+                  </tbody>
+                </Table>
+              </div>
+
+              <div style={{ float: "right", textAlign: "right" }}>
+                จำนวนรายการ {data ? data.imhalveSearch.length : "0"} รายการ
+                <br />
+                น้ำหนักอุ่น{" "}
+                {data &&
+                  data.imhalveSearch.reduce(
+                    (sum, nex) => sum + nex.halve.weightwarm,
+                    0
+                  ).toFixed(2)}{" "}
+                กิโลกรัม / น้ำหนักเย็น{" "}
+                {data &&
+                  data.imhalveSearch.reduce(
+                    (sum, nex) => sum + nex.halve.weightcool,
+                    0
+                  ).toFixed(2)}{" "}
+                กิโลกรัม
+              </div>
+            </DivFromDown>
+          </DivFrom>
+         
+        </>
+      </DivBase>
+
+    </div>
+>>>>>>> dev65
   );
 };
 

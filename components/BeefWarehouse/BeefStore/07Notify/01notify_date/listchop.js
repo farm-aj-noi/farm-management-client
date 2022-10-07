@@ -42,7 +42,7 @@ const EXPC = gql`
 
 const listchop = () => {
   const { data } = useQuery(EXPC);
-  console.log(data)
+  // console.log(data)
   return (
     <>
       <div style={{ height: `${data && data.Card8c.length > 10 ? "550px" : ""}`, overflow: "auto" }}>

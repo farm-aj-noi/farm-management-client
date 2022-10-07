@@ -163,7 +163,8 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
       router.pathname === "/beefwarehouse/beefstore/setting/sheif" ||
       router.pathname === "/beefwarehouse/beefstore/setting/basket" ||
       router.pathname === "/beefwarehouse/beefstore/setting/chillroom" ||
-      router.pathname === "/beefwarehouse/beefstore/setting/date"
+      router.pathname === "/beefwarehouse/beefstore/setting/date" ||
+      router.pathname === "/beefwarehouse/beefstore/setting/reportsetting"
     ) {
       ctx.res.writeHead(302, { Location: "/signin" });
       ctx.res.end();
@@ -186,7 +187,7 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
       router.pathname === "/beefwarehouse/beefproduct/notify/notify_import" ||
       router.pathname === "/beefwarehouse/beefproduct/notify/notify_export" ||
       router.pathname === "/beefwarehouse/beefproduct/notify/notify_export" ||
-      router.pathname === "/beefwarehouse/beefproduct/tracking/[trackingId]" ||
+      /* router.pathname === "/beefwarehouse/beefproduct/tracking/[trackingId]" || */
       router.pathname === "/beefwarehouse/beefproduct/transport" ||
       router.pathname === "/beefwarehouse/beefproduct/trace" ||
       router.pathname === "/beefwarehouse/beefproduct/trace/[trackingId]" ||
@@ -195,20 +196,45 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
       router.pathname === "/beefwarehouse/beefproduct/setting/date" ||
       router.pathname === "/beefwarehouse/beefproduct/setting/room" ||
       router.pathname === "/beefwarehouse/beefproduct/setting/freezer" ||
-      router.pathname === "/beefwarehouse/beefproduct/setting/shelf"
+      router.pathname === "/beefwarehouse/beefproduct/setting/shelf" ||
+      router.pathname === "/beefwarehouse/beefproduct/setting/reportsetting"
     ) {
       ctx.res.writeHead(302, { Location: "/signin" });
       ctx.res.end();
     }
   }
 
+<<<<<<< HEAD
   //Route SaleOnline
   if (!token) {
     if (router.pathname === "/saleonline") {
+=======
+  //sale
+  if (!token) {
+    if (
+      router.pathname === "/saleonline" ||
+      router.pathname === "/saleonline/listproduct" ||
+      router.pathname === "/saleonline/manageproductonline" ||
+      router.pathname === "/saleonline/checkorders" ||
+      router.pathname === "/saleonline/checkcancelorder" ||
+      router.pathname === "/saleonline/checkreturnorder" ||
+      router.pathname === "/saleonline/request" ||
+      router.pathname === "/saleonline/list/liststore" ||
+      router.pathname === "/saleonline/list/listproduct" ||
+      router.pathname === "/saleonline/transport" ||
+      router.pathname === "/saleonline/report" ||
+      router.pathname === "/saleonline/report/ReportCancelOrder" ||
+      router.pathname === "/saleonline/report/ReportReturnOrder"
+    ) {
+>>>>>>> dev65
       ctx.res.writeHead(302, { Location: "/signin" });
       ctx.res.end();
     }
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> dev65
 
   if (!token) {
     if (router.pathname === "/cart") {
@@ -283,7 +309,7 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
       router.pathname === "/slaughter/sentlump" ||
       router.pathname === "/slaughter/transport" ||
       router.pathname === "/slaughter/tracking" ||
-      router.pathname === "/slaughter/tracking/[trackingId]" ||
+      /* router.pathname === "/slaughter/tracking/[trackingId]" || */
       router.pathname === "/slaughter/trace" ||
       router.pathname === "/slaughter/trace/[trackingId]" ||
       router.pathname === "/slaughter/report" ||
@@ -440,7 +466,7 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
       router.pathname === "/slaughter/sentlump" ||
       router.pathname === "/slaughter/transport" ||
       router.pathname === "/slaughter/tracking" ||
-      router.pathname === "/slaughter/tracking/[trackingId]" ||
+      /* router.pathname === "/slaughter/tracking/[trackingId]" || */
       router.pathname === "/slaughter/trace" ||
       router.pathname === "/slaughter/trace/[trackingId]" ||
       router.pathname === "/slaughter/report" ||
@@ -520,6 +546,10 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
       router.pathname === "/beefwarehouse/beefstore/setting/basket" ||
       router.pathname === "/beefwarehouse/beefstore/setting/chillroom" ||
       router.pathname === "/beefwarehouse/beefstore/setting/date" ||
+<<<<<<< HEAD
+=======
+      router.pathname === "/beefwarehouse/beefstore/setting/reportsetting" ||
+>>>>>>> dev65
       /////////////////////////////////////////////////////////
       router.pathname === "/beefwarehouse/beefproduct" ||
       router.pathname === "/beefwarehouse/beefproduct/createproduct" ||
@@ -535,7 +565,7 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
       router.pathname === "/beefwarehouse/beefproduct/notify/notify_import" ||
       router.pathname === "/beefwarehouse/beefproduct/notify/notify_export" ||
       router.pathname === "/beefwarehouse/beefproduct/notify/notify_export" ||
-      router.pathname === "/beefwarehouse/beefproduct/tracking/[trackingId]" ||
+      /* router.pathname === "/beefwarehouse/beefproduct/tracking/[trackingId]" || */
       router.pathname === "/beefwarehouse/beefproduct/transport" ||
       router.pathname === "/beefwarehouse/beefproduct/trace" ||
       router.pathname === "/beefwarehouse/beefproduct/trace/[trackingId]" ||
@@ -544,7 +574,8 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
       router.pathname === "/beefwarehouse/beefproduct/setting/date" ||
       router.pathname === "/beefwarehouse/beefproduct/setting/room" ||
       router.pathname === "/beefwarehouse/beefproduct/setting/freezer" ||
-      router.pathname === "/beefwarehouse/beefproduct/setting/shelf"
+      router.pathname === "/beefwarehouse/beefproduct/setting/shelf" ||
+      router.pathname === "/beefwarehouse/beefproduct/setting/reportsetting"
     ) {
       ctx.res.writeHead(302, { Location: "/signin" });
       ctx.res.end();

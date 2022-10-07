@@ -186,9 +186,8 @@ const index = () => {
                 justifyContent: "center",
               }}
             >
-              <from>
+              <div>
                 <label
-                  for="producttype"
                   style={{
                     textAlign: "center",
                     fontSize: "18px",
@@ -219,7 +218,6 @@ const index = () => {
                     ))}
                 </select>
                 <label
-                  for="userName"
                   style={{
                     textAlign: "center",
                     fontSize: "18px",
@@ -241,7 +239,6 @@ const index = () => {
                   onChange={(event) => setimporter(event.target.value)}
                 />
                 <label
-                  for="beef"
                   style={{
                     textAlign: "center",
                     fontSize: "18px",
@@ -315,7 +312,6 @@ const index = () => {
                     ))}
                 </select>
                 <label
-                  for="startdate"
                   style={{
                     textAlign: "center",
                     fontSize: "18px",
@@ -338,7 +334,6 @@ const index = () => {
                   onChange={(event) => setselectstartdate(event.target.value)}
                 />
                 <label
-                  for="date"
                   style={{
                     textAlign: "center",
                     fontSize: "18px",
@@ -360,7 +355,7 @@ const index = () => {
                   }}
                   onChange={(event) => setselectenddate(event.target.value)}
                 ></input>
-              </from>
+              </div>
             </div>
           </DivFromDown>
         </DivFrom>

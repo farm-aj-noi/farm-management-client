@@ -144,9 +144,8 @@ const index = () => {
                   marginTop: "15px",
                 }}
               >
-                <from style={{ fontSize: "20px" }}>
+                <div style={{ fontSize: "20px" }}>
                   <label
-                    for="beef"
                     style={{
                       textAlign: "center",
                       fontSize: "18px",
@@ -168,7 +167,6 @@ const index = () => {
                     onChange={(event) => SetinputExporter(event.target.value)}
                   />
                   <label
-                    for="beef"
                     style={{
                       textAlign: "center",
                       fontSize: "18px",
@@ -191,7 +189,6 @@ const index = () => {
                     onChange={(event) => SetInputusername(event.target.value)}
                   />
                   <label
-                    for="date"
                     style={{
                       textAlign: "center",
                       fontSize: "18px",
@@ -214,7 +211,6 @@ const index = () => {
                     onChange={(event) => SetStartDateChange(event.target.value)}
                   ></input>
                   <label
-                    for="date"
                     style={{
                       textAlign: "center",
                       fontSize: "18px",
@@ -236,7 +232,7 @@ const index = () => {
                     }}
                     onChange={(event) => SetEndDateChange(event.target.value)}
                   ></input>
-                </from>
+                </div>
               </div>
             </DivFromDown>
           </DivFrom>

@@ -50,10 +50,41 @@ const UPDATETYPE = gql`
 const list = ({ listtype }) => {
   const MySwal = withReactContent(Swal);
   const [infotype, setinfotype] = useState(listtype);
-  console.log(infotype);
+/*   console.log(infotype); */
+  const DeleteAlert = () => {
+    Swal.fire({
+      title: 'ต้องการลบข้อมูล?',
+      text: "ยืนยันการลบข้อมูลประเภทตะกร้าจัดเก็บ!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'ตกลง',
+      cancelButtonText: 'ยกเลิก'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handdleSubmitDelete();
+        MySwal.fire({
+          icon: "success",
+          title: "สำเร็จ",
+          text: "ทำการลบข้อมูลสิ้น",
+          confirmButtonText: (
+            <span
+              onClick={() =>
+                Router.push("beefwarehouse/beefproduct/setting").then(() => Router.reload())
+              }
+            >
+              ตกลง
+            </span>
+          ),
+          confirmButtonColor: "#3085d6",
+        });
+      }
+    })
+  }
   const [deleteProducttype] = useMutation(DELETETYPE, {
     onCompleted: (data) => {
-      MySwal.fire({
+      /* MySwal.fire({
         icon: "success",
         title: "สำเร็จ",
         text: "ทำการลบข้อมูลสิ้น",
@@ -65,7 +96,7 @@ const list = ({ listtype }) => {
           </span>
         ),
         confirmButtonColor: "#3085d6",
-      });
+      }); */
     },
   });
   const handdleSubmitDelete = async () => {
@@ -189,7 +220,7 @@ const list = ({ listtype }) => {
           )}
         </td>
         <td>
-          <Removebuttoncolor onClick={handdleSubmitDelete}>
+          <Removebuttoncolor onClick={DeleteAlert}>
             <Removebutton />
           </Removebuttoncolor>
         </td>

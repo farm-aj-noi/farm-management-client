@@ -89,6 +89,7 @@ const index = () => {
             ค้นหารายการ
           </DivFromTop>
           <DivFromDown>
+<<<<<<< HEAD
             <DivSearch>
               <DivFromSearch>
                 <Formfilter>
@@ -130,6 +131,90 @@ const index = () => {
                 </Formfilter>
               </DivFromSearch>
             </DivSearch>
+=======
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <div style={{ fontSize: "20px" }}>
+                <label
+                  style={{
+                    textAlign: "center",
+                    fontSize: "18px",
+                    marginLeft: "10px",
+                    marginRight: "10px",
+                  }}
+                >
+                  ทะเบียนขุน
+                </label>
+                <input
+                  style={{
+                    height: "35px",
+                    width: "110px",
+                    borderRadius: "4px",
+                    border: "1px solid #AFAFAF",
+                    fontSize: "14px",
+                    textAlign: "center",
+                  }}
+                  onChange={(event) => setinputcownum(event.target.value)}
+                />
+                <label
+                  style={{
+                    textAlign: "center",
+                    fontSize: "18px",
+                    margin: "10px 10px",
+                  }}
+                >
+                  ตำแหน่ง
+                </label>
+                <select
+                  name="roomname"
+                  style={{
+                    height: "35px",
+                    width: "110px",
+                    border: "1px solid #AFAFAF",
+                    borderRadius: "4px ",
+                    textAlign: "center",
+                    fontSize: "14px",
+                    marginRight: "10px",
+                  }}
+                  onChange={(event) => setselectbeefroom(event.target.value)}
+                >
+                  <option value="">ห้อง</option>
+                  {dataroom &&
+                    dataroom.allRoom.map((prod) => (
+                      <option key={prod.id} value={prod.id}>
+                        {prod.roomname}
+                      </option>
+                    ))}
+                </select>
+                <label
+                  style={{
+                    textAlign: "center",
+                    fontSize: "18px",
+                    marginRight: "10px",
+                  }}
+                >
+                  วันหมดอายุ
+                </label>
+                <input
+                  type="date"
+                  name="expdate"
+                  id="date"
+                  style={{
+                    height: "35px",
+                    border: "1px solid #AFAFAF",
+                    borderRadius: "4px ",
+                    textAlign: "center",
+                    fontSize: "16px",
+                  }}
+                  onChange={(event) => setexpdate(event.target.value)}
+                ></input>
+              </div>
+            </div>
+>>>>>>> dev65
           </DivFromDown>
         </DivGrid>
         <DivData>

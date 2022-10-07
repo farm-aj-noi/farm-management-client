@@ -32,7 +32,7 @@ const create = () => {
   const { data } = useQuery(QUERYNAMERE)
   const [createexproduct, setcreateexproduct] = useState({
     barcode: "",
-    storestatus: "629cb4035d8e2a65ce3e3800",
+    storestatus: "6280fac6d3dbf7345093676f",
     exporter: "",
   })
   const [createExproduct] = useMutation(CREATEEXPORTPRODUCT, {
@@ -104,7 +104,7 @@ const create = () => {
   }
   return (
     <div>
-      <from>
+      <div>
         <DivFromInsideLeft>
           บาร์โค้ด :
           <div
@@ -114,7 +114,14 @@ const create = () => {
             }}
           >
             <Searchinput name="barcode" value={createexproduct.barcode}
-              onChange={handleChange} />
+              onChange={handleChange}
+              style={{
+                borderColor: `${!createexproduct.barcode ? "red" : ""}`,
+                height: "35px"
+              }} />
+            {!createexproduct.barcode && (
+              <label style={{ color: "red" }}>กรุณากรอกบาร์โค้ด</label>
+            )}
           </div>
         </DivFromInsideLeft>
         <DivFromInsideLeft style={{ marginTop: "5px" }}>
@@ -141,9 +148,10 @@ const create = () => {
                 disabled={!createexproduct.barcode}
               >
                 <option value="">รายชื่อผู้ขอเบิก</option>
-                {data && data.listRequestExP.map((prod) => (
+                <option value="seller">Seller</option>
+               {/*  {data && data.listRequestExP.map((prod) => (
                   <option key={prod.id} value={prod.id}>{prod.name}</option>
-                ))}
+                ))} */}
               </select>
             </div>
           </div>
@@ -167,7 +175,7 @@ const create = () => {
             disabled={!createexproduct.barcode || !createexproduct.exporter}
           >บันทึก</Savebutton1>
         </div>
-      </from>
+      </div>
     </div>
   );
 };

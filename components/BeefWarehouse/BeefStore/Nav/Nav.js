@@ -59,7 +59,7 @@ const Nav1 = () => {
         fixed="top"
       >
         <Navbar.Brand style={{ padding: "0" }}>
-          {(user.role.nameEN === "admin") && (
+          {user && (user.role.nameEN === "admin") && (
             <Link href="/beefwarehouse">
               <a style={{ color: "white" }}>
                 <p style={{ padding: "0 10px", display: "inline", fontSize: "18px", fontWeight: 600, letterSpacing: "1px " }}>หน้าแรก</p>
@@ -80,12 +80,6 @@ const Nav1 = () => {
           <Nav className="mr-auto">
 
             <>
-              <Link href="/beefwarehouse/beefstore/chill">
-                <NavButtonLeft>
-                  <Icon7 height="30px" weight="30px" />
-                  บ่มซากเนื้อโค
-                </NavButtonLeft>
-              </Link>
               <DropdownButton
                 drop="down"
                 title={
@@ -112,6 +106,12 @@ const Nav1 = () => {
                   <NavDropdownItem>นำเข้าซากเนื้อโคส่วนอื่น ๆ </NavDropdownItem>
                 </Link>
               </DropdownButton>
+              <Link href="/beefwarehouse/beefstore/chill">
+                <NavButtonLeft>
+                  <Icon7 height="30px" weight="30px" />
+                  บ่มซากเนื้อโค
+                </NavButtonLeft>
+              </Link>
               <DropdownButton
                 drop="down"
                 title={
@@ -168,11 +168,16 @@ const Nav1 = () => {
                   <NavDropdownItem>ออกรายงานคงคลัง</NavDropdownItem>
                 </Link>
               </DropdownButton>
-              <Link href="/beefwarehouse/beefstore/requestexport">
+              <Link href="/beefwarehouse/beefstore/graph">
+                <NavButtonLeft>
+                  <Icon13 height="40px" weight="37px" /> รายละเอียดข้อมูลสถิติ
+                </NavButtonLeft>
+              </Link>
+              {/*  <Link href="/beefwarehouse/beefstore/requestexport">
                 <NavButtonLeft>
                   <Icon2 height="30px" weight="30px" /> ร้องขอเบิก
                 </NavButtonLeft>
-              </Link>
+              </Link> */}
               <Link href="/beefwarehouse/beefstore/notify/notify_date">
                 <NavButtonLeft>
                   <Icon10 height="30px" weight="30px" /> การแจ้งเตือน
@@ -181,11 +186,6 @@ const Nav1 = () => {
               <Link href="/beefwarehouse/beefstore/transport">
                 <NavButtonLeft>
                   <Icon14 height="30px" weight="30px" /> บันทึกการขนส่ง
-                </NavButtonLeft>
-              </Link>
-              <Link href="/beefwarehouse/beefstore/graph">
-                <NavButtonLeft>
-                  <Icon13 height="40px" weight="37px" /> รายละเอียดข้อมูลสถิติ
                 </NavButtonLeft>
               </Link>
               <Link href="/beefwarehouse/beefstore/setting/room">
@@ -197,24 +197,50 @@ const Nav1 = () => {
           </Nav>
           <Nav>
             {user && (
-              <>
-                <a style={{ margin: "auto 5px", textAlign: "left", fontSize: "16px", fontWeight: 600, letterSpacing: "1px" }}>
-                  สวัสดี {user.name}
-                </a>
+              user.role.nameEN === "admin" ? (
+                <>
+                  <DropdownButton
+                    drop="down"
+                    title={
+                      <span style={{ fontSize: "18px", fontWeight: 600 }}>
+                        สวัสดี {user.name}
+                      </span>
+                    }
+                    bsPrefix={MyCss.nstdropleft}
+                  >
+                    <Link href="/beefwarehouse/beefstore/setting/reportsetting">
+                      <NavDropdownItem>ตั้งค่าออกรายงาน</NavDropdownItem>
+                    </Link>
+                  </DropdownButton>
+                  <NavButtonSigninComplete onClick={signout} style={{ fontSize: "16px", fontWeight: 600, letterSpacing: "1px" }}>
+                    <Icon
+                      style={{ verticalAlign: "text-bottom" }}
+                      icon={shareSquareO}
+                      size={25}
+                    />{" "}
+                    ออกจากระบบ
+                  </NavButtonSigninComplete>
+                </>
+              ) : (
+                <>
+                  <a style={{ margin: "auto 5px", textAlign: "left", fontSize: "16px", fontWeight: 600, letterSpacing: "1px" }}>
+                    สวัสดี {user.name}
+                  </a>
+                  <NavButtonSigninComplete onClick={signout} style={{ fontSize: "16px", fontWeight: 600, letterSpacing: "1px" }}>
+                    <Icon
+                      style={{ verticalAlign: "text-bottom" }}
+                      icon={shareSquareO}
+                      size={25}
+                    />{" "}
+                    ออกจากระบบ
+                  </NavButtonSigninComplete>
+                </>
+              )
 
-                <NavButtonSigninComplete onClick={signout} style={{ fontSize: "16px", fontWeight: 600, letterSpacing: "1px" }}>
-                  <Icon
-                    style={{ verticalAlign: "text-bottom" }}
-                    icon={shareSquareO}
-                    size={25}
-                  />{" "}
-                  ออกจากระบบ
-                </NavButtonSigninComplete>
-              </>
             )}
           </Nav>
-        </Navbar.Collapse>
-      </Navbar>
+        </Navbar.Collapse >
+      </Navbar >
     </>
   );
 };

@@ -77,7 +77,7 @@ export const QUERYROOMS = gql`
 const room = () => {
   const MySwal = withReactContent(Swal);
   const { data: dataroom } = useQuery(QUERYROOMS);
-  console.log(dataroom);
+  // console.log(dataroom);
   /*  console.log(data); */
   const [idroom, SetidRoom] = useState(""); //get ID room
   const [successCreateRoomName, setSuccessCreateRoomName] = useState(false); //done room name
@@ -185,17 +185,7 @@ const room = () => {
     }
   };
 
-  const testallselect = () => {
-    var x = document.getElementById("beeftype");
-    console.log(x)
-    return;
-    var txt;
-    var i;
-    for (i = 0; i < x.length; i++) {
-      txt = txt + "\n" + x.options[i].text;
-    }
 
-  }
 
   return (
     <div>

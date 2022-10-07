@@ -24,7 +24,7 @@ const CARDALLPRODUCT = gql`
 const index = () => {
   const { data: dataproduct } = useQuery(CARDALLPRODUCT);
   return (
-    <DivAlertCard style={{ backgroundColor: "#BB0FBB" }}>
+    <DivAlertCard style={{ backgroundColor: "#bb0fbb" }}>
       <div
         style={{
           display: "flex",

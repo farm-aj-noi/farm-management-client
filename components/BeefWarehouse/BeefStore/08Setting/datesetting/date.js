@@ -58,14 +58,29 @@ const UPDATETOTAL = gql`
 `;
 
 const date = ({ listdate }) => {
+  const MySwal = withReactContent(Swal);
   const [infodate, setinfodate] = useState(listdate);
   //console.log(infodate);
   const [Editdate, setEditdate] = useState(false);
   const [updateTotalExp, { loading, error }] = useMutation(UPDATETOTAL, {
     onCompleted: (data) => {
-      // console.log(data)
-      setinfodate(data.updateTotalExp);
-      setEditdate(false);
+      if (data) {
+        setinfodate(data.updateTotalExp);
+        setEditdate(false);
+        MySwal.fire({
+          icon: "success",
+          title: "สำเร็จ",
+          text: "ทำการแก้ไขข้อมูลสิ้น",
+          confirmButtonText: (
+            <span
+              onClick={() => Router.reload("beefwarehouse/beefstore/setting/date")}
+            >
+              ตกลง
+            </span>
+          ),
+          confirmButtonColor: "#3085d6",
+        });
+      }
     },
   });
   const handleChange = (e) =>
@@ -112,9 +127,9 @@ const date = ({ listdate }) => {
           <Editbutton />
         </Editbuttoncolor>
       )}
-      <div style={{ marginLeft: "38px",marginTop:"10px" }}>
+      <div style={{ marginLeft: "38px", marginTop: "10px" }}>
         <DivFromInsideLeft>
-          ซากเนื้อโคผ่าซีก : {}
+          ซากเนื้อโคผ่าซีก : { }
           {Editdate ? (
             <Searchinput
               name="dayH"
@@ -133,7 +148,7 @@ const date = ({ listdate }) => {
           วัน
         </DivFromInsideLeft>
         <DivFromInsideLeft style={{ marginTop: "10px" }}>
-          ซากเนื้อโคสี่เสี้ยว : {}
+          ซากเนื้อโคสี่เสี้ยว : { }
           {Editdate ? (
             <Searchinput
               name="dayQ"
@@ -152,7 +167,7 @@ const date = ({ listdate }) => {
           วัน
         </DivFromInsideLeft>
         <DivFromInsideLeft style={{ marginTop: "10px" }}>
-          ซากเนื้อโคก้อนเนื้อ : {}
+          ซากเนื้อโคก้อนเนื้อ : { }
           {Editdate ? (
             <Searchinput
               name="dayL"
@@ -171,7 +186,7 @@ const date = ({ listdate }) => {
           วัน
         </DivFromInsideLeft>
         <DivFromInsideLeft style={{ marginTop: "10px" }}>
-          ซากเนื้อโคชิ้นเนื้อ : {}
+          ซากเนื้อโคชิ้นเนื้อ : { }
           {Editdate ? (
             <Searchinput
               name="dayC"
@@ -190,7 +205,7 @@ const date = ({ listdate }) => {
           วัน
         </DivFromInsideLeft>
         <DivFromInsideLeft style={{ marginTop: "10px" }}>
-          ซากเนื้อโคส่วนอื่น ๆ : {}
+          ซากเนื้อโคส่วนอื่น ๆ : { }
           {Editdate ? (
             <Searchinput
               name="dayE"

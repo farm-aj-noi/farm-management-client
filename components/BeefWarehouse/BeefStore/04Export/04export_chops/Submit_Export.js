@@ -134,40 +134,6 @@ const Submit_Export = () => {
             </div>
           </DivFromInsideLeft>
           <DivFromInsideLeft style={{ marginTop: "5px" }}>
-            ผู้ขอเบิก :
-            <div
-              style={{
-                display: "grid",
-                gridTemplateRows: "1fr 15px",
-              }}
-            >
-              <div style={{ display: "inline", width: "170px" }}>
-                <select
-                  disabled={!ExportchopInfo.barcode}
-                  name="exporter"
-                  value={ExportchopInfo.exporter}
-                  onChange={handleChange}
-                  style={{
-                    height: "35px",
-                    width: "160px",
-                    border: "1px solid #AFAFAF",
-                    borderRadius: "4px",
-                    textAlign: "center",
-                    fontSize: "16px",
-                  }}
-                >
-                  <option value="">รายชื่อ</option>
-                  {requestdata &&
-                    requestdata.listRequestEx.map((prod) => (
-                      <option key={prod.id} value={prod.id}>
-                        {prod.name}
-                      </option>
-                    ))}
-                </select>
-              </div>
-            </div>
-          </DivFromInsideLeft>
-          <DivFromInsideLeft>
             สถานะเบิก :
             <div
               style={{
@@ -177,7 +143,7 @@ const Submit_Export = () => {
             >
               <div style={{ display: "inline", width: "170px" }}>
                 <select
-                  disabled={!ExportchopInfo.barcode || !ExportchopInfo.exporter}
+                  disabled={!ExportchopInfo.barcode}
                   name="storestatus"
                   value={ExportchopInfo.storestatus}
                   onChange={handleChange}
@@ -193,6 +159,47 @@ const Submit_Export = () => {
                   <option value="">เลือกสถานะ</option>
                   <option value="6280fac6d3dbf7345093676f">นำจำหน่าย</option>
                   <option value="62821d931768cd521052118b">นำแปรรูป</option>
+                </select>
+              </div>
+            </div>
+          </DivFromInsideLeft>
+          <DivFromInsideLeft>
+            ผู้ขอเบิก :
+            <div
+              style={{
+                display: "grid",
+                gridTemplateRows: "1fr 15px",
+              }}
+            >
+              <div style={{ display: "inline", width: "170px" }}>
+                <select
+                  disabled={!ExportchopInfo.storestatus}
+                  name="exporter"
+                  value={ExportchopInfo.exporter}
+                  onChange={handleChange}
+                  style={{
+                    height: "35px",
+                    width: "160px",
+                    border: "1px solid #AFAFAF",
+                    borderRadius: "4px",
+                    textAlign: "center",
+                    fontSize: "16px",
+                  }}
+                >
+                  <option value="">รายชื่อ</option>
+                  {ExportchopInfo.storestatus === "6280fac6d3dbf7345093676f" ? (
+                    <>
+                     {/*  <option value="admin">Admin</option> */}
+                      <option value="seller">Seller</option>
+                    </>
+                  ) : (
+                    ExportchopInfo.storestatus === "62821d931768cd521052118b" ? (
+                      <>
+                        {/* <option value="admin">Admin</option> */}
+                        <option value="productstoreman">Productstoreman</option>
+                      </>
+                    ) : ("")
+                  )}
                 </select>
               </div>
             </div>

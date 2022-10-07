@@ -33,7 +33,7 @@ export const QUERYROOMS = gql`
 
 const room1 = () => {
   const { data: dataroom } = useQuery(QUERYROOMS);
-  console.log(dataroom)
+  // console.log(dataroom)
   return (
     <div>
       <DivFromTop>

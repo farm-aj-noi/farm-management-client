@@ -93,7 +93,7 @@ const Index = () => {
     const [selectedDate, handleDateChange] = useState(
         dayjs(date).format("YYYY-MM-DD")
     );
-    console.log(selectedDate);
+    /* console.log(selectedDate); */
     const months = [
         "มกราคม",
         "กุมภาพันธ์",
@@ -166,7 +166,7 @@ const Index = () => {
             barcode: barcode
         }
     })
-    console.log(data)
+   /*  console.log(data) */
 
     const [createProductTransport] = useMutation(CREATETRANSPORT, {
         onCompleted: (data) => {
@@ -530,7 +530,7 @@ const Index = () => {
                                             ))
                                         ) : (
                                             <tr style={{ textAlign: "center" }}>
-                                                <td colspan="5">ไม่พบข้อมูล</td>
+                                                <td colSpan="5">ไม่พบข้อมูล</td>
                                             </tr>
                                         )}
                                     </tbody>
