@@ -7,9 +7,9 @@ export const DivFrom = styled.div`
   ${FromDiv}
   position: relative;
   display: block;
-  width: 960px;
   height: auto;
   box-shadow: 0px 0px 4px grey;
+ 
  /*  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
 `;
 
@@ -29,6 +29,9 @@ export const DivFromDown = styled.div`
   height: fit-content;
   border-radius: 10px 10px 0 0;
   padding: 25px 15px 15px 15px;
+  @media screen and (max-width:700px) {
+  
+}
 `;
 
 export const Searchinput = styled.input`
@@ -106,3 +109,33 @@ export const HeaderColor = styled.div`
   align-items: center;
   /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
 `;
+//////////////////////////////////////////
+export const DivContainer = styled.div`
+background-color: red;
+margin-top: 30px;
+padding-bottom: 30px;
+display:grid;
+grid-template-columns: 300px 1fr 300px;
+
+@media screen  and (max-width:700px) {
+  grid-template-columns: 30px 1fr 30px;
+}
+@media screen and (min-width:701px )and (max-width:1600px) {
+  grid-template-columns: 100px 1fr 100px;
+}
+`;
+
+export const DivItem = styled.div`
+grid-column-start:2;
+`
+export const DivList = styled.div`
+display:grid;
+grid-gap: 1rem;
+grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+@media screen  and (max-width:700px) {
+  grid-template-columns: 1fr;
+}
+@media screen and (min-width:701px )and (max-width:1600px) {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+`
