@@ -50,11 +50,11 @@ const UPDATETYPE = gql`
 const list = ({ listtype }) => {
   const MySwal = withReactContent(Swal);
   const [infotype, setinfotype] = useState(listtype);
-/*   console.log(infotype); */
+  /*   console.log(infotype); */
   const DeleteAlert = () => {
     Swal.fire({
       title: 'ต้องการลบข้อมูล?',
-      text: "ยืนยันการลบข้อมูลประเภทตะกร้าจัดเก็บ!",
+      text: "ยืนยันการลบข้อมูลประเภทสินค้าผลิตภัณฑ์!",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -68,16 +68,17 @@ const list = ({ listtype }) => {
           icon: "success",
           title: "สำเร็จ",
           text: "ทำการลบข้อมูลสิ้น",
-          confirmButtonText: (
-            <span
-              onClick={() =>
-                Router.push("beefwarehouse/beefproduct/setting").then(() => Router.reload())
-              }
-            >
-              ตกลง
-            </span>
-          ),
-          confirmButtonColor: "#3085d6",
+          showConfirmButton: false,
+          timer: 1000
+          /*  confirmButtonText: "ตกลง", */
+          /* confirmButtonColor: "#3085d6", */
+        }).then((result) => {
+          if (result.dismiss === Swal.DismissReason.timer) {
+            Router.push("beefwarehouse/beefproduct/setting").then(() => Router.reload())
+          }
+          /* if (result.isConfirmed) {
+            Router.reload("beefwarehouse/beefstore/import/import_halves")
+          } */
         });
       }
     })
@@ -119,14 +120,17 @@ const list = ({ listtype }) => {
         icon: "success",
         title: "สำเร็จ",
         text: "ทำการแก้ไขข้อมูลสิ้น",
-        confirmButtonText: (
-          <span
-            onClick={() => Router.reload("beefwarehouse/beefproduct/setting")}
-          >
-            ตกลง
-          </span>
-        ),
-        confirmButtonColor: "#3085d6",
+        showConfirmButton: false,
+        timer: 1000
+        /*  confirmButtonText: "ตกลง", */
+        /* confirmButtonColor: "#3085d6", */
+      }).then((result) => {
+        if (result.dismiss === Swal.DismissReason.timer) {
+          Router.reload("beefwarehouse/beefproduct/setting")
+        }
+        /* if (result.isConfirmed) {
+          Router.reload("beefwarehouse/beefstore/import/import_halves")
+        } */
       });
     },
   });

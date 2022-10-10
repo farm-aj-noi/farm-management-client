@@ -10,6 +10,8 @@ import Router from "next/router";
 import gql from "graphql-tag";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 
+import { CHILLSEARCHLIST } from "./index"
+
 
 
 export const CREATECHILLS = gql`
@@ -61,38 +63,41 @@ const Submit_Chill = () => {
         setSuccess(true);
         setChillInfo({
           barcode: "",
+          chillroom: "",
+          chillday: "",
         });
         MySwal.fire({
           icon: "success",
           title: "สำเร็จ",
           text: "ทำการบ่มซากเสร็จสิ้น",
-          confirmButtonText: (
-            <span
-              onClick={() => Router.reload("beefwarehouse/beefstore/chill")}
-            >
-              ตกลง
-            </span>
-          ),
-          confirmButtonColor: "#3085d6",
+          showConfirmButton: false,
+          timer: 1000
+          /*  confirmButtonText: "ตกลง", */
+          /* confirmButtonColor: "#3085d6", */
+        }).then((result) => {
+          if (result.dismiss === Swal.DismissReason.timer) {
+            /* Router.reload("beefwarehouse/beefstore/chill") */
+          }
+          /* if (result.isConfirmed) {
+            Router.reload("beefwarehouse/beefstore/import/import_halves")
+          } */
         });
       }
     },
-    onError: (error) => {
-      if (error) {
-        setChillInfo({
-          barcode: "",
-          chillroom: "",
-          chillday: "",
-        });
-        MySwal.fire({
-          icon: "error",
-          title: <p>{error.graphQLErrors[0].message}</p>,
-          text: "กรุณากรอกข้อมูลใหม่อีกครั้ง",
-          confirmButtonText: <span>ตกลง</span>,
-          confirmButtonColor: "#3085d6",
-        });
+    refetchQueries: [
+      {
+        query: CHILLSEARCHLIST,
+        variables: {
+          beeftype: "",
+          startdate: "",
+          enddate: "",
+          startdate2: "",
+          enddate2: "",
+          name: "",
+          chillstatus: "",
+        }
       }
-    },
+    ]
   });
 
   const handleChange = (e) => {
@@ -209,35 +214,36 @@ const Submit_Chill = () => {
               </div>
             </div>
           </DivFromInsideLeft>
-          <div
+        </form>
+        {error && (
+          <label style={{ color: "red", paddingRight: "10px", marginTop: "5px", marginBottom: "0px" }}>*** {error.graphQLErrors[0].message}</label>
+        )}
+        <div
+          style={{
+            float: "right",
+            paddingRight: "10px",
+            paddingBottom: "10px",
+          }}
+        >
+          <Savebutton1
+            onClick={handleSubmit}
+            disabled={
+              !ImportChillInfo.barcode ||
+              !ImportChillInfo.chillday ||
+              !ImportChillInfo.chillroom
+            }
             style={{
-              display: "inline-block",
-              justifySelf: "right",
-              float: "right",
-              paddingRight: "10px",
-              paddingBottom: "10px",
-            }}
-          >
-            <Savebutton1
-              onClick={handleSubmit}
-              disabled={
-                !ImportChillInfo.barcode ||
+              backgroundColor: `${!ImportChillInfo.barcode ||
                 !ImportChillInfo.chillday ||
                 !ImportChillInfo.chillroom
-              }
-              style={{
-                backgroundColor: `${!ImportChillInfo.barcode ||
-                  !ImportChillInfo.chillday ||
-                  !ImportChillInfo.chillroom
-                  ? "gray"
-                  : ""
-                  }`,
-              }}
-            >
-              บันทึก
-            </Savebutton1>
-          </div>
-        </form>
+                ? "gray"
+                : ""
+                }`,
+            }}
+          >
+            บันทึก
+          </Savebutton1>
+        </div>
       </div>
     </>
   );

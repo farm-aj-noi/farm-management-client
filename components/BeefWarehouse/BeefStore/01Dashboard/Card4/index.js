@@ -9,23 +9,15 @@ import { fileText } from "react-icons-kit/fa/fileText";
 import Link from "next/link";
 
 import { useQuery } from "@apollo/react-hooks";
-import gql from "graphql-tag";
 
-export const CARD4 = gql`
-  query CARD4($beeftype: String, $type: String) {
-    liststore(beeftype: $beeftype, type: $type) {
-      id
-      barcode
-      beeftype
-    }
-  }
-`;
+import { STORELIST } from "../../05Store/01Store/index"
+
 const index = () => {
-  const { data: storedata } = useQuery(CARD4, {
+  const { data } = useQuery(STORELIST, {
     variables: {
-      type: "ก้อนเนื้อ",
-    },
-  });
+      type: "ก้อนเนื้อ"
+    }
+  })
   return (
     <DivAlertCard style={{ backgroundColor: "#F23403" }}>
       <div
@@ -62,7 +54,7 @@ const index = () => {
               fontWeight: 600,
             }}
           >
-            {storedata ? storedata.liststore.length : "0"}
+            {data ? data.liststore.length : "0"}
           </div>
           <a
             style={{
@@ -70,7 +62,7 @@ const index = () => {
             }}
           ></a>
           <a style={{
-            color: "#ffffff", textAlign: "center", 
+            color: "#ffffff", textAlign: "center",
             fontWeight: 600,
             letterSpacing: "1px",
             fontSize: "14px",

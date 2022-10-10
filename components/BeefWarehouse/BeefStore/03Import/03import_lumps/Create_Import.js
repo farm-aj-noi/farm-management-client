@@ -61,9 +61,7 @@ export const QUERYBASKET = gql`
 
 const Create_Import = () => {
   const MySwal = withReactContent(Swal);
-
   const { data } = useQuery(QUERYROOM);
-
   const [ImportLumpsInfo, setImportLumpsInfo] = useState({
     barcode: "",
     beefstore: "6284d7035415c34e54b2fc2c",
@@ -99,47 +97,33 @@ const Create_Import = () => {
           icon: "success",
           title: "สำเร็จ",
           text: "ทำการนำเข้าคลังชิ้นเนื้อเสร็จสิ้น",
-          confirmButtonText: (
-            <span
-              onClick={() =>
-                Router.reload("beefwarehouse/beefstore/import/import_lumps")
-              }
-            >
-              ตกลง
-            </span>
-          ),
-          confirmButtonColor: "#3085d6",
-        });
-      }
-    },
-    onError: (error) => {
-      if (error) {
-        setImportLumpsInfo({
-          barcode: "",
-          beefroom: "",
-          shelf: "",
-          basket: "",
-        });
-        MySwal.fire({
-          icon: "error",
-          title: <p>{error.graphQLErrors[0].message}</p>,
-          text: "กรุณากรอกข้อมูลใหม่อีกครั้ง",
-          confirmButtonText: (
-            <span
-              onClick={() =>
-                Router.reload("beefwarehouse/beefstore/import/import_lumps")
-              }
-            >
-              ตกลง
-            </span>
-          ),
-          confirmButtonColor: "#3085d6",
+          showConfirmButton: false,
+          timer: 1000
+          /*  confirmButtonText: "ตกลง", */
+          /* confirmButtonColor: "#3085d6", */
+        }).then((result) => {
+          if (result.dismiss === Swal.DismissReason.timer) {
+            /* Router.reload("beefwarehouse/beefstore/import/import_lumps") */
+          }
+          /* if (result.isConfirmed) {
+            Router.reload("beefwarehouse/beefstore/import/import_halves")
+          } */
         });
       }
     },
     refetchQueries: [
       {
-        query: IMPORTLUMPSEARCH
+        query: IMPORTLUMPSEARCH,
+        variables: {
+          beeftype: "",
+          startdate: "",
+          enddate: "",
+          namefarmer: "",
+          userName: "",
+          beefroom: "",
+          shelf: "",
+          basket: "",
+        }
       }
     ]
   });
@@ -179,6 +163,7 @@ const Create_Import = () => {
                 onChange={handleChange}
                 style={{
                   borderColor: `${!ImportLumpsInfo.barcode ? "red" : ""}`,
+                  height: "35px"
                 }}
               />
               {!ImportLumpsInfo.barcode ? (
@@ -271,35 +256,36 @@ const Create_Import = () => {
               </div>
             </div>
           </DivFromInsideLeft>
-          <div
+        </form>
+        {error && (
+          <label style={{ color: "red", paddingRight: "10px", marginTop: "5px", marginBottom: "0px" }}>*** {error.graphQLErrors[0].message}</label>
+        )}
+        <div
+          style={{
+            float: "right",
+            paddingRight: "10px",
+            paddingBottom: "10px",
+          }}
+        >
+          <Savebutton1
+            disabled={
+              !ImportLumpsInfo.barcode ||
+              !ImportLumpsInfo.beefroom ||
+              !ImportLumpsInfo.shelf
+            }
+            onClick={handleSubmit}
             style={{
-              display: "inline-block",
-              justifySelf: "right",
-              float: "right",
-              paddingRight: "10px",
-              paddingBottom: "10px",
+              backgroundColor: `${!ImportLumpsInfo.beefroom ||
+                !ImportLumpsInfo.barcode ||
+                !ImportLumpsInfo.shelf
+                ? "gray"
+                : ""
+                }`,
             }}
           >
-            <Savebutton1
-              disabled={
-                !ImportLumpsInfo.barcode ||
-                !ImportLumpsInfo.beefroom ||
-                !ImportLumpsInfo.shelf
-              }
-              onClick={handleSubmit}
-              style={{
-                backgroundColor: `${!ImportLumpsInfo.beefroom ||
-                  !ImportLumpsInfo.barcode ||
-                  !ImportLumpsInfo.shelf
-                  ? "gray"
-                  : ""
-                  }`,
-              }}
-            >
-              บันทึก
-            </Savebutton1>
-          </div>
-        </form>
+            บันทึก
+          </Savebutton1>
+        </div>
       </div>
     </>
   );

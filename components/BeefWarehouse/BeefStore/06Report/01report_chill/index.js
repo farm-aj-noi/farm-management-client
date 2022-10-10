@@ -19,57 +19,7 @@ import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
 import dayjs from "dayjs";
-
-export const CHILLSEARCHLIST = gql`
-  query CHILLSEARCHLIST(
-    $startdate: String
-    $enddate: String
-    $beeftype: String
-    $startdate2: String
-    $enddate2: String
-    $name: String
-    $chillstatus: String
-  ) {
-    listchill(
-    startdate: $startdate
-    enddate: $enddate
-    beeftype: $beeftype
-    startdate2: $startdate2
-    enddate2: $enddate2
-    name: $name
-    chillstatus: $chillstatus
-    ) {
-      id
-      chilldateStart
-      chilldateEnd
-      chillroom {
-        roomnum
-      }
-      user {
-        name
-      }
-      halve {
-        barcode
-        beeftype {
-          nameTH
-          code
-        }
-        weightwarm
-        imslaughter {
-          numcow
-        }
-      }
-      chillstatus {
-        id
-        nameTH
-      }
-      chillday {
-        id
-        day
-      }
-    }
-  }
-`;
+import { CHILLSEARCHLIST } from "../../02Chill/index"
 
 const index = () => {
   const [selectedbeeftypeChill, SetBeeftypeChillChange] = useState("");

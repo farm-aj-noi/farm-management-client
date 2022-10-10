@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Savebuttoncolor } from "../../../../../utils/buttonColor";
+import { Savebuttoncolor, Editbuttoncolor } from "../../../../../utils/buttonColor";
 import { Savebutton } from "../../../../../utils/button";
 
 import { useMutation, useQuery } from "@apollo/react-hooks";
@@ -8,6 +8,9 @@ import gql from "graphql-tag";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+
+import { Icon } from "react-icons-kit";
+import { check } from "react-icons-kit/fa/check";
 
 import dayjs from "dayjs";
 import { QUERYREQUESTEXPORT } from "./index"
@@ -33,17 +36,18 @@ function listrequestP({ listrqP }) {
             MySwal.fire({
                 icon: "success",
                 title: "สำเร็จ",
-                text: "ทำการดำเนินการเสร็จสิ้น",
-                confirmButtonText: (
-                    <span
-                        onClick={() =>
-                            Router.reload("beefwarehouse/beefproduct/notify/notify_exportrequest")
-                        }
-                    >
-                        ตกลง
-                    </span>
-                ),
-                confirmButtonColor: "#3085d6",
+                text: "ดำเนินการเสร็จสิ้น",
+                showConfirmButton: false,
+                timer: 1000
+                /*  confirmButtonText: "ตกลง", */
+                /* confirmButtonColor: "#3085d6", */
+            }).then((result) => {
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    Router.reload("beefwarehouse/beefproduct/notify/notify_exportrequest")
+                }
+                /* if (result.isConfirmed) {
+                  Router.reload("beefwarehouse/beefstore/import/import_halves")
+                } */
             });
         },
         refetchQueries: [
@@ -74,11 +78,15 @@ function listrequestP({ listrqP }) {
                 <td >{inforeP.producttype.nameTH}</td>
                 <td >{inforeP.producttype.code}</td>
                 <td >
-                    {inforeP.status.id === "63299201e09fd895642f3cab" ? ("เสร็จสิ้น") :
+                    {inforeP.status.id === "63299201e09fd895642f3cab" ? (<Icon
+                        size={20}
+                        icon={check}
+                        style={{ color: "green" }}
+                    />) :
                         (
-                            <Savebuttoncolor onClick={handleSubmit}>
+                            <Editbuttoncolor onClick={handleSubmit}>
                                 <Savebutton />
-                            </Savebuttoncolor>
+                            </Editbuttoncolor>
                         )}
                 </td>
             </tr>

@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 import Router from "next/router";
+import { EXPORTENTRAILSEARCH } from "./index"
 
 export const CREATEEXPORTENTRAIL = gql`
   mutation CREATEEXPORTENTRAIL(
@@ -51,38 +52,37 @@ const Submit_Export = () => {
         setSuccess(true);
         setExportentrailInfo({
           barcode: "",
+          exporter: "",
         });
         MySwal.fire({
           icon: "success",
           title: "สำเร็จ",
-          text: "ทำการนำเข้าคลังชิ้นเนื้อเสร็จสิ้น",
-          confirmButtonText: (
-            <span
-              onClick={() =>
-                Router.reload("beefwarehouse/beefstore/export/export_entrails")
-              }
-            >
-              ตกลง
-            </span>
-          ),
-          confirmButtonColor: "#3085d6",
+          text: "ทำการเบิกออกคลังชิ้นเนื้อเสร็จสิ้น",
+          showConfirmButton: false,
+          timer: 1000
+          /*  confirmButtonText: "ตกลง", */
+          /* confirmButtonColor: "#3085d6", */
+        }).then((result) => {
+          if (result.dismiss === Swal.DismissReason.timer) {
+           /*  Router.reload("beefwarehouse/beefstore/export/export_entrails") */
+          }
+          /* if (result.isConfirmed) {
+            Router.reload("beefwarehouse/beefstore/import/import_halves")
+          } */
         });
       }
     },
-    onError: (error) => {
-      if (error) {
-        setExportentrailInfo({
-          barcode: "",
-        });
-        MySwal.fire({
-          icon: "error",
-          title: <p>{error.graphQLErrors[0].message}</p>,
-          text: "กรุณากรอกข้อมูลใหม่อีกครั้ง",
-          confirmButtonText: <span>ตกลง</span>,
-          confirmButtonColor: "#3085d6",
-        });
+    refetchQueries: [
+      {
+        query: EXPORTENTRAILSEARCH,
+        variables: {
+          startdate: selectedstartdate,
+          enddate: selectedenddate,
+          userName: inputusername,
+          exporter: inputexporter,
+        }
       }
-    },
+    ]
   });
   const handleChange = (e) => {
     setExportentrailInfo({
@@ -171,35 +171,36 @@ const Submit_Export = () => {
               </div>
             </div>
           </DivFromInsideLeft>
-          <div
+        </form>
+        {error && (
+          <label style={{ color: "red", paddingRight: "10px", marginTop: "5px", marginBottom: "0px" }}>*** {error.graphQLErrors[0].message}</label>
+        )}
+        <div
+          style={{
+            float: "right",
+            paddingRight: "10px",
+            paddingBottom: "10px",
+          }}
+        >
+          <Savebutton1
+            onClick={handleSubmit}
+            disabled={
+              !ExportentrailInfo.barcode ||
+              !ExportentrailInfo.exporter ||
+              !ExportentrailInfo.storestatus
+            }
             style={{
-              display: "inline-block",
-              justifySelf: "right",
-              float: "right",
-              paddingRight: "10px",
-              paddingBottom: "10px",
-            }}
-          >
-            <Savebutton1
-              onClick={handleSubmit}
-              disabled={
-                !ExportentrailInfo.barcode ||
+              backgroundColor: `${!ExportentrailInfo.barcode ||
                 !ExportentrailInfo.exporter ||
                 !ExportentrailInfo.storestatus
-              }
-              style={{
-                backgroundColor: `${!ExportentrailInfo.barcode ||
-                  !ExportentrailInfo.exporter ||
-                  !ExportentrailInfo.storestatus
-                  ? "gray"
-                  : ""
-                  }`,
-              }}
-            >
-              บันทึก
-            </Savebutton1>
-          </div>
-        </form>
+                ? "gray"
+                : ""
+                }`,
+            }}
+          >
+            บันทึก
+          </Savebutton1>
+        </div>
       </div>
     </>
   );

@@ -76,16 +76,17 @@ const type = () => {
           icon: "success",
           title: "สำเร็จ",
           text: "ทำการบึนทึกข้อมูลสิ้น",
-          confirmButtonText: (
-            <span
-              onClick={() =>
-                Router.reload("beefwarehouse/beefproduct/setting/type")
-              }
-            >
-              ตกลง
-            </span>
-          ),
-          confirmButtonColor: "#3085d6",
+          showConfirmButton: false,
+          timer: 1000
+          /*  confirmButtonText: "ตกลง", */
+          /* confirmButtonColor: "#3085d6", */
+        }).then((result) => {
+          if (result.dismiss === Swal.DismissReason.timer) {
+            Router.reload("beefwarehouse/beefproduct/setting/type")
+          }
+          /* if (result.isConfirmed) {
+            Router.reload("beefwarehouse/beefstore/import/import_halves")
+          } */
         });
       }
     },
@@ -134,21 +135,21 @@ const type = () => {
   return (
     <>
       <div>
-        รหัสสินค้า : {}
+        รหัสสินค้า : { }
         <Searchinput
           value={infoproduct.code}
           name="code"
           style={{ width: "60px", textAlign: "center" }}
           onChange={handleChange}
         />
-        ชื่อประเภทสินค้า (ไทย) : {}
+        ชื่อประเภทสินค้า (ไทย) : { }
         <Searchinput
           value={infoproduct.nameTH}
           name="nameTH"
           style={{ width: "135px", textAlign: "center" }}
           onChange={handleChange}
         />
-        ชื่อประเภทสินค้า (อังกฤษ) : {}
+        ชื่อประเภทสินค้า (อังกฤษ) : { }
         <Searchinput
           value={infoproduct.nameEN}
           name="nameEN"
@@ -157,7 +158,7 @@ const type = () => {
         />
       </div>
       <div style={{ marginTop: "10px" }}>
-        วันหมดอายุ : {}
+        วันหมดอายุ : { }
         <Searchinput
           value={infoproduct.BBE}
           name="BBE"
@@ -165,7 +166,7 @@ const type = () => {
           style={{ width: "120px", textAlign: "center" }}
           onChange={handleChange}
         />
-        หน่วย : {}
+        หน่วย : { }
         <select
           value={infoproduct.unit}
           name="unit"
@@ -192,15 +193,14 @@ const type = () => {
             height: "38px",
             width: " 50px",
             marginLeft: "10px",
-            backgroundColor: `${
-              !infoproduct.code ||
-              !infoproduct.nameTH ||
-              !infoproduct.nameEN ||
-              !infoproduct.BBE ||
-              !infoproduct.unit
+            backgroundColor: `${!infoproduct.code ||
+                !infoproduct.nameTH ||
+                !infoproduct.nameEN ||
+                !infoproduct.BBE ||
+                !infoproduct.unit
                 ? "gray"
                 : ""
-            }`,
+              }`,
           }}
           disabled={
             !infoproduct.code ||

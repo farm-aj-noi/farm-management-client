@@ -10,6 +10,8 @@ import withReactContent from "sweetalert2-react-content";
 
 import Router from "next/router";
 import { IMPORTCHOPSEARCH } from "./index"
+import { QUERY_IMCHOPDAY } from "../../07Notify/04notify_import/chopday";
+import { STORELIST } from "../../05Store/01Store/index"
 
 export const CREATEIMPORTCHOP = gql`
   mutation CREATEIMPORTCHOP(
@@ -83,57 +85,76 @@ const Create_Import = () => {
       id: ImportchopsInfo.shelf,
     },
   });
+  const { data: list } = useQuery(IMPORTCHOPSEARCH)
+  const barcodeallchop = list && list.imchopSearch.map((prod) => (prod.chop.barcode))
 
+
+  // console.log(barcodeallchop)
   const [createImchop, { loading, error }] = useMutation(CREATEIMPORTCHOP, {
     variables: { ...ImportchopsInfo },
     onCompleted: (data) => {
       if (data) {
         setImportchopsInfo({
           barcode: "",
+          beefroom: "",
+          shelf: "",
+          basket: "",
         });
         MySwal.fire({
           icon: "success",
           title: "สำเร็จ",
           text: "ทำการนำเข้าคลังชิ้นเนื้อเสร็จสิ้น",
-          confirmButtonText: (
-            <span
-              onClick={() =>
-                Router.reload("beefwarehouse/beefstore/import/import_chops")
-              }
-            >
-              ตกลง
-            </span>
-          ),
-          confirmButtonColor: "#3085d6",
-        });
-      }
-    },
-    onError: (error) => {
-      if (error) {
-        setImportchopsInfo({
-          barcode: "",
-        });
-        MySwal.fire({
-          icon: "error",
-          title: <p>{error.graphQLErrors[0].message}</p>,
-          text: "กรุณากรอกข้อมูลใหม่อีกครั้ง",
-          confirmButtonText: (
-            <span
-              onClick={() =>
-                Router.reload("beefwarehouse/beefstore/import/import_chops")
-              }
-            >
-              ตกลง
-            </span>
-          ),
-          confirmButtonColor: "#3085d6",
+          showConfirmButton: false,
+          timer: 1000
+          /*  confirmButtonText: "ตกลง", */
+          /* confirmButtonColor: "#3085d6", */
+        }).then((result) => {
+          if (result.dismiss === Swal.DismissReason.timer) {
+            /*  Router.reload("beefwarehouse/beefstore/import/import_chops") */
+          }
+          /* if (result.isConfirmed) {
+            Router.reload("beefwarehouse/beefstore/import/import_halves")
+          } */
         });
       }
     },
     refetchQueries: [
       {
-        query: IMPORTCHOPSEARCH
-      }
+        query: IMPORTCHOPSEARCH,
+        variables: {
+          beeftype: "",
+          startdate: "",
+          enddate: "",
+          namefarmer: "",
+          userName: "",
+          beefroom: "",
+          shelf: "",
+          basket: ""
+        },
+        /* query: STORELIST,
+        variables: {
+          beeftype: "",
+          type: "",
+          beefroom: "",
+          shelf: "",
+          expdate: "",
+          basket: "",
+          cownum: "",
+          grade: "",
+          type: ""
+        },
+        query: QUERY_IMCHOPDAY,
+        query: CARDCHOP,
+        variables: {
+          type: "ชื้นเนื้อ"
+        } */
+      },
+
+      /*   query: CARDSTORE,
+        variables: {
+          type: "ชิ้นเนื้อ"
+        },
+        query: QUERY_IMCHOPDAY */
     ]
   });
 
@@ -171,15 +192,25 @@ const Create_Import = () => {
                 name="barcode"
                 value={ImportchopsInfo.barcode}
                 onChange={handleChange}
+
                 style={{
-                  borderColor: `${!ImportchopsInfo.barcode ? "red" : ""}`,
+                  borderColor: `${!ImportchopsInfo.barcode
+                    ?
+                    "red" : ""
+                    }`,
+                  height: "35px",
                 }}
               />
               {!ImportchopsInfo.barcode ? (
                 <label style={{ color: "red" }}>กรุณากรอกบาร์โค้ด</label>
               ) : (
-                ""
-              )}
+                /*  list && list.imchopSearch.map((prod) => (
+                   prod.chop.barcode === ImportchopsInfo.barcode ? (
+                     <label style={{ color: "red" }}>บาร์โค้ดซ้ำ</label> */
+                "") /* : ("") */
+               /*  )) */
+             /*  ) */}
+
             </div>
           </DivFromInsideLeft>
           <DivFromInsideLeft style={{ marginTop: "5px" }}>
@@ -265,35 +296,36 @@ const Create_Import = () => {
               </div>
             </div>
           </DivFromInsideLeft>
-          <div
-            style={{
-              display: "inline-block",
-              justifySelf: "right",
-              float: "right",
-              paddingRight: "10px",
-              paddingBottom: "10px",
-            }}
-          >
-            <Savebutton1
-              disabled={
-                !ImportchopsInfo.barcode ||
-                !ImportchopsInfo.beefroom ||
-                !ImportchopsInfo.shelf
-              }
-              style={{
-                backgroundColor: `${!ImportchopsInfo.beefroom ||
-                  !ImportchopsInfo.barcode ||
-                  !ImportchopsInfo.shelf
-                  ? "gray"
-                  : ""
-                  }`,
-              }}
-              onClick={handleSubmit}
-            >
-              บันทึก
-            </Savebutton1>
-          </div>
         </form>
+        {error && (
+          <label style={{ color: "red", paddingRight: "10px", marginTop: "5px", marginBottom: "0px" }}>*** {error.graphQLErrors[0].message}</label>
+        )}
+        <div
+          style={{
+            float: "right",
+            paddingRight: "10px",
+            paddingBottom: "10px",
+          }}
+        >
+          <Savebutton1
+            disabled={
+              !ImportchopsInfo.barcode ||
+              !ImportchopsInfo.beefroom ||
+              !ImportchopsInfo.shelf
+            }
+            style={{
+              backgroundColor: `${!ImportchopsInfo.beefroom ||
+                !ImportchopsInfo.barcode ||
+                !ImportchopsInfo.shelf
+                ? "gray"
+                : ""
+                }`,
+            }}
+            onClick={handleSubmit}
+          >
+            บันทึก
+          </Savebutton1>
+        </div>
       </div>
     </>
   );

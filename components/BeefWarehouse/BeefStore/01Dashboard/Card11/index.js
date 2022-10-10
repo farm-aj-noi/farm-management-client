@@ -9,59 +9,19 @@ import { fileText } from "react-icons-kit/fa/fileText";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
-export const CARD_EXHALVE = gql`
-  query CARD_EXHALVE {
-    CardExh {
-      id
-      barcode
-    }
-  }
-`;
-
-export const CARD_EXQUAR = gql`
-  query CARD_EXQUAR {
-    CardExq {
-      id
-      barcode
-    }
-  }
-`;
-
-export const CARD_EXLUMP = gql`
-  query CARD_EXLUMP {
-    CardExl {
-      id
-      barcode
-    }
-  }
-`;
-
-export const CARD_EXCHOP = gql`
-  query CARD_EXCHOP {
-    CardExc {
-      id
-      barcode
-    }
-  }
-`;
-
-export const CARD_EXENTRAIL = gql`
-  query CARD_EXENTRAIL {
-    CardExe {
-      id
-      barcode
-    }
-  }
-`;
-
+import { QUERY_EXCHOPDAY } from "../../07Notify/05notify_export/chopday"
+import { QUERY_EXENTRAILDAY } from "../../07Notify/05notify_export/entrailday"
+import { QUERY_EXHALVEDAY } from "../../07Notify/05notify_export/halveday"
+import { QUERY_EXLUMPDAY } from "../../07Notify/05notify_export/lumpday"
+import { QUERY_EXQUARTERDAY } from "../../07Notify/05notify_export/quarterday"
 import Link from "next/link";
+
 const index = () => {
-  const { data: halve } = useQuery(CARD_EXHALVE);
-  const { data: quarter } = useQuery(CARD_EXQUAR);
-  const { data: lump } = useQuery(CARD_EXLUMP);
-  const { data: chop } = useQuery(CARD_EXCHOP);
-  const { data: entrail } = useQuery(CARD_EXENTRAIL);
-  /*   console.log(entrail); */
+  const { data: halve } = useQuery(QUERY_EXHALVEDAY);
+  const { data: quarter } = useQuery(QUERY_EXQUARTERDAY);
+  const { data: lump } = useQuery(QUERY_EXLUMPDAY);
+  const { data: chop } = useQuery(QUERY_EXCHOPDAY);
+  const { data: entrail } = useQuery(QUERY_EXENTRAILDAY);
   return (
     <DivAlertCard style={{ backgroundColor: "#BF0000" }}>
       <div

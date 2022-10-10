@@ -68,39 +68,18 @@ const create = () => {
                 MySwal.fire({
                     icon: "success",
                     title: "สำเร็จ",
-                    text: "ทำการบันทึกข้อมูลสิ้น",
-                    confirmButtonText: (
-                        <span
-                            onClick={() =>
-                                Router.reload("beefwarehouse/beefproduct/setting/shelf")
-                            }
-                        >
-                            ตกลง
-                        </span>
-                    ),
-                    confirmButtonColor: "#3085d6",
-                });
-            }
-        },
-        onError: (error) => {
-            if (error) {
-                setinfopbasket({
-                    productroom: "",
-                    freezer: "",
-                    basketname: "",
-                });
-                MySwal.fire({
-                    icon: "error",
-                    title: <p>{error.graphQLErrors[0].message}</p>,
-                    text: "กรุณากรอกข้อมูลใหม่อีกครั้ง",
-                    confirmButtonText: (
-                        <span
-                            onClick={() => Router.reload("beefwarehouse/beefproduct/setting/freezer")}
-                        >
-                            ตกลง
-                        </span>
-                    ),
-                    confirmButtonColor: "#3085d6",
+                    text: "ทำการบึนทึกข้อมูลสิ้น",
+                    showConfirmButton: false,
+                    timer: 1000
+                    /*  confirmButtonText: "ตกลง", */
+                    /* confirmButtonColor: "#3085d6", */
+                }).then((result) => {
+                    if (result.dismiss === Swal.DismissReason.timer) {
+                        Router.reload("beefwarehouse/beefproduct/setting/shelf")
+                    }
+                    /* if (result.isConfirmed) {
+                      Router.reload("beefwarehouse/beefstore/import/import_halves")
+                    } */
                 });
             }
         },

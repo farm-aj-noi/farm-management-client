@@ -6,7 +6,7 @@ import Modalqrcode from "../../12Qrcode/Import/imhqr";
 function List_import({ imhalve }) {
   const [imhalveData, SetImhalveData] = useState(imhalve);
   // console.log(imhalveData.id);
-
+  // if (data !== prod) setdata(prod); เก็บไว้ Test
   return (
     <tr style={{ textAlign: "center", fontSize: "16px" }}>
       <td >{imhalveData.halve.imslaughter.namefarmer}</td>
