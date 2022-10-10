@@ -7,7 +7,7 @@ export const DivFrom = styled.div`
   ${FromDiv}
   position: relative;
   display: block;
-  width: 960px;
+  /* width: 960px; */
   height: auto;
 `;
 
@@ -22,8 +22,12 @@ export const DivFromTop = styled.div`
 
 export const DivFromDown = styled.div`
   height: fit-content;
-  border-radius: 10px 10px 0 0;
-  padding: 25px 15px 15px 15px;
+  border-radius: 0px 0px 10px 10px;
+  padding: 15px 15px 15px 15px;
+  background-color:white;
+  display:grid;
+  grid-template-columns: 1fr;
+  width:100%;
 `;
 
 export const Searchinput = styled.input`
@@ -79,3 +83,41 @@ export const Wightinput = styled.input`
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 `;
+
+export const DivContainar = styled.div`
+padding-left:300px;
+padding-right: 300px;
+margin-top: 100px;
+display: grid;
+grid-template-columns: 200px 1fr;
+/* grid-gap: 2rem; */
+width: 100%;
+grid-column-gap: 2rem;
+
+@media screen and (max-width:1300px) {
+    grid-template-columns: 1fr;
+    grid-gap: 2rem; 
+    padding-left:30px;
+    padding-right: 30px;
+    padding-bottom: 130px;
+}
+`
+export const DivItem = styled.div`
+grid-column-start: 2;
+width: 100%;
+margin-top: 60px;
+@media screen and (max-width:1300px) {
+  grid-column-start: 1;
+  margin-top: 0;
+}
+`
+
+export const DivList = styled.div`
+display: grid;
+grid-gap:1rem;
+grid-template-columns: 1fr 1fr 1fr 1fr;
+@media screen and (max-width:800px) {
+  grid-template-columns: 1fr;
+}
+`
+

@@ -29,7 +29,12 @@ export const DivFromDown = styled.div`
   height: fit-content;
   border-radius: 10px 10px 0 0;
   padding: 25px 15px 15px 15px;
- 
+  display:grid;
+  grid-template-columns: 1fr;
+  width:100%;
+  display:grid;
+  grid-template-columns: 1fr;
+  width:100%;
 `;
 
 export const Searchinput = styled.input`
@@ -109,11 +114,11 @@ export const HeaderColor = styled.div`
 `;
 //////////////////////////////////////////
 export const DivContainer = styled.div`
-background-color: red;
 margin-top: 30px;
 padding-bottom: 30px;
 display:grid;
 grid-template-columns: 300px 1fr 300px;
+width: 100%;
 
 @media screen  and (max-width:700px) {
   grid-template-columns: 30px 1fr 30px;
@@ -131,9 +136,12 @@ display:grid;
 grid-gap: 1rem;
 grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 @media screen  and (max-width:700px) {
+  display: grid;
   grid-template-columns: 1fr;
+  margin: 0;
 }
 @media screen and (min-width:701px )and (max-width:1600px) {
   grid-template-columns: 1fr 1fr 1fr;
 }
 `
+

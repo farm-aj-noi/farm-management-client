@@ -27,9 +27,6 @@ import {
   Searchinput,
   Gobutton,
   Wightinput,
-  DivContainar,
-  DivItem,
-  DivList
 } from "./ListcuttwoFrom";
 // import Footer from "../../Footer/index";
 
@@ -127,10 +124,62 @@ const Index = () => {
 
   return (
     <>
-      <DivContainar>
+      <DivBase
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 237.5px 950px 1fr",
+          gridRowGap: "15px",
+          gridColumnGap: "10px",
+          // width:"950px",
+          // margin:"auto"
+        }}
+      >{user && (
+        <DivFrom
+          style={{ gridColumnStart: "2", gridColumnEnd: "4", width: "100%" }}
+        >
+          <DivFromTop>
+            <div style={{ margin: "-3px 5px 0px 0px" }}>
+              <Icon size={20} icon={list} />
+            </div>
+            ตรวจสอบสินค้าย้อนกลับ{" "}
+          </DivFromTop>
+          <DivFromDown
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr",
+              gridRowGap: "5px",
+            }}
+          >
+            <div className="mb-3" style={{ margin: "auto" }}>
+              กรุณากรอกบาร์โค๊ด : { }
+              <Searchinput
+                value={inputnumkun}
+                onChange={(event) => setInputnumkun(event.target.value)}
+                style={{
+                  marginRight: 10,
+                }}
+                autoFocus
+                onFocus={(e) => e.currentTarget.select()}
+                onKeyDown={handleKeyDown}
+              />
+              <Link href="[trackingId]" as={`${inputnumkun}`}>
+                <Gobutton onClick={() => refetch()}>ค้นหา</Gobutton>
+              </Link>
+            </div>
+          </DivFromDown>
+        </DivFrom>
+      )}
         {data && data.Tracking.barcode ? (
           <>
-            <DivFrom style={{ width: "100%" }}>
+            <DivFrom
+              style={{
+                width: "100%",
+                marginTop: "0",
+                gridRowStart: "2",
+                gridRowEnd: "4",
+                gridColumnStart: "2",
+              }}
+            >
               <DivFromTop>
                 <div style={{ margin: "-3px 5px 0px 0px" }}>
                   <Icon size={20} icon={list} />
@@ -165,112 +214,94 @@ const Index = () => {
                 </div>
               </DivFromDown>
             </DivFrom>
-            {user && (
 
-              <DivFrom
-                style={{ width: "100%", marginTop: 0 }}
-              >
-                <DivFromTop>
-                  <div style={{ margin: "-3px 5px 0px 0px" }}>
-                    <Icon size={20} icon={list} />
-                  </div>
-                  ตรวจสอบสินค้าย้อนกลับ{" "}
-                </DivFromTop>
-                <DivFromDown
+            <DivFrom
+              style={{
+                width: "100%",
+                gridRowStart: "2",
+                gridRowEnd: "3",
+                gridColumnStart: "3",
+              }}
+            >
+              <DivFromTop>
+                <div style={{ margin: "-3px 5px 0px 0px" }}>
+                  <Icon size={20} icon={list} />
+                </div>
+                รายละเอียดสินค้า
+              </DivFromTop>
+              <DivFromDown>
+                <div
                   style={{
+                    margin: "auto",
+                    minWidth: "100%",
                     display: "grid",
-                    gridTemplateColumns: "1fr",
-                    gridRowGap: "5px",
+                    gridTemplateColumns: "1fr 1fr 1fr 1fr",
+                    gridRowGap: "15px",
                   }}
                 >
-                  <div className="mb-3" style={{ margin: "auto" }}>
-                    กรุณากรอกบาร์โค๊ด : { }
-                    <Searchinput
-                      value={inputnumkun}
-                      onChange={(event) => setInputnumkun(event.target.value)}
-                      style={{
-                        marginRight: 10,
-                      }}
-                      autoFocus
-                      onFocus={(e) => e.currentTarget.select()}
-                      onKeyDown={handleKeyDown}
-                    />
-                    <Link href="[trackingId]" as={`${inputnumkun}`}>
-                      <Gobutton onClick={() => refetch()}>ค้นหา</Gobutton>
-                    </Link>
+                  <div>บาร์โค๊ด : {data.Tracking.barcode}</div>
+                  <div>ประเภทเนื้อ : {data.Tracking.beeftype ? data.Tracking.beeftype : "ไม่ระบุ"}</div>
+                  <div>เกรด : {data.Tracking.grade ? data.Tracking.grade : "ไม่ระบุ"}</div>
+                  <div></div>
+                  <div>
+                    ปริมาณสินค้า :{" "}
+                    {data.Tracking.weight ? data.Tracking.weight.toLocaleString(undefined, {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    }) : "ไม่ระบุ"}{" "}
+                    กก.
                   </div>
-                </DivFromDown>
-              </DivFrom>
-
-
-            )}
-            <DivItem style={{ marginTop: 0 }}>
-              <DivFrom style={{ width: "100%" }}>
-                <DivFromTop>
-                  <div style={{ margin: "-3px 5px 0px 0px" }}>
-                    <Icon size={20} icon={list} />
-                  </div>
-                  รายละเอียดสินค้า
-                </DivFromTop>
-                <DivFromDown>
-                  <DivList
-                  >
-                    <div>บาร์โค๊ด : {data.Tracking.barcode}</div>
-                    <div>ประเภทเนื้อ : {data.Tracking.beeftype ? data.Tracking.beeftype : "ไม่ระบุ"}</div>
-                    <div>เกรด : {data.Tracking.grade ? data.Tracking.grade : "ไม่ระบุ"}</div>
-                    <div>
-                      ปริมาณสินค้า :{" "}
-                      {data.Tracking.weight ? data.Tracking.weight.toLocaleString(undefined, {
+                  <div>
+                    ราคา :{" "}
+                    {data.Tracking.price
+                      ? data.Tracking.price.toLocaleString(undefined, {
                         minimumFractionDigits: 2,
                         maximumFractionDigits: 2,
-                      }) : "ไม่ระบุ"}{" "}
-                      กก.
-                    </div>
-                    <div>
-                      ราคา :{" "}
-                      {data.Tracking.price
-                        ? data.Tracking.price.toLocaleString(undefined, {
-                          minimumFractionDigits: 2,
-                          maximumFractionDigits: 2,
-                        }) + " บาท"
-                        : "ไม่ระบุ"}
-                    </div>
-                    <div>
-                      วันผลิต :{" "}
-                      {dayjs(data.Tracking.MFG)
+                      }) + " บาท"
+                      : "ไม่ระบุ"}
+                  </div>
+                  <div>
+                    วันผลิต :{" "}
+                    {dayjs(data.Tracking.MFG)
+                      .add(543, "y")
+                      .locale("th")
+                      .format("DD MMMM YYYY")}
+                  </div>
+                  <div>
+                    วันหมดอายุ :{" "}
+                    {data.Tracking.BBE
+                      ? dayjs(data.Tracking.BBE)
                         .add(543, "y")
                         .locale("th")
-                        .format("DD MMMM YYYY")}
-                    </div>
-                    <div>
-                      วันหมดอายุ :{" "}
-                      {data.Tracking.BBE
-                        ? dayjs(data.Tracking.BBE)
-                          .add(543, "y")
-                          .locale("th")
-                          .format("DD MMMM YYYY")
-                        : "ไม่ระบุ"}
-                    </div>
-                  </DivList>
-                </DivFromDown>
-              </DivFrom>
-            </DivItem>
-            <DivItem>
-              <DivFrom style={{ width: "100%" }}>
-                <DivFromTop>
-                  <div style={{ margin: "-3px 5px 0px 0px" }}>
-                    <Icon size={20} icon={list} />
+                        .format("DD MMMM YYYY")
+                      : "ไม่ระบุ"}
                   </div>
-                  {tab === 1
-                    ? "ข้อมูลทั่วไปของโค"
-                    : tab === 2
-                      ? "ประวัติการขุน"
-                      : tab === 3
-                        ? "ประวัติการให้ยา"
-                        : ""}
-                </DivFromTop>
-                <DivFromDown>
+                </div>
+              </DivFromDown>
+            </DivFrom>
 
+            <DivFrom
+              style={{
+                width: "100%",
+                gridRowStart: "3",
+                gridRowEnd: "3",
+                gridColumnStart: "3",
+              }}
+            >
+              <DivFromTop>
+                <div style={{ margin: "-3px 5px 0px 0px" }}>
+                  <Icon size={20} icon={list} />
+                </div>
+                {tab === 1
+                  ? "ข้อมูลทั่วไปของโค"
+                  : tab === 2
+                    ? "ประวัติการขุน"
+                    : tab === 3
+                      ? "ประวัติการให้ยา"
+                      : ""}
+              </DivFromTop>
+              <DivFromDown>
+                <div>
                   {tab === 1 ? (
                     <div
                       style={{
@@ -297,9 +328,12 @@ const Index = () => {
                       </div>
                     </div>
                   ) : tab === 2 ? (
-
                     <Table
-                      striped bordered responsive hover style={{ margin: "auto" }}
+                      striped
+                      bordered
+                      responsive
+                      hover
+                      style={{ margin: "auto" }}
                     >
                       <thead>
                         <tr style={{ textAlign: "center" }}>
@@ -352,7 +386,6 @@ const Index = () => {
                         )}
                       </tbody>
                     </Table>
-
                   ) : tab === 3 ? (
                     <Table
                       striped
@@ -408,13 +441,43 @@ const Index = () => {
                   ) : (
                     ""
                   )}
-                </DivFromDown>
-              </DivFrom>
-            </DivItem>
-
+                </div>
+              </DivFromDown>
+            </DivFrom>
           </>
-        ) : ("")}
-      </DivContainar>
+        ) : (
+          <DivFrom style={{ gridColumnStart: "2", gridColumnEnd: "3" }}>
+            <DivFromTop>
+              <div style={{ margin: "-3px 5px 0px 0px" }}>
+                <Icon size={20} icon={list} />
+              </div>
+              ผลการค้นหา{" "}
+            </DivFromTop>
+            <DivFromDown
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr",
+                gridRowGap: "5px",
+              }}
+            >
+              <div
+                className="mb-3"
+                style={{
+                  margin: "auto",
+                  textAlign: "center",
+                  color: "#ff0000",
+                }}
+              >
+                <Icon size={150} icon={ic_info_outline} />
+                <br />
+                ไม่พบข้อมูล
+              </div>
+            </DivFromDown>
+          </DivFrom>
+        )}
+
+        {/* <Footer/> */}
+      </DivBase>
     </>
   );
 };

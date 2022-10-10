@@ -311,6 +311,7 @@ function Test() {
                     </DivFromDown>
                 </DivGrid>
                 <DivData /* style={{ backgroundColor: "red" }} */>
+                    {/*  <DivFrom> */}
                     <DivFromTop>รายการค้นหา</DivFromTop>
                     <DivFromDown>
                         <div style={{ height: "350px", overflow: "auto" }}>
@@ -341,7 +342,23 @@ function Test() {
                                     </tr>
                                 </thead>
                                 <tbody>
-
+                                    <tr style={{ textAlign: "center" }}>
+                                        <td>we</td>
+                                        <td>we</td>
+                                        <td>we</td>
+                                        <td>we</td>
+                                        <td>we</td>
+                                        <td>we</td>
+                                        <td>we</td>
+                                        <td>we</td>
+                                        <td>we</td>
+                                        <td>we</td>
+                                        <td>we</td>
+                                        <td>we</td>
+                                        <td>we</td>
+                                        <td>we</td>
+                                        <td>we</td>
+                                    </tr>
                                 </tbody>
                             </Table>
 
@@ -361,6 +378,8 @@ function Test() {
                             กิโลกรัม
                         </div>
                     </DivFromDown>
+                    {/* </DivFrom> */}
+
                 </DivData>
             </DivContainar>
 

@@ -22,7 +22,8 @@ import {
     HeaderColor,
     DivContainer,
     DivItem,
-    DivList
+    DivList,
+    DivData
 } from "./ListcuttwoFrom";
 
 import { Editbuttoncolor } from "../../../../utils/buttonColor";
@@ -181,7 +182,7 @@ const index = () => {
                             รายการข้อมูลก้อนเนื้อที่นำมาแปรรูป{" "}
                         </DivFromTop>
                         <DivFromDown>
-                            <div style={{ height: `${data && data.ProductTracking.lump.length > 2 ? "170px" : ""}`, overflow: `${data && data.ProductTracking.lump.length > 2 ? "auto" : ""}` }}>
+                            <div style={{ height: `${data && data.ProductTracking.lump.length > 2 ? "170px" : ""}`, overflow: "auto" }}>
                                 <Table striped bordered responsive hover style={{ margin: "auto" }}>
                                     <thead /* style={{ display: "table", tableLayout: "fixed", width: "100%" }} */>
                                         <tr style={{ textAlign: "center", fontSize: "18px" /* display: "table", tableLayout: "fixed", width: "100%" */ }}>
@@ -236,7 +237,7 @@ const index = () => {
                             รายการข้อมูลชิ้นเนื้อที่นำมาแปรรูป{" "}
                         </DivFromTop>
                         <DivFromDown>
-                            <div style={{ height: `${data && data.ProductTracking.chop.length > 2 ? "170px" : ""}`, overflow: `${data && data.ProductTracking.chop.length > 2 ? "auto" : ""}` }}>
+                            <div style={{ height: `${data && data.ProductTracking.chop.length > 2 ? "170px" : ""}`, overflow: "auto" }}>
                                 <Table striped bordered responsive hover style={{ margin: "auto" }}>
                                     <thead>
                                         <tr style={{ textAlign: "center", fontSize: "18px" }}>
