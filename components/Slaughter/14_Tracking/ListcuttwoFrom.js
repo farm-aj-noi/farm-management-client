@@ -105,7 +105,6 @@ grid-column-gap: 2rem;
 export const DivItem = styled.div`
 grid-column-start: 2;
 width: 100%;
-margin-top: 60px;
 @media screen and (max-width:1300px) {
   grid-column-start: 1;
   margin-top: 0;

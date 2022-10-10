@@ -255,7 +255,7 @@ const Index = () => {
                 </DivFromDown>
               </DivFrom>
             </DivItem>
-            <DivItem>
+            <DivItem style={{ marginTop: `${user ? ("60px") : ("")}` }}>
               <DivFrom style={{ width: "100%" }}>
                 <DivFromTop>
                   <div style={{ margin: "-3px 5px 0px 0px" }}>
