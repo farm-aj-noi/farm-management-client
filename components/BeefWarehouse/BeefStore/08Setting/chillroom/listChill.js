@@ -67,7 +67,7 @@ const listChill = ({ listchill }) => {
         MySwal.fire({
           icon: "success",
           title: "สำเร็จ",
-          text: "ทำการลบข้อมูลสิ้น",
+          text: "ทำการลบข้อมูลเสร็จสิ้น",
           /*  confirmButtonText: (
              <span
                onClick={() =>

@@ -27,7 +27,7 @@ import withReactContent from "sweetalert2-react-content";
 import Router from "next/router";
 
 import { Spinner } from "react-bootstrap";
-
+import { QUERYROOMS } from "./room1"
 
 export const CREATEROOMS = gql`
   mutation CREATEROOMS($roomname: String) {
@@ -57,34 +57,19 @@ export const CREATETYPEKEEP = gql`
   }
 `;
 
-export const QUERYROOMS = gql`
-  query QUERYROOMS {
-    allRoom {
-      id
-      roomname
-      typekeep {
-        id
-        totalbeef
-        beeftype {
-          id
-          nameTH
-        }
-      }
-    }
-  }
-`;
+
 
 const room = () => {
   const MySwal = withReactContent(Swal);
-  const { data: dataroom } = useQuery(QUERYROOMS);
+
   // console.log(dataroom);
   /*  console.log(data); */
   const [idroom, SetidRoom] = useState(""); //get ID room
   const [successCreateRoomName, setSuccessCreateRoomName] = useState(false); //done room name
   const [Inforoomname, SetInforoomName] = useState({
-    beefroom: "",
-    shelfname: "",
+    roomname: ""
   });
+  console.log(Inforoomname.roomname)
   const [createBeefroom] = useMutation(CREATEROOMS, {
     variables: {
       ...Inforoomname,
@@ -139,7 +124,14 @@ const room = () => {
   }
   const [createtypekeep, { error, reset }] = useMutation(CREATETYPEKEEP, {
     onCompleted: (data) => {
+      if (data) {
+
+      }
+
     },
+   /*  refetchQueries: [
+      { query: QUERYROOMS }
+    ] */
   });
 
   const handleRemoveClickroom = (index) => {

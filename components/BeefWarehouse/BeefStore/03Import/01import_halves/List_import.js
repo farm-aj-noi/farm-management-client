@@ -33,7 +33,7 @@ function List_import({ imhalve }) {
       <td>
         {imhalveData.halve.weightcool ? imhalveData.halve.weightcool : "-"}
       </td>
-      <td >{imhalveData.beefroom.roomname}</td>
+      <td >{imhalveData.beefroom.roomname ? imhalveData.beefroom.roomname : "-"}</td>
       <td >{imhalveData.halve.status.nameTH}</td>
       <td >{imhalveData.user.name}</td>
     </tr>

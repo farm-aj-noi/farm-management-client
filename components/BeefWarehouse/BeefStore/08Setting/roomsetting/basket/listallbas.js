@@ -125,7 +125,7 @@ const listallbas = ({ listallbas }) => {
         MySwal.fire({
           icon: "success",
           title: "สำเร็จ",
-          text: "ทำการลบข้อมูลสิ้น",
+          text: "ทำการลบข้อมูลเสร็จสิ้น",
           showConfirmButton: false,
           timer: 1000
           /*  confirmButtonText: "ตกลง", */

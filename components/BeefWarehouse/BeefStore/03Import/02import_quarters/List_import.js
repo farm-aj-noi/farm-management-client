@@ -21,7 +21,7 @@ function List_import({ imquarter }) {
         <Modalqrcode key={imquarterData.id} listquarter={imquarterData} />
       </td>
       <td>{imquarterData.quarter.weight}</td>
-      <td>{imquarter.beefroom.roomname}</td>
+      <td>{imquarter.beefroom.roomname ? imquarter.beefroom.roomname : "-"}</td>
       <td>{imquarterData.quarter.status.nameTH}</td>
       <td>{imquarterData.user.name}</td>
     </tr>

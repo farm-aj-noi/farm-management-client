@@ -64,12 +64,15 @@ const Submit_Export = () => {
     refetchQueries: [
       {
         query: EXPORTQUARTERSEARCH,
-        beeftype: "",
-        startdate: "",
-        enddate: "",
-        userName: "",
-        exporter: "",
-        exportstatus: ""
+        variables: {
+          beeftype: "",
+          startdate: "",
+          enddate: "",
+          userName: "",
+          exporter: "",
+          exportstatus: "",
+        }
+
       }
     ]
   });
