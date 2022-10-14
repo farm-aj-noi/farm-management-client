@@ -268,7 +268,7 @@ const index = () => {
 
           </form>
           <Line data={DataChart} height={100} />
-          <div
+          {/* <div
             style={{
               display: "flex",
               justifyContent: "center",
@@ -276,7 +276,7 @@ const index = () => {
             }}
           >
             <Paper_Graph />
-          </div>
+          </div> */}
         </div>
       </div>
     </>

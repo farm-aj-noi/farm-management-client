@@ -11,13 +11,13 @@ const ListGrade = ({ ListGrade }) => {
   console.log(ListGradeData.chill.chilldateStart);
   return (
     <tr style={{ textAlign: "center" }}>
-      <th>{ListGradeData.id}</th>
+     {/*  <th>{ListGradeData.id}</th> */}
       <td>{ListGradeData.beeftype.code}</td>
       <td>{ListGradeData.barcode}</td>
       <td>{ListGradeData.weightwarm}</td>
       <td>{ListGradeData.weightcool ? ListGradeData.weightcool : "-"}</td>
-      {/* <td>{ListGradeData.chill[0].chilldateStart ? (dayjs(ListGradeData.chill[0].chilldateStart).format("DD-MM-YYYY")) : ("-")}</td>
-      <td>{ListGradeData.chill[0].chilldateEnd ? (dayjs(ListGradeData.chill[0].chilldateEnd).format("DD-MM-YYYY")) : ("-")}</td> */}
+      <td>{ListGradeData.chill[0].chilldateStart ? (dayjs(ListGradeData.chill[0].chilldateStart).format("DD-MM-YYYY")) : ("-")}</td>
+      <td>{ListGradeData.chill[0].chilldateEnd ? (dayjs(ListGradeData.chill[0].chilldateEnd).format("DD-MM-YYYY")) : ("-")}</td>
       {ListGradeData && ListGradeData.chill.map((prod) => (
         <td>
           {ListGradeData.chill[0].chillroom.roomnum
