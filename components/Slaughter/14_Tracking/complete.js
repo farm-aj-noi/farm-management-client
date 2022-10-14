@@ -125,57 +125,7 @@ const Index = () => {
 
   return (
     <>
-<<<<<<< HEAD
-      <DivBase
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 237.5px 950px 1fr",
-          gridRowGap: "15px",
-          gridColumnGap: "10px",
-          // width:"950px",
-          // margin:"auto"
-        }}
-      >
-        {user && (
-          <DivFrom
-            style={{ gridColumnStart: "2", gridColumnEnd: "4", width: "100%" }}
-          >
-            <DivFromTop>
-              <div style={{ margin: "-3px 5px 0px 0px" }}>
-                <Icon size={20} icon={list} />
-              </div>
-              ตรวจสอบสินค้าย้อนกลับ{" "}
-            </DivFromTop>
-            <DivFromDown
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr",
-                gridRowGap: "5px",
-              }}
-            >
-              <div className="mb-3" style={{ margin: "auto" }}>
-                กรุณากรอกบาร์โค๊ด : { }
-                <Searchinput
-                  value={inputnumkun}
-                  onChange={(event) => setInputnumkun(event.target.value)}
-                  style={{
-                    marginRight: 10,
-                  }}
-                  autoFocus
-                  onFocus={(e) => e.currentTarget.select()}
-                  onKeyDown={handleKeyDown}
-                />
-                <Link href="[trackingId]" as={`${inputnumkun}`}>
-                  <Gobutton onClick={() => refetch()}>ค้นหา</Gobutton>
-                </Link>
-              </div>
-            </DivFromDown>
-          </DivFrom>
-        )}
-
-=======
       <DivContainar>
->>>>>>> master
         {data && data.Tracking.barcode ? (
           <>
             <DivFrom style={{ width: "100%" }}>
