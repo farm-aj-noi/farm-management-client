@@ -38,7 +38,7 @@ const Nav1 = () => {
   return (
     <>
       <Head>
-        <title>ระบบจัดคงคลัง</title>
+        <title>ระบบจัดการคงคลัง</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar
