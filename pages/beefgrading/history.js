@@ -1,14 +1,13 @@
 import React from "react";
 import Nav from "../../components/Beefgrading/Nav/Nav";
-import History from "../../components/Beefgrading/history/History";
-
-const history = () => {
+import Index from "../../components/beefgrading/history/index";
+const index = () => {
   return (
     <div>
       <Nav/>
-      <History/> 
+      <Index/> 
     </div>
   );
 };
 
-export default history;
+export default index;

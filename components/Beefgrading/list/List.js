@@ -2,14 +2,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import dayjs from "dayjs";
 import Link from "next/link";
-import {
-  ButtonQrcodeColor,
-  ButtonHeaderColor,
-  ButtonSearchColor,
-  ButtonRecordColor,
-  ButtonSubmit,
-  ButtonImagecolor,
-} from "../Styleclass/Button";
+import { ButtonSubmit } from "../Styleclass/Button";
 
 const ListGrade = ({ ListGrade }) => {
   const router = useRouter();
@@ -22,20 +15,20 @@ const ListGrade = ({ ListGrade }) => {
       <td>{ListGradeData.barcode}</td>
       <td>{ListGradeData.weightwarm}</td>
       <td>{ListGradeData.weightcool ? ListGradeData.weightcool : "-"}</td>
-      <td>
-        {dayjs(ListGradeData.chill[0].chilldateStart).format("DD-MM-YYYY")}
-      </td>
+      <td>{dayjs(ListGradeData.chill[0].chilldateStart).format("DD-MM-YYYY")}</td>
       <td>{dayjs(ListGradeData.chill[0].chilldateEnd).format("DD-MM-YYYY")}</td>
+      {ListGradeData && ListGradeData.chill.map((prod) => (
       <td>
-        {ListGradeData.chill[0].chillroom.roomnum
-          ? ListGradeData.chill[0].chillroom.roomnum
-          : "-"}
+      {ListGradeData.chill[0].chillroom.roomnum
+        ? ListGradeData.chill[0].chillroom.roomnum
+        : "-"}
       </td>
-
+      ))} 
       <td>{ListGradeData.imslaughter.pun}</td>
+      <td>รอตัดเกรด</td>
       <td>
         <Link href="grade/[gradeId]" as={`grade/${ListGradeData.id}`}>
-          <ButtonSubmit>รอการตัดเกรด</ButtonSubmit>
+          <ButtonSubmit>ตัดเกรด</ButtonSubmit>
         </Link>
       </td>
     </tr>

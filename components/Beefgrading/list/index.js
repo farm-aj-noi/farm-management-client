@@ -2,22 +2,11 @@ import React from "react";
 import { Table } from "react-bootstrap";
 import { Icon } from "react-icons-kit";
 import { paste } from "react-icons-kit/icomoon/paste";
-import { DivCenter, TableForm, TableHead } from "../Styleclass/Table";
+import { DivCenter } from "../Styleclass/Table";
 import { Icon3 } from "../../../utils/Logograde";
-import Link from "next/link";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import ListGrade from "./List";
-
-import {
-  ButtonQrcodeColor,
-  ButtonHeaderColor,
-  ButtonSearchColor,
-  ButtonRecordColor,
-  ButtonSubmit,
-  ButtonImagecolor,
-} from "../Styleclass/Button";
-
 const thstyle = {
   border: "1px solid #dddddd",
   textAlign: "center",
@@ -40,8 +29,8 @@ export const LISTGRADE = gql`
       weightcool
       barcode
       imslaughter {
-      pun
-    }
+        pun
+      }
       beeftype {
         code
       }
@@ -58,7 +47,7 @@ export const LISTGRADE = gql`
 
 function index() {
   const { data, loading, error } = useQuery(LISTGRADE);
-  console.log(data)
+  console.log(data);
   return (
     <div>
       <DivCenter
@@ -134,6 +123,7 @@ function index() {
                     <th rowspan="2">ห้องบ่ม</th>
                     <th rowspan="2">สายพันธุ์</th>
                     <th rowspan="2">สถานะการตัดเกรด</th>
+                    <th rowspan="2">ตัดเกรด</th>
                   </tr>
                   <tr style={{ textAlign: "center", fontSize: "18px" }}>
                     <th>ซากอุ่น</th>
@@ -142,10 +132,15 @@ function index() {
                 </thead>
 
                 <tbody>
-                  {/* {data &&
+                  {data && data.listhalvegrade.length > 0 ? (
                     data.listhalvegrade.map((prod) => (
                       <ListGrade key={prod.id} ListGrade={prod} />
-                    ))} */}
+                    ))
+                  ) : (
+                    <tr style={{ textAlign: "center" }}>
+                      <td colSpan="10">ไม่พบข้อมูลซากโค</td>
+                    </tr>
+                  )}
                 </tbody>
               </Table>
             </div>

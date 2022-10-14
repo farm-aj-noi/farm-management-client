@@ -1,50 +1,26 @@
-import React, { useContext, useState, useRef, useEffect } from "react";
-import { Table } from "react-bootstrap";
+import React, { useState, useContext } from "react";
 import { Icon } from "react-icons-kit";
-import { paste } from "react-icons-kit/icomoon/paste";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { useRouter } from "next/router";
-import {print} from 'react-icons-kit/fa/print'
-import { iosSearchStrong } from "react-icons-kit/ionicons/iosSearchStrong";
-import { DivCenter, TableForm, TableHead } from "../Styleclass/Table";
-import {u1F356} from 'react-icons-kit/noto_emoji_regular/u1F356'
-import { Icon3, Icon2, Icon4, Icon5, Icon7 } from "../../../utils/Logograde";
-import Link from "next/link";
+import { DivCenter } from "../Styleclass/Table";
+import { u1F356 } from "react-icons-kit/noto_emoji_regular/u1F356";
+import { Icon2 } from "../../../utils/Logograde";
 import { DivBase } from "../../../utils/divBase";
-import {
-  ButtonQrcodeColor,
-  ButtonHeaderColor,
-  ButtonSearchColor,
-  ButtonRecordColor,
-  ButtonSubmit,
-  ButtonImagecolor,
-  ButtonBack,
-} from "../Styleclass/Button";
-import { Savebutton, Editbutton, Removebutton } from "../../../utils/button";
-import {
-  Savebuttoncolor,
-  Editbuttoncolor,
-  Removebuttoncolor,
-} from "../../../utils/buttonColor";
+import logo from "./defultcow.jpg";
 import {
   DivFrom,
   DivFromTop,
   DivFromDown,
-  Btns,
-  IMG,
-  Divimg,
-  Uploads,
-  Searchinput,
-  Searchbutton,
-  Gobutton,
+  Submitbutton,
+  Backbutton,
 } from "./GetinFrom";
-import { Spinner } from "react-bootstrap";
-// import Footer from "../../Footer/index";
-import dayjs from "dayjs";
 import DatePicker, { registerLocale } from "react-datepicker";
 import th from "date-fns/locale/th";
+import { AuthContext } from "../../../appState/AuthProvider";
+import { isEqualType } from "graphql";
 registerLocale("th", th);
+import Link from "next/link";
 
 const thstyle = {
   border: "1px solid #dddddd",
@@ -60,64 +36,122 @@ const tdstyle = {
   fontSize: "14px",
 };
 
-const QUERY_INFO = gql`
-  query QUERY_INFO($id: ID!) {
-    Cowgrade(id: $id) {
+const UPDATEEXPERT = gql`
+  mutation UPDATEEXPERT(
+    $id: ID
+    $expertName1: String
+    $expertName2: String
+    $expertName3: String
+    $expertName4: String
+    $expertName5: String
+    $expertGrade: String
+  ) {
+    updateGrading(
+      id: $id
+      ExpertName1: $expertName1
+      ExpertName2: $expertName2
+      ExpertName3: $expertName3
+      ExpertName4: $expertName4
+      ExpertName5: $expertName5
+      ExpertGrade: $expertGrade
+    ) {
       id
-      weightwarm
-      weightcool
-      barcode
-      imslaughter {
-        pun
-      }
-      beeftype {
-        code
-      }
-      chill {
-        chillroom {
-          roomnum
-        }
-        chilldateStart
-        chilldateEnd
+    }
+  }
+`;
+
+const QUERY_INFO = gql`
+  query QUERY_INFO {
+    historyGrade {
+      id
+      grade {
+        pic
+        SystemGrade
       }
     }
   }
 `;
 
-/* const CREATE = gql`
-  mutation CREATE($imagecow: String) {
-    createCow(imagecow: $imagecow) {
-      imagecow
+const QUERYGRADE = gql`
+  query QUERYGRADE($id: ID!) {
+    Cowgrade(id: $id) {
+      grade {
+        id
+        pic
+        SystemGrade
+        ExpertGrade
+        ExpertName1
+        ExpertName2
+        ExpertName3
+        ExpertName4
+        ExpertName5
+      }
+      id
     }
   }
 `;
- */
 
 const Summarize = () => {
-
-  const [errorAlert, setErrorAlert] = useState(false);
-  const [loadingCreate, setLoadingCreate] = useState(false);
-  const [edit, setEdit] = useState(false);
-  const [sumData, setSumdata] = useState("");
-  const [onEdite, setOnEdit] = useState(false);
-  const [success, setSuccess] = useState(false);
   const route = useRouter();
-  const handleChange = (e) =>
-    setSumdata({ ...sumData, [e.target.name]: e.target.value });
-  const { data, loading, error } = useQuery(QUERY_INFO, {
+  const { data: HistoryGradedata } = useQuery(QUERY_INFO);
+  const { data } = useQuery(QUERYGRADE, {
     variables: {
       id: route.query.sumId,
     },
-    onCompleted(res) {
-      setSumdata(res.Cowgrade);
-    },
+  });
+  console.log(data);
+  const [infoExpert, setInfoExpert] = useState({
+    ExpertName1: "",
+    ExpertName2: "",
+    ExpertName3: "",
+    ExpertName4: "",
+    ExpertName5: "",
+    ExpertGrade: "",
+  });
+  // console.log(infoExpert);
+  const [updateGrading] = useMutation(UPDATEEXPERT, {
+    onCompleted: (data) => {},
+    refetchQueries: [
+      {
+        query: QUERYGRADE,
+        variables: { id: route.query.sumId },
+      },
+    ],
   });
 
-  console.log(sumData);
+  const handleChange = (e) => {
+    setInfoExpert({
+      ...infoExpert,
+      [e.target.name]: e.target.value,
+    });
+  };
 
-    return (
-      <>
+  const handleSubmit = async () => {
+    const idgrade = data && data.Cowgrade[0].grade[0].id;
+    console.log(idgrade);
+    try {
+      await updateGrading({
+        variables: {
+          id: idgrade,
+          /*   ...infoExpert, */
+          expertName1: infoExpert.ExpertName1,
+          expertName2: infoExpert.ExpertName2,
+          expertName3: infoExpert.ExpertName3,
+          expertName4: infoExpert.ExpertName4,
+          expertName5: infoExpert.ExpertName5,
+          expertGrade: infoExpert.ExpertGrade,
+        },
+      });
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const { user, signout } = useContext(AuthContext);
+  return (
+    <>
       <div>
+        {/* header */}
         <DivCenter
           style={{
             fontSize: "36px",
@@ -127,42 +161,16 @@ const Summarize = () => {
             paddingTop: "30px",
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              marginRight: "5px",
-            }}
-          >
-            <Icon2 height="70px" weight="70px" />
-          </div>
+          <Icon2 height="70px" weight="70px" />
           สรุปเกรดเนื้อโค
         </DivCenter>
-        <DivCenter style={{ marginTop: "20px" }}>
-          <div
-            style={{
-              width: "1200px",
-              height: "650px",
-              backgroundColor: "white",
-              borderRadius: "5px",
-              borderTop: "none",
-              borderRadius: "5px",
-              boxShadow:
-                " 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 0px 10px 0 rgba(0, 0, 0, 0.1)",
-            }}
-          >
-            <h1
+        <DivBase>
+          <DivFrom style={{ width: "1200px" }}>
+            <DivFromTop
               style={{
                 height: "47px",
                 color: "white",
                 fontSize: "24px",
-                backgroundColor: "#3BAFDA",
-                borderRadius: "5px 5px 0px 0px",
-                padding: "7px 5px 5px 15px",
-                margin: "0px",
-                display: "flex",
-                alignItems: "center",
                 fontWeight: "-moz-initial",
               }}
             >
@@ -172,206 +180,277 @@ const Summarize = () => {
                 size={30}
               />
               สรุปเกรดเนื้อโค
-            </h1>
-
-            <DivBase
-              style={{
-                margin: "auto",
-                display: "grid",
-                gridTemplateColumns: " 0.4fr 1fr ",
-                gridRowGap: "5px",
-                width: " max-content",
-                left: "50%",
-                transform: "translateX(-50%)",
-              }}
-            >
-              <></>
-
-              
-          <div>               
-            <DivFrom
+            </DivFromTop>
+            <DivFromDown>
+              <div
                 style={{
-                  width: "270px",
-                  height: "min-content",
-                  margin: "20px",
-                  marginTop: "0",
-                  marginRight: "2px",
+                  display: "grid",
+                  gridTemplateColumns: "500px 1fr",
+                  gridGap: "15px",
                 }}
               >
-                <DivFromTop>
-                  <div
-                    style={{ margin: "-3px 5px 0px 0px", fontSize: "20px" }}
-                  ></div>
-                  <div style={{ margin: "-1px 5px 0px 0px", fontSize: "20px" }}>
-                    เกรดจากระบบ
-                  </div>
-                </DivFromTop>
-
-                
-                <DivFromDown
-            style={{
-              display: "grid",
-              gridTemplateColumns: "0.3fr",
-              height: "200px",
-      
-              // gridRowGap: "5px",
-              // paddingBottom: "20px",
-            }}
-          >
-            
-            <div
-              className="mb-3"
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr ",
-              }}
-            >
-
-            </div>
-
-            </DivFromDown>
-            </DivFrom>
-
-            
-            
-            <DivFrom
-                style={{
-                  width: "270px",
-                  height: "min-content",
-                  margin: "20px",
-                  marginTop: "0",
-                  marginRight: "2px",
-                }}
-              >
-                <DivFromTop>
-                  <div
-                    style={{ margin: "-3px 5px 0px 0px", fontSize: "20px" }}
-                  ></div>
-                  <div style={{ margin: "-1px 5px 0px 0px", fontSize: "20px" }}>
-                  เกรดจากผู้เชี่ยวชาญ
-                  </div>
-                </DivFromTop>
-
-                
-                <DivFromDown
-            style={{
-              display: "grid",
-              gridTemplateColumns: "0.3fr",
-              height: "200px",
-      
-              // gridRowGap: "5px",
-              // paddingBottom: "20px",
-            }}
-          >
-            
-            <div
-              className="mb-3"
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr ",
-              }}
-            >
-              
-            </div>
-
-            </DivFromDown>
-            </DivFrom>
-            
-            </div>  
-           
-              
-              {/* <Footer/> */}
-
-              {/* <Footer/> */}
-              
-              
-            </DivBase>
-            <DivFrom
-                style={{
-                  width: "270px",
-                  height: "min-content",
-                  margin: "20px",
-                  marginTop: "30px",
-                  marginRight: "2px",
-                }}
-              >
-                <DivFromTop>
-                  <div
-                    style={{ margin: "-3px 5px 0px 0px", fontSize: "20px" }}
-                  ></div>
-                  <div style={{ margin: "-1px 5px 0px 0px", fontSize: "20px" }}>
+                <div
+                  style={{ boxShadow: "0px 0px 2px grey", borderRadius: "9px" }}
+                >
+                  <DivFromTop style={{ fontSize: "20px" }}>
                     รูปตัวอย่างเนื้อโค
-                  </div>
-                </DivFromTop>
-
-                
-                <DivFromDown
-            style={{
-              display: "grid",
-              gridTemplateColumns: "0.3fr",
-      
-              // gridRowGap: "5px",
-              // paddingBottom: "20px",
-            }}
-          >
-            
-            <div
-              className="mb-3"
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr ",
-              }}
-            >
-              <div >
-                <div >
-                  <div >
-                    <div >
-                        <a >
-                        <Divimg style={{width:"240px"}}>
-                          <img style={{
-
-                            margin: "auto", objectFit: "cover", width: "100%", height: "100%", display: "relarive", padding: "4px", borderRadius: "30px"
-                          }} alt="Image" /* src={cowdetailData.imagecow || logo} */ />
-                        </Divimg >
-                        </a>
+                  </DivFromTop>
+                  <DivFromDown
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <div>
+                      {data &&
+                        data.Cowgrade.map((prod) => (
+                          <img
+                            style={{
+                              margin: "auto",
+                              objectFit: "cover",
+                              width: "100%",
+                              height: "100%",
+                              display: "relarive",
+                              padding: "4px",
+                              borderRadius: "30px",
+                              height: "480px",
+                              width: "480px",
+                            }}
+                            alt="Image"
+                            src={prod.grade[0].pic}
+                          />
+                        ))}
+                    </div>
+                  </DivFromDown>
+                </div>
+                <div
+                  style={{
+                    boxShadow: "0px 0px 2px grey",
+                    borderRadius: "9px",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "260px 1fr",
+                      gridGap: "30px",
+                      padding: "10px",
+                    }}
+                  >
+                    <div style={{ fontSize: "18px" }}>
+                      <h1 style={{ fontSize: "28px", margin: "0" }}>
+                        พนักงานตัดเกรด
+                      </h1>
+                      <div>
+                        ชื่อ-นามสกุล
+                        <p
+                          style={{
+                            margin: "5px",
+                            marginLeft: "0px",
+                            border: "1px solid #AFAFAF",
+                            borderRadius: "4px",
+                            textAlign: "center",
+                            width: "250px",
+                            padding: "3px",
+                          }}
+                        >
+                          {user && (
+                            <>
+                              <a
+                                style={{
+                                  margin: "auto 5px",
+                                  textAlign: "left",
+                                  fontSize: "18px",
+                                  fontWeight: 600,
+                                  letterSpacing: "1px",
+                                }}
+                              >
+                                สวัสดี {user.name}
+                              </a>
+                            </>
+                          )}
+                        </p>
+                      </div>
+                      <div style={{ marginTop: "10px", fontSize: "18px" }}>
+                        <h1 style={{ fontSize: "28px", margin: "0" }}>
+                          ชื่อผู้เชี่ยวชาญ
+                        </h1>
+                        {data &&
+                          data.Cowgrade.map((prod) => (
+                            <>
+                              <div>
+                                1.ชื่อ-นามสกุล {}
+                                {prod.grade[0].ExpertName1 ? (
+                                  <p>{prod.grade[0].ExpertName1}</p>
+                                ) : (
+                                  <input
+                                    style={{
+                                      margin: "5px",
+                                      marginLeft: "0px",
+                                      border: "1px solid #AFAFAF",
+                                      borderRadius: "4px",
+                                      width: "250px",
+                                      padding: "3px",
+                                    }}
+                                    name="ExpertName1"
+                                    value={infoExpert.ExpertName1}
+                                    onChange={handleChange}
+                                  />
+                                )}
+                              </div>
+                              <div>
+                                2.ชื่อ-นามสกุล {}
+                                {prod.grade[0].ExpertName2 ? (
+                                  <p>{prod.grade[0].ExpertName2}</p>
+                                ) : (
+                                  <input
+                                    style={{
+                                      margin: "5px",
+                                      marginLeft: "0px",
+                                      border: "1px solid #AFAFAF",
+                                      borderRadius: "4px",
+                                      width: "250px",
+                                      padding: "3px",
+                                    }}
+                                    name="ExpertName2"
+                                    value={infoExpert.ExpertName2}
+                                    onChange={handleChange}
+                                  />
+                                )}
+                              </div>
+                              <div>
+                                3.ชื่อ-นามสกุล {}
+                                {prod.grade[0].ExpertName3 ? (
+                                  <p>{prod.grade[0].ExpertName3}</p>
+                                ) : (
+                                  <input
+                                    style={{
+                                      margin: "5px",
+                                      marginLeft: "0px",
+                                      border: "1px solid #AFAFAF",
+                                      borderRadius: "4px",
+                                      width: "250px",
+                                      padding: "3px",
+                                    }}
+                                    name="ExpertName3"
+                                    value={infoExpert.ExpertName3}
+                                    onChange={handleChange}
+                                  />
+                                )}
+                              </div>
+                              <div>
+                                4.ชื่อ-นามสกุล {}
+                                {prod.grade[0].ExpertName4 ? (
+                                  <p>{prod.grade[0].ExpertName4}</p>
+                                ) : (
+                                  <input
+                                    style={{
+                                      margin: "5px",
+                                      marginLeft: "0px",
+                                      border: "1px solid #AFAFAF",
+                                      borderRadius: "4px",
+                                      width: "250px",
+                                      padding: "3px",
+                                    }}
+                                    name="ExpertName4"
+                                    value={infoExpert.ExpertName4}
+                                    onChange={handleChange}
+                                  />
+                                )}
+                              </div>
+                              <div>
+                                5.ชื่อ-นามสกุล {}
+                                {prod.grade[0].ExpertName5 ? (
+                                  <p>{prod.grade[0].ExpertName5}</p>
+                                ) : (
+                                  <input
+                                    style={{
+                                      margin: "5px",
+                                      marginLeft: "0px",
+                                      border: "1px solid #AFAFAF",
+                                      borderRadius: "4px",
+                                      width: "250px",
+                                      padding: "3px",
+                                    }}
+                                    name="ExpertName5"
+                                    value={infoExpert.ExpertName5}
+                                    onChange={handleChange}
+                                  />
+                                )}
+                              </div>
+                            </>
+                          ))}
+                      </div>
+                    </div>
+                    <div>
+                      <div
+                        style={{
+                          boxShadow: "0px 0px 2px grey",
+                          borderRadius: "9px",
+                          height: "fit-content",
+                          marginTop: "30px",
+                        }}
+                      >
+                        <DivFromTop style={{ fontSize: "20px" }}>
+                          เกรดจากระบบ
+                        </DivFromTop>
+                        <DivFromDown
+                          style={{
+                            textAlign: "center",
+                            fontSize: "70px",
+                            padding: "0",
+                            fontWeight: "bold",
+                            color: "green",
+                          }}
+                        >
+                          {data &&
+                            data.Cowgrade.map((prod) => (
+                              <div className="mb-3">
+                                {prod.grade[0].SystemGrade}
+                              </div>
+                            ))}
+                        </DivFromDown>
+                      </div>           
+                      <div style={{ fontSize: "18px", marginTop: "30px" }}>
+                        <h1 style={{ fontSize: "20px", margin: "0" }}>
+                          ช่องกรอกเกรดจากผู้เชี่ยวชาญ : {}
+                        </h1>
+                        <input
+                          style={{
+                            margin: "5px",
+                            marginLeft: "0px",
+                            border: "1px solid #AFAFAF",
+                            borderRadius: "4px",
+                            textAlign: "center",
+                            padding: "3px",
+                          }}
+                          name="ExpertGrade"
+                          value={infoExpert.ExpertGrade}
+                          onChange={handleChange}
+                        />
+                        <Submitbutton
+                          style={{ margin: "10px 10px", width: "70px" }}
+                          onClick={handleSubmit}
+                        >
+                          บันทึก
+                        </Submitbutton>
+                        <Link href="/beefgrading/indexsum">
+                          <Backbutton style={{ width: "70px" }}>
+                            ย้อนกลับ
+                          </Backbutton>
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
-
               </div>
-            </div>
             </DivFromDown>
-            </DivFrom>
-
-            <div style={{
-                  width: "270px",
-                  height: "min-content",
-                  margin: "20px",
-                  marginTop: "30px",
-                  marginRight: "2px",
-                  fontSize: "18px",
-                }}>
-                ลงชื่อผู้เชี่ยวชาญตัดเกรด : { }
-                <div style={{ display: "grid", gridTemplateRows: "1fr 15px" }}>
-                  
-                  <Searchinput
-                    name="numkun"
-                    maxLength="8"
-                    enable={!onEdite}
-                    style={{ backgroundColor: `${!onEdite ? "#ececec" : 'white'}` }}
-                  />
-                </div>
-              </div>
-
-          </div>
-          
-        </DivCenter>
-        
+          </DivFrom>
+        </DivBase>
+        {/* detail */}
       </div>
     </>
   );
-      
-    }
-
+};
 
 export default Summarize;
