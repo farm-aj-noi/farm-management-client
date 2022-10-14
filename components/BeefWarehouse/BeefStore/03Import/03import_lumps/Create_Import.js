@@ -69,7 +69,7 @@ const Create_Import = () => {
     shelf: "",
     basket: "",
   });
-
+  console.log(ImportLumpsInfo)
 
   const { data: datashelf } = useQuery(QUERYSHELF, {
     variables: {
@@ -92,6 +92,7 @@ const Create_Import = () => {
           beefroom: "",
           shelf: "",
           basket: "",
+          beefstore: "6284d7035415c34e54b2fc2c",
         });
         MySwal.fire({
           icon: "success",

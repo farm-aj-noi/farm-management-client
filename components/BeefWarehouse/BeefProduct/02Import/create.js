@@ -83,6 +83,7 @@ const create = () => {
           productroom: "",
           freezer: "",
           pbasket: "",
+          productstore: "629cb4035d8e2a65ce3e3800",
         })
         MySwal.fire({
           icon: "success",

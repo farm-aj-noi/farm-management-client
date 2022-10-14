@@ -95,6 +95,7 @@ const Create_Import = () => {
     onCompleted: (data) => {
       if (data) {
         setImportchopsInfo({
+          beefstore: "6284d7035415c34e54b2fc2c",
           barcode: "",
           beefroom: "",
           shelf: "",

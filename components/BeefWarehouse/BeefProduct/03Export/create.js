@@ -45,6 +45,7 @@ const create = () => {
         setcreateexproduct({
           barcode: "",
           exporter: "",
+          storestatus: "6280fac6d3dbf7345093676f",
         })
         MySwal.fire({
           icon: "success",

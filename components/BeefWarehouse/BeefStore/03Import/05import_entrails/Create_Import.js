@@ -56,6 +56,7 @@ const Create_Import = () => {
           setImportentrailInfo({
             barcode: "",
             beefroom: "",
+            entrailstore: "62837e7631ace600dc6caa23",
           });
           MySwal.fire({
             icon: "success",

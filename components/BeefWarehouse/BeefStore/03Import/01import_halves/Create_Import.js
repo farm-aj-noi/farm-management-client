@@ -62,6 +62,7 @@ const Create_Import = () => {
         setImporthalvesInfo({
           barcode: "",
           beefroom: "",
+          beefstore: "6284d7035415c34e54b2fc2c",
         });
         MySwal.fire({
           icon: "success",

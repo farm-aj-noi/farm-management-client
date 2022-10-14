@@ -55,6 +55,7 @@ const Create_Import = () => {
         if (data) {
           setSuccess(true);
           setImportquarterInfo({
+            beefstore: "6284d7035415c34e54b2fc2c",
             barcode: "",
             beefroom: "",
           });
