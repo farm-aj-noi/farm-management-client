@@ -204,7 +204,7 @@ const index = () => {
                                                     <td>{prod.barcode}</td>
                                                     <td>{prod.weight}</td>
                                                     <td>
-                                                        <a href={"http://localhost:3000/slaughter/tracking/" + prod.barcode}
+                                                        <a href={"https://farm-organization.herokuapp.com/slaughter/tracking/" + prod.barcode}
                                                             target="_blank">
                                                             <Editbuttoncolor>
                                                                 <Icon size={30} icon={iosSearchStrong} />
@@ -259,7 +259,7 @@ const index = () => {
                                                     <td>{prod.barcode}</td>
                                                     <td>{prod.weight}</td>
                                                     <td>
-                                                        <a href={"http://localhost:3000/slaughter/tracking/" + prod.barcode}
+                                                        <a href={"https://farm-organization.herokuapp.com/slaughter/tracking/" + prod.barcode}
                                                             target="_blank">
                                                             <Editbuttoncolor>
                                                                 <Icon size={30} icon={iosSearchStrong} />
