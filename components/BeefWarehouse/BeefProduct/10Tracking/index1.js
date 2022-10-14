@@ -19,11 +19,7 @@ import {
     DivFromTop,
     DivFromDown,
     DivBase1,
-    HeaderColor,
-    DivContainer,
-    DivItem,
-    DivList,
-    DivData
+    HeaderColor
 } from "./ListcuttwoFrom";
 
 import { Editbuttoncolor } from "../../../../utils/buttonColor";
@@ -93,21 +89,31 @@ const index = () => {
         }
     }
     return (
-        <div style={{ marginTop: "100px", marginBottom: "100px" }}>
-            <div style={{ display: "flex", justifyContent: "center" }}>
+        <div style={{ marginTop: "100px" }}>
+            <div style={{ display: "flex", justifyContent: "center", marginTop: "30px" }}>
                 <HeaderColor style={{
                     width: "fit-content",
                     height: "fit-content",
                     padding: "5px 30px",
-                }}>
-                    ตรวจสอบข้อมูลสินค้าผลิตภัณฑ์</HeaderColor>
+                }}>ตรวจสอบข้อมูลสินค้าผลิตภัณฑ์</HeaderColor>
             </div>
-            <DivContainer>
+            <DivBase1
+                style={{
+                    display: "grid",
+                    gridTemplateColumns: "1fr  1200px 1fr",
+                    gridRowGap: "15px",
+                    gridColumnGap: "10px",
+
+                }}>
                 {data && data.ProductTracking.barcode ? (
-                    <DivItem>
+                    <>
                         <DivFrom
                             style={{
+                                marginTop: "0px",
                                 width: "100%",
+                                gridRowStart: "1",
+                                gridRowEnd: "1",
+                                gridColumnStart: "2",
                             }}>
                             <DivFromTop>
                                 <div style={{ margin: "-3px 5px 0px 0px" }}>
@@ -116,7 +122,15 @@ const index = () => {
                                 รายละเอียดสินค้าผลิตภัณฑ์
                             </DivFromTop>
                             <DivFromDown>
-                                <DivList>
+                                <div
+                                    style={{
+                                        margin: "auto",
+                                        minWidth: "100%",
+                                        display: "grid",
+                                        gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 1fr",
+                                        gridRowGap: "15px",
+                                    }}
+                                >
                                     <div>บาร์โค้ด : {data.ProductTracking.barcode}</div>
                                     <div>ประเภทสินค้า : {data.ProductTracking.producttype.nameTH}</div>
                                     <div>รหัสสินค้า : {data.ProductTracking.producttype.code}</div>
@@ -131,14 +145,18 @@ const index = () => {
                                             .add(543, "year")
                                             .format("DD/MM/YYYY")}
                                     </div>
-                                </DivList>
+                                </div>
                             </DivFromDown>
                         </DivFrom>
-                    </DivItem>
+                    </>
                 ) : (
-                    <DivItem>
+                    <>
                         <DivFrom style={{
+                            marginTop: "0px",
                             width: "100%",
+                            gridRowStart: "1",
+                            gridRowEnd: "1",
+                            gridColumnStart: "2",
                         }}>
                             <DivFromTop>
                                 <div style={{ margin: "-3px 5px 0px 0px" }}>
@@ -167,7 +185,6 @@ const index = () => {
                                 </div>
                             </DivFromDown>
                         </DivFrom>
-<<<<<<< HEAD
                     </>
                 )
                 }
@@ -208,7 +225,7 @@ const index = () => {
                                                 <td>{prod.barcode}</td>
                                                 <td>{prod.weight}</td>
                                                 <td>
-                                                    <a href={"https://farm-organization.herokuapp.com/slaughter/tracking/" + prod.barcode}
+                                                    <a href={"http://localhost:3000/slaughter/tracking/" + prod.barcode}
                                                         target="_blank">
                                                         <Editbuttoncolor>
                                                             <Icon size={30} icon={iosSearchStrong} />
@@ -222,139 +239,71 @@ const index = () => {
                                             <td colspan="6">ไม่พบข้อมูล</td>
                                         </tr>
                                     )}
-=======
-                    </DivItem>
-                )}
->>>>>>> master
 
-                <DivItem style={{ marginTop: "30px" }}>
-                    <DivFrom
-                        style={{
-                            width: "100%",
-                        }}>
-                        <DivFromTop>
-                            <div style={{ margin: "-3px 5px 0px 0px" }}>
-                                <Icon size={20} icon={list} />
-                            </div>
-                            รายการข้อมูลก้อนเนื้อที่นำมาแปรรูป{" "}
-                        </DivFromTop>
-                        <DivFromDown>
-                            <div style={{ height: `${data && data.ProductTracking.lump.length > 2 ? "170px" : ""}`, overflow: "auto" }}>
-                                <Table striped bordered responsive hover style={{ margin: "auto" }}>
-                                    <thead /* style={{ display: "table", tableLayout: "fixed", width: "100%" }} */>
-                                        <tr style={{ textAlign: "center", fontSize: "18px" /* display: "table", tableLayout: "fixed", width: "100%" */ }}>
-                                            <th>ประเภทซาก</th>
-                                            <th>รหัสซาก</th>
-                                            <th>บาร์โค้ด</th>
-                                            <th>ทะเบียนขุน</th>
-                                            <th>น้ำหนัก (กก.)</th>
-                                            <th>ตรวจสอบข้อมูล</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody /* style={{ display: "block", overflow: "auto", tableLayout: "fixed", maxHeight: "130px" }} */>
-                                        {data && data.ProductTracking.lump.length > 0 ? (
-                                            data.ProductTracking.lump.map((prod) => (
-                                                <tr style={{ textAlign: "center",/* display: "table", tableLayout: "fixed", width: "100%" */ }}>
-                                                    <td>{prod.beeftype.nameTH}</td>
-                                                    <td>{prod.beeftype.code}</td>
-                                                    <td>{prod.imslaughter.numcow}</td>
-                                                    <td>{prod.barcode}</td>
-                                                    <td>{prod.weight}</td>
-                                                    <td>
-                                                        <a href={"http://localhost:3000/slaughter/tracking/" + prod.barcode}
-                                                            target="_blank">
-                                                            <Editbuttoncolor>
-                                                                <Icon size={30} icon={iosSearchStrong} />
-                                                            </Editbuttoncolor>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            ))
-                                        ) : (
+                                </tbody>
+                            </Table>
+                        </div>
+                    </DivFromDown>
+                </DivFrom>
+                <DivFrom
+                    style={{
+                        marginTop: "0px",
+                        width: "100%",
+                        gridRowStart: "3",
+                        gridRowEnd: "3",
+                        gridColumnStart: "2",
+                    }}>
+                    <DivFromTop>
+                        <div style={{ margin: "-3px 5px 0px 0px" }}>
+                            <Icon size={20} icon={list} />
+                        </div>
+                        รายการข้อมูลชิ้นเนื้อที่นำมาแปรรูป{" "}
+                    </DivFromTop>
+                    <DivFromDown>
+                        <div style={{ height: `${data && data.ProductTracking.chop.length > 2 ? "170px" : ""}`, overflow: `${data && data.ProductTracking.chop.length > 2 ? "auto" : ""}` }}>
+                            <Table striped bordered responsive hover style={{ margin: "auto" }}>
+                                <thead>
+                                    <tr style={{ textAlign: "center", fontSize: "18px" }}>
+                                        <th>ประเภทซาก</th>
+                                        <th>รหัสซาก</th>
+                                        <th>ทะเบียนขุน</th>
+                                        <th>บาร์โค้ด</th>
+                                        <th>น้ำหนัก (กก.)</th>
+                                        <th>ตรวจสอบข้อมูล</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {data && data.ProductTracking.chop.length > 0 ? (
+                                        data.ProductTracking.chop.map((prod) => (
                                             <tr style={{ textAlign: "center" }}>
-<<<<<<< HEAD
                                                 <td>{prod.beeftype.nameTH}</td>
                                                 <td>{prod.beeftype.code}</td>
                                                 <td>{prod.imslaughter.numcow}</td>
                                                 <td>{prod.barcode}</td>
                                                 <td>{prod.weight}</td>
                                                 <td>
-                                                    <a href={"https://farm-organization.herokuapp.com/slaughter/tracking/" + prod.barcode}
+                                                    <a href={"http://localhost:3000/slaughter/tracking/" + prod.barcode}
                                                         target="_blank">
                                                         <Editbuttoncolor>
                                                             <Icon size={30} icon={iosSearchStrong} />
                                                         </Editbuttoncolor>
                                                     </a>
                                                 </td>
-=======
-                                                <td colspan="6">ไม่พบข้อมูล</td>
->>>>>>> master
                                             </tr>
-                                        )}
+                                        ))
 
-                                    </tbody>
-                                </Table>
-                            </div>
-                        </DivFromDown>
-                    </DivFrom>
-                </DivItem>
-                <DivItem style={{ marginTop: "30px" }}>
-                    <DivFrom
-                        style={{
-                            width: "100%",
-                        }}>
-                        <DivFromTop>
-                            <div style={{ margin: "-3px 5px 0px 0px" }}>
-                                <Icon size={20} icon={list} />
-                            </div>
-                            รายการข้อมูลชิ้นเนื้อที่นำมาแปรรูป{" "}
-                        </DivFromTop>
-                        <DivFromDown>
-                            <div style={{ height: `${data && data.ProductTracking.chop.length > 2 ? "170px" : ""}`, overflow: "auto" }}>
-                                <Table striped bordered responsive hover style={{ margin: "auto" }}>
-                                    <thead>
-                                        <tr style={{ textAlign: "center", fontSize: "18px" }}>
-                                            <th>ประเภทซาก</th>
-                                            <th>รหัสซาก</th>
-                                            <th>ทะเบียนขุน</th>
-                                            <th>บาร์โค้ด</th>
-                                            <th>น้ำหนัก (กก.)</th>
-                                            <th>ตรวจสอบข้อมูล</th>
+                                    ) : (
+                                        <tr style={{ textAlign: "center" }}>
+                                            <td colspan="6">ไม่พบข้อมูล</td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        {data && data.ProductTracking.chop.length > 0 ? (
-                                            data.ProductTracking.chop.map((prod) => (
-                                                <tr style={{ textAlign: "center" }}>
-                                                    <td>{prod.beeftype.nameTH}</td>
-                                                    <td>{prod.beeftype.code}</td>
-                                                    <td>{prod.imslaughter.numcow}</td>
-                                                    <td>{prod.barcode}</td>
-                                                    <td>{prod.weight}</td>
-                                                    <td>
-                                                        <a href={"http://localhost:3000/slaughter/tracking/" + prod.barcode}
-                                                            target="_blank">
-                                                            <Editbuttoncolor>
-                                                                <Icon size={30} icon={iosSearchStrong} />
-                                                            </Editbuttoncolor>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            ))
+                                    )}
+                                </tbody>
+                            </Table>
+                        </div>
 
-                                        ) : (
-                                            <tr style={{ textAlign: "center" }}>
-                                                <td colspan="6">ไม่พบข้อมูล</td>
-                                            </tr>
-                                        )}
-                                    </tbody>
-                                </Table>
-                            </div>
-
-                        </DivFromDown>
-                    </DivFrom>
-                </DivItem>
-            </DivContainer>
+                    </DivFromDown>
+                </DivFrom>
+            </DivBase1 >
         </div>
     )
 }
