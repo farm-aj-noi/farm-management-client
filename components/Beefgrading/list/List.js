@@ -8,7 +8,7 @@ const ListGrade = ({ ListGrade }) => {
   const router = useRouter();
   const [prod, setProd] = useState(ListGrade);
   const [ListGradeData, SetListGradeData] = useState(ListGrade);
-  console.log(ListGradeData.chill.chilldateStart);
+  console.log(ListGradeData);
   return (
     <tr style={{ textAlign: "center" }}>
       <td>{ListGradeData.beeftype.code}</td>
