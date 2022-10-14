@@ -207,7 +207,7 @@ const Submit_Export = () => {
           </DivFromInsideLeft>
         </form>
         {error && (
-          <label style={{ color: "red", paddingRight: "10px", marginTop: "5px", marginBottom: "0px" }}>*** {error.graphQLErrors[0].message}</label>
+          <label style={{ color: "red", paddingRight: "10px", marginTop: "5px", marginBottom: "0px" }}>*** {error.graphQLErrors[0].message ? error.graphQLErrors[0].message : "-"}</label>
         )}
         <div
           style={{
