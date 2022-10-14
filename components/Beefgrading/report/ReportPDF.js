@@ -125,13 +125,7 @@ function ReportPDF({ prod }) {
             //   height: 50,
             //   style: "printer",
             // },
-            {
-              // auto-sized columns have their widths based on their content
-              width: 150,
-              text: `${logo && logo.gradeLogo[0].address}`,
-              /* text: `ผู้พิมพ์ ${user.name}`, */
-              style: "printer",
-            },
+
             {
               // auto-sized columns have their widths based on their content
               width: "*",
@@ -150,7 +144,13 @@ function ReportPDF({ prod }) {
           height: 100,
           alignment: "center",
         },
-
+        {
+          
+          text: `${logo && logo.gradeLogo[0].address}`,
+          alignment: "center",
+          marginTop: 20,
+          fontSize: 18,
+        },
         {
           text: "รายงานประวัติการตัดเกรด\n\n",
           style: "header",
@@ -177,7 +177,7 @@ function ReportPDF({ prod }) {
               columns: [
                 {
                   style: "confirm",
-                  text: `ผู้พิมพ์รายงาน\n..........................................................\n( .......................................................... )\nตำแหน่ง ${user.name}`,
+                  text: `ผู้พิมพ์รายงาน\n..........................................................\n( .......................${user.name}..................... )\nตำแหน่ง .......................พนักงานตัดเกรด.........................`,
                 },
                 {
                   style: "confirm",
@@ -228,8 +228,13 @@ function ReportPDF({ prod }) {
 
   return (
     <div>
-      <button style={{border: "none", backgroundColor: "#fff"}} type="button" value="print PDF" onClick={printPDF}>
-      <Pdf height="40px" weight="40px" />
+      <button
+        style={{ border: "none", backgroundColor: "#fff" }}
+        type="button"
+        value="print PDF"
+        onClick={printPDF}
+      >
+        <Pdf height="40px" weight="40px" />
       </button>
     </div>
   );

@@ -50,12 +50,12 @@ function Index() {
         <DivFromDown
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 1fr 1fr ",
+            /* gridTemplateColumns: "1fr 1fr 1fr ", */
             gridGap: "20px",
           }}
         >
-          <System1 />
-          <System2 />
+          <System1  />
+          {/* <System2 /> */}
 
         </DivFromDown>
       </DivFrom>

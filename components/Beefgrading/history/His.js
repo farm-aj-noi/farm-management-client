@@ -354,7 +354,7 @@ export default function Home() {
                 style={{ margin: "-3px 5px 0px 0px", fontSize: "20px" }}
               ></div>
               <div style={{ margin: "-1px 5px 0px 0px", fontSize: "20px" }}>
-                รายละเอียดรายการตัดเกรด
+                รายชื่อผู้ตัดเกรด
               </div>
             </DivFromTop>
             <DivFromDown>
