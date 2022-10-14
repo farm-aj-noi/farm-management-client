@@ -22,6 +22,7 @@ const index = () => {
   const { data: lump } = useQuery(QUERY_EXLUMPDAY);
   const { data: chop } = useQuery(QUERY_EXCHOPDAY);
   const { data: entrail } = useQuery(QUERY_EXENTRAILDAY);
+  
   return (
     <DivAlertCard style={{ backgroundColor: "#BF0000" }}>
       <div

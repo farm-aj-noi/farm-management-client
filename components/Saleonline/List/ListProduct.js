@@ -17,6 +17,7 @@ query QUERYLISTFORSALE {
     weight
     Expdate
     info
+    MFGdate
   }
 }
 `
@@ -74,7 +75,7 @@ function ListProduct() {
                           <td>{prod.code}</td>
                           <td>{prod.barcode}</td>
                           <td>{prod.weight ? prod.weight : "-"}</td>
-                          <td>วันที่ผลิต</td>
+                          <td>{prod.MFGdate ? dayjs(prod.MFGdate).add(543, "year").format("DD/MM/YYYY") : "-"}</td>
                           <td>{prod.Expdate ? dayjs(prod.Expdate).add(543, "year").format("DD/MM/YYYY") : "-"}</td>
                           <td>{prod.info ? prod.info : "-"}</td>
                         </tr>
