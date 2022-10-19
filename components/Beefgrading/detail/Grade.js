@@ -81,7 +81,7 @@ export default function Home() {
     onCompleted(res) {
     },
   });
-
+  const MySwal = withReactContent(Swal);
   const [createGrade] = useMutation(CREATEGRADE,{
     onCompleted: (data) => {
       if (data) {
@@ -123,10 +123,8 @@ export default function Home() {
   const [isImage, setImage] = useState("");
   const [isImage1, setImage1] = useState({ preview: "", raw: "" });
   const [success, setSuccess] = useState(false);
-  const MySwal = withReactContent(Swal);
-/*   console.log(isImage);
-  console.log(isImage1); */
-  useEffect(() => {
+  
+ useEffect(() => {
     fnModel();
   }, []);
 

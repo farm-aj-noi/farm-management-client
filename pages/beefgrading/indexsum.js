@@ -7,7 +7,7 @@ const sum = () => {
     <div>
       <Nav/>
       <Index/> 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

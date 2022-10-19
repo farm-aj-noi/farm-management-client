@@ -8,6 +8,8 @@ import { u1F356 } from "react-icons-kit/noto_emoji_regular/u1F356";
 import { Icon2 } from "../../../utils/Logograde";
 import { DivBase } from "../../../utils/divBase";
 import logo from "./defultcow.jpg";
+import Swal from "sweetalert2";
+import Router from "next/router";
 import {
   DivFrom,
   DivFromTop,
@@ -21,6 +23,7 @@ import { AuthContext } from "../../../appState/AuthProvider";
 import { isEqualType } from "graphql";
 registerLocale("th", th);
 import Link from "next/link";
+import withReactContent from "sweetalert2-react-content";
 
 const thstyle = {
   border: "1px solid #dddddd",
@@ -90,7 +93,7 @@ const QUERYGRADE = gql`
     }
   }
 `;
-
+const MySwal = withReactContent(Swal);
 const Summarize = () => {
   const route = useRouter();
   const { data: HistoryGradedata } = useQuery(QUERY_INFO);
@@ -110,7 +113,28 @@ const Summarize = () => {
   });
   // console.log(infoExpert);
   const [updateGrading] = useMutation(UPDATEEXPERT, {
-    onCompleted: (data) => {},
+    onCompleted: (data) => {
+      if (data) {
+        MySwal.fire({
+          icon: "success",
+          title: "ประมวณผลสำเร็จ",
+          showDenyButton: true,
+          /* showCancelButton: true, */
+          confirmButtonText: (
+            <span
+              onClick={() =>
+                Router.push("/beefgrading/history")
+              }
+            >
+              ดำเนินการต่อ
+            </span>
+          ),
+          denyButtonText: `ตกลง`,
+          confirmButtonColor: "#3085d6",
+          denyButtonColor: "#008631"
+        })
+      }
+    },
     refetchQueries: [
       {
         query: QUERYGRADE,

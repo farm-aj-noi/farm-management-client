@@ -7,7 +7,7 @@ function setSystem2() {
     <div>
       <Nav />
       <System2 />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

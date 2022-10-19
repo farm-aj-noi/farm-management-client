@@ -179,6 +179,15 @@ function index() {
               </Table>
             </div>
           </DivCenter>
+         {/*  {data && data.finalGrade.length > 0 ? (
+                    data.finalGrade.map((prod) => (
+                      <ListHistory key={prod.id} ListHistory={prod} />
+                    ))
+                  ) : (
+                    <tr style={{ textAlign: "center" }}>
+                      <td colSpan="10">ไม่พบข้อมูลซากโค</td>
+                    </tr>
+                  )} */}
           {data && data.finalGrade.length > 0 ? (
             <div
               style={{
@@ -193,7 +202,9 @@ function index() {
 
             </div>
           ) : (
-            ""
+            <tr style={{ textAlign: "center" }}>
+            <td colSpan="10">ไม่พบข้อมูลซากโค</td>
+            </tr>
           )}
         </div>
       </DivCenter>

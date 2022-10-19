@@ -8,7 +8,7 @@ const index = () => {
     <BackgroundGrade>
         <Nav/>
       <Home/>
-      <Footer />
+     {/*  <Footer /> */}
     </BackgroundGrade>
   );
 };

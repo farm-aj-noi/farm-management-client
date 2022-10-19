@@ -7,7 +7,7 @@ const summarize = () => {
     <div>
       <Nav/>
       <Summarize/> 
-      <Footer />
+     {/*  <Footer /> */}
     </div>
   );
 };

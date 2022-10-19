@@ -10,7 +10,7 @@ const GradePage = () => {
 <div> 
   <Nav />
   <Grade/>
-  <Footer />
+{/*   <Footer /> */}
 </div>
   );
 }

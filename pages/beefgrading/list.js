@@ -7,7 +7,7 @@ const index = () => {
     <div>
       <Nav/>
       <Index/> 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
