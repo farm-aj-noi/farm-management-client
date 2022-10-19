@@ -126,6 +126,15 @@ const Home = () => {
                   </LinkSt>
                 </Link>
               )}
+               {(
+              user.role.nameEN === "grade") && (
+                <Link href="/beefgrading">
+                  <LinkSt style={{ paddingTop: "5px" }}>
+                    <Logobeefgrade height="160px" weight="155px" />
+                    ระบบตัดเกรด
+                  </LinkSt>
+                </Link>
+              )}
           </div>
         )}
 

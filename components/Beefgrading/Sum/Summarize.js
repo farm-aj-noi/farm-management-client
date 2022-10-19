@@ -117,7 +117,7 @@ const Summarize = () => {
       if (data) {
         MySwal.fire({
           icon: "success",
-          title: "ประมวณผลสำเร็จ",
+          title: "บันทึกเสร็จสิ้น",
           showDenyButton: true,
           /* showCancelButton: true, */
           confirmButtonText: (
