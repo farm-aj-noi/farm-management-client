@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 import Router from "next/router";
-
+import { EXPORTCHOPSEARCH } from "./index"
 
 
 export const CREATEEXPORTCHOP = gql`
@@ -53,40 +53,40 @@ const Submit_Export = () => {
         setSuccess(true);
         setExportchopInfo({
           barcode: "",
+          storestatus: "",
+          exporter: "",
         });
         MySwal.fire({
           icon: "success",
           title: "สำเร็จ",
           text: "ทำการเบิกออกคลังชิ้นเนื้อเสร็จสิ้น",
-          confirmButtonText: (
-            <span
-              onClick={() =>
-                Router.reload("beefwarehouse/beefstore/export/export_chops")
-              }
-            >
-              ตกลง
-            </span>
-          ),
-          confirmButtonColor: "#3085d6",
+          showConfirmButton: false,
+          timer: 1000
+          /*  confirmButtonText: "ตกลง", */
+          /* confirmButtonColor: "#3085d6", */
+        }).then((result) => {
+          if (result.dismiss === Swal.DismissReason.timer) {
+            /* Router.reload("beefwarehouse/beefstore/export/export_chops") */
+          }
+          /* if (result.isConfirmed) {
+            Router.reload("beefwarehouse/beefstore/import/import_halves")
+          } */
         });
       }
     },
-    onError: (error) => {
-      if (error) {
-        setExportchopInfo({
-          barcode: "",
-        });
-        MySwal.fire({
-          icon: "error",
-          title: <p>{error.graphQLErrors[0].message}</p>,
-          text: "กรุณากรอกบาร์โค้ดใหม่อีกครั้ง",
-          confirmButtonText: <span onClick={() =>
-            Router.reload("beefwarehouse/beefstore/export/export_chops")
-          }>ตกลง</span>,
-          confirmButtonColor: "#3085d6",
-        });
+    refetchQueries: [
+      {
+        query: EXPORTCHOPSEARCH,
+        variables: {
+          beeftype: "",
+          startdate: "",
+          enddate: "",
+          userName: "",
+          exporter: "",
+          exportstatus: ""
+        }
       }
-    },
+    ]
   });
 
   const handleChange = (e) => {
@@ -124,6 +124,7 @@ const Submit_Export = () => {
                 onChange={handleChange}
                 style={{
                   borderColor: `${!ExportchopInfo.barcode ? "red" : ""}`,
+                  height: "35px"
                 }}
               />
               {!ExportchopInfo.barcode ? (
@@ -189,7 +190,7 @@ const Submit_Export = () => {
                   <option value="">รายชื่อ</option>
                   {ExportchopInfo.storestatus === "6280fac6d3dbf7345093676f" ? (
                     <>
-                     {/*  <option value="admin">Admin</option> */}
+                      {/*  <option value="admin">Admin</option> */}
                       <option value="seller">Seller</option>
                     </>
                   ) : (
@@ -204,35 +205,36 @@ const Submit_Export = () => {
               </div>
             </div>
           </DivFromInsideLeft>
-          <div
+        </form>
+        {error && (
+          <label style={{ color: "red", paddingRight: "10px", marginTop: "5px", marginBottom: "0px" }}>*** {error.graphQLErrors[0].message ? error.graphQLErrors[0].message : "-"}</label>
+        )}
+        <div
+          style={{
+            float: "right",
+            paddingRight: "10px",
+            paddingBottom: "10px",
+          }}
+        >
+          <Savebutton1
+            onClick={handleSubmit}
+            disabled={
+              !ExportchopInfo.barcode ||
+              !ExportchopInfo.exporter ||
+              !ExportchopInfo.storestatus
+            }
             style={{
-              display: "inline-block",
-              justifySelf: "right",
-              float: "right",
-              paddingRight: "10px",
-              paddingBottom: "10px",
-            }}
-          >
-            <Savebutton1
-              onClick={handleSubmit}
-              disabled={
-                !ExportchopInfo.barcode ||
+              backgroundColor: `${!ExportchopInfo.barcode ||
                 !ExportchopInfo.exporter ||
                 !ExportchopInfo.storestatus
-              }
-              style={{
-                backgroundColor: `${!ExportchopInfo.barcode ||
-                  !ExportchopInfo.exporter ||
-                  !ExportchopInfo.storestatus
-                  ? "gray"
-                  : ""
-                  }`,
-              }}
-            >
-              บันทึก
-            </Savebutton1>
-          </div>
-        </form>
+                ? "gray"
+                : ""
+                }`,
+            }}
+          >
+            บันทึก
+          </Savebutton1>
+        </div>
       </div>
     </>
   );

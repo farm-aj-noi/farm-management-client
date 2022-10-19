@@ -27,7 +27,7 @@ import withReactContent from "sweetalert2-react-content";
 import Router from "next/router";
 
 import { Spinner } from "react-bootstrap";
-
+import { QUERYROOMS } from "./room1"
 
 export const CREATEROOMS = gql`
   mutation CREATEROOMS($roomname: String) {
@@ -57,34 +57,19 @@ export const CREATETYPEKEEP = gql`
   }
 `;
 
-export const QUERYROOMS = gql`
-  query QUERYROOMS {
-    allRoom {
-      id
-      roomname
-      typekeep {
-        id
-        totalbeef
-        beeftype {
-          id
-          nameTH
-        }
-      }
-    }
-  }
-`;
+
 
 const room = () => {
   const MySwal = withReactContent(Swal);
-  const { data: dataroom } = useQuery(QUERYROOMS);
+
   // console.log(dataroom);
   /*  console.log(data); */
   const [idroom, SetidRoom] = useState(""); //get ID room
   const [successCreateRoomName, setSuccessCreateRoomName] = useState(false); //done room name
   const [Inforoomname, SetInforoomName] = useState({
-    beefroom: "",
-    shelfname: "",
+    roomname: ""
   });
+  console.log(Inforoomname.roomname)
   const [createBeefroom] = useMutation(CREATEROOMS, {
     variables: {
       ...Inforoomname,
@@ -124,21 +109,29 @@ const room = () => {
       icon: "success",
       title: "สำเร็จ",
       text: "ทำการตั้งค่าเสร็จสิ้น",
-      confirmButtonText: (
-        <span
-          onClick={() =>
-            Router.push("beefwarehouse/beefstore/setting/room").then(() => Router.reload())
-          }
-        >
-          ตกลง
-        </span >
-      ),
-      confirmButtonColor: "#3085d6",
+      showConfirmButton: false,
+      timer: 1000
+      /*  confirmButtonText: "ตกลง", */
+      /* confirmButtonColor: "#3085d6", */
+    }).then((result) => {
+      if (result.dismiss === Swal.DismissReason.timer) {
+        Router.push("beefwarehouse/beefstore/setting/room").then(() => Router.reload())
+      }
+      /* if (result.isConfirmed) {
+        Router.reload("beefwarehouse/beefstore/import/import_halves")
+      } */
     });
   }
   const [createtypekeep, { error, reset }] = useMutation(CREATETYPEKEEP, {
     onCompleted: (data) => {
+      if (data) {
+
+      }
+
     },
+   /*  refetchQueries: [
+      { query: QUERYROOMS }
+    ] */
   });
 
   const handleRemoveClickroom = (index) => {

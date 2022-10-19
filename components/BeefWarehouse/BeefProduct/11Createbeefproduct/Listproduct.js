@@ -19,7 +19,8 @@ const Listimproduct = ({ listp }) => {
                 .locale("th")
                 .add(543, "year")
                 .format("DD/MM/YYYY")}</td>
-            <td>{infoproduct.barcode}<Barcode infoall={infoproduct} /></td>
+            <td>{infoproduct.barcode}</td>
+            <td><Barcode infoall={infoproduct} /></td>
         </tr>
     );
 };

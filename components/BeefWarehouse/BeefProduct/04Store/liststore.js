@@ -28,17 +28,18 @@ const liststore = ({ listall }) => {
       MySwal.fire({
         icon: "success",
         title: "สำเร็จ",
-        text: "ทำการแก้ไขข้อมูลเสร็จสิ้น",
-        confirmButtonText: (
-          <span
-            onClick={() =>
-              Router.reload("beefwarehouse/beefproduct/Allstore/store")
-            }
-          >
-            ตกลง
-          </span>
-        ),
-        confirmButtonColor: "#3085d6",
+        text: "ทำการแก้ไขข้อมูลสิ้น",
+        showConfirmButton: false,
+        timer: 1000
+        /*  confirmButtonText: "ตกลง", */
+        /* confirmButtonColor: "#3085d6", */
+      }).then((result) => {
+        if (result.dismiss === Swal.DismissReason.timer) {
+          Router.reload("beefwarehouse/beefproduct/Allstore/store")
+        }
+        /* if (result.isConfirmed) {
+          Router.reload("beefwarehouse/beefstore/import/import_halves")
+        } */
       });
     }
   })
@@ -61,7 +62,7 @@ const liststore = ({ listall }) => {
       console.log(error)
     }
   }
-// console.log(infoall.MFGdate)
+  // console.log(infoall.MFGdate)
   return (
     <tr style={{ textAlign: "center" }}>
       <td>{infoall.producttype}</td>

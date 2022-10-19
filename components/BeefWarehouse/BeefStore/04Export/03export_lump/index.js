@@ -17,8 +17,8 @@ import gql from "graphql-tag";
 
 import List_export from "./ListExport";
 
-export const CREATEEXPORTLUMP = gql`
-  query CREATEEXPORTLUMP(
+export const QUERYEXPORTTLUMP = gql`
+  query QUERYEXPORTTLUMP(
     $startdate: String
     $enddate: String
     $beeftype: String
@@ -68,7 +68,7 @@ const index = () => {
   const [inputusername, SetInputusername] = useState("");
   const [inputexporter, SetinputExporter] = useState("");
   const [exportstatus, Setexportstatus] = useState("");
-  const { data, loading, error } = useQuery(CREATEEXPORTLUMP, {
+  const { data, loading, error } = useQuery(QUERYEXPORTTLUMP, {
     variables: {
       beeftype: selectedbeeftypelump,
       startdate: selectedstartdate,

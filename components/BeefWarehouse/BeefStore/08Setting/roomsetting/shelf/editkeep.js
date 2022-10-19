@@ -55,16 +55,17 @@ const editkeep = ({ edittype }) => {
         icon: "success",
         title: "สำเร็จ",
         text: "ทำการแก้ไขข้อมูลเสร็จสิ้น",
-        confirmButtonText: (
-          <span
-            onClick={() =>
-              Router.push("beefwarehouse/beefstore/setting/shelf").then(() => Router.reload())
-            }
-          >
-            ตกลง
-          </span>
-        ),
-        confirmButtonColor: "#3085d6",
+        showConfirmButton: false,
+        timer: 1000
+        /*  confirmButtonText: "ตกลง", */
+        /* confirmButtonColor: "#3085d6", */
+      }).then((result) => {
+        if (result.dismiss === Swal.DismissReason.timer) {
+          /* Router.push("beefwarehouse/beefstore/setting/shelf").then(() => Router.reload()) */
+        }
+        /* if (result.isConfirmed) {
+          Router.reload("beefwarehouse/beefstore/import/import_halves")
+        } */
       });
     },
   });
@@ -90,21 +91,36 @@ const editkeep = ({ edittype }) => {
 
   const [deletetypekeep] = useMutation(DELETETYPEKEEP, {
     onCompleted: (data) => {
-      MySwal.fire({
-        icon: "success",
-        title: "สำเร็จ",
-        text: "ทำการลบข้อมูลสิ้น",
-        confirmButtonText: (
-          <span
-            onClick={() =>
+      Swal.fire({
+        title: 'ต้องการลบข้อมูล?',
+        text: "ยืนยันการลบข้อมูลประเภทซากโค!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'ตกลง',
+        cancelButtonText: 'ยกเลิก'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          handdleSubmitDelete();
+          MySwal.fire({
+            icon: "success",
+            title: "สำเร็จ",
+            text: "ทำการลบข้อมูลเสร็จสิ้น",
+            showConfirmButton: false,
+            timer: 1000
+            /*  confirmButtonText: "ตกลง", */
+            /* confirmButtonColor: "#3085d6", */
+          }).then((result) => {
+            if (result.dismiss === Swal.DismissReason.timer) {
               Router.push("beefwarehouse/beefstore/setting/shelf").then(() => Router.reload())
             }
-          >
-            ตกลง
-          </span>
-        ),
-        confirmButtonColor: "#3085d6",
-      });
+            /* if (result.isConfirmed) {
+              Router.reload("beefwarehouse/beefstore/import/import_halves")
+            } */
+          });
+        }
+      })
     },
   });
 

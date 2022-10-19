@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 import Router from "next/router";
+import { EXPRODUCTSEARCH } from "./index"
 
 const CREATEEXPORTPRODUCT = gql`
 mutation CREATEEXPORTPRODUCT($barcode: String, $storestatus: String, $exporter: String) {
@@ -35,7 +36,7 @@ const create = () => {
     storestatus: "6280fac6d3dbf7345093676f",
     exporter: "",
   })
-  const [createExproduct] = useMutation(CREATEEXPORTPRODUCT, {
+  const [createExproduct, { error }] = useMutation(CREATEEXPORTPRODUCT, {
     variables: {
       ...createexproduct
     },
@@ -44,47 +45,38 @@ const create = () => {
         setcreateexproduct({
           barcode: "",
           exporter: "",
+          storestatus: "6280fac6d3dbf7345093676f",
         })
         MySwal.fire({
           icon: "success",
           title: "สำเร็จ",
           text: "ทำการเบิกออกคลังผลิตภัณฑ์เสร็จสิ้น",
-          confirmButtonText: (
-            <span
-              onClick={() =>
-                Router.reload("beefwarehouse/beefproduct/exports")
-              }
-            >
-              ตกลง
-            </span>
-          ),
-          confirmButtonColor: "#3085d6",
+          showConfirmButton: false,
+          timer: 1000
+          /*  confirmButtonText: "ตกลง", */
+          /* confirmButtonColor: "#3085d6", */
+        }).then((result) => {
+          if (result.dismiss === Swal.DismissReason.timer) {
+            // Router.reload("beefwarehouse/beefstore/import/import_halves")
+          }
+          /* if (result.isConfirmed) {
+            Router.reload("beefwarehouse/beefstore/import/import_halves")
+          } */
         });
       }
     },
-    onError: (error) => {
-      if (error) {
-        setcreateexproduct({
-          barcode: "",
+    refetchQueries: [
+      {
+        query: EXPRODUCTSEARCH,
+        variables: {
+          startdate: "",
+          enddate: "",
+          userName: "",
+          producttype: "",
           exporter: "",
-        })
-        MySwal.fire({
-          icon: "error",
-          title: <p>{error.graphQLErrors[0].message}</p>,
-          text: "กรุณากรอกข้อมูลใหม่อีกครั้ง",
-          confirmButtonText: (
-            <span
-              onClick={() =>
-                Router.reload("beefwarehouse/beefproduct/exports")
-              }
-            >
-              ตกลง
-            </span>
-          ),
-          confirmButtonColor: "#3085d6",
-        })
+        }
       }
-    }
+    ]
   })
 
   const handleChange = (e) => {
@@ -149,20 +141,21 @@ const create = () => {
               >
                 <option value="">รายชื่อผู้ขอเบิก</option>
                 <option value="seller">Seller</option>
-               {/*  {data && data.listRequestExP.map((prod) => (
+                {/*  {data && data.listRequestExP.map((prod) => (
                   <option key={prod.id} value={prod.id}>{prod.name}</option>
                 ))} */}
               </select>
             </div>
           </div>
         </DivFromInsideLeft>
+        {error && (
+          <label style={{ color: "red", paddingRight: "10px", marginTop: "5px", marginBottom: "0px" }}>*** {error.graphQLErrors[0].message ? error.graphQLErrors[0].message : "-"}</label>
+        )}
         <div
           style={{
-            display: "inline-block",
-            justifySelf: "right",
-            float: "right",
             paddingRight: "10px",
             paddingBottom: "10px",
+            float: "right"
           }}
         >
           <Savebutton1 onClick={handleSubmit}

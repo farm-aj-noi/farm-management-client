@@ -8,10 +8,10 @@ import { fileText } from "react-icons-kit/fa/fileText";
 
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
-
-export const CARD2 = gql`
-  query CARD2($beeftype: String, $type: String) {
-    liststore(beeftype: $beeftype, type: $type) {
+import { STORELIST } from "../../05Store/01Store/index"
+export const CARDSTORE = gql`
+  query CARDSTORE($type: String) {
+    liststore(type: $type) {
       id
       barcode
       beeftype
@@ -21,7 +21,7 @@ export const CARD2 = gql`
 
 import Link from "next/link";
 const index = () => {
-  const { data: storedata } = useQuery(CARD2, {
+  const { data: storedata } = useQuery(CARDSTORE, {
     variables: {
       type: "ซากโคผ่าซีก",
     },

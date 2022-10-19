@@ -30,7 +30,7 @@ const create = () => {
     variables: {
       roomname: inforoom.roomname,
     },
-   
+
     onCompleted: (data) => {
       if (data) {
         setinforoom({
@@ -40,39 +40,21 @@ const create = () => {
           icon: "success",
           title: "สำเร็จ",
           text: "ทำการบึนทึกข้อมูลสิ้น",
-          confirmButtonText: (
-            <span
-              onClick={() =>
-                Router.reload("beefwarehouse/beefproduct/setting/room")
-              }
-            >
-              ตกลง
-            </span>
-          ),
-          confirmButtonColor: "#3085d6",
+          showConfirmButton: false,
+          timer: 1000
+          /*  confirmButtonText: "ตกลง", */
+          /* confirmButtonColor: "#3085d6", */
+        }).then((result) => {
+          if (result.dismiss === Swal.DismissReason.timer) {
+            Router.reload("beefwarehouse/beefproduct/setting/room")
+          }
+          /* if (result.isConfirmed) {
+            Router.reload("beefwarehouse/beefstore/import/import_halves")
+          } */
         });
       }
     },
-    onError: (error) => {
-      if (error) {
-        setinforoom({
-          name: "",
-        });
-        MySwal.fire({
-          icon: "error",
-          title: <p>{error.graphQLErrors[0].message}</p>,
-          text: "กรุณากรอกข้อมูลใหม่อีกครั้ง",
-          confirmButtonText: (
-            <span
-              onClick={() => Router.reload("beefwarehouse/beefproduct/setting")}
-            >
-              ตกลง
-            </span>
-          ),
-          confirmButtonColor: "#3085d6",
-        });
-      }
-    },
+
   });
 
   const handleChange = (e) => {

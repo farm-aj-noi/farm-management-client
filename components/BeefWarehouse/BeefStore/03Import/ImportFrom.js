@@ -92,6 +92,7 @@ export const Searchinput = styled.input`
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   margin-right: 10px;
+ 
 `;
 
 export const Searchbutton = styled.button`

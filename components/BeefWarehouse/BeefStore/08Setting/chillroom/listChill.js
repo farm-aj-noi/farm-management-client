@@ -4,6 +4,7 @@ import gql from "graphql-tag";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import Router from "next/router";
+import { LISTCHILLDAY } from "./index"
 export const DELETECHILLDAY = gql`
   mutation DELETECHILLDAY($id: ID) {
     deleteChillday(id: $id) {
@@ -45,6 +46,9 @@ const listChill = ({ listchill }) => {
         });
       } */
     },
+    refetchQueries: [
+      { query: LISTCHILLDAY }
+    ]
   });
 
   const DeleteAlert = () => {
@@ -63,17 +67,23 @@ const listChill = ({ listchill }) => {
         MySwal.fire({
           icon: "success",
           title: "สำเร็จ",
-          text: "ทำการลบข้อมูลสิ้น",
-          confirmButtonText: (
-            <span
-              onClick={() =>
-                Router.push("beefwarehouse/beefstore/setting/chillroom").then(() => Router.reload())
-              }
-            >
-              ตกลง
-            </span>
-          ),
-          confirmButtonColor: "#3085d6",
+          text: "ทำการลบข้อมูลเสร็จสิ้น",
+          /*  confirmButtonText: (
+             <span
+               onClick={() =>
+                 Router.push("beefwarehouse/beefstore/setting/chillroom").then(() => Router.reload())
+               }
+             >
+               ตกลง
+             </span>
+           ),
+           confirmButtonColor: "#3085d6", */
+          showConfirmButton: false,
+          timer: 1000
+        }).then((result) => {
+          if (result.dismiss === Swal.DismissReason.timer) {
+            Router.reload("beefwarehouse/beefstore/setting/chillroom")
+          }
         });
       }
     })

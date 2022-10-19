@@ -73,16 +73,17 @@ const basket = () => {
           icon: "success",
           title: "สำเร็จ",
           text: "ทำการตั้งค่าเสร็จสิ้น",
-          confirmButtonText: (
-            <span
-              onClick={() =>
-                Router.push("beefwarehouse/beefstore/setting/basket").then(() => Router.reload())
-              }
-            >
-              ตกลง
-            </span>
-          ),
-          confirmButtonColor: "#3085d6",
+          showConfirmButton: false,
+          timer: 1000
+          /*  confirmButtonText: "ตกลง", */
+          /* confirmButtonColor: "#3085d6", */
+        }).then((result) => {
+          if (result.dismiss === Swal.DismissReason.timer) {
+            Router.push("beefwarehouse/beefstore/setting/basket").then(() => Router.reload())
+          }
+          /* if (result.isConfirmed) {
+            Router.reload("beefwarehouse/beefstore/import/import_halves")
+          } */
         });
       }
     },

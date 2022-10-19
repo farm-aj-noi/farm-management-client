@@ -94,30 +94,17 @@ const index = () => {
           icon: "success",
           title: "สำเร็จ",
           text: "ตั้งค่าห้องบ่มเสร็จสิ้น",
-          confirmButtonText: (
-            <span
-              onClick={() =>
-                Router.reload("beefwarehouse/beefstore/setting/chillroom")
-              }
-            >
-              ตกลง
-            </span>
-          ),
-          confirmButtonColor: "#3085d6",
-        });
-      }
-    },
-    onError: (error) => {
-      if (error) {
-        setChillroom({
-          roomnum: "",
-        });
-        MySwal.fire({
-          icon: "error",
-          title: <p>{error.graphQLErrors[0].message}</p>,
-          text: "กรุณากรอกข้อมูลใหม่อีกครั้ง",
-          confirmButtonText: <span>ตกลง</span>,
-          confirmButtonColor: "#3085d6",
+          showConfirmButton: false,
+          timer: 1000
+          /*  confirmButtonText: "ตกลง", */
+          /* confirmButtonColor: "#3085d6", */
+        }).then((result) => {
+          if (result.dismiss === Swal.DismissReason.timer) {
+            Router.push("beefwarehouse/beefstore/setting/chillroom").then(() => Router.reload())
+          }
+          /* if (result.isConfirmed) {
+            Router.reload("beefwarehouse/beefstore/import/import_halves")
+          } */
         });
       }
     },
@@ -152,16 +139,17 @@ const index = () => {
           icon: "success",
           title: "สำเร็จ",
           text: "ตั้งค่าระยะเวลาบ่มเสร็จสิ้น",
-          confirmButtonText: (
-            <span
-              onClick={() =>
-                Router.reload("beefwarehouse/beefstore/setting/chillroom")
-              }
-            >
-              ตกลง
-            </span>
-          ),
-          confirmButtonColor: "#3085d6",
+          showConfirmButton: false,
+          timer: 1000
+          /*  confirmButtonText: "ตกลง", */
+          /* confirmButtonColor: "#3085d6", */
+        }).then((result) => {
+          if (result.dismiss === Swal.DismissReason.timer) {
+            Router.push("beefwarehouse/beefstore/setting/chillroom").then(() => Router.reload())
+          }
+          /* if (result.isConfirmed) {
+            Router.reload("beefwarehouse/beefstore/import/import_halves")
+          } */
         });
       }
     },

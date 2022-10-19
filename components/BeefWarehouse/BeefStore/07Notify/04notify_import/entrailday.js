@@ -14,8 +14,9 @@ import gql from "graphql-tag";
 import dayjs from "dayjs";
 import Modalqrcode from "../../12Qrcode/Notify/Import/imeqr";
 
-export const QUERY_IMHALVEDAY = gql`
-  query QUERY_IMHALVEDAY {
+
+export const QUERY_IMENTRAILDAY = gql`
+  query QUERY_IMENTRAILDAY {
     CardIme {
       id
       importdate
@@ -47,7 +48,7 @@ export const QUERY_IMHALVEDAY = gql`
 `;
 
 const entrailday = () => {
-  const { data } = useQuery(QUERY_IMHALVEDAY);
+  const { data } = useQuery(QUERY_IMENTRAILDAY);
   return (
     <div>
       <DivFromTop>

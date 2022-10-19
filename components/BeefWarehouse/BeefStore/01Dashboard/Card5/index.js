@@ -10,18 +10,20 @@ import Link from "next/link";
 
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
+import { STORELIST } from "../../05Store/01Store/index"
 
-export const CARD5 = gql`
-  query CARD4($beeftype: String, $type: String) {
-    liststore(beeftype: $beeftype, type: $type) {
+export const CARDCHOP = gql`
+  query CARDCHOP($type: String) {
+    liststore(type: $type) {
       id
       barcode
       beeftype
     }
   }
 `;
+
 const index = () => {
-  const { data: storedata } = useQuery(CARD5, {
+  const { data: storedata } = useQuery(CARDCHOP, {
     variables: {
       type: "ชิ้นเนื้อ",
     },

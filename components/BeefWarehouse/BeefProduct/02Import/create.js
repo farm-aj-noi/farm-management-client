@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 import Router from "next/router";
+import { IMPRODUCTSEARCH } from "./index"
 
 
 const CREATEIMPORTPRODUCT = gql`
@@ -71,7 +72,7 @@ const create = () => {
     }
   })
 
-  const [createImproduct] = useMutation(CREATEIMPORTPRODUCT, {
+  const [createImproduct, { error }] = useMutation(CREATEIMPORTPRODUCT, {
     variables: {
       ...createimproduct
     },
@@ -82,49 +83,40 @@ const create = () => {
           productroom: "",
           freezer: "",
           pbasket: "",
+          productstore: "629cb4035d8e2a65ce3e3800",
         })
         MySwal.fire({
           icon: "success",
           title: "สำเร็จ",
           text: "ทำการนำเข้าคลังผลิตภัณฑ์เสร็จสิ้น",
-          confirmButtonText: (
-            <span
-              onClick={() =>
-                Router.reload("beefwarehouse/beefproduct/imports")
-              }
-            >
-              ตกลง
-            </span>
-          ),
-          confirmButtonColor: "#3085d6",
+          showConfirmButton: false,
+          timer: 1000
+          /*  confirmButtonText: "ตกลง", */
+          /* confirmButtonColor: "#3085d6", */
+        }).then((result) => {
+          if (result.dismiss === Swal.DismissReason.timer) {
+            // Router.reload("beefwarehouse/beefstore/import/import_halves")
+          }
+          /* if (result.isConfirmed) {
+            Router.reload("beefwarehouse/beefstore/import/import_halves")
+          } */
         });
       }
     },
-    onError: (error) => {
-      if (error) {
-        setcreateimproduct({
-          barcode: "",
+    refetchQueries: [
+      {
+        query: IMPRODUCTSEARCH,
+        variables: {
+          startdate: "",
+          enddate: "",
+          producttype: "",
+          userName: "",
           productroom: "",
           freezer: "",
           pbasket: "",
-        })
-        MySwal.fire({
-          icon: "error",
-          title: <p>{error.graphQLErrors[0].message}</p>,
-          text: "กรุณากรอกข้อมูลใหม่อีกครั้ง",
-          confirmButtonText: (
-            <span
-              onClick={() =>
-                Router.reload("beefwarehouse/beefproduct/imports")
-              }
-            >
-              ตกลง
-            </span>
-          ),
-          confirmButtonColor: "#3085d6",
-        })
+        }
       }
-    }
+    ]
   })
 
   const handleChange = (e) => {
@@ -238,13 +230,14 @@ const create = () => {
             </div>
           </div>
         </DivFromInsideLeft>
+        {error && (
+          <label style={{ color: "red", paddingRight: "10px", marginTop: "5px", marginBottom: "0px" }}>*** {error.graphQLErrors[0].message ? error.graphQLErrors[0].message : "-"}</label>
+        )}
         <div
           style={{
-            display: "inline-block",
-            justifySelf: "right",
-            float: "right",
             paddingRight: "10px",
             paddingBottom: "10px",
+            float: "right"
           }}
         >
           <Savebutton1 onClick={handleSubmit}

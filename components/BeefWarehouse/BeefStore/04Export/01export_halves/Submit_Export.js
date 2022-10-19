@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 import Router from "next/router";
+import { EXPORTHALVESSEARCH } from "./index"
 
 export const CREATEEXPORTHALVE = gql`
   mutation Mutation($barcode: String, $storestatus: String, $exporter: String) {
@@ -46,37 +47,34 @@ const Submit_Export = () => {
           icon: "success",
           title: "สำเร็จ",
           text: "ทำการเบิกออกคลังชิ้นเนื้อเสร็จสิ้น",
-          confirmButtonText: (
-            <span
-              onClick={() =>
-                Router.reload("beefwarehouse/beefstore/export/export_halves")
-              }
-            >
-              ตกลง
-            </span>
-          ),
-          confirmButtonColor: "#3085d6",
+          showConfirmButton: false,
+          timer: 1000
+          /*  confirmButtonText: "ตกลง", */
+          /* confirmButtonColor: "#3085d6", */
+        }).then((result) => {
+          if (result.dismiss === Swal.DismissReason.timer) {
+            /* Router.reload("beefwarehouse/beefstore/export/export_halves") */
+          }
+          /* if (result.isConfirmed) {
+            Router.reload("beefwarehouse/beefstore/import/import_halves")
+          } */
         });
       }
     },
-    onError: (error) => {
-      if (error) {
-        setExporthalvesInfo({
-          barcode: "",
-          storestatus: "",
+    refetchQueries: [
+      {
+        query: EXPORTHALVESSEARCH,
+        variables: {
+          beeftype: "",
+          startdate: "",
+          enddate: "",
+          userName: "",
           exporter: "",
-        });
-        MySwal.fire({
-          icon: "error",
-          title: <p>{error.graphQLErrors[0].message}</p>,
-          text: "กรุณากรอกข้อมูลใหม่อีกครั้ง",
-          confirmButtonText: <span onClick={() =>
-            Router.reload("beefwarehouse/beefstore/export/export_chops")
-          }>ตกลง</span>,
-          confirmButtonColor: "#3085d6",
-        });
+          exportstatus: "",
+        }
       }
-    },
+    ]
+
   });
 
   const handleChange = (e) => {
@@ -94,7 +92,6 @@ const Submit_Export = () => {
       console.log(error);
     }
   };
-
   return (
     <>
       <div>
@@ -115,6 +112,7 @@ const Submit_Export = () => {
                 onChange={handleChange}
                 style={{
                   borderColor: `${!ExporthalvesInfo.barcode ? "red" : ""}`,
+                  height: "35px",
                 }}
               />
               {!ExporthalvesInfo.barcode ? (
@@ -200,35 +198,36 @@ const Submit_Export = () => {
               </div>
             </div>
           </DivFromInsideLeft>
-          <div
+        </form>
+        {error && (
+          <label style={{ color: "red", paddingRight: "10px", marginTop: "5px", marginBottom: "0px" }}>*** {error.graphQLErrors[0].message ? error.graphQLErrors[0].message : "-"}</label>
+        )}
+        <div
+          style={{
+            float: "right",
+            paddingRight: "10px",
+            paddingBottom: "10px",
+          }}
+        >
+          <Savebutton1
+            onClick={handleSubmit}
+            disabled={
+              !ExporthalvesInfo.barcode ||
+              !ExporthalvesInfo.exporter ||
+              !ExporthalvesInfo.storestatus
+            }
             style={{
-              display: "inline-block",
-              justifySelf: "right",
-              float: "right",
-              paddingRight: "10px",
-              paddingBottom: "10px",
-            }}
-          >
-            <Savebutton1
-              onClick={handleSubmit}
-              disabled={
-                !ExporthalvesInfo.barcode ||
+              backgroundColor: `${!ExporthalvesInfo.barcode ||
                 !ExporthalvesInfo.exporter ||
                 !ExporthalvesInfo.storestatus
-              }
-              style={{
-                backgroundColor: `${!ExporthalvesInfo.barcode ||
-                  !ExporthalvesInfo.exporter ||
-                  !ExporthalvesInfo.storestatus
-                  ? "gray"
-                  : ""
-                  }`,
-              }}
-            >
-              บันทึก
-            </Savebutton1>
-          </div>
-        </form>
+                ? "gray"
+                : ""
+                }`,
+            }}
+          >
+            บันทึก
+          </Savebutton1>
+        </div>
       </div>
     </>
   );

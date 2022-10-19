@@ -7,10 +7,13 @@ import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
 import { CHILLSEARCHLIST } from "./index";
+import { STORELIST } from "../05Store/01Store/index"
 
 import { Savebuttoncolor } from "../../../../utils/buttonColor";
 import { Savebutton } from "../../../../utils/button";
 
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 import Modalqrcode from "../12Qrcode/chill";
 
@@ -27,11 +30,12 @@ export const UPDATECHILLSTATUS = gql`
 `;
 
 const List_chill = ({ listchill }) => {
+  const MySwal = withReactContent(Swal);
   const checkdate = dayjs().locale("th").format("YYYY-MM-DDTHH:mm:ssZ[Z]");
   // console.log(checkdate);
 
   const [ListChillInfo, SetListChillInfo] = useState(listchill);
-  // console.log(ListChillInfo.chilldateEnd);
+  console.log(ListChillInfo);
   /*  console.log(ListChillInfo.chillstatus); */
   const [updateChillday, { error }] = useMutation(UPDATECHILLSTATUS, {
     onCompleted: (data) => {
@@ -41,10 +45,28 @@ const List_chill = ({ listchill }) => {
         ...ListChillInfo,
         chillstatus: data.updateChillday.chillstatus,
       });
+      MySwal.fire({
+        icon: "success",
+        title: "สำเร็จ",
+        text: "ทำการอัพเดตสถานะเสร็จสิ้น",
+        showConfirmButton: false,
+        timer: 1000
+        /*  confirmButtonText: "ตกลง", */
+        /* confirmButtonColor: "#3085d6", */
+      }).then((result) => {
+        if (result.dismiss === Swal.DismissReason.timer) {
+          /*  Router.reload("beefwarehouse/beefstore/chill") */
+        }
+        /* if (result.isConfirmed) {
+          Router.reload("beefwarehouse/beefstore/import/import_halves")
+        } */
+      });
+
     },
     refetchQueries: [
       {
         query: CHILLSEARCHLIST,
+        query: STORELIST,
       },
     ],
   });
@@ -89,7 +111,7 @@ const List_chill = ({ listchill }) => {
           .format("h:mm:ss A")}
       </td>
       <td style={tdStyle}>{ListChillInfo.halve.beeftype.nameTH}</td>
-      <td style={tdStyle}>{ListChillInfo.chillday.day} วัน</td>
+      <td style={tdStyle}>{ListChillInfo.chillday ? ListChillInfo.chillday.day : "-"} วัน</td>
       <td style={tdStyle}>{ListChillInfo.halve.imslaughter.numcow}</td>
       <td style={tdStyle}>{ListChillInfo.halve.beeftype.code}</td>
       <td style={tdStyle}>{ListChillInfo.halve.barcode}</td>

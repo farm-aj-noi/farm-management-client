@@ -145,7 +145,7 @@ const index = () => {
             id: idcreate,
         }
     })
-  /*   console.log(data) */
+    /*   console.log(data) */
     const [UpdateBeefProduct] = useMutation(UPDATETYPEPRODUCT, {
         onCompleted: (data) => {
             settypebeef({
@@ -227,17 +227,19 @@ const index = () => {
         MySwal.fire({
             icon: "success",
             title: "สำเร็จ",
-            text: "ทำการเลือกซากแปรรูปเสร็จสิ้น",
-            confirmButtonText: (
-                <span onClick={() =>
-                    Router.reload("beefwarehouse/beefproduct/createproduct")
-                }
-                >
-                    ตกลง
-                </span>
-            ),
-            confirmButtonColor: "#3085d6",
-        })
+            text: "ทำการแปรรูปเสร็จสิ้น",
+            showConfirmButton: false,
+            timer: 1000
+            /*  confirmButtonText: "ตกลง", */
+            /* confirmButtonColor: "#3085d6", */
+        }).then((result) => {
+            if (result.dismiss === Swal.DismissReason.timer) {
+                Router.reload("beefwarehouse/beefproduct/createproduct")
+            }
+            /* if (result.isConfirmed) {
+              Router.reload("beefwarehouse/beefstore/import/import_halves")
+            } */
+        });
     }
 
     return (
@@ -547,6 +549,7 @@ const index = () => {
                                             <th>น้ำหนัก (กก.)</th>
                                             <th>วันที่ผลิต</th>
                                             <th>วันหมดอายุ</th>
+                                            <th>รหัสบาร์โค้ด</th>
                                             <th>บาร์โค้ด</th>
                                         </tr>
                                     </thead>
@@ -567,13 +570,14 @@ const index = () => {
                                                             .locale("th")
                                                             .add(543, "year")
                                                             .format("DD/MM/YYYY")}</td>
+                                                        <td>{prod.barcode}</td>
                                                         <td><Buttonbarcode key={prod.id} allinfo={prod} /></td>
                                                     </tr>
                                                 </>
                                             ))
                                         ) : (
                                             <tr style={{ textAlign: "center" }}>
-                                                <td colSpan="6">ไม่พบข้อมูล</td>
+                                                <td colSpan="7">ไม่พบข้อมูล</td>
                                             </tr>
                                         )
                                         }

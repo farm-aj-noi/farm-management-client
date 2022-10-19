@@ -4,6 +4,7 @@ import Modalqrcode from "../../12Qrcode/Import/imcqr";
 
 function List_import({ imchop }) {
   const [imchopData, SetImchopData] = useState(imchop);
+ /*  if (imchopData !== imchop) setdata(imchop); */
   return (
     <tr style={{ textAlign: "center" }}>
       <td>{imchopData.chop.imslaughter.namefarmer}</td>

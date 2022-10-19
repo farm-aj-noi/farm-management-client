@@ -40,14 +40,19 @@ const CreateRequest = () => {
                 MySwal.fire({
                     icon: "success",
                     title: "สำเร็จ",
-                    text: "ทำการร้องขอเบิกเสร็จสิ้น",
-                    confirmButtonText: (
-                        <span onClick={() => Router.reload("saleonline/requeststore")}>
-                            ตกลง
-                        </span>
-                    ),
-                    confirmButtonColor: "#3085d6",
-                });
+                    text: "ดำเนินรายการร้องขอเสร็จสิ้น",
+                    showConfirmButton: false,
+                    timer: 1000
+                    /*  confirmButtonText: "ตกลง", */
+                    /* confirmButtonColor: "#3085d6", */
+                  }).then((result) => {
+                    if (result.dismiss === Swal.DismissReason.timer) {
+                      /*  Router.reload("beefwarehouse/beefstore/import/import_chops") */
+                    }
+                    /* if (result.isConfirmed) {
+                      Router.reload("beefwarehouse/beefstore/import/import_halves")
+                    } */
+                  });
             }
         },
         refetchQueries: [

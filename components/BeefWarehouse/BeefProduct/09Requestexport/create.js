@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { AuthContext } from '../../../../appState/AuthProvider';
 import Router from "next/router";
-
+import { QUERYRE } from "./index"
 
 const CREATEREQUESTPRODUCT = gql`
 mutation CREATEREQUESTPRODUCT($name: String, $typemeat: String, $beeftype: String) {
@@ -43,16 +43,27 @@ function create() {
                     icon: "success",
                     title: "สำเร็จ",
                     text: "ทำการร้องขอเบิกเสร็จสิ้น",
-                    confirmButtonText: (
-                        <span onClick={() => Router.reload("beefwarehouse/beefproduct/requestexport")}>
-                            ตกลง
-                        </span>
-                    ),
-                    confirmButtonColor: "#3085d6",
+                    showConfirmButton: false,
+                    timer: 1000
+                    /*  confirmButtonText: "ตกลง", */
+                    /* confirmButtonColor: "#3085d6", */
+                }).then((result) => {
+                    if (result.dismiss === Swal.DismissReason.timer) {
+                        // Router.reload("beefwarehouse/beefstore/import/import_halves")
+                    }
+                    /* if (result.isConfirmed) {
+                      Router.reload("beefwarehouse/beefstore/import/import_halves")
+                    } */
                 });
             }
-        }
-    })
+        },
+        refetchQueries: [
+            {
+                query: QUERYRE
+            }
+        ]
+    }
+    )
 
 
     const handleChange = (e) => {

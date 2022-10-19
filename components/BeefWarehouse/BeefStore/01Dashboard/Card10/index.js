@@ -9,59 +9,20 @@ import { fileText } from "react-icons-kit/fa/fileText";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
-export const CARD_IMHALVE = gql`
-  query CARD_IMHALVE {
-    CardImh {
-      id
-      barcode
-    }
-  }
-`;
-
-export const CARD_IMQUAR = gql`
-  query CARD_IMQUAR {
-    CardImq {
-      id
-      barcode
-    }
-  }
-`;
-
-export const CARD_IMLUMP = gql`
-  query CARD_IMQUAR {
-    CardIml {
-      id
-      barcode
-    }
-  }
-`;
-
-export const CARD_IMCHOP = gql`
-  query CARD_IMQUAR {
-    CardImc {
-      id
-      barcode
-    }
-  }
-`;
-
-export const CARD_ENTRAIL = gql`
-  query CARD_IMQUAR {
-    CardIme {
-      id
-      barcode
-    }
-  }
-`;
+import { QUERY_IMCHOPDAY } from "../../07Notify/04notify_import/chopday"
+import { QUERY_IMENTRAILDAY } from "../../07Notify/04notify_import/entrailday"
+import { QUERY_IMHALVEDAY } from "../../07Notify/04notify_import/halveday"
+import { QUERY_IMLUMPDAY } from "../../07Notify/04notify_import/lumpday"
+import { QUERY_IMQUARTERDAY } from "../../07Notify/04notify_import/quarterday"
 
 import Link from "next/link";
 
 const index = () => {
-  const { data: halve } = useQuery(CARD_IMHALVE);
-  const { data: quarter } = useQuery(CARD_IMQUAR);
-  const { data: lump } = useQuery(CARD_IMLUMP);
-  const { data: chop } = useQuery(CARD_IMCHOP);
-  const { data: entrail } = useQuery(CARD_ENTRAIL);
+  const { data: halve } = useQuery(QUERY_IMHALVEDAY);
+  const { data: quarter } = useQuery(QUERY_IMQUARTERDAY);
+  const { data: lump } = useQuery(QUERY_IMLUMPDAY);
+  const { data: chop } = useQuery(QUERY_IMCHOPDAY);
+  const { data: entrail } = useQuery(QUERY_IMENTRAILDAY);
   return (
     <DivAlertCard style={{ backgroundColor: "#EF9813" }}>
       <div

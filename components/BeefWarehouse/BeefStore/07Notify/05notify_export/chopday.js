@@ -42,7 +42,7 @@ export const QUERY_EXCHOPDAY = gql`
       storestatus {
         nameTH
       }
-    }
+  }
   }
 `;
 

@@ -11,8 +11,8 @@ import Link from "next/link";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
-export const CARD6 = gql`
-  query CARD6 {
+export const CARDENTRAIL = gql`
+  query CARDENTRAIL {
     listentrail {
       id
       barcode
@@ -22,7 +22,7 @@ export const CARD6 = gql`
 `;
 
 const index = () => {
-  const { data: storedata } = useQuery(CARD6);
+  const { data: storedata } = useQuery(CARDENTRAIL);
   // console.log(storedata);
   return (
     <DivAlertCard style={{ backgroundColor: "#bb0fbb" }}>

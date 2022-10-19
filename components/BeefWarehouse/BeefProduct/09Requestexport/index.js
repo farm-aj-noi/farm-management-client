@@ -17,7 +17,7 @@ import dayjs from "dayjs";
 import ListRequest from "./listRequest";
 import ListRequestP from "../../BeefStore/07Notify/02notify_exportrequest/listRequestP";
 
-const QUERYRE = gql`
+export const QUERYRE = gql`
 query QUERYRE {
   listRequestProduct {
     id
