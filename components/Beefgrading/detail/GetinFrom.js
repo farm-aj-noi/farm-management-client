@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import { FromDiv } from "../../../utils/from";
-import { lightBlue, white, blue,lightGreen,green } from "../../../utils/colors";
+import { lightBlue, white, blue, lightGreen, green } from "../../../utils/colors";
 
 export const DivFrom = styled.div`
   ${FromDiv}
@@ -60,9 +60,9 @@ export const Divimg = styled.div`
   ${FromDiv}
   width: 250px;
   height: 100%;
-  objectFit:"scale-down"`;
+  object-fit:scale-down;
+  `;
 export const Uploads = styled.button`
-
 height: 200px;
 width:240px;
 overflow: hidden;
@@ -70,7 +70,7 @@ margin: 0 auto;
 background: #f5f5f5c4;
 border: 1px solid #80808014;
   `;
-  export const IMG = styled.image`
+export const IMG = styled.image`
   object-fit: cover;
     max-width: 100%;
     position: absolute;

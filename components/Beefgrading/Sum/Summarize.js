@@ -189,7 +189,7 @@ const Summarize = () => {
           สรุปเกรดเนื้อโค
         </DivCenter>
         <DivBase>
-          <DivFrom style={{ width: "1200px" }}>
+          <DivFrom style={{ width: "1500px" }}>
             <DivFromTop
               style={{
                 height: "47px",
@@ -209,43 +209,80 @@ const Summarize = () => {
               <div
                 style={{
                   display: "grid",
-                  gridTemplateColumns: "500px 1fr",
+                  gridTemplateColumns: "1fr 1fr",
                   gridGap: "15px",
                 }}
               >
-                <div
-                  style={{ boxShadow: "0px 0px 2px grey", borderRadius: "9px" }}
-                >
-                  <DivFromTop style={{ fontSize: "20px" }}>
-                    รูปตัวอย่างเนื้อโค
-                  </DivFromTop>
-                  <DivFromDown
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                    }}
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <div
+                    style={{ boxShadow: "0px 0px 2px grey", borderRadius: "9px", height: "fit-content", width: "fit-content" }}
                   >
-                    <div>
-                      {data &&
-                        data.Cowgrade.map((prod) => (
-                          <img
-                            style={{
-                              margin: "auto",
-                              objectFit: "cover",
-                              width: "100%",
-                              height: "100%",
-                              display: "relarive",
-                              padding: "4px",
-                              borderRadius: "30px",
-                              height: "480px",
-                              width: "480px",
-                            }}
-                            alt="Image"
-                            src={prod.grade[0].pic}
-                          />
-                        ))}
-                    </div>
-                  </DivFromDown>
+                    <DivFromTop style={{ fontSize: "20px" }}>
+                      รูปตัวอย่างเนื้อโค
+                    </DivFromTop>
+                    <DivFromDown
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <div>
+                        {data &&
+                          data.Cowgrade.map((prod) => (
+                            <img
+                              style={{
+                                margin: "auto",
+                                objectFit: "cover",
+                                width: "100%",
+                                height: "100%",
+                                display: "relarive",
+                                padding: "4px",
+                                borderRadius: "30px",
+                                height: "300px",
+                                width: "300px",
+                              }}
+                              alt="Image"
+                              src={prod.grade[0].pic}
+                            />
+                          ))}
+                      </div>
+                    </DivFromDown>
+
+                  </div>
+                  <div
+                    style={{ boxShadow: "0px 0px 2px grey", borderRadius: "9px", height: "fit-content", width: "fit-content", marginLeft: "20px" }}
+                  >
+                    <DivFromTop style={{ fontSize: "20px" }}>
+                      รูปตัวอย่างส่วนครอปเนื้อโค
+                    </DivFromTop>
+                    <DivFromDown
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <div>
+                        {data &&
+                          data.Cowgrade.map((prod) => (
+                            <img
+                              style={{
+                                margin: "auto",
+                                objectFit: "cover",
+                                width: "100%",
+                                height: "100%",
+                                display: "relarive",
+                                padding: "4px",
+                                borderRadius: "30px",
+                                height: "300px",
+                                width: "300px",
+                              }}
+                              alt="Image"
+                              src={prod.grade[0].pic}
+                            />
+                          ))}
+                      </div>
+                    </DivFromDown>
+                  </div>
                 </div>
                 <div
                   style={{
@@ -303,7 +340,7 @@ const Summarize = () => {
                           data.Cowgrade.map((prod) => (
                             <>
                               <div>
-                                1.ชื่อ-นามสกุล {}
+                                1.ชื่อ-นามสกุล { }
                                 {prod.grade[0].ExpertName1 ? (
                                   <p>{prod.grade[0].ExpertName1}</p>
                                 ) : (
@@ -323,7 +360,7 @@ const Summarize = () => {
                                 )}
                               </div>
                               <div>
-                                2.ชื่อ-นามสกุล {}
+                                2.ชื่อ-นามสกุล { }
                                 {prod.grade[0].ExpertName2 ? (
                                   <p>{prod.grade[0].ExpertName2}</p>
                                 ) : (
@@ -343,7 +380,7 @@ const Summarize = () => {
                                 )}
                               </div>
                               <div>
-                                3.ชื่อ-นามสกุล {}
+                                3.ชื่อ-นามสกุล { }
                                 {prod.grade[0].ExpertName3 ? (
                                   <p>{prod.grade[0].ExpertName3}</p>
                                 ) : (
@@ -363,7 +400,7 @@ const Summarize = () => {
                                 )}
                               </div>
                               <div>
-                                4.ชื่อ-นามสกุล {}
+                                4.ชื่อ-นามสกุล { }
                                 {prod.grade[0].ExpertName4 ? (
                                   <p>{prod.grade[0].ExpertName4}</p>
                                 ) : (
@@ -383,7 +420,7 @@ const Summarize = () => {
                                 )}
                               </div>
                               <div>
-                                5.ชื่อ-นามสกุล {}
+                                5.ชื่อ-นามสกุล { }
                                 {prod.grade[0].ExpertName5 ? (
                                   <p>{prod.grade[0].ExpertName5}</p>
                                 ) : (
@@ -434,10 +471,10 @@ const Summarize = () => {
                               </div>
                             ))}
                         </DivFromDown>
-                      </div>           
+                      </div>
                       <div style={{ fontSize: "18px", marginTop: "30px" }}>
                         <h1 style={{ fontSize: "20px", margin: "0" }}>
-                          ช่องกรอกเกรดจากผู้เชี่ยวชาญ : {}
+                          ช่องกรอกเกรดจากผู้เชี่ยวชาญ : { }
                         </h1>
                         <input
                           style={{

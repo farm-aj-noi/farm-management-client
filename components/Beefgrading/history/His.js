@@ -163,36 +163,174 @@ export default function Home() {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "500px 1fr",
+          gridTemplateColumns: "1fr 1fr",
           padding: "30px 350px 0px 350px",
           gridColumnGap: "50px",
         }}
       >
-        <DivFromHis style={{ marginTop: "0px" }}>
-          <DivFromTop style={{ fontSize: "20px" }}>
-            รูปตัวอย่างเนื้อโค
-          </DivFromTop>
-          <DivFromDown style={{ width: "fit-content" }}>
-            {data &&
-              data.Cowgrade.map((prod) => (
-                <img
+        <div>
+          <div style={{ display: "flex", justtifyContent: "center" }}>
+            <DivFromHis style={{ marginTop: "0px", width: "fit-content", marginRight: "10px" }}>
+              <DivFromTop style={{ fontSize: "20px" }}>
+                รูปตัวอย่างเนื้อโค
+              </DivFromTop>
+              <DivFromDown style={{ width: "fit-content" }}>
+                {data &&
+                  data.Cowgrade.map((prod) => (
+                    <img
+                      style={{
+                        margin: "auto",
+                        objectFit: "cover",
+                        width: "100%",
+                        height: "100%",
+                        display: "relarive",
+                        padding: "4px",
+                        borderRadius: "30px",
+                        height: "300px",
+                        width: "300px",
+                      }}
+                      alt="Image"
+                      src={prod.grade[0].pic}
+                    />
+                  ))}
+              </DivFromDown>
+            </DivFromHis>
+            <DivFromHis style={{ marginTop: "0px", width: "fit-content" }}>
+              <DivFromTop style={{ fontSize: "20px" }}>
+                รูปตัวอย่างครอปเนื้อโค
+              </DivFromTop>
+              <DivFromDown style={{ width: "fit-content" }}>
+                {data &&
+                  data.Cowgrade.map((prod) => (
+                    <img
+                      style={{
+                        margin: "auto",
+                        objectFit: "cover",
+                        width: "100%",
+                        height: "100%",
+                        display: "relarive",
+                        padding: "4px",
+                        borderRadius: "30px",
+                        height: "300px",
+                        width: "300px",
+                      }}
+                      alt="Image"
+                      src={prod.grade[0].pic}
+                    />
+                  ))}
+              </DivFromDown>
+            </DivFromHis>
+          </div>
+          <DivFromHis
+            style={{
+              marginTop: "10px",
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              boxShadow: "none",
+              gridColumnGap: "10px",
+              /*  marginLeft: "-30px", */
+            }}
+          >
+            <div style={{ boxShadow: "0px 0px 2px grey", borderRadius: "9px" }}>
+              <DivFromTop>
+                <div
+                  style={{ margin: "-3px 5px 0px 0px", fontSize: "20px" }}
+                ></div>
+                <div style={{ margin: "-1px 5px 0px 0px", fontSize: "20px" }}>
+                  เกรดจากระบบ
+                </div>
+              </DivFromTop>
+              <DivFromDown style={{ padding: "0px" }}>
+                <div
                   style={{
-                    margin: "auto",
-                    objectFit: "cover",
-                    width: "100%",
-                    height: "100%",
-                    display: "relarive",
-                    padding: "4px",
-                    borderRadius: "30px",
-                    height: "480px",
-                    width: "480px",
+                    textAlign: "center",
+                    fontSize: "70px",
+                    padding: "0",
+                    fontWeight: "bold",
+                    color: "green",
                   }}
-                  alt="Image"
-                  src={prod.grade[0].pic}
-                />
-              ))}
-          </DivFromDown>
-        </DivFromHis>
+                >
+                  {data &&
+                    data.Cowgrade.map((prod) => (
+                      <div className="mb-3">{prod.grade[0].SystemGrade}</div>
+                    ))}
+                </div>
+              </DivFromDown>
+            </div>
+            <div style={{ boxShadow: "0px 0px 2px grey", borderRadius: "9px" }}>
+              <DivFromTop>
+                <div
+                  style={{ margin: "-3px 5px 0px 0px", fontSize: "20px" }}
+                ></div>
+                <div style={{ margin: "-1px 5px 0px 0px", fontSize: "20px" }}>
+                  เกรดจากผู้เชี่ยวชาญ
+                </div>
+              </DivFromTop>
+              <DivFromDown style={{ padding: "0px" }}>
+                <div
+                  style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}
+                >
+                  {edit ? (
+                    <Searchinput
+                      name="grade"
+                      style={{
+                        textAlign: "center",
+                        height: "50px",
+                        marginTop: "20px",
+                        fontSize: "40px",
+                        marginLeft: "10px"
+                      }}
+                      value={editgrade.grade}
+                      onChange={handleChange}
+                    />
+                  ) : (
+                    <div
+                      style={{
+                        textAlign: "center",
+                        fontSize: "70px",
+                        padding: "0",
+                        fontWeight: "bold",
+                        color: "green",
+                      }}
+                    >
+                      {data &&
+                        data.Cowgrade.map((prod) => (
+                          <div className="mb-3">{prod.grade[0].ExpertGrade}</div>
+                        ))}
+                    </div>
+                  )}
+
+                  <div style={{ marginTop: "30px", marginLeft: "10px", marginRight: "10px" }}>
+                    {edit ? (
+                      <Savebuttoncolor
+                        style={{
+                          height: "40px",
+                          width: "135px",
+                        }}
+                        onClick={handleSubmit}
+                      >
+                        บันทึก
+                      </Savebuttoncolor>
+                    ) : (
+                      <Editbuttoncolor
+                        style={{
+                          height: "40px",
+                          width: "135px",
+                        }}
+                        onClick={() => setedit(true)}
+                      >
+                        เเก้ไขเกรด
+                      </Editbuttoncolor>
+                    )}
+                  </div>
+                </div>
+                <div></div>
+              </DivFromDown>
+            </div>
+          </DivFromHis>
+        </div>
+
+
         <div>
           <DivFromHis style={{ marginLeft: "-30px" }}>
             <DivFromTop>
@@ -348,7 +486,7 @@ export default function Home() {
               </div>
             </DivFromDown>
           </DivFromHis>
-          <DivFromHis style={{ marginTop: "5px", marginLeft: "-30px" }}>
+          <DivFromHis style={{ marginTop: "10px", marginLeft: "-30px" }}>
             <DivFromTop>
               <div
                 style={{ margin: "-3px 5px 0px 0px", fontSize: "20px" }}
@@ -464,112 +602,6 @@ export default function Home() {
                   ))}
               </div>
             </DivFromDown>
-          </DivFromHis>
-          <DivFromHis
-            style={{
-              marginTop: "5px",
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              boxShadow: "none",
-              gridColumnGap: "20px",
-              marginLeft: "-30px",
-            }}
-          >
-            <div style={{ boxShadow: "0px 0px 2px grey", borderRadius: "9px" }}>
-              <DivFromTop>
-                <div
-                  style={{ margin: "-3px 5px 0px 0px", fontSize: "20px" }}
-                ></div>
-                <div style={{ margin: "-1px 5px 0px 0px", fontSize: "20px" }}>
-                  เกรดจากระบบ
-                </div>
-              </DivFromTop>
-              <DivFromDown style={{padding:"0px"}}>
-                <div
-                  style={{
-                    textAlign: "center",
-                    fontSize: "70px",
-                    padding: "0",
-                    fontWeight: "bold",
-                    color: "green",
-                  }}
-                >
-                  {data &&
-                    data.Cowgrade.map((prod) => (
-                      <div className="mb-3">{prod.grade[0].SystemGrade}</div>
-                    ))}
-                </div>
-              </DivFromDown>
-            </div>
-            <div style={{ boxShadow: "0px 0px 2px grey", borderRadius: "9px" }}>
-              <DivFromTop>
-                <div
-                  style={{ margin: "-3px 5px 0px 0px", fontSize: "20px" }}
-                ></div>
-                <div style={{ margin: "-1px 5px 0px 0px", fontSize: "20px" }}>
-                  เกรดจากผู้เชี่ยวชาญ
-                </div>
-              </DivFromTop>
-              <DivFromDown style={{padding:"0px"}}>
-                <div
-                  style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}
-                >
-                  {edit ? (
-                    <Searchinput
-                      name="grade"
-                      style={{
-                        textAlign: "center",
-                        height: "50px",
-                        marginTop: "20px",
-                        fontSize: "40px"
-                      }}
-                      value={editgrade.grade}
-                      onChange={handleChange}
-                    />
-                  ) : (
-                    <div
-                      style={{
-                        textAlign: "center",
-                        fontSize: "70px",
-                        padding: "0",
-                        fontWeight: "bold",
-                        color: "green",
-                      }}
-                    >
-                      {data &&
-                        data.Cowgrade.map((prod) => (
-                          <div className="mb-3">{prod.grade[0].ExpertGrade}</div>
-                        ))}
-                    </div>
-                  )}
-
-                  <div style={{ marginTop: "30px", marginLeft: "10px", marginRight:"10px" }}>
-                    {edit ? (
-                      <Savebuttoncolor
-                        style={{
-                          height: "40px",
-                          width: "135px",
-                        }}
-                        onClick={handleSubmit}
-                      >
-                        บันทึก
-                      </Savebuttoncolor>
-                    ) : (
-                      <Editbuttoncolor
-                        style={{
-                          height: "40px",
-                          width: "135px",
-                        }}
-                        onClick={() => setedit(true)}
-                      >
-                        เเก้ไขเกรด
-                      </Editbuttoncolor>
-                    )}
-                  </div>
-                </div>
-                <div></div>
-              </DivFromDown>
-            </div>
           </DivFromHis>
           <div style={{ marginTop: "10px", marginLeft: "505px" }}>
             <Link href="/beefgrading/history">
