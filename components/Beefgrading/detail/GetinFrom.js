@@ -27,6 +27,12 @@ export const DivFromTop = styled.div`
   color: ${white};
 `;
 
+export const DivFromHis = styled.div`
+  ${FromDiv}
+  position: relative;
+  display: block;
+`;
+
 export const DivFromDown = styled.div`
   height: fit-content;
   border-radius: 10px 10px 0 0;

@@ -19,6 +19,7 @@ import {
   Uploads,
   Searchinput,
   Gobutton,
+  DivFromHis,
 } from "./GetinFrom";
 import { Spinner } from "react-bootstrap";
 import dayjs from "dayjs";
@@ -78,11 +79,10 @@ export default function Home() {
     variables: {
       id: route.query.gradeId,
     },
-    onCompleted(res) {
-    },
+    onCompleted(res) {},
   });
   const MySwal = withReactContent(Swal);
-  const [createGrade] = useMutation(CREATEGRADE,{
+  const [createGrade] = useMutation(CREATEGRADE, {
     onCompleted: (data) => {
       if (data) {
         MySwal.fire({
@@ -91,21 +91,17 @@ export default function Home() {
           showDenyButton: true,
           /* showCancelButton: true, */
           confirmButtonText: (
-            <span
-              onClick={() =>
-                Router.push("/beefgrading/indexsum")
-              }
-            >
+            <span onClick={() => Router.push("/beefgrading/indexsum")}>
               ดำเนินการต่อ
             </span>
           ),
           denyButtonText: `ตกลง`,
           confirmButtonColor: "#3085d6",
-          denyButtonColor: "#008631"
-        })
+          denyButtonColor: "#008631",
+        });
       }
     },
-  })
+  });
 
   const TARGET_CLASSES = {
     0: "2",
@@ -117,14 +113,13 @@ export default function Home() {
     6: "5",
   };
 
-  
   const [isModelLoading, setModel] = useState();
   const [loadingCreate, setLoadingCreate] = useState(false);
   const [isImage, setImage] = useState("");
   const [isImage1, setImage1] = useState({ preview: "", raw: "" });
   const [success, setSuccess] = useState(false);
-  
- useEffect(() => {
+
+  useEffect(() => {
     fnModel();
   }, []);
 
@@ -299,378 +294,416 @@ export default function Home() {
             marginRight: "5px",
           }}
         >
-      <Logobeefgrade height="70px" weight="70px" />
-      </div>
+          <Logobeefgrade height="70px" weight="70px" />
+        </div>
         ระบบการตัดเกรด
       </DivCenter>
-      <DivCenter style={{ marginTop: "20px" }}>
-        <div>
-          <DivBase
+      <div style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+
+      }}>
+        <div>test</div>
+        <div style={{ marginTop: "0px" }}>
+          <DivFromTop style={{ fontSize: "20px" }}>
+            เลือกรูปซากโคหน้าเต็ม
+          </DivFromTop>
+          <DivFromDown
             style={{
-              margin: "auto",
               display: "grid",
-              gridTemplateColumns: " 0.4fr 1fr ",
-              gridRowGap: "5px",
-              width: " max-content",
-              left: "50%",
-              transform: "translateX(-50%)",
+              gridTemplateColumns: "0.3fr",
             }}
           >
-            <DivFrom
+            <div
+              /* className="mb-3"
               style={{
-                width: "270px",
-                height: "min-content",
-                margin: "20px",
-                marginTop: "0",
-                marginRight: "2px",
-              }}
-            >
-              <DivFromTop>
-                <div
-                  style={{ margin: "-3px 5px 0px 0px", fontSize: "20px" }}
-                ></div>
-                <div style={{ margin: "-1px 5px 0px 0px", fontSize: "20px" }}>
-                  เลือกรูปซากโคที่ต้องการตัดเกรด
-                </div>
-              </DivFromTop>
-
-              <DivFromDown
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "0.3fr",
-                }}
-              >
-                <div
-                  className="mb-3"
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "1fr ",
-                  }}
-                >
-                  <div>
-                    <div>
-                      <div>
-                        <br />
-                        <div>
-                          <Uploads
-                            style={{ margin: "-10px", marginTop: "-45px" }}
-                          >
-                            <a>
-                              <div>
-                                <img
-                                  style={{
-                                    objectFit: "cover",
-                                    width: "110%",
-                                    position: "inherit",
-                                  }}
-                                  id="test2223"
-                                  src={isImage1.preview || logo}
-                                  width="224"
-                                  height="224"
-                                />
-                              </div>
-                            </a>
-                            <br />
-                          </Uploads>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <input
-                        style={{
-                          marginTop: "20px",
-                        }}
-                        type="file"
-                        name="file"
-                        onChange={handleChange}
-                        accept="image/*"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </DivFromDown>
-            </DivFrom>
-
-            <DivBase
-              style={{
-                marginTop: "315px",
                 display: "grid",
-                gridTemplateColumns: " 0.4fr 2.6fr ",
-                gridRowGap: "5px",
-                width: " max-content",
-                left: "50%",
-                transform: "translateX(-50%)",
+                gridTemplateColumns: "1fr ",
+              }} */
+            >
+              <div> 
+                <div>
+                  <div>
+                    <br />
+                    <div>
+                      <Uploads style={{ margin: "-10px", marginTop: "-45px" }}>
+                        <a>
+                          <div>
+                            <img
+                              style={{
+                                objectFit: "cover",
+                                width: "110%",
+                                position: "inherit",
+                              }}
+                              id="image1"
+                              src={isImage1.preview || logo}
+                              width="480"
+                              height="480"
+                            />
+                          </div>
+                        </a>
+                        <br />
+                      </Uploads>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <input
+                    style={{
+                      marginTop: "20px",
+                    }}
+                    type="file"
+                    name="file"
+                    onChange={handleChange}
+                    accept="image/*"
+                  />
+                </div>
+              </div>
+            </div>
+          </DivFromDown>
+        </div>
+      </div>
+
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "500px 1fr",
+          padding: "30px 350px 0px 350px",
+          gridColumnGap: "50px",
+        }}
+      >
+        <DivFromHis style={{ marginTop: "0px" }}>
+          <DivFromTop style={{ fontSize: "20px" }}>
+            ครอปส่วนรูปซากโคที่ต้องการตัดเกรด
+          </DivFromTop>
+          <DivFromDown
+            style={{
+              display: "grid",
+              gridTemplateColumns: "0.3fr",
+            }}
+          >
+            <div
+              className="mb-3"
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr ",
               }}
             >
-              <DivFrom
-                style={{
-                  width: "270px",
-                  height: "min-content",
-                  margin: "20px",
-                  marginTop: "0",
-                  marginRight: "2px",
-                }}
-              >
-                <DivFromTop>
-                  <div
-                    style={{ margin: "-3px 5px 0px 0px", fontSize: "20px" }}
-                  ></div>
-                  <div style={{ margin: "-1px 5px 0px 0px", fontSize: "20px" }}>
-                    เกรดที่ได้
+              <div>
+                <div>
+                  <div>
+                    <br />
+                    <div>
+                      <Uploads style={{ margin: "-10px", marginTop: "-45px" }}>
+                        <a>
+                          <div>
+                            <img
+                              style={{
+                                objectFit: "cover",
+                                width: "110%",
+                                position: "inherit",
+                              }}
+                              id="test2223"
+                              src={isImage1.preview || logo}
+                              width="224"
+                              height="224"
+                            />
+                          </div>
+                        </a>
+                        <br />
+                      </Uploads>
+                    </div>
                   </div>
-                </DivFromTop>
-                <DivFromDown style={{ padding: 0, height: "113px" }}>
-                  <div
+                </div>
+                <div>
+                  <input
                     style={{
-                      fontSize: "100px",
-                      color: "green",
-                      listStyle: "none",
-                      textAlign: "center",
-                      padding: 0,
-                      marginTop: "-12px",
+                      marginTop: "20px",
                     }}
-                    id="prediction-list"
-                  >-</div>
-                </DivFromDown>
-              </DivFrom>
-            </DivBase>
+                    type="file"
+                    name="file"
+                    onChange={handleChange}
+                    accept="image/*"
+                  />
+                </div>
+              </div>
+            </div>
+          </DivFromDown>
+        </DivFromHis>
 
-            <DivFrom style={{ width: "750px", float: "Rigth" }}>
-              <DivFromTop>
-                <div style={{ margin: "-3px 5px 0px 0px", fontSize: "20px" }}>
-                </div>
-                <div style={{ margin: "-1px 5px 0px 0px", fontSize: "20px" }}>
-                  ข้อมูลโค
-                </div>
-              </DivFromTop>
+        <DivBase
+          style={{
+            marginTop: "315px",
+            display: "grid",
+            gridTemplateColumns: " 0.4fr 2.6fr ",
+            gridRowGap: "5px",
+            width: " max-content",
+            left: "50%",
+            transform: "translateX(-50%)",
+          }}
+        >
+          <DivFrom
+            style={{
+              width: "270px",
+              height: "min-content",
+              margin: "20px",
+              marginTop: "0",
+              marginRight: "2px",
+            }}
+          >
+            <DivFromTop>
+              <div
+                style={{ margin: "-3px 5px 0px 0px", fontSize: "20px" }}
+              ></div>
+              <div style={{ margin: "-1px 5px 0px 0px", fontSize: "20px" }}>
+                เกรดที่ได้
+              </div>
+            </DivFromTop>
+            <DivFromDown style={{ padding: 0, height: "113px" }}>
+              <div
+                style={{
+                  fontSize: "100px",
+                  color: "green",
+                  listStyle: "none",
+                  textAlign: "center",
+                  padding: 0,
+                  marginTop: "-12px",
+                }}
+                id="prediction-list"
+              >
+                -
+              </div>
+            </DivFromDown>
+          </DivFrom>
+        </DivBase>
+
+        <DivFrom style={{ width: "750px", float: "Rigth" }}>
+          <DivFromTop>
+            <div style={{ margin: "-3px 5px 0px 0px", fontSize: "20px" }}></div>
+            <div style={{ margin: "-1px 5px 0px 0px", fontSize: "20px" }}>
+              ข้อมูลโค
+            </div>
+          </DivFromTop>
+          <DivFromDown
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr",
+              margin: "-3px 5px 0px 0px",
+            }}
+          >
+            <div
+              className="mb-3"
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr",
+                gridRowGap: "5px",
+              }}
+            >
               <DivFromDown
                 style={{
                   display: "grid",
                   gridTemplateColumns: "1fr",
-                  margin: "-3px 5px 0px 0px",
+                  gridRowGap: "5px",
+                  paddingBottom: "20px",
                 }}
               >
                 <div
                   className="mb-3"
                   style={{
                     display: "grid",
-                    gridTemplateColumns: "1fr",
+                    gridTemplateColumns: "1.2fr 1.2fr 1fr",
                     gridRowGap: "5px",
+                    margin: "auto",
                   }}
                 >
-                  <DivFromDown
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "1fr",
-                      gridRowGap: "5px",
-                      paddingBottom: "20px",
-                    }}
-                  >
-                    <div
-                      className="mb-3"
-                      style={{
-                        display: "grid",
-                        gridTemplateColumns: "1.2fr 1.2fr 1fr",
-                        gridRowGap: "5px",
-                        margin: "auto",
-                      }}
-                    >
-                      {data &&
-                        data.Cowgrade.map((prod) => (
-                          <>
-                            <div>
-                              รหัสซากโค : {}
-                              <div
-                                style={{
-                                  display: "grid",
-                                  gridTemplateRows: "1fr 15px",
-                                }}
-                              >
-                                <Searchinput
-                                  name="code"
-                                  value={prod.beeftype.code}
-                                  maxLength="8"
-                                />
-                              </div>
-                            </div>
-                            <div>
-                              บาร์โค้ด : {}
-                              <div
-                                style={{
-                                  display: "grid",
-                                  gridTemplateRows: "1fr 15px",
-                                }}
-                              >
-                                <Searchinput
-                                  name="barcode"
-                                  value={prod.barcode}
-                                  maxLength="5"
-                                />
-                              </div>
-                            </div>
-                            <div>
-                              น้ำหนักซากอุ่น : {}
-                              <div
-                                style={{
-                                  display: "grid",
-                                  gridTemplateRows: "1fr 15px",
-                                }}
-                              >
-                                <Searchinput
-                                  name="weightwarm"
-                                  value={prod.weightwarm}
-                                  maxLength="100"
-                                />
-                              </div>
-                            </div>
-                            <div>
-                              น้ำหนักซากเย็น : {}
-                              <div
-                                style={{
-                                  display: "grid",
-                                  gridTemplateRows: "1fr 15px",
-                                }}
-                              >
-                                <Searchinput
-                                  name="weighcool"
-                                  value={
-                                    prod.weightcool ? prod.weightcool : "-"
-                                  }
-                                  maxLength="5"
-                                />
-                              </div>
-                            </div>
-                            <div>
-                              วันที่เข้าบ่ม : {}
-                              <div
-                                style={{
-                                  display: "grid",
-                                  gridTemplateRows: "1fr 15px",
-                                }}
-                              >
-                                <Searchinput
-                                  name="chillstart"
-                                  value={dayjs(
-                                    prod.chill.chilldateStart
-                                  ).format("DD-MM-YYYY")}
-                                  maxLength="2"
-                                  disabled
-                                
-                                />
-                              </div>
-                            </div>
-                            <div>
-                              วันที่ตัดเกรด : {}
-                              <div
-                                style={{
-                                  display: "grid",
-                                  gridTemplateRows: "1fr 15px",
-                                }}
-                              >
-                                <Searchinput
-                                  name="chilldateEnd"
-                                  value={dayjs(prod.chill.chilldateEnd).format(
-                                    "DD-MM-YYYY"
-                                  )}
-                                  maxLength="20"
-                                  disabled
-                                  
-                                />
-                              </div>
-                            </div>
-
-                            <div>
-                              ห้องบ่ม : {}
-                              <div
-                                style={{
-                                  display: "grid",
-                                  gridTemplateRows: "1fr 15px",
-                                }}
-                              >
-                                <Searchinput
-                                  name=""
-                                  value={prod.chill[0].chillroom.roomnum}
-                                  maxLength="5"
-                                  disabled
-                                  
-                                />
-                              </div>
-                            </div>
-                            <div>
-                              สายพันธุ์ : {}
-                              <div
-                                style={{
-                                  display: "grid",
-                                  gridTemplateRows: "1fr 15px",
-                                }}
-                              >
-                                <Searchinput
-                                  name="pun"
-                                  value={prod.imslaughter.pun}
-                                  maxLength="20"
-                                />
-                              </div>
-                            </div>
-                          </>
-                        ))}
-                      <div
-                        className="mb-3"
-                        style={{
-                          display: "grid",
-                          gridTemplateColumns: "1fr 0.75fr 1fr 0.75fr",
-                          gridRowGap: "5px",
-                          marginTop: "5px",
-                        }}
-                      ></div>
-                      {loadingCreate ? (
-                        <Spinner
-                          style={{
-                            margin: "0px 12px 0px auto",
-                            float: "right",
-                          }}
-                          animation="border"
-                          variant="primary"
-                        />
-                      ) : (
-                        
-                        <Gobutton onClick={handleClick}>ประมวลผล</Gobutton>
-                      )}
-
-                      {success && (
-                        <p
-                          style={{
-                            color: "green",
-                            position: "absolute",
-                            display: "flex",
-                            margin: "410px 0px 0px 78%",
-                          }}
-                        >
-                          ประมวณผลสำเร็จ
-                        </p>
-                      )}
-                      <div
-                        style={{
-                          marginLeft: "5px",
-                        }}
-                      >
-                        <Link href="/beefgrading/list">
-                          <ButtonBack
+                  {data &&
+                    data.Cowgrade.map((prod) => (
+                      <>
+                        <div>
+                          รหัสซากโค : {}
+                          <div
                             style={{
-                              width: "200px",
+                              display: "grid",
+                              gridTemplateRows: "1fr 15px",
                             }}
                           >
-                            ย้อนกลับ
-                          </ButtonBack>
-                        </Link>
-                      </div>
-                    </div>
-                  </DivFromDown>
+                            <Searchinput
+                              name="code"
+                              value={prod.beeftype.code}
+                              maxLength="8"
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          บาร์โค้ด : {}
+                          <div
+                            style={{
+                              display: "grid",
+                              gridTemplateRows: "1fr 15px",
+                            }}
+                          >
+                            <Searchinput
+                              name="barcode"
+                              value={prod.barcode}
+                              maxLength="5"
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          น้ำหนักซากอุ่น : {}
+                          <div
+                            style={{
+                              display: "grid",
+                              gridTemplateRows: "1fr 15px",
+                            }}
+                          >
+                            <Searchinput
+                              name="weightwarm"
+                              value={prod.weightwarm}
+                              maxLength="100"
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          น้ำหนักซากเย็น : {}
+                          <div
+                            style={{
+                              display: "grid",
+                              gridTemplateRows: "1fr 15px",
+                            }}
+                          >
+                            <Searchinput
+                              name="weighcool"
+                              value={prod.weightcool ? prod.weightcool : "-"}
+                              maxLength="5"
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          วันที่เข้าบ่ม : {}
+                          <div
+                            style={{
+                              display: "grid",
+                              gridTemplateRows: "1fr 15px",
+                            }}
+                          >
+                            <Searchinput
+                              name="chillstart"
+                              value={dayjs(prod.chill.chilldateStart).format(
+                                "DD-MM-YYYY"
+                              )}
+                              maxLength="2"
+                              disabled
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          วันที่ตัดเกรด : {}
+                          <div
+                            style={{
+                              display: "grid",
+                              gridTemplateRows: "1fr 15px",
+                            }}
+                          >
+                            <Searchinput
+                              name="chilldateEnd"
+                              value={dayjs(prod.chill.chilldateEnd).format(
+                                "DD-MM-YYYY"
+                              )}
+                              maxLength="20"
+                              disabled
+                            />
+                          </div>
+                        </div>
+
+                        <div>
+                          ห้องบ่ม : {}
+                          <div
+                            style={{
+                              display: "grid",
+                              gridTemplateRows: "1fr 15px",
+                            }}
+                          >
+                            <Searchinput
+                              name=""
+                              value={prod.chill[0].chillroom.roomnum}
+                              maxLength="5"
+                              disabled
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          สายพันธุ์ : {}
+                          <div
+                            style={{
+                              display: "grid",
+                              gridTemplateRows: "1fr 15px",
+                            }}
+                          >
+                            <Searchinput
+                              name="pun"
+                              value={prod.imslaughter.pun}
+                              maxLength="20"
+                            />
+                          </div>
+                        </div>
+                      </>
+                    ))}
+                  <div
+                    className="mb-3"
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "1fr 0.75fr 1fr 0.75fr",
+                      gridRowGap: "5px",
+                      marginTop: "5px",
+                    }}
+                  ></div>
+                  {loadingCreate ? (
+                    <Spinner
+                      style={{
+                        margin: "0px 12px 0px auto",
+                        float: "right",
+                      }}
+                      animation="border"
+                      variant="primary"
+                    />
+                  ) : (
+                    <Gobutton onClick={handleClick}>ประมวลผล</Gobutton>
+                  )}
+
+                  {success && (
+                    <p
+                      style={{
+                        color: "green",
+                        position: "absolute",
+                        display: "flex",
+                        margin: "410px 0px 0px 78%",
+                      }}
+                    >
+                      ประมวณผลสำเร็จ
+                    </p>
+                  )}
+                  <div
+                    style={{
+                      marginLeft: "5px",
+                    }}
+                  >
+                    <Link href="/beefgrading/list">
+                      <ButtonBack
+                        style={{
+                          width: "200px",
+                        }}
+                      >
+                        ย้อนกลับ
+                      </ButtonBack>
+                    </Link>
+                  </div>
                 </div>
               </DivFromDown>
-            </DivFrom>
-          </DivBase>
-        </div>
-      </DivCenter>
+            </div>
+          </DivFromDown>
+        </DivFrom>
+      </div>
     </div>
   );
 }

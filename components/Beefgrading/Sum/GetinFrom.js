@@ -111,6 +111,12 @@ export const Wightinput = styled.input`
   -moz-appearance: textfield;
 `;
 
+export const DivFromHis = styled.div`
+  ${FromDiv}
+  position: relative;
+  display: block;
+`;
+
 export const Gobutton = styled.button`
   display: inline-block;
   font-weight: 400;
