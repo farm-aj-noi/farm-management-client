@@ -56,6 +56,7 @@ const QUERYHISINFO = gql`
       }
       grade {
         id
+        pic1
         pic
         SystemGrade
         ExpertGrade
@@ -177,7 +178,7 @@ export default function Home() {
               <DivFromDown style={{ width: "fit-content" }}>
                 {data &&
                   data.Cowgrade.map((prod) => (
-                    <img
+                    <><img
                       style={{
                         margin: "auto",
                         objectFit: "cover",
@@ -190,8 +191,9 @@ export default function Home() {
                         width: "300px",
                       }}
                       alt="Image"
-                      src={prod.grade[0].pic}
+                      src={prod.grade[0].pic1}
                     />
+                    </>
                   ))}
               </DivFromDown>
             </DivFromHis>

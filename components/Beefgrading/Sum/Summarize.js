@@ -70,6 +70,7 @@ const QUERY_INFO = gql`
       grade {
         pic
         SystemGrade
+        pic1
       }
     }
   }
@@ -81,6 +82,7 @@ const QUERYGRADE = gql`
       grade {
         id
         pic
+        pic1
         SystemGrade
         ExpertGrade
         ExpertName1
@@ -229,7 +231,7 @@ const Summarize = () => {
                       <div>
                         {data &&
                           data.Cowgrade.map((prod) => (
-                            <img
+                            <><img
                               style={{
                                 margin: "auto",
                                 objectFit: "cover",
@@ -242,8 +244,10 @@ const Summarize = () => {
                                 width: "300px",
                               }}
                               alt="Image"
-                              src={prod.grade[0].pic}
+                              src={prod.grade[0].pic1}
                             />
+                            </>
+                            
                           ))}
                       </div>
                     </DivFromDown>
