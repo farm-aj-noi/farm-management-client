@@ -28,8 +28,8 @@ import th from "date-fns/locale/th";
 registerLocale("th", th);
 
 const CREATEGRADE = gql`
-  mutation CREATEGRADE($pic: String, $halve: String, $SystemGrade: String) {
-    createGrade(pic: $pic, halve: $halve, SystemGrade: $SystemGrade) {
+  mutation CREATEGRADE($pic: String, $halve: String, $SystemGrade: String,$pic1: String) {
+    createGrade(pic: $pic, halve: $halve, SystemGrade: $SystemGrade,pic1: $pic1) {
       id
     }
   }
@@ -91,13 +91,20 @@ export default function Home() {
           showDenyButton: true,
           /* showCancelButton: true, */
           confirmButtonText: (
-            <span onClick={() => Router.push("/beefgrading/indexsum")}>
+            <span /* onClick={() => Router.push("/beefgrading/indexsum")} */>
               ดำเนินการต่อ
             </span>
           ),
           denyButtonText: `ตกลง`,
           confirmButtonColor: "#3085d6",
           denyButtonColor: "#008631",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Router.push("/beefgrading/indexsum")   
+          }
+          if (result.isDenied) {
+            Router.push("/beefgrading/grade")
+          }
         });
       }
     },
@@ -116,7 +123,9 @@ export default function Home() {
   const [isModelLoading, setModel] = useState();
   const [loadingCreate, setLoadingCreate] = useState(false);
   const [isImage, setImage] = useState("");
+  const [isImage3, setImage3] = useState("");
   const [isImage1, setImage1] = useState({ preview: "", raw: "" });
+  const [isImage2, setImage2] = useState({ preview: "", raw: "" });
   const [success, setSuccess] = useState(false);
 
   useEffect(() => {
@@ -138,6 +147,17 @@ export default function Home() {
     }
     setImage(i[0]);
   };
+
+  const handdleChange1 = (e) => {
+    const j = e.target.files;
+    if (e.target.files.length) {
+      setImage2({
+        preview: URL.createObjectURL(e.target.files[0]),
+        raw: e.target.files[0],
+      })
+    }
+    setImage3(j[0]);
+  }
 
   var resizeImage = function (settings) {
     var file = settings.file;
@@ -223,6 +243,39 @@ export default function Home() {
     return result.secure_url;
   };
 
+  const uploadFile1 = async () => {
+    const data = new FormData();
+    var file_upload;
+    await resizeImage({
+      file: isImage3,
+      maxSize: 640,
+    })
+      .then(function (resizedImage) {
+        console.log(resizedImage);
+        console.log("upload resized image");
+        file_upload = new File([resizedImage], "name");
+      })
+      .catch(function (err) {
+        console.error(err);
+      });
+    data.append("file", file_upload);
+    data.append("upload_preset", "graphql-basic");
+
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/da7loumgx/image/upload",
+      {
+        method: "post",
+        body: data,
+      }
+    );
+
+    const result = await res.json();
+    console.log(result);
+
+    return result.secure_url;
+  }
+
+
   const handleClick = async (event) => {
     let test2 = document.getElementById("test2223");
     if (isModelLoading && test2) {
@@ -258,11 +311,13 @@ export default function Home() {
       });
       try {
         const url = await uploadFile();
+        const url1 = await uploadFile1();
         const grade = top5[0].className;
         if (url) {
           await createGrade({
             variables: {
               pic: url,
+              pic1: url1,
               halve: route.query.gradeId,
               SystemGrade: grade,
             },
@@ -321,8 +376,7 @@ export default function Home() {
                           width: "110%",
                           position: "inherit",
                         }} */
-                        /* id="test2223" */
-                        src={isImage1.preview || logo}
+                        src={isImage2.preview || logo}
                         width="224"
                         height="224"
                       />
@@ -338,7 +392,7 @@ export default function Home() {
                   }}
                   type="file"
                   name="file"
-                  onChange={handleChange}
+                  onChange={handdleChange1}
                   accept="image/*"
                 />
               </div>
@@ -361,7 +415,7 @@ export default function Home() {
                           width: "110%",
                           position: "inherit",
                         }} */
-                        /* id="test2223" */
+                        id="test2223"
                         src={isImage1.preview || logo}
                         width="224"
                         height="224"
